@@ -1,8 +1,10 @@
-name: Build
-on: [push]
+name: Cron
+on:
+  schedule:
+  - cron: "0 0 * * *"
 jobs:
   build:
-    name: build
+    name: cron
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
