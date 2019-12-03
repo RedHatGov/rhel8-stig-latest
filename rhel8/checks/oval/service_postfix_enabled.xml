@@ -1,0 +1,70 @@
+<def-group>
+
+  <definition class="compliance" id="service_postfix_enabled" version="1">
+    <metadata>
+      <title>Service postfix Enabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The postfix service should be enabled if possible.</description>
+    </metadata>
+    <criteria comment="package postfix installed and service postfix is configured to start" operator="AND">
+    <criterion comment="postfix installed" test_ref="test_service_postfix_package_postfix_installed" />
+      <criteria comment="service postfix is configured to start and is running" operator="AND">
+        <criterion comment="postfix is running" test_ref="test_service_running_postfix" />
+        <criteria operator="OR" comment="service postfix is configured to start">
+          <criterion comment="multi-user.target wants postfix" test_ref="test_multi_user_wants_postfix" />
+          <criterion comment="multi-user.target wants postfix socket" test_ref="test_multi_user_wants_postfix_socket" />
+        </criteria>
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_postfix" version="1">
+    <linux:object object_ref="object_multi_user_target_for_postfix_enabled" />
+    <linux:state state_ref="state_systemd_postfix_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_postfix_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_postfix_on" comment="postfix listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">postfix.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_postfix_socket" version="1">
+    <linux:object object_ref="object_multi_user_target_for_postfix_socket_enabled" />
+    <linux:state state_ref="state_systemd_postfix_socket_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_postfix_socket_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_postfix_socket_on" comment="postfix listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">postfix.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_running_postfix" check="at least one" check_existence="at_least_one_exists" comment="Test that the postfix service is running" version="1">
+    <linux:object object_ref="obj_service_running_postfix"/>
+    <linux:state state_ref="state_service_running_postfix"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_running_postfix" comment="Retrieve the ActiveState property of postfix" version="1">
+    <linux:unit operation="pattern match">^postfix\.(socket|service)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_running_postfix" version="1" comment="postfix is running">
+      <linux:value>active</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+  <linux:rpminfo_test check="all" check_existence="all_exist"
+  id="test_service_postfix_package_postfix_installed" version="1"
+  comment="package postfix is installed">
+    <linux:object object_ref="obj_test_service_postfix_package_postfix_installed" />
+    
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_postfix_package_postfix_installed" version="1">
+    <linux:name>postfix</linux:name>
+  </linux:rpminfo_object>
+  
+
+</def-group>

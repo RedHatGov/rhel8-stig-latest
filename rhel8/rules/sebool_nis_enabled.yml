@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>nis_enabled</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>nis_enabled</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P nis_enabled off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>nis_enabled</code> SELinux boolean
+  is disabled:
+
+  <pre>$ getsebool nis_enabled</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>nis_enabled --> off</code>'
+ocil_clause: nis_enabled is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: nis_enabled}
+title: Disable the nis_enabled SELinux Boolean
+warnings: []

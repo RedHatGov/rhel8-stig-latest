@@ -1,0 +1,24 @@
+description: 'Install the <tt>security</tt> module:
+
+  The <code>mod_security</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install mod_security</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: '<tt>mod_security</tt> provides an additional level of protection for the
+  web server by
+
+  enabling the administrator to implement content access policies and filters at the
+
+  application layer.'
+references: {}
+severity: unknown
+template: null
+title: Install mod_security
+warnings: []

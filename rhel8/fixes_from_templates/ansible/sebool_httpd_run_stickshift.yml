@@ -1,0 +1,19 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+
+
+- (xccdf-var var_httpd_run_stickshift)
+
+- name: Ensure libsemanage-python installed
+  package:
+    name: libsemanage-python
+    state: present
+
+- name: Set SELinux boolean httpd_run_stickshift accordingly
+  seboolean:
+    name: httpd_run_stickshift
+    state: "{{ var_httpd_run_stickshift }}"
+    persistent: yes

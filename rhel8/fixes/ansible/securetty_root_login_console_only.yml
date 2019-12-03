@@ -1,0 +1,22 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Restrict Virtual Console Root Logins
+  lineinfile:
+    dest: /etc/securetty
+    regexp: ^vc
+    state: absent
+  tags:
+    - securetty_root_login_console_only
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80864-2
+    - NIST-800-53-AC-6(2)
+    - NIST-800-53-IA-2
+    - NIST-800-171-3.1.1
+    - NIST-800-171-3.1.5

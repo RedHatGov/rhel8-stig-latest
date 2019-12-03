@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure xorg-x11-server-common is removed
+  package:
+    name: xorg-x11-server-common
+    state: absent
+  tags:
+    - package_xorg-x11-server-common_removed
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-17(8).1(ii)

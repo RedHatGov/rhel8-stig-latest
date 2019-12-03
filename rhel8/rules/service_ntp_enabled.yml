@@ -1,0 +1,30 @@
+description: ' The <code>ntpd</code> service can be enabled with the following command:
+  <pre>$ sudo systemctl enable ntpd.service</pre>'
+identifiers: {}
+ocil: ' Run the following command to determine the current status of the <code>ntp</code>
+  service: <pre>$ systemctl is-active ntp</pre> If the service is running, it should
+  return the following: <pre>active</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: "Enabling the <tt>ntpd</tt> service ensures that the <tt>ntpd</tt>\nservice\
+  \ will be running and that the system will synchronize its time to\nany servers\
+  \ specified. This is important whether the system is configured to be\na client\
+  \ (and synchronize only its own clock) or it is also acting as an NTP\nserver to\
+  \ other systems.  Synchronizing time is essential for authentication\nservices such\
+  \ as Kerberos, but it is also important for maintaining accurate\nlogs and auditing\
+  \ possible security breaches.\n<br /><br />\nThe NTP daemon offers all of the functionality\
+  \ of <tt>ntpdate</tt>, which is now\ndeprecated.  Additional information on this\
+  \ is available at\n\n    <a xmlns='http://www.w3.org/1999/xhtml' href='http://support.ntp.org/bin/view/Dev/DeprecatingNtpdate'>http://support.ntp.org/bin/view/Dev/DeprecatingNtpdate</a>."
+references: {anssi: NT012(R03), cis-csc: '1,14,15,16,3,5,6', cobit5: 'APO11.04,BAI03.05,DSS05.04,DSS05.07,MEA02.01',
+  disa: '160', isa-62443-2009: '4.3.3.3.9,4.3.3.5.8,4.3.4.4.7,4.4.2.1,4.4.2.2,4.4.2.4',
+  isa-62443-2013: 'SR 2.10,SR 2.11,SR 2.12,SR 2.8,SR 2.9', iso27001-2013: 'A.12.4.1,A.12.4.2,A.12.4.3,A.12.4.4,A.12.7.1',
+  nist: AU-8(1), nist-csf: PR.PT-1, pcidss: Req-10.4}
+severity: high
+template:
+  backends: {}
+  name: service_enabled
+  vars: {servicename: ntp}
+title: Enable the NTP Daemon
+warnings: []

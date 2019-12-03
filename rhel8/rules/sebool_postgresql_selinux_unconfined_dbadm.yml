@@ -1,0 +1,37 @@
+description: 'By default, the SELinux boolean <tt>postgresql_selinux_unconfined_dbadm</tt>
+  is enabled.
+
+  If this setting is disabled, it should be enabled as it allows Database Administrators
+  to
+
+  execute Data Manipulation Language (DML) statements.
+
+
+  To enable the <code>postgresql_selinux_unconfined_dbadm</code> SELinux boolean,
+  run the following command:
+
+  <pre>$ sudo setsebool -P postgresql_selinux_unconfined_dbadm on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>postgresql_selinux_unconfined_dbadm</code>
+  SELinux boolean is enabled:
+
+  <pre>$ getsebool postgresql_selinux_unconfined_dbadm</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>postgresql_selinux_unconfined_dbadm --> on</code>'
+ocil_clause: postgresql_selinux_unconfined_dbadm is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: postgresql_selinux_unconfined_dbadm}
+title: Enable the postgresql_selinux_unconfined_dbadm SELinux Boolean
+warnings: []

@@ -1,0 +1,35 @@
+description: 'By default, the SELinux boolean <tt>virt_sandbox_use_audit</tt> is enabled.
+
+  If this setting is disabled, it should be enabled to allow sandboxed containers
+
+  to send audit messages.
+
+
+  To enable the <code>virt_sandbox_use_audit</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P virt_sandbox_use_audit on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>virt_sandbox_use_audit</code>
+  SELinux boolean is enabled:
+
+  <pre>$ getsebool virt_sandbox_use_audit</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>virt_sandbox_use_audit --> on</code>'
+ocil_clause: virt_sandbox_use_audit is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: virt_sandbox_use_audit}
+title: Enable the virt_sandbox_use_audit SELinux Boolean
+warnings: []

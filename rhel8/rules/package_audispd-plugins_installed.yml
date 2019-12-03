@@ -1,0 +1,27 @@
+description: 'The <code>audispd-plugins</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install audispd-plugins</pre>'
+identifiers: {cce: 82953-1}
+ocil: 'Run the following command to determine if the <code>audispd-plugins</code>
+  package is installed: <pre>$ rpm -q audispd-plugins</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: '<tt>audispd-plugins</tt> provides plugins for the real-time interface
+  to the
+
+  audit subsystem, <tt>audispd</tt>. These plugins can do things like relay events
+
+  to remote machines or analyze events for suspicious behavior.'
+references: {srg: SRG-OS-000342-GPOS-00133}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: audispd-plugins}
+title: Install audispd-plugins Package
+warnings: []

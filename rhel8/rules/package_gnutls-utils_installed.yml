@@ -1,0 +1,35 @@
+description: 'The <code>gnutls-utils</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install gnutls-utils</pre>'
+identifiers: {cce: 82395-5}
+ocil: 'Run the following command to determine if the <code>gnutls-utils</code> package
+  is installed: <pre>$ rpm -q gnutls-utils</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: 'GnuTLS is a secure communications library implementing the SSL, TLS and
+  DTLS
+
+  protocols and technologies around them. It provides a simple C language
+
+  application programming interface (API) to access the secure communications
+
+  protocols as well as APIs to parse and write X.509, PKCS #12, OpenPGP and
+
+  other required structures.
+
+  This package contains command line TLS client and server and certificate
+
+  manipulation tools.'
+references: {ospp: FMT_SMF_EXT.1}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: gnutls-utils}
+title: Ensure gnutls-utils is installed
+warnings: []

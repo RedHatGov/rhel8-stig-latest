@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure firewalld is installed
+  package:
+    name: firewalld
+    state: present
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - package_firewalld_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82998-6
+    - NIST-800-53-SC-7(21)

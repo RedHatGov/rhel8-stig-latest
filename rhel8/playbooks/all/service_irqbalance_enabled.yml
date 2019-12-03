@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable IRQ Balance (irqbalance)
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-CM-7
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_irqbalance_enabled
+    - unknown_severity
+  tasks:
+
+    - name: Enable service irqbalance
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service irqbalance
+          service:
+            name: irqbalance
+            enabled: 'yes'
+            state: started
+          when:
+            - '"irqbalance" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,19 @@
+description: ntpdate is a historical ntp synchronization client for unixes. It sould
+  be uninstalled.
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: ntpdate is an old not security-compliant ntp client. It should be replaced
+  by modern ntp clients such as ntpd, able to use cryptographic mechanisms integrated
+  in NTP.
+references: {}
+severity: low
+template:
+  backends: {}
+  name: package_removed
+  vars: {pkgname: ntpdate}
+title: Uninstall the ntpdate package
+warnings: []

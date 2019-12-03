@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure syslog-ng is Installed
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AU-9(2)
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_syslogng_installed
+  tasks:
+
+    - name: Ensure syslogng is installed
+      package:
+        name: syslogng
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

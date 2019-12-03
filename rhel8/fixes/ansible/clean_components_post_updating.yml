@@ -1,0 +1,23 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Ensure YUM Removes Previous Package Versions
+  lineinfile:
+    dest: /etc/yum.conf
+    regexp: ^#?clean_requirements_on_remove
+    line: clean_requirements_on_remove=1
+    insertafter: \[main\]
+    create: true
+  tags:
+    - clean_components_post_updating
+    - low_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82476-3
+    - NIST-800-53-SI-2(6)
+    - NIST-800-53-CM-11
+    - NIST-800-171-3.4.8

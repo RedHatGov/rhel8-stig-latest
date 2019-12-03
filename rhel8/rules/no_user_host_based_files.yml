@@ -1,0 +1,35 @@
+description: 'The <tt>~/.shosts</tt> (in each user''s home directory) files
+
+  list remote hosts and users that are trusted by the
+
+  local system. To remove these files, run the following command
+
+  to delete them from any location:
+
+  <pre>$ sudo find / -name ''.shosts'' -type f -delete</pre>'
+identifiers: {}
+ocil: 'To verify that there are no <tt>.shosts</tt> files
+
+  on the system, run the following command:
+
+  <pre>$ sudo find / -name ''.shosts''</pre>
+
+  No output should be returned.'
+ocil_clause: these files exist
+oval_external_content: null
+platform: null
+prodtype: wrlinux1019,rhel7,rhel8,sle12,rhv4
+rationale: 'The .shosts files are used to configure host-based authentication for
+
+  individual users or the system via SSH. Host-based authentication is not
+
+  sufficient for preventing unauthorized access to the system, as it does not
+
+  require interactive identification and authentication of a connection request,
+
+  or for the use of two-factor authentication.'
+references: {disa: '366', srg: SRG-OS-000480-GPOS-00227}
+severity: high
+template: null
+title: Remove User Host-Based Authentication Files
+warnings: []

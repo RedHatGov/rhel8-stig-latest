@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>gitosis_can_sendmail</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>gitosis_can_sendmail</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P gitosis_can_sendmail off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>gitosis_can_sendmail</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool gitosis_can_sendmail</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>gitosis_can_sendmail --> off</code>'
+ocil_clause: gitosis_can_sendmail is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: gitosis_can_sendmail}
+title: Disable the gitosis_can_sendmail SELinux Boolean
+warnings: []

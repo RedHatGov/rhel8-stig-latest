@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable timer dnf-automatic
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable timer dnf-automatic
+    systemd:
+      name: "dnf-automatic.timer"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"dnf-automatic" in ansible_facts.packages'

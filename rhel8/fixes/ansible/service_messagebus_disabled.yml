@@ -1,0 +1,63 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service messagebus
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service messagebus
+      systemd:
+        name: messagebus.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"messagebus.service" in ansible_facts.services'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_messagebus_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-CM-7
+
+- name: Unit Socket Exists - messagebus.socket
+  command: systemctl list-unit-files messagebus.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_messagebus_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-CM-7
+
+- name: Disable socket messagebus
+  systemd:
+    name: messagebus.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when:
+    - '"messagebus.socket" in socket_file_exists.stdout_lines[1]'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_messagebus_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-CM-7

@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl user.max_user_namespaces is set to 0
+  sysctl:
+    name: user.max_user_namespaces
+    value: '0'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_user_max_user_namespaces
+    - low_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-82211-4
+    - NIST-800-53-SC-39

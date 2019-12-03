@@ -1,0 +1,30 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable Accepting Router Advertisements on all IPv6 Interfaces by Default
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    sysctl_net_ipv6_conf_default_accept_ra_value: '0'
+  tags:
+    - CCE-81007-7
+    - NIST-800-171-3.1.20
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - sysctl_net_ipv6_conf_default_accept_ra
+    - unknown_severity
+  tasks:
+
+    - name: Ensure sysctl net.ipv6.conf.default.accept_ra is set
+      sysctl:
+        name: net.ipv6.conf.default.accept_ra
+        value: '{{ sysctl_net_ipv6_conf_default_accept_ra_value }}'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

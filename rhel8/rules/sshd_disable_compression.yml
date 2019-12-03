@@ -1,0 +1,38 @@
+description: 'Compression is useful for slow network connections over long
+
+  distances but can cause performance issues on local LANs. If use of compression
+
+  is required, it should be enabled only after a user has authenticated; otherwise
+
+  , it should be disabled. To disable compression or delay compression until after
+
+  a user has successfully authenticated, add or correct the following line in the
+
+  <tt>/etc/ssh/sshd_config</tt> file:
+
+  <pre>Compression <sub idref="var_sshd_disable_compression"/></pre>'
+identifiers: {cce: 80895-6}
+ocil: 'To check if compression is enabled or set correctly, run the
+
+  following command:
+
+  <pre>$ sudo grep Compression /etc/ssh/sshd_config</pre>
+
+  If configured properly, output should be <pre>no</pre> or <pre>delayed</pre>.'
+ocil_clause: it is commented out, or is not set to no or delayed
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: 'If compression is allowed in an SSH connection prior to authentication,
+
+  vulnerabilities in the compression software could result in compromise of the
+
+  system from an unauthenticated connection, potentially wih root privileges.'
+references: {cis-csc: '11,3,9', cobit5: 'BAI10.01,BAI10.02,BAI10.03,BAI10.05', cui: 3.1.12,
+  disa: '366', hipaa: '164.308(a)(4)(i),164.308(b)(1),164.308(b)(3),164.310(b),164.312(e)(1),164.312(e)(2)(ii)',
+  isa-62443-2009: '4.3.4.3.2,4.3.4.3.3', isa-62443-2013: SR 7.6, iso27001-2013: 'A.12.1.2,A.12.5.1,A.12.6.2,A.14.2.2,A.14.2.3,A.14.2.4',
+  nist: CM-6(b), nist-csf: PR.IP-1, srg: SRG-OS-000480-GPOS-00227, vmmsrg: SRG-OS-000480-VMM-002000}
+severity: medium
+template: null
+title: Disable Compression Or Set Compression to delayed
+warnings: []

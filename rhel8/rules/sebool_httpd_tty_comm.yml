@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>httpd_tty_comm</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>httpd_tty_comm</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P httpd_tty_comm off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>httpd_tty_comm</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool httpd_tty_comm</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>httpd_tty_comm --> off</code>'
+ocil_clause: httpd_tty_comm is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: httpd_tty_comm}
+title: Disable the httpd_tty_comm SELinux Boolean
+warnings: []

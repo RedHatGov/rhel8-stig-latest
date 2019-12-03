@@ -1,0 +1,94 @@
+<def-group>
+
+  
+
+  <definition class="compliance" id="service_rhnsd_disabled" version="1">
+    <metadata>
+      <title>Service rhnsd Disabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The rhnsd service should be disabled if possible.</description>
+    </metadata>
+    <criteria comment="package rhnsd removed or service rhnsd is not configured to start" operator="OR">
+      <criterion comment="rhnsd removed" test_ref="test_service_rhnsd_package_rhnsd_removed" />
+      <criteria operator="AND" comment="service rhnsd is not configured to start">
+        <criterion comment="rhnsd is not running" test_ref="test_service_not_running_rhnsd" />
+        <criterion comment="Property LoadState of service rhnsd is masked" test_ref="test_service_loadstate_is_masked_rhnsd" />
+        <criterion comment="Property FragmentPath of service rhnsd is set to /dev/null" test_ref="test_service_fragmentpath_is_dev_null_rhnsd" />
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_rhnsd_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_rhnsd_disabled" />
+    <linux:state state_ref="state_systemd_rhnsd_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_rhnsd_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_rhnsd_off" comment="rhnsd service is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">rhnsd.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_rhnsd_socket_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_rhnsd_socket_disabled" />
+    <linux:state state_ref="state_systemd_rhnsd_socket_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_rhnsd_socket_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_rhnsd_socket_off" comment="rhnsd socket is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">rhnsd.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_not_running_rhnsd" check="all" check_existence="any_exist" comment="Test that the rhnsd service is not running" version="1">
+    <linux:object object_ref="obj_service_not_running_rhnsd"/>
+    <linux:state state_ref="state_service_not_running_rhnsd"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_not_running_rhnsd" comment="Retrieve the ActiveState property of rhnsd" version="1">
+    <linux:unit operation="pattern match">^rhnsd\.(service|socket)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_not_running_rhnsd" version="1" comment="rhnsd is not running">
+      <linux:value>inactive</linux:value>
+  </linux:systemdunitproperty_state>
+  <linux:systemdunitproperty_test id="test_service_loadstate_is_masked_rhnsd" check="all" check_existence="any_exist" comment="Test that the property LoadState from the service rhnsd is masked" version="1">
+    <linux:object object_ref="obj_service_loadstate_is_masked_rhnsd"/>
+    <linux:state state_ref="state_service_loadstate_is_masked_rhnsd"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_loadstate_is_masked_rhnsd" comment="Retrieve the LoadState property of rhnsd" version="1">
+    <linux:unit operation="pattern match">^rhnsd\.(service|socket)$</linux:unit>
+    <linux:property>LoadState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_loadstate_is_masked_rhnsd" version="1" comment="LoadState is set to masked">
+      <linux:value>masked</linux:value>
+  </linux:systemdunitproperty_state>
+
+  <linux:systemdunitproperty_test id="test_service_fragmentpath_is_dev_null_rhnsd" check="all" check_existence="any_exist" comment="Test that the property FragmentPath from the service rhnsd is set to /dev/null" version="1">
+    <linux:object object_ref="obj_service_fragmentpath_is_dev_null_rhnsd"/>
+    <linux:state state_ref="state_service_fragmentpath_is_dev_null_rhnsd"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_fragmentpath_is_dev_null_rhnsd" comment="Retrieve the FragmentPath property of rhnsd" version="1">
+    <linux:unit operation="pattern match">^rhnsd\.(service|socket)$</linux:unit>
+    <linux:property>FragmentPath</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_fragmentpath_is_dev_null_rhnsd" version="1" comment="FragmentPath is set to /dev/null">
+      <linux:value>/dev/null</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+
+
+  <linux:rpminfo_test check="all" check_existence="none_exist"
+  id="test_service_rhnsd_package_rhnsd_removed" version="1"
+  comment="package rhnsd is removed">
+    <linux:object object_ref="obj_test_service_rhnsd_package_rhnsd_removed" />
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_rhnsd_package_rhnsd_removed" version="1">
+    <linux:name>rhnsd</linux:name>
+  </linux:rpminfo_object>
+
+
+</def-group>

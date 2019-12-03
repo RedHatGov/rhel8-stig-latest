@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install the tmux Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80644-8
+    - NIST-800-171-3.1.10
+    - NIST-800-53-AC-11(a)
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_tmux_installed
+  tasks:
+
+    - name: Ensure tmux is installed
+      package:
+        name: tmux
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

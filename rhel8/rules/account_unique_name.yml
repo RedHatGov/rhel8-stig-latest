@@ -1,0 +1,17 @@
+description: Change usernames, or delete accounts, so each has a unique name.
+identifiers: {cce: 80674-5}
+ocil: 'Run the following command to check for duplicate account names:
+
+  <pre>$ sudo pwck -qr</pre>
+
+  If there are no duplicate names, no line will be returned.'
+ocil_clause: a line is returned
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: Unique usernames allow for accountability on the system.
+references: {cjis: 5.5.2, disa: '770,804', pcidss: Req-8.1.1}
+severity: medium
+template: null
+title: Ensure All Accounts on the System Have Unique Names
+warnings: []

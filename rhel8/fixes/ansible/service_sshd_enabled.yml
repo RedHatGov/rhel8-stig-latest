@@ -1,0 +1,31 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service sshd
+  block:
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+
+    - name: Enable service sshd
+      service:
+        name: sshd
+        enabled: 'yes'
+        state: started
+      when:
+        - '"openssh-server" in ansible_facts.packages'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_sshd_enabled
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-SC-8
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.5.4
+    - NIST-800-171-3.13.8

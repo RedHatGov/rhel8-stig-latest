@@ -1,0 +1,20 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.unprivileged_bpf_disabled is set to 1
+  sysctl:
+    name: kernel.unprivileged_bpf_disabled
+    value: '1'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_kernel_unprivileged_bpf_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-82974-7

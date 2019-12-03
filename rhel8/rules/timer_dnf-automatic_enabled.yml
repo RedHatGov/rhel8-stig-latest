@@ -1,0 +1,26 @@
+description: '
+
+  The <code>dnf-automatic</code> timer can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable dnf-automatic.timer</pre>'
+identifiers: {cce: 82360-9}
+ocil: ' Run the following command to determine the current status of the <code>dnf-automatic</code>
+  timer: <pre>$ systemctl is-active dnf-automatic.timer</pre> If the timer is running,
+  it should return the following: <pre>active</pre>'
+ocil_clause: the dnf-automatic.timer is not enabled
+oval_external_content: null
+platform: null
+prodtype: rhel8,fedora,ol8
+rationale: 'The <tt>dnf-automatic</tt> is an alternative command line interface (CLI)
+  to <tt>dnf upgrade</tt> with specific facilities to make it suitable to be executed
+  automatically and regularly from systemd timers, cron jobs and similar.
+
+  The tool is controlled by <tt>dnf-automatic.timer</tt> SystemD timer.'
+references: {nist: SI-2(5), ospp: FMT_SMF_EXT.1, srg: SRG-OS-000191-GPOS-00080}
+severity: medium
+template:
+  backends: {}
+  name: timer_enabled
+  vars: {packagename: dnf-automatic, timername: dnf-automatic}
+title: Enable dnf-automatic Timer
+warnings: []

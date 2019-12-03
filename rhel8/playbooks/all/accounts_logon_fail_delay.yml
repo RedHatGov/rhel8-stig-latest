@@ -1,0 +1,27 @@
+# platform = multi_platform_rhel
+# disruption = low
+# strategy = restrict
+# complexity = low
+# reboot = true
+- name: Ensure the Logon Failure Delay is Set Correctly in login.defs
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_accounts_fail_delay: '4'
+  tags:
+    - NIST-800-53-AC-7(b)
+    - NIST-800-53-CM-6(b)
+    - accounts_logon_fail_delay
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - reboot_required
+    - restrict_strategy
+  tasks:
+
+    - name: Set accounts logon fail delay
+      lineinfile:
+        dest: /etc/login.defs
+        regexp: ^FAIL_DELAY
+        line: FAIL_DELAY {{ var_accounts_fail_delay }}
+        create: true

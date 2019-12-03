@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall abrt-plugin-rhtsupport Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82916-8
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_abrt-plugin-rhtsupport_removed
+  tasks:
+
+    - name: Ensure abrt-plugin-rhtsupport is removed
+      package:
+        name: abrt-plugin-rhtsupport
+        state: absent

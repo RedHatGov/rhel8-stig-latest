@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable the unconfined_login SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_unconfined_login: 'true'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_unconfined_login
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean unconfined_login accordingly
+      seboolean:
+        name: unconfined_login
+        state: '{{ var_unconfined_login }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service sssd
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable service sssd
+    service:
+      name: "sssd"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"sssd" in ansible_facts.packages'

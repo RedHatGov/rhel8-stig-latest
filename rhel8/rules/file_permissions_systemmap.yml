@@ -1,0 +1,23 @@
+description: "Files containing sensitive informations should be protected by restrictive\n\
+  \  permissions. Most of the time, there is no need that these files need to be read\
+  \ by any non-root user\n\nTo properly set the permissions of <code>/boot/System.map-*</code>,\
+  \ run the command:\n<pre>$ sudo chmod 0600 /boot/System.map-*</pre>"
+identifiers: {}
+ocil: 'To check the permissions of <code>/boot/Sysem.map-*</code>, run the command:
+
+  <pre>$ ls -l /boot/Sysem.map-*</pre>
+
+  If properly configured, the output should indicate the following permissions:
+
+  <code>-rw-------</code>'
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: "The <tt>System.map</tt> file contains information about kernel symbols\
+  \ and\n  can give some hints to generate local exploitation."
+references: {anssi: NT28(R13)}
+severity: unknown
+template: null
+title: Verify that local System.map file (if exists) is readable only by root
+warnings: []

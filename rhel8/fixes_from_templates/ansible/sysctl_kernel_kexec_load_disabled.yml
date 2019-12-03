@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.kexec_load_disabled is set to 1
+  sysctl:
+    name: "kernel.kexec_load_disabled"
+    value: "1"
+    state: present
+    reload: yes

@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure xorg-x11-server-common is removed
+  package:
+    name: "xorg-x11-server-common"
+    state: absent

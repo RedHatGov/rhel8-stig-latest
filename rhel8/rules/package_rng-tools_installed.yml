@@ -1,0 +1,24 @@
+description: 'The <code>rng-tools</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install rng-tools</pre>'
+identifiers: {cce: 82968-9}
+ocil: 'Run the following command to determine if the <code>rng-tools</code> package
+  is installed: <pre>$ rpm -q rng-tools</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: '<tt>rng-tools</tt> provides hardware random number generator tools,
+
+  such as those used in the formation of x509/PKI certificates.'
+references: {srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: rng-tools}
+title: Install rng-tools Package
+warnings: []

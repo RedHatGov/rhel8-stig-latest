@@ -1,0 +1,37 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = medium
+- name: Get nfs and nfs4 mount points, that don't have sec=krb5:krb5i:krb5p
+  command: findmnt --fstab --types nfs,nfs4 -O nosec=krb5:krb5i:krb5p -n
+  register: points_register
+  check_mode: false
+  changed_when: false
+  failed_when: false
+  tags:
+    - mount_option_krb_sec_remote_filesystems
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-14(1)
+
+- name: Add sec=krb5:krb5i:krb5p to nfs and nfs4 mount points
+  mount:
+    path: '{{ item.split()[0] }}'
+    src: '{{ item.split()[1] }}'
+    fstype: '{{ item.split()[2] }}'
+    state: mounted
+    opts: '{{ item.split()[3] }},sec=krb5:krb5i:krb5p'
+  when: (points_register.stdout | length > 0)
+  with_items: '{{ points_register.stdout_lines }}'
+  tags:
+    - mount_option_krb_sec_remote_filesystems
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-14(1)

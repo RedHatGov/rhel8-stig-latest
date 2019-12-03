@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure samba-common is installed
+  package:
+    name: "samba-common"
+    state: present

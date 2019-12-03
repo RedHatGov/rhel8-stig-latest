@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>rsync_anon_write</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>rsync_anon_write</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P rsync_anon_write off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>rsync_anon_write</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool rsync_anon_write</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>rsync_anon_write --> off</code>'
+ocil_clause: rsync_anon_write is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: rsync_anon_write}
+title: Disable the rsync_anon_write SELinux Boolean
+warnings: []

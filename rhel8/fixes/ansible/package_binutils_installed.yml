@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure binutils is installed
+  package:
+    name: binutils
+    state: present
+  tags:
+    - package_binutils_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82989-5

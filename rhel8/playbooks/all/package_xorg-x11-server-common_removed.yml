@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Remove the X Windows Package Group
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AC-17(8).1(ii)
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_xorg-x11-server-common_removed
+  tasks:
+
+    - name: Ensure xorg-x11-server-common is removed
+      package:
+        name: xorg-x11-server-common
+        state: absent

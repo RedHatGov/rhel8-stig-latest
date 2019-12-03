@@ -1,0 +1,34 @@
+description: 'By default, the SELinux boolean <tt>selinuxuser_use_ssh_chroot</tt>
+  is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>selinuxuser_use_ssh_chroot</code> SELinux boolean, run the
+  following command:
+
+  <pre>$ sudo setsebool -P selinuxuser_use_ssh_chroot off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>selinuxuser_use_ssh_chroot</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool selinuxuser_use_ssh_chroot</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>selinuxuser_use_ssh_chroot --> off</code>'
+ocil_clause: selinuxuser_use_ssh_chroot is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: selinuxuser_use_ssh_chroot}
+title: Disable the selinuxuser_use_ssh_chroot SELinux Boolean
+warnings: []

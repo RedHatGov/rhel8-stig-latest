@@ -1,0 +1,51 @@
+description: '
+
+  By default, <tt>iptables</tt>
+
+  blocks access to the ports used by the web server.
+
+
+  To configure <tt>iptables</tt> to allow port 21 traffic, one must edit
+
+  <tt>/etc/sysconfig/iptables</tt> and
+
+  <tt>/etc/sysconfig/ip6tables</tt> (if IPv6 is in use).
+
+  Add the following line, ensuring that it appears before the final LOG and DROP lines
+  for the INPUT chain:
+
+  <pre>-A INPUT -m state --state NEW -p tcp --dport 21 -j ACCEPT</pre>
+
+  Edit the file <tt>/etc/sysconfig/iptables-config</tt>. Ensure that the space-separated
+  list of modules contains
+
+  the FTP connection tracking module:
+
+  <pre>IPTABLES_MODULES="ip_conntrack_ftp"</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: 'These settings configure the firewall to allow connections to an FTP server.
+
+
+
+  The first line allows initial connections to the FTP server port.
+
+  FTP is an older protocol which is not very compatible with firewalls. During the
+  initial FTP dialogue, the client
+
+  and server negotiate an arbitrary port to be used for data transfer. The <tt>ip_conntrack_ftp</tt>  module
+  is used by
+
+  iptables to listen to that dialogue and allow connections to the data ports which
+  FTP negotiates. This allows an
+
+  FTP server to operate on a system which is running a firewall.'
+references: {}
+severity: unknown
+template: null
+title: Configure Firewalls to Protect the FTP Server
+warnings: []

@@ -1,0 +1,23 @@
+description: 'The <tt>samba-common</tt> package should be installed.
+
+  The <code>samba-common</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install samba-common</pre>'
+identifiers: {}
+ocil: 'Run the following command to determine if the <code>samba-common</code> package
+  is installed: <pre>$ rpm -q samba-common</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: If the samba-common package is not installed, samba cannot be configured.
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: samba-common}
+title: Install the Samba Common Package
+warnings: []

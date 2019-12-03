@@ -1,0 +1,36 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Disable Full User Name on Splash Shield
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80779-2
+    - dconf_gnome_screensaver_user_info
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Disable Full Username on Splash Screen
+      ini_file:
+        dest: /etc/dconf/db/local.d/00-security-settings
+        section: org/gnome/desktop/screensaver
+        option: show-full-name-in-top-bar
+        value: 'false'
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Prevent user modification of GNOME show-full-name-in-top-bar
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/screensaver/show-full-name-in-top-bar
+        line: /org/gnome/desktop/screensaver/show-full-name-in-top-bar
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

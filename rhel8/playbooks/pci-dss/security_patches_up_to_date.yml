@@ -1,0 +1,28 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = patch
+# complexity = low
+# disruption = high
+- name: Ensure Software Patches Installed
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80865-9
+    - CJIS-5.10.4.1
+    - NIST-800-53-MA-1(b)
+    - NIST-800-53-SI-2
+    - NIST-800-53-SI-2(c)
+    - PCI-DSS-Req-6.2
+    - high_disruption
+    - high_severity
+    - low_complexity
+    - patch_strategy
+    - reboot_required
+    - security_patches_up_to_date
+    - skip_ansible_lint
+  tasks:
+
+    - name: Security patches are up to date
+      package:
+        name: '*'
+        state: latest

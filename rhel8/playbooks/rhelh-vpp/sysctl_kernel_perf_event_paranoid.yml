@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disallow kernel profiling by unprivileged users
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-81054-9
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_kernel_perf_event_paranoid
+  tasks:
+
+    - name: Ensure sysctl kernel.perf_event_paranoid is set to 2
+      sysctl:
+        name: kernel.perf_event_paranoid
+        value: '2'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,35 @@
+description: 'Configure the operating system to encrypt the transfer of off-loaded
+  audit
+
+  records onto a different system or media from the system being audited.
+
+
+  Set the <tt>transport</tt> option in <pre>/etc/audit/audisp-remote.conf</pre>
+
+  to <tt>KRB5</tt>.'
+identifiers: {cce: 80926-9}
+ocil: 'To verify the audispd plugin encrypts audit records off-loaded onto a different
+
+  system or media from the system being audited, run the following command:
+
+
+  <pre>$ sudo grep -i transport /etc/audit/audisp-remote.conf</pre>
+
+  The output should return the following:
+
+  <pre>transport = KRB5</pre>'
+ocil_clause: audispd is not encrypting audit records when sent over the network
+oval_external_content: null
+platform: machine
+prodtype: wrlinux1019,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: 'Information stored in one location is vulnerable to accidental or incidental
+  deletion
+
+  or alteration. Off-loading is a common process in information systems with limited
+
+  audit storage capacity.'
+references: {disa: '1851', nist: AU-9(3), ospp: FAU_GEN.1.1.c, srg: SRG-OS-000342-GPOS-00133}
+severity: medium
+template: null
+title: Encrypt Audit Records Sent With audispd Plugin
+warnings: []

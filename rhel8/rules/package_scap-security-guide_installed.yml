@@ -1,0 +1,45 @@
+description: 'The <code>scap-security-guide</code> package can be installed with the
+  following command:
+
+  <pre>
+
+  $ sudo yum install scap-security-guide</pre>'
+identifiers: {cce: 82949-9}
+ocil: 'Run the following command to determine if the <code>scap-security-guide</code>
+  package is installed: <pre>$ rpm -q scap-security-guide</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: 'The <tt>scap-security-guide</tt> package provides a guide for configuration
+  of the system
+
+  from the final system''s security point of view. The guidance is specified in the
+  Security
+
+  Content Automation Protocol (SCAP) format and constitutes a catalog of practical
+  hardening
+
+  advice, linked to government requirements where applicable. The SCAP Security Guide
+  project
+
+  bridges the gap between generalized policy requirements and specific implementation
+  guidelines.
+
+  A system administrator can use the <tt>oscap</tt> CLI tool from the <tt>openscap-scanner</tt>
+
+  package, or the SCAP Workbench GUI tool from the <tt>scap-workbench</tt> package,
+  to verify
+
+  that the system conforms to provided guidelines. Refer to the scap-security-guide(8)
+  manual
+
+  page for futher information.'
+references: {srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: scap-security-guide}
+title: Install scap-security-guide Package
+warnings: []

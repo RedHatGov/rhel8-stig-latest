@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Remove telnet Clients
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80849-3
+    - NIST-800-171-3.1.13
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_telnet_removed
+  tasks:
+
+    - name: Ensure telnet is removed
+      package:
+        name: telnet
+        state: absent

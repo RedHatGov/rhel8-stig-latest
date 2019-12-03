@@ -1,0 +1,28 @@
+<def-group>
+  <definition class="compliance" id="package_dnf-plugin-subscription-manager_installed"
+  version="1">
+    <metadata>
+      <title>Package dnf-plugin-subscription-manager Installed</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The RPM package dnf-plugin-subscription-manager should be installed.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="package dnf-plugin-subscription-manager is installed"
+      test_ref="test_package_dnf-plugin-subscription-manager_installed" />
+    </criteria>
+  </definition>
+
+  <linux:rpminfo_test check="all" check_existence="all_exist"
+  id="test_package_dnf-plugin-subscription-manager_installed" version="1"
+  comment="package dnf-plugin-subscription-manager is installed">
+    <linux:object object_ref="obj_test_package_dnf-plugin-subscription-manager_installed" />
+    
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_package_dnf-plugin-subscription-manager_installed" version="1">
+    <linux:name>dnf-plugin-subscription-manager</linux:name>
+  </linux:rpminfo_object>
+  
+
+</def-group>

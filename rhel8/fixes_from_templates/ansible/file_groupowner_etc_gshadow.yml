@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+
+- name: Test for existence /etc/gshadow
+  stat:
+    path: "/etc/gshadow"
+  register: file_exists
+
+- name: Ensure group owner 0 on /etc/gshadow
+  file:
+    path: "/etc/gshadow"
+    group: "0"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

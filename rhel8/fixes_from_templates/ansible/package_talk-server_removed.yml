@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure talk-server is removed
+  package:
+    name: "talk-server"
+    state: absent

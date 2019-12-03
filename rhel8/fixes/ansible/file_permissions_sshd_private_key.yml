@@ -1,0 +1,42 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Find /etc/ssh/ file(s)
+  find:
+    paths: /etc/ssh/
+    patterns: ^.*_key$
+    use_regex: true
+  register: files_found
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_permissions_sshd_private_key
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6
+    - NIST-800-53-AC-17
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.13.10
+
+- name: Set permissions for /etc/ssh/ file(s)
+  file:
+    path: '{{ item.path }}'
+    mode: '0640'
+  with_items:
+    - '{{ files_found.files }}'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_permissions_sshd_private_key
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6
+    - NIST-800-53-AC-17
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.13.10

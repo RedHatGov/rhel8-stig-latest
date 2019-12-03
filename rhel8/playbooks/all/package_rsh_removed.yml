@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall rsh Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82183-5
+    - NIST-800-171-3.1.13
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_rsh_removed
+    - unknown_severity
+  tasks:
+
+    - name: Ensure rsh is removed
+      package:
+        name: rsh
+        state: absent

@@ -1,0 +1,57 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = high
+- name: Add nosuid Option to Removable Media Partitions
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_removable_partition: /dev/cdrom
+  tags:
+    - NIST-800-53-AC-19(a)
+    - NIST-800-53-AC-19(d)
+    - NIST-800-53-AC-19(e)
+    - NIST-800-53-AC-6
+    - NIST-800-53-CM-7
+    - NIST-800-53-MP-2
+    - configure_strategy
+    - high_disruption
+    - low_complexity
+    - mount_option_nosuid_removable_partitions
+    - no_reboot_needed
+    - unknown_severity
+  tasks:
+
+    - name: get back mount information associated to mountpoint
+      command: findmnt --fstab '{{ var_removable_partition }}'
+      register: device_name
+      failed_when: device_name.rc > 1
+      changed_when: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: create mount_info dictionary variable
+      set_fact:
+        mount_info: '{{ mount_info|default({})|combine({item.0: item.1}) }}'
+      with_together:
+        - '{{ device_name.stdout_lines[0].split() | list | lower }}'
+        - '{{ device_name.stdout_lines[1].split() | list }}'
+      when:
+        - device_name.stdout is defined and device_name.stdout_lines is defined
+        - (device_name.stdout | length > 0)
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"
+
+    - name: Ensure permission nosuid are set on var_removable_partition
+      mount:
+        path: '{{ var_removable_partition }}'
+        src: '{{ mount_info.source }}'
+        opts: '{{ mount_info.options }},nosuid'
+        state: mounted
+        fstype: '{{ mount_info.fstype }}'
+      when:
+        - device_name.stdout is defined
+        - (device_name.stdout | length > 0)
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

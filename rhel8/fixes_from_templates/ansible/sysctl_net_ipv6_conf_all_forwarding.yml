@@ -1,0 +1,13 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv6_conf_all_forwarding_value)
+
+- name: Ensure sysctl net.ipv6.conf.all.forwarding is set
+  sysctl:
+    name: "net.ipv6.conf.all.forwarding"
+    value: "{{ sysctl_net_ipv6_conf_all_forwarding_value }}"
+    state: present
+    reload: yes

@@ -1,0 +1,40 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Test for existence /boot/efi/EFI/redhat/grub.cfg
+  stat:
+    path: /boot/efi/EFI/redhat/grub.cfg
+  register: file_exists
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_owner_efi_grub2_cfg
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6(7)
+    - NIST-800-171-3.4.5
+    - PCI-DSS-Req-7.1
+    - CJIS-5.5.2.2
+
+- name: Ensure owner 0 on /boot/efi/EFI/redhat/grub.cfg
+  file:
+    path: /boot/efi/EFI/redhat/grub.cfg
+    owner: '0'
+  when:
+    - file_exists.stat is defined and file_exists.stat.exists
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_owner_efi_grub2_cfg
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6(7)
+    - NIST-800-171-3.4.5
+    - PCI-DSS-Req-7.1
+    - CJIS-5.5.2.2

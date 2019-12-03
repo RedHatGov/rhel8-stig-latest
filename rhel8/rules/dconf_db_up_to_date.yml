@@ -1,0 +1,31 @@
+description: 'By default, DConf uses a binary database as a data backend.
+
+  The system-level database is compiled from keyfiles in the /etc/dconf/db/ directory
+  by the <pre>dconf update</pre> command.'
+identifiers: {cce: 81003-6}
+ocil: 'In order to be sure that the databases are up-to-date, run the
+
+  <pre>dconf update</pre>
+
+  command as the administrator.'
+ocil_clause: The system-wide dconf databases are up-to-date with regards to respective
+  keyfiles
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,fedora,ol7,ol8
+rationale: 'Unlike text-based keyfiles, the binary database is impossible to check
+  by OVAL.
+
+  Therefore, in order to evaluate dconf configuration, both have to be true at the
+  same time -
+
+  configuration files have to be compliant, and the database needs to be more recent
+  than those keyfiles,
+
+  which gives confidence that it reflects them.'
+references: {}
+severity: high
+template: null
+title: Make sure that the dconf databases are up-to-date with regards to respective
+  keyfiles
+warnings: []

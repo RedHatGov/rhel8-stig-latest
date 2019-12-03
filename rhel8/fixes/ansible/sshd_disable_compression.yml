@@ -1,0 +1,34 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Disable Compression Or Set Compression to delayed
+  block:
+
+    - name: Deduplicate values from /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: false
+        regexp: (?i)^\s*Compression\s+
+        state: absent
+
+    - name: Insert correct line to /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: true
+        line: Compression delayed
+        state: present
+        insertbefore: ^[#\s]*Match
+        validate: /usr/sbin/sshd -t -f %s
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sshd_disable_compression
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80895-6
+    - NIST-800-53-CM-6(b)
+    - NIST-800-171-3.1.12

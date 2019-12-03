@@ -1,0 +1,28 @@
+description: 'The <code>tar</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install tar</pre>'
+identifiers: {cce: 82965-5}
+ocil: 'Run the following command to determine if the <code>tar</code> package is installed:
+  <pre>$ rpm -q tar</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: 'The GNU <tt>tar</tt> program saves many files together into one archive
+  and
+
+  can restore individual files (or all of the files) from the archive. <tt>tar</tt>
+
+  includes multivolume support, automatic archive compression/decompression, the
+
+  the ability to perform incremental and full backups. If '
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: tar}
+title: Install tar Package
+warnings: []

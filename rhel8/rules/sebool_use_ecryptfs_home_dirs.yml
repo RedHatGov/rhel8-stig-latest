@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>use_ecryptfs_home_dirs</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>use_ecryptfs_home_dirs</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P use_ecryptfs_home_dirs off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>use_ecryptfs_home_dirs</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool use_ecryptfs_home_dirs</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>use_ecryptfs_home_dirs --> off</code>'
+ocil_clause: use_ecryptfs_home_dirs is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: use_ecryptfs_home_dirs}
+title: Disable the use_ecryptfs_home_dirs SELinux Boolean
+warnings: []

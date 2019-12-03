@@ -1,0 +1,31 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Verify Group Who Owns shadow File
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80799-0
+    - CJIS-5.5.2.2
+    - NIST-800-53-AC-6
+    - PCI-DSS-Req-8.7.c
+    - configure_strategy
+    - file_groupowner_etc_shadow
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Test for existence /etc/shadow
+      stat:
+        path: /etc/shadow
+      register: file_exists
+
+    - name: Ensure group owner 0 on /etc/shadow
+      file:
+        path: /etc/shadow
+        group: '0'
+      when: file_exists.stat is defined and file_exists.stat.exists

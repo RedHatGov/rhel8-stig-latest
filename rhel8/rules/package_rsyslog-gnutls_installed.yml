@@ -1,0 +1,25 @@
+description: 'TLS protocol support for rsyslog is installed.
+
+  The <code>rsyslog-gnutls</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install rsyslog-gnutls</pre>'
+identifiers: {cce: 82859-0}
+ocil: 'Run the following command to determine if the <code>rsyslog-gnutls</code> package
+  is installed: <pre>$ rpm -q rsyslog-gnutls</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: 'The rsyslog-gnutls package provides Transport Layer Security (TLS) support
+
+  for the rsyslog daemon, which enables secure remote logging.'
+references: {ospp: FMT_SMF_EXT.1, srg: 'SRG-OS-000480-GPOS-00227,SRG-OS-000120-GPOS-00061'}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: rsyslog-gnutls}
+title: Ensure rsyslog-gnutls is installed
+warnings: []

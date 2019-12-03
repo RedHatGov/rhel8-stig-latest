@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = patch
+# complexity = low
+# disruption = high
+- name: Security patches are up to date
+  package:
+    name: '*'
+    state: latest
+  tags:
+    - security_patches_up_to_date
+    - high_severity
+    - skip_ansible_lint
+    - patch_strategy
+    - low_complexity
+    - high_disruption
+    - reboot_required
+    - CCE-80865-9
+    - NIST-800-53-SI-2
+    - NIST-800-53-SI-2(c)
+    - NIST-800-53-MA-1(b)
+    - PCI-DSS-Req-6.2
+    - CJIS-5.10.4.1

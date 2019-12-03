@@ -1,0 +1,34 @@
+description: 'Change the group owner of interactive users files to the group found
+
+  in <pre>/etc/passwd</pre> for the user. To change the group owner of a local
+
+  interactive user home directory, use the following command:
+
+  <pre>$ sudo chgrp <i>USER_GROUP</i> /home/<i>USER</i>/.<i>INIT_FILE</i></pre>'
+identifiers: {}
+ocil: 'To verify the local initialization files of all local interactive users are
+  group-
+
+  owned by the appropriate user, inspect the primary group of the respective
+
+  users in <tt>/etc/passwd</tt> and verify all initialization files under the
+
+  respective users home directory. Check the group owner of all local interactive
+  users
+
+  initialization files.'
+ocil_clause: they are not
+oval_external_content: null
+platform: null
+prodtype: wrlinux1019,rhel7,rhel8,rhv4
+rationale: 'Local initialization files for interactive users are used to configure
+  the
+
+  user''s shell environment upon logon. Malicious modification of these files could
+
+  compromise accounts upon logon.'
+references: {disa: '366', srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template: null
+title: User Initialization Files Must Be Group-Owned By The Primary User
+warnings: []

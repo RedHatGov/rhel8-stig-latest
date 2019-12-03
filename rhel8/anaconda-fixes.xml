@@ -1,0 +1,225 @@
+<fix-content system="urn:xccdf:fix:script:sh" xmlns="http://checklists.nist.gov/xccdf/1.1"><fix-group id="anaconda" system="urn:redhat:anaconda:pre" xmlns="http://checklists.nist.gov/xccdf/1.1"><fix complexity="low" disruption="low" reboot="false" rule="package_tar_installed" strategy="enable">
+package --add=tar
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt_removed" strategy="disable">
+package --remove=abrt
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_libcap-ng-utils_installed" strategy="enable">
+package --add=libcap-ng-utils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_openssh-server_removed" strategy="disable">
+package --remove=openssh-server
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_tftp_removed" strategy="disable">
+package --remove=tftp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_usbguard_installed" strategy="enable">
+package --add=usbguard
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_gssproxy_removed" strategy="disable">
+package --remove=gssproxy
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_tftp-server_removed" strategy="disable">
+package --remove=tftp-server
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_audit_noexec" strategy="enable">
+part /var/log/audit --mountoptions="noexec"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-addon-python_removed" strategy="disable">
+package --remove=abrt-addon-python
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_telnetd-ssl_removed" strategy="disable">
+package --remove=telnetd-ssl
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_nis_removed" strategy="disable">
+package --remove=nis
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_audit_nosuid" strategy="enable">
+part /var/log/audit --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_quagga_removed" strategy="disable">
+package --remove=quagga
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_tmp_noexec" strategy="enable">
+part /var/tmp --mountoptions="noexec"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_ypbind_removed" strategy="disable">
+package --remove=ypbind
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_srv" strategy="enable">
+part /srv
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_tmp_noexec" strategy="enable">
+part /tmp --mountoptions="noexec"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_openldap-servers_removed" strategy="disable">
+package --remove=openldap-servers
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_opensc_installed" strategy="enable">
+package --add=opensc
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_tmp_nodev" strategy="enable">
+part /var/tmp --mountoptions="nodev"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_sendmail_removed" strategy="disable">
+package --remove=sendmail
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-plugin-rhtsupport_removed" strategy="disable">
+package --remove=abrt-plugin-rhtsupport
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_bind_removed" strategy="disable">
+package --remove=bind
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_tmp_bind" strategy="enable">
+part /var/tmp --mountoptions="bind"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_rsh-server_removed" strategy="disable">
+package --remove=rsh-server
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_boot_nosuid" strategy="enable">
+part /boot --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_talk_removed" strategy="disable">
+package --remove=talk
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_aide_installed" strategy="enable">
+package --add=aide
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_tmp_nosuid" strategy="enable">
+part /tmp --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_rsh_removed" strategy="disable">
+package --remove=rsh
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_sudo_installed" strategy="enable">
+package --add=sudo
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-addon-kerneloops_removed" strategy="disable">
+package --remove=abrt-addon-kerneloops
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_telnet_removed" strategy="disable">
+package --remove=telnet
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_tmux_installed" strategy="enable">
+package --add=tmux
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_pigz_removed" strategy="disable">
+package --remove=pigz
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_telnet-server_removed" strategy="disable">
+package --remove=telnet-server
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_squid_removed" strategy="disable">
+package --remove=squid
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_xinetd_removed" strategy="disable">
+package --remove=xinetd
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_iprutils_removed" strategy="disable">
+package --remove=iprutils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_ntpdate_removed" strategy="disable">
+package --remove=ntpdate
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_nodev" strategy="enable">
+part /var --mountoptions="nodev"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_firewalld_installed" strategy="enable">
+package --add=firewalld
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_tmp_nosuid" strategy="enable">
+part /var/tmp --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_dnf-automatic_installed" strategy="enable">
+package --add=dnf-automatic
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_vsftpd_removed" strategy="disable">
+package --remove=vsftpd
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_tmp_nodev" strategy="enable">
+part /tmp --mountoptions="nodev"
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_home_nosuid" strategy="enable">
+part /home --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_inetutils-telnetd_removed" strategy="disable">
+package --remove=inetutils-telnetd
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_var_tmp" strategy="enable">
+part /var/tmp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_nss-tools_installed" strategy="enable">
+package --add=nss-tools
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_syslogng_installed" strategy="enable">
+package --add=syslogng
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_tuned_removed" strategy="disable">
+package --remove=tuned
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_home" strategy="enable">
+part /home
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_boot_nodev" strategy="enable">
+part /boot --mountoptions="nodev"
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_nodev" strategy="enable">
+part /var/log --mountoptions="nodev"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_xorg-x11-server-common_removed" strategy="disable">
+package --remove=xorg-x11-server-common
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_net-snmp_removed" strategy="disable">
+package --remove=net-snmp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_rsyslog-gnutls_installed" strategy="enable">
+package --add=rsyslog-gnutls
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_openscap-scanner_installed" strategy="enable">
+package --add=openscap-scanner
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_policycoreutils_installed" strategy="enable">
+package --add=policycoreutils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_vim_installed" strategy="enable">
+package --add=vim
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-cli_removed" strategy="disable">
+package --remove=abrt-cli
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_setroubleshoot_removed" strategy="disable">
+package --remove=setroubleshoot
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_subscription-manager_installed" strategy="enable">
+package --add=subscription-manager
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_cron_installed" strategy="enable">
+package --add=cron
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_ypserv_removed" strategy="disable">
+package --remove=ypserv
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_var" strategy="enable">
+part /var
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_sssd_installed" strategy="enable">
+package --add=sssd
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_home_nodev" strategy="enable">
+part /home --mountoptions="nodev"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_libreswan_installed" strategy="enable">
+package --add=libreswan
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_sssd-ipa_installed" strategy="enable">
+package --add=sssd-ipa
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_talk-server_removed" strategy="disable">
+package --remove=talk-server
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_samba-common_installed" strategy="enable">
+package --add=samba-common
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_gdm_removed" strategy="disable">
+package --remove=gdm
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_mcstrans_removed" strategy="disable">
+package --remove=mcstrans
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_openssh-server_installed" strategy="enable">
+package --add=openssh-server
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_dovecot_removed" strategy="disable">
+package --remove=dovecot
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_scap-security-guide_installed" strategy="enable">
+package --add=scap-security-guide
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_samba_removed" strategy="disable">
+package --remove=samba
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_rng-tools_installed" strategy="enable">
+package --add=rng-tools
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_psacct_installed" strategy="enable">
+package --add=psacct
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_audit_installed" strategy="enable">
+package --add=audit
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_tmp" strategy="enable">
+part /tmp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_fapolicyd_installed" strategy="enable">
+package --add=fapolicyd
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_ntp_installed" strategy="enable">
+package --add=ntp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_tcp_wrappers_installed" strategy="enable">
+package --add=tcp_wrappers
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_gnutls-utils_installed" strategy="enable">
+package --add=gnutls-utils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_telnetd_removed" strategy="disable">
+package --remove=telnetd
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_python3-subscription-manager-rhsm_installed" strategy="enable">
+package --add=python3-subscription-manager-rhsm
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_geolite2-country_removed" strategy="disable">
+package --remove=geolite2-country
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-plugin-sosreport_removed" strategy="disable">
+package --remove=abrt-plugin-sosreport
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_audispd-plugins_installed" strategy="enable">
+package --add=audispd-plugins
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_var_log_audit" strategy="enable">
+part /var/log/audit
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_dhcp_removed" strategy="disable">
+package --remove=dhcp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-addon-ccpp_removed" strategy="disable">
+package --remove=abrt-addon-ccpp
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_vsftpd_installed" strategy="enable">
+package --add=vsftpd
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_httpd_removed" strategy="disable">
+package --remove=httpd
+</fix><fix rule="service_kdump_disabled">
+kdump --disable
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_dnf-plugin-subscription-manager_installed" strategy="enable">
+package --add=dnf-plugin-subscription-manager
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_krb5-workstation_removed" strategy="disable">
+package --remove=krb5-workstation
+</fix><fix complexity="low" disruption="high" reboot="false" rule="partition_for_var_log" strategy="enable">
+part /var/log
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_binutils_installed" strategy="enable">
+package --add=binutils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_rsyslog_installed" strategy="enable">
+package --add=rsyslog
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_pcsc-lite_installed" strategy="enable">
+package --add=pcsc-lite
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_abrt-plugin-logger_removed" strategy="disable">
+package --remove=abrt-plugin-logger
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_audit_nodev" strategy="enable">
+part /var/log/audit --mountoptions="nodev"
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_noexec" strategy="enable">
+part /var/log --mountoptions="noexec"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_iptables_installed" strategy="enable">
+package --add=iptables
+</fix><fix complexity="low" disruption="high" reboot="false" rule="mount_option_var_log_nosuid" strategy="enable">
+part /var/log --mountoptions="nosuid"
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_nfs-utils_removed" strategy="disable">
+package --remove=nfs-utils
+</fix><fix complexity="low" disruption="low" reboot="false" rule="package_geolite2-city_removed" strategy="disable">
+package --remove=geolite2-city
+</fix></fix-group></fix-content>

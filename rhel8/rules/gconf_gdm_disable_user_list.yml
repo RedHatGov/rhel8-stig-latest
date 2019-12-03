@@ -1,0 +1,25 @@
+description: "In the default graphical environment, users logging\ndirectly into the\
+  \ system are greeted with a login screen that displays\nall known users. This functionality\
+  \ should be disabled.\n<br /><br />\nRun the following command to disable the user\
+  \ list:\n<pre>$ sudo gconftool-2 --direct \\\n  --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory\
+  \ \\\n  --type bool \\\n  --set /apps/gdm/simple-greeter/disable_user_list true</pre>"
+identifiers: {}
+ocil: 'To ensure the user list is disabled, run the following command:
+
+  <pre>$ gconftool-2 -g /apps/gdm/simple-greeter/disable_user_list</pre>
+
+  The output should be <tt>true</tt>.'
+ocil_clause: it is not
+oval_external_content: null
+platform: gdm
+prodtype: all
+rationale: 'Leaving the user list enabled is a security risk since it allows anyone
+
+  with physical access to the system to quickly enumerate known user accounts
+
+  without logging in.'
+references: {nist: AC-23}
+severity: medium
+template: null
+title: Disable the User List
+warnings: []

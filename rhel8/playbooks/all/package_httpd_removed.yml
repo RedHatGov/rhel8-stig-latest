@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall httpd Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_httpd_removed
+    - unknown_severity
+  tasks:
+
+    - name: Ensure httpd is removed
+      package:
+        name: httpd
+        state: absent

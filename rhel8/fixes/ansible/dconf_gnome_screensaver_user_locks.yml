@@ -1,0 +1,22 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Prevent user modification of GNOME lock-delay
+  lineinfile:
+    path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+    regexp: ^/org/gnome/desktop/screensaver/lock-delay
+    line: /org/gnome/desktop/screensaver/lock-delay
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - dconf_gnome_screensaver_user_locks
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80780-0
+    - NIST-800-53-AC-11(a)
+    - NIST-800-171-3.1.10

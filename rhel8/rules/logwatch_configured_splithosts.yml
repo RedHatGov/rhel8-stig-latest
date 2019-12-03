@@ -1,0 +1,21 @@
+description: 'If <tt>SplitHosts</tt> is set, Logwatch will separate entries by hostname.
+
+  This makes the report longer but significantly more usable. If it is not
+
+  set, then Logwatch will not report which host generated a given log entry,
+
+  and that information is almost always necessary
+
+  <pre> SplitHosts = yes </pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template: null
+title: Configure Logwatch SplitHosts Line
+warnings: []

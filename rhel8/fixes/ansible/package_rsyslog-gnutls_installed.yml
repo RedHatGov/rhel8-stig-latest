@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure rsyslog-gnutls is installed
+  package:
+    name: rsyslog-gnutls
+    state: present
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - package_rsyslog-gnutls_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82859-0

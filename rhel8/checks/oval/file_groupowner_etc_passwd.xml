@@ -1,0 +1,22 @@
+<def-group>
+  <definition class="compliance" id="file_groupowner_etc_passwd" version="1">
+    <metadata>
+      <title>Verify /etc/passwd Group Owner</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>This test makes sure that /etc/passwd is group owned by 0.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="Check file group ownership of /etc/passwd" test_ref="test_file_groupowner_etc_passwd" />
+    </criteria>
+  </definition>
+    <unix:file_test check="all" check_existence="all_exist" comment="Testing group ownership of /etc/passwd" id="test_file_groupowner_etc_passwd" version="1">
+    <unix:object object_ref="object_file_groupowner_etc_passwd" />
+    <unix:state state_ref="state_file_groupowner_etc_passwd_gid_0" />
+  </unix:file_test>
+  <unix:file_state id="state_file_groupowner_etc_passwd_gid_0" version="1">
+    <unix:group_id datatype="int">0</unix:group_id>
+  </unix:file_state>
+  <unix:file_object comment="/etc/passwd" id="object_file_groupowner_etc_passwd" version="1"><unix:filepath>/etc/passwd</unix:filepath></unix:file_object>
+</def-group>

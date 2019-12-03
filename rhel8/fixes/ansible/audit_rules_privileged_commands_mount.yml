@@ -1,0 +1,95 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Search /etc/audit/rules.d for audit rule entries
+  find:
+    paths: /etc/audit/rules.d
+    recurse: false
+    contains: ^.*path=/usr/bin/mount.*$
+    patterns: '*.rules'
+  register: find_mount
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands_mount
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80989-7
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AC-6(9)
+
+- name: Use /etc/audit/rules.d/privileged.rules as the recipient for the rule
+  set_fact:
+    all_files:
+      - /etc/audit/rules.d/privileged.rules
+  when:
+    - find_mount.matched is defined and find_mount.matched == 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands_mount
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80989-7
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AC-6(9)
+
+- name: Use matched file as the recipient for the rule
+  set_fact:
+    all_files:
+      - '{{ find_mount.files | map(attribute=''path'') | list | first }}'
+  when:
+    - find_mount.matched is defined and find_mount.matched > 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands_mount
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80989-7
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AC-6(9)
+
+- name: Inserts/replaces the mount rule in rules.d
+  lineinfile:
+    path: '{{ all_files[0] }}'
+    line: -a always,exit -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset
+      -F key=privileged
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands_mount
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80989-7
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AC-6(9)
+
+- name: Inserts/replaces the mount rule in audit.rules
+  lineinfile:
+    path: /etc/audit/audit.rules
+    line: -a always,exit -F path=/usr/bin/mount -F perm=x -F auid>=1000 -F auid!=unset
+      -F key=privileged
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands_mount
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80989-7
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AC-6(9)

@@ -1,0 +1,25 @@
+description: 'The <code>sssd-ipa</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install sssd-ipa</pre>'
+identifiers: {cce: 82994-5}
+ocil: 'Run the following command to determine if the <code>sssd-ipa</code> package
+  is installed: <pre>$ rpm -q sssd-ipa</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: sssd
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: '<tt>sssd-ipa</tt> provides the IPA back end that the SSSD can utilize
+  to
+
+  fetch identity data from and authenticate against an IPA server.'
+references: {srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: sssd-ipa}
+title: Install sssd-ipa Package
+warnings: []

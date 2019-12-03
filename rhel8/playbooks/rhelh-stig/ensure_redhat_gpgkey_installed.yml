@@ -1,0 +1,61 @@
+# platform = multi_platform_rhel,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = medium
+# disruption = medium
+- name: Ensure Red Hat GPG Key Installed
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80795-8
+    - CJIS-5.10.4.1
+    - NIST-800-171-3.4.8
+    - NIST-800-53-CM-11(a)
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-MA-1(b)
+    - NIST-800-53-SA-12
+    - NIST-800-53-SC-12(3)
+    - NIST-800-53-SI-7
+    - PCI-DSS-Req-6.2
+    - ensure_redhat_gpgkey_installed
+    - high_severity
+    - medium_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Read permission of GPG key directory
+      stat:
+        path: /etc/pki/rpm-gpg/
+      register: gpg_key_directory_permission
+      check_mode: false
+
+    - name: Read signatures in GPG key
+      command: gpg --show-keys --with-fingerprint --with-colons "/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release"
+      args:
+        warn: false
+      changed_when: false
+      register: gpg_fingerprints
+      check_mode: false
+
+    - name: Set Fact - Installed GPG Fingerprints
+      set_fact:
+        gpg_installed_fingerprints: |-
+          {{ gpg_fingerprints.stdout | regex_findall('^pub.*
+          (?:^fpr[:]*)([0-9A-Fa-f]*)', '\1') | list }}
+
+    - name: Set Fact - Valid fingerprints
+      set_fact:
+        gpg_valid_fingerprints: ("567E347AD0044ADE55BA8A5F199E2F91FD431D51" "6A6AA7C97C8890AEC6AEBFE2F76F66C3D4082792")
+
+    - name: Import RedHat GPG key
+      rpm_key:
+        state: present
+        key: /etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+      when:
+        - gpg_key_directory_permission.stat.mode <= '0755'
+        - (gpg_installed_fingerprints | difference(gpg_valid_fingerprints)) | length
+          == 0
+        - gpg_installed_fingerprints | length > 0
+        - ansible_distribution == "RedHat"

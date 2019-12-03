@@ -1,0 +1,29 @@
+description: 'The <code>python3-subscription-manager-rhsm</code> package can be installed
+  with the following command:
+
+  <pre>
+
+  $ sudo yum install python3-subscription-manager-rhsm</pre>'
+identifiers: {cce: 82243-7}
+ocil: 'Run the following command to determine if the <code>python3-subscription-manager-rhsm</code>
+  package is installed: <pre>$ rpm -q python3-subscription-manager-rhsm</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel8,rhv4
+rationale: '<tt>python3-subscription-manager-rhsm</tt> is a small library for communicating
+
+  with the REST interface of a Red Hat Unified Entitlement Platform. This
+
+  interface is used for the management of system entitlements, certificates, and access
+  to
+
+  content.'
+references: {srg: SRG-OS-000366-GPOS-00153}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: python3-subscription-manager-rhsm}
+title: Install python3-subscription-manager-rhsm Package
+warnings: []

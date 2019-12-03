@@ -1,0 +1,28 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure kernel module 'bluetooth' is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/bluetooth.conf
+    regexp: bluetooth
+    line: install bluetooth /bin/true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - kernel_module_bluetooth_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-80832-9
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-AC-18(a)
+    - NIST-800-53-AC-18(d)
+    - NIST-800-53-AC-18(3)
+    - NIST-800-53-CM-7
+    - NIST-800-53-MP-7
+    - NIST-800-171-3.1.16
+    - CJIS-5.13.1.3

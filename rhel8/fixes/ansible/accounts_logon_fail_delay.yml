@@ -1,0 +1,22 @@
+# platform = multi_platform_rhel
+# disruption = low
+# strategy = restrict
+# complexity = low
+# reboot = true
+- (xccdf-var var_accounts_fail_delay)
+
+- name: Set accounts logon fail delay
+  lineinfile:
+    dest: /etc/login.defs
+    regexp: ^FAIL_DELAY
+    line: FAIL_DELAY {{ var_accounts_fail_delay }}
+    create: true
+  tags:
+    - accounts_logon_fail_delay
+    - low_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - NIST-800-53-AC-7(b)
+    - NIST-800-53-CM-6(b)

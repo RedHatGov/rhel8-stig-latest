@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Disable the mcelog_server SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_mcelog_server: 'false'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_mcelog_server
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean mcelog_server accordingly
+      seboolean:
+        name: mcelog_server
+        state: '{{ var_mcelog_server }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,31 @@
+description: 'The rpcgssd service manages RPCSEC GSS contexts required to secure protocols
+
+  that use RPC (most often Kerberos and NFS). The rpcgssd service is the
+
+  client-side of RPCSEC GSS. If the system does not require secure RPC then this
+
+  service should be disabled.
+
+
+  The <code>rpcgssd</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable rpcgssd.service</pre>
+
+  The <code>rpcgssd</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask rpcgssd.service</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: nfs-utils, servicename: rpcgssd}
+title: Disable Secure RPC Client Service (rpcgssd)
+warnings: []

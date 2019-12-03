@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_selinuxuser_execstack" version="1">
+    <metadata>
+      <title>SELinux "selinuxuser_execstack" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "selinuxuser_execstack" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="selinuxuser_execstack is configured correctly" test_ref="test_sebool_selinuxuser_execstack" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="selinuxuser_execstack is configured correctly" id="test_sebool_selinuxuser_execstack" version="1">
+    <linux:object object_ref="object_sebool_selinuxuser_execstack" />
+    <linux:state state_ref="state_sebool_selinuxuser_execstack" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_selinuxuser_execstack" version="1">
+    <linux:name>selinuxuser_execstack</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_selinuxuser_execstack" version="1">
+    <linux:name>selinuxuser_execstack</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_selinuxuser_execstack"/>
+      <linux:pending_status datatype="boolean" var_ref="var_selinuxuser_execstack"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for selinuxuser_execstack" datatype="boolean" id="var_selinuxuser_execstack" version="1" />
+  
+</def-group>

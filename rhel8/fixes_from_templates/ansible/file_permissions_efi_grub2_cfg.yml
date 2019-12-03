@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Test for existence /boot/efi/EFI/redhat/grub.cfg
+  stat:
+    path: "/boot/efi/EFI/redhat/grub.cfg"
+  register: file_exists
+  
+- name: Ensure permission 0700 on /boot/efi/EFI/redhat/grub.cfg
+  file:
+    path: "/boot/efi/EFI/redhat/grub.cfg"
+    mode: "0700"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

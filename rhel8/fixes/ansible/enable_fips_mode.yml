@@ -1,0 +1,21 @@
+# platform = Red Hat Enterprise Linux 8,multi_platform_fedora,Oracle Linux 8
+# reboot = true
+# strategy = restrict
+# complexity = medium
+# disruption = medium
+- name: enable fips mode
+  command: /usr/bin/fips-mode-setup --enable
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - enable_fips_mode
+    - high_severity
+    - restrict_strategy
+    - medium_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-80942-6
+    - NIST-800-53-SC-13
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(2)
+    - NIST-800-53-IA-7
+    - NIST-800-53-SC-12(3)

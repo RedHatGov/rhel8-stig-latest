@@ -1,0 +1,13 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv6_conf_default_accept_source_route_value)
+
+- name: Ensure sysctl net.ipv6.conf.default.accept_source_route is set
+  sysctl:
+    name: "net.ipv6.conf.default.accept_source_route"
+    value: "{{ sysctl_net_ipv6_conf_default_accept_source_route_value }}"
+    state: present
+    reload: yes

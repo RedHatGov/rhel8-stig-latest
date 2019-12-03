@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>antivirus_use_jit</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>antivirus_use_jit</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P antivirus_use_jit off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>antivirus_use_jit</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool antivirus_use_jit</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>antivirus_use_jit --> off</code>'
+ocil_clause: antivirus_use_jit is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {cui: 3.7.2}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: antivirus_use_jit}
+title: Disable the antivirus_use_jit SELinux Boolean
+warnings: []

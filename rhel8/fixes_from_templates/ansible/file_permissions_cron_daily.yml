@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Test for existence /etc/cron.daily/
+  stat:
+    path: "/etc/cron.daily/"
+  register: file_exists
+  
+- name: Ensure permission 0700 on /etc/cron.daily/
+  file:
+    path: "/etc/cron.daily/"
+    mode: "0700"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

@@ -1,0 +1,32 @@
+# platform = multi_platform_rhel,multi_platform_fedora
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = medium
+- name: Check if /etc/samba/smb.conf exists
+  stat:
+    path: /etc/samba/smb.conf
+  register: st_smb
+  tags:
+    - require_smb_client_signing
+    - unknown_severity
+    - configure_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+
+- name: Require Client SMB Packet Signing, if using smbclient
+  lineinfile:
+    dest: /etc/samba/smb.conf
+    line: client signing = mandatory
+    state: present
+    insertafter:
+      - global
+  when: st_smb.stat.exists
+  tags:
+    - require_smb_client_signing
+    - unknown_severity
+    - configure_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed

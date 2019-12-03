@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure tftp-server is removed
+  package:
+    name: tftp-server
+    state: absent
+  tags:
+    - package_tftp-server_removed
+    - high_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-6(c)
+    - NIST-800-53-CM-7

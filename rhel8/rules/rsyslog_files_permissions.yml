@@ -1,0 +1,47 @@
+description: 'The file permissions for all log files written by <tt>rsyslog</tt> should
+
+  be set to 600, or more restrictive. These log files are determined by the
+
+  second part of each Rule line in <tt>/etc/rsyslog.conf</tt> and typically
+
+  all appear in <tt>/var/log</tt>. For each log file <i>LOGFILE</i>
+
+  referenced in <tt>/etc/rsyslog.conf</tt>, run the following command to
+
+  inspect the file''s permissions:
+
+  <pre>$ ls -l <i>LOGFILE</i></pre>
+
+  If the permissions are not 600 or more restrictive, run the following
+
+  command to correct this:
+
+  <pre>$ sudo chmod 0600 <i>LOGFILE</i></pre>"'
+identifiers: {cce: 80862-6}
+ocil: 'The file permissions for all log files written by <tt>rsyslog</tt> should
+
+  be set to 600, or more restrictive. These log files are determined by the
+
+  second part of each Rule line in <tt>/etc/rsyslog.conf</tt> and typically
+
+  all appear in <tt>/var/log</tt>. To see the permissions of a given log
+
+  file, run the following command:
+
+  <pre>$ ls -l <i>LOGFILE</i></pre>
+
+  The permissions should be 600, or more restrictive.'
+ocil_clause: the permissions are not correct
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: 'Log files can contain valuable information regarding system
+
+  configuration. If the system log files are not protected unauthorized
+
+  users could change the logged data, eliminating their forensic value.'
+references: {cis: 4.2.1.3, disa: '1314', nist: SI-11, pcidss: 'Req-10.5.1,Req-10.5.2'}
+severity: medium
+template: null
+title: Ensure System Log Files Have Correct Permissions
+warnings: []

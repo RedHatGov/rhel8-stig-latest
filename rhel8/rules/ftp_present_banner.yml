@@ -1,0 +1,39 @@
+description: '
+
+  Edit the vsftpd configuration file, which resides at <tt>/etc/vsftpd/vsftpd.conf</tt>
+
+
+  by default. Add or correct the following configuration options:
+
+  <pre>banner_file=/etc/issue</pre>'
+identifiers: {}
+ocil: 'If FTP services are not installed, this is not applicable.
+
+  <br /><br />
+
+  To verify this configuration, run the following command:
+
+
+  <pre>grep "banner_file" /etc/vsftpd/vsftpd.conf</pre>
+
+
+
+  The output should show the value of <tt>banner_file</tt> is set to <tt>/etc/issue</tt>,
+  an example of which is shown below:
+
+
+  <pre>$ sudo grep "banner_file" /etc/vsftpd/vsftpd.conf
+
+
+  banner_file=/etc/issue</pre>'
+ocil_clause: it does not
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,sle12
+rationale: This setting will cause the system greeting banner to be used for FTP connections
+  as well.
+references: {disa: '48'}
+severity: medium
+template: null
+title: Create Warning Banners for All FTP Users
+warnings: []

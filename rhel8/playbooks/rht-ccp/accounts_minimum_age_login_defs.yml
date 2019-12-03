@@ -1,0 +1,30 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Set Password Minimum Age
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_accounts_minimum_age_login_defs: '7'
+  tags:
+    - CCE-80648-9
+    - CJIS-5.6.2.1.1
+    - NIST-800-171-3.5.8
+    - NIST-800-53-IA-5(1)(d)
+    - NIST-800-53-IA-5(f)
+    - accounts_minimum_age_login_defs
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Set Password Minimum Age
+      lineinfile:
+        create: true
+        dest: /etc/login.defs
+        regexp: ^#?PASS_MIN_DAYS
+        line: PASS_MIN_DAYS {{ var_accounts_minimum_age_login_defs }}

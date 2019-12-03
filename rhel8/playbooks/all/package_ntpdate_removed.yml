@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall the ntpdate package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_ntpdate_removed
+  tasks:
+
+    - name: Ensure ntpdate is removed
+      package:
+        name: ntpdate
+        state: absent

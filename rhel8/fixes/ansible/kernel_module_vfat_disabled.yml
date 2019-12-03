@@ -1,0 +1,22 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure kernel module 'vfat' is disabled
+  lineinfile:
+    create: true
+    dest: /etc/modprobe.d/vfat.conf
+    regexp: vfat
+    line: install vfat /bin/true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - kernel_module_vfat_disabled
+    - low_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-82170-2
+    - NIST-800-53-CM-7
+    - NIST-800-171-3.4.6

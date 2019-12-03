@@ -1,0 +1,27 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service usbguard
+  block:
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+
+    - name: Enable service usbguard
+      service:
+        name: usbguard
+        enabled: 'yes'
+        state: started
+      when:
+        - '"usbguard" in ansible_facts.packages'
+  tags:
+    - service_usbguard_enabled
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82853-3

@@ -1,0 +1,34 @@
+description: 'By default, the SELinux boolean <tt>unconfined_mozilla_plugin_transition</tt>
+  is enabled.
+
+  If this setting is disabled, it should be enabled.
+
+
+  To enable the <code>unconfined_mozilla_plugin_transition</code> SELinux boolean,
+  run the following command:
+
+  <pre>$ sudo setsebool -P unconfined_mozilla_plugin_transition on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>unconfined_mozilla_plugin_transition</code>
+  SELinux boolean is enabled:
+
+  <pre>$ getsebool unconfined_mozilla_plugin_transition</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>unconfined_mozilla_plugin_transition --> on</code>'
+ocil_clause: unconfined_mozilla_plugin_transition is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: unconfined_mozilla_plugin_transition}
+title: Enable the unconfined_mozilla_plugin_transition SELinux Boolean
+warnings: []

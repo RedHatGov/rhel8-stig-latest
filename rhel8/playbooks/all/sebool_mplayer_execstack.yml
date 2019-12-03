@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Disable the mplayer_execstack SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_mplayer_execstack: 'false'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_mplayer_execstack
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean mplayer_execstack accordingly
+      seboolean:
+        name: mplayer_execstack
+        state: '{{ var_mplayer_execstack }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

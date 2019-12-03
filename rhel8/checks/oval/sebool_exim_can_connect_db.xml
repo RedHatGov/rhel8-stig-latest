@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_exim_can_connect_db" version="1">
+    <metadata>
+      <title>SELinux "exim_can_connect_db" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "exim_can_connect_db" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="exim_can_connect_db is configured correctly" test_ref="test_sebool_exim_can_connect_db" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="exim_can_connect_db is configured correctly" id="test_sebool_exim_can_connect_db" version="1">
+    <linux:object object_ref="object_sebool_exim_can_connect_db" />
+    <linux:state state_ref="state_sebool_exim_can_connect_db" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_exim_can_connect_db" version="1">
+    <linux:name>exim_can_connect_db</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_exim_can_connect_db" version="1">
+    <linux:name>exim_can_connect_db</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_exim_can_connect_db"/>
+      <linux:pending_status datatype="boolean" var_ref="var_exim_can_connect_db"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for exim_can_connect_db" datatype="boolean" id="var_exim_can_connect_db" version="1" />
+  
+</def-group>

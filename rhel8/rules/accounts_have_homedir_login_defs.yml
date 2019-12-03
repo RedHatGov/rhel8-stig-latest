@@ -1,0 +1,36 @@
+description: 'All local interactive user accounts, upon creation, should be assigned
+  a home directory.
+
+  <br /><br />
+
+  Configure the operating system to assign home directories to all new local interactive
+  users by setting the <tt>CREATE_HOME</tt>
+
+  parameter in <tt>/etc/login.defs</tt> to <tt>yes</tt> as follows:
+
+  <br /><br />
+
+  <pre>CREATE_HOME yes</pre>'
+identifiers: {}
+ocil: 'Check if the system is configured to create home directories for local interactive
+  users with the following command:
+
+  <br /><br />
+
+  <pre>$ sudo grep create_home /etc/login.defs</pre>
+
+  <br /><br />'
+ocil_clause: the value of CREATE_HOME is not set to yes, is missing, or the line is
+  commented out
+oval_external_content: null
+platform: shadow-utils
+prodtype: wrlinux1019,rhel7,rhel8,rhv4
+rationale: 'If local interactive users are not assigned a valid home directory, there
+  is no place
+
+  for the storage and control of files they should own.'
+references: {srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template: null
+title: Ensure Home Directories are Created for New Users
+warnings: []

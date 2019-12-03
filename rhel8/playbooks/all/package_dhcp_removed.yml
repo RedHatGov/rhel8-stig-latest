@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall DHCP Server Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_dhcp_removed
+  tasks:
+
+    - name: Ensure dhcp is removed
+      package:
+        name: dhcp
+        state: absent

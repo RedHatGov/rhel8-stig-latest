@@ -1,0 +1,64 @@
+description: 'SystemD''s <tt>debug-shell</tt> service is intended to
+
+  diagnose SystemD related boot issues with various <tt>systemctl</tt>
+
+  commands. Once enabled and following a system reboot, the root shell
+
+  will be available on <tt>tty9</tt> which is access by pressing
+
+  <tt>CTRL-ALT-F9</tt>. The <tt>debug-shell</tt> service should only be used
+
+  for SystemD related issues and should otherwise be disabled.
+
+  <br /><br />
+
+  By default, the <tt>debug-shell</tt> SystemD service is already disabled.
+
+
+  The <code>debug-shell</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable debug-shell.service</pre>
+
+  The <code>debug-shell</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask debug-shell.service</pre>'
+identifiers: {cce: 80876-6}
+ocil: ' To check that the <code>debug-shell</code> service is disabled in system boot
+  configuration, run the following command: <pre>$ systemctl is-enabled <code>debug-shell</code></pre>
+  Output should indicate the <code>debug-shell</code> service has either not been
+  installed, or has been disabled at all runlevels, as shown in the example below:
+  <pre>$ systemctl is-enabled <code>debug-shell</code><br/> disabled</pre>
+
+  Run the following command to verify <code>debug-shell</code> is not active (i.e.
+  not running) through current runtime configuration: <pre>$ systemctl is-active debug-shell</pre>
+
+  If the service is not running the command will return the following output: <pre>inactive</pre>
+
+  By default the service will also be masked, to check that the <code>debug-shell</code>
+  is masked, run the following command: <pre>$ systemctl show <code>debug-shell</code>
+  | grep "LoadState\|UnitFileState"</pre>
+
+  If the service is masked the command will return the following outputs:
+
+  <pre>LoadState=masked</pre>
+
+  <pre>UnitFileState=masked</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: 'This prevents attackers with physical access from trivially bypassing
+  security
+
+  on the machine through valid troubleshooting configurations and gaining root
+
+  access when the system is rebooted.'
+references: {cui: 3.4.5, hipaa: '164.308(a)(1)(ii)(B),164.308(a)(7)(i),164.308(a)(7)(ii)(A),164.310(a)(1),164.310(a)(2)(i),164.310(a)(2)(ii),164.310(a)(2)(iii),164.310(b),164.310(c),164.310(d)(1),164.310(d)(2)(iii)',
+  ospp: FIA_AFL.1, srg: SRG-OS-000324-GPOS-00125}
+severity: medium
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: systemd, servicename: debug-shell}
+title: Disable debug-shell SystemD Service
+warnings: []

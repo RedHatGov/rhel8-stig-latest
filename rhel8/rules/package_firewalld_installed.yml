@@ -1,0 +1,22 @@
+description: 'The <code>firewalld</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install firewalld</pre>'
+identifiers: {cce: 82998-6}
+ocil: 'Run the following command to determine if the <code>firewalld</code> package
+  is installed: <pre>$ rpm -q firewalld</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,ol7,ol8,ocp4
+rationale: The firewalld package should be installed to provide access control methods.
+references: {nist: SC-7(21), srg: 'SRG-OS-000480-GPOS-00227,SRG-OS-000298-GPOS-00116'}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: firewalld}
+title: Install firewalld Package
+warnings: []

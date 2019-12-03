@@ -1,0 +1,25 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+
+
+
+- name: "Disable SSH Support for User Known Hosts"
+  block:
+    - name: "Deduplicate values from /etc/ssh/sshd_config"
+      lineinfile:
+        path: '/etc/ssh/sshd_config'
+        create: no
+        regexp: '(?i)^\s*IgnoreUserKnownHosts\s+'
+        state: 'absent'
+    - name: "Insert correct line to /etc/ssh/sshd_config"
+      lineinfile:
+        path: '/etc/ssh/sshd_config'
+        create: yes
+        line: 'IgnoreUserKnownHosts yes'
+        state: present
+        insertbefore: '^[#\s]*Match'
+        
+        validate: '/usr/sbin/sshd -t -f %s'

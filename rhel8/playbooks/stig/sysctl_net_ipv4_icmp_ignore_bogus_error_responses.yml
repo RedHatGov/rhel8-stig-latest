@@ -1,0 +1,31 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Enable Kernel Parameter to Ignore Bogus ICMP Error Responses on IPv4 Interfaces
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    sysctl_net_ipv4_icmp_ignore_bogus_error_responses_value: '1'
+  tags:
+    - CCE-81023-4
+    - NIST-800-171-3.1.20
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-5
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - sysctl_net_ipv4_icmp_ignore_bogus_error_responses
+    - unknown_severity
+  tasks:
+
+    - name: Ensure sysctl net.ipv4.icmp_ignore_bogus_error_responses is set
+      sysctl:
+        name: net.ipv4.icmp_ignore_bogus_error_responses
+        value: '{{ sysctl_net_ipv4_icmp_ignore_bogus_error_responses_value }}'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

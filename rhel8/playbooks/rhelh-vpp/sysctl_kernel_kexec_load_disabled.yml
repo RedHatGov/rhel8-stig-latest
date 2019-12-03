@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable Kernel Image Loading
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80952-5
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_kernel_kexec_load_disabled
+  tasks:
+
+    - name: Ensure sysctl kernel.kexec_load_disabled is set to 1
+      sysctl:
+        name: kernel.kexec_load_disabled
+        value: '1'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,30 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable Kernel Parameter for IP Forwarding on IPv4 Interfaces
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-81024-2
+    - NIST-800-171-3.1.20
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-32
+    - NIST-800-53-SC-5
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_net_ipv4_ip_forward
+  tasks:
+
+    - name: Ensure sysctl net.ipv4.ip_forward is set to 0
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: '0'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

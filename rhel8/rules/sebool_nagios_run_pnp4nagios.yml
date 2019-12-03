@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>nagios_run_pnp4nagios</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>nagios_run_pnp4nagios</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P nagios_run_pnp4nagios off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>nagios_run_pnp4nagios</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool nagios_run_pnp4nagios</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>nagios_run_pnp4nagios --> off</code>'
+ocil_clause: nagios_run_pnp4nagios is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: nagios_run_pnp4nagios}
+title: Disable the nagios_run_pnp4nagios SELinux Boolean
+warnings: []

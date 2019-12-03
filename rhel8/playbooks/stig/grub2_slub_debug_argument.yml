@@ -1,0 +1,34 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = restrict
+# complexity = medium
+# disruption = low
+- name: Enable SLUB/SLAB allocator poisoning
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80945-9
+    - grub2_slub_debug_argument
+    - low_disruption
+    - medium_complexity
+    - medium_severity
+    - reboot_required
+    - restrict_strategy
+  tasks:
+
+    - name: get current kernel parameters
+      command: /usr/bin/grub2-editenv - list
+      register: kernelopts
+      changed_when: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Update the bootloader menu
+      command: /usr/bin/grub2-editenv - set "{{ item }} slub_debug=P"
+      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'')
+        | list }}'
+      when:
+        - kernelopts.stdout_lines is defined
+        - kernelopts.stdout_lines | length > 0
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

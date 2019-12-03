@@ -1,0 +1,64 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = high
+- name: get back mount information associated to mountpoint
+  command: findmnt --fstab '/boot'
+  register: device_name
+  failed_when: device_name.rc > 1
+  changed_when: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - mount_option_boot_nosuid
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - high_disruption
+    - no_reboot_needed
+    - CCE-81033-3
+    - NIST-800-53-CM-7
+    - NIST-800-53-MP-2
+
+- name: create mount_info dictionary variable
+  set_fact:
+    mount_info: '{{ mount_info|default({})|combine({item.0: item.1}) }}'
+  with_together:
+    - '{{ device_name.stdout_lines[0].split() | list | lower }}'
+    - '{{ device_name.stdout_lines[1].split() | list }}'
+  when:
+    - device_name.stdout is defined and device_name.stdout_lines is defined
+    - (device_name.stdout | length > 0)
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - mount_option_boot_nosuid
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - high_disruption
+    - no_reboot_needed
+    - CCE-81033-3
+    - NIST-800-53-CM-7
+    - NIST-800-53-MP-2
+
+- name: Ensure permission nosuid are set on /boot
+  mount:
+    path: /boot
+    src: '{{ mount_info.source }}'
+    opts: '{{ mount_info.options }},nosuid'
+    state: mounted
+    fstype: '{{ mount_info.fstype }}'
+  when:
+    - device_name.stdout is defined
+    - (device_name.stdout | length > 0)
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - mount_option_boot_nosuid
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - high_disruption
+    - no_reboot_needed
+    - CCE-81033-3
+    - NIST-800-53-CM-7
+    - NIST-800-53-MP-2

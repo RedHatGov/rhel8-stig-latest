@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Test for existence /etc/crontab
+  stat:
+    path: "/etc/crontab"
+  register: file_exists
+  
+- name: Ensure permission 0600 on /etc/crontab
+  file:
+    path: "/etc/crontab"
+    mode: "0600"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

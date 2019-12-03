@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>mcelog_exec_scripts</tt> is enabled.
+
+  If this setting is disabled, it should be enabled.
+
+
+  To enable the <code>mcelog_exec_scripts</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P mcelog_exec_scripts on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>mcelog_exec_scripts</code> SELinux
+  boolean is enabled:
+
+  <pre>$ getsebool mcelog_exec_scripts</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>mcelog_exec_scripts --> on</code>'
+ocil_clause: mcelog_exec_scripts is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: mcelog_exec_scripts}
+title: Enable the mcelog_exec_scripts SELinux Boolean
+warnings: []

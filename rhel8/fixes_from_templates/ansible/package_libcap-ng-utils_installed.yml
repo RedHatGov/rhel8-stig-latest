@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure libcap-ng-utils is installed
+  package:
+    name: "libcap-ng-utils"
+    state: present

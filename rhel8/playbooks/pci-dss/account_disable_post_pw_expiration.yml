@@ -1,0 +1,32 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Set Account Expiration Following Inactivity
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_account_disable_post_pw_expiration: '90'
+  tags:
+    - CCE-80954-1
+    - CJIS-5.6.2.1.1
+    - NIST-800-171-3.5.6
+    - NIST-800-53-AC-2(2)
+    - NIST-800-53-AC-2(3)
+    - NIST-800-53-IA-4(e)
+    - PCI-DSS-Req-8.1.4
+    - account_disable_post_pw_expiration
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Set Account Expiration Following Inactivity
+      lineinfile:
+        create: true
+        dest: /etc/default/useradd
+        regexp: ^INACTIVE
+        line: INACTIVE={{ var_account_disable_post_pw_expiration }}

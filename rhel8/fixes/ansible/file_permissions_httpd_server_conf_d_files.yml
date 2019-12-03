@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Find /etc/httpd/conf.d/ file(s)
+  find:
+    paths: /etc/httpd/conf.d/
+    patterns: ^.*$
+    use_regex: true
+  register: files_found
+  tags:
+    - file_permissions_httpd_server_conf_d_files
+    - unknown_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-CM-7
+
+- name: Set permissions for /etc/httpd/conf.d/ file(s)
+  file:
+    path: '{{ item.path }}'
+    mode: '0640'
+  with_items:
+    - '{{ files_found.files }}'
+  tags:
+    - file_permissions_httpd_server_conf_d_files
+    - unknown_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-CM-7

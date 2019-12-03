@@ -1,0 +1,27 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_conf_default_secure_redirects_value)
+
+- name: Ensure sysctl net.ipv4.conf.default.secure_redirects is set
+  sysctl:
+    name: net.ipv4.conf.default.secure_redirects
+    value: '{{ sysctl_net_ipv4_conf_default_secure_redirects_value }}'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_net_ipv4_conf_default_secure_redirects
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-81017-6
+    - NIST-800-53-AC-4
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-5
+    - NIST-800-53-SC-7
+    - NIST-800-171-3.1.20

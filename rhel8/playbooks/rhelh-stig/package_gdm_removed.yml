@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Remove the GDM Package Group
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82367-4
+    - NIST-800-53-AC-17(8).1(ii)
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_gdm_removed
+  tasks:
+
+    - name: Ensure gdm is removed
+      package:
+        name: gdm
+        state: absent

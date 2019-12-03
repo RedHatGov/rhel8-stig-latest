@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>selinuxuser_execmod</tt> is enabled.
+
+  If this setting is disabled, it should be enabled.
+
+
+  To enable the <code>selinuxuser_execmod</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P selinuxuser_execmod on</pre>'
+identifiers: {cce: 80950-9}
+ocil: '
+
+  Run the following command to determine if the <code>selinuxuser_execmod</code> SELinux
+  boolean is enabled:
+
+  <pre>$ getsebool selinuxuser_execmod</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>selinuxuser_execmod --> on</code>'
+ocil_clause: selinuxuser_execmod is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,ol7,ol8,rhv4
+rationale: ''
+references: {hipaa: '164.308(a)(1)(ii)(D),164.308(a)(3),164.308(a)(4),164.310(b),164.310(c),164.312(a),164.312(e)'}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: selinuxuser_execmod}
+title: Enable the selinuxuser_execmod SELinux Boolean
+warnings: []

@@ -1,0 +1,20 @@
+description: ' To properly set the permissions of <code>/etc/http/conf</code>, run
+  the command: <pre>$ sudo chmod 0750 /etc/http/conf</pre>'
+identifiers: {}
+ocil: 'To check the permissions of <code>/etc/http/conf</code>, run the command: <pre>$
+  ls -l /etc/http/conf</pre> If properly configured, the output should indicate the
+  following permissions: <code>-rwxr-x---</code>'
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Access to the web server''s configuration files may allow an unauthorized
+  user or attacker
+
+  to access information about the web server or alter the server''s configuration
+  files.'
+references: {}
+severity: unknown
+template: null
+title: Set Permissions on the /etc/httpd/conf/ Directory
+warnings: []

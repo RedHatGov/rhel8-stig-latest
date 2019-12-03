@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure tftp-server is removed
+  package:
+    name: "tftp-server"
+    state: absent

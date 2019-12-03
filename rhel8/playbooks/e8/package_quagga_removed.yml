@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall quagga Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82187-6
+    - NIST-800-53-SC-32
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_quagga_removed
+  tasks:
+
+    - name: Ensure quagga is removed
+      package:
+        name: quagga
+        state: absent

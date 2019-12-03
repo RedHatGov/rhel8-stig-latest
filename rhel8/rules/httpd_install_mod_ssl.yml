@@ -1,0 +1,25 @@
+description: 'Install the <tt>mod_ssl</tt> module:
+
+  The <code>mod_ssl</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install mod_ssl</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: '<tt>mod_ssl</tt> provides encryption capabilities for the <tt>httpd</tt>
+  Web server. Unencrypted
+
+  content is transmitted in plain text which could be passively monitored and accessed
+  by
+
+  unauthorized parties.'
+references: {}
+severity: unknown
+template: null
+title: Install mod_ssl
+warnings: []

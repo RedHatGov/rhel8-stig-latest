@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall tuned Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82904-4
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_tuned_removed
+  tasks:
+
+    - name: Ensure tuned is removed
+      package:
+        name: tuned
+        state: absent

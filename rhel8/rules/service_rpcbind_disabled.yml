@@ -1,0 +1,35 @@
+description: 'The rpcbind utility maps RPC services to the ports on which they listen.
+
+  RPC processes notify rpcbind when they start, registering the ports they
+
+  are listening on and the RPC program numbers they expect to serve. The
+
+  rpcbind service redirects the client to the proper port number so it can
+
+  communicate with the requested service. If the system does not require RPC
+
+  (such as for NFS servers) then this service should be disabled.
+
+
+  The <code>rpcbind</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable rpcbind.service</pre>
+
+  The <code>rpcbind</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask rpcbind.service</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8
+rationale: ''
+references: {cis: 2.2.7}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: nfs-utils, servicename: rpcbind}
+title: Disable rpcbind Service
+warnings: []

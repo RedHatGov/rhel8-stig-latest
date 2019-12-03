@@ -1,0 +1,19 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+
+
+- (xccdf-var var_user_exec_content)
+
+- name: Ensure libsemanage-python installed
+  package:
+    name: libsemanage-python
+    state: present
+
+- name: Set SELinux boolean user_exec_content accordingly
+  seboolean:
+    name: user_exec_content
+    state: "{{ var_user_exec_content }}"
+    persistent: yes

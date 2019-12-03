@@ -1,0 +1,36 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable nails Service
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-SC-28
+    - NIST-800-53-SI-3
+    - NIST-800-53-SI-3(1)(ii)
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - service_nails_enabled
+  tasks:
+
+    - name: Enable service nails
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service nails
+          service:
+            name: nails
+            enabled: 'yes'
+            state: started
+          when:
+            - '"nails" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

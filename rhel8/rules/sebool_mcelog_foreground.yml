@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>mcelog_foreground</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>mcelog_foreground</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P mcelog_foreground off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>mcelog_foreground</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool mcelog_foreground</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>mcelog_foreground --> off</code>'
+ocil_clause: mcelog_foreground is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: mcelog_foreground}
+title: Disable the mcelog_foreground SELinux Boolean
+warnings: []

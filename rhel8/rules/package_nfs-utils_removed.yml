@@ -1,0 +1,36 @@
+description: 'The <code>nfs-utils</code> package can be removed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum erase nfs-utils</pre>'
+identifiers: {cce: 82932-5}
+ocil: 'Run the following command to determine if the <code>nfs-utils</code> package
+  is installed:
+
+  <pre>$ rpm -q nfs-utils</pre>'
+ocil_clause: the package is installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8
+rationale: '<tt>nfs-utils</tt> provides a daemon for the kernel NFS server and related
+  tools. This
+
+  package also contains the <tt>showmount</tt> program. <tt>showmount</tt> queries
+  the mount
+
+  daemon on a remote host for information about the Network File System (NFS) server
+  on the
+
+  remote host. For example, <tt>showmount</tt> can display the clients which are mounted
+  on
+
+  that host.'
+references: {srg: SRG-OS-000095-GPOS-00049}
+severity: low
+template:
+  backends: {}
+  name: package_removed
+  vars: {pkgname: nfs-utils}
+title: Uninstall nfs-utils Package
+warnings: []

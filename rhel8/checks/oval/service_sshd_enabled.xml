@@ -1,0 +1,70 @@
+<def-group>
+
+  <definition class="compliance" id="service_sshd_enabled" version="1">
+    <metadata>
+      <title>Service sshd Enabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The sshd service should be enabled if possible.</description>
+    </metadata>
+    <criteria comment="package openssh-server installed and service sshd is configured to start" operator="AND">
+    <criterion comment="openssh-server installed" test_ref="test_service_sshd_package_openssh-server_installed" />
+      <criteria comment="service sshd is configured to start and is running" operator="AND">
+        <criterion comment="sshd is running" test_ref="test_service_running_sshd" />
+        <criteria operator="OR" comment="service sshd is configured to start">
+          <criterion comment="multi-user.target wants sshd" test_ref="test_multi_user_wants_sshd" />
+          <criterion comment="multi-user.target wants sshd socket" test_ref="test_multi_user_wants_sshd_socket" />
+        </criteria>
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_sshd" version="1">
+    <linux:object object_ref="object_multi_user_target_for_sshd_enabled" />
+    <linux:state state_ref="state_systemd_sshd_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_sshd_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_sshd_on" comment="sshd listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">sshd.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_sshd_socket" version="1">
+    <linux:object object_ref="object_multi_user_target_for_sshd_socket_enabled" />
+    <linux:state state_ref="state_systemd_sshd_socket_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_sshd_socket_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_sshd_socket_on" comment="sshd listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">sshd.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_running_sshd" check="at least one" check_existence="at_least_one_exists" comment="Test that the sshd service is running" version="1">
+    <linux:object object_ref="obj_service_running_sshd"/>
+    <linux:state state_ref="state_service_running_sshd"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_running_sshd" comment="Retrieve the ActiveState property of sshd" version="1">
+    <linux:unit operation="pattern match">^sshd\.(socket|service)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_running_sshd" version="1" comment="sshd is running">
+      <linux:value>active</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+  <linux:rpminfo_test check="all" check_existence="all_exist"
+  id="test_service_sshd_package_openssh-server_installed" version="1"
+  comment="package openssh-server is installed">
+    <linux:object object_ref="obj_test_service_sshd_package_openssh-server_installed" />
+    
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_sshd_package_openssh-server_installed" version="1">
+    <linux:name>openssh-server</linux:name>
+  </linux:rpminfo_object>
+  
+
+</def-group>

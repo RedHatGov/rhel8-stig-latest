@@ -1,0 +1,36 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Disable GSSAPI Authentication
+  block:
+
+    - name: Deduplicate values from /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: false
+        regexp: (?i)^\s*GSSAPIAuthentication\s+
+        state: absent
+
+    - name: Insert correct line to /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: true
+        line: GSSAPIAuthentication no
+        state: present
+        insertbefore: ^[#\s]*Match
+        validate: /usr/sbin/sshd -t -f %s
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sshd_disable_gssapi_auth
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80897-2
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(b)
+    - NIST-800-53-CM-6(c)
+    - NIST-800-171-3.1.12

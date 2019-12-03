@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>dhcpc_exec_iptables</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>dhcpc_exec_iptables</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P dhcpc_exec_iptables off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>dhcpc_exec_iptables</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool dhcpc_exec_iptables</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>dhcpc_exec_iptables --> off</code>'
+ocil_clause: dhcpc_exec_iptables is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: dhcpc_exec_iptables}
+title: Disable the dhcpc_exec_iptables SELinux Boolean
+warnings: []

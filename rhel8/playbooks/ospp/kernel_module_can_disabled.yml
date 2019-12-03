@@ -1,0 +1,26 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable CAN Support
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82059-7
+    - disable_strategy
+    - kernel_module_can_disabled
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+  tasks:
+
+    - name: Ensure kernel module 'can' is disabled
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/can.conf
+        regexp: can
+        line: install can /bin/true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

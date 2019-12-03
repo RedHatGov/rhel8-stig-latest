@@ -1,0 +1,11 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure kernel module 'squashfs' is disabled
+  lineinfile:
+    create: yes
+    dest: "/etc/modprobe.d/squashfs.conf"
+    regexp: 'squashfs'
+    line: "install squashfs /bin/true"

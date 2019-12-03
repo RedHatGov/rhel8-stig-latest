@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Disable the daemons_dump_core SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_daemons_dump_core: 'false'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_daemons_dump_core
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean daemons_dump_core accordingly
+      seboolean:
+        name: daemons_dump_core
+        state: '{{ var_daemons_dump_core }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

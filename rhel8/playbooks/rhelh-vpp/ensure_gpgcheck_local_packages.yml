@@ -1,0 +1,48 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Ensure gpgcheck Enabled for Local Packages
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80791-7
+    - NIST-800-171-3.4.8
+    - NIST-800-53-CM-11
+    - NIST-800-53-CM-11(b)
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-SA-12
+    - ensure_gpgcheck_local_packages
+    - high_severity
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Check existence of yum on Fedora
+      stat:
+        path: /etc/yum.conf
+      register: yum_config_file
+      check_mode: false
+      when: ansible_distribution == "Fedora"
+
+    - name: Ensure GPG check Enabled for Local Packages (Yum)
+      ini_file:
+        dest: /etc/yum.conf
+        section: main
+        option: localpkg_gpgcheck
+        value: 1
+        create: true
+      when: (ansible_distribution == "RedHat" or ansible_distribution == "CentOS"
+        or yum_config_file.stat.exists)
+
+    - name: Ensure GPG check Enabled for Local Packages (DNF)
+      ini_file:
+        dest: /etc/dnf/dnf.conf
+        section: main
+        option: localpkg_gpgcheck
+        value: 1
+        create: true
+      when: ansible_distribution == "Fedora"

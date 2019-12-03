@@ -1,0 +1,36 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Verify the UEFI Boot Loader grub.cfg Group Ownership
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CJIS-5.5.2.2
+    - NIST-800-171-3.4.5
+    - NIST-800-53-AC-6(7)
+    - PCI-DSS-Req-7.1
+    - configure_strategy
+    - file_groupowner_efi_grub2_cfg
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Test for existence /boot/efi/EFI/redhat/grub.cfg
+      stat:
+        path: /boot/efi/EFI/redhat/grub.cfg
+      register: file_exists
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Ensure group owner 0 on /boot/efi/EFI/redhat/grub.cfg
+      file:
+        path: /boot/efi/EFI/redhat/grub.cfg
+        group: '0'
+      when:
+        - file_exists.stat is defined and file_exists.stat.exists
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

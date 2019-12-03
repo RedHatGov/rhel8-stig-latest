@@ -1,0 +1,32 @@
+description: 'The <tt>noexec</tt> mount option can be used to prevent binaries
+
+  from being executed out of <tt>/var/log</tt>.
+
+  Add the <code>noexec</code> option to the fourth column of
+
+  <tt>/etc/fstab</tt> for the line which controls mounting of
+
+  <code>/var/log</code>.'
+identifiers: {cce: 82008-4}
+ocil: "To verify the <tt>noexec</tt> option is configured for the <tt>/var/log</tt>\
+  \ mount point, run the following command:\n    <pre>$ mount | grep '\\s/var/log\\\
+  s'</pre>\n    The output should show the corresponding mount point along with the\
+  \ <tt>noexec</tt> setting in parentheses.\n"
+ocil_clause: the  is not present in the output line, or there is no output line at
+  all
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora,ol8
+rationale: 'Allowing users to execute binaries from directories containing log files
+
+  such as <tt>/var/log</tt> should never be necessary in normal operation and
+
+  can expose the system to potential compromise.'
+references: {nist: CM-7, nist-csf: 'PR.IP-1,PR.PT-2,PR.PT-3', srg: SRG-OS-000368-GPOS-00154}
+severity: medium
+template:
+  backends: {}
+  name: mount_option
+  vars: {mount_has_to_exist: 'yes', mountoption: noexec, mountpoint: /var/log}
+title: Add noexec Option to /var/log
+warnings: []

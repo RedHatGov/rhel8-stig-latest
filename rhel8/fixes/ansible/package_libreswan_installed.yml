@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure libreswan is installed
+  package:
+    name: libreswan
+    state: present
+  tags:
+    - package_libreswan_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80845-1
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-MA-4
+    - NIST-800-53-SC-9
+    - PCI-DSS-Req-4.1

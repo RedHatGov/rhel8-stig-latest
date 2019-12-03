@@ -1,0 +1,27 @@
+# platform = multi_platform_rhel,multi_platform_fedora
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Ensure the Default Umask is Set Correctly in login.defs
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_accounts_user_umask: '027'
+  tags:
+    - NIST-800-53-CM-6(b)
+    - NIST-800-53-SA-8
+    - accounts_umask_etc_login_defs
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Ensure the Default UMASK is Set Correctly
+      lineinfile:
+        create: true
+        dest: /etc/login.defs
+        regexp: ^UMASK
+        line: UMASK {{ var_accounts_user_umask }}

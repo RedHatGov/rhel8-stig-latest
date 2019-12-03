@@ -1,0 +1,87 @@
+description: 'To enable FIPS mode, run the following command:
+
+  <pre>fips-mode-setup --enable</pre>
+
+  <br />
+
+  The <tt>fips-mode-setup</tt> command will configure the system in
+
+  FIPS mode by automatically configuring the following:
+
+  <ul>
+
+  <li>Setting the kernel FIPS mode flag (<tt>/proc/sys/crypto/fips_enabled</tt>) to
+  <tt>1</tt></li>
+
+  <li>Creating <tt>/etc/system-fips</tt></li>
+
+  <li>Setting the system crypto policy in <tt>/etc/crypto-policies/config</tt> to
+  <tt>FIPS</tt></li>
+
+  <li>Loading the Dracut <tt>fips</tt> module</li>
+
+  </ul>
+
+  Furthermore, the system running in FIPS mode should be FIPS certified by NIST.'
+identifiers: {cce: 80942-6}
+ocil: 'To verify that FIPS is enabled properly, run the following command:
+
+  <pre>fips-mode-setup --check</pre>
+
+  The output should contain the following:
+
+  <pre>FIPS mode is enabled.</pre>'
+ocil_clause: FIPS mode is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'Use of weak or untested encryption algorithms undermines the purposes
+  of utilizing encryption to
+
+  protect data. The operating system must implement cryptographic modules adhering
+  to the higher
+
+  standards approved by the federal government since this provides assurance they
+  have been tested
+
+  and validated.'
+references: {disa: '68,803,2450', nist: 'SC-13,AC-17(a),AC-17(2),IA-7,SC-12(3)', srg: 'SRG-OS-000478-GPOS-00223,SRG-OS-000396-GPOS-00176',
+  vmmsrg: 'SRG-OS-000120-VMM-000600,SRG-OS-000478-VMM-001980,SRG-OS-000396-VMM-001590'}
+severity: high
+template: null
+title: Enable FIPS Mode
+warnings:
+- {general: The system needs to be rebooted for these changes to take effect.}
+- {regulatory: 'System Crypto Modules must be provided by a vendor that undergoes
+
+    FIPS-140 certifications.
+
+    FIPS-140 is applicable to all Federal agencies that use
+
+    cryptographic-based security systems to protect sensitive information
+
+    in computer and telecommunication systems (including voice systems) as
+
+    defined in Section 5131 of the Information Technology Management Reform
+
+    Act of 1996, Public Law 104-106. This standard shall be used in
+
+    designing and implementing cryptographic modules that Federal
+
+    departments and agencies operate or are operated for them under
+
+    contract. See <b>
+
+    <a xmlns=''http://www.w3.org/1999/xhtml'' href=''https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-2.pdf''>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-2.pdf</a></b>
+
+    To meet this, the system has to have cryptographic software provided by
+
+    a vendor that has undergone this certification. This means providing
+
+    documentation, test results, design information, and independent third
+
+    party review by an accredited lab. While open source software is
+
+    capable of meeting this, it does not meet FIPS-140 unless the vendor
+
+    submits to this process.'}

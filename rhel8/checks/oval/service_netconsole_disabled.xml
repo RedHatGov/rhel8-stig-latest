@@ -1,0 +1,94 @@
+<def-group>
+
+  
+
+  <definition class="compliance" id="service_netconsole_disabled" version="1">
+    <metadata>
+      <title>Service netconsole Disabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The netconsole service should be disabled if possible.</description>
+    </metadata>
+    <criteria comment="package netconsole removed or service netconsole is not configured to start" operator="OR">
+      <criterion comment="netconsole removed" test_ref="test_service_netconsole_package_netconsole_removed" />
+      <criteria operator="AND" comment="service netconsole is not configured to start">
+        <criterion comment="netconsole is not running" test_ref="test_service_not_running_netconsole" />
+        <criterion comment="Property LoadState of service netconsole is masked" test_ref="test_service_loadstate_is_masked_netconsole" />
+        <criterion comment="Property FragmentPath of service netconsole is set to /dev/null" test_ref="test_service_fragmentpath_is_dev_null_netconsole" />
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_netconsole_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_netconsole_disabled" />
+    <linux:state state_ref="state_systemd_netconsole_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_netconsole_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_netconsole_off" comment="netconsole service is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">netconsole.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_netconsole_socket_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_netconsole_socket_disabled" />
+    <linux:state state_ref="state_systemd_netconsole_socket_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_netconsole_socket_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_netconsole_socket_off" comment="netconsole socket is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">netconsole.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_not_running_netconsole" check="all" check_existence="any_exist" comment="Test that the netconsole service is not running" version="1">
+    <linux:object object_ref="obj_service_not_running_netconsole"/>
+    <linux:state state_ref="state_service_not_running_netconsole"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_not_running_netconsole" comment="Retrieve the ActiveState property of netconsole" version="1">
+    <linux:unit operation="pattern match">^netconsole\.(service|socket)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_not_running_netconsole" version="1" comment="netconsole is not running">
+      <linux:value>inactive</linux:value>
+  </linux:systemdunitproperty_state>
+  <linux:systemdunitproperty_test id="test_service_loadstate_is_masked_netconsole" check="all" check_existence="any_exist" comment="Test that the property LoadState from the service netconsole is masked" version="1">
+    <linux:object object_ref="obj_service_loadstate_is_masked_netconsole"/>
+    <linux:state state_ref="state_service_loadstate_is_masked_netconsole"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_loadstate_is_masked_netconsole" comment="Retrieve the LoadState property of netconsole" version="1">
+    <linux:unit operation="pattern match">^netconsole\.(service|socket)$</linux:unit>
+    <linux:property>LoadState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_loadstate_is_masked_netconsole" version="1" comment="LoadState is set to masked">
+      <linux:value>masked</linux:value>
+  </linux:systemdunitproperty_state>
+
+  <linux:systemdunitproperty_test id="test_service_fragmentpath_is_dev_null_netconsole" check="all" check_existence="any_exist" comment="Test that the property FragmentPath from the service netconsole is set to /dev/null" version="1">
+    <linux:object object_ref="obj_service_fragmentpath_is_dev_null_netconsole"/>
+    <linux:state state_ref="state_service_fragmentpath_is_dev_null_netconsole"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_fragmentpath_is_dev_null_netconsole" comment="Retrieve the FragmentPath property of netconsole" version="1">
+    <linux:unit operation="pattern match">^netconsole\.(service|socket)$</linux:unit>
+    <linux:property>FragmentPath</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_fragmentpath_is_dev_null_netconsole" version="1" comment="FragmentPath is set to /dev/null">
+      <linux:value>/dev/null</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+
+
+  <linux:rpminfo_test check="all" check_existence="none_exist"
+  id="test_service_netconsole_package_netconsole_removed" version="1"
+  comment="package netconsole is removed">
+    <linux:object object_ref="obj_test_service_netconsole_package_netconsole_removed" />
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_netconsole_package_netconsole_removed" version="1">
+    <linux:name>netconsole</linux:name>
+  </linux:rpminfo_object>
+
+
+</def-group>

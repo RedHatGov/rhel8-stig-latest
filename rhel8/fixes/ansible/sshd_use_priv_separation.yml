@@ -1,0 +1,36 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Enable Use of Privilege Separation
+  block:
+
+    - name: Deduplicate values from /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: false
+        regexp: (?i)^\s*UsePrivilegeSeparation\s+
+        state: absent
+
+    - name: Insert correct line to /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: true
+        line: UsePrivilegeSeparation sandbox
+        state: present
+        insertbefore: ^[#\s]*Match
+        validate: /usr/sbin/sshd -t -f %s
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sshd_use_priv_separation
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80908-7
+    - NIST-800-53-AC-6
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(b)
+    - NIST-800-171-3.1.12

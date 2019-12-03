@@ -1,0 +1,24 @@
+description: 'The <tt>ldap</tt> module provides HTTP authentication via an LDAP directory.
+
+  If its functionality is unnecessary, comment out the related modules:
+
+  <pre>#LoadModule ldap_module modules/mod_ldap.so
+
+  #LoadModule authnz_ldap_module modules/mod_authnz_ldap.so</pre>
+
+  If LDAP is to be used, SSL encryption should be used as well.'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Minimizing the number of loadable modules available to the web server
+  reduces risk
+
+  by limiting the capabilities allowed by the web server.'
+references: {}
+severity: unknown
+template: null
+title: Disable LDAP Support
+warnings: []

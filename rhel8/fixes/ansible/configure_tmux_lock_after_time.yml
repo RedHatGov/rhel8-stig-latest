@@ -1,0 +1,30 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Configure tmux to lock session after inactivity
+  block:
+
+    - name: Deduplicate values from /etc/tmux.conf
+      lineinfile:
+        path: /etc/tmux.conf
+        create: false
+        regexp: ^\s*set -g lock-after-time\s+
+        state: absent
+
+    - name: Insert correct line to /etc/tmux.conf
+      lineinfile:
+        path: /etc/tmux.conf
+        create: true
+        line: set -g lock-after-time 900
+        state: present
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - configure_tmux_lock_after_time
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82199-1

@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Restrict usage of ptrace to descendant processes
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80953-3
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_kernel_yama_ptrace_scope
+  tasks:
+
+    - name: Ensure sysctl kernel.yama.ptrace_scope is set to 1
+      sysctl:
+        name: kernel.yama.ptrace_scope
+        value: '1'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

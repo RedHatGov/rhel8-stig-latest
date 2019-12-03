@@ -1,0 +1,30 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable Kernel Parameter for Accepting ICMP Redirects by Default on IPv6 Interfaces
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    sysctl_net_ipv6_conf_default_accept_redirects_value: '0'
+  tags:
+    - CCE-81010-1
+    - NIST-800-171-3.1.20
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_net_ipv6_conf_default_accept_redirects
+  tasks:
+
+    - name: Ensure sysctl net.ipv6.conf.default.accept_redirects is set
+      sysctl:
+        name: net.ipv6.conf.default.accept_redirects
+        value: '{{ sysctl_net_ipv6_conf_default_accept_redirects_value }}'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

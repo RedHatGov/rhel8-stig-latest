@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Test for existence /boot/grub2/grub.cfg
+  stat:
+    path: "/boot/grub2/grub.cfg"
+  register: file_exists
+  
+- name: Ensure permission 600 on /boot/grub2/grub.cfg
+  file:
+    path: "/boot/grub2/grub.cfg"
+    mode: "600"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

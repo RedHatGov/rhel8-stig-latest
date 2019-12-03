@@ -1,0 +1,29 @@
+description: 'Set the owner of the user initialization files for interactive users
+  to
+
+  the primary owner with the following command:
+
+  <pre>$ sudo chown <i>USER</i> /home/<i>USER</i>/.*</pre>'
+identifiers: {}
+ocil: 'To verify all local initialization files for interactive users are owned by
+  the
+
+  primary user, run the following command:
+
+  <pre>$ sudo ls -al /home/<i>USER</i>/.*</pre>
+
+  The user initialization files should be owned by <i>USER</i>.'
+ocil_clause: they are not
+oval_external_content: null
+platform: null
+prodtype: wrlinux1019,rhel7,rhel8,rhv4
+rationale: 'Local initialization files are used to configure the user''s shell environment
+
+  upon logon. Malicious modification of these files could compromise accounts upon
+
+  logon.'
+references: {disa: '366', srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template: null
+title: User Initialization Files Must Be Owned By the Primary User
+warnings: []

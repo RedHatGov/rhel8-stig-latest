@@ -1,0 +1,70 @@
+<def-group>
+
+  <definition class="compliance" id="service_sssd_enabled" version="1">
+    <metadata>
+      <title>Service sssd Enabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The sssd service should be enabled if possible.</description>
+    </metadata>
+    <criteria comment="package sssd installed and service sssd is configured to start" operator="AND">
+    <criterion comment="sssd installed" test_ref="test_service_sssd_package_sssd_installed" />
+      <criteria comment="service sssd is configured to start and is running" operator="AND">
+        <criterion comment="sssd is running" test_ref="test_service_running_sssd" />
+        <criteria operator="OR" comment="service sssd is configured to start">
+          <criterion comment="multi-user.target wants sssd" test_ref="test_multi_user_wants_sssd" />
+          <criterion comment="multi-user.target wants sssd socket" test_ref="test_multi_user_wants_sssd_socket" />
+        </criteria>
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_sssd" version="1">
+    <linux:object object_ref="object_multi_user_target_for_sssd_enabled" />
+    <linux:state state_ref="state_systemd_sssd_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_sssd_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_sssd_on" comment="sssd listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">sssd.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_sssd_socket" version="1">
+    <linux:object object_ref="object_multi_user_target_for_sssd_socket_enabled" />
+    <linux:state state_ref="state_systemd_sssd_socket_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_sssd_socket_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_sssd_socket_on" comment="sssd listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">sssd.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_running_sssd" check="at least one" check_existence="at_least_one_exists" comment="Test that the sssd service is running" version="1">
+    <linux:object object_ref="obj_service_running_sssd"/>
+    <linux:state state_ref="state_service_running_sssd"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_running_sssd" comment="Retrieve the ActiveState property of sssd" version="1">
+    <linux:unit operation="pattern match">^sssd\.(socket|service)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_running_sssd" version="1" comment="sssd is running">
+      <linux:value>active</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+  <linux:rpminfo_test check="all" check_existence="all_exist"
+  id="test_service_sssd_package_sssd_installed" version="1"
+  comment="package sssd is installed">
+    <linux:object object_ref="obj_test_service_sssd_package_sssd_installed" />
+    
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_sssd_package_sssd_installed" version="1">
+    <linux:name>sssd</linux:name>
+  </linux:rpminfo_object>
+  
+
+</def-group>

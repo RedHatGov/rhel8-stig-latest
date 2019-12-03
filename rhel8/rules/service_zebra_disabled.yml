@@ -1,0 +1,46 @@
+description: ' The <code>zebra</code> service can be disabled with the following command:
+  <pre>$ sudo systemctl disable zebra.service</pre> The <code>zebra</code> service
+  can be masked with the following command: <pre>$ sudo systemctl mask zebra.service</pre>'
+identifiers: {cce: 80889-9}
+ocil: ' To check that the <code>zebra</code> service is disabled in system boot configuration,
+  run the following command: <pre>$ systemctl is-enabled <code>zebra</code></pre>
+  Output should indicate the <code>zebra</code> service has either not been installed,
+  or has been disabled at all runlevels, as shown in the example below: <pre>$ systemctl
+  is-enabled <code>zebra</code><br/> disabled</pre>
+
+  Run the following command to verify <code>zebra</code> is not active (i.e. not running)
+  through current runtime configuration: <pre>$ systemctl is-active zebra</pre>
+
+  If the service is not running the command will return the following output: <pre>inactive</pre>
+
+  By default the service will also be masked, to check that the <code>zebra</code>
+  is masked, run the following command: <pre>$ systemctl show <code>zebra</code> |
+  grep "LoadState\|UnitFileState"</pre>
+
+  If the service is masked the command will return the following outputs:
+
+  <pre>LoadState=masked</pre>
+
+  <pre>UnitFileState=masked</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,ol7,ol8,rhv4
+rationale: 'Routing protocol daemons are typically used on routers to exchange network
+
+  topology information with other routers. If routing daemons are used when not
+
+  required, system network information may be unnecessarily transmitted across
+
+  the network.'
+references: {cis-csc: '12,15,8', cobit5: 'APO13.01,DSS05.02', disa: '366', hipaa: '164.308(a)(4)(i),164.308(b)(1),164.308(b)(3),164.310(b),164.312(e)(1),164.312(e)(2)(ii)',
+  isa-62443-2013: 'SR 3.1,SR 3.5,SR 3.8,SR 4.1,SR 4.3,SR 5.1,SR 5.2,SR 5.3,SR 7.1,SR
+    7.6', iso27001-2013: 'A.13.1.1,A.13.2.1,A.14.1.3', nist: SC-32, nist-csf: PR.PT-4,
+  srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: quagga, servicename: zebra}
+title: Disable Quagga Service
+warnings: []

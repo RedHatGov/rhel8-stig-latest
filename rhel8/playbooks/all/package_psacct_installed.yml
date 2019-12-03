@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install the psacct package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AU-12
+    - NIST-800-53-CM-7
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_psacct_installed
+    - unknown_severity
+  tasks:
+
+    - name: Ensure psacct is installed
+      package:
+        name: psacct
+        state: present

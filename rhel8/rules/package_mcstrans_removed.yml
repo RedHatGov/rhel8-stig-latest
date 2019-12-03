@@ -1,0 +1,33 @@
+description: 'The <tt>mcstransd</tt> daemon provides category label information
+
+  to client processes requesting information. The label translations are defined
+
+  in <tt>/etc/selinux/targeted/setrans.conf</tt>.
+
+  The <code>mcstrans</code> package can be removed with the following command:
+
+  <pre>
+
+  $ sudo yum erase mcstrans</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: 'Since this service is not used very often, disable it to reduce the
+
+  amount of potentially vulnerable code running on the system.
+
+
+  NOTE: This rule was added in support of the CIS RHEL6 v1.2.0 benchmark. Please
+
+  note that Red Hat does not feel this rule is security relevant.'
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: package_removed
+  vars: {pkgname: mcstrans}
+title: Uninstall mcstrans Package
+warnings: []

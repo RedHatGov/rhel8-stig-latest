@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Find /etc/ssh/ file(s)
+  find:
+    paths: "/etc/ssh/"
+    patterns: "^.*_key$"
+    use_regex: yes
+  register: files_found
+
+- name: Set permissions for /etc/ssh/ file(s)
+  file:
+    path: "{{ item.path }}"
+    mode: "0640"
+  with_items:
+    - "{{ files_found.files }}"
+

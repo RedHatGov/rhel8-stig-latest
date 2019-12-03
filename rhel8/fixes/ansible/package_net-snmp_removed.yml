@@ -1,0 +1,16 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure net-snmp is removed
+  package:
+    name: net-snmp
+    state: absent
+  tags:
+    - package_net-snmp_removed
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable the gssd_read_tmp SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_gssd_read_tmp: 'true'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_gssd_read_tmp
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean gssd_read_tmp accordingly
+      seboolean:
+        name: gssd_read_tmp
+        state: '{{ var_gssd_read_tmp }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

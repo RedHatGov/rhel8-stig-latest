@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure rng-tools is installed
+  package:
+    name: "rng-tools"
+    state: present

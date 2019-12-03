@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.yama.ptrace_scope is set to 1
+  sysctl:
+    name: "kernel.yama.ptrace_scope"
+    value: "1"
+    state: present
+    reload: yes

@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>virt_use_samba</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>virt_use_samba</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P virt_use_samba off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>virt_use_samba</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool virt_use_samba</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>virt_use_samba --> off</code>'
+ocil_clause: virt_use_samba is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: virt_use_samba}
+title: Disable the virt_use_samba SELinux Boolean
+warnings: []

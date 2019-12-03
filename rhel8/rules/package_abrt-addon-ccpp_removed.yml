@@ -1,0 +1,27 @@
+description: 'The <code>abrt-addon-ccpp</code> package can be removed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum erase abrt-addon-ccpp</pre>'
+identifiers: {cce: 82919-2}
+ocil: 'Run the following command to determine if the <code>abrt-addon-ccpp</code>
+  package is installed:
+
+  <pre>$ rpm -q abrt-addon-ccpp</pre>'
+ocil_clause: the package is installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8
+rationale: '<tt>abrt-addon-ccpp</tt> contains hooks for C/C++ crashed programs and
+  <tt>abrt</tt>''s
+
+  C/C++ analyzer plugin.'
+references: {srg: SRG-OS-000095-GPOS-00049}
+severity: low
+template:
+  backends: {}
+  name: package_removed
+  vars: {pkgname: abrt-addon-ccpp}
+title: Uninstall abrt-addon-ccpp Package
+warnings: []

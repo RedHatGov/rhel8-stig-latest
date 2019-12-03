@@ -1,0 +1,23 @@
+description: 'Enforce policy requiring administrative accounts use web browsers only
+  for
+
+  local service administration.'
+identifiers: {}
+ocil: 'Check the <tt>root</tt> home directory for a <tt>.mozilla</tt> directory. If
+
+  one exists, ensure browsing is limited to local service administration.'
+ocil_clause: this is not the case
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8
+rationale: 'If a browser vulnerability is exploited while running with administrative
+  privileges,
+
+  the entire system could be compromised. Specific exceptions for local service
+
+  administration should be documented in site-defined policy.'
+references: {}
+severity: unknown
+template: null
+title: Restrict Web Browser Use for Administrative Accounts
+warnings: []

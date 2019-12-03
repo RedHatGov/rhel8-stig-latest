@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_antivirus_use_jit" version="1">
+    <metadata>
+      <title>SELinux "antivirus_use_jit" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "antivirus_use_jit" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="antivirus_use_jit is configured correctly" test_ref="test_sebool_antivirus_use_jit" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="antivirus_use_jit is configured correctly" id="test_sebool_antivirus_use_jit" version="1">
+    <linux:object object_ref="object_sebool_antivirus_use_jit" />
+    <linux:state state_ref="state_sebool_antivirus_use_jit" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_antivirus_use_jit" version="1">
+    <linux:name>antivirus_use_jit</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_antivirus_use_jit" version="1">
+    <linux:name>antivirus_use_jit</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_antivirus_use_jit"/>
+      <linux:pending_status datatype="boolean" var_ref="var_antivirus_use_jit"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for antivirus_use_jit" datatype="boolean" id="var_antivirus_use_jit" version="1" />
+  
+</def-group>

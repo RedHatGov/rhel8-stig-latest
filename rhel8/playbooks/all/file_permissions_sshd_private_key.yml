@@ -1,0 +1,38 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Verify Permissions on SSH Server Private *_key Key Files
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.13.10
+    - NIST-800-53-AC-17
+    - NIST-800-53-AC-6
+    - configure_strategy
+    - file_permissions_sshd_private_key
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Find /etc/ssh/ file(s)
+      find:
+        paths: /etc/ssh/
+        patterns: ^.*_key$
+        use_regex: true
+      register: files_found
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set permissions for /etc/ssh/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0640'
+      with_items:
+        - '{{ files_found.files }}'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

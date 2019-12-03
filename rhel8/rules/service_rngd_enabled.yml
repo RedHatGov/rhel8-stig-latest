@@ -1,0 +1,25 @@
+description: 'The Hardware RNG Entropy Gatherer service should be enabled.
+
+
+  The <code>rngd</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable rngd.service</pre>'
+identifiers: {cce: 82831-9}
+ocil: ' Run the following command to determine the current status of the <code>rngd</code>
+  service: <pre>$ systemctl is-active rngd</pre> If the service is running, it should
+  return the following: <pre>active</pre>'
+ocil_clause: the service is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'The <tt>rngd</tt> service
+
+  feeds random data from hardware device to kernel random device.'
+references: {ospp: FCS_RBG_EXT.1, srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: service_enabled
+  vars: {packagename: rng-tools, servicename: rngd}
+title: Enable the Hardware RNG Entropy Gatherer Service
+warnings: []

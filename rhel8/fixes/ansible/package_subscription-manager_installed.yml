@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure subscription-manager is installed
+  package:
+    name: subscription-manager
+    state: present
+  tags:
+    - package_subscription-manager_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82316-1

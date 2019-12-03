@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>racoon_read_shadow</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>racoon_read_shadow</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P racoon_read_shadow off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>racoon_read_shadow</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool racoon_read_shadow</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>racoon_read_shadow --> off</code>'
+ocil_clause: racoon_read_shadow is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: racoon_read_shadow}
+title: Disable the racoon_read_shadow SELinux Boolean
+warnings: []

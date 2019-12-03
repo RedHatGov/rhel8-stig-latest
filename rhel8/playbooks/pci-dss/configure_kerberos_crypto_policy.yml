@@ -1,0 +1,24 @@
+# platform = multi_platform_fedora,Red Hat Enterprise Linux 8,Oracle Linux 8
+# reboot = true
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Configure Kerberos to use System Crypto Policy
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80936-8
+    - NIST-800-53-SC-12(3)
+    - configure_kerberos_crypto_policy
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - reboot_required
+  tasks:
+
+    - name: Configure Kerberos to use System Crypto Policy
+      file:
+        src: /etc/crypto-policies/back-ends/krb5.config
+        path: /etc/krb5.conf.d/crypto-policies
+        state: link

@@ -1,0 +1,18 @@
+description: 'To disable interface usage of IPv6, add or correct the following lines
+  in <tt>/etc/sysconfig/network</tt>:
+
+  <pre>NETWORKING_IPV6=no
+
+  IPV6INIT=no</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template: null
+title: Disable Interface Usage of IPv6
+warnings: []

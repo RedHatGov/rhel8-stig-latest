@@ -1,0 +1,69 @@
+description: 'To enable Kernel page-table isolation,
+
+  add the argument <tt>pti=on</tt> to the default
+
+  GRUB 2 command line for the Linux operating system in
+
+  <tt>/etc/default/grub</tt>, in the manner below:
+
+  <pre>GRUB_CMDLINE_LINUX="pti=on"</pre>'
+identifiers: {cce: 82194-2}
+ocil: 'Inspect the form of default GRUB 2 command line for the Linux operating system
+
+  in <tt>/etc/default/grub</tt>. If they include <tt>pti=on</tt>,
+
+  then Kernel page-table isolation is enabled at boot time.
+
+  <br /><br />
+
+  To ensure <tt>pti=on</tt> is configured on all installed kernels, the
+
+  following command may be used:
+
+  <br />
+
+  <pre>$ sudo /sbin/grubby --update-kernel=ALL --args="pti=on</pre>
+
+  <br />'
+ocil_clause: Kernel page-table isolation is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'Kernel page-table isolation is a kernel feature that mitigates
+
+  the Meltdown security vulnerability and hardens the kernel
+
+  against attempts to bypass kernel address space layout
+
+  randomization (KASLR).'
+references: {srg: SRG-OS-000433-GPOS-00193}
+severity: high
+template:
+  backends: {}
+  name: grub2_bootloader_argument
+  vars: {arg_name: pti, arg_value: 'on'}
+title: Enable Kernel Page-Table Isolation (KPTI)
+warnings:
+- {management: 'The GRUB 2 configuration file, <tt>grub.cfg</tt>,
+
+    is automatically updated each time a new kernel is installed. Note that any
+
+    changes to <tt>/etc/default/grub</tt> require rebuilding the <tt>grub.cfg</tt>
+
+    file. To update the GRUB 2 configuration file manually, use the
+
+    <pre>grub2-mkconfig -o</pre> command as follows:
+
+    <ul>
+
+    <li>On BIOS-based machines, issue the following command as <tt>root</tt>:
+
+    <pre>~]# grub2-mkconfig -o /boot/grub2/grub.cfg</pre></li>
+
+    <li>On UEFI-based machines, issue the following command as <tt>root</tt>:
+
+
+    <pre>~]# grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre></li>
+
+
+    </ul>'}

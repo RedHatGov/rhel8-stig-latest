@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+
+
+
+- name: "Set number of records to cause an explicit flush to audit logs"
+  block:
+    - name: "Deduplicate values from /etc/audit/auditd.conf"
+      lineinfile:
+        path: '/etc/audit/auditd.conf'
+        create: no
+        regexp: '(?i)^\s*freq\s*=\s*'
+        state: 'absent'
+    - name: "Insert correct line to /etc/audit/auditd.conf"
+      lineinfile:
+        path: '/etc/audit/auditd.conf'
+        create: yes
+        line: 'freq = 50'
+        state: present
+        

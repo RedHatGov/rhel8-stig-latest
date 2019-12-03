@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install libcap-ng-utils Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82979-6
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_libcap-ng-utils_installed
+  tasks:
+
+    - name: Ensure libcap-ng-utils is installed
+      package:
+        name: libcap-ng-utils
+        state: present

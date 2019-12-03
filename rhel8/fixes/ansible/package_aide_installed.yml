@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure aide is installed
+  package:
+    name: aide
+    state: present
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - package_aide_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80844-4
+    - NIST-800-53-CM-3(d)
+    - NIST-800-53-CM-3(e)
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-53-SC-28
+    - NIST-800-53-SI-7
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.1.3

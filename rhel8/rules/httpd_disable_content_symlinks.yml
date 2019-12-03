@@ -1,0 +1,34 @@
+description: 'For each <tt>&lt;Directory&gt;</tt> instance, remove the following:
+
+  <pre>FollowSymLinks</pre>
+
+  If symbolic links are allowed, the following can be added for each
+
+  <tt>&lt;Directory&gt;</tt> instance:
+
+  <pre>Options SymLinksIfOwnerMatchDisable</pre>'
+identifiers: {}
+ocil: 'Inspect each <tt>&lt;Directory&gt;</tt> instance and verify that either
+
+  <pre>FollowSymLinks</pre> does not exist, or
+
+  <pre>Options SymLinksIfOwnerMatchDisable</pre> is configured properly.'
+ocil_clause: it is not
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8
+rationale: 'A symbolic link allows a file or a directory to be referenced using a
+  symbolic
+
+  name raising a potential hazard if symbolic linkage is made to a sensitive area.
+
+  When web scripts are executed and symbolic links are allowed, the web user could
+
+  be allowed to access locations on the web server that are outside the scope of
+
+  the web document root or home directory.'
+references: {}
+severity: high
+template: null
+title: Disable Web Content Symbolic Links
+warnings: []

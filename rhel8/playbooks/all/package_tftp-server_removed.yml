@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall tftp-server Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-6(c)
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_tftp-server_removed
+  tasks:
+
+    - name: Ensure tftp-server is removed
+      package:
+        name: tftp-server
+        state: absent

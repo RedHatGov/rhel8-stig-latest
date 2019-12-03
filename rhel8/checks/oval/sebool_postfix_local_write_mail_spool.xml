@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_postfix_local_write_mail_spool" version="1">
+    <metadata>
+      <title>SELinux "postfix_local_write_mail_spool" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "postfix_local_write_mail_spool" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="postfix_local_write_mail_spool is configured correctly" test_ref="test_sebool_postfix_local_write_mail_spool" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="postfix_local_write_mail_spool is configured correctly" id="test_sebool_postfix_local_write_mail_spool" version="1">
+    <linux:object object_ref="object_sebool_postfix_local_write_mail_spool" />
+    <linux:state state_ref="state_sebool_postfix_local_write_mail_spool" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_postfix_local_write_mail_spool" version="1">
+    <linux:name>postfix_local_write_mail_spool</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_postfix_local_write_mail_spool" version="1">
+    <linux:name>postfix_local_write_mail_spool</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_postfix_local_write_mail_spool"/>
+      <linux:pending_status datatype="boolean" var_ref="var_postfix_local_write_mail_spool"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for postfix_local_write_mail_spool" datatype="boolean" id="var_postfix_local_write_mail_spool" version="1" />
+  
+</def-group>

@@ -1,0 +1,94 @@
+<def-group>
+
+  
+
+  <definition class="compliance" id="service_systemd-coredump_disabled" version="1">
+    <metadata>
+      <title>Service systemd-coredump Disabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The systemd-coredump service should be disabled if possible.</description>
+    </metadata>
+    <criteria comment="package systemd removed or service systemd-coredump is not configured to start" operator="OR">
+      <criterion comment="systemd removed" test_ref="test_service_systemd-coredump_package_systemd_removed" />
+      <criteria operator="AND" comment="service systemd-coredump is not configured to start">
+        <criterion comment="systemd-coredump is not running" test_ref="test_service_not_running_systemd-coredump" />
+        <criterion comment="Property LoadState of service systemd-coredump is masked" test_ref="test_service_loadstate_is_masked_systemd-coredump" />
+        <criterion comment="Property FragmentPath of service systemd-coredump is set to /dev/null" test_ref="test_service_fragmentpath_is_dev_null_systemd-coredump" />
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_systemd-coredump_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_systemd-coredump_disabled" />
+    <linux:state state_ref="state_systemd_systemd-coredump_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_systemd-coredump_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_systemd-coredump_off" comment="systemd-coredump service is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">systemd-coredump.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_systemd-coredump_socket_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_systemd-coredump_socket_disabled" />
+    <linux:state state_ref="state_systemd_systemd-coredump_socket_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_systemd-coredump_socket_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_systemd-coredump_socket_off" comment="systemd-coredump socket is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">systemd-coredump.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_not_running_systemd-coredump" check="all" check_existence="any_exist" comment="Test that the systemd-coredump service is not running" version="1">
+    <linux:object object_ref="obj_service_not_running_systemd-coredump"/>
+    <linux:state state_ref="state_service_not_running_systemd-coredump"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_not_running_systemd-coredump" comment="Retrieve the ActiveState property of systemd-coredump" version="1">
+    <linux:unit operation="pattern match">^systemd-coredump\.(service|socket)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_not_running_systemd-coredump" version="1" comment="systemd-coredump is not running">
+      <linux:value>inactive</linux:value>
+  </linux:systemdunitproperty_state>
+  <linux:systemdunitproperty_test id="test_service_loadstate_is_masked_systemd-coredump" check="all" check_existence="any_exist" comment="Test that the property LoadState from the service systemd-coredump is masked" version="1">
+    <linux:object object_ref="obj_service_loadstate_is_masked_systemd-coredump"/>
+    <linux:state state_ref="state_service_loadstate_is_masked_systemd-coredump"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_loadstate_is_masked_systemd-coredump" comment="Retrieve the LoadState property of systemd-coredump" version="1">
+    <linux:unit operation="pattern match">^systemd-coredump\.(service|socket)$</linux:unit>
+    <linux:property>LoadState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_loadstate_is_masked_systemd-coredump" version="1" comment="LoadState is set to masked">
+      <linux:value>masked</linux:value>
+  </linux:systemdunitproperty_state>
+
+  <linux:systemdunitproperty_test id="test_service_fragmentpath_is_dev_null_systemd-coredump" check="all" check_existence="any_exist" comment="Test that the property FragmentPath from the service systemd-coredump is set to /dev/null" version="1">
+    <linux:object object_ref="obj_service_fragmentpath_is_dev_null_systemd-coredump"/>
+    <linux:state state_ref="state_service_fragmentpath_is_dev_null_systemd-coredump"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_fragmentpath_is_dev_null_systemd-coredump" comment="Retrieve the FragmentPath property of systemd-coredump" version="1">
+    <linux:unit operation="pattern match">^systemd-coredump\.(service|socket)$</linux:unit>
+    <linux:property>FragmentPath</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_fragmentpath_is_dev_null_systemd-coredump" version="1" comment="FragmentPath is set to /dev/null">
+      <linux:value>/dev/null</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+
+
+  <linux:rpminfo_test check="all" check_existence="none_exist"
+  id="test_service_systemd-coredump_package_systemd_removed" version="1"
+  comment="package systemd is removed">
+    <linux:object object_ref="obj_test_service_systemd-coredump_package_systemd_removed" />
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_systemd-coredump_package_systemd_removed" version="1">
+    <linux:name>systemd</linux:name>
+  </linux:rpminfo_object>
+
+
+</def-group>

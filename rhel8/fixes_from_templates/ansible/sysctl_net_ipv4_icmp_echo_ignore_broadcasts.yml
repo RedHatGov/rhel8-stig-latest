@@ -1,0 +1,13 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value)
+
+- name: Ensure sysctl net.ipv4.icmp_echo_ignore_broadcasts is set
+  sysctl:
+    name: "net.ipv4.icmp_echo_ignore_broadcasts"
+    value: "{{ sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value }}"
+    state: present
+    reload: yes

@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+
+- name: Test for existence /etc/cron.allow
+  stat:
+    path: "/etc/cron.allow"
+  register: file_exists
+
+- name: Ensure owner 0 on /etc/cron.allow
+  file:
+    path: "/etc/cron.allow"
+    owner: "0"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

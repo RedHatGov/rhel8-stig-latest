@@ -1,0 +1,21 @@
+# platform = multi_platform_fedora,Red Hat Enterprise Linux 8,Oracle Linux 8
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Configure dnf-automatic to Install Only Security Updates
+  ini_file:
+    dest: /etc/dnf/automatic.conf
+    section: commands
+    option: upgrade_type
+    value: security
+    create: true
+  tags:
+    - dnf-automatic_security_updates_only
+    - low_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-82267-6
+    - NIST-800-53-SI-2(5)

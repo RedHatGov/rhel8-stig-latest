@@ -1,0 +1,39 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Test for existence of /etc/securetty
+  stat:
+    path: /etc/securetty
+  register: securetty_empty
+  tags:
+    - no_direct_root_logins
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80840-2
+    - NIST-800-53-IA-2
+    - NIST-800-53-IA-2(1)
+    - NIST-800-171-3.1.1
+    - NIST-800-171-3.1.6
+
+- name: Direct root Logins Not Allowed
+  copy:
+    dest: /etc/securetty
+    content: ''
+  when: securetty_empty.stat.size > 1
+  tags:
+    - no_direct_root_logins
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80840-2
+    - NIST-800-53-IA-2
+    - NIST-800-53-IA-2(1)
+    - NIST-800-171-3.1.1
+    - NIST-800-171-3.1.6

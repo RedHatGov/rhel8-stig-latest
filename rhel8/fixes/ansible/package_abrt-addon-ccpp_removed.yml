@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure abrt-addon-ccpp is removed
+  package:
+    name: abrt-addon-ccpp
+    state: absent
+  tags:
+    - package_abrt-addon-ccpp_removed
+    - low_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82919-2

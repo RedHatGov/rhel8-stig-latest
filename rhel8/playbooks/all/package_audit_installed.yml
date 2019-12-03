@@ -1,0 +1,28 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure the audit Subsystem is Installed
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-81043-2
+    - NIST-800-53-AU-10
+    - NIST-800-53-AU-7(1)
+    - NIST-800-53-AU-7(a)
+    - NIST-800-53-AU-7(b)
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_audit_installed
+  tasks:
+
+    - name: Ensure audit is installed
+      package:
+        name: audit
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

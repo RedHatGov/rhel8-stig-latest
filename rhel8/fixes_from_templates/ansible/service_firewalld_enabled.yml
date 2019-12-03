@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service firewalld
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable service firewalld
+    service:
+      name: "firewalld"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"firewalld" in ansible_facts.packages'

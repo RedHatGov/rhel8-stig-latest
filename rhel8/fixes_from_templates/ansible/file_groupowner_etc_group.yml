@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+
+- name: Test for existence /etc/group
+  stat:
+    path: "/etc/group"
+  register: file_exists
+
+- name: Ensure group owner 0 on /etc/group
+  file:
+    path: "/etc/group"
+    group: "0"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

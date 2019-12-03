@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure nfs-utils is removed
+  package:
+    name: nfs-utils
+    state: absent
+  tags:
+    - package_nfs-utils_removed
+    - low_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82932-5

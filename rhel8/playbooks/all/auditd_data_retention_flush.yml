@@ -1,0 +1,32 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Configure auditd flush priority
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_auditd_flush: data
+  tags:
+    - CCE-80680-2
+    - NIST-800-171-3.3.1
+    - NIST-800-53-AU-12(1)
+    - NIST-800-53-AU-9
+    - auditd_data_retention_flush
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Configure auditd Flush Priority
+      lineinfile:
+        dest: /etc/audit/auditd.conf
+        regexp: ^\s*flush\s*=\s*.*$
+        line: flush = {{ var_auditd_flush }}
+        state: present
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

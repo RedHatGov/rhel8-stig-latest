@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl fs.suid_dumpable is set to 0
+  sysctl:
+    name: "fs.suid_dumpable"
+    value: "0"
+    state: present
+    reload: yes

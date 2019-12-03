@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>git_session_users</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>git_session_users</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P git_session_users off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>git_session_users</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool git_session_users</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>git_session_users --> off</code>'
+ocil_clause: git_session_users is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: git_session_users}
+title: Disable the git_session_users SELinux Boolean
+warnings: []

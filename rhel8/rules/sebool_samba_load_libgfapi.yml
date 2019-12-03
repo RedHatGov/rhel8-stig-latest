@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>samba_load_libgfapi</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>samba_load_libgfapi</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P samba_load_libgfapi off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>samba_load_libgfapi</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool samba_load_libgfapi</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>samba_load_libgfapi --> off</code>'
+ocil_clause: samba_load_libgfapi is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: samba_load_libgfapi}
+title: Disable the samba_load_libgfapi SELinux Boolean
+warnings: []

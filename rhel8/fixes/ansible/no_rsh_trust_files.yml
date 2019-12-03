@@ -1,0 +1,31 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- block:
+
+    - name: Detect shosts.equiv Files on the System
+      find:
+        paths: /
+        recurse: true
+        patterns: shosts.equiv
+      check_mode: false
+      register: shosts_equiv_locations
+
+    - name: Remove Rsh Trust Files
+      file:
+        path: '{{ item.path }}'
+        state: absent
+      with_items: '{{ shosts_equiv_locations.files }}'
+      when: shosts_equiv_locations
+  tags:
+    - no_rsh_trust_files
+    - high_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80842-8
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7

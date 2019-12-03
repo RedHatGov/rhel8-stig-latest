@@ -1,0 +1,27 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Restrict Exposed Kernel Pointer Addresses Access
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80915-2
+    - NIST-800-53-SC-39
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_kernel_kptr_restrict
+  tasks:
+
+    - name: Ensure sysctl kernel.kptr_restrict is set to 1
+      sysctl:
+        name: kernel.kptr_restrict
+        value: '1'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

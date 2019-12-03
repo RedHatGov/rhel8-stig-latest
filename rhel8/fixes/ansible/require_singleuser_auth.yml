@@ -1,0 +1,25 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: require single user mode password
+  lineinfile:
+    create: true
+    dest: /usr/lib/systemd/system/rescue.service
+    regexp: ^#?ExecStart=
+    line: ExecStart=-/usr/lib/systemd/systemd-sulogin-shell rescue
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - require_singleuser_auth
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80855-0
+    - NIST-800-53-IA-2
+    - NIST-800-53-IA-2(1)
+    - NIST-800-53-AC-3
+    - NIST-800-171-3.1.1
+    - NIST-800-171-3.4.5

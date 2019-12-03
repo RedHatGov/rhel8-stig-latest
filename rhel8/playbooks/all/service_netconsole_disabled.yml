@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable Network Console (netconsole)
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_netconsole_disabled
+    - unknown_severity
+  tasks:
+
+    - name: Disable service netconsole
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service netconsole
+          systemd:
+            name: netconsole.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"netconsole.service" in ansible_facts.services'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Unit Socket Exists - netconsole.socket
+      command: systemctl list-unit-files netconsole.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Disable socket netconsole
+      systemd:
+        name: netconsole.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when:
+        - '"netconsole.socket" in socket_file_exists.stdout_lines[1]'
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

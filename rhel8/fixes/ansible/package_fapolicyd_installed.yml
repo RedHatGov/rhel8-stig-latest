@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure fapolicyd is installed
+  package:
+    name: fapolicyd
+    state: present
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - package_fapolicyd_installed
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82191-8
+    - NIST-800-53-SI-4(22)

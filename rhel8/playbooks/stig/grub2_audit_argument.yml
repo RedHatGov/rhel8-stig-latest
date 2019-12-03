@@ -1,0 +1,47 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = restrict
+# complexity = medium
+# disruption = low
+- name: Enable Auditing for Processes Which Start Prior to the Audit Daemon
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80825-3
+    - CJIS-5.4.1.1
+    - NIST-800-171-3.3.1
+    - NIST-800-53-AC-17(1)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-10
+    - NIST-800-53-AU-12
+    - NIST-800-53-AU-12(1)
+    - NIST-800-53-AU-14(1)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-IR-5
+    - PCI-DSS-Req-10.3
+    - grub2_audit_argument
+    - low_disruption
+    - medium_complexity
+    - medium_severity
+    - reboot_required
+    - restrict_strategy
+  tasks:
+
+    - name: get current kernel parameters
+      command: /usr/bin/grub2-editenv - list
+      register: kernelopts
+      changed_when: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Update the bootloader menu
+      command: /usr/bin/grub2-editenv - set "{{ item }} audit=1"
+      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'')
+        | list }}'
+      when:
+        - kernelopts.stdout_lines is defined
+        - kernelopts.stdout_lines | length > 0
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

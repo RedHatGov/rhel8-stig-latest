@@ -1,0 +1,32 @@
+description: 'Install McAfee VirusScan Enterprise for Linux antivirus software
+
+  which is provided for DoD systems and uses signatures to search for the
+
+  presence of viruses on the filesystem.'
+identifiers: {}
+ocil: 'To verify that McAfee VirusScan Enterprise for Linux is installed
+
+  and running, run the following command(s):
+
+  <pre>$ sudo systemctl status nails</pre>
+
+  <pre>$ rpm -q McAfeeVSEForLinux</pre>'
+ocil_clause: virus scanning software is not installed or running
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: 'Virus scanning software can be used to detect if a system has been compromised
+  by
+
+  computer viruses, as well as to limit their spread to other systems.'
+references: {cis-csc: '12,13,14,4,7,8', cobit5: 'APO01.06,APO13.02,BAI02.01,BAI06.01,DSS04.07,DSS05.01,DSS05.02,DSS05.03,DSS06.06',
+  disa: '366,1239,1668', isa-62443-2009: '4.3.4.3.8,4.4.3.2', isa-62443-2013: 'SR
+    3.2,SR 3.3,SR 3.4,SR 4.1', iso27001-2013: 'A.12.2.1,A.14.2.8,A.8.2.3', nist: 'SC-28,SI-3,SI-3(1)(ii)',
+  nist-csf: 'DE.CM-4,DE.DP-3,PR.DS-1', srg: SRG-OS-000480-GPOS-00227}
+severity: high
+template: null
+title: Install McAfee Virus Scanning Software
+warnings:
+- {general: 'Due to McAfee HIPS being 3rd party software, automated
+
+    remediation is not available for this configuration check.'}

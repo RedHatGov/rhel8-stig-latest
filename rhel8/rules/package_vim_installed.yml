@@ -1,0 +1,21 @@
+description: 'The <code>vim</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install vim</pre>'
+identifiers: {cce: 82956-4}
+ocil: 'Run the following command to determine if the <code>vim</code> package is installed:
+  <pre>$ rpm -q vim</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: 'Vim (Vi IMproved) is an almost compatible version of the UNIX editor <tt>vi</tt>. '
+references: {}
+severity: low
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: vim}
+title: Install vim Package
+warnings: []

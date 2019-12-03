@@ -1,0 +1,64 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Set Interactive Session Timeout
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_accounts_tmout: '600'
+  tags:
+    - CCE-80673-7
+    - NIST-800-171-3.1.11
+    - NIST-800-53-AC-12
+    - NIST-800-53-AC-2(5)
+    - NIST-800-53-SC-10
+    - accounts_tmout
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Set Interactive Session Timeout
+      block:
+
+        - name: Deduplicate values from /etc/profile
+          lineinfile:
+            path: /etc/profile
+            create: false
+            regexp: ^\s*TMOUT=
+            state: absent
+
+        - name: Check if /etc/profile.d exists
+          stat:
+            path: /etc/profile.d
+          register: _etc_profile_d_exists
+
+        - name: Check if the parameter TMOUT is present in /etc/profile.d
+          find:
+            paths: /etc/profile.d
+            recurse: 'yes'
+            follow: 'no'
+            contains: ^\s*TMOUT=
+          register: _etc_profile_d_has_parameter
+          when: _etc_profile_d_exists.stat.isdir is defined and _etc_profile_d_exists.stat.isdir
+
+        - name: Remove parameter from files in /etc/profile.d
+          lineinfile:
+            path: '{{ item.path }}'
+            create: false
+            regexp: ^\s*TMOUT=
+            state: absent
+          with_items: '{{ _etc_profile_d_has_parameter.files }}'
+          when: _etc_profile_d_has_parameter.matched
+
+        - name: Insert correct line to /etc/profile
+          lineinfile:
+            path: /etc/profile
+            create: true
+            line: TMOUT={{ var_accounts_tmout }}
+            state: present
+            validate: bash -n %s

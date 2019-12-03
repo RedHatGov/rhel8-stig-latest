@@ -1,0 +1,13 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_conf_all_accept_redirects_value)
+
+- name: Ensure sysctl net.ipv4.conf.all.accept_redirects is set
+  sysctl:
+    name: "net.ipv4.conf.all.accept_redirects"
+    value: "{{ sysctl_net_ipv4_conf_all_accept_redirects_value }}"
+    state: present
+    reload: yes

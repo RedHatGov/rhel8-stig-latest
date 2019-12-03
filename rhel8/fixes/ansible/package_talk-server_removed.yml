@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure talk-server is removed
+  package:
+    name: talk-server
+    state: absent
+  tags:
+    - package_talk-server_removed
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82180-1

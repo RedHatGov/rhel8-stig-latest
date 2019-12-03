@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl net.ipv4.conf.all.send_redirects is set to 0
+  sysctl:
+    name: "net.ipv4.conf.all.send_redirects"
+    value: "0"
+    state: present
+    reload: yes

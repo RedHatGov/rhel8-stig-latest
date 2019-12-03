@@ -1,0 +1,36 @@
+<def-group>
+  <definition class="compliance" id="file_permissions_etc_gshadow" version="1">
+    <metadata>
+      <title>Verify /etc/gshadow Mode Permissions</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>This test makes sure that /etc/gshadow has mode 0000.
+      If the target file or directory has an extended ACL, then it will fail the mode check.
+      </description>
+    </metadata>
+    <criteria>
+      <criterion comment="Check file mode of /etc/gshadow" test_ref="test_file_permissions_etc_gshadow" />
+    </criteria>
+  </definition>
+    <unix:file_test check="all" check_existence="all_exist" comment="Testing mode of /etc/gshadow" id="test_file_permissions_etc_gshadow" version="1">
+    <unix:object object_ref="object_file_permissions_etc_gshadow" />
+    <unix:state state_ref="state_file_permissions_etc_gshadow_mode_0000" />
+  </unix:file_test>
+  <unix:file_state id="state_file_permissions_etc_gshadow_mode_0000" version="1">
+    	<unix:suid datatype="boolean">false</unix:suid>
+	<unix:sgid datatype="boolean">false</unix:sgid>
+	<unix:sticky datatype="boolean">false</unix:sticky>
+	<unix:uread datatype="boolean">false</unix:uread>
+	<unix:uwrite datatype="boolean">false</unix:uwrite>
+	<unix:uexec datatype="boolean">false</unix:uexec>
+	<unix:gread datatype="boolean">false</unix:gread>
+	<unix:gwrite datatype="boolean">false</unix:gwrite>
+	<unix:gexec datatype="boolean">false</unix:gexec>
+	<unix:oread datatype="boolean">false</unix:oread>
+	<unix:owrite datatype="boolean">false</unix:owrite>
+	<unix:oexec datatype="boolean">false</unix:oexec>
+
+  </unix:file_state>
+  <unix:file_object comment="/etc/gshadow" id="object_file_permissions_etc_gshadow" version="1"><unix:filepath>/etc/gshadow</unix:filepath></unix:file_object>
+</def-group>

@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install python3-subscription-manager-rhsm Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82243-7
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_python3-subscription-manager-rhsm_installed
+  tasks:
+
+    - name: Ensure python3-subscription-manager-rhsm is installed
+      package:
+        name: python3-subscription-manager-rhsm
+        state: present

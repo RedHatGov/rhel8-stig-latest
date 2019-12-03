@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure audispd-plugins is installed
+  package:
+    name: "audispd-plugins"
+    state: present

@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure rsh is removed
+  package:
+    name: rsh
+    state: absent
+  tags:
+    - package_rsh_removed
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82183-5
+    - NIST-800-171-3.1.13

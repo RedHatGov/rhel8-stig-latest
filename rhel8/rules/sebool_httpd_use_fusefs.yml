@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>httpd_use_fusefs</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>httpd_use_fusefs</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P httpd_use_fusefs off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>httpd_use_fusefs</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool httpd_use_fusefs</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>httpd_use_fusefs --> off</code>'
+ocil_clause: httpd_use_fusefs is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: httpd_use_fusefs}
+title: Disable the httpd_use_fusefs SELinux Boolean
+warnings: []

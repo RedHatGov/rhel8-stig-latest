@@ -1,0 +1,51 @@
+description: 'The rpcsvcgssd service manages RPCSEC GSS contexts required to
+
+  secure protocols that use RPC (most often Kerberos and NFS). The rpcsvcgssd
+
+  service is the server-side of RPCSEC GSS. If the system does not require secure
+
+  RPC then this service should be disabled.
+
+
+  The <code>rpcsvcgssd</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable rpcsvcgssd.service</pre>
+
+  The <code>rpcsvcgssd</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask rpcsvcgssd.service</pre>'
+identifiers: {}
+ocil: ' To check that the <code>rpcsvcgssd</code> service is disabled in system boot
+  configuration, run the following command: <pre>$ systemctl is-enabled <code>rpcsvcgssd</code></pre>
+  Output should indicate the <code>rpcsvcgssd</code> service has either not been installed,
+  or has been disabled at all runlevels, as shown in the example below: <pre>$ systemctl
+  is-enabled <code>rpcsvcgssd</code><br/> disabled</pre>
+
+  Run the following command to verify <code>rpcsvcgssd</code> is not active (i.e.
+  not running) through current runtime configuration: <pre>$ systemctl is-active rpcsvcgssd</pre>
+
+  If the service is not running the command will return the following output: <pre>inactive</pre>
+
+  By default the service will also be masked, to check that the <code>rpcsvcgssd</code>
+  is masked, run the following command: <pre>$ systemctl show <code>rpcsvcgssd</code>
+  | grep "LoadState\|UnitFileState"</pre>
+
+  If the service is masked the command will return the following outputs:
+
+  <pre>LoadState=masked</pre>
+
+  <pre>UnitFileState=masked</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: Unnecessary services should be disabled to decrease the attack surface
+  of the system.
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: nfs-utils, servicename: rpcsvcgssd}
+title: Disable Secure RPC Server Service (rpcsvcgssd)
+warnings: []

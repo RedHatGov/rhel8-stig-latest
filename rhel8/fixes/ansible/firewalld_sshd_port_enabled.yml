@@ -1,0 +1,61 @@
+# platform = Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# complexity = low
+# strategy = configure
+# disruption = low
+- name: Ensure firewalld is installed
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - firewalld
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - firewalld_sshd_port_enabled
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80820-4
+    - NIST-800-53-AC-17(a)
+    - NIST-800-171-3.1.12
+- (xccdf-var sshd_listening_port)
+
+- name: Enable SSHD in firewalld (custom port)
+  firewalld:
+    port: '{{ sshd_listening_port }}/tcp'
+    permanent: true
+    state: enabled
+  when:
+    - sshd_listening_port != 22
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - firewalld_sshd_port_enabled
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80820-4
+    - NIST-800-53-AC-17(a)
+    - NIST-800-171-3.1.12
+
+- name: Enable SSHD in firewalld (default port)
+  firewalld:
+    service: ssh
+    permanent: true
+    state: enabled
+  when:
+    - sshd_listening_port == 22
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - firewalld_sshd_port_enabled
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80820-4
+    - NIST-800-53-AC-17(a)
+    - NIST-800-171-3.1.12

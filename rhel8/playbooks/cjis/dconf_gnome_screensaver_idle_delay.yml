@@ -1,0 +1,42 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Set GNOME3 Screensaver Inactivity Timeout
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    inactivity_timeout_value: '1800'
+  tags:
+    - CCE-80775-0
+    - CJIS-5.5.5
+    - NIST-800-171-3.1.10
+    - NIST-800-53-AC-11(a)
+    - PCI-DSS-Req-8.1.8
+    - dconf_gnome_screensaver_idle_delay
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Set GNOME3 Screensaver Inactivity Timeout
+      ini_file:
+        dest: /etc/dconf/db/local.d/00-security-settings
+        section: org/gnome/desktop/screensaver
+        option: idle-delay
+        value: '{{ inactivity_timeout_value }}'
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Prevent user modification of GNOME idle-delay
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/screensaver/idle-delay
+        line: /org/gnome/desktop/screensaver/idle-delay
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

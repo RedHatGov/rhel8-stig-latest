@@ -1,0 +1,26 @@
+description: 'The <code>iptables</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install iptables</pre>'
+identifiers: {cce: 82982-0}
+ocil: 'Run the following command to determine if the <code>iptables</code> package
+  is installed: <pre>$ rpm -q iptables</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: '<tt>iptables</tt> controls the Linux kernel network packet filtering
+
+  code. <tt>iptables</tt> allows system operators to set up firewalls and IP
+
+  masquerading, etc.'
+references: {nist: SC-7(21), srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: iptables}
+title: Install iptables Package
+warnings: []

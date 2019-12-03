@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall squid Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82189-2
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_squid_removed
+    - unknown_severity
+  tasks:
+
+    - name: Ensure squid is removed
+      package:
+        name: squid
+        state: absent

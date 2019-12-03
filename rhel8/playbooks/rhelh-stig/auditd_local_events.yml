@@ -1,0 +1,36 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Include Local Events in Audit Logs
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82233-8
+    - auditd_local_events
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Include Local Events in Audit Logs
+      block:
+
+        - name: Deduplicate values from /etc/audit/auditd.conf
+          lineinfile:
+            path: /etc/audit/auditd.conf
+            create: false
+            regexp: (?i)^\s*local_events\s*=\s*
+            state: absent
+
+        - name: Insert correct line to /etc/audit/auditd.conf
+          lineinfile:
+            path: /etc/audit/auditd.conf
+            create: true
+            line: local_events = yes
+            state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

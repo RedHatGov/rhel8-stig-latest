@@ -1,0 +1,25 @@
+description: 'The File Access Policy service should be enabled.
+
+
+  The <code>fapolicyd</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable fapolicyd.service</pre>'
+identifiers: {cce: 82249-4}
+ocil: ' Run the following command to determine the current status of the <code>fapolicyd</code>
+  service: <pre>$ systemctl is-active fapolicyd</pre> If the service is running, it
+  should return the following: <pre>active</pre>'
+ocil_clause: the service is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel8,ocp4
+rationale: 'The <tt>fapolicyd</tt> service (File Access Policy Daemon)
+
+  implements application whitelisting to decide file access rights.'
+references: {nist: SI-4(22), ospp: FMT_SMF_EXT.1, srg: SRG-OS-000370-GPOS-00155}
+severity: medium
+template:
+  backends: {ansible: 'off'}
+  name: service_enabled
+  vars: {servicename: fapolicyd}
+title: Enable the File Access Policy Service
+warnings: []

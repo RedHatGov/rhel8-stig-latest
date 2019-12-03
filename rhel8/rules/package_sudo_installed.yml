@@ -1,0 +1,28 @@
+description: 'The <code>sudo</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install sudo</pre>'
+identifiers: {cce: 82214-8}
+ocil: 'Run the following command to determine if the <code>sudo</code> package is
+  installed: <pre>$ rpm -q sudo</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: '<tt>sudo</tt> is a program designed to allow a system administrator to
+  give
+
+  limited root privileges to users and log root activity. The basic philosophy
+
+  is to give as few privileges as possible but still allow system users to
+
+  get their work done.'
+references: {nist: 'AC-6(5),CM-11(b)', srg: SRG-OS-000324-GPOS-00125}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: sudo}
+title: Install sudo Package
+warnings: []

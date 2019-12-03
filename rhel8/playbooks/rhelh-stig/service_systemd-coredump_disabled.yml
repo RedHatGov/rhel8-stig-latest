@@ -1,0 +1,48 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable acquiring, saving, and processing core dumps
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82881-4
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_systemd-coredump_disabled
+    - unknown_severity
+  tasks:
+
+    - name: Disable service systemd-coredump
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service systemd-coredump
+          systemd:
+            name: systemd-coredump.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"systemd-coredump.service" in ansible_facts.services'
+
+    - name: Unit Socket Exists - systemd-coredump.socket
+      command: systemctl list-unit-files systemd-coredump.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+
+    - name: Disable socket systemd-coredump
+      systemd:
+        name: systemd-coredump.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"systemd-coredump.socket" in socket_file_exists.stdout_lines[1]'

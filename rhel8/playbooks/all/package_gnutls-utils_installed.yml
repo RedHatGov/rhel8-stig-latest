@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure gnutls-utils is installed
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82395-5
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_gnutls-utils_installed
+  tasks:
+
+    - name: Ensure gnutls-utils is installed
+      package:
+        name: gnutls-utils
+        state: present

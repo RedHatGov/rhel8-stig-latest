@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service abrtd
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service abrtd
+    systemd:
+      name: "abrtd.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"abrtd.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - abrtd.socket"
+  command: systemctl list-unit-files abrtd.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket abrtd
+  systemd:
+    name: "abrtd.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"abrtd.socket" in socket_file_exists.stdout_lines[1]'

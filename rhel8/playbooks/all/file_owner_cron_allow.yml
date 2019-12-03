@@ -1,0 +1,33 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Verify User Who Owns /etc/cron.allow file
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AC-6
+    - configure_strategy
+    - file_owner_cron_allow
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Test for existence /etc/cron.allow
+      stat:
+        path: /etc/cron.allow
+      register: file_exists
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Ensure owner 0 on /etc/cron.allow
+      file:
+        path: /etc/cron.allow
+        owner: '0'
+      when:
+        - file_exists.stat is defined and file_exists.stat.exists
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

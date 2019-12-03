@@ -1,0 +1,20 @@
+# platform = multi_platform_fedora,Red Hat Enterprise Linux 8,Oracle Linux 8
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Configure SSH to use System Crypto Policy
+  lineinfile:
+    dest: /etc/sysconfig/sshd
+    state: absent
+    regexp: ^\s*CRYPTO_POLICY.*$
+  tags:
+    - configure_ssh_crypto_policy
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-80939-2
+    - NIST-800-53-MA-4(6)
+    - NIST-800-53-SC-12(3)

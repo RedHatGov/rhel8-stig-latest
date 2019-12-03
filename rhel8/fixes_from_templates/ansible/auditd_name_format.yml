@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+
+
+
+- name: "Set hostname as computer node name in audit logs"
+  block:
+    - name: "Deduplicate values from /etc/audit/auditd.conf"
+      lineinfile:
+        path: '/etc/audit/auditd.conf'
+        create: no
+        regexp: '(?i)^\s*name_format\s*=\s*'
+        state: 'absent'
+    - name: "Insert correct line to /etc/audit/auditd.conf"
+      lineinfile:
+        path: '/etc/audit/auditd.conf'
+        create: yes
+        line: 'name_format = hostname'
+        state: present
+        

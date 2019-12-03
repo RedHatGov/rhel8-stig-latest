@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable Quagga Service
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80889-9
+    - NIST-800-53-SC-32
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - service_zebra_disabled
+  tasks:
+
+    - name: Disable service zebra
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service zebra
+          systemd:
+            name: zebra.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"zebra.service" in ansible_facts.services'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Unit Socket Exists - zebra.socket
+      command: systemctl list-unit-files zebra.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Disable socket zebra
+      systemd:
+        name: zebra.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when:
+        - '"zebra.socket" in socket_file_exists.stdout_lines[1]'
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

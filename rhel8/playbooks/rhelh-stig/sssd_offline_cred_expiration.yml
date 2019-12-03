@@ -1,0 +1,53 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = medium
+- name: Configure SSSD to Expire Offline Credentials
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80911-1
+    - NIST-800-53-IA-5(13)
+    - configure_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sssd_offline_cred_expiration
+  tasks:
+
+    - name: Test for domain group
+      command: grep '\s*\[domain\/[^]]*]' /etc/sssd/sssd.conf
+      register: test_grep_domain
+      ignore_errors: true
+      changed_when: false
+      check_mode: false
+
+    - name: Add default domain group (if no domain there)
+      ini_file:
+        path: /etc/sssd/sssd.conf
+        section: '{{ item.section }}'
+        option: '{{ item.option }}'
+        value: '{{ item.value }}'
+        create: true
+        mode: 384
+      with_items:
+        - section: sssd
+          option: domains
+          value: default
+        - section: domain/default
+          option: id_provider
+          value: files
+      when:
+        - test_grep_domain.stdout is defined
+        - test_grep_domain.stdout | length < 1
+
+    - name: Configure SSD to Expire Offline Credentials
+      ini_file:
+        dest: /etc/sssd/sssd.conf
+        section: pam
+        option: offline_credentials_expiration
+        value: 1
+        create: true
+        mode: 384

@@ -1,0 +1,28 @@
+description: 'The <code>libcap-ng-utils</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install libcap-ng-utils</pre>'
+identifiers: {cce: 82979-6}
+ocil: 'Run the following command to determine if the <code>libcap-ng-utils</code>
+  package is installed: <pre>$ rpm -q libcap-ng-utils</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: '<tt>libcap-ng-utils</tt> contains applications to analyze the posix
+
+  posix capabilities of all the programs running on a system.
+
+  <tt>libcap-ng-utils</tt> also lets system operators set the file
+
+  system based capabilities.'
+references: {srg: SRG-OS-000445-GPOS-00199}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: libcap-ng-utils}
+title: Install libcap-ng-utils Package
+warnings: []

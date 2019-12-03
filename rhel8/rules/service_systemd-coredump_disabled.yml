@@ -1,0 +1,28 @@
+description: 'The <tt>systemd-coredump.socket</tt> unit is a socket activation of
+
+  the <tt>systemd-coredump@.service</tt> which processes core dumps.
+
+  By masking the unit, core dump processing is disabled.'
+identifiers: {cce: 82881-4}
+ocil: "To verify that acquiring, saving, and processing core dumps is disabled, run\
+  \ the\nfollowing command:\n<pre>$ systemctl status systemd-coredump.socket</pre>\n\
+  The output should be similar to:\n<pre>\u25CF systemd-coredump.socket\n   Loaded:\
+  \ masked (Reason: Unit systemd-coredump.socket is masked.)\n   Active: inactive\
+  \ (dead) ...\n</pre>"
+ocil_clause: unit systemd-coredump.socket is not masked or running
+oval_external_content: null
+platform: null
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'A core dump includes a memory image taken at the time the operating system
+
+  terminates an application. The memory image could contain sensitive data
+
+  and is generally useful only for developers trying to debug problems.'
+references: {ospp: FMT_SMF_EXT.1, srg: SRG-OS-000480-GPOS-00227}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: systemd, servicename: systemd-coredump}
+title: Disable acquiring, saving, and processing core dumps
+warnings: []

@@ -1,0 +1,19 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+
+
+- (xccdf-var var_httpd_can_check_spam)
+
+- name: Ensure libsemanage-python installed
+  package:
+    name: libsemanage-python
+    state: present
+
+- name: Set SELinux boolean httpd_can_check_spam accordingly
+  seboolean:
+    name: httpd_can_check_spam
+    state: "{{ var_httpd_can_check_spam }}"
+    persistent: yes

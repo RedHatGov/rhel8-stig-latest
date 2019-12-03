@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+
+- name: Test for existence /etc/cron.monthly/
+  stat:
+    path: "/etc/cron.monthly/"
+  register: file_exists
+
+- name: Ensure group owner 0 on /etc/cron.monthly/
+  file:
+    path: "/etc/cron.monthly/"
+    group: "0"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

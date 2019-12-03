@@ -1,0 +1,31 @@
+description: 'The Postfix mail transfer agent is used for local mail delivery
+
+  within the system. The default configuration only listens for connections to
+
+  the default SMTP port (port 25) on the loopback interface (127.0.0.1).  It is
+
+  recommended to leave this service enabled for local mail delivery.
+
+
+  The <code>postfix</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable postfix.service</pre>'
+identifiers: {}
+ocil: ' Run the following command to determine the current status of the <code>postfix</code>
+  service: <pre>$ systemctl is-active postfix</pre> If the service is running, it
+  should return the following: <pre>active</pre>'
+ocil_clause: the system is not a cross domain solution and the service is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Local mail delivery is essential to some system maintenance and
+
+  notification tasks.'
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_enabled
+  vars: {servicename: postfix}
+title: Enable Postfix Service
+warnings: []

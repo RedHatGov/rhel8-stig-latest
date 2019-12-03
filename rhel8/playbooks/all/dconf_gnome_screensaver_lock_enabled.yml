@@ -1,0 +1,40 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Enable GNOME3 Screensaver Lock After Idle Period
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80777-6
+    - CJIS-5.5.5
+    - NIST-800-171-3.1.10
+    - NIST-800-53-AC-11(b)
+    - PCI-DSS-Req-8.1.8
+    - dconf_gnome_screensaver_lock_enabled
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Enable GNOME3 Screensaver Lock After Idle Period
+      ini_file:
+        dest: /etc/dconf/db/local.d/00-security-settings
+        section: org/gnome/desktop/screensaver
+        option: lock-enabled
+        value: 'true'
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Prevent user modification of GNOME lock-enabled
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/screensaver/lock-enabled
+        line: /org/gnome/desktop/screensaver/lock-enabled
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

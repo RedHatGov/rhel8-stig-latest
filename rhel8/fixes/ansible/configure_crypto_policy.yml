@@ -1,0 +1,40 @@
+# platform = multi_platform_fedora,Red Hat Enterprise Linux 8,Oracle Linux 8
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- (xccdf-var var_system_crypto_policy)
+
+- name: Configure System Cryptography Policy
+  lineinfile:
+    path: /etc/crypto-policies/config
+    regexp: ^(?!#)(\S+)$
+    line: '{{ var_system_crypto_policy }}'
+    create: true
+  tags:
+    - configure_crypto_policy
+    - high_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80935-0
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(2)
+    - NIST-800-53-MA-4(6)
+    - NIST-800-53-SC-12(3)
+
+- name: Verify that Crypto Policy is Set (runtime)
+  command: /usr/bin/update-crypto-policies --set {{ var_system_crypto_policy }}
+  tags:
+    - configure_crypto_policy
+    - high_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80935-0
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(2)
+    - NIST-800-53-MA-4(6)
+    - NIST-800-53-SC-12(3)

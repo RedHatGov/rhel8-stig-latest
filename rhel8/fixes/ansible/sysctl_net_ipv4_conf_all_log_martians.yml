@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_conf_all_log_martians_value)
+
+- name: Ensure sysctl net.ipv4.conf.all.log_martians is set
+  sysctl:
+    name: net.ipv4.conf.all.log_martians
+    value: '{{ sysctl_net_ipv4_conf_all_log_martians_value }}'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_net_ipv4_conf_all_log_martians
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-81018-4
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-5(3)
+    - NIST-800-171-3.1.20

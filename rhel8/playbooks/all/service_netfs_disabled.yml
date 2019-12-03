@@ -1,0 +1,47 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable Network File Systems (netfs)
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_netfs_disabled
+    - unknown_severity
+  tasks:
+
+    - name: Disable service netfs
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service netfs
+          systemd:
+            name: netfs.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"netfs.service" in ansible_facts.services'
+
+    - name: Unit Socket Exists - netfs.socket
+      command: systemctl list-unit-files netfs.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+
+    - name: Disable socket netfs
+      systemd:
+        name: netfs.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"netfs.socket" in socket_file_exists.stdout_lines[1]'

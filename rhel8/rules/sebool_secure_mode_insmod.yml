@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>secure_mode_insmod</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>secure_mode_insmod</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P secure_mode_insmod off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>secure_mode_insmod</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool secure_mode_insmod</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>secure_mode_insmod --> off</code>'
+ocil_clause: secure_mode_insmod is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {anssi: NT28(R67)}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: secure_mode_insmod}
+title: Disable the secure_mode_insmod SELinux Boolean
+warnings: []

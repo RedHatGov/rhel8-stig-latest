@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure dnf-plugin-subscription-manager is installed
+  package:
+    name: "dnf-plugin-subscription-manager"
+    state: present

@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install usbguard Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82959-8
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_usbguard_installed
+  tasks:
+
+    - name: Ensure usbguard is installed
+      package:
+        name: usbguard
+        state: present

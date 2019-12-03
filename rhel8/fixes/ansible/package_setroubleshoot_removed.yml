@@ -1,0 +1,17 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure setroubleshoot is removed
+  package:
+    name: setroubleshoot
+    state: absent
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - package_setroubleshoot_removed
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

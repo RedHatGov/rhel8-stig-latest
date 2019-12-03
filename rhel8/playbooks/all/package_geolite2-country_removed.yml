@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall geolite2-country Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82936-6
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_geolite2-country_removed
+  tasks:
+
+    - name: Ensure geolite2-country is removed
+      package:
+        name: geolite2-country
+        state: absent

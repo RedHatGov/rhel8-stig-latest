@@ -1,0 +1,37 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Test for existence /etc/group
+  stat:
+    path: /etc/group
+  register: file_exists
+  tags:
+    - file_permissions_etc_group
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80810-5
+    - NIST-800-53-AC-6
+    - PCI-DSS-Req-8.7.c
+    - CJIS-5.5.2.2
+
+- name: Ensure permission 0644 on /etc/group
+  file:
+    path: /etc/group
+    mode: '0644'
+  when: file_exists.stat is defined and file_exists.stat.exists
+  tags:
+    - file_permissions_etc_group
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80810-5
+    - NIST-800-53-AC-6
+    - PCI-DSS-Req-8.7.c
+    - CJIS-5.5.2.2

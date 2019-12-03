@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install vim Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82956-4
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_vim_installed
+  tasks:
+
+    - name: Ensure vim is installed
+      package:
+        name: vim
+        state: present

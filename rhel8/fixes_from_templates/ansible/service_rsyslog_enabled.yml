@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service rsyslog
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable service rsyslog
+    service:
+      name: "rsyslog"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"rsyslog" in ansible_facts.packages'

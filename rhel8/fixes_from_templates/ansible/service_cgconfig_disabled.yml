@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service cgconfig
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service cgconfig
+    systemd:
+      name: "cgconfig.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"cgconfig.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - cgconfig.socket"
+  command: systemctl list-unit-files cgconfig.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket cgconfig
+  systemd:
+    name: "cgconfig.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"cgconfig.socket" in socket_file_exists.stdout_lines[1]'

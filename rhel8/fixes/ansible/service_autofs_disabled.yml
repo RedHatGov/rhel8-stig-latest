@@ -1,0 +1,78 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service autofs
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service autofs
+      systemd:
+        name: autofs.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"autofs.service" in ansible_facts.services'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_autofs_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80873-3
+    - NIST-800-53-AC-19(a)
+    - NIST-800-53-AC-19(d)
+    - NIST-800-53-AC-19(e)
+    - NIST-800-53-IA-3
+    - NIST-800-171-3.4.6
+
+- name: Unit Socket Exists - autofs.socket
+  command: systemctl list-unit-files autofs.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_autofs_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80873-3
+    - NIST-800-53-AC-19(a)
+    - NIST-800-53-AC-19(d)
+    - NIST-800-53-AC-19(e)
+    - NIST-800-53-IA-3
+    - NIST-800-171-3.4.6
+
+- name: Disable socket autofs
+  systemd:
+    name: autofs.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when:
+    - '"autofs.socket" in socket_file_exists.stdout_lines[1]'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_autofs_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80873-3
+    - NIST-800-53-AC-19(a)
+    - NIST-800-53-AC-19(d)
+    - NIST-800-53-AC-19(e)
+    - NIST-800-53-IA-3
+    - NIST-800-171-3.4.6

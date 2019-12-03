@@ -1,0 +1,38 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Test for existence /etc/cron.monthly/
+  stat:
+    path: /etc/cron.monthly/
+  register: file_exists
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_owner_cron_monthly
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82260-1
+    - NIST-800-53-AC-6
+    - NIST-800-53-AC-17
+
+- name: Ensure owner 0 on /etc/cron.monthly/
+  file:
+    path: /etc/cron.monthly/
+    owner: '0'
+  when:
+    - file_exists.stat is defined and file_exists.stat.exists
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - file_owner_cron_monthly
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82260-1
+    - NIST-800-53-AC-6
+    - NIST-800-53-AC-17

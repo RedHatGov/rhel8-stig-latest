@@ -1,0 +1,61 @@
+description: "Red Hat Enterprise Linux 8 natively supports partition encryption through\
+  \ the\nLinux Unified Key Setup-on-disk-format (LUKS) technology. The easiest way\
+  \ to\nencrypt a partition is during installation time.\n<br /><br />\nFor manual\
+  \ installations, select the <tt>Encrypt</tt> checkbox during\npartition creation\
+  \ to encrypt the partition. When this\noption is selected the system will prompt\
+  \ for a passphrase to use in\ndecrypting the partition. The passphrase will subsequently\
+  \ need to be entered manually\nevery time the system boots.\n<br /><br />\nFor automated/unattended\
+  \ installations, it is possible to use Kickstart by adding\nthe <tt>--encrypted</tt>\
+  \ and <tt>--passphrase=</tt> options to the definition of each partition to be\n\
+  encrypted. For example, the following line would encrypt the root partition:\n<pre>part\
+  \ / --fstype=ext4 --size=100 --onpart=hda1 --encrypted --passphrase=<i>PASSPHRASE</i></pre>\n\
+  Any <i>PASSPHRASE</i> is stored in the Kickstart in plaintext, and the Kickstart\n\
+  must then be protected accordingly.\nOmitting the <tt>--passphrase=</tt> option\
+  \ from the partition definition will cause the\ninstaller to pause and interactively\
+  \ ask for the passphrase during installation.\n<br /><br />\nBy default, the <tt>Anaconda</tt>\
+  \ installer uses <tt>aes-xts-plain64</tt> cipher\nwith a minimum <tt>512</tt> bit\
+  \ key size which should be compatible with FIPS enabled.\n<br /><br />\nDetailed\
+  \ information on encrypting partitions using LUKS or LUKS ciphers can be found on\n\
+  the Red Hat Enterprise Linux 8 Documentation web site:<br />\n\n    \n    <a xmlns='http://www.w3.org/1999/xhtml'\
+  \ href='https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Encryption.html'>https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Encryption.html</a>."
+identifiers: {cce: 80789-1}
+ocil: 'Check the system partitions to determine if they are encrypted with the following
+  command:
+
+  <pre>blkid</pre>
+
+  <br /><br />
+
+  Output will be similar to:
+
+  <pre>/dev/sda1: UUID=" ab12c3de-4f56-789a-8f33-3850cc8ce3a2
+
+  " TYPE="crypto_LUKS"
+
+  /dev/sda2: UUID=" bc98d7ef-6g54-321h-1d24-9870de2ge1a2
+
+  " TYPE="crypto_LUKS"</pre>
+
+  <br /><br />
+
+  Pseudo-file systems, such as /proc, /sys, and tmpfs, are not required to use disk
+  encryption and are not a finding.'
+ocil_clause: partitions do not have a type of crypto_LUKS
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,ol7,ol8,rhv4
+rationale: 'The risk of a system''s physical compromise, particularly mobile systems
+  such as
+
+  laptops, places its data at risk of compromise.  Encrypting this data mitigates
+
+  the risk of its loss if the system is lost.'
+references: {cis-csc: '13,14', cobit5: 'APO01.06,BAI02.01,BAI06.01,DSS04.07,DSS05.03,DSS05.04,DSS05.07,DSS06.02,DSS06.06',
+  cui: 3.13.16, disa: '1199,2475,2476', hipaa: '164.308(a)(1)(ii)(D),164.308(b)(1),164.310(d),164.312(a)(1),164.312(a)(2)(iii),164.312(a)(2)(iv),164.312(b),164.312(c),164.314(b)(2)(i),164.312(d)',
+  isa-62443-2013: 'SR 3.4,SR 4.1,SR 5.2', iso27001-2013: 'A.10.1.1,A.11.1.4,A.11.1.5,A.11.2.1,A.13.1.1,A.13.1.3,A.13.2.1,A.13.2.3,A.13.2.4,A.14.1.2,A.14.1.3,A.6.1.2,A.7.1.1,A.7.1.2,A.7.3.1,A.8.2.2,A.8.2.3,A.9.1.1,A.9.1.2,A.9.2.3,A.9.4.1,A.9.4.4,A.9.4.5',
+  nist: 'SC-13,SC-28(1),AU-9(3)', nist-csf: 'PR.DS-1,PR.DS-5', srg: 'SRG-OS-000405-GPOS-00184,SRG-OS-000185-GPOS-00079,SRG-OS-000404-GPOS-00183',
+  vmmsrg: 'SRG-OS-000404-VMM-001650,SRG-OS-000405-VMM-001660'}
+severity: high
+template: null
+title: Encrypt Partitions
+warnings: []

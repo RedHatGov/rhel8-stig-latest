@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service nfslock
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service nfslock
+      systemd:
+        name: nfslock.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"nfslock.service" in ansible_facts.services'
+  tags:
+    - service_nfslock_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Unit Socket Exists - nfslock.socket
+  command: systemctl list-unit-files nfslock.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  tags:
+    - service_nfslock_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Disable socket nfslock
+  systemd:
+    name: nfslock.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when: '"nfslock.socket" in socket_file_exists.stdout_lines[1]'
+  tags:
+    - service_nfslock_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

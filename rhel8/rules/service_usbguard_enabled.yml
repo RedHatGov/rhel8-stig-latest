@@ -1,0 +1,25 @@
+description: 'The USBGuard service should be enabled.
+
+
+  The <code>usbguard</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable usbguard.service</pre>'
+identifiers: {cce: 82853-3}
+ocil: ' Run the following command to determine the current status of the <code>usbguard</code>
+  service: <pre>$ systemctl is-active usbguard</pre> If the service is running, it
+  should return the following: <pre>active</pre>'
+ocil_clause: the service is not enabled
+oval_external_content: null
+platform: null
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'The <tt>usbguard</tt> service must be running in order to
+
+  enforce the USB device authorization policy for all USB devices.'
+references: {ospp: FMT_SMF_EXT.1, srg: SRG-OS-000378-GPOS-00163}
+severity: medium
+template:
+  backends: {}
+  name: service_enabled
+  vars: {servicename: usbguard}
+title: Enable the USBGuard Service
+warnings: []

@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure geolite2-country is removed
+  package:
+    name: "geolite2-country"
+    state: absent

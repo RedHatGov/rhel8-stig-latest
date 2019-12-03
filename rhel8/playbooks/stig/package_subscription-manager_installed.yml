@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install subscription-manager Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82316-1
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_subscription-manager_installed
+  tasks:
+
+    - name: Ensure subscription-manager is installed
+      package:
+        name: subscription-manager
+        state: present

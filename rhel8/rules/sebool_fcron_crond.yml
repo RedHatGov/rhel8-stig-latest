@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>fcron_crond</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>fcron_crond</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P fcron_crond off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>fcron_crond</code> SELinux boolean
+  is disabled:
+
+  <pre>$ getsebool fcron_crond</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>fcron_crond --> off</code>'
+ocil_clause: fcron_crond is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: fcron_crond}
+title: Disable the fcron_crond SELinux Boolean
+warnings: []

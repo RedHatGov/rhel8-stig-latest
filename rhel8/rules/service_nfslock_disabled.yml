@@ -1,0 +1,31 @@
+description: 'The Network File System Lock (nfslock) service starts the required
+
+  remote procedure call (RPC) processes which allow clients to lock files on the
+
+  server. If the local system is not configured to mount NFS filesystems then
+
+  this service should be disabled.
+
+
+  The <code>nfslock</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable nfslock.service</pre>
+
+  The <code>nfslock</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask nfslock.service</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: nfs-utils, servicename: nfslock}
+title: Disable Network File System Lock Service (nfslock)
+warnings: []

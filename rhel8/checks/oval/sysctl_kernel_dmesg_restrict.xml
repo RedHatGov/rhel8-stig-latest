@@ -1,0 +1,107 @@
+<def-group>
+  <definition class="compliance" id="sysctl_kernel_dmesg_restrict" version="3">
+    <metadata>
+      <title>Kernel "kernel.dmesg_restrict" Parameter Configuration and Runtime Check</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The "kernel.dmesg_restrict" kernel parameter should be set to the appropriate value in both system configuration and system runtime.</description>
+    </metadata>
+    <criteria operator="AND">
+      <extend_definition comment="kernel.dmesg_restrict configuration setting check" definition_ref="sysctl_static_kernel_dmesg_restrict" />
+      <extend_definition comment="kernel.dmesg_restrict runtime setting check" definition_ref="sysctl_runtime_kernel_dmesg_restrict" />
+    </criteria>
+  </definition>
+</def-group><def-group>
+  <definition class="compliance" id="sysctl_runtime_kernel_dmesg_restrict" version="3">
+    <metadata>
+      <title>Kernel "kernel.dmesg_restrict" Parameter Runtime Check</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The kernel "kernel.dmesg_restrict" parameter should be set to "1" in system runtime.</description>
+    </metadata>
+    <criteria operator="AND">
+      <criterion comment="kernel runtime parameter kernel.dmesg_restrict set to 1" test_ref="test_sysctl_runtime_kernel_dmesg_restrict" />
+    </criteria>
+  </definition>
+
+  <unix:sysctl_test check="all" check_existence="all_exist" comment="kernel runtime parameter kernel.dmesg_restrict set to 1" id="test_sysctl_runtime_kernel_dmesg_restrict" version="1">
+    <unix:object object_ref="object_sysctl_runtime_kernel_dmesg_restrict" />
+    <unix:state state_ref="state_sysctl_runtime_kernel_dmesg_restrict" />
+  </unix:sysctl_test>
+
+  <unix:sysctl_object id="object_sysctl_runtime_kernel_dmesg_restrict" version="1">
+    <unix:name>kernel.dmesg_restrict</unix:name>
+  </unix:sysctl_object>
+
+  <unix:sysctl_state id="state_sysctl_runtime_kernel_dmesg_restrict" version="1">
+    <unix:value datatype="int" operation="equals">1</unix:value>
+  </unix:sysctl_state>
+</def-group><def-group>
+  <definition class="compliance" id="sysctl_static_kernel_dmesg_restrict" version="3">
+    <metadata>
+      <title>Kernel "kernel.dmesg_restrict" Parameter Configuration Check</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The kernel "kernel.dmesg_restrict" parameter should be set to "1" in the system configuration.</description>
+    </metadata>
+
+
+    <criteria operator="OR">
+      <criterion comment="kernel static parameter kernel.dmesg_restrict set to 1 in /etc/sysctl.conf" test_ref="test_static_sysctl_kernel_dmesg_restrict" />
+      <!-- see sysctl.d(5) -->
+      <criterion comment="kernel static parameter kernel.dmesg_restrict set to 1 in /etc/sysctl.d/*.conf" test_ref="test_static_etc_sysctld_kernel_dmesg_restrict" />
+      <criterion comment="kernel static parameter kernel.dmesg_restrict set to 1 in /run/sysctl.d/*.conf" test_ref="test_static_run_sysctld_kernel_dmesg_restrict" />
+      <criterion comment="kernel static parameter kernel.dmesg_restrict set to 1 in /usr/lib/sysctl.d/*.conf" test_ref="test_static_usr_lib_sysctld_kernel_dmesg_restrict" />
+    </criteria>
+
+  </definition>
+
+
+
+  <ind:textfilecontent54_test check="all" check_existence="all_exist" comment="kernel.dmesg_restrict static configuration" id="test_static_sysctl_kernel_dmesg_restrict" version="1">
+    <ind:object object_ref="object_static_sysctl_kernel_dmesg_restrict" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_test check="all" comment="kernel.dmesg_restrict static configuration in /etc/sysctl.d/*.conf" id="test_static_etc_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:object object_ref="object_static_etc_sysctld_kernel_dmesg_restrict" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_test check="all" comment="kernel.dmesg_restrict static configuration in /etc/sysctl.d/*.conf" id="test_static_run_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:object object_ref="object_static_run_sysctld_kernel_dmesg_restrict" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_test check="all" comment="kernel.dmesg_restrict static configuration in /etc/sysctl.d/*.conf" id="test_static_usr_lib_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:object object_ref="object_static_usr_lib_sysctld_kernel_dmesg_restrict" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_object id="object_static_sysctl_kernel_dmesg_restrict" version="1">
+    <ind:filepath>/etc/sysctl.conf</ind:filepath>
+    <ind:pattern operation="pattern match">^[\s]*kernel.dmesg_restrict[\s]*=[\s]*1[\s]*$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+  <ind:textfilecontent54_object id="object_static_etc_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:path>/etc/sysctl.d</ind:path>
+    <ind:filename operation="pattern match">^.*\.conf$</ind:filename>
+    <ind:pattern operation="pattern match">^[\s]*kernel.dmesg_restrict[\s]*=[\s]*1[\s]*$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+  <ind:textfilecontent54_object id="object_static_run_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:path>/run/sysctl.d</ind:path>
+    <ind:filename operation="pattern match">^.*\.conf$</ind:filename>
+    <ind:pattern operation="pattern match">^[\s]*kernel.dmesg_restrict[\s]*=[\s]*1[\s]*$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+  <ind:textfilecontent54_object id="object_static_usr_lib_sysctld_kernel_dmesg_restrict" version="1">
+    <ind:path>/usr/lib/sysctl.d</ind:path>
+    <ind:filename operation="pattern match">^.*\.conf$</ind:filename>
+    <ind:pattern operation="pattern match">^[\s]*kernel.dmesg_restrict[\s]*=[\s]*1[\s]*$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+</def-group>

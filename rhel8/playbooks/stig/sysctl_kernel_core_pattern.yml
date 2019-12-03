@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable storing core dumps
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82215-5
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - sysctl_kernel_core_pattern
+    - unknown_severity
+  tasks:
+
+    - name: Ensure sysctl kernel.core_pattern is set to |/bin/false
+      sysctl:
+        name: kernel.core_pattern
+        value: '|/bin/false'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

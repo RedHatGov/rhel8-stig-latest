@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>xend_run_blktap</tt> is enabled.
+
+  If this setting is disabled, it should be enabled.
+
+
+  To enable the <code>xend_run_blktap</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P xend_run_blktap on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>xend_run_blktap</code> SELinux
+  boolean is enabled:
+
+  <pre>$ getsebool xend_run_blktap</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>xend_run_blktap --> on</code>'
+ocil_clause: xend_run_blktap is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: xend_run_blktap}
+title: Enable the xend_run_blktap SELinux Boolean
+warnings: []

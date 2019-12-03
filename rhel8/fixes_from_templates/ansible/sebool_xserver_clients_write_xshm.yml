@@ -1,0 +1,19 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+
+
+- (xccdf-var var_xserver_clients_write_xshm)
+
+- name: Ensure libsemanage-python installed
+  package:
+    name: libsemanage-python
+    state: present
+
+- name: Set SELinux boolean xserver_clients_write_xshm accordingly
+  seboolean:
+    name: xserver_clients_write_xshm
+    state: "{{ var_xserver_clients_write_xshm }}"
+    persistent: yes

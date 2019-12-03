@@ -1,0 +1,30 @@
+description: 'The <code>nss-tools</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install nss-tools</pre>'
+identifiers: {cce: 82396-3}
+ocil: 'Run the following command to determine if the <code>nss-tools</code> package
+  is installed: <pre>$ rpm -q nss-tools</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: 'Network Security Services (NSS) is a set of libraries designed to
+
+  support cross-platform development of security-enabled client and
+
+  server applications. Install the <tt>nss-tools</tt> package
+
+  to install command-line tools to manipulate the NSS certificate
+
+  and key database.'
+references: {ospp: FMT_SMF_EXT.1}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: nss-tools}
+title: Ensure nss-tools is installed
+warnings: []

@@ -1,0 +1,42 @@
+description: 'Crypto Policies provide a centralized control over crypto algorithms
+  usage of many packages.
+
+  OpenSSL is supported by crypto policy, but the OpenSSL configuration may be
+
+  set up to ignore it.
+
+  To check that Crypto Policies settings are configured correctly, you have to examine
+  the OpenSSL config file
+
+  available under <tt>/etc/pki/tls/openssl.cnf</tt>.
+
+  This file has the <tt>ini</tt> format, and it enables crypto policy support
+
+  if there is a <tt>[ crypto_policy ]</tt> section that contains the <tt>.include
+  /etc/crypto-policies/back-ends/openssl.config</tt> directive.'
+identifiers: {cce: 80938-4}
+ocil: 'To verify that OpenSSL uses the system crypro policy, check out that the OpenSSL
+  config file
+
+  <pre>/etc/pki/tls/openssl.cnf</pre> contains the <pre>[ crypto_policy ]</pre> section
+  with the
+
+  <pre>.include /etc/crypto-policies/back-ends/openssl.config</pre> directive:
+
+  <pre>grep ''\.include\s* /etc/crypto-policies/back-ends/openssl.config$'' /etc/pki/tls/openssl.cnf</pre>.'
+ocil_clause: 'the OpenSSL config file doesn''t contain the whole section,
+
+  or that the section doesn''t have the <pre>.include /etc/crypto-policies/back-ends/openssl.config</pre>
+  directive'
+oval_external_content: null
+platform: null
+prodtype: fedora,rhel8,ol8,ocp4
+rationale: 'Overriding the system crypto policy makes the behavior of the Java runtime
+  violates expectations,
+
+  and makes system configuration more fragmented.'
+references: {nist: 'SC-12(2),SC-12(3)', srg: SRG-OS-000250-GPOS-00093}
+severity: medium
+template: null
+title: Configure OpenSSL library to use System Crypto Policy
+warnings: []

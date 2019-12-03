@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv6_conf_all_accept_source_route_value)
+
+- name: Ensure sysctl net.ipv6.conf.all.accept_source_route is set
+  sysctl:
+    name: net.ipv6.conf.all.accept_source_route
+    value: '{{ sysctl_net_ipv6_conf_all_accept_source_route_value }}'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_net_ipv6_conf_all_accept_source_route
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-81013-5
+    - NIST-800-53-AC-4
+    - NIST-800-171-3.1.20

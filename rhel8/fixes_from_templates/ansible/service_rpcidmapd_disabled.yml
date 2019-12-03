@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service rpcidmapd
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service rpcidmapd
+    systemd:
+      name: "rpcidmapd.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"rpcidmapd.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - rpcidmapd.socket"
+  command: systemctl list-unit-files rpcidmapd.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket rpcidmapd
+  systemd:
+    name: "rpcidmapd.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"rpcidmapd.socket" in socket_file_exists.stdout_lines[1]'

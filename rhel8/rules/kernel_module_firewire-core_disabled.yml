@@ -1,0 +1,41 @@
+description: 'The IEEE 1394 (FireWire) is a serial bus standard for
+
+  high-speed real-time communication.
+
+
+  To configure the system to prevent the <code>firewire-core</code>
+
+  kernel module from being loaded, add the following line to a file in the directory
+  <code>/etc/modprobe.d</code>:
+
+  <pre>install firewire-core /bin/true</pre>'
+identifiers: {cce: 82005-0}
+ocil: '
+
+  If the system is configured to prevent the loading of the <code>firewire-core</code>
+  kernel module,
+
+  it will contain lines inside any file in <code>/etc/modprobe.d</code> or the deprecated<code>/etc/modprobe.conf</code>.
+
+  These lines instruct the module loading system to run another program (such as <code>/bin/true</code>)
+  upon a module <code>install</code> event.
+
+  Run the following command to search for such lines in all files in <code>/etc/modprobe.d</code>
+  and the deprecated <code>/etc/modprobe.conf</code>:
+
+  <pre>$ grep -r firewire-core /etc/modprobe.conf /etc/modprobe.d</pre>'
+ocil_clause: no line is returned
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,fedora,ol8,ocp4
+rationale: 'Disabling FireWire protects the system against exploitation of any
+
+  flaws in its implementation.'
+references: {ospp: FMT_SMF_EXT.1, srg: SRG-OS-000095-GPOS-00049}
+severity: medium
+template:
+  backends: {}
+  name: kernel_module_disabled
+  vars: {kernmodule: firewire-core}
+title: Disable IEEE 1394 (FireWire) Support
+warnings: []

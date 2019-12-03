@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>gluster_export_all_ro</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>gluster_export_all_ro</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P gluster_export_all_ro off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>gluster_export_all_ro</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool gluster_export_all_ro</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>gluster_export_all_ro --> off</code>'
+ocil_clause: gluster_export_all_ro is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: gluster_export_all_ro}
+title: Disable the gluster_export_all_ro SELinux Boolean
+warnings: []

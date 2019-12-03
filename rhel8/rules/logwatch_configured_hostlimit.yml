@@ -1,0 +1,21 @@
+description: 'On a central logserver, you want Logwatch to summarize all syslog entries,
+
+  including those which did not originate on the logserver itself. The
+
+  <tt>HostLimit</tt> setting tells Logwatch to report on all hosts, not just
+
+  the one on which it is running.
+
+  <pre> HostLimit = no </pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template: null
+title: Configure Logwatch HostLimit Line
+warnings: []

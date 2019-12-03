@@ -1,0 +1,29 @@
+description: 'The Cockpit Management Server (<tt>cockpit</tt>) provides a web based
+
+  login and management framework.
+
+
+  The <code>cockpit</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable cockpit.service</pre>
+
+  The <code>cockpit</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask cockpit.service</pre>'
+identifiers: {}
+ocil: 'To check the status of cockpit run the following command:
+
+  <pre>$ systemctl status cockpit.service cockpit.socket</pre>'
+ocil_clause: it is not disabled
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8,ol7,ol8
+rationale: Cockpit provides a form of remote login.
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: cockpit, servicename: cockpit}
+title: Disable Cockpit Management Server
+warnings: []

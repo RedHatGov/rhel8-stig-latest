@@ -1,0 +1,50 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Does prelink file exist
+  stat:
+    path: /etc/sysconfig/prelink
+  register: prelink_exists
+  tags:
+    - disable_prelink
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80787-5
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-53-SC-13
+    - NIST-800-53-SC-28
+    - NIST-800-53-SI-7
+    - NIST-800-53-IA-7
+    - NIST-800-171-3.13.11
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.1.3
+
+- name: disable prelinking
+  lineinfile:
+    path: /etc/sysconfig/prelink
+    regexp: ^PRELINKING=
+    line: PRELINKING=no
+  when: prelink_exists.stat.exists
+  tags:
+    - disable_prelink
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80787-5
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-53-SC-13
+    - NIST-800-53-SC-28
+    - NIST-800-53-SI-7
+    - NIST-800-53-IA-7
+    - NIST-800-171-3.13.11
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.1.3

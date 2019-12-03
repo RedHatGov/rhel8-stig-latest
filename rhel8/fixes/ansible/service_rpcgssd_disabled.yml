@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service rpcgssd
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service rpcgssd
+      systemd:
+        name: rpcgssd.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"rpcgssd.service" in ansible_facts.services'
+  tags:
+    - service_rpcgssd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Unit Socket Exists - rpcgssd.socket
+  command: systemctl list-unit-files rpcgssd.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  tags:
+    - service_rpcgssd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Disable socket rpcgssd
+  systemd:
+    name: rpcgssd.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when: '"rpcgssd.socket" in socket_file_exists.stdout_lines[1]'
+  tags:
+    - service_rpcgssd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

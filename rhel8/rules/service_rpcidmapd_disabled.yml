@@ -1,0 +1,29 @@
+description: 'The rpcidmapd service is used to map user names and groups to UID
+
+  and GID numbers on NFSv4 mounts. If NFS is not in use on the local system then
+
+  this service should be disabled.
+
+
+  The <code>rpcidmapd</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable rpcidmapd.service</pre>
+
+  The <code>rpcidmapd</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask rpcidmapd.service</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora
+rationale: ''
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {packagename: nfs-utils, servicename: rpcidmapd}
+title: Disable RPC ID Mapping Service (rpcidmapd)
+warnings: []

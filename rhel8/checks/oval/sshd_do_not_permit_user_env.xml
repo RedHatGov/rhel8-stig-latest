@@ -1,0 +1,53 @@
+
+<def-group>
+  <definition class="compliance" id="sshd_do_not_permit_user_env" version="1">
+    <metadata>
+      <title>Do Not Allow SSH Environment Options</title>
+<affected family="unix">
+<platform>Red Hat Enterprise Linux 8</platform>
+</affected>
+      <description>Look for parameter 'PermitUserEnvironment' with value 'yes' in '/etc/ssh/sshd_config'</description>
+    </metadata>
+    <criteria comment="sshd is configured correctly or is not installed"
+    operator="OR"><criteria comment="sshd is not installed" operator="AND">
+        <extend_definition comment="sshd is not required or requirement is unset"
+        definition_ref="sshd_not_required_or_unset" />
+        
+        <extend_definition comment="rpm package openssh-server removed"
+        definition_ref="package_openssh-server_removed" />
+        
+      </criteria><criteria comment="sshd is installed and configured" operator="AND">
+        <extend_definition comment="sshd is required or requirement is unset"
+        definition_ref="sshd_required_or_unset" />
+        
+        <extend_definition comment="rpm package openssh-server installed"
+        definition_ref="package_openssh-server_installed" />
+        
+      
+    <criteria comment="sshd is configured correctly"
+    operator="OR">
+      <criterion comment="Check the PermitUserEnvironment in /etc/ssh/sshd_config"
+      test_ref="test_sshd_do_not_permit_user_env" />
+    </criteria>
+    </criteria> 
+    </criteria>
+  </definition>
+  
+  <ind:textfilecontent54_test check="all" check_existence="all_exist"
+  comment="tests the value of PermitUserEnvironment setting in the /etc/ssh/sshd_config file"
+  id="test_sshd_do_not_permit_user_env" version="1">
+  <ind:object object_ref="obj_sshd_do_not_permit_user_env" />
+  <ind:state state_ref="state_sshd_do_not_permit_user_env" />
+  </ind:textfilecontent54_test>
+  
+  <ind:textfilecontent54_object id="obj_sshd_do_not_permit_user_env" version="1">
+    <ind:filepath>/etc/ssh/sshd_config</ind:filepath>
+    <ind:pattern operation="pattern match">^[ \t]*(?i)PermitUserEnvironment(?-i)[ \t]+(.+?)[ \t]*(?:$|#)</ind:pattern>
+    <ind:instance operation="greater than or equal" datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+  
+  <ind:textfilecontent54_state id="state_sshd_do_not_permit_user_env" version="1">
+    <ind:subexpression datatype="string" operation="pattern match">^yes$</ind:subexpression>
+  </ind:textfilecontent54_state>
+
+</def-group>

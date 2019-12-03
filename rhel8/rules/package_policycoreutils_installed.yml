@@ -1,0 +1,33 @@
+description: 'The <code>policycoreutils</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install policycoreutils</pre>'
+identifiers: {cce: 82976-2}
+ocil: 'Run the following command to determine if the <code>policycoreutils</code>
+  package is installed: <pre>$ rpm -q policycoreutils</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: "Security-enhanced Linux is a feature of the Linux kernel and a number\
+  \ of utilities\nwith enhanced security functionality designed to add mandatory access\
+  \ controls to Linux.\nThe Security-enhanced Linux kernel contains new architectural\
+  \ components originally\ndeveloped to improve security of the Flask operating system.\
+  \ These architectural components\nprovide general support for the enforcement of\
+  \ many kinds of mandatory access control\npolicies, including those based on the\
+  \ concepts of Type Enforcement, Role-based Access\nControl, and Multi-level Security.\
+  \ \n\n<tt>policycoreutils</tt> contains the policy core utilities that are required\
+  \ for\nbasic operation of an SELinux-enabled system. These utilities include <tt>load_policy</tt>\n\
+  to load SELinux policies, <tt>setfiles</tt> to label filesystems, <tt>newrole</tt>\
+  \ to\nswitch roles, and <tt>run_init</tt> to run <tt>/etc/init.d</tt> scripts in\
+  \ the proper\ncontext."
+references: {srg: SRG-OS-000480-GPOS-00227}
+severity: high
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: policycoreutils}
+title: Install policycoreutils Package
+warnings: []

@@ -1,0 +1,29 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable DCCP Support
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80833-7
+    - CJIS-5.10.1
+    - NIST-800-171-3.4.6
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - kernel_module_dccp_disabled
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+  tasks:
+
+    - name: Ensure kernel module 'dccp' is disabled
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/dccp.conf
+        regexp: dccp
+        line: install dccp /bin/true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

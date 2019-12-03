@@ -1,0 +1,31 @@
+description: 'The <tt>nails</tt> service is used to run McAfee VirusScan Enterprise
+
+  for Linux and McAfee Host-based Security System (HBSS) services.
+
+
+  The <code>nails</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable nails.service</pre>'
+identifiers: {}
+ocil: ' Run the following command to determine the current status of the <code>nails</code>
+  service: <pre>$ systemctl is-active nails</pre> If the service is running, it should
+  return the following: <pre>active</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: 'Virus scanning software can be used to detect if a system has been compromised
+  by
+
+  computer viruses, as well as to limit their spread to other systems.'
+references: {cis-csc: '12,13,14,4,7,8', cobit5: 'APO01.06,APO13.02,BAI02.01,BAI06.01,DSS04.07,DSS05.01,DSS05.02,DSS05.03,DSS06.06',
+  disa: '366,1239,1668', isa-62443-2009: '4.3.4.3.8,4.4.3.2', isa-62443-2013: 'SR
+    3.2,SR 3.3,SR 3.4,SR 4.1', iso27001-2013: 'A.12.2.1,A.14.2.8,A.8.2.3', nist: 'SC-28,SI-3,SI-3(1)(ii)',
+  nist-csf: 'DE.CM-4,DE.DP-3,PR.DS-1', srg: SRG-OS-000480-GPOS-00227}
+severity: medium
+template:
+  backends: {}
+  name: service_enabled
+  vars: {servicename: nails}
+title: Enable nails Service
+warnings: []

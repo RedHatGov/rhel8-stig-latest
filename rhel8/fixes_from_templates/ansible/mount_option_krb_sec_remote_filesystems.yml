@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = medium
+
+- name: "Get nfs and nfs4 mount points, that don't have sec=krb5:krb5i:krb5p"
+  # 'no' before MOUNTOPTION isn't omission, it means a negation
+  command: findmnt --fstab --types nfs,nfs4 -O nosec=krb5:krb5i:krb5p -n
+  register: points_register
+  check_mode: no
+  changed_when: False
+  # if no nfs/nfs4 entries are in /etc/fstab, findmnt command returns 1
+  failed_when: False
+
+- name: "Add sec=krb5:krb5i:krb5p to nfs and nfs4 mount points"
+  mount:
+    path: "{{ item.split()[0] }}"
+    src: "{{ item.split()[1] }}"
+    fstype: "{{ item.split()[2] }}"
+    state: mounted
+    opts: "{{ item.split()[3] }},sec=krb5:krb5i:krb5p"
+  when: (points_register.stdout | length > 0)
+  with_items: "{{ points_register.stdout_lines }}"

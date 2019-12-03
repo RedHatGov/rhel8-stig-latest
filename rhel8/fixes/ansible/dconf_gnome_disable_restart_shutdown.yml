@@ -1,0 +1,40 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Disable the GNOME3 Login Restart and Shutdown Buttons
+  ini_file:
+    dest: /etc/dconf/db/gdm.d/00-security-settings
+    section: org/gnome/login-screen
+    option: disable-restart-buttons
+    value: 'true'
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - dconf_gnome_disable_restart_shutdown
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6
+    - NIST-800-171-3.1.2
+
+- name: Prevent user modification of GNOME disablement of Login Restart and Shutdown
+    Buttons
+  lineinfile:
+    path: /etc/dconf/db/gdm.d/locks/00-security-settings-lock
+    regexp: ^/org/gnome/login-screen/disable-restart-buttons
+    line: /org/gnome/login-screen/disable-restart-buttons
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - dconf_gnome_disable_restart_shutdown
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-AC-6
+    - NIST-800-171-3.1.2

@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_domain_fd_use" version="1">
+    <metadata>
+      <title>SELinux "domain_fd_use" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "domain_fd_use" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="domain_fd_use is configured correctly" test_ref="test_sebool_domain_fd_use" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="domain_fd_use is configured correctly" id="test_sebool_domain_fd_use" version="1">
+    <linux:object object_ref="object_sebool_domain_fd_use" />
+    <linux:state state_ref="state_sebool_domain_fd_use" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_domain_fd_use" version="1">
+    <linux:name>domain_fd_use</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_domain_fd_use" version="1">
+    <linux:name>domain_fd_use</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_domain_fd_use"/>
+      <linux:pending_status datatype="boolean" var_ref="var_domain_fd_use"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for domain_fd_use" datatype="boolean" id="var_domain_fd_use" version="1" />
+  
+</def-group>

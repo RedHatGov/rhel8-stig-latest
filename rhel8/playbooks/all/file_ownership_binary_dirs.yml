@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora
+# reboot = false
+# strategy = restrict
+# complexity = medium
+# disruption = medium
+- name: Verify that System Executables Have Root Ownership
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80806-3
+    - NIST-800-53-AC-6
+    - file_ownership_binary_dirs
+    - medium_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Read list of system executables without root ownership
+      command: find /bin/ /usr/bin/ /usr/local/bin/ /sbin/ /usr/sbin/ /usr/local/sbin/
+        /usr/libexec \! -user root
+      register: no_root_system_executables
+      changed_when: false
+      failed_when: false
+      check_mode: false
+
+    - name: Set ownership to root of system executables
+      file:
+        path: '{{ item }}'
+        owner: root
+      with_items: '{{ no_root_system_executables.stdout_lines }}'
+      when: no_root_system_executables.stdout_lines | length > 0

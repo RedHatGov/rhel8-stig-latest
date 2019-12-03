@@ -1,0 +1,24 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable RDS Support
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - kernel_module_rds_disabled
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - unknown_severity
+  tasks:
+
+    - name: Ensure kernel module 'rds' is disabled
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/rds.conf
+        regexp: rds
+        line: install rds /bin/true

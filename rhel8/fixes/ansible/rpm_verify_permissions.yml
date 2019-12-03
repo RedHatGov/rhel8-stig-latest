@@ -1,0 +1,85 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = high
+# disruption = medium
+- name: Read list of files with incorrect permissions
+  command: rpm -Va --nodeps --nosignature --nofiledigest --nosize --nomtime --nordev
+    --nocaps --nolinkto --nouser --nogroup
+  args:
+    warn: false
+  register: files_with_incorrect_permissions
+  failed_when: files_with_incorrect_permissions.rc > 1
+  changed_when: false
+  check_mode: false
+  tags:
+    - rpm_verify_permissions
+    - high_severity
+    - restrict_strategy
+    - high_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80858-4
+    - NIST-800-53-AC-6
+    - NIST-800-53-AU-9(1)
+    - NIST-800-53-AU-9(3)
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-171-3.3.8
+    - NIST-800-171-3.4.1
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.4.1
+
+- name: Create list of packages
+  command: rpm -qf "{{ item }}"
+  args:
+    warn: false
+  with_items: '{{ files_with_incorrect_permissions.stdout_lines | map(''regex_findall'',
+    ''^[.]+[M]+.* (\/.*)'', ''\1'') | map(''join'') | select(''match'', ''(\/.*)'')
+    | list | unique }}'
+  register: list_of_packages
+  changed_when: false
+  check_mode: false
+  when: (files_with_incorrect_permissions.stdout_lines | length > 0)
+  tags:
+    - rpm_verify_permissions
+    - high_severity
+    - restrict_strategy
+    - high_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80858-4
+    - NIST-800-53-AC-6
+    - NIST-800-53-AU-9(1)
+    - NIST-800-53-AU-9(3)
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-171-3.3.8
+    - NIST-800-171-3.4.1
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.4.1
+
+- name: Correct file permissions with RPM
+  command: rpm --setperms '{{ item }}'
+  args:
+    warn: false
+  with_items: '{{ list_of_packages.results | map(attribute=''stdout_lines'') | list
+    | unique }}'
+  when: (files_with_incorrect_permissions.stdout_lines | length > 0)
+  tags:
+    - rpm_verify_permissions
+    - high_severity
+    - restrict_strategy
+    - high_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80858-4
+    - NIST-800-53-AC-6
+    - NIST-800-53-AU-9(1)
+    - NIST-800-53-AU-9(3)
+    - NIST-800-53-CM-6(d)
+    - NIST-800-53-CM-6(3)
+    - NIST-800-171-3.3.8
+    - NIST-800-171-3.4.1
+    - PCI-DSS-Req-11.5
+    - CJIS-5.10.4.1

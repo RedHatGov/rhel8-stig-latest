@@ -1,0 +1,28 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_tcp_syncookies_value)
+
+- name: Ensure sysctl net.ipv4.tcp_syncookies is set
+  sysctl:
+    name: net.ipv4.tcp_syncookies
+    value: '{{ sysctl_net_ipv4_tcp_syncookies_value }}'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_net_ipv4_tcp_syncookies
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-80923-6
+    - NIST-800-53-AC-4
+    - NIST-800-53-SC-5(1)(2)
+    - NIST-800-53-SC-5(2)
+    - NIST-800-53-SC-5(3)
+    - NIST-800-171-3.1.20
+    - CJIS-5.10.1.1

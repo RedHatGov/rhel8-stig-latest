@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_xdm_sysadm_login" version="1">
+    <metadata>
+      <title>SELinux "xdm_sysadm_login" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "xdm_sysadm_login" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="xdm_sysadm_login is configured correctly" test_ref="test_sebool_xdm_sysadm_login" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="xdm_sysadm_login is configured correctly" id="test_sebool_xdm_sysadm_login" version="1">
+    <linux:object object_ref="object_sebool_xdm_sysadm_login" />
+    <linux:state state_ref="state_sebool_xdm_sysadm_login" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_xdm_sysadm_login" version="1">
+    <linux:name>xdm_sysadm_login</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_xdm_sysadm_login" version="1">
+    <linux:name>xdm_sysadm_login</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_xdm_sysadm_login"/>
+      <linux:pending_status datatype="boolean" var_ref="var_xdm_sysadm_login"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for xdm_sysadm_login" datatype="boolean" id="var_xdm_sysadm_login" version="1" />
+  
+</def-group>

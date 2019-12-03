@@ -1,0 +1,41 @@
+# platform = multi_platform_rhel,multi_platform_ol,multi_platform_fedora,multi_platform_rhv
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Ensure gpgcheck Enabled for All yum Package Repositories
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80792-5
+    - CJIS-5.10.4.1
+    - NIST-800-171-3.4.8
+    - NIST-800-53-CM-11(a)
+    - NIST-800-53-CM-11(b)
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-MA-1(b)
+    - NIST-800-53-SA-12
+    - NIST-800-53-SI-7
+    - PCI-DSS-Req-6.2
+    - ensure_gpgcheck_never_disabled
+    - high_severity
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Find All yum Repositories
+      find:
+        paths: /etc/yum.repos.d/
+        patterns: '*.repo'
+        contains: ^\[.+]$
+      register: yum_find
+
+    - name: Ensure gpgcheck Enabled For All yum Package Repositories
+      with_items: '{{ yum_find.files }}'
+      lineinfile:
+        create: true
+        dest: '{{ item.path }}'
+        regexp: ^gpgcheck
+        line: gpgcheck=1

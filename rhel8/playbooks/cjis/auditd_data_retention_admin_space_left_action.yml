@@ -1,0 +1,37 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Configure auditd admin_space_left Action on Low Disk Space
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_auditd_admin_space_left_action: single
+  tags:
+    - CCE-80679-4
+    - CJIS-5.4.1.1
+    - NIST-800-171-3.3.1
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-4
+    - NIST-800-53-AU-5(2)
+    - NIST-800-53-AU-5(b)
+    - NIST-800-53-IR-5
+    - PCI-DSS-Req-10.7
+    - auditd_data_retention_admin_space_left_action
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Configure auditd admin_space_left Action on Low Disk Space
+      lineinfile:
+        dest: /etc/audit/auditd.conf
+        line: admin_space_left_action = {{ var_auditd_admin_space_left_action }}
+        regexp: ^\s*admin_space_left_action\s*=\s*.*$
+        state: present
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install scap-security-guide Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82949-9
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_scap-security-guide_installed
+  tasks:
+
+    - name: Ensure scap-security-guide is installed
+      package:
+        name: scap-security-guide
+        state: present

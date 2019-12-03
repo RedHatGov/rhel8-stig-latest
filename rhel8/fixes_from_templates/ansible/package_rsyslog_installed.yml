@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure rsyslog is installed
+  package:
+    name: "rsyslog"
+    state: present

@@ -1,0 +1,32 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Enable Kernel Paremeter to Log Martian Packets on all IPv4 Interfaces by Default
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    sysctl_net_ipv4_conf_default_log_martians_value: '1'
+  tags:
+    - CCE-81020-0
+    - NIST-800-171-3.1.20
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-5(3)
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - sysctl_net_ipv4_conf_default_log_martians
+    - unknown_severity
+  tasks:
+
+    - name: Ensure sysctl net.ipv4.conf.default.log_martians is set
+      sysctl:
+        name: net.ipv4.conf.default.log_martians
+        value: '{{ sysctl_net_ipv4_conf_default_log_martians_value }}'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

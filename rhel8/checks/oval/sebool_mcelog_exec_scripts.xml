@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_mcelog_exec_scripts" version="1">
+    <metadata>
+      <title>SELinux "mcelog_exec_scripts" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "mcelog_exec_scripts" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="mcelog_exec_scripts is configured correctly" test_ref="test_sebool_mcelog_exec_scripts" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="mcelog_exec_scripts is configured correctly" id="test_sebool_mcelog_exec_scripts" version="1">
+    <linux:object object_ref="object_sebool_mcelog_exec_scripts" />
+    <linux:state state_ref="state_sebool_mcelog_exec_scripts" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_mcelog_exec_scripts" version="1">
+    <linux:name>mcelog_exec_scripts</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_mcelog_exec_scripts" version="1">
+    <linux:name>mcelog_exec_scripts</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_mcelog_exec_scripts"/>
+      <linux:pending_status datatype="boolean" var_ref="var_mcelog_exec_scripts"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for mcelog_exec_scripts" datatype="boolean" id="var_mcelog_exec_scripts" version="1" />
+  
+</def-group>

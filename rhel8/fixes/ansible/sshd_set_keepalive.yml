@@ -1,0 +1,42 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- (xccdf-var var_sshd_set_keepalive)
+
+- name: Set SSH Client Alive Max Count
+  block:
+
+    - name: Deduplicate values from /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: false
+        regexp: (?i)^\s*ClientAliveCountMax\s+
+        state: absent
+
+    - name: Insert correct line to /etc/ssh/sshd_config
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        create: true
+        line: ClientAliveCountMax {{ var_sshd_set_keepalive }}
+        state: present
+        insertbefore: ^[#\s]*Match
+        validate: /usr/sbin/sshd -t -f %s
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sshd_set_keepalive
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80907-9
+    - NIST-800-53-AC-2(5)
+    - NIST-800-53-SA-8
+    - NIST-800-53-AC-12
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(b)
+    - NIST-800-53-SC-10
+    - NIST-800-171-3.1.11
+    - CJIS-5.5.6

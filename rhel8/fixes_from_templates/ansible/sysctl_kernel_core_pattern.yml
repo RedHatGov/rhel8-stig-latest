@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.core_pattern is set to |/bin/false
+  sysctl:
+    name: "kernel.core_pattern"
+    value: "|/bin/false"
+    state: present
+    reload: yes

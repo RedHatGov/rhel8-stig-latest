@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>sanlock_use_nfs</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>sanlock_use_nfs</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P sanlock_use_nfs off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>sanlock_use_nfs</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool sanlock_use_nfs</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>sanlock_use_nfs --> off</code>'
+ocil_clause: sanlock_use_nfs is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: sanlock_use_nfs}
+title: Disable the sanlock_use_nfs SELinux Boolean
+warnings: []

@@ -1,0 +1,34 @@
+description: 'Require packet signing of clients who mount Samba
+
+  shares using the <tt>mount.cifs</tt> program (e.g., those who specify shares
+
+  in <tt>/etc/fstab</tt>). To do so, ensure signing options (either
+
+  <tt>sec=krb5i</tt> or <tt>sec=ntlmv2i</tt>) are used.
+
+  <br /><br />
+
+  See the <tt>mount.cifs(8)</tt> man page for more information. A Samba
+
+  client should only communicate with servers who can support SMB
+
+  packet signing.'
+identifiers: {}
+ocil: 'To verify that Samba clients using mount.cifs must use packet signing, run
+  the following command:
+
+  <pre>$ grep sec /etc/fstab</pre>
+
+  The output should show either <tt>krb5i</tt> or <tt>ntlmv2i</tt> in use.'
+ocil_clause: it does not
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Packet signing can prevent man-in-the-middle
+
+  attacks which modify SMB packets in transit.'
+references: {}
+severity: unknown
+template: null
+title: Require Client SMB Packet Signing, if using mount.cifs
+warnings: []

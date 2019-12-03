@@ -1,0 +1,45 @@
+<def-group>
+  <definition class="compliance" id="grub2_slub_debug_argument" version="2">
+    <metadata>
+      <title>Ensure GRUB 2 is configured to run Linux operating system with argument slub_debug=P</title>
+      <affected family="unix">
+        <platform>Red Hat Enterprise Linux 7</platform>
+        <platform>Red Hat Enterprise Linux 8</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>Look for argument slub_debug=P in the kernel line in /etc/default/grub.</description>
+    </metadata>
+    <criteria operator="AND">
+      
+        <criterion test_ref="test_grub2_slub_debug_argument_grub_env"
+        comment="Check if slub_debug=P is present in the GRUB2 environment variable block in /boot/grub2/grubenv" />
+      
+    </criteria>
+  </definition>
+
+
+
+  <ind:textfilecontent54_test id="test_grub2_slub_debug_argument_grub_env"
+  comment="check forkernel command line parameters slub_debug=P in /boot/grub2/grubenv for all kernels"
+  check="all" check_existence="all_exist" version="1">
+    <ind:object object_ref="object_grub2_slub_debug_argument_grub_env" />
+    <ind:state state_ref="state_grub2_slub_debug_argument" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_object id="object_grub2_slub_debug_argument_grub_env"
+  version="1">
+    <ind:filepath>/boot/grub2/grubenv</ind:filepath>
+    <ind:pattern operation="pattern match">^kernelopts=(.*)$</ind:pattern>
+    <ind:instance datatype="int" operation="greater than or equal">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+
+
+  <ind:textfilecontent54_state id="state_grub2_slub_debug_argument"
+  version="1">
+    <ind:subexpression datatype="string" operation="pattern match">^.*slub_debug=P.*$</ind:subexpression>
+  </ind:textfilecontent54_state>
+
+</def-group>

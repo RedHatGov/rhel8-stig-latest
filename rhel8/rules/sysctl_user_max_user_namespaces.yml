@@ -1,0 +1,60 @@
+description: 'To set the runtime status of the <code>user.max_user_namespaces</code>
+  kernel parameter,
+
+  run the following command:
+
+  <pre>$ sudo sysctl -w user.max_user_namespaces=0</pre>
+
+
+  If this is not the system default value, add the following line to a file in the
+
+  directory <tt>/etc/sysctl.d</tt>:
+
+  <pre>user.max_user_namespaces = 0</pre>
+
+  When containers are deployed on the machine, the value should be set
+
+  to large non-zero value.'
+identifiers: {cce: 82211-4}
+ocil: 'The status of the <code>user.max_user_namespaces</code> kernel parameter can
+  be queried
+
+  by running the following command:
+
+  <pre>$ sysctl user.max_user_namespaces</pre>
+
+  The output of the command should indicate a value of <code>0</code>.
+
+  If this value is not the default value, investigate how it could have been
+
+  adjusted at runtime, and verify it is not set improperly. This has to be checked
+
+  in all files in the <tt>/etc/sysctl.d</tt> directory and the deprecated
+
+  <code>/etc/sysctl.conf</code>. You can verify this by running the following command:
+
+  <pre>$ grep -r user.max_user_namespaces /etc/sysctl.conf /etc/sysctl.d</pre>
+
+  '
+ocil_clause: the correct value is not returned
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8,ocp4
+rationale: 'User namespaces are used primarily for Linux containers. The value 0
+
+  disallows the use of user namespaces.'
+references: {nist: SC-39, ospp: FMT_SMF_EXT.1, srg: SRG-OS-000480-GPOS-00227}
+severity: low
+template:
+  backends: {}
+  name: sysctl
+  vars: {datatype: int, sysctlval: '0', sysctlvar: user.max_user_namespaces}
+title: Disable the use of user namespaces
+warnings:
+- {general: 'This configuration baseline was created to deploy the base operating
+    system for general purpose
+
+    workloads. When the operating system is configured for certain purposes, such
+    as to host Linux Containers,
+
+    it is expected that <tt>user.max_user_namespaces</tt> will be enabled.'}

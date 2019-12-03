@@ -1,0 +1,35 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Verify Owner on cron.hourly
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82209-8
+    - NIST-800-53-AC-17
+    - NIST-800-53-AC-6
+    - configure_strategy
+    - file_owner_cron_hourly
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Test for existence /etc/cron.hourly/
+      stat:
+        path: /etc/cron.hourly/
+      register: file_exists
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Ensure owner 0 on /etc/cron.hourly/
+      file:
+        path: /etc/cron.hourly/
+        owner: '0'
+      when:
+        - file_exists.stat is defined and file_exists.stat.exists
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

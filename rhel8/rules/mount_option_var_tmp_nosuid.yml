@@ -1,0 +1,33 @@
+description: 'The <tt>nosuid</tt> mount option can be used to prevent
+
+  execution of setuid programs in <tt>/var/tmp</tt>. The SUID and SGID permissions
+
+  should not be required in these world-writable directories.
+
+  Add the <code>nosuid</code> option to the fourth column of
+
+  <tt>/etc/fstab</tt> for the line which controls mounting of
+
+  <code>/var/tmp</code>.'
+identifiers: {cce: 82154-6}
+ocil: "To verify the <tt>nosuid</tt> option is configured for the <tt>/var/tmp</tt>\
+  \ mount point, run the following command:\n    <pre>$ mount | grep '\\s/var/tmp\\\
+  s'</pre>\n    The output should show the corresponding mount point along with the\
+  \ <tt>nosuid</tt> setting in parentheses.\n"
+ocil_clause: the  is not present in the output line, or there is no output line at
+  all
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8
+rationale: 'The presence of SUID and SGID executables should be tightly controlled.
+  Users
+
+  should not be able to execute SUID or SGID binaries from temporary storage partitions.'
+references: {anssi: NT28(R12), cis: 1.1.9, srg: SRG-OS-000368-GPOS-00154}
+severity: unknown
+template:
+  backends: {}
+  name: mount_option
+  vars: {mount_has_to_exist: 'yes', mountoption: nosuid, mountpoint: /var/tmp}
+title: Add nosuid Option to /var/tmp
+warnings: []

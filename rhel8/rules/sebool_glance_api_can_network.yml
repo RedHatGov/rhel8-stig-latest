@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>glance_api_can_network</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>glance_api_can_network</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P glance_api_can_network off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>glance_api_can_network</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool glance_api_can_network</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>glance_api_can_network --> off</code>'
+ocil_clause: glance_api_can_network is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: glance_api_can_network}
+title: Disable the glance_api_can_network SELinux Boolean
+warnings: []

@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>exim_read_user_files</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>exim_read_user_files</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P exim_read_user_files off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>exim_read_user_files</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool exim_read_user_files</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>exim_read_user_files --> off</code>'
+ocil_clause: exim_read_user_files is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: exim_read_user_files}
+title: Disable the exim_read_user_files SELinux Boolean
+warnings: []

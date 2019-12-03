@@ -1,0 +1,39 @@
+description: 'If a file server (FTP, TFTP...) is hosted locally, create a separate
+  partition
+
+  for <tt>/srv</tt> at installation time (or migrate it later using LVM). If
+
+  <tt>/srv</tt> will be mounted from another system such as an NFS server, then
+
+  creating a separate partition is not necessary at installation time, and the
+
+  mountpoint can instead be configured later.'
+identifiers: {}
+ocil: 'Run the following command to determine if <code>/srv</code>
+
+  is on its own partition or logical volume:
+
+  <pre>$ mount | grep "on /srv"</pre>
+
+  If <code>/srv</code> has its own partition or volume group, a line will be returned.
+
+  '
+ocil_clause: no line is returned
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: 'Srv deserves files for local network file server such as FTP. Ensuring
+
+  that <tt>/srv</tt> is mounted on its own partition enables the setting of
+
+  more restrictive mount options, and also helps ensure that
+
+  users cannot trivially fill partitions used for log or audit data storage.'
+references: {anssi: NT28(R12)}
+severity: unknown
+template:
+  backends: {}
+  name: mount
+  vars: {mountpoint: /srv}
+title: Ensure /srv Located On Separate Partition
+warnings: []

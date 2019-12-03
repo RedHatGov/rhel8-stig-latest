@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall the inet-based telnet server
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_inetutils-telnetd_removed
+  tasks:
+
+    - name: Ensure inetutils-telnetd is removed
+      package:
+        name: inetutils-telnetd
+        state: absent

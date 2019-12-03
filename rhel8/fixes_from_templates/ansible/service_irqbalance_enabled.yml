@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service irqbalance
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable service irqbalance
+    service:
+      name: "irqbalance"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"irqbalance" in ansible_facts.packages'

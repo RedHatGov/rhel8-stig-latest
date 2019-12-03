@@ -1,0 +1,20 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = restrict
+# complexity = medium
+# disruption = low
+
+
+
+- name: get current kernel parameters
+  command: '/usr/bin/grub2-editenv - list'
+  register: kernelopts
+  changed_when: False
+
+- name: Update the bootloader menu
+  command: /usr/bin/grub2-editenv - set "{{ item }} audit=1"
+  with_items: "{{ kernelopts.stdout_lines | select('match', '^kernelopts.*') | list }}"
+  when:
+    - kernelopts.stdout_lines is defined
+    - kernelopts.stdout_lines | length > 0
+

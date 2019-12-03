@@ -1,0 +1,26 @@
+<def-group>
+  <definition class="compliance" id="mount_option_var_log_nodev" version="1">
+    <metadata>
+      <title>Add nodev Option to /var/log</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>/var/log should be mounted with mount option nodev.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="nodev on /var/log" test_ref="test_var_log_partition_nodev" />
+    </criteria>
+  </definition>
+
+  <linux:partition_test check="all" check_existence="all_exist"
+  id="test_var_log_partition_nodev" version="1" comment="nodev on /var/log">
+    <linux:object object_ref="object_var_log_partition_nodev" />
+    <linux:state state_ref="state_var_log_partition_nodev" />
+  </linux:partition_test>
+  <linux:partition_object id="object_var_log_partition_nodev" version="1">
+    <linux:mount_point>/var/log</linux:mount_point>
+  </linux:partition_object>
+  <linux:partition_state id="state_var_log_partition_nodev" version="1">
+    <linux:mount_options datatype="string" entity_check="at least one" operation="equals">nodev</linux:mount_options>
+  </linux:partition_state>
+</def-group>

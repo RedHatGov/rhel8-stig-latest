@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall telnet-server Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82182-7
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7(a)
+    - disable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_telnet-server_removed
+  tasks:
+
+    - name: Ensure telnet-server is removed
+      package:
+        name: telnet-server
+        state: absent

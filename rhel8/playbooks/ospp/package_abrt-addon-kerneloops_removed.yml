@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall abrt-addon-kerneloops Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82926-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_abrt-addon-kerneloops_removed
+  tasks:
+
+    - name: Ensure abrt-addon-kerneloops is removed
+      package:
+        name: abrt-addon-kerneloops
+        state: absent

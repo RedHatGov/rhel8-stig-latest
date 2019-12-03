@@ -1,0 +1,28 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- (xccdf-var var_auditd_max_log_file)
+
+- name: Configure auditd Max Log File Size
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    regexp: ^\s*max_log_file\s*=\s*.*$
+    line: max_log_file = {{ var_auditd_max_log_file }}
+    state: present
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - auditd_data_retention_max_log_file
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80681-0
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-11
+    - NIST-800-53-IR-5
+    - PCI-DSS-Req-10.7
+    - CJIS-5.4.1.1

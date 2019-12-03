@@ -1,0 +1,26 @@
+description: 'The <code>usbguard</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install usbguard</pre>'
+identifiers: {cce: 82959-8}
+ocil: 'Run the following command to determine if the <code>usbguard</code> package
+  is installed: <pre>$ rpm -q usbguard</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: '<tt>usbguard</tt> is a software framework that helps to protect
+
+  against rogue USB devices by implementing basic whitelisting/blacklisting
+
+  capabilities based on USB device attributes.'
+references: {srg: SRG-OS-000378-GPOS-00163}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: usbguard}
+title: Install usbguard Package
+warnings: []

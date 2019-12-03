@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Ensure rsyslog-gnutls is installed
+  package:
+    name: "rsyslog-gnutls"
+    state: present

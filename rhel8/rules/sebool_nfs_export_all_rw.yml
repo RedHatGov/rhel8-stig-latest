@@ -1,0 +1,35 @@
+description: 'By default, the SELinux boolean <tt>nfs_export_all_rw</tt> is enabled.
+
+  If this setting is disabled, it should be enabled as it allows NFS to
+
+  export read/write mounts.
+
+
+  To enable the <code>nfs_export_all_rw</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P nfs_export_all_rw on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>nfs_export_all_rw</code> SELinux
+  boolean is enabled:
+
+  <pre>$ getsebool nfs_export_all_rw</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>nfs_export_all_rw --> on</code>'
+ocil_clause: nfs_export_all_rw is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: nfs_export_all_rw}
+title: Enable the nfs_export_all_rw SELinux Boolean
+warnings: []

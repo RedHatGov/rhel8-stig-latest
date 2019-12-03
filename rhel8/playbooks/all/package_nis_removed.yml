@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall the nis package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_nis_removed
+  tasks:
+
+    - name: Ensure nis is removed
+      package:
+        name: nis
+        state: absent

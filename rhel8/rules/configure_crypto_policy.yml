@@ -1,0 +1,99 @@
+description: 'To configure the system cryptography policy to use ciphers only from
+  the <tt><sub idref="var_system_crypto_policy" /></tt>
+
+  policy, run the following command:
+
+  <pre>$ sudo update-crypto-policies --set <sub idref="var_system_crypto_policy" /></pre>
+
+  The rule checks if settings for selected crypto policy are configured as expected.
+  Configuration files in the <tt>/etc/crypto-policies/back-ends</tt> are either symlinks
+  to correct files provided by Crypto-policies package or they are regular files in
+  case crypto policy customizations are applied.'
+identifiers: {cce: 80935-0}
+ocil: 'To verify that cryptography policy has been configured correctly, run the
+
+  following command:
+
+  <pre>$ update-crypto-policies --show</pre>
+
+  The output should return <pre><sub idref="var_system_crypto_policy" /></pre>.
+
+  Run the command to check if the policy is correctly applied:
+
+  <pre>$ update-crypto-policies --is-applied</pre>
+
+  The output should be <pre>The configured policy is applied</pre>.
+
+  Moreover, check if settings for selected crypto policy are as expected.
+
+  List all libraries for which it holds that their crypto policies do not have symbolic
+  link in <pre>/etc/crypto-policies/back-ends</pre>.
+
+  <pre>$ ls -l /etc/crypto-policies/back-ends/ | grep ''^[^l]'' | tail -n +2 | awk
+  -F'' '' ''{print $NF}'' | awk -F''.'' ''{print $1}'' | sort</pre>
+
+  Subsequently, check if matching libraries have drop in files in the <pre>/etc/crypto-policies/local.d</pre>
+  directory.
+
+  <pre>$ ls /etc/crypto-policies/local.d/ | awk -F''-'' ''{print $1}'' | uniq | sort</pre>
+
+  Outputs of two previous commands should match.
+
+  Now check if all symbolic links from the <pre>/etc/crypto-policies/back-ends/</pre>
+  are pointing into the <pre>/usr/share/crypto-policies/<sub idref="var_system_crypto_policy"
+  /></pre> directory.
+
+  <pre>$ find /etc/crypto-policies/back-ends/ -type l -ls | grep -v ''/usr/share/crypto-policies/<sub
+  idref="var_system_crypto_policy" />''</pre>
+
+  No output is expected.'
+ocil_clause: cryptographic policy is not configured or is configured incorrectly
+oval_external_content: null
+platform: null
+prodtype: fedora,rhel8,ol8,ocp4
+rationale: 'Centralized cryptographic policies simplify applying secure ciphers across
+  an operating system and
+
+  the applications that run on that operating system. Use of weak or untested encryption
+  algorithms
+
+  undermines the purposes of utilizing encryption to protect data.'
+references: {nist: 'AC-17(a),AC-17(2),MA-4(6),SC-12(3)', srg: 'SRG-OS-000396-GPOS-00176,SRG-OS-000393-GPOS-00173,SRG-OS-000394-GPOS-00174'}
+severity: high
+template: null
+title: Configure System Cryptography Policy
+warnings:
+- {general: The system needs to be rebooted for these changes to take effect.}
+- {regulatory: 'System Crypto Modules must be provided by a vendor that undergoes
+
+    FIPS-140 certifications.
+
+    FIPS-140 is applicable to all Federal agencies that use
+
+    cryptographic-based security systems to protect sensitive information
+
+    in computer and telecommunication systems (including voice systems) as
+
+    defined in Section 5131 of the Information Technology Management Reform
+
+    Act of 1996, Public Law 104-106. This standard shall be used in
+
+    designing and implementing cryptographic modules that Federal
+
+    departments and agencies operate or are operated for them under
+
+    contract. See <b>
+
+    <a xmlns=''http://www.w3.org/1999/xhtml'' href=''https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-2.pdf''>https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.140-2.pdf</a></b>
+
+    To meet this, the system has to have cryptographic software provided by
+
+    a vendor that has undergone this certification. This means providing
+
+    documentation, test results, design information, and independent third
+
+    party review by an accredited lab. While open source software is
+
+    capable of meeting this, it does not meet FIPS-140 unless the vendor
+
+    submits to this process.'}

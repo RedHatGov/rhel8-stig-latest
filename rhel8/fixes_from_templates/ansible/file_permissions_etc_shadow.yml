@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Test for existence /etc/shadow
+  stat:
+    path: "/etc/shadow"
+  register: file_exists
+  
+- name: Ensure permission 0000 on /etc/shadow
+  file:
+    path: "/etc/shadow"
+    mode: "0000"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

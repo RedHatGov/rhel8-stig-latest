@@ -1,0 +1,94 @@
+<def-group>
+
+  
+
+  <definition class="compliance" id="service_certmonger_disabled" version="1">
+    <metadata>
+      <title>Service certmonger Disabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The certmonger service should be disabled if possible.</description>
+    </metadata>
+    <criteria comment="package certmonger removed or service certmonger is not configured to start" operator="OR">
+      <criterion comment="certmonger removed" test_ref="test_service_certmonger_package_certmonger_removed" />
+      <criteria operator="AND" comment="service certmonger is not configured to start">
+        <criterion comment="certmonger is not running" test_ref="test_service_not_running_certmonger" />
+        <criterion comment="Property LoadState of service certmonger is masked" test_ref="test_service_loadstate_is_masked_certmonger" />
+        <criterion comment="Property FragmentPath of service certmonger is set to /dev/null" test_ref="test_service_fragmentpath_is_dev_null_certmonger" />
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_certmonger_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_certmonger_disabled" />
+    <linux:state state_ref="state_systemd_certmonger_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_certmonger_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_certmonger_off" comment="certmonger service is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">certmonger.service</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_certmonger_socket_not_wanted_by_multi_user_target" version="1">
+    <linux:object object_ref="object_multi_user_target_for_certmonger_socket_disabled" />
+    <linux:state state_ref="state_systemd_certmonger_socket_off"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_certmonger_socket_disabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_certmonger_socket_off" comment="certmonger socket is not listed in the dependencies" version="1">
+    <linux:dependency entity_check="none satisfy">certmonger.socket</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_service_not_running_certmonger" check="all" check_existence="any_exist" comment="Test that the certmonger service is not running" version="1">
+    <linux:object object_ref="obj_service_not_running_certmonger"/>
+    <linux:state state_ref="state_service_not_running_certmonger"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_not_running_certmonger" comment="Retrieve the ActiveState property of certmonger" version="1">
+    <linux:unit operation="pattern match">^certmonger\.(service|socket)$</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_not_running_certmonger" version="1" comment="certmonger is not running">
+      <linux:value>inactive</linux:value>
+  </linux:systemdunitproperty_state>
+  <linux:systemdunitproperty_test id="test_service_loadstate_is_masked_certmonger" check="all" check_existence="any_exist" comment="Test that the property LoadState from the service certmonger is masked" version="1">
+    <linux:object object_ref="obj_service_loadstate_is_masked_certmonger"/>
+    <linux:state state_ref="state_service_loadstate_is_masked_certmonger"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_loadstate_is_masked_certmonger" comment="Retrieve the LoadState property of certmonger" version="1">
+    <linux:unit operation="pattern match">^certmonger\.(service|socket)$</linux:unit>
+    <linux:property>LoadState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_loadstate_is_masked_certmonger" version="1" comment="LoadState is set to masked">
+      <linux:value>masked</linux:value>
+  </linux:systemdunitproperty_state>
+
+  <linux:systemdunitproperty_test id="test_service_fragmentpath_is_dev_null_certmonger" check="all" check_existence="any_exist" comment="Test that the property FragmentPath from the service certmonger is set to /dev/null" version="1">
+    <linux:object object_ref="obj_service_fragmentpath_is_dev_null_certmonger"/>
+    <linux:state state_ref="state_service_fragmentpath_is_dev_null_certmonger"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_service_fragmentpath_is_dev_null_certmonger" comment="Retrieve the FragmentPath property of certmonger" version="1">
+    <linux:unit operation="pattern match">^certmonger\.(service|socket)$</linux:unit>
+    <linux:property>FragmentPath</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_service_fragmentpath_is_dev_null_certmonger" version="1" comment="FragmentPath is set to /dev/null">
+      <linux:value>/dev/null</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+
+
+  <linux:rpminfo_test check="all" check_existence="none_exist"
+  id="test_service_certmonger_package_certmonger_removed" version="1"
+  comment="package certmonger is removed">
+    <linux:object object_ref="obj_test_service_certmonger_package_certmonger_removed" />
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_service_certmonger_package_certmonger_removed" version="1">
+    <linux:name>certmonger</linux:name>
+  </linux:rpminfo_object>
+
+
+</def-group>

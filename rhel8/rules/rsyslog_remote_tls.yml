@@ -1,0 +1,27 @@
+description: "Configure <tt>rsyslog</tt> to use Transport Layer\nSecurity (TLS) support\
+  \ for logging to remote server\nfor the Forwarding Output Module in <tt>/etc/rsyslog.conf</tt>\n\
+  using action. You can use the following command:\n<pre>echo 'action(type=\"omfwd\"\
+  \ protocol=\"tcp\" Target=\"&lt;remote system>\" port=\"6514\"\n    StreamDriver=\"\
+  gtls\" StreamDriverMode=\"1\" StreamDriverAuthMode=\"x509/name\")' >> /etc/rsyslog.conf\n\
+  </pre>\nReplace the <tt>&lt;remote system></tt> in the above command with an IP\
+  \ address or a host name of the remote logging server."
+identifiers: {cce: 82457-3}
+ocil: "To verify that rsyslog's Forwarding Output Module is configured\nto use TLS\
+  \ for logging to remote server, run the following command:\n<pre>$ grep omfwd /etc/rsyslog.conf\
+  \ /etc/rsyslog.d/*.conf</pre>\nThe output should include record similar to\n<pre>action(type=\"\
+  omfwd\" protocol=\"tcp\" Target=\"&lt;remote system>\" port=\"6514\"\n    StreamDriver=\"\
+  gtls\" StreamDriverMode=\"1\" StreamDriverAuthMode=\"x509/name\")\n</pre>\nwhere\
+  \ the <tt>&lt;remote system></tt> present in the configuration line above must be\
+  \ a valid IP address or a host name of the remote logging server."
+ocil_clause: omfwd is not configured with gtls and AuthMode
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8
+rationale: 'For protection of data being logged, the connection to the
+
+  remote logging server needs to be authenticated and encrypted.'
+references: {nist: AU-9(3), ospp: FMT_SMF_EXT.1, srg: 'SRG-OS-000480-GPOS-00227,SRG-OS-000120-GPOS-00061'}
+severity: medium
+template: null
+title: Configure TLS for rsyslog remote logging
+warnings: []

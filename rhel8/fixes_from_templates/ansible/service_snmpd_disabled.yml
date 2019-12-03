@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service snmpd
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service snmpd
+    systemd:
+      name: "snmpd.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"snmpd.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - snmpd.socket"
+  command: systemctl list-unit-files snmpd.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket snmpd
+  systemd:
+    name: "snmpd.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"snmpd.socket" in socket_file_exists.stdout_lines[1]'

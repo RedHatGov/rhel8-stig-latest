@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>ssh_chroot_rw_homedirs</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>ssh_chroot_rw_homedirs</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P ssh_chroot_rw_homedirs off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>ssh_chroot_rw_homedirs</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool ssh_chroot_rw_homedirs</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>ssh_chroot_rw_homedirs --> off</code>'
+ocil_clause: ssh_chroot_rw_homedirs is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: ssh_chroot_rw_homedirs}
+title: Disable the ssh_chroot_rw_homedirs SELinux Boolean
+warnings: []

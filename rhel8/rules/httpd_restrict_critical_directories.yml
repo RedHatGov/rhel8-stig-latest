@@ -1,0 +1,26 @@
+description: 'All accessible web directories should be configured with similarly restrictive
+  settings.
+
+  The <tt>Options</tt> directive should be limited to necessary functionality and
+  the <tt>AllowOverride</tt>
+
+  directive should be used only if needed. The <tt>Order</tt> and <tt>Deny</tt> access
+  control tags
+
+  should be used to deny access by default, allowing access only where necessary.'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Directories accessible from a web client should be configured with the
+  least amount of
+
+  access possible in order to avoid unauthorized access to restricted content or server
+  information.'
+references: {}
+severity: unknown
+template: null
+title: Restrict Other Critical Directories
+warnings: []

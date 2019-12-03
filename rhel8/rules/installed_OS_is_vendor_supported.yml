@@ -1,0 +1,38 @@
+description: 'The installed operating system must be maintained by a vendor.
+
+
+  Red Hat Enterprise Linux is supported by Red Hat, Inc. As the Red Hat Enterprise
+
+  Linux vendor, Red Hat, Inc. is responsible for providing security patches.'
+identifiers: {cce: 80947-5}
+ocil: 'To verify that the installed operating system is supported, run
+
+  the following command:
+
+
+  <pre>$ grep -i "red hat" /etc/redhat-release</pre>
+
+
+  The output should contain something similar to:
+
+  <pre>Red Hat Enterprise Linux 8</pre>'
+ocil_clause: the installed operating system is not supported
+oval_external_content: null
+platform: null
+prodtype: wrlinux1019,rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: 'An operating system is considered "supported" if the vendor continues
+  to
+
+  provide security patches for the product.  With an unsupported release, it
+
+  will not be possible to resolve any security issue discovered in the system
+
+  software.'
+references: {cis-csc: '18,20,4', cobit5: 'APO12.01,APO12.02,APO12.03,APO12.04,BAI03.10,DSS05.01,DSS05.02',
+  disa: '366', isa-62443-2009: '4.2.3,4.2.3.12,4.2.3.7,4.2.3.9', iso27001-2013: 'A.12.6.1,A.14.2.3,A.16.1.3,A.18.2.2,A.18.2.3',
+  nist: SI-2(c), nist-csf: 'ID.RA-1,PR.IP-12', srg: SRG-OS-000480-GPOS-00227}
+severity: high
+template: null
+title: The Installed Operating System Is Vendor Supported
+warnings:
+- {general: There is no remediation besides switching to a different operating system.}

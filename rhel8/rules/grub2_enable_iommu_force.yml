@@ -1,0 +1,16 @@
+description: "On x86 architecture supporting VT-d, the IOMMU manages the access control\
+  \ policy between the hardware devices and some\n    of the system critical units\
+  \ such as the memory."
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: "On x86 architectures, activating the I/OMMU prevents the system from arbritrary\
+  \ accesses potentially made by\n    hardware devices."
+references: {anssi: NT28(R11)}
+severity: unknown
+template: null
+title: IOMMU configuration directive
+warnings: []

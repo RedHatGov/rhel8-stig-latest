@@ -1,0 +1,39 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Enable the GNOME3 Login Number of Failures
+  ini_file:
+    dest: /etc/dconf/db/gdm.d/00-security-settings
+    section: org/gnome/login-screen
+    option: allowed-failures
+    value: '3'
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - dconf_gnome_login_retries
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80771-9
+    - NIST-800-171-3.1.8
+
+- name: Prevent user modification of GNOME3 Login Number of Failures
+  lineinfile:
+    path: /etc/dconf/db/gdm.d/locks/00-security-settings-lock
+    regexp: ^/org/gnome/login-screen/allowed-failures
+    line: /org/gnome/login-screen/allowed-failures
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - dconf_gnome_login_retries
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80771-9
+    - NIST-800-171-3.1.8

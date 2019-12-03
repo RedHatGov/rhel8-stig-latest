@@ -1,0 +1,49 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable auditd Service
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80872-5
+    - CJIS-5.4.1.1
+    - NIST-800-171-3.3.1
+    - NIST-800-171-3.3.2
+    - NIST-800-171-3.3.6
+    - NIST-800-53-AC-17(1)
+    - NIST-800-53-AC-2(g)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-10
+    - NIST-800-53-AU-12(1)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-AU-14(1)
+    - NIST-800-53-AU-3
+    - NIST-800-53-IR-5
+    - PCI-DSS-Req-10.1
+    - enable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_auditd_enabled
+  tasks:
+
+    - name: Enable service auditd
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service auditd
+          service:
+            name: auditd
+            enabled: 'yes'
+            state: started
+          when:
+            - '"audit" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

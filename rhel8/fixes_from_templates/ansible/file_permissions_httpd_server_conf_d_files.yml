@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+- name: Find /etc/httpd/conf.d/ file(s)
+  find:
+    paths: "/etc/httpd/conf.d/"
+    patterns: "^.*$"
+    use_regex: yes
+  register: files_found
+
+- name: Set permissions for /etc/httpd/conf.d/ file(s)
+  file:
+    path: "{{ item.path }}"
+    mode: "0640"
+  with_items:
+    - "{{ files_found.files }}"
+

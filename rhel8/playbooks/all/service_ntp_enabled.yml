@@ -1,0 +1,35 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable the NTP Daemon
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-AU-8(1)
+    - PCI-DSS-Req-10.4
+    - enable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_ntp_enabled
+  tasks:
+
+    - name: Enable service ntp
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service ntp
+          service:
+            name: ntp
+            enabled: 'yes'
+            state: started
+          when:
+            - '"ntp" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

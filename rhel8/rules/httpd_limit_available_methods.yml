@@ -1,0 +1,22 @@
+description: "Web server methods are defined in section 9 of RFC 2616 (\n    <a xmlns='http://www.w3.org/1999/xhtml'\
+  \ href='http://www.ietf.org/rfc/rfc2616.txt'>http://www.ietf.org/rfc/rfc2616.txt</a>).\n\
+  If a web server does not require the implementation of all available methods,\n\
+  they should be disabled.\n<br /><br />\nNote: <tt>GET</tt> and <tt>POST</tt> are\
+  \ the most common methods. A majority of the others\nare limited to the WebDAV protocol.\n\
+  <pre>&lt;Directory /var/www/html&gt;\n# ...\n   # Only allow specific methods (this\
+  \ command is case-sensitive!)\n   &lt;LimitExcept GET POST&gt;\n      Order allow,deny\n\
+  \   &lt;/LimitExcept&gt;\n# ...\n&lt;/Directory&gt;</pre>"
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Minimizing the number of available methods to the web client reduces risk
+
+  by limiting the capabilities allowed by the web server.'
+references: {}
+severity: unknown
+template: null
+title: Limit Available Methods
+warnings: []

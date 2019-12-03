@@ -1,0 +1,29 @@
+description: 'By default, inbound connections to SSH''s port are allowed. If
+
+  the SSH server is not being used, this exception should be removed from the
+
+  firewall configuration.
+
+  <br /><br />
+
+
+  To configure <code>firewalld</code> to prevent access, run the following command(s):
+
+
+
+  <code>firewall-cmd --permanent --remove-service=ssh</code>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: 'If inbound SSH connections are not expected, disallowing access to the
+  SSH port will
+
+  avoid possible exploitation of the port by an attacker.'
+references: {cui: 3.1.12}
+severity: unknown
+template: null
+title: Remove SSH Server firewalld Firewall exception (Unusual)
+warnings: []

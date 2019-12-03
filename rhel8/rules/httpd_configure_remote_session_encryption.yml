@@ -1,0 +1,36 @@
+description: 'Ensure that the SSH server service is enabled.
+
+
+  The <code>sshd</code> service can be enabled with the following command:
+
+  <pre>$ sudo systemctl enable sshd.service</pre>'
+identifiers: {}
+ocil: ' Run the following command to determine the current status of the <code>sshd</code>
+  service: <pre>$ systemctl is-active sshd</pre> If the service is running, it should
+  return the following: <pre>active</pre>'
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8
+rationale: 'Logging into a web server remotely using an unencrypted protocol or service
+
+  when performing updates and maintenance is a major risk. Data, such as user
+
+  account, is transmitted in plaintext and can easily be compromised. When
+
+  performing remote administrative tasks, a protocol or service that encrypts the
+
+  communication channel must be used.
+
+  <br /><br />
+
+  An alternative to remote administration of
+
+  the web server is to perform web server administration locally at the console.
+
+  Local administration at the console implies physical access to the server.'
+references: {}
+severity: high
+template: null
+title: Ensure Remote Administrative Access Is Encrypted
+warnings: []

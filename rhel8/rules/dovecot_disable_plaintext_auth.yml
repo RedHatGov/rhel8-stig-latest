@@ -1,0 +1,21 @@
+description: 'To prevent Dovecot from attempting plaintext authentication of clients,
+
+  edit <tt>/etc/dovecot/conf.d/10-auth.conf</tt> and add\or correct the
+
+  following line:
+
+  <pre>disable_plaintext_auth = yes</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Using plain text authentication to the mail server could allow an attacker
+
+  access to credentials by monitoring network traffic.'
+references: {}
+severity: unknown
+template: null
+title: Disable Plaintext Authentication
+warnings: []

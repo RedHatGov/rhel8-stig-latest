@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.randomize_va_space is set to 2
+  sysctl:
+    name: kernel.randomize_va_space
+    value: '2'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_kernel_randomize_va_space
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - CCE-80916-0
+    - NIST-800-53-SC-30(2)
+    - NIST-800-53-SC-39
+    - NIST-800-171-3.1.7

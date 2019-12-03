@@ -1,0 +1,24 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Disable GDM Guest Login
+  ini_file:
+    dest: /etc/gdm/custom.conf
+    section: daemon
+    option: TimedLoginEnable
+    value: 'false'
+    no_extra_spaces: true
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - gnome_gdm_disable_guest_login
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80824-6
+    - NIST-800-53-CM-6(b)
+    - NIST-800-171-3.1.1

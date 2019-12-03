@@ -1,0 +1,23 @@
+description: "The default configuration for the web (<tt>/var/www/html</tt>) Directory\
+  \ allows directory\nindexing (<tt>Indexes</tt>) and the following of symbolic links\
+  \ (<tt>FollowSymLinks</tt>).\nNeither of these is recommended.\n<br /><br />\nThe\
+  \ <tt>/var/www/html</tt> directory hierarchy should not be viewable via the web,\
+  \ and\nsymlinks should only be followed if the owner of the symlink also owns the\
+  \ linked file.\n<br /><br />\nEnsure that this policy is adhered to by altering\
+  \ the related section of the configuration:\n<pre>&lt;Directory \"/var/www/html\"\
+  &gt;\n#  ...\n   Options SymLinksIfOwnerMatch\n#  ...\n&lt;/Directory&gt;</pre>"
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Access to the web server''s directory hierarchy could allow access to
+  unauthorized files
+
+  by web clients. Following symbolic links could also allow such access.'
+references: {}
+severity: unknown
+template: null
+title: Restrict Web Directory
+warnings: []

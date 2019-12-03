@@ -1,0 +1,28 @@
+description: 'The <code>openscap-scanner</code> package can be installed with the
+  following command:
+
+  <pre>
+
+  $ sudo yum install openscap-scanner</pre>'
+identifiers: {cce: 82220-5}
+ocil: 'Run the following command to determine if the <code>openscap-scanner</code>
+  package is installed: <pre>$ rpm -q openscap-scanner</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: '<tt>openscap-scanner</tt> contains the <tt>oscap</tt> command line tool.
+  This tool is a
+
+  configuration and vulnerability scanner, capable of performing compliance checking
+  using
+
+  SCAP content.'
+references: {srg: 'SRG-OS-000480-GPOS-00227,SRG-OS-000191-GPOS-00080'}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: openscap-scanner}
+title: Install openscap-scanner Package
+warnings: []

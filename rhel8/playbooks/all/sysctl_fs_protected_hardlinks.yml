@@ -1,0 +1,25 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Enable Kernel Parameter to Enforce DAC on Hardlinks
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-81027-5
+    - NIST-800-53-SI-11
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - sysctl_fs_protected_hardlinks
+    - unknown_severity
+  tasks:
+
+    - name: Ensure sysctl fs.protected_hardlinks is set to 1
+      sysctl:
+        name: fs.protected_hardlinks
+        value: '1'
+        state: present
+        reload: true

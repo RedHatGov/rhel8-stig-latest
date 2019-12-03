@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl kernel.dmesg_restrict is set to 1
+  sysctl:
+    name: "kernel.dmesg_restrict"
+    value: "1"
+    state: present
+    reload: yes

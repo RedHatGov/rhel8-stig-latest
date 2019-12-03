@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service messagebus
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service messagebus
+    systemd:
+      name: "messagebus.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"messagebus.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - messagebus.socket"
+  command: systemctl list-unit-files messagebus.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket messagebus
+  systemd:
+    name: "messagebus.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"messagebus.socket" in socket_file_exists.stdout_lines[1]'

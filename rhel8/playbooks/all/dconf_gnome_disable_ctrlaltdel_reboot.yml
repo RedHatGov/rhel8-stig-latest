@@ -1,0 +1,37 @@
+# platform = multi_platform_rhel,multi_platform_fedora
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Disable Ctrl-Alt-Del Reboot Key Sequence in GNOME3
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-171-3.1.2
+    - NIST-800-53-AC-6
+    - dconf_gnome_disable_ctrlaltdel_reboot
+    - high_severity
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Disable Ctrl-Alt-Del Reboot Key Sequence in GNOME3
+      ini_file:
+        dest: /etc/dconf/db/local.d/00-security-settings
+        section: org/gnome/settings-daemon/plugins/media-keys
+        option: logout
+        value: string ''
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Prevent user modification of GNOME disablement of Ctrl-Alt-Del
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/settings-daemon/plugins/media-keys/logout
+        line: /org/gnome/settings-daemon/plugins/media-keys/logout
+        create: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

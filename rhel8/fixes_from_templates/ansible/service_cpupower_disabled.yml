@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service cpupower
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service cpupower
+    systemd:
+      name: "cpupower.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"cpupower.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - cpupower.socket"
+  command: systemctl list-unit-files cpupower.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket cpupower
+  systemd:
+    name: "cpupower.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"cpupower.socket" in socket_file_exists.stdout_lines[1]'

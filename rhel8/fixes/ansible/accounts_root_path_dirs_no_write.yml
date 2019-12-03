@@ -1,0 +1,56 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = medium
+- name: Print error message if user is not root
+  fail:
+    msg: Root account required to read root $PATH
+  when: ansible_user != "root"
+  ignore_errors: true
+  tags:
+    - accounts_root_path_dirs_no_write
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80672-9
+    - NIST-800-53-CM-6(b)
+
+- name: Get root paths which are not symbolic links
+  stat:
+    path: '{{ item }}'
+  changed_when: false
+  failed_when: false
+  register: root_paths
+  with_items: '{{ ansible_env.PATH.split('':'') }}'
+  when: ansible_user == "root"
+  tags:
+    - accounts_root_path_dirs_no_write
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80672-9
+    - NIST-800-53-CM-6(b)
+
+- name: Disable writability to root directories
+  file:
+    path: '{{ item.item }}'
+    mode: g-w,o-w
+  with_items: '{{ root_paths.results }}'
+  when:
+    - root_paths.results is defined
+    - item.stat.exists
+    - not item.stat.islnk
+  tags:
+    - accounts_root_path_dirs_no_write
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80672-9
+    - NIST-800-53-CM-6(b)

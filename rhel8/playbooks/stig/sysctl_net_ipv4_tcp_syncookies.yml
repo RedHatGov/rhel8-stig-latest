@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Enable Kernel Parameter to Use TCP Syncookies on IPv4 Interfaces
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    sysctl_net_ipv4_tcp_syncookies_value: '1'
+  tags:
+    - CCE-80923-6
+    - CJIS-5.10.1.1
+    - NIST-800-171-3.1.20
+    - NIST-800-53-AC-4
+    - NIST-800-53-SC-5(1)(2)
+    - NIST-800-53-SC-5(2)
+    - NIST-800-53-SC-5(3)
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+    - sysctl_net_ipv4_tcp_syncookies
+  tasks:
+
+    - name: Ensure sysctl net.ipv4.tcp_syncookies is set
+      sysctl:
+        name: net.ipv4.tcp_syncookies
+        value: '{{ sysctl_net_ipv4_tcp_syncookies_value }}'
+        state: present
+        reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

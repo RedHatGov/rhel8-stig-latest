@@ -1,0 +1,33 @@
+description: 'By default, inbound connections to SSH''s port are allowed. If
+
+  the SSH server is being used but denied by the firewall, this exception should
+
+  be added to the firewall configuration.
+
+  <br /><br />
+
+
+  To configure <code>firewalld</code> to allow access, run the following command(s):
+
+
+
+  <code>firewall-cmd --permanent --add-service=ssh</code>'
+identifiers: {cce: 80820-4}
+ocil: "\n\nTo determine if <code>firewalld</code> is configured to allow access to\
+  \ <code>ssh</code>\non port <code>22/tcp</code>, run the following command(s):\n\
+  \n    <code>firewall-cmd --list-ports</code>\n\n\n    <code>firewall-cmd --list-services</code>\n\
+  \nIf <code>firewalld</code> is configured to allow access through the firewall,\
+  \ something similar to the following will be output:\n\nIf it is a service:\n<code>ssh</code>\n\
+  \n\nIf it is a port:\n<code>22/tcp</code>\n"
+ocil_clause: null
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,ol7,ol8,rhv4
+rationale: 'If inbound SSH connections are expected, adding a firewall rule exception
+
+  will allow remote access through the SSH port.'
+references: {cui: 3.1.12, nist: AC-17(a)}
+severity: medium
+template: null
+title: Enable SSH Server firewalld Firewall Exception
+warnings: []

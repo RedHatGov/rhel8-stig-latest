@@ -1,0 +1,36 @@
+description: 'By default, the SELinux boolean <tt>antivirus_can_scan_system</tt> is
+  disabled.
+
+  This setting should be enabled as it allows antivirus programs to read non-security
+
+  files on a system.
+
+
+  To enable the <code>antivirus_can_scan_system</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P antivirus_can_scan_system on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>antivirus_can_scan_system</code>
+  SELinux boolean is enabled:
+
+  <pre>$ getsebool antivirus_can_scan_system</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>antivirus_can_scan_system --> on</code>'
+ocil_clause: antivirus_can_scan_system is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {cui: 3.7.2}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: antivirus_can_scan_system}
+title: Enable the antivirus_can_scan_system SELinux Boolean
+warnings: []

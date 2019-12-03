@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall geolite2-city Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82939-0
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_geolite2-city_removed
+  tasks:
+
+    - name: Ensure geolite2-city is removed
+      package:
+        name: geolite2-city
+        state: absent

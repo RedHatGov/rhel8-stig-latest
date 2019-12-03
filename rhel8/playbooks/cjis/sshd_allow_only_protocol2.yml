@@ -1,0 +1,45 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Allow Only SSH Protocol 2
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80894-9
+    - CJIS-5.5.6
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.5.4
+    - NIST-800-53-AC-17(8).1(ii)
+    - NIST-800-53-AC-17(a)
+    - NIST-800-53-AC-17(b)
+    - NIST-800-53-IA-5(1)(c)
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - restrict_strategy
+    - sshd_allow_only_protocol2
+  tasks:
+
+    - name: Allow Only SSH Protocol 2
+      block:
+
+        - name: Deduplicate values from /etc/ssh/sshd_config
+          lineinfile:
+            path: /etc/ssh/sshd_config
+            create: false
+            regexp: (?i)^\s*Protocol\s+
+            state: absent
+
+        - name: Insert correct line to /etc/ssh/sshd_config
+          lineinfile:
+            path: /etc/ssh/sshd_config
+            create: true
+            line: Protocol 2
+            state: present
+            insertbefore: ^[#\s]*Match
+            validate: /usr/sbin/sshd -t -f %s
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

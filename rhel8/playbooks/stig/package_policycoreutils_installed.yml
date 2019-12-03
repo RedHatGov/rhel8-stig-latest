@@ -1,0 +1,24 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Install policycoreutils Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82976-2
+    - enable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_policycoreutils_installed
+  tasks:
+
+    - name: Ensure policycoreutils is installed
+      package:
+        name: policycoreutils
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

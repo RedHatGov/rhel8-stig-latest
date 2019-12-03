@@ -1,0 +1,26 @@
+description: 'The <code>binutils</code> package can be installed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum install binutils</pre>'
+identifiers: {cce: 82989-5}
+ocil: 'Run the following command to determine if the <code>binutils</code> package
+  is installed: <pre>$ rpm -q binutils</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8,rhv4
+rationale: '<tt>binutils</tt> is a collection of binary utilities required for
+
+  foundational system operator activities, such as <tt>ld</tt>,
+
+  <tt>nm</tt>, <tt>objcopy</tt> and <tt>readelf</tt>.'
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: binutils}
+title: Install binutils Package
+warnings: []

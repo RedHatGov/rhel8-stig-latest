@@ -1,0 +1,50 @@
+description: 'It is important to segregate public web server resources from private
+
+  resources located behind the DoD DMZ in order to protect private
+
+  assets.'
+identifiers: {}
+ocil: 'Configure the public web server to not have a trusted relationship with
+
+  any system resources that is also not accessible to the public. Web
+
+  content is not to be shared via Microsoft shares or NFS mounts.
+
+
+  Determine whether the public web server has a two-way trust relationship
+
+  with any private asset located within the network. Private web server
+
+  resources (e.g. drives, folders, printers, etc.) will not be directly
+
+  mapped to or shared with public web servers.'
+ocil_clause: 'sharing is selected for any web folder, this is a finding.
+
+
+  If private resources (e.g. drives, partitions, folders/directories,
+
+  printers, etc.) are sharedw ith the public web server'
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8
+rationale: 'When folders, drives, or other resources are directly shared between the
+
+  public web server and private servers the intent of data and resource
+
+  segregation can be compromised.
+
+
+  In addition to the requirements of the DoD Internet-NIPRNet DMZ STIG that
+
+  isolates inbound traffic from external network to the internal network,
+
+  resources such as printers, files, and folders/directories will not be
+
+  shared between public web servers and assets located within the internal
+
+  network.'
+references: {}
+severity: medium
+template: null
+title: Public web server resources must not be shared with private assets
+warnings: []

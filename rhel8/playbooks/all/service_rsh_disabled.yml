@@ -1,0 +1,59 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable rsh Service
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-171-3.1.13
+    - NIST-800-171-3.4.7
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7
+    - NIST-800-53-IA-5(1)(c)
+    - disable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_rsh_disabled
+  tasks:
+
+    - name: Disable service rsh
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service rsh
+          systemd:
+            name: rsh.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"rsh.service" in ansible_facts.services'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Unit Socket Exists - rsh.socket
+      command: systemctl list-unit-files rsh.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Disable socket rsh
+      systemd:
+        name: rsh.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when:
+        - '"rsh.socket" in socket_file_exists.stdout_lines[1]'
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

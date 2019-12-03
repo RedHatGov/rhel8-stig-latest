@@ -1,0 +1,33 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable Postfix Service
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - service_postfix_enabled
+    - unknown_severity
+  tasks:
+
+    - name: Enable service postfix
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service postfix
+          service:
+            name: postfix
+            enabled: 'yes'
+            state: started
+          when:
+            - '"postfix" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

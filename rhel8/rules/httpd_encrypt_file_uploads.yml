@@ -1,0 +1,29 @@
+description: 'Use only secure encrypted logons and connections for uploading files
+  to the web
+
+  site.'
+identifiers: {}
+ocil: 'Determine if there is a process for the uploading of files to the web site.
+
+  This process should include the requirement for the use of a secure encrypted
+
+  logon and secure encrypted connection. If the remote users are uploading files
+
+  without utilizing approved encryption methods, this is a finding.'
+ocil_clause: it is not
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8
+rationale: 'Logging in to a web server via an unencrypted protocol or service, to
+  upload
+
+  documents to the web site, is a risk if proper encryption is not utilized to
+
+  protect the data being transmitted. An encrypted protocol or service must be
+
+  used for remote access to web administration tasks.'
+references: {}
+severity: high
+template: null
+title: Encrypt All File Uploads
+warnings: []

@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_entropyd_use_audio" version="1">
+    <metadata>
+      <title>SELinux "entropyd_use_audio" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "entropyd_use_audio" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="entropyd_use_audio is configured correctly" test_ref="test_sebool_entropyd_use_audio" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="entropyd_use_audio is configured correctly" id="test_sebool_entropyd_use_audio" version="1">
+    <linux:object object_ref="object_sebool_entropyd_use_audio" />
+    <linux:state state_ref="state_sebool_entropyd_use_audio" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_entropyd_use_audio" version="1">
+    <linux:name>entropyd_use_audio</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_entropyd_use_audio" version="1">
+    <linux:name>entropyd_use_audio</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_entropyd_use_audio"/>
+      <linux:pending_status datatype="boolean" var_ref="var_entropyd_use_audio"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for entropyd_use_audio" datatype="boolean" id="var_entropyd_use_audio" version="1" />
+  
+</def-group>

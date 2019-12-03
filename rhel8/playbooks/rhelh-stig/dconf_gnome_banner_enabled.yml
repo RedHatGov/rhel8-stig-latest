@@ -1,0 +1,38 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Enable GNOME3 Login Warning Banner
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80768-5
+    - NIST-800-171-3.1.9
+    - NIST-800-53-AC-8(a)
+    - NIST-800-53-AC-8(b)
+    - NIST-800-53-AC-8(c)(1)
+    - NIST-800-53-AC-8(c)(2)
+    - NIST-800-53-AC-8(c)(3)
+    - dconf_gnome_banner_enabled
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - no_reboot_needed
+    - unknown_strategy
+  tasks:
+
+    - name: Enable GNOME3 Login Warning Banner
+      ini_file:
+        dest: /etc/dconf/db/local.d/00-security-settings
+        section: org/gnome/login-screen
+        option: banner-message-enable
+        value: 'true'
+        create: true
+
+    - name: Prevent user modification of GNOME banner-message-enabled
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/login-screen/banner-message-enable
+        line: /org/gnome/login-screen/banner-message-enable
+        create: true

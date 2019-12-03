@@ -1,0 +1,44 @@
+description: 'Crypto Policies provide a centralized control over crypto algorithms
+  usage of many packages.
+
+  BIND is supported by crypto policy, but the BIND configuration may be
+
+  set up to ignore it.
+
+
+  To check that Crypto Policies settings are configured correctly, ensure that the
+  <tt>/etc/named.conf</tt>
+
+  includes the appropriate configuration:
+
+  In the <tt>options</tt> section of <tt>/etc/named.conf</tt>, make sure that the
+  following line
+
+  is not commented out or superseded by later includes:
+
+  <tt>include "/etc/crypto-policies/back-ends/bind.config";</tt>'
+identifiers: {cce: 80934-3}
+ocil: 'To verify that BIND uses the system crypto policy, check out that the BIND
+  config file
+
+  <pre>/etc/named.conf</pre> contains the <pre>include "/etc/crypto-policies/back-ends/bind.config";</pre>
+
+  directive: <pre>grep ''include "/etc/crypto-policies/back-ends/bind.config";'' /etc/named.conf</pre>,
+
+  and verify that the directive is at the bottom of the <pre>options</pre> section
+  of the config file.'
+ocil_clause: 'BIND is installed and the BIND config file doesn''t contain the
+
+  <pre>include "/etc/crypto-policies/back-ends/bind.config";</pre> directive'
+oval_external_content: null
+platform: null
+prodtype: fedora,rhel8,ol8,ocp4
+rationale: 'Overriding the system crypto policy makes the behavior of the BIND service
+  violate expectations,
+
+  and makes system configuration more fragmented.'
+references: {nist: SC-12(3), srg: 'SRG-OS-000423-GPOS-00187,SRG-OS-000426-GPOS-00190'}
+severity: medium
+template: null
+title: Configure BIND to use System Crypto Policy
+warnings: []

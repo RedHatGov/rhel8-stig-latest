@@ -1,0 +1,18 @@
+description: "The <tt>httpd</tt> root directory should always have the most restrictive\
+  \ configuration enabled.\n<pre>&lt;Directory / &gt;\n   Options None\n   AllowOverride\
+  \ None\n   Order allow,deny\n&lt;/Directory&gt;</pre>"
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'The Web Server''s root directory content should be protected from unauthorized
+  access
+
+  by web clients.'
+references: {}
+severity: unknown
+template: null
+title: Restrict Root Directory
+warnings: []

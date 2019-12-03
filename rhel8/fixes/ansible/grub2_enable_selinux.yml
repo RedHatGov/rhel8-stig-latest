@@ -1,0 +1,27 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Ensure SELinux Not Disabled in /etc/default/grub
+  replace:
+    dest: /etc/default/grub
+    regexp: selinux=0
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - grub2_enable_selinux
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80827-9
+    - NIST-800-53-AC-3
+    - NIST-800-53-AC-3(3)
+    - NIST-800-53-AC-3(4)
+    - NIST-800-53-AC-4
+    - NIST-800-53-AC-6
+    - NIST-800-53-AU-9
+    - NIST-800-53-SI-6(a)
+    - NIST-800-171-3.1.2
+    - NIST-800-171-3.7.2

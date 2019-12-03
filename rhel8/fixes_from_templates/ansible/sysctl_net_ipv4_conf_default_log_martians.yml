@@ -1,0 +1,13 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv4_conf_default_log_martians_value)
+
+- name: Ensure sysctl net.ipv4.conf.default.log_martians is set
+  sysctl:
+    name: "net.ipv4.conf.default.log_martians"
+    value: "{{ sysctl_net_ipv4_conf_default_log_martians_value }}"
+    state: present
+    reload: yes

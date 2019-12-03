@@ -1,0 +1,25 @@
+description: "Run the following command to set force logout an inactive user when\
+  \ the\nmaximum allowed inactivity period has expired:\n<pre>$ sudo gconftool-2 --direct\
+  \ \\\n  --config-source xml:readwrite:/etc/gconf/gconf.xml.mandatory \\\n  --type\
+  \ string \\\n  --set /desktop/gnome/session/max_idle_action \"forced-logout\"</pre>"
+identifiers: {}
+ocil: 'To check the current idle time-out value, run the following command:
+
+  <pre>$ gconftool-2 -g /desktop/gnome/session/max_idle_action</pre>
+
+  If properly configured, the output should be <tt>forced-logout</tt>.'
+ocil_clause: it is not
+oval_external_content: null
+platform: gdm
+prodtype: all
+rationale: 'Terminating an idle session within a short time period reduces the window
+  of
+
+  opportunity for unauthorized personnel to take control of a management session
+
+  and will also free up resources utilized by an idle session.'
+references: {}
+severity: medium
+template: null
+title: Set GNOME Login Maximum Allowed Inactivity Action
+warnings: []

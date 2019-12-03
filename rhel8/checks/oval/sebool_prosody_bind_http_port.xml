@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_prosody_bind_http_port" version="1">
+    <metadata>
+      <title>SELinux "prosody_bind_http_port" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "prosody_bind_http_port" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="prosody_bind_http_port is configured correctly" test_ref="test_sebool_prosody_bind_http_port" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="prosody_bind_http_port is configured correctly" id="test_sebool_prosody_bind_http_port" version="1">
+    <linux:object object_ref="object_sebool_prosody_bind_http_port" />
+    <linux:state state_ref="state_sebool_prosody_bind_http_port" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_prosody_bind_http_port" version="1">
+    <linux:name>prosody_bind_http_port</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_prosody_bind_http_port" version="1">
+    <linux:name>prosody_bind_http_port</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_prosody_bind_http_port"/>
+      <linux:pending_status datatype="boolean" var_ref="var_prosody_bind_http_port"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for prosody_bind_http_port" datatype="boolean" id="var_prosody_bind_http_port" version="1" />
+  
+</def-group>

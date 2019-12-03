@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>cdrecord_read_content</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>cdrecord_read_content</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P cdrecord_read_content off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>cdrecord_read_content</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool cdrecord_read_content</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>cdrecord_read_content --> off</code>'
+ocil_clause: cdrecord_read_content is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: cdrecord_read_content}
+title: Disable the cdrecord_read_content SELinux Boolean
+warnings: []

@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>daemons_use_tty</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>daemons_use_tty</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P daemons_use_tty off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>daemons_use_tty</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool daemons_use_tty</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>daemons_use_tty --> off</code>'
+ocil_clause: daemons_use_tty is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: daemons_use_tty}
+title: Disable the daemons_use_tty SELinux Boolean
+warnings: []

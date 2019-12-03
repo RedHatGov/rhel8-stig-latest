@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl user.max_user_namespaces is set to 0
+  sysctl:
+    name: "user.max_user_namespaces"
+    value: "0"
+    state: present
+    reload: yes

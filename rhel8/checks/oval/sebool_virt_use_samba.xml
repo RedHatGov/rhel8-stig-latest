@@ -1,0 +1,38 @@
+<def-group>
+  <definition class="compliance" id="sebool_virt_use_samba" version="1">
+    <metadata>
+      <title>SELinux "virt_use_samba" Boolean Check</title>
+      <affected family="unix">
+        <platform>multi_platform_rhel</platform>
+        <platform>multi_platform_fedora</platform>
+        <platform>multi_platform_rhv</platform>
+        <platform>multi_platform_ol</platform>
+      </affected>
+      <description>The SELinux "virt_use_samba" boolean should be set in the system configuration.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="virt_use_samba is configured correctly" test_ref="test_sebool_virt_use_samba" />
+    </criteria>
+  </definition>
+
+  <linux:selinuxboolean_test check="all" check_existence="all_exist" comment="virt_use_samba is configured correctly" id="test_sebool_virt_use_samba" version="1">
+    <linux:object object_ref="object_sebool_virt_use_samba" />
+    <linux:state state_ref="state_sebool_virt_use_samba" />
+  </linux:selinuxboolean_test>
+
+  <linux:selinuxboolean_object id="object_sebool_virt_use_samba" version="1">
+    <linux:name>virt_use_samba</linux:name>
+  </linux:selinuxboolean_object>
+
+  <linux:selinuxboolean_state id="state_sebool_virt_use_samba" version="1">
+    <linux:name>virt_use_samba</linux:name>
+    
+      <linux:current_status datatype="boolean" var_ref="var_virt_use_samba"/>
+      <linux:pending_status datatype="boolean" var_ref="var_virt_use_samba"/>
+    
+  </linux:selinuxboolean_state>
+
+  
+    <external_variable comment="external variable for virt_use_samba" datatype="boolean" id="var_virt_use_samba" version="1" />
+  
+</def-group>

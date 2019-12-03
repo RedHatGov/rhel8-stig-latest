@@ -1,0 +1,9 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure vsftpd is removed
+  package:
+    name: "vsftpd"
+    state: absent

@@ -1,0 +1,26 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall xinetd Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80850-1
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - package_xinetd_removed
+  tasks:
+
+    - name: Ensure xinetd is removed
+      package:
+        name: xinetd
+        state: absent
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

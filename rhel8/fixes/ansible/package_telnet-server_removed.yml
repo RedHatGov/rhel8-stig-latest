@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Ensure telnet-server is removed
+  package:
+    name: telnet-server
+    state: absent
+  tags:
+    - package_telnet-server_removed
+    - high_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-82182-7
+    - NIST-800-53-AC-17(8)
+    - NIST-800-53-CM-7(a)

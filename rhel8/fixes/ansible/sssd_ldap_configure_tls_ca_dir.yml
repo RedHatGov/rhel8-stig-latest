@@ -1,0 +1,74 @@
+# platform = multi_platform_rhel,multi_platform_fedora
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- (xccdf-var var_sssd_ldap_tls_ca_dir)
+
+- name: Test for domain group
+  command: grep '\s*\[domain\/[^]]*]' /etc/sssd/sssd.conf
+  register: test_grep_domain
+  ignore_errors: true
+  changed_when: false
+  check_mode: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sssd_ldap_configure_tls_ca_dir
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-SC-12(3)
+
+- name: Add default domain group and set CA directory (if no domain there)
+  ini_file:
+    path: /etc/sssd/sssd.conf
+    section: '{{ item.section }}'
+    option: '{{ item.option }}'
+    value: '{{ item.value }}'
+    create: true
+    mode: 384
+  with_items:
+    - section: sssd
+      option: domains
+      value: default
+    - section: domain/default
+      option: id_provider
+      value: files
+    - section: domain/default
+      option: ldap_tls_cacertdir
+      value: '{{ var_sssd_ldap_tls_ca_dir }}'
+  when:
+    - test_grep_domain.stdout is defined
+    - test_grep_domain.stdout | length < 1
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sssd_ldap_configure_tls_ca_dir
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-SC-12(3)
+
+- name: Configure LDAPs path to CA directory
+  ini_file:
+    path: /etc/sssd/sssd.conf
+    section: '{{ test_grep_domain.stdout | regex_replace(''\[(.*)\]'',''\1'') }}'
+    option: ldap_tls_cacertdir
+    value: '{{ var_sssd_ldap_tls_ca_dir }}'
+    create: true
+    mode: 384
+  when:
+    - test_grep_domain.stdout is defined
+    - test_grep_domain.stdout | length > 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sssd_ldap_configure_tls_ca_dir
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - NIST-800-53-SC-12(3)

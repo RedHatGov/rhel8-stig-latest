@@ -1,0 +1,27 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service sssd
+  block:
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+
+    - name: Enable service sssd
+      service:
+        name: sssd
+        enabled: 'yes'
+        state: started
+      when:
+        - '"sssd" in ansible_facts.packages'
+  tags:
+    - service_sssd_enabled
+    - medium_severity
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - NIST-800-53-IA-5(10)

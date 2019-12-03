@@ -1,0 +1,62 @@
+description: '
+
+  By default, <tt>iptables</tt>
+
+  blocks access to the ports used by the web server.
+
+  To configure <tt>iptables</tt> to allow port 80 traffic, one must edit
+
+  <tt>/etc/sysconfig/iptables</tt> and
+
+  <tt>/etc/sysconfig/ip6tables</tt> (if IPv6 is in use).
+
+  Add the following line, ensuring that it appears before the final LOG and DROP lines
+  for the INPUT chain:
+
+  <pre>-A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT</pre>
+
+  To configure <tt>iptables</tt> to allow port 443 traffic, one must edit
+
+  <tt>/etc/sysconfig/iptables</tt> and
+
+  <tt>/etc/sysconfig/ip6tables</tt> (if IPv6 is in use).
+
+  Add the following line, ensuring that it appears before the final LOG and DROP lines
+  for the INPUT chain:
+
+  <pre>-A INPUT -m state --state NEW -p tcp --dport 443 -j ACCEPT</pre>'
+identifiers: {}
+ocil: 'Review the web site to determine if HTTP and HTTPs are used in accordance with
+
+  well known ports (e.g., 80 and 443) or those ports and services as registered
+
+  and approved for use by the DoD PPSM.
+
+
+  To configure <code>firewalld</code> to allow access, run the following command(s):
+
+
+
+  <code>firewall-cmd --permanent --add-service=http</code>
+
+
+
+  To configure <code>firewalld</code> to allow access, run the following command(s):
+
+
+
+  <code>firewall-cmd --permanent --add-service=https</code>'
+ocil_clause: it is not
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: 'Failure to comply with DoD ports, protocols, and services (PPS) requirements
+
+  can result in compromise of enclave boundary protections and/or functionality
+
+  of the AIS.'
+references: {}
+severity: low
+template: null
+title: Configure firewall to Allow Access to the Web Server
+warnings: []

@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>puppetmaster_use_db</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>puppetmaster_use_db</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P puppetmaster_use_db off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>puppetmaster_use_db</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool puppetmaster_use_db</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>puppetmaster_use_db --> off</code>'
+ocil_clause: puppetmaster_use_db is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: puppetmaster_use_db}
+title: Disable the puppetmaster_use_db SELinux Boolean
+warnings: []

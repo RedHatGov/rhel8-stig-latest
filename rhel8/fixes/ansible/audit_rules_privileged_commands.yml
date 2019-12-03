@@ -1,0 +1,170 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Search for privileged commands
+  shell: find / -xdev -type f -perm -4000 -o -type f -perm -2000 2>/dev/null
+  args:
+    warn: false
+    executable: /bin/bash
+  check_mode: false
+  register: find_result
+  changed_when: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80724-8
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-2(4)
+    - NIST-800-53-AU-6(9)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-53-AC-6(9)
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.2.2
+    - CJIS-5.4.1.1
+
+- name: Search /etc/audit/rules.d for audit rule entries
+  find:
+    paths: /etc/audit/rules.d
+    recurse: false
+    contains: ^.*path={{ item }} .*$
+    patterns: '*.rules'
+  with_items:
+    - '{{ find_result.stdout_lines }}'
+  register: files_result
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80724-8
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-2(4)
+    - NIST-800-53-AU-6(9)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-53-AC-6(9)
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.2.2
+    - CJIS-5.4.1.1
+
+- name: Overwrites the rule in rules.d
+  lineinfile:
+    path: '{{ item.1.path }}'
+    line: -a always,exit -F path={{ item.0.item }} -F perm=x -F auid>=1000 -F auid!=unset
+      -F key=special-config-changes
+    create: false
+    regexp: ^.*path={{ item.0.item }} .*$
+  with_subelements:
+    - '{{ files_result.results }}'
+    - files
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80724-8
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-2(4)
+    - NIST-800-53-AU-6(9)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-53-AC-6(9)
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.2.2
+    - CJIS-5.4.1.1
+
+- name: Adds the rule in rules.d
+  lineinfile:
+    path: /etc/audit/rules.d/privileged.rules
+    line: -a always,exit -F path={{ item.item }} -F perm=x -F auid>=1000 -F auid!=unset
+      -F key=special-config-changes
+    create: true
+  with_items:
+    - '{{ files_result.results }}'
+  when:
+    - files_result.results is defined and item.matched == 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80724-8
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-2(4)
+    - NIST-800-53-AU-6(9)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-53-AC-6(9)
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.2.2
+    - CJIS-5.4.1.1
+
+- name: Inserts/replaces the rule in audit.rules
+  lineinfile:
+    path: /etc/audit/audit.rules
+    line: -a always,exit -F path={{ item.item }} -F perm=x -F auid>=1000 -F auid!=unset
+      -F key=special-config-changes
+    create: true
+    regexp: ^.*path={{ item.item }} .*$
+  with_items:
+    - '{{ files_result.results }}'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_privileged_commands
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80724-8
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-2(4)
+    - NIST-800-53-AU-6(9)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-53-AC-6(9)
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.2.2
+    - CJIS-5.4.1.1

@@ -1,0 +1,26 @@
+<def-group>
+  <definition class="compliance" id="mount_option_var_tmp_bind" version="1">
+    <metadata>
+      <title>Add bind Option to /var/tmp</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>/var/tmp should be mounted with mount option bind.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="bind on /var/tmp" test_ref="test_var_tmp_partition_bind" />
+    </criteria>
+  </definition>
+
+  <linux:partition_test check="all" check_existence="all_exist"
+  id="test_var_tmp_partition_bind" version="1" comment="bind on /var/tmp">
+    <linux:object object_ref="object_var_tmp_partition_bind" />
+    <linux:state state_ref="state_var_tmp_partition_bind" />
+  </linux:partition_test>
+  <linux:partition_object id="object_var_tmp_partition_bind" version="1">
+    <linux:mount_point>/var/tmp</linux:mount_point>
+  </linux:partition_object>
+  <linux:partition_state id="state_var_tmp_partition_bind" version="1">
+    <linux:mount_options datatype="string" entity_check="at least one" operation="equals">bind</linux:mount_options>
+  </linux:partition_state>
+</def-group>

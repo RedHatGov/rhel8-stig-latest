@@ -1,0 +1,60 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service sshd
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service sshd
+      systemd:
+        name: sshd.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"sshd.service" in ansible_facts.services'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_sshd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Unit Socket Exists - sshd.socket
+  command: systemctl list-unit-files sshd.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_sshd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Disable socket sshd
+  systemd:
+    name: sshd.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when:
+    - '"sshd.socket" in socket_file_exists.stdout_lines[1]'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_sshd_disabled
+    - unknown_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

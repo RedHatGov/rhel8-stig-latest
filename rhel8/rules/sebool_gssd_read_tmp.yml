@@ -1,0 +1,36 @@
+description: 'By default, the SELinux boolean <tt>gssd_read_tmp</tt> is enabled.
+
+  This setting allows <tt>gssd</tt> processes to access Kerberos to read
+
+  TGTs in the temp directory. If this setting is disabled, it should
+
+  be enabled.
+
+
+  To enable the <code>gssd_read_tmp</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P gssd_read_tmp on</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>gssd_read_tmp</code> SELinux
+  boolean is enabled:
+
+  <pre>$ getsebool gssd_read_tmp</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>gssd_read_tmp --> on</code>'
+ocil_clause: gssd_read_tmp is not enabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: gssd_read_tmp}
+title: Enable the gssd_read_tmp SELinux Boolean
+warnings: []

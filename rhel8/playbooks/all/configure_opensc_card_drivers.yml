@@ -1,0 +1,42 @@
+# platform = Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_rhv,multi_platform_ol
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Configure opensc Smart Card Drivers
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_smartcard_drivers: default
+  tags:
+    - CCE-80766-9
+    - NIST-800-53-IA-2(1)
+    - NIST-800-53-IA-2(2)
+    - NIST-800-53-IA-2(3)
+    - NIST-800-53-IA-2(4)
+    - PCI-DSS-Req-8.3
+    - configure_opensc_card_drivers
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+  tasks:
+
+    - name: Check existence of opensc conf
+      stat:
+        path: /etc/opensc-{{ ansible_architecture }}.conf
+      register: opensc_conf_cd
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Configure opensc Smart Card Drivers
+      lineinfile:
+        path: /etc/opensc-{{ ansible_architecture }}.conf
+        line: '        card_drivers = {{ var_smartcard_drivers }}'
+        regexp: (^\s+#|^)\s+card_drivers\s+=\s+.*
+        state: present
+      when:
+        - opensc_conf_cd.stat.exists
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

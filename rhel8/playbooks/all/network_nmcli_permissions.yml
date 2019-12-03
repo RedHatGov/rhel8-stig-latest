@@ -1,0 +1,39 @@
+# platform = Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_rhv,multi_platform_fedora
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Prevent non-Privileged Users from Modifying Network Interfaces using nmcli
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82179-3
+    - NIST-800-171-3.1.16
+    - NIST-800-53-AC-18(4)
+    - NIST-800-53-AC-18(a)
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - network_nmcli_permissions
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Ensure non-privileged users do not have access to nmcli
+      ini_file:
+        path: /etc/polkit-1/localauthority/20-org.d/10-nm-harden-access.pkla
+        section: Disable General User Access to NetworkManager
+        option: '{{ item.option }}'
+        value: '{{ item.value }}'
+        create: true
+      loop:
+        - option: Identity
+          value: default
+        - option: Action
+          value: org.freedesktop.NetworkManager.*
+        - option: ResultAny
+          value: 'no'
+        - option: ResultInactive
+          value: 'no'
+        - option: ResultActive
+          value: auth_admin

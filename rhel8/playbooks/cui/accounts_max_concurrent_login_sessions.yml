@@ -1,0 +1,31 @@
+# platform = multi_platform_fedora,multi_platform_rhel,multi_platform_ol
+# reboot = false
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Limit the Number of Concurrent Login Sessions Allowed Per User
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_accounts_max_concurrent_login_sessions: '10'
+  tags:
+    - CCE-80955-8
+    - CJIS-5.5.2.2
+    - NIST-800-53-AC-10
+    - accounts_max_concurrent_login_sessions
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - restrict_strategy
+  tasks:
+
+    - name: Limit the Number of Concurrent Login Sessions Allowed Per User
+      lineinfile:
+        state: present
+        dest: /etc/security/limits.conf
+        insertbefore: ^# End of file
+        regexp: ^#?\*.*maxlogins
+        line: '*           hard    maxlogins     {{ var_accounts_max_concurrent_login_sessions
+          }}'
+        create: true

@@ -1,0 +1,32 @@
+description: 'By default, the SELinux boolean <tt>xdm_write_home</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>xdm_write_home</code> SELinux boolean, run the following command:
+
+  <pre>$ sudo setsebool -P xdm_write_home off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>xdm_write_home</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool xdm_write_home</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>xdm_write_home --> off</code>'
+ocil_clause: xdm_write_home is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8,rhv4
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: xdm_write_home}
+title: Disable the xdm_write_home SELinux Boolean
+warnings: []

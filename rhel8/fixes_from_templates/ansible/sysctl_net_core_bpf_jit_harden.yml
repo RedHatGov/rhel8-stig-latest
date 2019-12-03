@@ -1,0 +1,11 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Ensure sysctl net.core.bpf_jit_harden is set to 2
+  sysctl:
+    name: "net.core.bpf_jit_harden"
+    value: "2"
+    state: present
+    reload: yes

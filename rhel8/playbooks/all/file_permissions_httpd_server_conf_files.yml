@@ -1,0 +1,31 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Set Permissions on All Configuration Files Inside /etc/httpd/conf/
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - NIST-800-53-CM-7
+    - configure_strategy
+    - file_permissions_httpd_server_conf_files
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - unknown_severity
+  tasks:
+
+    - name: Find /etc/httpd/conf/ file(s)
+      find:
+        paths: /etc/httpd/conf/
+        patterns: ^.*$
+        use_regex: true
+      register: files_found
+
+    - name: Set permissions for /etc/httpd/conf/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0640'
+      with_items:
+        - '{{ files_found.files }}'

@@ -1,0 +1,19 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+
+
+
+- name: Test for existence /etc/cron.hourly/
+  stat:
+    path: "/etc/cron.hourly/"
+  register: file_exists
+
+- name: Ensure owner 0 on /etc/cron.hourly/
+  file:
+    path: "/etc/cron.hourly/"
+    owner: "0"
+  when: file_exists.stat is defined and file_exists.stat.exists
+

@@ -1,0 +1,23 @@
+# platform = multi_platform_all
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- (xccdf-var sysctl_net_ipv6_conf_all_forwarding_value)
+
+- name: Ensure sysctl net.ipv6.conf.all.forwarding is set
+  sysctl:
+    name: net.ipv6.conf.all.forwarding
+    value: '{{ sysctl_net_ipv6_conf_all_forwarding_value }}'
+    state: present
+    reload: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - sysctl_net_ipv6_conf_all_forwarding
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - medium_disruption
+    - reboot_required
+    - NIST-800-53-CM-7
+    - NIST-800-53-SC-5

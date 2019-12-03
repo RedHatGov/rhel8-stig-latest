@@ -1,0 +1,36 @@
+description: 'By default, the SELinux boolean <tt>httpd_builtin_scripting</tt> is
+  enabled.
+
+  This setting should be disabled if <tt>httpd</tt> is not running <tt>php</tt>
+
+  or some similary scripting language.
+
+
+  To disable the <code>httpd_builtin_scripting</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P httpd_builtin_scripting off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>httpd_builtin_scripting</code>
+  SELinux boolean is disabled:
+
+  <pre>$ getsebool httpd_builtin_scripting</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>httpd_builtin_scripting --> off</code>'
+ocil_clause: httpd_builtin_scripting is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: httpd_builtin_scripting}
+title: Configure the httpd_builtin_scripting SELinux Boolean
+warnings: []

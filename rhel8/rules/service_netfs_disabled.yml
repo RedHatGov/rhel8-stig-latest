@@ -1,0 +1,33 @@
+description: 'The netfs script manages the boot-time mounting of several types
+
+  of networked filesystems, of which NFS and Samba are the most common. If these
+
+  filesystem types are not in use, the script can be disabled, protecting the
+
+  system somewhat against accidental or malicious changes to <tt>/etc/fstab</tt>
+
+  and against flaws in the netfs script itself.
+
+
+  The <code>netfs</code> service can be disabled with the following command:
+
+  <pre>$ sudo systemctl disable netfs.service</pre>
+
+  The <code>netfs</code> service can be masked with the following command:
+
+  <pre>$ sudo systemctl mask netfs.service</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: all
+rationale: ''
+references: {}
+severity: unknown
+template:
+  backends: {}
+  name: service_disabled
+  vars: {servicename: netfs}
+title: Disable Network File Systems (netfs)
+warnings: []

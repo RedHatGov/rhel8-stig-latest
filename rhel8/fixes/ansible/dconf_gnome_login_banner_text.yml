@@ -1,0 +1,92 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- (xccdf-var login_banner_text)
+
+- name: Set the GNOME3 Login Warning Banner Text
+  file:
+    path: /etc/dconf/db/{{ item }}
+    owner: root
+    group: root
+    mode: 493
+    state: directory
+  with_items:
+    - gdm.d
+    - gdm.d/locks
+  tags:
+    - dconf_gnome_login_banner_text
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80770-1
+    - NIST-800-53-AC-8(a)
+    - NIST-800-53-AC-8(b)
+    - NIST-800-53-AC-8(c)
+    - NIST-800-171-3.1.9
+
+- name: Set the GNOME3 Login Warning Banner Text
+  file:
+    path: /etc/dconf/db/gdm.d/{{ item }}
+    owner: root
+    group: root
+    mode: 420
+    state: touch
+  with_items:
+    - 00-security-settings
+    - locks/00-security-settings-lock
+  tags:
+    - dconf_gnome_login_banner_text
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80770-1
+    - NIST-800-53-AC-8(a)
+    - NIST-800-53-AC-8(b)
+    - NIST-800-53-AC-8(c)
+    - NIST-800-171-3.1.9
+
+- name: Set the GNOME3 Login Warning Banner Text
+  ini_file:
+    dest: /etc/dconf/db/gdm.d/00-security-settings
+    section: org/gnome/login-screen
+    option: banner-message-text
+    value: '{{ login_banner_text }}'
+    create: true
+  tags:
+    - dconf_gnome_login_banner_text
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80770-1
+    - NIST-800-53-AC-8(a)
+    - NIST-800-53-AC-8(b)
+    - NIST-800-53-AC-8(c)
+    - NIST-800-171-3.1.9
+
+- name: Prevent user modification of the GNOME3 Login Warning Banner Text
+  lineinfile:
+    path: /etc/dconf/db/gdm.d/locks/00-security-settings-lock
+    regexp: ^org/gnome/login-screen/banner-message-text$
+    line: org/gnome/login-screen/banner-message-text
+    create: true
+    state: present
+  tags:
+    - dconf_gnome_login_banner_text
+    - medium_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80770-1
+    - NIST-800-53-AC-8(a)
+    - NIST-800-53-AC-8(b)
+    - NIST-800-53-AC-8(c)
+    - NIST-800-171-3.1.9

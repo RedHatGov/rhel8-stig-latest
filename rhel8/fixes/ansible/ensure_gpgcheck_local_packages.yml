@@ -1,0 +1,68 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = unknown
+# complexity = low
+# disruption = medium
+- name: Check existence of yum on Fedora
+  stat:
+    path: /etc/yum.conf
+  register: yum_config_file
+  check_mode: false
+  when: ansible_distribution == "Fedora"
+  tags:
+    - ensure_gpgcheck_local_packages
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80791-7
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-CM-11
+    - NIST-800-53-CM-11(b)
+    - NIST-800-53-SA-12
+    - NIST-800-171-3.4.8
+
+- name: Ensure GPG check Enabled for Local Packages (Yum)
+  ini_file:
+    dest: /etc/yum.conf
+    section: main
+    option: localpkg_gpgcheck
+    value: 1
+    create: true
+  when: (ansible_distribution == "RedHat" or ansible_distribution == "CentOS" or yum_config_file.stat.exists)
+  tags:
+    - ensure_gpgcheck_local_packages
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80791-7
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-CM-11
+    - NIST-800-53-CM-11(b)
+    - NIST-800-53-SA-12
+    - NIST-800-171-3.4.8
+
+- name: Ensure GPG check Enabled for Local Packages (DNF)
+  ini_file:
+    dest: /etc/dnf/dnf.conf
+    section: main
+    option: localpkg_gpgcheck
+    value: 1
+    create: true
+  when: ansible_distribution == "Fedora"
+  tags:
+    - ensure_gpgcheck_local_packages
+    - high_severity
+    - unknown_strategy
+    - low_complexity
+    - medium_disruption
+    - no_reboot_needed
+    - CCE-80791-7
+    - NIST-800-53-CM-5(3)
+    - NIST-800-53-CM-11
+    - NIST-800-53-CM-11(b)
+    - NIST-800-53-SA-12
+    - NIST-800-171-3.4.8

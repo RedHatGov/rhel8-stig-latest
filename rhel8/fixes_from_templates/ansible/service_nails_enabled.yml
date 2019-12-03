@@ -1,0 +1,18 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Enable service nails
+  block:
+  - name: Gather the package facts
+    package_facts:
+      manager: auto
+
+  - name: Enable service nails
+    service:
+      name: "nails"
+      enabled: "yes"
+      state: "started"
+    when:
+    - '"nails" in ansible_facts.packages'

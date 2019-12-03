@@ -1,0 +1,37 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = configure
+# complexity = low
+# disruption = low
+- name: Test for existence /etc/passwd
+  stat:
+    path: /etc/passwd
+  register: file_exists
+  tags:
+    - file_permissions_etc_passwd
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80812-1
+    - NIST-800-53-AC-6
+    - PCI-DSS-Req-8.7.c
+    - CJIS-5.5.2.2
+
+- name: Ensure permission 0644 on /etc/passwd
+  file:
+    path: /etc/passwd
+    mode: '0644'
+  when: file_exists.stat is defined and file_exists.stat.exists
+  tags:
+    - file_permissions_etc_passwd
+    - medium_severity
+    - configure_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80812-1
+    - NIST-800-53-AC-6
+    - PCI-DSS-Req-8.7.c
+    - CJIS-5.5.2.2

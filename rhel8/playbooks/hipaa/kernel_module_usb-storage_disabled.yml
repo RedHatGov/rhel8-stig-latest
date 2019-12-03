@@ -1,0 +1,32 @@
+# platform = Red Hat Enterprise Linux 6,Red Hat Enterprise Linux 7,Red Hat Enterprise Linux 8,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = disable
+# complexity = low
+# disruption = medium
+- name: Disable Modprobe Loading of USB Storage Driver
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80835-2
+    - NIST-800-171-3.1.21
+    - NIST-800-53-AC-19(a)
+    - NIST-800-53-AC-19(d)
+    - NIST-800-53-AC-19(e)
+    - NIST-800-53-IA-3
+    - NIST-800-53-MP-7
+    - disable_strategy
+    - kernel_module_usb-storage_disabled
+    - low_complexity
+    - medium_disruption
+    - medium_severity
+    - reboot_required
+  tasks:
+
+    - name: Ensure kernel module 'usb-storage' is disabled
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/usb-storage.conf
+        regexp: usb-storage
+        line: install usb-storage /bin/true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

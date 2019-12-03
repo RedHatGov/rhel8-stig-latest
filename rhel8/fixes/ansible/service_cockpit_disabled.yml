@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service cockpit
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service cockpit
+      systemd:
+        name: cockpit.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"cockpit.service" in ansible_facts.services'
+  tags:
+    - service_cockpit_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Unit Socket Exists - cockpit.socket
+  command: systemctl list-unit-files cockpit.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  tags:
+    - service_cockpit_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+
+- name: Disable socket cockpit
+  systemd:
+    name: cockpit.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when: '"cockpit.socket" in socket_file_exists.stdout_lines[1]'
+  tags:
+    - service_cockpit_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed

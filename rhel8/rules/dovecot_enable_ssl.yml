@@ -1,0 +1,24 @@
+description: 'To allow clients to make encrypted connections the <tt>ssl</tt>
+
+  flag in Dovecot''s configuration file needs to be set to <tt>yes</tt>.
+
+  <br /><br />
+
+  Edit <tt>/etc/dovecot/conf.d/10-ssl.conf</tt> and add or correct the following line:
+
+  <pre>ssl = yes</pre>'
+identifiers: {}
+ocil: null
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8
+rationale: "SSL encrypt network traffic between the Dovecot server and its clients\
+  \ \nprotecting user credentials, mail as it is downloaded, and clients may use\n\
+  SSL certificates to authenticate the server, preventing another system from\nimpersonating\
+  \ the server."
+references: {}
+severity: unknown
+template: null
+title: Enable the SSL flag in /etc/dovecot.conf
+warnings: []

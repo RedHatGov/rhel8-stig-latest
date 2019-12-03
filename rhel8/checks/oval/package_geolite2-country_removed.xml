@@ -1,0 +1,26 @@
+<def-group>
+  <definition class="compliance" id="package_geolite2-country_removed"
+  version="1">
+    <metadata>
+      <title>Package geolite2-country Removed</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The RPM package geolite2-country should be removed.</description>
+    </metadata>
+    <criteria>
+      <criterion comment="package geolite2-country is removed"
+      test_ref="test_package_geolite2-country_removed" />
+    </criteria>
+  </definition>
+
+  <linux:rpminfo_test check="all" check_existence="none_exist"
+  id="test_package_geolite2-country_removed" version="1"
+  comment="package geolite2-country is removed">
+    <linux:object object_ref="obj_test_package_geolite2-country_removed" />
+  </linux:rpminfo_test>
+  <linux:rpminfo_object id="obj_test_package_geolite2-country_removed" version="1">
+    <linux:name>geolite2-country</linux:name>
+  </linux:rpminfo_object>
+
+</def-group>

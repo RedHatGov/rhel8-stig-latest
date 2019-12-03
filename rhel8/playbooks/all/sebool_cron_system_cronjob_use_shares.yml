@@ -1,0 +1,33 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = false
+# strategy = enable
+# complexity = low
+# disruption = low
+- name: Disable the cron_system_cronjob_use_shares SELinux Boolean
+  hosts: '@@HOSTS@@'
+  become: true
+  vars:
+    var_cron_system_cronjob_use_shares: 'false'
+  tags:
+    - enable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - sebool_cron_system_cronjob_use_shares
+  tasks:
+
+    - name: Ensure libsemanage-python installed
+      package:
+        name: libsemanage-python
+        state: present
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Set SELinux boolean cron_system_cronjob_use_shares accordingly
+      seboolean:
+        name: cron_system_cronjob_use_shares
+        state: '{{ var_cron_system_cronjob_use_shares }}'
+        persistent: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"

@@ -1,0 +1,26 @@
+description: 'The <code>abrt-addon-python</code> package can be removed with the following
+  command:
+
+  <pre>
+
+  $ sudo yum erase abrt-addon-python</pre>'
+identifiers: {cce: 82923-4}
+ocil: 'Run the following command to determine if the <code>abrt-addon-python</code>
+  package is installed:
+
+  <pre>$ rpm -q abrt-addon-python</pre>'
+ocil_clause: the package is installed
+oval_external_content: null
+platform: null
+prodtype: rhel6,rhel7,rhel8,fedora,ol7,ol8
+rationale: '<tt>abrt-addon-python</tt> contains python hook and python analyzer
+
+  plugin for handling uncaught exceptions in python programs.'
+references: {srg: SRG-OS-000095-GPOS-00049}
+severity: low
+template:
+  backends: {}
+  name: package_removed
+  vars: {pkgname: abrt-addon-python}
+title: Uninstall abrt-addon-python Package
+warnings: []

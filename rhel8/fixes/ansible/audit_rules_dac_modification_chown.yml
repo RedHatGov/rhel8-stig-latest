@@ -1,0 +1,221 @@
+# platform = multi_platform_rhel,multi_platform_fedora,multi_platform_ol,multi_platform_rhv
+# reboot = true
+# strategy = restrict
+# complexity = low
+# disruption = low
+- name: Set architecture for audit chown tasks
+  set_fact:
+    audit_arch: b{{ ansible_architecture | regex_replace('.*(\d\d$)','\1') }}
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Search /etc/audit/rules.d for other DAC audit rules
+  find:
+    paths: /etc/audit/rules.d
+    recurse: false
+    contains: -F key=perm_mod$
+    patterns: '*.rules'
+  register: find_chown
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: If existing DAC ruleset not found, use /etc/audit/rules.d/privileged.rules
+    as the recipient for the rule
+  set_fact:
+    all_files:
+      - /etc/audit/rules.d/privileged.rules
+  when:
+    - find_chown.matched is defined and find_chown.matched == 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Use matched file as the recipient for the rule
+  set_fact:
+    all_files:
+      - '{{ find_chown.files | map(attribute=''path'') | list | first }}'
+  when:
+    - find_chown.matched is defined and find_chown.matched > 0
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Inserts/replaces the chown rule in rules.d when on x86
+  lineinfile:
+    path: '{{ all_files[0] }}'
+    line: -a always,exit -F arch=b32 -S chown -F auid>=1000 -F auid!=unset -F key=perm_mod
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Inserts/replaces the chown rule in rules.d when on x86_64
+  lineinfile:
+    path: '{{ all_files[0] }}'
+    line: -a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=unset -F key=perm_mod
+    create: true
+  when:
+    - audit_arch is defined and audit_arch == 'b64'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Inserts/replaces the chown rule in /etc/audit/audit.rules when on x86
+  lineinfile:
+    line: -a always,exit -F arch=b32 -S chown -F auid>=1000 -F auid!=unset -F key=perm_mod
+    state: present
+    dest: /etc/audit/audit.rules
+    create: true
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1
+
+- name: Inserts/replaces the chown rule in audit.rules when on x86_64
+  lineinfile:
+    line: -a always,exit -F arch=b64 -S chown -F auid>=1000 -F auid!=unset -F key=perm_mod
+    state: present
+    dest: /etc/audit/audit.rules
+    create: true
+  when:
+    - audit_arch is defined and audit_arch == 'b64'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - audit_rules_dac_modification_chown
+    - medium_severity
+    - restrict_strategy
+    - low_complexity
+    - low_disruption
+    - reboot_required
+    - CCE-80686-9
+    - NIST-800-53-AC-17(7)
+    - NIST-800-53-AU-1(b)
+    - NIST-800-53-AU-2(a)
+    - NIST-800-53-AU-2(c)
+    - NIST-800-53-AU-2(d)
+    - NIST-800-53-AU-12(a)
+    - NIST-800-53-AU-12(c)
+    - NIST-800-53-IR-5
+    - NIST-800-171-3.1.7
+    - PCI-DSS-Req-10.5.5
+    - CJIS-5.4.1.1

@@ -1,0 +1,21 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Remove tftp Daemon
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - disable_strategy
+    - high_severity
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - package_tftp_removed
+  tasks:
+
+    - name: Ensure tftp is removed
+      package:
+        name: tftp
+        state: absent

@@ -1,0 +1,56 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable At Service (atd)
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-80871-7
+    - NIST-800-53-CM-7
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - medium_severity
+    - no_reboot_needed
+    - service_atd_disabled
+  tasks:
+
+    - name: Disable service atd
+      block:
+
+        - name: Gather the service facts
+          service_facts: null
+
+        - name: Disable service atd
+          systemd:
+            name: atd.service
+            enabled: 'no'
+            state: stopped
+            masked: 'yes'
+          when: '"atd.service" in ansible_facts.services'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Unit Socket Exists - atd.socket
+      command: systemctl list-unit-files atd.socket
+      args:
+        warn: false
+      register: socket_file_exists
+      changed_when: false
+      ignore_errors: true
+      check_mode: false
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type
+        != "docker"
+
+    - name: Disable socket atd
+      systemd:
+        name: atd.socket
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when:
+        - '"atd.socket" in socket_file_exists.stdout_lines[1]'
+        - ansible_virtualization_role != "guest" or ansible_virtualization_type !=
+          "docker"

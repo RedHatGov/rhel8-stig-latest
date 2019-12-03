@@ -1,0 +1,108 @@
+description: "The <tt>telnet</tt> service configuration file <tt>/etc/xinetd.d/telnet</tt>\n\
+  is not created automatically. If it was created manually, check the\n<tt>/etc/xinetd.d/telnet</tt>\
+  \ file and ensure that <tt>disable = no</tt>\nis changed to read <tt>disable = yes</tt>\
+  \ as follows below:\n<pre>\n# description: The telnet server serves telnet sessions;\
+  \ it uses \\\\\n#       unencrypted username/password pairs for authentication.\n\
+  service telnet\n{\n        flags           = REUSE\n        socket_type     = stream\n\
+  \n        wait            = no\n        user            = root\n        server \
+  \         = /usr/sbin/in.telnetd\n        log_on_failure  += USERID\n        disable\
+  \         = yes\n}\n</pre>\nIf the <tt>/etc/xinetd.d/telnet</tt> file does not exist,\
+  \ make sure that\nthe activation of the <tt>telnet</tt> service on system boot is\
+  \ disabled\nvia the following command:\n\nThe <code>rexec</code> socket can be disabled\
+  \ with the following command:\n<pre>$ sudo systemctl disable rexec.socket</pre>\n\
+  The <code>rexec</code> socket can be masked with the following command:\n<pre>$\
+  \ sudo systemctl mask .socket</pre>"
+identifiers: {cce: 80887-3}
+ocil: '
+
+  To check that the <code>telnet</code> service is disabled in system boot configuration
+  with xinetd, run the following command:
+
+  <pre>$ chkconfig <code>telnet</code> --list</pre>
+
+  Output should indicate the <code>telnet</code> service has either not been installed,
+  or has been disabled, as shown in the example below:
+
+  <pre>$ chkconfig <code>telnet</code> --list
+
+
+  Note: This output shows SysV services only and does not include native
+
+  systemd services. SysV configuration data might be overridden by native
+
+  systemd configuration.
+
+
+  If you want to list systemd services use ''systemctl list-unit-files''.
+
+  To see services enabled on particular target use
+
+  ''systemctl list-dependencies [target]''.
+
+
+  <code>telnet</code>       off</pre>
+
+
+  To check that the <code>telnet</code> socket is disabled in system boot configuration
+  with systemd, run the following command:
+
+  <pre>$ systemctl is-enabled <code>telnet</code></pre>
+
+  Output should indicate the <code>telnet</code> socket has either not been installed,
+
+  or has been disabled at all runlevels, as shown in the example below:
+
+  <pre>$ systemctl is-enabled <code>telnet</code><br/>disabled</pre>
+
+
+  Run the following command to verify <code>telnet</code> is not active (i.e. not
+  running) through current runtime configuration:
+
+  <pre>systemctl is-active telnet</pre>
+
+
+  If the socket is not running the command will return the following output:
+
+  <pre>inactive</pre>
+
+
+  By default the socket will also be masked, to check that the <code>telnet</code>
+  is masked, run the following command:
+
+  <pre>$ systemctl show <code>telnet</code> | grep "LoadState\|UnitFileState"</pre>
+
+
+  If the socket is masked the command will return the following outputs:
+
+
+  <pre>LoadState=masked</pre>
+
+
+  <pre>UnitFileState=masked</pre>'
+ocil_clause: service and/or socket are running
+oval_external_content: null
+platform: machine
+prodtype: rhel6,rhel7,rhel8,ol7,ol8,rhv4
+rationale: 'The telnet protocol uses unencrypted network communication, which
+
+  means that data from the login session, including passwords and
+
+  all other information transmitted during the session, can be
+
+  stolen by eavesdroppers on the network. The telnet protocol is also
+
+  subject to man-in-the-middle attacks.'
+references: {cis: 2.2.18, cis-csc: '1,11,12,14,15,16,3,5,8,9', cobit5: 'APO13.01,BAI10.01,BAI10.02,BAI10.03,BAI10.05,DSS01.04,DSS05.02,DSS05.03,DSS05.04,DSS05.05,DSS05.07,DSS05.10,DSS06.03,DSS06.06,DSS06.10',
+  cui: '3.1.13,3.4.7', hipaa: '164.308(a)(4)(i),164.308(b)(1),164.308(b)(3),164.310(b),164.312(e)(1),164.312(e)(2)(ii)',
+  isa-62443-2009: '4.3.3.2.2,4.3.3.5.1,4.3.3.5.2,4.3.3.5.3,4.3.3.5.4,4.3.3.5.5,4.3.3.5.6,4.3.3.5.7,4.3.3.5.8,4.3.3.6.1,4.3.3.6.2,4.3.3.6.3,4.3.3.6.4,4.3.3.6.5,4.3.3.6.6,4.3.3.6.7,4.3.3.6.8,4.3.3.6.9,4.3.3.7.1,4.3.3.7.2,4.3.3.7.3,4.3.3.7.4,4.3.4.3.2,4.3.4.3.3',
+  isa-62443-2013: 'SR 1.1,SR 1.10,SR 1.11,SR 1.12,SR 1.13,SR 1.2,SR 1.3,SR 1.4,SR
+    1.5,SR 1.6,SR 1.7,SR 1.8,SR 1.9,SR 2.1,SR 2.2,SR 2.3,SR 2.4,SR 2.5,SR 2.6,SR 2.7,SR
+    3.1,SR 3.5,SR 3.8,SR 4.1,SR 4.3,SR 5.1,SR 5.2,SR 5.3,SR 7.1,SR 7.6', iso27001-2013: 'A.11.2.6,A.12.1.2,A.12.5.1,A.12.6.2,A.13.1.1,A.13.2.1,A.14.1.3,A.14.2.2,A.14.2.3,A.14.2.4,A.18.1.4,A.6.2.1,A.6.2.2,A.7.1.1,A.9.1.2,A.9.2.1,A.9.2.2,A.9.2.3,A.9.2.4,A.9.2.6,A.9.3.1,A.9.4.2,A.9.4.3',
+  nist: 'AC-17(8),CM-7,IA-5(1)(c)', nist-csf: 'PR.AC-1,PR.AC-3,PR.AC-6,PR.AC-7,PR.IP-1,PR.PT-3,PR.PT-4'}
+severity: high
+template:
+  backends: {}
+  name: service_disabled
+  vars: {servicename: telnet}
+title: Disable telnet Service
+warnings: []

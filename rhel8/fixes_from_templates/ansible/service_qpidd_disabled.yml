@@ -1,0 +1,34 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service qpidd
+  block:
+  - name: Gather the service facts
+    service_facts:
+
+  - name: Disable service qpidd
+    systemd:
+      name: "qpidd.service"
+      enabled: "no"
+      state: "stopped"
+      masked: "yes"
+    when: '"qpidd.service" in ansible_facts.services'
+
+- name: "Unit Socket Exists - qpidd.socket"
+  command: systemctl list-unit-files qpidd.socket
+  args:
+    warn: False
+  register: socket_file_exists
+  changed_when: False
+  ignore_errors: True
+  check_mode: False
+
+- name: Disable socket qpidd
+  systemd:
+    name: "qpidd.socket"
+    enabled: "no"
+    state: "stopped"
+    masked: "yes"
+  when: '"qpidd.socket" in socket_file_exists.stdout_lines[1]'

@@ -1,0 +1,22 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Uninstall nfs-utils Package
+  hosts: '@@HOSTS@@'
+  become: true
+  tags:
+    - CCE-82932-5
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - low_severity
+    - no_reboot_needed
+    - package_nfs-utils_removed
+  tasks:
+
+    - name: Ensure nfs-utils is removed
+      package:
+        name: nfs-utils
+        state: absent

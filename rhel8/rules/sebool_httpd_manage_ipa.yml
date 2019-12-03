@@ -1,0 +1,33 @@
+description: 'By default, the SELinux boolean <tt>httpd_manage_ipa</tt> is disabled.
+
+  If this setting is enabled, it should be disabled.
+
+
+  To disable the <code>httpd_manage_ipa</code> SELinux boolean, run the following
+  command:
+
+  <pre>$ sudo setsebool -P httpd_manage_ipa off</pre>'
+identifiers: {}
+ocil: '
+
+  Run the following command to determine if the <code>httpd_manage_ipa</code> SELinux
+  boolean is disabled:
+
+  <pre>$ getsebool httpd_manage_ipa</pre>
+
+  If properly configured, the output should show the following:
+
+  <code>httpd_manage_ipa --> off</code>'
+ocil_clause: httpd_manage_ipa is not disabled
+oval_external_content: null
+platform: machine
+prodtype: rhel7,rhel8
+rationale: ''
+references: {}
+severity: medium
+template:
+  backends: {}
+  name: sebool
+  vars: {seboolid: httpd_manage_ipa}
+title: Disable the httpd_manage_ipa SELinux Boolean
+warnings: []

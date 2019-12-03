@@ -1,0 +1,18 @@
+description: The audit package should be installed.
+identifiers: {cce: 81043-2}
+ocil: null
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: all
+rationale: The auditd service is an access monitoring and accounting daemon, watching
+  system calls to audit any access, in comparison with potential local access control
+  policy such as SELinux policy.
+references: {anssi: NT28(R50), nist: 'AU-7(a),AU-7(b),AU-7(1),AU-10', srg: 'SRG-OS-000480-GPOS-00227,SRG-OS-000122-GPOS-00063'}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: audit}
+title: Ensure the audit Subsystem is Installed
+warnings: []

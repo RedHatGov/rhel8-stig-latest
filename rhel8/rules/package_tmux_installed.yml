@@ -1,0 +1,51 @@
+description: 'To enable console screen locking, install the <tt>tmux</tt> package.
+
+  The <code>tmux</code> package can be installed with the following command:
+
+  <pre>
+
+  $ sudo yum install tmux</pre>
+
+  Instruct users to begin new terminal sessions with the following command:
+
+  <pre>$ tmux</pre>
+
+  The console can now be locked with the following key combination:
+
+  <pre>ctrl+b :lock-session</pre>'
+identifiers: {cce: 80644-8}
+ocil: 'Run the following command to determine if the <code>tmux</code> package is
+  installed: <pre>$ rpm -q tmux</pre>'
+ocil_clause: the package is not installed
+oval_external_content: null
+platform: machine
+prodtype: rhel8,fedora,ol8
+rationale: 'A session time-out lock is a temporary action taken when a user stops
+  work and moves away from the immediate
+
+  physical vicinity of the information system but does not logout because of the temporary
+  nature of the absence.
+
+  Rather than relying on the user to manually lock their operation system session
+  prior to vacating the vicinity,
+
+  operating systems need to be able to identify when a user''s session has idled and
+  take action to initiate the
+
+  session lock.
+
+  <br /><br />
+
+  The <tt>tmux</tt> package allows for a session lock to be implemented and configured.'
+references: {cis-csc: '1,12,15,16', cobit5: 'DSS05.04,DSS05.10,DSS06.10', cui: 3.1.10,
+  disa: '58', isa-62443-2009: '4.3.3.6.1,4.3.3.6.2,4.3.3.6.3,4.3.3.6.4,4.3.3.6.5,4.3.3.6.6,4.3.3.6.7,4.3.3.6.8,4.3.3.6.9',
+  isa-62443-2013: 'SR 1.1,SR 1.10,SR 1.2,SR 1.5,SR 1.7,SR 1.8,SR 1.9', iso27001-2013: 'A.18.1.4,A.9.2.1,A.9.2.4,A.9.3.1,A.9.4.2,A.9.4.3',
+  nist: AC-11(a), nist-csf: PR.AC-7, rhel7: FMT_MOF_EXT.1, srg: SRG-OS-000030-GPOS-00011,
+  vmmsrg: SRG-OS-000030-VMM-000110}
+severity: medium
+template:
+  backends: {}
+  name: package_installed
+  vars: {pkgname: tmux}
+title: Install the tmux Package
+warnings: []

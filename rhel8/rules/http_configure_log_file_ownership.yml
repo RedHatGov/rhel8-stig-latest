@@ -1,0 +1,42 @@
+description: 'All <tt>httpd</tt> logs must be owned by root user and group. By default,
+
+  the path for httpd logs is <tt>/var/log/httpd/</tt>
+
+
+  To properly set the owner of <code>/var/log/httpd</code>, run the command:
+
+  <pre>$ sudo chown root /var/log/httpd </pre>
+
+
+  To properly set the owner of <code>/var/log/httpd/*</code>, run the command:
+
+  <pre>$ sudo chown root /var/log/httpd/* </pre>'
+identifiers: {}
+ocil: '
+
+  To properly set the owner of <code>/var/log/httpd</code>, run the command:
+
+  <pre>$ sudo chown root /var/log/httpd </pre>
+
+
+  To properly set the owner of <code>/var/log/httpd/*</code>, run the command:
+
+  <pre>$ sudo chown root /var/log/httpd/* </pre>'
+ocil_clause: null
+oval_external_content: null
+platform: null
+prodtype: rhel7,rhel8
+rationale: 'A major tool in exploring the web site use, attempted use, unusual conditions,
+
+  and problems are the access and error logs. In the event of a security incident,
+
+  these logs can provide the SA and the web administrator with valuable
+
+  information. Because of the information that is captured in the logs, it is
+
+  critical that only authorized individuals have access to the logs.'
+references: {}
+severity: medium
+template: null
+title: HTTPD Log Files Must Be Owned By Root
+warnings: []

@@ -1,0 +1,49 @@
+
+<def-group>
+  <definition class="compliance" id="auditd_local_events" version="1">
+    <metadata>
+      <title>Include Local Events in Audit Logs</title>
+<affected family="unix">
+<platform>Red Hat Enterprise Linux 8</platform>
+</affected>
+      <description>Look for parameter 'local_events' with value '(?i)yes(?-i)' in '/etc/audit/auditd.conf'</description>
+    </metadata>
+    <criteria comment="auditd is configured correctly"
+    operator="OR">
+      <criterion comment="Check the local_events in /etc/audit/auditd.conf"
+      test_ref="test_auditd_local_events" />
+      <criterion comment="Check the absence of local_events in /etc/audit/auditd.conf"
+      test_ref="test_auditd_local_events_default_not_overriden" />
+    </criteria>
+  </definition>
+  
+  <ind:textfilecontent54_test check="all" check_existence="all_exist"
+  comment="tests the value of local_events setting in the /etc/audit/auditd.conf file"
+  id="test_auditd_local_events" version="1">
+  <ind:object object_ref="obj_auditd_local_events" />
+  <ind:state state_ref="state_auditd_local_events" />
+  </ind:textfilecontent54_test>
+  
+  <ind:textfilecontent54_object id="obj_auditd_local_events" version="1">
+    <ind:filepath>/etc/audit/auditd.conf</ind:filepath>
+    <ind:pattern operation="pattern match">^[ \t]*(?i)local_events(?-i)[ \t]*=[ \t]*(.+?)[ \t]*(?:$|#)</ind:pattern>
+    <ind:instance operation="greater than or equal" datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+  
+  <ind:textfilecontent54_state id="state_auditd_local_events" version="1">
+    <ind:subexpression datatype="string" operation="pattern match">^(?i)yes(?-i)$</ind:subexpression>
+  </ind:textfilecontent54_state>
+  
+  <ind:textfilecontent54_test check="all" check_existence="none_exist"
+  comment="tests the absence of local_events setting in the /etc/audit/auditd.conf file"
+  id="test_auditd_local_events_default_not_overriden" version="1">
+  <ind:object object_ref="obj_auditd_local_events_default_not_overriden" />
+  </ind:textfilecontent54_test>
+  
+  <ind:textfilecontent54_object id="obj_auditd_local_events_default_not_overriden" version="1">
+    <ind:filepath>/etc/audit/auditd.conf</ind:filepath>
+    <ind:pattern operation="pattern match">^[ \t]*(?i)local_events(?-i)[ \t]*=[ \t]*</ind:pattern>
+    <ind:instance operation="greater than or equal" datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+</def-group>

@@ -1,0 +1,39 @@
+description: 'Configure the audispd plugin to off-load audit records onto a different
+
+  system or media from the system being audited.
+
+  Set the <tt>remote_server</tt> option in <pre>/etc/audit/audisp-remote.conf</pre>
+
+  with an IP address or hostname of the system that the audispd plugin should
+
+  send audit records to. For example
+
+  <pre>remote_server = <i><sub idref="var_audispd_remote_server" /></i></pre>'
+identifiers: {cce: 80925-1}
+ocil: 'To verify the audispd plugin off-loads audit records onto a different system
+  or
+
+  media from the system being audited, run the following command:
+
+
+  <pre>$ sudo grep -i remote_server /etc/audit/audisp-remote.conf</pre>
+
+
+  The output should return something similar to
+
+  <pre>remote_server = <i><sub idref="var_audispd_remote_server" /></i></pre>'
+ocil_clause: audispd is not sending logs to a remote system
+oval_external_content: null
+platform: machine
+prodtype: wrlinux1019,rhel7,rhel8,fedora,ol7,ol8,rhv4,ocp4
+rationale: 'Information stored in one location is vulnerable to accidental or incidental
+
+  deletion or alteration.Off-loading is a common process in information systems
+
+  with limited audit storage capacity.'
+references: {disa: '1851', ospp: FAU_GEN.1.1.c, srg: 'SRG-OS-000342-GPOS-00133,SRG-OS-000479-GPOS-00224',
+  vmmsrg: 'SRG-OS-000051-VMM-000230,SRG-OS-000058-VMM-000270,SRG-OS-000059-VMM-000280,SRG-OS-000479-VMM-001990,SRG-OS-000479-VMM-001990'}
+severity: medium
+template: null
+title: Configure audispd Plugin To Send Logs To Remote Server
+warnings: []

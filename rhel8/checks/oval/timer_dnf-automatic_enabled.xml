@@ -1,0 +1,47 @@
+<def-group>
+
+
+
+  <definition class="compliance" id="timer_dnf-automatic_enabled" version="1">
+    <metadata>
+      <title>Timer dnf-automatic Enabled</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <description>The dnf-automatic timer should be enabled if possible.</description>
+    </metadata>
+    <criteria comment="package dnf-automatic installed and timer dnf-automatic is configured to start" operator="AND">
+      <extend_definition comment="dnf-automatic installed" definition_ref="package_dnf-automatic_installed" />
+      <criteria comment="timer dnf-automatic is configured to start and is running" operator="AND">
+        <criterion comment="dnf-automatic is running" test_ref="test_timer_running_dnf-automatic" />
+        <criterion comment="multi-user.target wants dnf-automatic" test_ref="test_multi_user_wants_dnf-automatic" />
+      </criteria>
+    </criteria>
+  </definition>
+
+  <linux:systemdunitdependency_test check="all" check_existence="any_exist" comment="systemd test" id="test_multi_user_wants_dnf-automatic" version="1">
+    <linux:object object_ref="object_multi_user_target_for_dnf-automatic_enabled" />
+    <linux:state state_ref="state_systemd_dnf-automatic_on"/>
+  </linux:systemdunitdependency_test>
+  <linux:systemdunitdependency_object id="object_multi_user_target_for_dnf-automatic_enabled" comment="list of dependencies of multi-user.target" version="1">
+    <linux:unit>multi-user.target</linux:unit>
+  </linux:systemdunitdependency_object>
+  <linux:systemdunitdependency_state id="state_systemd_dnf-automatic_on" comment="dnf-automatic listed at least once in the dependencies" version="1">
+    <linux:dependency entity_check="at least one">dnf-automatic.timer</linux:dependency>
+  </linux:systemdunitdependency_state>
+
+  <linux:systemdunitproperty_test id="test_timer_running_dnf-automatic" check="at least one" check_existence="at_least_one_exists" comment="Test that the dnf-automatic timer is running" version="1">
+    <linux:object object_ref="obj_timer_running_dnf-automatic"/>
+    <linux:state state_ref="state_timer_running_dnf-automatic"/>
+  </linux:systemdunitproperty_test>
+  <linux:systemdunitproperty_object id="obj_timer_running_dnf-automatic" comment="Retrieve the ActiveState property of dnf-automatic" version="1">
+    <linux:unit operation="pattern match">dnf-automatic\.timer</linux:unit>
+    <linux:property>ActiveState</linux:property>
+  </linux:systemdunitproperty_object>
+  <linux:systemdunitproperty_state id="state_timer_running_dnf-automatic" version="1" comment="dnf-automatic is running">
+      <linux:value>active</linux:value>
+  </linux:systemdunitproperty_state>
+
+
+
+</def-group>

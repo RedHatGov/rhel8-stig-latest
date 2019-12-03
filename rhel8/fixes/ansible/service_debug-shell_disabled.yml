@@ -1,0 +1,66 @@
+# platform = multi_platform_all
+# reboot = false
+# strategy = disable
+# complexity = low
+# disruption = low
+- name: Disable service debug-shell
+  block:
+
+    - name: Gather the service facts
+      service_facts: null
+
+    - name: Disable service debug-shell
+      systemd:
+        name: debug-shell.service
+        enabled: 'no'
+        state: stopped
+        masked: 'yes'
+      when: '"debug-shell.service" in ansible_facts.services'
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_debug-shell_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80876-6
+    - NIST-800-171-3.4.5
+
+- name: Unit Socket Exists - debug-shell.socket
+  command: systemctl list-unit-files debug-shell.socket
+  args:
+    warn: false
+  register: socket_file_exists
+  changed_when: false
+  ignore_errors: true
+  check_mode: false
+  when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_debug-shell_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80876-6
+    - NIST-800-171-3.4.5
+
+- name: Disable socket debug-shell
+  systemd:
+    name: debug-shell.socket
+    enabled: 'no'
+    state: stopped
+    masked: 'yes'
+  when:
+    - '"debug-shell.socket" in socket_file_exists.stdout_lines[1]'
+    - ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+  tags:
+    - service_debug-shell_disabled
+    - medium_severity
+    - disable_strategy
+    - low_complexity
+    - low_disruption
+    - no_reboot_needed
+    - CCE-80876-6
+    - NIST-800-171-3.4.5
