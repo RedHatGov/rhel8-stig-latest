@@ -1,10 +1,9 @@
 name: Build
-on:
-  schedule:
-  - cron: "0 0 * * *"
+on: [push]
 jobs:
-  report:
-    runs-on: fedora-latest
+  build:
+    name: build
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - name: Make
