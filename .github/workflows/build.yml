@@ -20,7 +20,7 @@ jobs:
           COMMIT_MESSAGE: Automated content rebuild
           COMMIT_AUTHOR_EMAIL: isimluk@fedorapeople.org
           COMMIT_AUTHOR_NAME: Github Actions Automation
-          PULL_REQUEST_TITLE: 'Automated build of opencontrol data'
+          PULL_REQUEST_TITLE: 'Automated build of ComplianceAsContent/content rhel8'
           PULL_REQUEST_BODY: |
             Automated content re-build.
           PULL_REQUEST_BRANCH: update-rebuild
