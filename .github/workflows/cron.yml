@@ -26,6 +26,6 @@ jobs:
           PULL_REQUEST_BODY: |
             Automated content re-build.
           PULL_REQUEST_BRANCH: update-rebuild
-          BRANCH_SUFFIX: short-commit-hash
+          BRANCH_SUFFIX: timestamp
       - name: Check output environment variable
         run: echo "Pull Request Number - $PULL_REQUEST_NUMBER"
