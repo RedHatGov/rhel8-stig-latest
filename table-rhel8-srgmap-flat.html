@@ -6708,66 +6708,29 @@ Techniques used to address this include protocols using nonces (e.g., numbers ge
 <td>SRG-OS-000114-GPOS-00059</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must uniquely identify peripherals before establishing a connection.</td>
-<td>CCE-82274-2: Authorize Human Interface Devices in USBGuard daemon</td>
+<td>CCE-82368-2: Authorize Human Interface Devices and USB hubs in USBGuard daemon</td>
 <td>Without identifying devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity.
 
 Peripherals include, but are not limited to, such devices as flash drives, external storage, and printers.</td>
-<td xml:lang="en-US">To allow authorization of Human Interface Devices (keyboard, mouse)
+<td xml:lang="en-US">To allow authorization of USB devices combining human interface device and hub capabilities
 by USBGuard daemon,
-add lines
-<code>allow with-interface equals { 03:*:* }</code>
-and
-<code>allow with-interface equals { 03:*:* 03:*:* }</code>
+add the line
+<code>allow with-interface match_all { 03:*:* 09:00:* }</code>
 to <code>/etc/usbguard/rules.conf</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system uniquely identifies peripherals before establishing a connection. If it does not, this is a finding.</td>
-<td>To verify that USB Human Interface Devices will be authorized by the USBGuard daemon,
+<td>To verify that USB Human Interface Devices and hubs will be authorized by the USBGuard daemon,
 run the following command:
 $ sudo grep allow /etc/usbguard/rules.conf
 The output lines should include
-allow with-interface equals { 03:*:* }
-allow with-interface equals { 03:*:* 03:*:* }
-      Is it the case that USB devices of class 3 are not authorized?
+allow with-interface match-all { 03:*:* 09:00:* }
+      Is it the case that USB devices of class 3 and 9:00 are not authorized?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61665r1_fix">Configure the operating system to uniquely identify peripherals before establishing a connection.</fixtext></td>
-<td>To allow authorization of Human Interface Devices (keyboard, mouse)
+<td>To allow authorization of USB devices combining human interface device and hub capabilities
 by USBGuard daemon,
-add lines
-allow with-interface equals { 03:*:* }
-and
-allow with-interface equals { 03:*:* 03:*:* }
-to /etc/usbguard/rules.conf.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000778</td>
-<td>SRG-OS-000114-GPOS-00059</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must uniquely identify peripherals before establishing a connection.</td>
-<td>CCE-82273-4: Authorize USB hubs in USBGuard daemon</td>
-<td>Without identifying devices, unidentified or unknown devices may be introduced, thereby facilitating malicious activity.
-
-Peripherals include, but are not limited to, such devices as flash drives, external storage, and printers.</td>
-<td xml:lang="en-US">To allow authorization of USB hub devices by USBGuard daemon,
-add line
-<code>allow with-interface equals { 09:00:* }</code>
-to <code>/etc/usbguard/rules.conf</code>.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system uniquely identifies peripherals before establishing a connection. If it does not, this is a finding.</td>
-<td>To verify that USB hubs will be authorized by the USBGuard daemon,
-run the following command:
-$ sudo grep allow /etc/usbguard/rules.conf
-One of the output lines should be
-allow with-interface equals { 09:00:* }
-      Is it the case that USB devices of class 9 are not authorized?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61665r1_fix">Configure the operating system to uniquely identify peripherals before establishing a connection.</fixtext></td>
-<td>To allow authorization of USB hub devices by USBGuard daemon,
-add line
-allow with-interface equals { 09:00:* }
+add the line
+allow with-interface match_all { 03:*:* 09:00:* }
 to /etc/usbguard/rules.conf.</td>
 <td>medium</td>
 <td></td>
