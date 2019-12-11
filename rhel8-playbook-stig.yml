@@ -2670,6 +2670,7 @@ Red Hat technologies that are based on Red Hat Enterprise Linux 8, such as:
         value: '1'
         state: present
         reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
       tags:
         - sysctl_fs_protected_hardlinks
         - unknown_severity
@@ -2686,6 +2687,7 @@ Red Hat technologies that are based on Red Hat Enterprise Linux 8, such as:
         value: '1'
         state: present
         reload: true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
       tags:
         - sysctl_fs_protected_symlinks
         - unknown_severity
@@ -3381,6 +3383,7 @@ Red Hat technologies that are based on Red Hat Enterprise Linux 8, such as:
         dest: /etc/modprobe.d/tipc.conf
         regexp: tipc
         line: install tipc /bin/true
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
       tags:
         - kernel_module_tipc_disabled
         - medium_severity
@@ -5290,6 +5293,31 @@ Red Hat technologies that are based on Red Hat Enterprise Linux 8, such as:
         - low_disruption
         - no_reboot_needed
         - CCE-82191-8
+        - NIST-800-53-SI-4(22)
+
+    - name: Enable service fapolicyd
+      block:
+
+        - name: Gather the package facts
+          package_facts:
+            manager: auto
+
+        - name: Enable service fapolicyd
+          service:
+            name: fapolicyd
+            enabled: 'yes'
+            state: started
+          when:
+            - '"fapolicyd" in ansible_facts.packages'
+      when: ansible_virtualization_role != "guest" or ansible_virtualization_type != "docker"
+      tags:
+        - service_fapolicyd_enabled
+        - medium_severity
+        - enable_strategy
+        - low_complexity
+        - low_disruption
+        - no_reboot_needed
+        - CCE-82249-4
         - NIST-800-53-SI-4(22)
 
     - name: Test for domain group
