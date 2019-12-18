@@ -3927,78 +3927,6 @@ automatic session locking. It should be started from
 <td>SRG-OS-000033-GPOS-00014</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.</td>
-<td>CCE-82225-4: Harden SSH client Crypto Policy</td>
-<td>Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
-
-Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
-
-Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the <code>/etc/ssh/ssh_config.d/</code> so that it is loaded before the <code>05-redhat.conf</code>. In this case it is file named <code>02-ospp.conf</code> containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH Client uses defined Crypto Policy, run:
-$ cat /etc/ssh/ssh_config.d/02-ospp.conf
-and verify that the line matches
-Match final all
-RekeyLimit 512M 1h
-GSSAPIAuthentication no
-Ciphers aes256-ctr,aes256-cbc,aes128-ctr,aes128-cbc
-PubkeyAcceptedKeyTypes ssh-rsa,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group14-sha1
-      Is it the case that Crypto Policy for OpenSSH Client is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61537r1_fix">Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the /etc/ssh/ssh_config.d/ so that it is loaded before the 05-redhat.conf. In this case it is file named 02-ospp.conf containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000068</td>
-<td>SRG-OS-000033-GPOS-00014</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.</td>
-<td>CCE-82176-9: Harden SSHD Crypto Policy</td>
-<td>Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
-
-Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
-
-Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named <code>opensshserver-xxx.config</code>, replacing <code>xxx</code> with arbitrary identifier, into <code>/etc/crypto-policies/local.d</code>. This has to be followed by running <code>update-crypto-policies</code> so that changes are applied.
-Changes are propagated into <code>/etc/crypto-policies/back-ends/opensshserver.config</code>. This rule checks if this file contains predefined <code>CRYPTO_POLICY</code> environment variable configured with predefined value.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH server uses defined Crypto Policy, run:
-$ grep 'CRYPTO_POLICY' /etc/crypto-policies/back-ends/opensshserver.config | tail -n 1
-and verify that the line matches
-CRYPTO_POLICY='-oCiphers=aes128-ctr,aes256-ctr,aes128-cbc,aes256-cbc -oMACs=hmac-sha2-256,hmac-sha2-512 -oGSSAPIKeyExchange=no -oKexAlgorithms=diffie-hellman-group14-sha1,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521 -oHostKeyAlgorithms=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384 -oPubkeyAcceptedKeyTypes=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384'
-      Is it the case that Crypto Policy for OpenSSH Server is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61537r1_fix">Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named opensshserver-xxx.config, replacing xxx with arbitrary identifier, into /etc/crypto-policies/local.d. This has to be followed by running update-crypto-policies so that changes are applied.
-Changes are propagated into /etc/crypto-policies/back-ends/opensshserver.config. This rule checks if this file contains predefined CRYPTO_POLICY environment variable configured with predefined value.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000068</td>
-<td>SRG-OS-000033-GPOS-00014</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.</td>
 <td>CCE-80937-6: Configure Libreswan to use System Crypto Policy</td>
 <td>Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
 
@@ -6910,7 +6838,8 @@ Furthermore, the system running in FIPS mode should be FIPS certified by NIST.</
 <td xml:lang="en-US">To configure the system cryptography policy to use ciphers only from the <code><ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></code>
 policy, run the following command:
 <pre>$ sudo update-crypto-policies --set <ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></pre>
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.</td>
 <td>To verify that cryptography policy has been configured correctly, run the
@@ -6926,16 +6855,14 @@ $ ls -l /etc/crypto-policies/back-ends/ | grep '^[^l]' | tail -n +2 | awk -F' ' 
 Subsequently, check if matching libraries have drop in files in the /etc/crypto-policies/local.d directory.
 $ ls /etc/crypto-policies/local.d/ | awk -F'-' '{print $1}' | uniq | sort
 Outputs of two previous commands should match.
-Now check if all symbolic links from the /etc/crypto-policies/back-ends/ are pointing into the /usr/share/crypto-policies/ directory.
-$ find /etc/crypto-policies/back-ends/ -type l -ls | grep -v '/usr/share/crypto-policies/'
-No output is expected.
       Is it the case that cryptographic policy is not configured or is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61679r1_fix">Configure the operating system to implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</fixtext></td>
 <td>To configure the system cryptography policy to use ciphers only from the 
 policy, run the following command:
 $ sudo update-crypto-policies --set 
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -7003,39 +6930,6 @@ set up to ignore it.
 To check that Crypto Policies settings for Kerberos are configured correctly, examine that there is a symlink at
 /etc/krb5.conf.d/crypto-policies targeting /etc/cypto-policies/back-ends/krb5.config.
 If the symlink exists, kerberos is configured to use the system-wide crypto policy settings.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000803</td>
-<td>SRG-OS-000120-GPOS-00061</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.</td>
-<td>CCE-82176-9: Harden SSHD Crypto Policy</td>
-<td>Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised.
-
-Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to cryptographic modules. 
-
-FIPS 140-2 is the current standard for validating that mechanisms used to access cryptographic modules utilize authentication that meets DoD requirements. This allows for Security Levels 1, 2, 3, or 4 for use on a general purpose computing system.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named <code>opensshserver-xxx.config</code>, replacing <code>xxx</code> with arbitrary identifier, into <code>/etc/crypto-policies/local.d</code>. This has to be followed by running <code>update-crypto-policies</code> so that changes are applied.
-Changes are propagated into <code>/etc/crypto-policies/back-ends/opensshserver.config</code>. This rule checks if this file contains predefined <code>CRYPTO_POLICY</code> environment variable configured with predefined value.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH server uses defined Crypto Policy, run:
-$ grep 'CRYPTO_POLICY' /etc/crypto-policies/back-ends/opensshserver.config | tail -n 1
-and verify that the line matches
-CRYPTO_POLICY='-oCiphers=aes128-ctr,aes256-ctr,aes128-cbc,aes256-cbc -oMACs=hmac-sha2-256,hmac-sha2-512 -oGSSAPIKeyExchange=no -oKexAlgorithms=diffie-hellman-group14-sha1,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521 -oHostKeyAlgorithms=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384 -oPubkeyAcceptedKeyTypes=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384'
-      Is it the case that Crypto Policy for OpenSSH Server is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61681r1_fix">Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named opensshserver-xxx.config, replacing xxx with arbitrary identifier, into /etc/crypto-policies/local.d. This has to be followed by running update-crypto-policies so that changes are applied.
-Changes are propagated into /etc/crypto-policies/back-ends/opensshserver.config. This rule checks if this file contains predefined CRYPTO_POLICY environment variable configured with predefined value.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -7207,47 +7101,6 @@ from correctly detecting that the user is idle.</td>
 <td>SRG-OS-000394-GPOS-00174</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</td>
-<td>CCE-82225-4: Harden SSH client Crypto Policy</td>
-<td>Privileged access contains control and configuration information and is particularly sensitive, so additional protections are necessary. This is maintained by using cryptographic mechanisms such as encryption to protect confidentiality.
-
-Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection. 
-
-This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system (e.g., the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch).
-
-The operating system can meet this requirement through leveraging a cryptographic module.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the <code>/etc/ssh/ssh_config.d/</code> so that it is loaded before the <code>05-redhat.conf</code>. In this case it is file named <code>02-ospp.conf</code> containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH Client uses defined Crypto Policy, run:
-$ cat /etc/ssh/ssh_config.d/02-ospp.conf
-and verify that the line matches
-Match final all
-RekeyLimit 512M 1h
-GSSAPIAuthentication no
-Ciphers aes256-ctr,aes256-cbc,aes128-ctr,aes128-cbc
-PubkeyAcceptedKeyTypes ssh-rsa,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group14-sha1
-      Is it the case that Crypto Policy for OpenSSH Client is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61685r1_fix">Configure the operating system to implement cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the /etc/ssh/ssh_config.d/ so that it is loaded before the 05-redhat.conf. In this case it is file named 02-ospp.conf containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-003123</td>
-<td>SRG-OS-000394-GPOS-00174</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</td>
 <td>CCE-80935-0: Configure System Cryptography Policy</td>
 <td>Privileged access contains control and configuration information and is particularly sensitive, so additional protections are necessary. This is maintained by using cryptographic mechanisms such as encryption to protect confidentiality.
 
@@ -7259,7 +7112,8 @@ The operating system can meet this requirement through leveraging a cryptographi
 <td xml:lang="en-US">To configure the system cryptography policy to use ciphers only from the <code><ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></code>
 policy, run the following command:
 <pre>$ sudo update-crypto-policies --set <ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></pre>
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions. If it does not, this is a finding.</td>
 <td>To verify that cryptography policy has been configured correctly, run the
@@ -7275,16 +7129,14 @@ $ ls -l /etc/crypto-policies/back-ends/ | grep '^[^l]' | tail -n +2 | awk -F' ' 
 Subsequently, check if matching libraries have drop in files in the /etc/crypto-policies/local.d directory.
 $ ls /etc/crypto-policies/local.d/ | awk -F'-' '{print $1}' | uniq | sort
 Outputs of two previous commands should match.
-Now check if all symbolic links from the /etc/crypto-policies/back-ends/ are pointing into the /usr/share/crypto-policies/ directory.
-$ find /etc/crypto-policies/back-ends/ -type l -ls | grep -v '/usr/share/crypto-policies/'
-No output is expected.
       Is it the case that cryptographic policy is not configured or is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61685r1_fix">Configure the operating system to implement cryptographic mechanisms to protect the confidentiality of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</fixtext></td>
 <td>To configure the system cryptography policy to use ciphers only from the 
 policy, run the following command:
 $ sudo update-crypto-policies --set 
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -7308,45 +7160,6 @@ Non-organizational users shall be uniquely identified and authenticated for all 
 <td>SRG-OS-000393-GPOS-00173</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</td>
-<td>CCE-82225-4: Harden SSH client Crypto Policy</td>
-<td>Privileged access contains control and configuration information and is particularly sensitive, so additional protections are necessary. This is maintained by using cryptographic mechanisms, such as a hash function or digital signature, to protect integrity. 
-
-Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection. 
-
-The operating system can meet this requirement through leveraging a cryptographic module. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system (e.g., the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch).</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the <code>/etc/ssh/ssh_config.d/</code> so that it is loaded before the <code>05-redhat.conf</code>. In this case it is file named <code>02-ospp.conf</code> containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH Client uses defined Crypto Policy, run:
-$ cat /etc/ssh/ssh_config.d/02-ospp.conf
-and verify that the line matches
-Match final all
-RekeyLimit 512M 1h
-GSSAPIAuthentication no
-Ciphers aes256-ctr,aes256-cbc,aes128-ctr,aes128-cbc
-PubkeyAcceptedKeyTypes ssh-rsa,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group14-sha1
-      Is it the case that Crypto Policy for OpenSSH Client is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61689r1_fix">Configure the operating system to implement cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the /etc/ssh/ssh_config.d/ so that it is loaded before the 05-redhat.conf. In this case it is file named 02-ospp.conf containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-002890</td>
-<td>SRG-OS-000393-GPOS-00173</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</td>
 <td>CCE-80935-0: Configure System Cryptography Policy</td>
 <td>Privileged access contains control and configuration information and is particularly sensitive, so additional protections are necessary. This is maintained by using cryptographic mechanisms, such as a hash function or digital signature, to protect integrity. 
 
@@ -7356,7 +7169,8 @@ The operating system can meet this requirement through leveraging a cryptographi
 <td xml:lang="en-US">To configure the system cryptography policy to use ciphers only from the <code><ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></code>
 policy, run the following command:
 <pre>$ sudo update-crypto-policies --set <ns0:sub xmlns:ns0="http://checklists.nist.gov/xccdf/1.1" idref="var_system_crypto_policy"></ns0:sub></pre>
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the <code>/etc/crypto-policies/back-ends</code> are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions. If it does not, this is a finding.</td>
 <td>To verify that cryptography policy has been configured correctly, run the
@@ -7372,16 +7186,14 @@ $ ls -l /etc/crypto-policies/back-ends/ | grep '^[^l]' | tail -n +2 | awk -F' ' 
 Subsequently, check if matching libraries have drop in files in the /etc/crypto-policies/local.d directory.
 $ ls /etc/crypto-policies/local.d/ | awk -F'-' '{print $1}' | uniq | sort
 Outputs of two previous commands should match.
-Now check if all symbolic links from the /etc/crypto-policies/back-ends/ are pointing into the /usr/share/crypto-policies/ directory.
-$ find /etc/crypto-policies/back-ends/ -type l -ls | grep -v '/usr/share/crypto-policies/'
-No output is expected.
       Is it the case that cryptographic policy is not configured or is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61689r1_fix">Configure the operating system to implement cryptographic mechanisms to protect the integrity of nonlocal maintenance and diagnostic communications, when used for nonlocal maintenance sessions.</fixtext></td>
 <td>To configure the system cryptography policy to use ciphers only from the 
 policy, run the following command:
 $ sudo update-crypto-policies --set 
-The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.</td>
+The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
+Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -9901,45 +9713,6 @@ cp /usr/share/doc/audit*/rules/{10-base-config,11-loginuid,30-ospp-v42,43-module
 <td>SRG-OS-000250-GPOS-00093</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
-<td>CCE-82225-4: Harden SSH client Crypto Policy</td>
-<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
-
-Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
-
-Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the <code>/etc/ssh/ssh_config.d/</code> so that it is loaded before the <code>05-redhat.conf</code>. In this case it is file named <code>02-ospp.conf</code> containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH Client uses defined Crypto Policy, run:
-$ cat /etc/ssh/ssh_config.d/02-ospp.conf
-and verify that the line matches
-Match final all
-RekeyLimit 512M 1h
-GSSAPIAuthentication no
-Ciphers aes256-ctr,aes256-cbc,aes128-ctr,aes128-cbc
-PubkeyAcceptedKeyTypes ssh-rsa,ecdsa-sha2-nistp384,ecdsa-sha2-nistp256
-MACs hmac-sha2-512,hmac-sha2-256
-KexAlgorithms ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256,diffie-hellman-group14-sha1
-      Is it the case that Crypto Policy for OpenSSH Client is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH client.
-To override the system wide crypto policy for Openssh client, place a file in the /etc/ssh/ssh_config.d/ so that it is loaded before the 05-redhat.conf. In this case it is file named 02-ospp.conf containing parameters which need to be changed with respect to the crypto policy.
-This rule checks if the file exists and if it contains required parameters and values which modify the Crypto Policy.
-During the parsing process, as soon as Openssh client parses some configuration option and its value, it remembers it and ignores any subsequent overrides. The customization mechanism provided by crypto policies appends eventual customizations at the end of the system wide crypto policy. Therefore, if the crypto policy customization overrides some parameter which is already configured in the system wide crypto policy, the SSH client will not honor that customized parameter.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-001453</td>
-<td>SRG-OS-000250-GPOS-00093</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
 <td>CCE-80938-4: Configure OpenSSL library to use System Crypto Policy</td>
 <td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
 
@@ -9970,39 +9743,6 @@ To check that Crypto Policies settings are configured correctly, you have to exa
 available under /etc/pki/tls/openssl.cnf.
 This file has the ini format, and it enables crypto policy support
 if there is a [ crypto_policy ] section that contains the .include /etc/crypto-policies/back-ends/openssl.config directive.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-001453</td>
-<td>SRG-OS-000250-GPOS-00093</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
-<td>CCE-82176-9: Harden SSHD Crypto Policy</td>
-<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
-
-Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
-
-Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
-<td xml:lang="en-US">Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named <code>opensshserver-xxx.config</code>, replacing <code>xxx</code> with arbitrary identifier, into <code>/etc/crypto-policies/local.d</code>. This has to be followed by running <code>update-crypto-policies</code> so that changes are applied.
-Changes are propagated into <code>/etc/crypto-policies/back-ends/opensshserver.config</code>. This rule checks if this file contains predefined <code>CRYPTO_POLICY</code> environment variable configured with predefined value.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
-<td>To verify if the OpenSSH server uses defined Crypto Policy, run:
-$ grep 'CRYPTO_POLICY' /etc/crypto-policies/back-ends/opensshserver.config | tail -n 1
-and verify that the line matches
-CRYPTO_POLICY='-oCiphers=aes128-ctr,aes256-ctr,aes128-cbc,aes256-cbc -oMACs=hmac-sha2-256,hmac-sha2-512 -oGSSAPIKeyExchange=no -oKexAlgorithms=diffie-hellman-group14-sha1,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521 -oHostKeyAlgorithms=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384 -oPubkeyAcceptedKeyTypes=ssh-rsa,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384'
-      Is it the case that Crypto Policy for OpenSSH Server is not configured according to CC requirements?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
-<td>Crypto Policies are means of enforcing certain cryptographic settings for selected applications including OpenSSH server.
-The SSHD service is by default configured to modify its configuration based on currently configured Crypto-Policy. However, in certain cases it might be needed to override the Crypto Policy specific to OpenSSH Server and leave rest of the Crypto Policy intact.
-This can be done by dropping a file named opensshserver-xxx.config, replacing xxx with arbitrary identifier, into /etc/crypto-policies/local.d. This has to be followed by running update-crypto-policies so that changes are applied.
-Changes are propagated into /etc/crypto-policies/back-ends/opensshserver.config. This rule checks if this file contains predefined CRYPTO_POLICY environment variable configured with predefined value.</td>
 <td>medium</td>
 <td></td>
 <td></td>
