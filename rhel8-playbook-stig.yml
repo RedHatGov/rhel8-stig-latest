@@ -4658,7 +4658,7 @@ Red Hat technologies that are based on Red Hat Enterprise Linux 8, such as:
 
     - name: XCCDF Value var_system_crypto_policy # promote to variable
       set_fact:
-        var_system_crypto_policy: !!str FIPS
+        var_system_crypto_policy: !!str FIPS:OSPP
       tags:
         - always
 
