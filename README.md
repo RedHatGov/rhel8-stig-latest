@@ -4,7 +4,7 @@ Periodic automated re-build of [ComplianceAsCode](https://github.com/ComplianceA
 
 Preview 
  * [Implementation Guide](http://htmlpreview.github.io/?https://github.com/isimluk/rhel8-stig-latest/blob/master/ssg-rhel8-guide-stig.html)
- * [SRG Mapping Table](http://htmlpreview.github.io/?https://github.com/isimluk/rhel8-stig-latest/blob/master/table-rhel8-srgmap-flat.html)
+ * SRG Mapping Table: [HTML](http://htmlpreview.github.io/?https://github.com/isimluk/rhel8-stig-latest/blob/master/table-rhel8-srgmap-flat.html), [CSV](https://raw.githubusercontent.com/isimluk/rhel8-stig-latest/master/table-rhel8-srgmap-flat.csv)
 
 Or download:
  * [SCAP DataStream](https://raw.githubusercontent.com/isimluk/rhel8-stig-latest/master/ssg-rhel8-ds.xml)
