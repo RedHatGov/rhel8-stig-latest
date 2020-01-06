@@ -53,13 +53,23 @@
 	  <xsl:variable name="currSrg" select="cdf:version"/>
     <xsl:variable name="relevantRules" select="$selectedRules[cdf:reference[@href=$disa-srguri and text()=$currSrg]]"/>
 
-    <xsl:for-each select="$relevantRules">
-	  	<xsl:call-template name="dataRow">
-        <xsl:with-param name="disaRule" select="$disaRule"/>
-        <xsl:with-param name="ssgRule" select="."/>
-      </xsl:call-template>
-    </xsl:for-each>
-    <!-- TODO SRG RULEs without SSG RULEs -->
+    <xsl:choose>
+      <xsl:when test="$relevantRules">
+        <xsl:for-each select="$relevantRules">
+		<xsl:call-template name="dataRow">
+            <xsl:with-param name="disaRule" select="$disaRule"/>
+            <xsl:with-param name="ssgRule" select="."/>
+          </xsl:call-template>
+        </xsl:for-each>
+      </xsl:when>
+      <xsl:otherwise>
+	      <xsl:call-template name="dataRow">
+          <xsl:with-param name="disaRule" select="$disaRule"/>
+            <!-- when ssg Rule is missing, we just print out data from original DISA XCCDF -->
+            <xsl:with-param name="ssgRule" select="$disaRule"/>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
   <xsl:template name="dataRow">
