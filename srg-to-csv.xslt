@@ -94,7 +94,8 @@
               <xsl:value-of select="$disaRule/cdf:title"/>
             </xsl:when>
             <xsl:when test="$column='Requirement'">
-              <xsl:value-of select="$ssgRule/cdf:ident"/>:<xsl:value-of select="$ssgRule/cdf:title"/>
+              <xsl:if test="$ssgRule/cdf:ident"><xsl:value-of select="$ssgRule/cdf:ident"/>:</xsl:if>
+              <xsl:value-of select="$ssgRule/cdf:title"/>
             </xsl:when>
             <xsl:when test="$column='SRG VulDiscussion'">
               <xsl:variable name="desc" select="$disaRule/cdf:description"/>
