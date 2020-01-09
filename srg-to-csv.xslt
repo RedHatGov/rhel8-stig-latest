@@ -2,12 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:ocil2="http://scap.nist.gov/schema/ocil/2.0" xmlns:csv="csv:csv">
   <xsl:output method="text" encoding="iso-8859-1"/>
 
-  <xsl:variable name="items" select="document($map-to-items)//*[cdf:reference]" />
+  <xsl:variable name="selectedRules" select="document($map-to-items)//*[cdf:reference]" />
   <xsl:variable name="title" select="document($map-to-items)/cdf:Benchmark/cdf:title" />
-  <xsl:param name="profileId" select="'stig'"/>
   <xsl:param name="ocil-document" select="''"/>
-  <xsl:variable name="profile" select="document($map-to-items)/cdf:Benchmark/cdf:Profile[@id=$profileId]"/>
-  <xsl:variable name="selectedRules" select="$items[@id = $profile/cdf:select[@selected='true']/@idref]"/>
   <xsl:variable name="ocil" select="document($ocil-document)/ocil2:ocil"/>
 
   <xsl:variable name="delimiter" select="','" />
@@ -56,7 +53,7 @@
     <xsl:choose>
       <xsl:when test="$relevantRules">
         <xsl:for-each select="$relevantRules">
-		<xsl:call-template name="dataRow">
+          <xsl:call-template name="dataRow">
             <xsl:with-param name="disaRule" select="$disaRule"/>
             <xsl:with-param name="ssgRule" select="."/>
           </xsl:call-template>
@@ -94,7 +91,8 @@
               <xsl:value-of select="$disaRule/cdf:title"/>
             </xsl:when>
             <xsl:when test="$column='Requirement'">
-              <xsl:value-of select="$ssgRule/cdf:ident"/>:<xsl:value-of select="$ssgRule/cdf:title"/>
+              <xsl:if test="$ssgRule/cdf:ident"><xsl:value-of select="$ssgRule/cdf:ident"/>:</xsl:if>
+              <xsl:value-of select="$ssgRule/cdf:title"/>
             </xsl:when>
             <xsl:when test="$column='SRG VulDiscussion'">
               <xsl:variable name="desc" select="$disaRule/cdf:description"/>
@@ -105,7 +103,17 @@
               <xsl:value-of select="$ssgRule/cdf:description"/>
             </xsl:when>
             <xsl:when test="$column='Status'">
-              <xsl:value-of select="'Applicable - Configurable'"/>
+              <xsl:choose>
+								<xsl:when test="contains($ssgRule/@id, 'met_inherently_')">
+                  Applicable - Inherently Meets
+                </xsl:when>
+                <xsl:when test="contains($ssgRule/@id, '-overlay-')">
+                  N/A
+                </xsl:when>
+                <xsl:otherwise>
+                  Applicable - Configurable
+                </xsl:otherwise>
+              </xsl:choose
             </xsl:when>
             <xsl:when test="$column='SRG Check'">
 							<xsl:apply-templates select="$disaRule/cdf:check/cdf:check-content"/>
