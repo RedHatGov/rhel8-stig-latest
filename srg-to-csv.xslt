@@ -106,7 +106,17 @@
               <xsl:value-of select="$ssgRule/cdf:description"/>
             </xsl:when>
             <xsl:when test="$column='Status'">
-              <xsl:value-of select="'Applicable - Configurable'"/>
+              <xsl:choose>
+								<xsl:when test="contains($ssgRule/@id, 'met_inherently_')">
+                  Applicable - Inherently Meets
+                </xsl:when>
+                <xsl:when test="contains($ssgRule/@id, '-overlay-')">
+                  N/A
+                </xsl:when>
+                <xsl:otherwise>
+                  Applicable - Configurable
+                </xsl:otherwise>
+              </xsl:choose
             </xsl:when>
             <xsl:when test="$column='SRG Check'">
 							<xsl:apply-templates select="$disaRule/cdf:check/cdf:check-content"/>
