@@ -113,7 +113,7 @@
                 <xsl:otherwise>
                   Applicable - Configurable
                 </xsl:otherwise>
-              </xsl:choose
+              </xsl:choose>
             </xsl:when>
             <xsl:when test="$column='SRG Check'">
 							<xsl:apply-templates select="$disaRule/cdf:check/cdf:check-content"/>
