@@ -56,7 +56,7 @@
     <xsl:choose>
       <xsl:when test="$relevantRules">
         <xsl:for-each select="$relevantRules">
-		<xsl:call-template name="dataRow">
+          <xsl:call-template name="dataRow">
             <xsl:with-param name="disaRule" select="$disaRule"/>
             <xsl:with-param name="ssgRule" select="."/>
           </xsl:call-template>
