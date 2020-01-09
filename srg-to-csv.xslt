@@ -2,12 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cdf="http://checklists.nist.gov/xccdf/1.1" xmlns:ocil2="http://scap.nist.gov/schema/ocil/2.0" xmlns:csv="csv:csv">
   <xsl:output method="text" encoding="iso-8859-1"/>
 
-  <xsl:variable name="items" select="document($map-to-items)//*[cdf:reference]" />
+  <xsl:variable name="selectedRules" select="document($map-to-items)//*[cdf:reference]" />
   <xsl:variable name="title" select="document($map-to-items)/cdf:Benchmark/cdf:title" />
-  <xsl:param name="profileId" select="'stig'"/>
   <xsl:param name="ocil-document" select="''"/>
-  <xsl:variable name="profile" select="document($map-to-items)/cdf:Benchmark/cdf:Profile[@id=$profileId]"/>
-  <xsl:variable name="selectedRules" select="$items[@id = $profile/cdf:select[@selected='true']/@idref]"/>
   <xsl:variable name="ocil" select="document($ocil-document)/ocil2:ocil"/>
 
   <xsl:variable name="delimiter" select="','" />
