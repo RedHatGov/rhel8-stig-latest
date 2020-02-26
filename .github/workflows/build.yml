@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install dependencies
-        uses: mstksg/get-package@v1
+        uses: mstksg/get-package@master
         with:
                 apt-get: make expat libopenscap8 libxml2-utils ninja-build python3-jinja2 python3-yaml xsltproc
       - name: Make
