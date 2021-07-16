@@ -5826,6 +5826,49 @@
         - medium_severity
         - no_reboot_needed
 
+    - name: Read list libraries without root ownership
+      find:
+        paths:
+          - /usr/lib
+          - /usr/lib64
+          - /lib
+          - /lib64
+        file_type: directory
+      register: library_dirs_not_group_owned_by_root
+      tags:
+        - CCE-85894-4
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - dir_group_ownership_library_dirs
+        - medium_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Set group ownership of system library dirs to root
+      file:
+        path: '{{ item.path }}'
+        group: root
+        state: directory
+        mode: '{{ item.mode }}'
+      with_items: '{{ library_dirs_not_group_owned_by_root.files }}'
+      when:
+        - library_dirs_not_group_owned_by_root.matched > 0
+        - item.gid != 0
+      tags:
+        - CCE-85894-4
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - dir_group_ownership_library_dirs
+        - medium_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Retrieve the system command files and set their group ownership to root
       command: find -L {{ item }}  ! -group root -type f -exec chgrp root '{}' \;
       with_items:
@@ -6011,6 +6054,49 @@
         - medium_severity
         - no_reboot_needed
         - restrict_strategy
+
+    - name: Read list libraries without root ownership
+      find:
+        paths:
+          - /usr/lib
+          - /usr/lib64
+          - /lib
+          - /lib64
+        file_type: file
+      register: library_files_not_group_owned_by_root
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - high_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - root_permissions_syslibrary_files
+
+    - name: Set group ownership of system library files to root
+      file:
+        path: '{{ item.path }}'
+        group: root
+        state: file
+        mode: '{{ item.mode }}'
+      with_items: '{{ library_files_not_group_owned_by_root.files }}'
+      when:
+        - library_files_not_group_owned_by_root.matched > 0
+        - item.gid != 0
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - high_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - root_permissions_syslibrary_files
 
     - name: Disable service autofs
       block:
@@ -6650,6 +6736,111 @@
         - low_complexity
         - low_severity
         - mount_option_dev_shm_nosuid
+        - no_reboot_needed
+
+    - name: Check information associated to mountpoint
+      command: findmnt --fstab '/home'
+      register: device_name
+      failed_when: device_name.rc > 1
+      changed_when: false
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-83328-5
+        - DISA-STIG-RHEL-08-010590
+        - NIST-800-53-CM-6(b)
+        - configure_strategy
+        - high_disruption
+        - low_complexity
+        - medium_severity
+        - mount_option_home_noexec
+        - no_reboot_needed
+
+    - name: Create mount_info dictionary variable
+      set_fact:
+        mount_info: '{{ mount_info|default({})|combine({item.0: item.1}) }}'
+      with_together:
+        - '{{ device_name.stdout_lines[0].split() | list | lower }}'
+        - '{{ device_name.stdout_lines[1].split() | list }}'
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - device_name.stdout is defined and device_name.stdout_lines is defined
+        - (device_name.stdout | length > 0)
+      tags:
+        - CCE-83328-5
+        - DISA-STIG-RHEL-08-010590
+        - NIST-800-53-CM-6(b)
+        - configure_strategy
+        - high_disruption
+        - low_complexity
+        - medium_severity
+        - mount_option_home_noexec
+        - no_reboot_needed
+
+    - name: If /home not mounted, craft mount_info manually
+      set_fact:
+        mount_info: '{{ mount_info|default({})|combine({item.0: item.1}) }}'
+      with_together:
+        - - target
+          - source
+          - fstype
+          - options
+        - - /home
+          - ''
+          - ''
+          - defaults
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - ("--fstab" | length == 0)
+        - (device_name.stdout | length == 0)
+      tags:
+        - CCE-83328-5
+        - DISA-STIG-RHEL-08-010590
+        - NIST-800-53-CM-6(b)
+        - configure_strategy
+        - high_disruption
+        - low_complexity
+        - medium_severity
+        - mount_option_home_noexec
+        - no_reboot_needed
+
+    - name: Make sure noexec option is part of the to /home options
+      set_fact:
+        mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',noexec''
+          }) }}'
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - mount_info is defined and "noexec" not in mount_info.options
+      tags:
+        - CCE-83328-5
+        - DISA-STIG-RHEL-08-010590
+        - NIST-800-53-CM-6(b)
+        - configure_strategy
+        - high_disruption
+        - low_complexity
+        - medium_severity
+        - mount_option_home_noexec
+        - no_reboot_needed
+
+    - name: Ensure /home is mounted with noexec option
+      mount:
+        path: /home
+        src: '{{ mount_info.source }}'
+        opts: '{{ mount_info.options }}'
+        state: mounted
+        fstype: '{{ mount_info.fstype }}'
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
+          | length == 0)
+      tags:
+        - CCE-83328-5
+        - DISA-STIG-RHEL-08-010590
+        - NIST-800-53-CM-6(b)
+        - configure_strategy
+        - high_disruption
+        - low_complexity
+        - medium_severity
+        - mount_option_home_noexec
         - no_reboot_needed
 
     - name: Check information associated to mountpoint

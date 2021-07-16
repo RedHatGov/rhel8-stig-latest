@@ -3651,6 +3651,39 @@ Add the nosuid option to the fourth column of
 <td>SRG-OS-000480-GPOS-00227</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-83328-5:Add noexec Option to /home</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">The <code>noexec</code> mount option can be used to prevent binaries from being
+executed out of <code>/home</code>. 
+Add the <code>noexec</code> option to the fourth column of
+<code>/etc/fstab</code> for the line which controls mounting of
+<code>/home</code>.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To verify the noexec option is configured for the /home mount point, run the following command:
+    $ mount | grep '\s/home\s'
+    The output should show the corresponding mount point along with the noexec setting in parentheses.
+
+      Is it the case that the  is not present in the output line, or there is no output line at all?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>The noexec mount option can be used to prevent binaries from being
+executed out of /home. 
+Add the noexec option to the fourth column of
+/etc/fstab for the line which controls mounting of
+/home.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
 <td>CCE-81050-7:Add nosuid Option to /home</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -17098,6 +17131,62 @@ The operating system or software configuration management utility must enforce c
 <td>SRG-OS-000259-GPOS-00100</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must limit privileges to change software resident within software libraries.</td>
+<td>CCE-85894-4:Verify that Shared Library Directories Have Root Group Ownership</td>
+<td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
+
+This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.</td>
+<td xml:lang="en-US">System-wide shared library files, which are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+<pre>/lib
+/lib64
+/usr/lib
+/usr/lib64
+</pre>
+Kernel modules, which can be added to the kernel during runtime, are also
+stored in <code>/lib/modules</code>. All files in these directories should be
+group-owned by the <code>root</code> user. If the  directories, is found to be owned
+by a user other than root correct its
+ownership with the following command:
+<pre>$ sudo chgrp root <i>DIR</i></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.</td>
+<td>Shared libraries are stored in the following directories:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+For each of these directories, run the following command to find files not
+owned by root:
+$ sudo find -L $DIR ! -user root -type d -exec chgrp root {} \;
+      Is it the case that any of these directories are not group-owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62077r1_fix">Configure the operating system to limit privileges to change software resident within software libraries.</fixtext></td>
+<td>System-wide shared library files, which are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+Kernel modules, which can be added to the kernel during runtime, are also
+stored in /lib/modules. All files in these directories should be
+group-owned by the root user. If the  directories, is found to be owned
+by a user other than root correct its
+ownership with the following command:
+$ sudo chgrp root DIR</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001499</td>
+<td>SRG-OS-000259-GPOS-00100</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must limit privileges to change software resident within software libraries.</td>
 <td>CCE-86519-6:Verify that system commands files are group owned by root </td>
 <td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
 
@@ -17369,6 +17458,58 @@ should not be group-writable or world-writable. If any file in these
 directories is found to be group-writable or world-writable, correct
 its permission with the following command:
 $ sudo chmod go-w FILE</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001499</td>
+<td>SRG-OS-000259-GPOS-00100</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must limit privileges to change software resident within software libraries.</td>
+<td>CCE-86523-8:Verify the system-wide library files in directories
+"/lib", "/lib64", "/usr/lib/" and "/usr/lib64" are owned by root.</td>
+<td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
+
+This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.</td>
+<td xml:lang="en-US">System-wide library files are stored in the following directories
+by default:
+<pre>/lib
+/lib64
+/usr/lib
+/usr/lib64
+</pre>
+All system-wide shared library files should be protected from unauthorised
+access. If any of these files is not owned by root, correct its owner with
+the following command:
+<pre>$ sudo chgrp root <i>FILE</i></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.</td>
+<td>System-wide library files are stored in the following directories:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+To find if system-wide library files stored in these directories are not group-owned by
+root run the following command for each directory DIR:
+$ sudo find -L DIR ! -group root -type f 
+      Is it the case that system wide library files are not group owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62077r1_fix">Configure the operating system to limit privileges to change software resident within software libraries.</fixtext></td>
+<td>System-wide library files are stored in the following directories
+by default:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+All system-wide shared library files should be protected from unauthorised
+access. If any of these files is not owned by root, correct its owner with
+the following command:
+$ sudo chgrp root FILE</td>
 <td>medium</td>
 <td></td>
 <td></td>
