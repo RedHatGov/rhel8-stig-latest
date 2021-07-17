@@ -86,6 +86,31 @@ This requirement is a permanent not a finding. No fix is required.
 <td>SRG-OS-000480-GPOS-00232</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must enable an application firewall, if available.</td>
+<td>CCE-82998-6:Install firewalld Package</td>
+<td>Firewalls protect computers from network attacks by blocking or limiting access to open network ports. Application firewalls limit which applications are allowed to communicate over the network.</td>
+<td xml:lang="en-US">The <code>firewalld</code> package can be installed with the following command:
+<pre>
+$ sudo yum install firewalld</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system enabled an application firewall, if available. If it does not, this is a finding. If the operating system does not support an application firewall, this may be downgraded to a CAT III finding.</td>
+<td>Run the following command to determine if the firewalld package is installed: $ rpm -q firewalld
+      Is it the case that the package is not installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61467r1_fix">Ensure the operating system's application firewall is enabled, if available.</fixtext></td>
+<td>The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-OS-000480-GPOS-00232</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must enable an application firewall, if available.</td>
 <td>CCE-80877-4:Verify firewalld Enabled</td>
 <td>Firewalls protect computers from network attacks by blocking or limiting access to open network ports. Application firewalls limit which applications are allowed to communicate over the network.</td>
 <td xml:lang="en-US">
@@ -9512,6 +9537,8 @@ AIDE can be executed periodically through other means; this is merely one exampl
 $ grep aide /etc/crontab
 The output should return something similar to the following:
 05 4 * * * root /usr/sbin/aide --check | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost
+The email address that the notifications are sent to can be changed by overriding
+.
       Is it the case that AIDE has not been configured or has not been configured to notify personnel of scan details?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61611r1_fix">Configure the operating system to shut down the information system, restart the information system, and/or notify the system administrator when anomalies in the operation of the security functions are discovered.</fixtext></td>
@@ -11775,6 +11802,35 @@ $ rpm -q telnet-server
 
 $ sudo yum erase telnet-server</td>
 <td>high</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000382</td>
+<td>SRG-OS-000096-GPOS-00050</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.</td>
+<td>CCE-82998-6:Install firewalld Package</td>
+<td>In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
+
+To support the requirements and principles of least functionality, the operating system must support the organizational requirements, providing only essential capabilities and limiting the use of ports, protocols, and/or services to only those required, authorized, and approved to conduct official business or to address authorized quality of life issues.</td>
+<td xml:lang="en-US">The <code>firewalld</code> package can be installed with the following command:
+<pre>
+$ sudo yum install firewalld</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments. If it does not, this is a finding.</td>
+<td>Run the following command to determine if the firewalld package is installed: $ rpm -q firewalld
+      Is it the case that the package is not installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61647r1_fix">Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.</fixtext></td>
+<td>The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
@@ -17088,6 +17144,8 @@ AIDE can be executed periodically through other means; this is merely one exampl
 $ grep aide /etc/crontab
 The output should return something similar to the following:
 05 4 * * * root /usr/sbin/aide --check | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost
+The email address that the notifications are sent to can be changed by overriding
+.
       Is it the case that AIDE has not been configured or has not been configured to notify personnel of scan details?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62075r1_fix">Configure the operating system to notify designated personnel if baseline configurations are changed in an unauthorized manner.</fixtext></td>

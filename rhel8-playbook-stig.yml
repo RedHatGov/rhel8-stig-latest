@@ -43,6 +43,7 @@
            "You must update Ansible to at least version 2.5 to use this role."
 
    vars:
+      var_aide_scan_notification_email: !!str root@localhost
       var_system_crypto_policy: !!str FIPS
       inactivity_timeout_value: !!str 900
       var_sudo_timestamp_timeout: !!str 0
@@ -125,6 +126,47 @@
         - medium_severity
         - no_reboot_needed
         - package_aide_installed
+
+    - name: Ensure AIDE is installed
+      package:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - aide
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82891-3
+        - DISA-STIG-RHEL-08-010360
+        - NIST-800-53-CM-3(5)
+        - NIST-800-53-CM-6(a)
+        - aide_scan_notification
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Configure Notification of Post-AIDE Scan Details
+      cron:
+        name: run AIDE check
+        minute: 5
+        hour: 4
+        weekday: 0
+        user: root
+        job: /usr/sbin/aide  --check | /bin/mail -s "$(hostname) - AIDE Integrity Check"
+          {{ var_aide_scan_notification_email }}
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82891-3
+        - DISA-STIG-RHEL-08-010360
+        - NIST-800-53-CM-3(5)
+        - NIST-800-53-CM-6(a)
+        - aide_scan_notification
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
 
     - name: enable fips mode
       command: /usr/bin/fips-mode-setup --enable

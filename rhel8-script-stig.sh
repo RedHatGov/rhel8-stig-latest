@@ -55,9 +55,19 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+
+
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
 fi
+var_aide_scan_notification_email="root@localhost"
+
+
+
+    
+
+
+
 
 CRONTAB=/etc/crontab
 CRONDIRS='/etc/cron.d /etc/cron.daily /etc/cron.weekly /etc/cron.monthly'
@@ -71,10 +81,8 @@ if [ -f /var/spool/cron/root ]; then
 	VARSPOOL=/var/spool/cron/root
 fi
 
-if ! grep -qR '^.*\/usr\/sbin\/aide\s*\-\-check.*|.*\/bin\/mail\s*-s\s*".*"\s*root@.*$' $CRONTAB_EXIST $VARSPOOL $CRONDIRS; then
-
-	echo '0 5 * * * root /usr/sbin/aide  --check | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost' >> $CRONTAB
-
+if ! grep -qR '^.*/usr/sbin/aide\s*\-\-check.*|.*\/bin\/mail\s*-s\s*".*"\s*.*@.*$' $CRONTAB_EXIST $VARSPOOL $CRONDIRS; then
+	echo "0 5 * * * root /usr/sbin/aide  --check | /bin/mail -s \"\$(hostname) - AIDE Integrity Check\" $var_aide_scan_notification_email" >> $CRONTAB
 fi
 
 else

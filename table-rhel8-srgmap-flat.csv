@@ -12,6 +12,15 @@ This requirement is a permanent not a finding. No fix is required.
                 ","Verify the operating system provides automated mechanisms for supporting account management functions. If it does not, this is a finding.",,Configure the operating system to provide automated mechanisms for supporting account management functions.,"
 This requirement is a permanent not a finding. No fix is required.
 ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00232,TBD - Assigned by DISA after STIG release,"The operating system must enable an application firewall, if available.",CCE-82998-6:Install firewalld Package,Firewalls protect computers from network attacks by blocking or limiting access to open network ports. Application firewalls limit which applications are allowed to communicate over the network.,"The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld","
+                  Applicable - Configurable
+                ","Verify the operating system enabled an application firewall, if available. If it does not, this is a finding. If the operating system does not support an application firewall, this may be downgraded to a CAT III finding.","Run the following command to determine if the firewalld package is installed: $ rpm -q firewalld
+      Is it the case that the package is not installed?
+      ","Ensure the operating system's application firewall is enabled, if available.","The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld",,,,
 CCI-000366,SRG-OS-000480-GPOS-00232,TBD - Assigned by DISA after STIG release,"The operating system must enable an application firewall, if available.",CCE-80877-4:Verify firewalld Enabled,Firewalls protect computers from network attacks by blocking or limiting access to open network ports. Application firewalls limit which applications are allowed to communicate over the network.,"
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service","
@@ -5590,6 +5599,8 @@ AIDE can be executed periodically through other means; this is merely one exampl
 $ grep aide /etc/crontab
 The output should return something similar to the following:
 05 4 * * * root /usr/sbin/aide --check | /bin/mail -s ""$(hostname) - AIDE Integrity Check"" root@localhost
+The email address that the notifications are sent to can be changed by overriding
+.
       Is it the case that AIDE has not been configured or has not been configured to notify personnel of scan details?
       ","Configure the operating system to shut down the information system, restart the information system, and/or notify the system administrator when anomalies in the operation of the security functions are discovered.","AIDE should notify appropriate personnel of the details of a scan after the scan has been run.
 If AIDE has already been configured for periodic execution in /etc/crontab, append the
@@ -6950,6 +6961,19 @@ $ rpm -q telnet-server
       ",Configure the operating system to disable non-essential capabilities.,"The telnet-server package can be removed with the following command:
 
 $ sudo yum erase telnet-server",,,,
+CCI-000382,SRG-OS-000096-GPOS-00050,TBD - Assigned by DISA after STIG release,"The operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.",CCE-82998-6:Install firewalld Package,"In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
+
+To support the requirements and principles of least functionality, the operating system must support the organizational requirements, providing only essential capabilities and limiting the use of ports, protocols, and/or services to only those required, authorized, and approved to conduct official business or to address authorized quality of life issues.","The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld","
+                  Applicable - Configurable
+                ","Verify the operating system is configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments. If it does not, this is a finding.","Run the following command to determine if the firewalld package is installed: $ rpm -q firewalld
+      Is it the case that the package is not installed?
+      ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","The firewalld package can be installed with the following command:
+
+$ sudo yum install firewalld",,,,
 CCI-000382,SRG-OS-000096-GPOS-00050,TBD - Assigned by DISA after STIG release,"The operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.",CCE-80877-4:Verify firewalld Enabled,"In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
@@ -10223,6 +10247,8 @@ AIDE can be executed periodically through other means; this is merely one exampl
 $ grep aide /etc/crontab
 The output should return something similar to the following:
 05 4 * * * root /usr/sbin/aide --check | /bin/mail -s ""$(hostname) - AIDE Integrity Check"" root@localhost
+The email address that the notifications are sent to can be changed by overriding
+.
       Is it the case that AIDE has not been configured or has not been configured to notify personnel of scan details?
       ",Configure the operating system to notify designated personnel if baseline configurations are changed in an unauthorized manner.,"AIDE should notify appropriate personnel of the details of a scan after the scan has been run.
 If AIDE has already been configured for periodic execution in /etc/crontab, append the
