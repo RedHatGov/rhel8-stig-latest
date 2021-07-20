@@ -8603,6 +8603,52 @@ needs to be set to LinuxAudit.</td>
 <td>SRG-OS-000063-GPOS-00032</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</td>
+<td>CCE-85871-2:Verify Permissions on /etc/audit/auditd.conf</td>
+<td>Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.</td>
+<td xml:lang="en-US">
+To properly set the permissions of <code>/etc/audit/auditd.conf</code>, run the command:
+<pre>$ sudo chmod 0640 /etc/audit/auditd.conf</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.</td>
+<td></td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61575r1_fix">Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</fixtext></td>
+<td>
+To properly set the permissions of /etc/audit/auditd.conf, run the command:
+$ sudo chmod 0640 /etc/audit/auditd.conf</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000171</td>
+<td>SRG-OS-000063-GPOS-00032</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</td>
+<td>CCE-85875-3:Verify Permissions on /etc/audit/rules.d/*.rules</td>
+<td>Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.</td>
+<td xml:lang="en-US">
+To properly set the permissions of <code>/etc/audit/rules.d/*.rules</code>, run the command:
+<pre>$ sudo chmod 0640 /etc/audit/rules.d/*.rules</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.</td>
+<td></td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61575r1_fix">Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</fixtext></td>
+<td>
+To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
+$ sudo chmod 0640 /etc/audit/rules.d/*.rules</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000171</td>
+<td>SRG-OS-000063-GPOS-00032</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</td>
 <td>Product Meets this Requirement</td>
 <td>Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.</td>
 <td>

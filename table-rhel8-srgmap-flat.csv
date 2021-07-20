@@ -5078,6 +5078,20 @@ DoD has defined the list of events for which the operating system will provide a
 (as opposed directly to a file),
 AuditBackend option in /etc/usbguard/usbguard-daemon.conf
 needs to be set to LinuxAudit.",,,,
+CCI-000171,SRG-OS-000063-GPOS-00032,TBD - Assigned by DISA after STIG release,The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,CCE-85871-2:Verify Permissions on /etc/audit/auditd.conf,"Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.","
+To properly set the permissions of /etc/audit/auditd.conf, run the command:
+$ sudo chmod 0640 /etc/audit/auditd.conf","
+                  Applicable - Configurable
+                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.",,Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
+To properly set the permissions of /etc/audit/auditd.conf, run the command:
+$ sudo chmod 0640 /etc/audit/auditd.conf",,,,
+CCI-000171,SRG-OS-000063-GPOS-00032,TBD - Assigned by DISA after STIG release,The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,CCE-85875-3:Verify Permissions on /etc/audit/rules.d/*.rules,"Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.","
+To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
+$ sudo chmod 0640 /etc/audit/rules.d/*.rules","
+                  Applicable - Configurable
+                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.",,Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
+To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
+$ sudo chmod 0640 /etc/audit/rules.d/*.rules",,,,
 CCI-000171,SRG-OS-000063-GPOS-00032,TBD - Assigned by DISA after STIG release,The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,Product Meets this Requirement,"Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.","
 This requirement is a permanent not a finding. No fix is required.
 ","

@@ -5656,6 +5656,71 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Test for existence /etc/audit/auditd.conf
+      stat:
+        path: /etc/audit/auditd.conf
+      register: file_exists
+      tags:
+        - CCE-85871-2
+        - DISA-STIG-RHEL-08-030610
+        - NIST-800-53-AU-12(b)
+        - configure_strategy
+        - file_permissions_etc_audit_auditd
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure permission 0640 on /etc/audit/auditd.conf
+      file:
+        path: /etc/audit/auditd.conf
+        mode: '0640'
+      when: file_exists.stat is defined and file_exists.stat.exists
+      tags:
+        - CCE-85871-2
+        - DISA-STIG-RHEL-08-030610
+        - NIST-800-53-AU-12(b)
+        - configure_strategy
+        - file_permissions_etc_audit_auditd
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Find /etc/audit/rules.d/ file(s)
+      find:
+        paths: /etc/audit/rules.d/
+        patterns: ^.*rules$
+        use_regex: true
+      register: files_found
+      tags:
+        - CCE-85875-3
+        - DISA-STIG-RHEL-08-030610
+        - NIST-800-53-AU-12(b)
+        - configure_strategy
+        - file_permissions_etc_audit_rulesd
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /etc/audit/rules.d/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0640'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-85875-3
+        - DISA-STIG-RHEL-08-030610
+        - NIST-800-53-AU-12(b)
+        - configure_strategy
+        - file_permissions_etc_audit_rulesd
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
     - name: Ensure sysctl fs.protected_hardlinks is set to 1
       sysctl:
         name: fs.protected_hardlinks
