@@ -16820,6 +16820,174 @@ in the /etc/sysconfig/sshd.</td>
 <td></td>
 </tr>
 <tr>
+<td>CCI-001453</td>
+<td>SRG-OS-000250-GPOS-00093</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
+<td>CCE-85902-5:Configure SSH Client to Use FIPS 140-2 Validated Ciphers: openssh.config</td>
+<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+
+Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
+<td xml:lang="en-US">Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings for ciphers are configured correctly, ensure that
+<code>/etc/crypto-policies/back-ends/openssh.config</code> contains the following
+line and is not commented out:
+<pre>Ciphers <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_approved_ciphers"></xccdf-1.1:sub></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
+<td>To verify if the OpenSSH client uses defined Cipher suite in the Crypto Policy, run:
+$ grep -i ciphers /etc/crypto-policies/back-ends/openssh.config
+and verify that the line matches:
+Ciphers 
+      Is it the case that Crypto Policy for OpenSSH client is not configured correctly?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
+<td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings for ciphers are configured correctly, ensure that
+/etc/crypto-policies/back-ends/openssh.config contains the following
+line and is not commented out:
+Ciphers </td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001453</td>
+<td>SRG-OS-000250-GPOS-00093</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
+<td>CCE-85897-7:Configure SSH Server to Use FIPS 140-2 Validated Ciphers: opensshserver.config</td>
+<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+
+Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
+<td xml:lang="en-US">Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings for ciphers are configured correctly, ensure that
+<code>/etc/crypto-policies/back-ends/opensshserver.config</code> contains the following
+text and is not commented out:
+<pre>-oCiphers=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="sshd_approved_ciphers"></xccdf-1.1:sub></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
+<td>To verify if the OpenSSH server uses defined ciphers in the Crypto Policy, run:
+$ grep -Po '(-oCiphers=\S+)' /etc/crypto-policies/back-ends/opensshserver.config
+and verify that the line matches:
+-oCiphers=
+      Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
+<td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings for ciphers are configured correctly, ensure that
+/etc/crypto-policies/back-ends/opensshserver.config contains the following
+text and is not commented out:
+-oCiphers=</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001453</td>
+<td>SRG-OS-000250-GPOS-00093</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
+<td>CCE-85870-4:Configure SSH Client to Use FIPS 140-2 Validated MACs: openssh.config</td>
+<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+
+Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
+<td xml:lang="en-US">Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings are configured correctly, ensure that
+<code>/etc/crypto-policies/back-ends/openssh.config</code> contains the following
+line and is not commented out:
+<code>MACs hmac-sha2-512,hmac-sha2-256</code>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
+<td>To verify if the OpenSSH client uses defined MACs in the Crypto Policy, run:
+$ grep -i macs /etc/crypto-policies/back-ends/openssh.config
+and verify that the line matches:
+MACs hmac-sha2-512,hmac-sha2-256
+      Is it the case that Crypto Policy for OpenSSH client is not configured correctly?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
+<td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings are configured correctly, ensure that
+/etc/crypto-policies/back-ends/openssh.config contains the following
+line and is not commented out:
+MACs hmac-sha2-512,hmac-sha2-256</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001453</td>
+<td>SRG-OS-000250-GPOS-00093</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement cryptography to protect the integrity of remote access sessions.</td>
+<td>CCE-85899-3:Configure SSH Server to Use FIPS 140-2 Validated MACs: opensshserver.config</td>
+<td>Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
+
+Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.</td>
+<td xml:lang="en-US">Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings are configured correctly, ensure that
+<code>/etc/crypto-policies/back-ends/opensshserver.config</code> contains the following
+text and is not commented out:
+<code>-oMACS=hmac-sha2-512,hmac-sha2-256</code>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
+<td>To verify if the OpenSSH server uses defined MACs in the Crypto Policy, run:
+$ grep -Po '(-oMACs=\S+)' /etc/crypto-policies/back-ends/opensshserver.config
+and verify that the line matches:
+-oMACS=hmac-sha2-512,hmac-sha2-256
+      Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61831r1_fix">Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</fixtext></td>
+<td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
+OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
+set up incorrectly.
+
+To check that Crypto Policies settings are configured correctly, ensure that
+/etc/crypto-policies/back-ends/opensshserver.config contains the following
+text and is not commented out:
+-oMACS=hmac-sha2-512,hmac-sha2-256</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>CCI-001464</td>
 <td>SRG-OS-000254-GPOS-00095</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>

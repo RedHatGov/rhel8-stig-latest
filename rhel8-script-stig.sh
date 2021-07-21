@@ -33,9 +33,9 @@
 ###############################################################################
 
 ###############################################################################
-# BEGIN fix (1 / 278) for 'package_aide_installed'
+# BEGIN fix (1 / 282) for 'package_aide_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 1/278: 'package_aide_installed'")
+(>&2 echo "Remediating rule 1/282: 'package_aide_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -49,9 +49,9 @@ fi
 # END fix for 'package_aide_installed'
 
 ###############################################################################
-# BEGIN fix (2 / 278) for 'aide_scan_notification'
+# BEGIN fix (2 / 282) for 'aide_scan_notification'
 ###############################################################################
-(>&2 echo "Remediating rule 2/278: 'aide_scan_notification'")
+(>&2 echo "Remediating rule 2/282: 'aide_scan_notification'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -91,9 +91,9 @@ fi
 # END fix for 'aide_scan_notification'
 
 ###############################################################################
-# BEGIN fix (3 / 278) for 'aide_verify_acls'
+# BEGIN fix (3 / 282) for 'aide_verify_acls'
 ###############################################################################
-(>&2 echo "Remediating rule 3/278: 'aide_verify_acls'")
+(>&2 echo "Remediating rule 3/282: 'aide_verify_acls'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -127,9 +127,9 @@ fi
 # END fix for 'aide_verify_acls'
 
 ###############################################################################
-# BEGIN fix (4 / 278) for 'aide_verify_ext_attributes'
+# BEGIN fix (4 / 282) for 'aide_verify_ext_attributes'
 ###############################################################################
-(>&2 echo "Remediating rule 4/278: 'aide_verify_ext_attributes'")
+(>&2 echo "Remediating rule 4/282: 'aide_verify_ext_attributes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -163,16 +163,16 @@ fi
 # END fix for 'aide_verify_ext_attributes'
 
 ###############################################################################
-# BEGIN fix (5 / 278) for 'enable_dracut_fips_module'
+# BEGIN fix (5 / 282) for 'enable_dracut_fips_module'
 ###############################################################################
-(>&2 echo "Remediating rule 5/278: 'enable_dracut_fips_module'")
+(>&2 echo "Remediating rule 5/282: 'enable_dracut_fips_module'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'enable_dracut_fips_module'
 
 ###############################################################################
-# BEGIN fix (6 / 278) for 'enable_fips_mode'
+# BEGIN fix (6 / 282) for 'enable_fips_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 6/278: 'enable_fips_mode'")
+(>&2 echo "Remediating rule 6/282: 'enable_fips_mode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -184,16 +184,16 @@ fi
 # END fix for 'enable_fips_mode'
 
 ###############################################################################
-# BEGIN fix (7 / 278) for 'sysctl_crypto_fips_enabled'
+# BEGIN fix (7 / 282) for 'sysctl_crypto_fips_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 7/278: 'sysctl_crypto_fips_enabled'")
+(>&2 echo "Remediating rule 7/282: 'sysctl_crypto_fips_enabled'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'sysctl_crypto_fips_enabled'
 
 ###############################################################################
-# BEGIN fix (8 / 278) for 'configure_bind_crypto_policy'
+# BEGIN fix (8 / 282) for 'configure_bind_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 8/278: 'configure_bind_crypto_policy'")
+(>&2 echo "Remediating rule 8/282: 'configure_bind_crypto_policy'")
 
 function remediate_bind_crypto_policy() {
 	CONFIG_FILE="/etc/named.conf"
@@ -210,9 +210,9 @@ remediate_bind_crypto_policy
 # END fix for 'configure_bind_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (9 / 278) for 'configure_crypto_policy'
+# BEGIN fix (9 / 282) for 'configure_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 9/278: 'configure_crypto_policy'")
+(>&2 echo "Remediating rule 9/282: 'configure_crypto_policy'")
 
 # include remediation functions library
 
@@ -237,9 +237,9 @@ fi
 # END fix for 'configure_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (10 / 278) for 'configure_gnutls_tls_crypto_policy'
+# BEGIN fix (10 / 282) for 'configure_gnutls_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 10/278: 'configure_gnutls_tls_crypto_policy'")
+(>&2 echo "Remediating rule 10/282: 'configure_gnutls_tls_crypto_policy'")
 
 CONF_FILE=/etc/crypto-policies/back-ends/gnutls.config
 correct_value='+VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0'
@@ -265,18 +265,18 @@ fi
 # END fix for 'configure_gnutls_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (11 / 278) for 'configure_kerberos_crypto_policy'
+# BEGIN fix (11 / 282) for 'configure_kerberos_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 11/278: 'configure_kerberos_crypto_policy'")
+(>&2 echo "Remediating rule 11/282: 'configure_kerberos_crypto_policy'")
 
 rm -f /etc/krb5.conf.d/crypto-policies
 ln -s /etc/crypto-policies/back-ends/krb5.config /etc/krb5.conf.d/crypto-policies
 # END fix for 'configure_kerberos_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (12 / 278) for 'configure_libreswan_crypto_policy'
+# BEGIN fix (12 / 282) for 'configure_libreswan_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 12/278: 'configure_libreswan_crypto_policy'")
+(>&2 echo "Remediating rule 12/282: 'configure_libreswan_crypto_policy'")
 
 function remediate_libreswan_crypto_policy() {
     CONFIG_FILE="/etc/ipsec.conf"
@@ -290,9 +290,9 @@ remediate_libreswan_crypto_policy
 # END fix for 'configure_libreswan_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (13 / 278) for 'configure_openssl_crypto_policy'
+# BEGIN fix (13 / 282) for 'configure_openssl_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 13/278: 'configure_openssl_crypto_policy'")
+(>&2 echo "Remediating rule 13/282: 'configure_openssl_crypto_policy'")
 
 OPENSSL_CRYPTO_POLICY_SECTION='[ crypto_policy ]'
 OPENSSL_CRYPTO_POLICY_SECTION_REGEX='\[\s*crypto_policy\s*\]'
@@ -319,9 +319,9 @@ remediate_openssl_crypto_policy
 # END fix for 'configure_openssl_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (14 / 278) for 'configure_openssl_tls_crypto_policy'
+# BEGIN fix (14 / 282) for 'configure_openssl_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 14/278: 'configure_openssl_tls_crypto_policy'")
+(>&2 echo "Remediating rule 14/282: 'configure_openssl_tls_crypto_policy'")
 
 if [ -e "/etc/crypto-policies/back-ends/opensslcnf.config" ] ; then
     
@@ -346,9 +346,9 @@ rm "/etc/crypto-policies/back-ends/opensslcnf.config.bak"
 # END fix for 'configure_openssl_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (15 / 278) for 'configure_ssh_crypto_policy'
+# BEGIN fix (15 / 282) for 'configure_ssh_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 15/278: 'configure_ssh_crypto_policy'")
+(>&2 echo "Remediating rule 15/282: 'configure_ssh_crypto_policy'")
 
 SSH_CONF="/etc/sysconfig/sshd"
 
@@ -356,65 +356,185 @@ sed -i "/^\s*CRYPTO_POLICY.*$/d" $SSH_CONF
 # END fix for 'configure_ssh_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (16 / 278) for 'installed_OS_is_vendor_supported'
+# BEGIN fix (16 / 282) for 'harden_sshd_ciphers_openssh_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 16/278: 'installed_OS_is_vendor_supported'")
+(>&2 echo "Remediating rule 16/282: 'harden_sshd_ciphers_openssh_conf_crypto_policy'")
+
+sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
+
+
+
+if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
+    
+    LC_ALL=C sed -i "/^.*Ciphers\s\+/d" "/etc/crypto-policies/back-ends/openssh.config"
+else
+    touch "/etc/crypto-policies/back-ends/openssh.config"
+fi
+cp "/etc/crypto-policies/back-ends/openssh.config" "/etc/crypto-policies/back-ends/openssh.config.bak"
+# Insert at the end of the file
+printf '%s\n' "Ciphers ${sshd_approved_ciphers}" >> "/etc/crypto-policies/back-ends/openssh.config"
+# Clean up after ourselves.
+rm "/etc/crypto-policies/back-ends/openssh.config.bak"
+# END fix for 'harden_sshd_ciphers_openssh_conf_crypto_policy'
+
+###############################################################################
+# BEGIN fix (17 / 282) for 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'
+###############################################################################
+(>&2 echo "Remediating rule 17/282: 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
+
+sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
+
+
+
+CONF_FILE=/etc/crypto-policies/back-ends/opensshserver.config
+correct_value="-oCiphers=${sshd_approved_ciphers}"
+
+# Test if file exists
+test -f ${CONF_FILE} || touch ${CONF_FILE}
+
+# Ensure CRYPTO_POLICY is not commented out
+sed -i 's/#CRYPTO_POLICY=/CRYPTO_POLICY=/' ${CONF_FILE}
+
+grep -q "'${correct_value}'" ${CONF_FILE}
+
+if [[ $? -ne 0 ]]; then
+    # We need to get the existing value, using PCRE to maintain same regex
+    existing_value=$(grep -Po '(-oCiphers=\S+)' ${CONF_FILE})
+
+    if [[ ! -z ${existing_value} ]]; then
+        # replace existing_value with correct_value
+        sed -i "s/${existing_value}/${correct_value}/g" ${CONF_FILE}
+    else
+        # ***NOTE*** #
+        # This probably means this file is not here or it's been modified
+        # unintentionally.
+        # ********** #
+        # echo correct_value to end
+        echo "CRYPTO_POLICY='${correct_value}'" >> ${CONF_FILE}
+    fi
+fi
+# END fix for 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'
+
+###############################################################################
+# BEGIN fix (18 / 282) for 'harden_sshd_macs_openssh_conf_crypto_policy'
+###############################################################################
+(>&2 echo "Remediating rule 18/282: 'harden_sshd_macs_openssh_conf_crypto_policy'")
+
+sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
+
+
+
+if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
+    
+    LC_ALL=C sed -i "/^.*MACs\s\+/d" "/etc/crypto-policies/back-ends/openssh.config"
+else
+    touch "/etc/crypto-policies/back-ends/openssh.config"
+fi
+cp "/etc/crypto-policies/back-ends/openssh.config" "/etc/crypto-policies/back-ends/openssh.config.bak"
+# Insert at the end of the file
+printf '%s\n' "MACs ${sshd_approved_macs}" >> "/etc/crypto-policies/back-ends/openssh.config"
+# Clean up after ourselves.
+rm "/etc/crypto-policies/back-ends/openssh.config.bak"
+# END fix for 'harden_sshd_macs_openssh_conf_crypto_policy'
+
+###############################################################################
+# BEGIN fix (19 / 282) for 'harden_sshd_macs_opensshserver_conf_crypto_policy'
+###############################################################################
+(>&2 echo "Remediating rule 19/282: 'harden_sshd_macs_opensshserver_conf_crypto_policy'")
+
+sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
+
+
+
+CONF_FILE=/etc/crypto-policies/back-ends/opensshserver.config
+correct_value="-oMACs=${sshd_approved_macs}"
+
+# Test if file exists
+test -f ${CONF_FILE} || touch ${CONF_FILE}
+
+# Ensure CRYPTO_POLICY is not commented out
+sed -i 's/#CRYPTO_POLICY=/CRYPTO_POLICY=/' ${CONF_FILE}
+
+grep -q "'${correct_value}'" ${CONF_FILE}
+
+if [[ $? -ne 0 ]]; then
+    # We need to get the existing value, using PCRE to maintain same regex
+    existing_value=$(grep -Po '(-oMACs=\S+)' ${CONF_FILE})
+
+    if [[ ! -z ${existing_value} ]]; then
+        # replace existing_value with correct_value
+        sed -i "s/${existing_value}/${correct_value}/g" ${CONF_FILE}
+    else
+        # ***NOTE*** #
+        # This probably means this file is not here or it's been modified
+        # unintentionally.
+        # ********** #
+        # echo correct_value to end
+        echo "CRYPTO_POLICY='${correct_value}'" >> ${CONF_FILE}
+    fi
+fi
+# END fix for 'harden_sshd_macs_opensshserver_conf_crypto_policy'
+
+###############################################################################
+# BEGIN fix (20 / 282) for 'installed_OS_is_vendor_supported'
+###############################################################################
+(>&2 echo "Remediating rule 20/282: 'installed_OS_is_vendor_supported'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'installed_OS_is_vendor_supported'
 
 ###############################################################################
-# BEGIN fix (17 / 278) for 'encrypt_partitions'
+# BEGIN fix (21 / 282) for 'encrypt_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 17/278: 'encrypt_partitions'")
+(>&2 echo "Remediating rule 21/282: 'encrypt_partitions'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'encrypt_partitions'
 
 ###############################################################################
-# BEGIN fix (18 / 278) for 'partition_for_home'
+# BEGIN fix (22 / 282) for 'partition_for_home'
 ###############################################################################
-(>&2 echo "Remediating rule 18/278: 'partition_for_home'")
+(>&2 echo "Remediating rule 22/282: 'partition_for_home'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_home'
 
 ###############################################################################
-# BEGIN fix (19 / 278) for 'partition_for_tmp'
+# BEGIN fix (23 / 282) for 'partition_for_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 19/278: 'partition_for_tmp'")
+(>&2 echo "Remediating rule 23/282: 'partition_for_tmp'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_tmp'
 
 ###############################################################################
-# BEGIN fix (20 / 278) for 'partition_for_var'
+# BEGIN fix (24 / 282) for 'partition_for_var'
 ###############################################################################
-(>&2 echo "Remediating rule 20/278: 'partition_for_var'")
+(>&2 echo "Remediating rule 24/282: 'partition_for_var'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var'
 
 ###############################################################################
-# BEGIN fix (21 / 278) for 'partition_for_var_log'
+# BEGIN fix (25 / 282) for 'partition_for_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 21/278: 'partition_for_var_log'")
+(>&2 echo "Remediating rule 25/282: 'partition_for_var_log'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_log'
 
 ###############################################################################
-# BEGIN fix (22 / 278) for 'partition_for_var_log_audit'
+# BEGIN fix (26 / 282) for 'partition_for_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 22/278: 'partition_for_var_log_audit'")
+(>&2 echo "Remediating rule 26/282: 'partition_for_var_log_audit'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (23 / 278) for 'partition_for_var_tmp'
+# BEGIN fix (27 / 282) for 'partition_for_var_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 23/278: 'partition_for_var_tmp'")
+(>&2 echo "Remediating rule 27/282: 'partition_for_var_tmp'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_tmp'
 
 ###############################################################################
-# BEGIN fix (24 / 278) for 'dconf_gnome_lock_screen_on_smartcard_removal'
+# BEGIN fix (28 / 282) for 'dconf_gnome_lock_screen_on_smartcard_removal'
 ###############################################################################
-(>&2 echo "Remediating rule 24/278: 'dconf_gnome_lock_screen_on_smartcard_removal'")
+(>&2 echo "Remediating rule 28/282: 'dconf_gnome_lock_screen_on_smartcard_removal'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -463,9 +583,9 @@ fi
 # END fix for 'dconf_gnome_lock_screen_on_smartcard_removal'
 
 ###############################################################################
-# BEGIN fix (25 / 278) for 'gnome_gdm_disable_automatic_login'
+# BEGIN fix (29 / 282) for 'gnome_gdm_disable_automatic_login'
 ###############################################################################
-(>&2 echo "Remediating rule 25/278: 'gnome_gdm_disable_automatic_login'")
+(>&2 echo "Remediating rule 29/282: 'gnome_gdm_disable_automatic_login'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -486,9 +606,9 @@ fi
 # END fix for 'gnome_gdm_disable_automatic_login'
 
 ###############################################################################
-# BEGIN fix (26 / 278) for 'dconf_gnome_screensaver_idle_delay'
+# BEGIN fix (30 / 282) for 'dconf_gnome_screensaver_idle_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 26/278: 'dconf_gnome_screensaver_idle_delay'")
+(>&2 echo "Remediating rule 30/282: 'dconf_gnome_screensaver_idle_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -542,9 +662,9 @@ fi
 # END fix for 'dconf_gnome_screensaver_idle_delay'
 
 ###############################################################################
-# BEGIN fix (27 / 278) for 'dconf_gnome_screensaver_lock_enabled'
+# BEGIN fix (31 / 282) for 'dconf_gnome_screensaver_lock_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 27/278: 'dconf_gnome_screensaver_lock_enabled'")
+(>&2 echo "Remediating rule 31/282: 'dconf_gnome_screensaver_lock_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -593,9 +713,9 @@ fi
 # END fix for 'dconf_gnome_screensaver_lock_enabled'
 
 ###############################################################################
-# BEGIN fix (28 / 278) for 'dconf_gnome_disable_ctrlaltdel_reboot'
+# BEGIN fix (32 / 282) for 'dconf_gnome_disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 28/278: 'dconf_gnome_disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 32/282: 'dconf_gnome_disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -644,9 +764,9 @@ fi
 # END fix for 'dconf_gnome_disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (29 / 278) for 'sudo_remove_no_authenticate'
+# BEGIN fix (33 / 282) for 'sudo_remove_no_authenticate'
 ###############################################################################
-(>&2 echo "Remediating rule 29/278: 'sudo_remove_no_authenticate'")
+(>&2 echo "Remediating rule 33/282: 'sudo_remove_no_authenticate'")
 
 for f in $( ls /etc/sudoers /etc/sudoers.d/* 2> /dev/null ) ; do
   matching_list=$(grep -P '^(?!#).*[\s]+\!authenticate.*$' $f | uniq )
@@ -662,9 +782,9 @@ done
 # END fix for 'sudo_remove_no_authenticate'
 
 ###############################################################################
-# BEGIN fix (30 / 278) for 'sudo_remove_nopasswd'
+# BEGIN fix (34 / 282) for 'sudo_remove_nopasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 30/278: 'sudo_remove_nopasswd'")
+(>&2 echo "Remediating rule 34/282: 'sudo_remove_nopasswd'")
 
 for f in $( ls /etc/sudoers /etc/sudoers.d/* 2> /dev/null ) ; do
   matching_list=$(grep -P '^(?!#).*[\s]+NOPASSWD[\s]*\:.*$' $f | uniq )
@@ -680,9 +800,9 @@ done
 # END fix for 'sudo_remove_nopasswd'
 
 ###############################################################################
-# BEGIN fix (31 / 278) for 'sudo_require_reauthentication'
+# BEGIN fix (35 / 282) for 'sudo_require_reauthentication'
 ###############################################################################
-(>&2 echo "Remediating rule 31/278: 'sudo_require_reauthentication'")
+(>&2 echo "Remediating rule 35/282: 'sudo_require_reauthentication'")
 
 
 var_sudo_timestamp_timeout="0"
@@ -717,16 +837,16 @@ fi
 # END fix for 'sudo_require_reauthentication'
 
 ###############################################################################
-# BEGIN fix (32 / 278) for 'sudo_restrict_privilege_elevation_to_authorized'
+# BEGIN fix (36 / 282) for 'sudo_restrict_privilege_elevation_to_authorized'
 ###############################################################################
-(>&2 echo "Remediating rule 32/278: 'sudo_restrict_privilege_elevation_to_authorized'")
+(>&2 echo "Remediating rule 36/282: 'sudo_restrict_privilege_elevation_to_authorized'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'sudo_restrict_privilege_elevation_to_authorized'
 
 ###############################################################################
-# BEGIN fix (33 / 278) for 'sudoers_validate_passwd'
+# BEGIN fix (37 / 282) for 'sudoers_validate_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 33/278: 'sudoers_validate_passwd'")
+(>&2 echo "Remediating rule 37/282: 'sudoers_validate_passwd'")
 
 if [ -e "/etc/sudoers" ] ; then
     
@@ -764,9 +884,9 @@ rm "/etc/sudoers.bak"
 # END fix for 'sudoers_validate_passwd'
 
 ###############################################################################
-# BEGIN fix (34 / 278) for 'package_rng-tools_installed'
+# BEGIN fix (38 / 282) for 'package_rng-tools_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 34/278: 'package_rng-tools_installed'")
+(>&2 echo "Remediating rule 38/282: 'package_rng-tools_installed'")
 
 if ! rpm -q --quiet "rng-tools" ; then
     yum install -y "rng-tools"
@@ -774,9 +894,9 @@ fi
 # END fix for 'package_rng-tools_installed'
 
 ###############################################################################
-# BEGIN fix (35 / 278) for 'package_abrt-addon-ccpp_removed'
+# BEGIN fix (39 / 282) for 'package_abrt-addon-ccpp_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 35/278: 'package_abrt-addon-ccpp_removed'")
+(>&2 echo "Remediating rule 39/282: 'package_abrt-addon-ccpp_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-ccpp
 #	   from the system, and may remove any packages
@@ -790,9 +910,9 @@ fi
 # END fix for 'package_abrt-addon-ccpp_removed'
 
 ###############################################################################
-# BEGIN fix (36 / 278) for 'package_abrt-addon-kerneloops_removed'
+# BEGIN fix (40 / 282) for 'package_abrt-addon-kerneloops_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 36/278: 'package_abrt-addon-kerneloops_removed'")
+(>&2 echo "Remediating rule 40/282: 'package_abrt-addon-kerneloops_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-kerneloops
 #	   from the system, and may remove any packages
@@ -806,9 +926,9 @@ fi
 # END fix for 'package_abrt-addon-kerneloops_removed'
 
 ###############################################################################
-# BEGIN fix (37 / 278) for 'package_abrt-addon-python_removed'
+# BEGIN fix (41 / 282) for 'package_abrt-addon-python_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 37/278: 'package_abrt-addon-python_removed'")
+(>&2 echo "Remediating rule 41/282: 'package_abrt-addon-python_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-python
 #	   from the system, and may remove any packages
@@ -822,9 +942,9 @@ fi
 # END fix for 'package_abrt-addon-python_removed'
 
 ###############################################################################
-# BEGIN fix (38 / 278) for 'package_abrt-cli_removed'
+# BEGIN fix (42 / 282) for 'package_abrt-cli_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 38/278: 'package_abrt-cli_removed'")
+(>&2 echo "Remediating rule 42/282: 'package_abrt-cli_removed'")
 
 # CAUTION: This remediation script will remove abrt-cli
 #	   from the system, and may remove any packages
@@ -838,9 +958,9 @@ fi
 # END fix for 'package_abrt-cli_removed'
 
 ###############################################################################
-# BEGIN fix (39 / 278) for 'package_abrt-plugin-logger_removed'
+# BEGIN fix (43 / 282) for 'package_abrt-plugin-logger_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 39/278: 'package_abrt-plugin-logger_removed'")
+(>&2 echo "Remediating rule 43/282: 'package_abrt-plugin-logger_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-logger
 #	   from the system, and may remove any packages
@@ -854,9 +974,9 @@ fi
 # END fix for 'package_abrt-plugin-logger_removed'
 
 ###############################################################################
-# BEGIN fix (40 / 278) for 'package_abrt-plugin-rhtsupport_removed'
+# BEGIN fix (44 / 282) for 'package_abrt-plugin-rhtsupport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 40/278: 'package_abrt-plugin-rhtsupport_removed'")
+(>&2 echo "Remediating rule 44/282: 'package_abrt-plugin-rhtsupport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-rhtsupport
 #	   from the system, and may remove any packages
@@ -870,9 +990,9 @@ fi
 # END fix for 'package_abrt-plugin-rhtsupport_removed'
 
 ###############################################################################
-# BEGIN fix (41 / 278) for 'package_abrt-plugin-sosreport_removed'
+# BEGIN fix (45 / 282) for 'package_abrt-plugin-sosreport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 41/278: 'package_abrt-plugin-sosreport_removed'")
+(>&2 echo "Remediating rule 45/282: 'package_abrt-plugin-sosreport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-sosreport
 #	   from the system, and may remove any packages
@@ -886,9 +1006,9 @@ fi
 # END fix for 'package_abrt-plugin-sosreport_removed'
 
 ###############################################################################
-# BEGIN fix (42 / 278) for 'package_gssproxy_removed'
+# BEGIN fix (46 / 282) for 'package_gssproxy_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 42/278: 'package_gssproxy_removed'")
+(>&2 echo "Remediating rule 46/282: 'package_gssproxy_removed'")
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -902,9 +1022,9 @@ fi
 # END fix for 'package_gssproxy_removed'
 
 ###############################################################################
-# BEGIN fix (43 / 278) for 'package_iprutils_removed'
+# BEGIN fix (47 / 282) for 'package_iprutils_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 43/278: 'package_iprutils_removed'")
+(>&2 echo "Remediating rule 47/282: 'package_iprutils_removed'")
 
 # CAUTION: This remediation script will remove iprutils
 #	   from the system, and may remove any packages
@@ -918,9 +1038,9 @@ fi
 # END fix for 'package_iprutils_removed'
 
 ###############################################################################
-# BEGIN fix (44 / 278) for 'package_krb5-workstation_removed'
+# BEGIN fix (48 / 282) for 'package_krb5-workstation_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 44/278: 'package_krb5-workstation_removed'")
+(>&2 echo "Remediating rule 48/282: 'package_krb5-workstation_removed'")
 
 # CAUTION: This remediation script will remove krb5-workstation
 #	   from the system, and may remove any packages
@@ -934,9 +1054,9 @@ fi
 # END fix for 'package_krb5-workstation_removed'
 
 ###############################################################################
-# BEGIN fix (45 / 278) for 'package_tuned_removed'
+# BEGIN fix (49 / 282) for 'package_tuned_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 45/278: 'package_tuned_removed'")
+(>&2 echo "Remediating rule 49/282: 'package_tuned_removed'")
 
 # CAUTION: This remediation script will remove tuned
 #	   from the system, and may remove any packages
@@ -950,9 +1070,9 @@ fi
 # END fix for 'package_tuned_removed'
 
 ###############################################################################
-# BEGIN fix (46 / 278) for 'clean_components_post_updating'
+# BEGIN fix (50 / 282) for 'clean_components_post_updating'
 ###############################################################################
-(>&2 echo "Remediating rule 46/278: 'clean_components_post_updating'")
+(>&2 echo "Remediating rule 50/282: 'clean_components_post_updating'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -969,9 +1089,9 @@ fi
 # END fix for 'clean_components_post_updating'
 
 ###############################################################################
-# BEGIN fix (47 / 278) for 'ensure_gpgcheck_globally_activated'
+# BEGIN fix (51 / 282) for 'ensure_gpgcheck_globally_activated'
 ###############################################################################
-(>&2 echo "Remediating rule 47/278: 'ensure_gpgcheck_globally_activated'")
+(>&2 echo "Remediating rule 51/282: 'ensure_gpgcheck_globally_activated'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1060,9 +1180,9 @@ fi
 # END fix for 'ensure_gpgcheck_globally_activated'
 
 ###############################################################################
-# BEGIN fix (48 / 278) for 'ensure_gpgcheck_local_packages'
+# BEGIN fix (52 / 282) for 'ensure_gpgcheck_local_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 48/278: 'ensure_gpgcheck_local_packages'")
+(>&2 echo "Remediating rule 52/282: 'ensure_gpgcheck_local_packages'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1151,18 +1271,18 @@ fi
 # END fix for 'ensure_gpgcheck_local_packages'
 
 ###############################################################################
-# BEGIN fix (49 / 278) for 'security_patches_up_to_date'
+# BEGIN fix (53 / 282) for 'security_patches_up_to_date'
 ###############################################################################
-(>&2 echo "Remediating rule 49/278: 'security_patches_up_to_date'")
+(>&2 echo "Remediating rule 53/282: 'security_patches_up_to_date'")
 
 
 yum -y update
 # END fix for 'security_patches_up_to_date'
 
 ###############################################################################
-# BEGIN fix (50 / 278) for 'banner_etc_issue'
+# BEGIN fix (54 / 282) for 'banner_etc_issue'
 ###############################################################################
-(>&2 echo "Remediating rule 50/278: 'banner_etc_issue'")
+(>&2 echo "Remediating rule 54/282: 'banner_etc_issue'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -1195,9 +1315,9 @@ fi
 # END fix for 'banner_etc_issue'
 
 ###############################################################################
-# BEGIN fix (51 / 278) for 'dconf_gnome_banner_enabled'
+# BEGIN fix (55 / 282) for 'dconf_gnome_banner_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 51/278: 'dconf_gnome_banner_enabled'")
+(>&2 echo "Remediating rule 55/282: 'dconf_gnome_banner_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1246,9 +1366,9 @@ fi
 # END fix for 'dconf_gnome_banner_enabled'
 
 ###############################################################################
-# BEGIN fix (52 / 278) for 'dconf_gnome_login_banner_text'
+# BEGIN fix (56 / 282) for 'dconf_gnome_login_banner_text'
 ###############################################################################
-(>&2 echo "Remediating rule 52/278: 'dconf_gnome_login_banner_text'")
+(>&2 echo "Remediating rule 56/282: 'dconf_gnome_login_banner_text'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1318,9 +1438,9 @@ fi
 # END fix for 'dconf_gnome_login_banner_text'
 
 ###############################################################################
-# BEGIN fix (53 / 278) for 'display_login_attempts'
+# BEGIN fix (57 / 282) for 'display_login_attempts'
 ###############################################################################
-(>&2 echo "Remediating rule 53/278: 'display_login_attempts'")
+(>&2 echo "Remediating rule 57/282: 'display_login_attempts'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1391,9 +1511,9 @@ fi
 # END fix for 'display_login_attempts'
 
 ###############################################################################
-# BEGIN fix (54 / 278) for 'accounts_password_pam_pwhistory_remember_password_auth'
+# BEGIN fix (58 / 282) for 'accounts_password_pam_pwhistory_remember_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 54/278: 'accounts_password_pam_pwhistory_remember_password_auth'")
+(>&2 echo "Remediating rule 58/282: 'accounts_password_pam_pwhistory_remember_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1439,9 +1559,9 @@ fi
 # END fix for 'accounts_password_pam_pwhistory_remember_password_auth'
 
 ###############################################################################
-# BEGIN fix (55 / 278) for 'accounts_password_pam_pwhistory_remember_system_auth'
+# BEGIN fix (59 / 282) for 'accounts_password_pam_pwhistory_remember_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 55/278: 'accounts_password_pam_pwhistory_remember_system_auth'")
+(>&2 echo "Remediating rule 59/282: 'accounts_password_pam_pwhistory_remember_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1487,9 +1607,9 @@ fi
 # END fix for 'accounts_password_pam_pwhistory_remember_system_auth'
 
 ###############################################################################
-# BEGIN fix (56 / 278) for 'accounts_passwords_pam_faillock_deny'
+# BEGIN fix (60 / 282) for 'accounts_passwords_pam_faillock_deny'
 ###############################################################################
-(>&2 echo "Remediating rule 56/278: 'accounts_passwords_pam_faillock_deny'")
+(>&2 echo "Remediating rule 60/282: 'accounts_passwords_pam_faillock_deny'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1543,9 +1663,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_deny'
 
 ###############################################################################
-# BEGIN fix (57 / 278) for 'accounts_passwords_pam_faillock_deny_root'
+# BEGIN fix (61 / 282) for 'accounts_passwords_pam_faillock_deny_root'
 ###############################################################################
-(>&2 echo "Remediating rule 57/278: 'accounts_passwords_pam_faillock_deny_root'")
+(>&2 echo "Remediating rule 61/282: 'accounts_passwords_pam_faillock_deny_root'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1599,9 +1719,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_deny_root'
 
 ###############################################################################
-# BEGIN fix (58 / 278) for 'accounts_passwords_pam_faillock_interval'
+# BEGIN fix (62 / 282) for 'accounts_passwords_pam_faillock_interval'
 ###############################################################################
-(>&2 echo "Remediating rule 58/278: 'accounts_passwords_pam_faillock_interval'")
+(>&2 echo "Remediating rule 62/282: 'accounts_passwords_pam_faillock_interval'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1656,9 +1776,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_interval'
 
 ###############################################################################
-# BEGIN fix (59 / 278) for 'accounts_passwords_pam_faillock_unlock_time'
+# BEGIN fix (63 / 282) for 'accounts_passwords_pam_faillock_unlock_time'
 ###############################################################################
-(>&2 echo "Remediating rule 59/278: 'accounts_passwords_pam_faillock_unlock_time'")
+(>&2 echo "Remediating rule 63/282: 'accounts_passwords_pam_faillock_unlock_time'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1712,9 +1832,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_unlock_time'
 
 ###############################################################################
-# BEGIN fix (60 / 278) for 'accounts_password_pam_dcredit'
+# BEGIN fix (64 / 282) for 'accounts_password_pam_dcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 60/278: 'accounts_password_pam_dcredit'")
+(>&2 echo "Remediating rule 64/282: 'accounts_password_pam_dcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1805,9 +1925,9 @@ fi
 # END fix for 'accounts_password_pam_dcredit'
 
 ###############################################################################
-# BEGIN fix (61 / 278) for 'accounts_password_pam_difok'
+# BEGIN fix (65 / 282) for 'accounts_password_pam_difok'
 ###############################################################################
-(>&2 echo "Remediating rule 61/278: 'accounts_password_pam_difok'")
+(>&2 echo "Remediating rule 65/282: 'accounts_password_pam_difok'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1898,9 +2018,9 @@ fi
 # END fix for 'accounts_password_pam_difok'
 
 ###############################################################################
-# BEGIN fix (62 / 278) for 'accounts_password_pam_lcredit'
+# BEGIN fix (66 / 282) for 'accounts_password_pam_lcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 62/278: 'accounts_password_pam_lcredit'")
+(>&2 echo "Remediating rule 66/282: 'accounts_password_pam_lcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1991,9 +2111,9 @@ fi
 # END fix for 'accounts_password_pam_lcredit'
 
 ###############################################################################
-# BEGIN fix (63 / 278) for 'accounts_password_pam_maxclassrepeat'
+# BEGIN fix (67 / 282) for 'accounts_password_pam_maxclassrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 63/278: 'accounts_password_pam_maxclassrepeat'")
+(>&2 echo "Remediating rule 67/282: 'accounts_password_pam_maxclassrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2084,9 +2204,9 @@ fi
 # END fix for 'accounts_password_pam_maxclassrepeat'
 
 ###############################################################################
-# BEGIN fix (64 / 278) for 'accounts_password_pam_maxrepeat'
+# BEGIN fix (68 / 282) for 'accounts_password_pam_maxrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 64/278: 'accounts_password_pam_maxrepeat'")
+(>&2 echo "Remediating rule 68/282: 'accounts_password_pam_maxrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2177,9 +2297,9 @@ fi
 # END fix for 'accounts_password_pam_maxrepeat'
 
 ###############################################################################
-# BEGIN fix (65 / 278) for 'accounts_password_pam_minclass'
+# BEGIN fix (69 / 282) for 'accounts_password_pam_minclass'
 ###############################################################################
-(>&2 echo "Remediating rule 65/278: 'accounts_password_pam_minclass'")
+(>&2 echo "Remediating rule 69/282: 'accounts_password_pam_minclass'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2270,9 +2390,9 @@ fi
 # END fix for 'accounts_password_pam_minclass'
 
 ###############################################################################
-# BEGIN fix (66 / 278) for 'accounts_password_pam_minlen'
+# BEGIN fix (70 / 282) for 'accounts_password_pam_minlen'
 ###############################################################################
-(>&2 echo "Remediating rule 66/278: 'accounts_password_pam_minlen'")
+(>&2 echo "Remediating rule 70/282: 'accounts_password_pam_minlen'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2363,9 +2483,9 @@ fi
 # END fix for 'accounts_password_pam_minlen'
 
 ###############################################################################
-# BEGIN fix (67 / 278) for 'accounts_password_pam_ocredit'
+# BEGIN fix (71 / 282) for 'accounts_password_pam_ocredit'
 ###############################################################################
-(>&2 echo "Remediating rule 67/278: 'accounts_password_pam_ocredit'")
+(>&2 echo "Remediating rule 71/282: 'accounts_password_pam_ocredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2456,9 +2576,9 @@ fi
 # END fix for 'accounts_password_pam_ocredit'
 
 ###############################################################################
-# BEGIN fix (68 / 278) for 'accounts_password_pam_retry'
+# BEGIN fix (72 / 282) for 'accounts_password_pam_retry'
 ###############################################################################
-(>&2 echo "Remediating rule 68/278: 'accounts_password_pam_retry'")
+(>&2 echo "Remediating rule 72/282: 'accounts_password_pam_retry'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2485,9 +2605,9 @@ fi
 # END fix for 'accounts_password_pam_retry'
 
 ###############################################################################
-# BEGIN fix (69 / 278) for 'accounts_password_pam_ucredit'
+# BEGIN fix (73 / 282) for 'accounts_password_pam_ucredit'
 ###############################################################################
-(>&2 echo "Remediating rule 69/278: 'accounts_password_pam_ucredit'")
+(>&2 echo "Remediating rule 73/282: 'accounts_password_pam_ucredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2578,9 +2698,9 @@ fi
 # END fix for 'accounts_password_pam_ucredit'
 
 ###############################################################################
-# BEGIN fix (70 / 278) for 'set_password_hashing_algorithm_logindefs'
+# BEGIN fix (74 / 282) for 'set_password_hashing_algorithm_logindefs'
 ###############################################################################
-(>&2 echo "Remediating rule 70/278: 'set_password_hashing_algorithm_logindefs'")
+(>&2 echo "Remediating rule 74/282: 'set_password_hashing_algorithm_logindefs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -2602,9 +2722,9 @@ fi
 # END fix for 'set_password_hashing_algorithm_logindefs'
 
 ###############################################################################
-# BEGIN fix (71 / 278) for 'set_password_hashing_algorithm_systemauth'
+# BEGIN fix (75 / 282) for 'set_password_hashing_algorithm_systemauth'
 ###############################################################################
-(>&2 echo "Remediating rule 71/278: 'set_password_hashing_algorithm_systemauth'")
+(>&2 echo "Remediating rule 75/282: 'set_password_hashing_algorithm_systemauth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2624,9 +2744,9 @@ fi
 # END fix for 'set_password_hashing_algorithm_systemauth'
 
 ###############################################################################
-# BEGIN fix (72 / 278) for 'service_debug-shell_disabled'
+# BEGIN fix (76 / 282) for 'service_debug-shell_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 72/278: 'service_debug-shell_disabled'")
+(>&2 echo "Remediating rule 76/282: 'service_debug-shell_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2650,9 +2770,9 @@ fi
 # END fix for 'service_debug-shell_disabled'
 
 ###############################################################################
-# BEGIN fix (73 / 278) for 'disable_ctrlaltdel_burstaction'
+# BEGIN fix (77 / 282) for 'disable_ctrlaltdel_burstaction'
 ###############################################################################
-(>&2 echo "Remediating rule 73/278: 'disable_ctrlaltdel_burstaction'")
+(>&2 echo "Remediating rule 77/282: 'disable_ctrlaltdel_burstaction'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q systemd; then
 
@@ -2741,9 +2861,9 @@ fi
 # END fix for 'disable_ctrlaltdel_burstaction'
 
 ###############################################################################
-# BEGIN fix (74 / 278) for 'disable_ctrlaltdel_reboot'
+# BEGIN fix (78 / 282) for 'disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 74/278: 'disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 78/282: 'disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2758,9 +2878,9 @@ fi
 # END fix for 'disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (75 / 278) for 'require_emergency_target_auth'
+# BEGIN fix (79 / 282) for 'require_emergency_target_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 75/278: 'require_emergency_target_auth'")
+(>&2 echo "Remediating rule 79/282: 'require_emergency_target_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2780,9 +2900,9 @@ fi
 # END fix for 'require_emergency_target_auth'
 
 ###############################################################################
-# BEGIN fix (76 / 278) for 'require_singleuser_auth'
+# BEGIN fix (80 / 282) for 'require_singleuser_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 76/278: 'require_singleuser_auth'")
+(>&2 echo "Remediating rule 80/282: 'require_singleuser_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2802,9 +2922,9 @@ fi
 # END fix for 'require_singleuser_auth'
 
 ###############################################################################
-# BEGIN fix (77 / 278) for 'package_tmux_installed'
+# BEGIN fix (81 / 282) for 'package_tmux_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 77/278: 'package_tmux_installed'")
+(>&2 echo "Remediating rule 81/282: 'package_tmux_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2818,9 +2938,9 @@ fi
 # END fix for 'package_tmux_installed'
 
 ###############################################################################
-# BEGIN fix (78 / 278) for 'configure_bashrc_exec_tmux'
+# BEGIN fix (82 / 282) for 'configure_bashrc_exec_tmux'
 ###############################################################################
-(>&2 echo "Remediating rule 78/278: 'configure_bashrc_exec_tmux'")
+(>&2 echo "Remediating rule 82/282: 'configure_bashrc_exec_tmux'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2840,9 +2960,9 @@ fi
 # END fix for 'configure_bashrc_exec_tmux'
 
 ###############################################################################
-# BEGIN fix (79 / 278) for 'configure_tmux_lock_after_time'
+# BEGIN fix (83 / 282) for 'configure_tmux_lock_after_time'
 ###############################################################################
-(>&2 echo "Remediating rule 79/278: 'configure_tmux_lock_after_time'")
+(>&2 echo "Remediating rule 83/282: 'configure_tmux_lock_after_time'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2860,9 +2980,9 @@ fi
 # END fix for 'configure_tmux_lock_after_time'
 
 ###############################################################################
-# BEGIN fix (80 / 278) for 'configure_tmux_lock_command'
+# BEGIN fix (84 / 282) for 'configure_tmux_lock_command'
 ###############################################################################
-(>&2 echo "Remediating rule 80/278: 'configure_tmux_lock_command'")
+(>&2 echo "Remediating rule 84/282: 'configure_tmux_lock_command'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2880,9 +3000,9 @@ fi
 # END fix for 'configure_tmux_lock_command'
 
 ###############################################################################
-# BEGIN fix (81 / 278) for 'no_tmux_in_shells'
+# BEGIN fix (85 / 282) for 'no_tmux_in_shells'
 ###############################################################################
-(>&2 echo "Remediating rule 81/278: 'no_tmux_in_shells'")
+(>&2 echo "Remediating rule 85/282: 'no_tmux_in_shells'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2896,9 +3016,9 @@ fi
 # END fix for 'no_tmux_in_shells'
 
 ###############################################################################
-# BEGIN fix (82 / 278) for 'package_opensc_installed'
+# BEGIN fix (86 / 282) for 'package_opensc_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 82/278: 'package_opensc_installed'")
+(>&2 echo "Remediating rule 86/282: 'package_opensc_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2912,9 +3032,9 @@ fi
 # END fix for 'package_opensc_installed'
 
 ###############################################################################
-# BEGIN fix (83 / 278) for 'install_smartcard_packages'
+# BEGIN fix (87 / 282) for 'install_smartcard_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 83/278: 'install_smartcard_packages'")
+(>&2 echo "Remediating rule 87/282: 'install_smartcard_packages'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2928,9 +3048,9 @@ fi
 # END fix for 'install_smartcard_packages'
 
 ###############################################################################
-# BEGIN fix (84 / 278) for 'account_disable_post_pw_expiration'
+# BEGIN fix (88 / 282) for 'account_disable_post_pw_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 84/278: 'account_disable_post_pw_expiration'")
+(>&2 echo "Remediating rule 88/282: 'account_disable_post_pw_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3021,16 +3141,16 @@ fi
 # END fix for 'account_disable_post_pw_expiration'
 
 ###############################################################################
-# BEGIN fix (85 / 278) for 'account_temp_expire_date'
+# BEGIN fix (89 / 282) for 'account_temp_expire_date'
 ###############################################################################
-(>&2 echo "Remediating rule 85/278: 'account_temp_expire_date'")
+(>&2 echo "Remediating rule 89/282: 'account_temp_expire_date'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'account_temp_expire_date'
 
 ###############################################################################
-# BEGIN fix (86 / 278) for 'accounts_maximum_age_login_defs'
+# BEGIN fix (90 / 282) for 'accounts_maximum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 86/278: 'accounts_maximum_age_login_defs'")
+(>&2 echo "Remediating rule 90/282: 'accounts_maximum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3051,9 +3171,9 @@ fi
 # END fix for 'accounts_maximum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (87 / 278) for 'accounts_minimum_age_login_defs'
+# BEGIN fix (91 / 282) for 'accounts_minimum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 87/278: 'accounts_minimum_age_login_defs'")
+(>&2 echo "Remediating rule 91/282: 'accounts_minimum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3074,9 +3194,9 @@ fi
 # END fix for 'accounts_minimum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (88 / 278) for 'accounts_password_minlen_login_defs'
+# BEGIN fix (92 / 282) for 'accounts_password_minlen_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 88/278: 'accounts_password_minlen_login_defs'")
+(>&2 echo "Remediating rule 92/282: 'accounts_password_minlen_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3099,30 +3219,30 @@ fi
 # END fix for 'accounts_password_minlen_login_defs'
 
 ###############################################################################
-# BEGIN fix (89 / 278) for 'accounts_password_set_max_life_existing'
+# BEGIN fix (93 / 282) for 'accounts_password_set_max_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 89/278: 'accounts_password_set_max_life_existing'")
+(>&2 echo "Remediating rule 93/282: 'accounts_password_set_max_life_existing'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_set_max_life_existing'
 
 ###############################################################################
-# BEGIN fix (90 / 278) for 'accounts_password_set_min_life_existing'
+# BEGIN fix (94 / 282) for 'accounts_password_set_min_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 90/278: 'accounts_password_set_min_life_existing'")
+(>&2 echo "Remediating rule 94/282: 'accounts_password_set_min_life_existing'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_set_min_life_existing'
 
 ###############################################################################
-# BEGIN fix (91 / 278) for 'accounts_password_all_shadowed_sha512'
+# BEGIN fix (95 / 282) for 'accounts_password_all_shadowed_sha512'
 ###############################################################################
-(>&2 echo "Remediating rule 91/278: 'accounts_password_all_shadowed_sha512'")
+(>&2 echo "Remediating rule 95/282: 'accounts_password_all_shadowed_sha512'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_all_shadowed_sha512'
 
 ###############################################################################
-# BEGIN fix (92 / 278) for 'accounts_password_pam_unix_rounds_password_auth'
+# BEGIN fix (96 / 282) for 'accounts_password_pam_unix_rounds_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 92/278: 'accounts_password_pam_unix_rounds_password_auth'")
+(>&2 echo "Remediating rule 96/282: 'accounts_password_pam_unix_rounds_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3146,9 +3266,9 @@ fi
 # END fix for 'accounts_password_pam_unix_rounds_password_auth'
 
 ###############################################################################
-# BEGIN fix (93 / 278) for 'accounts_password_pam_unix_rounds_system_auth'
+# BEGIN fix (97 / 282) for 'accounts_password_pam_unix_rounds_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 93/278: 'accounts_password_pam_unix_rounds_system_auth'")
+(>&2 echo "Remediating rule 97/282: 'accounts_password_pam_unix_rounds_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3172,9 +3292,9 @@ fi
 # END fix for 'accounts_password_pam_unix_rounds_system_auth'
 
 ###############################################################################
-# BEGIN fix (94 / 278) for 'no_empty_passwords'
+# BEGIN fix (98 / 282) for 'no_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 94/278: 'no_empty_passwords'")
+(>&2 echo "Remediating rule 98/282: 'no_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3187,16 +3307,16 @@ fi
 # END fix for 'no_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (95 / 278) for 'accounts_no_uid_except_zero'
+# BEGIN fix (99 / 282) for 'accounts_no_uid_except_zero'
 ###############################################################################
-(>&2 echo "Remediating rule 95/278: 'accounts_no_uid_except_zero'")
+(>&2 echo "Remediating rule 99/282: 'accounts_no_uid_except_zero'")
 awk -F: '$3 == 0 && $1 != "root" { print $1 }' /etc/passwd | xargs --max-lines=1 passwd -l
 # END fix for 'accounts_no_uid_except_zero'
 
 ###############################################################################
-# BEGIN fix (96 / 278) for 'accounts_have_homedir_login_defs'
+# BEGIN fix (100 / 282) for 'accounts_have_homedir_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 96/278: 'accounts_have_homedir_login_defs'")
+(>&2 echo "Remediating rule 100/282: 'accounts_have_homedir_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3227,9 +3347,9 @@ fi
 # END fix for 'accounts_have_homedir_login_defs'
 
 ###############################################################################
-# BEGIN fix (97 / 278) for 'accounts_logon_fail_delay'
+# BEGIN fix (101 / 282) for 'accounts_logon_fail_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 97/278: 'accounts_logon_fail_delay'")
+(>&2 echo "Remediating rule 101/282: 'accounts_logon_fail_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3322,9 +3442,9 @@ fi
 # END fix for 'accounts_logon_fail_delay'
 
 ###############################################################################
-# BEGIN fix (98 / 278) for 'accounts_max_concurrent_login_sessions'
+# BEGIN fix (102 / 282) for 'accounts_max_concurrent_login_sessions'
 ###############################################################################
-(>&2 echo "Remediating rule 98/278: 'accounts_max_concurrent_login_sessions'")
+(>&2 echo "Remediating rule 102/282: 'accounts_max_concurrent_login_sessions'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3347,58 +3467,58 @@ fi
 # END fix for 'accounts_max_concurrent_login_sessions'
 
 ###############################################################################
-# BEGIN fix (99 / 278) for 'accounts_user_dot_no_world_writable_programs'
+# BEGIN fix (103 / 282) for 'accounts_user_dot_no_world_writable_programs'
 ###############################################################################
-(>&2 echo "Remediating rule 99/278: 'accounts_user_dot_no_world_writable_programs'")
+(>&2 echo "Remediating rule 103/282: 'accounts_user_dot_no_world_writable_programs'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_dot_no_world_writable_programs'
 
 ###############################################################################
-# BEGIN fix (100 / 278) for 'accounts_user_home_paths_only'
+# BEGIN fix (104 / 282) for 'accounts_user_home_paths_only'
 ###############################################################################
-(>&2 echo "Remediating rule 100/278: 'accounts_user_home_paths_only'")
+(>&2 echo "Remediating rule 104/282: 'accounts_user_home_paths_only'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_home_paths_only'
 
 ###############################################################################
-# BEGIN fix (101 / 278) for 'accounts_user_interactive_home_directory_defined'
+# BEGIN fix (105 / 282) for 'accounts_user_interactive_home_directory_defined'
 ###############################################################################
-(>&2 echo "Remediating rule 101/278: 'accounts_user_interactive_home_directory_defined'")
+(>&2 echo "Remediating rule 105/282: 'accounts_user_interactive_home_directory_defined'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_interactive_home_directory_defined'
 
 ###############################################################################
-# BEGIN fix (102 / 278) for 'accounts_user_interactive_home_directory_exists'
+# BEGIN fix (106 / 282) for 'accounts_user_interactive_home_directory_exists'
 ###############################################################################
-(>&2 echo "Remediating rule 102/278: 'accounts_user_interactive_home_directory_exists'")
+(>&2 echo "Remediating rule 106/282: 'accounts_user_interactive_home_directory_exists'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_interactive_home_directory_exists'
 
 ###############################################################################
-# BEGIN fix (103 / 278) for 'file_groupownership_home_directories'
+# BEGIN fix (107 / 282) for 'file_groupownership_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 103/278: 'file_groupownership_home_directories'")
+(>&2 echo "Remediating rule 107/282: 'file_groupownership_home_directories'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_groupownership_home_directories'
 
 ###############################################################################
-# BEGIN fix (104 / 278) for 'file_permission_user_init_files'
+# BEGIN fix (108 / 282) for 'file_permission_user_init_files'
 ###############################################################################
-(>&2 echo "Remediating rule 104/278: 'file_permission_user_init_files'")
+(>&2 echo "Remediating rule 108/282: 'file_permission_user_init_files'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permission_user_init_files'
 
 ###############################################################################
-# BEGIN fix (105 / 278) for 'file_permissions_home_directories'
+# BEGIN fix (109 / 282) for 'file_permissions_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 105/278: 'file_permissions_home_directories'")
+(>&2 echo "Remediating rule 109/282: 'file_permissions_home_directories'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permissions_home_directories'
 
 ###############################################################################
-# BEGIN fix (106 / 278) for 'accounts_umask_etc_bashrc'
+# BEGIN fix (110 / 282) for 'accounts_umask_etc_bashrc'
 ###############################################################################
-(>&2 echo "Remediating rule 106/278: 'accounts_umask_etc_bashrc'")
+(>&2 echo "Remediating rule 110/282: 'accounts_umask_etc_bashrc'")
 
 var_accounts_user_umask="077"
 
@@ -3412,9 +3532,9 @@ fi
 # END fix for 'accounts_umask_etc_bashrc'
 
 ###############################################################################
-# BEGIN fix (107 / 278) for 'accounts_umask_etc_login_defs'
+# BEGIN fix (111 / 282) for 'accounts_umask_etc_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 107/278: 'accounts_umask_etc_login_defs'")
+(>&2 echo "Remediating rule 111/282: 'accounts_umask_etc_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3505,16 +3625,16 @@ fi
 # END fix for 'accounts_umask_etc_login_defs'
 
 ###############################################################################
-# BEGIN fix (108 / 278) for 'accounts_umask_interactive_users'
+# BEGIN fix (112 / 282) for 'accounts_umask_interactive_users'
 ###############################################################################
-(>&2 echo "Remediating rule 108/278: 'accounts_umask_interactive_users'")
+(>&2 echo "Remediating rule 112/282: 'accounts_umask_interactive_users'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_umask_interactive_users'
 
 ###############################################################################
-# BEGIN fix (109 / 278) for 'package_audit_installed'
+# BEGIN fix (113 / 282) for 'package_audit_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 109/278: 'package_audit_installed'")
+(>&2 echo "Remediating rule 113/282: 'package_audit_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3528,9 +3648,9 @@ fi
 # END fix for 'package_audit_installed'
 
 ###############################################################################
-# BEGIN fix (110 / 278) for 'service_auditd_enabled'
+# BEGIN fix (114 / 282) for 'service_auditd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 110/278: 'service_auditd_enabled'")
+(>&2 echo "Remediating rule 114/282: 'service_auditd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3545,9 +3665,9 @@ fi
 # END fix for 'service_auditd_enabled'
 
 ###############################################################################
-# BEGIN fix (111 / 278) for 'grub2_audit_argument'
+# BEGIN fix (115 / 282) for 'grub2_audit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 111/278: 'grub2_audit_argument'")
+(>&2 echo "Remediating rule 115/282: 'grub2_audit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -3562,9 +3682,9 @@ fi
 # END fix for 'grub2_audit_argument'
 
 ###############################################################################
-# BEGIN fix (112 / 278) for 'grub2_audit_backlog_limit_argument'
+# BEGIN fix (116 / 282) for 'grub2_audit_backlog_limit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 112/278: 'grub2_audit_backlog_limit_argument'")
+(>&2 echo "Remediating rule 116/282: 'grub2_audit_backlog_limit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -3579,9 +3699,9 @@ fi
 # END fix for 'grub2_audit_backlog_limit_argument'
 
 ###############################################################################
-# BEGIN fix (113 / 278) for 'audit_rules_suid_privilege_function'
+# BEGIN fix (117 / 282) for 'audit_rules_suid_privilege_function'
 ###############################################################################
-(>&2 echo "Remediating rule 113/278: 'audit_rules_suid_privilege_function'")
+(>&2 echo "Remediating rule 117/282: 'audit_rules_suid_privilege_function'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4059,9 +4179,9 @@ fi
 # END fix for 'audit_rules_suid_privilege_function'
 
 ###############################################################################
-# BEGIN fix (114 / 278) for 'directory_permissions_var_log_audit'
+# BEGIN fix (118 / 282) for 'directory_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 114/278: 'directory_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 118/282: 'directory_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4082,9 +4202,9 @@ fi
 # END fix for 'directory_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (115 / 278) for 'file_ownership_var_log_audit'
+# BEGIN fix (119 / 282) for 'file_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 115/278: 'file_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 119/282: 'file_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4108,9 +4228,9 @@ fi
 # END fix for 'file_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (116 / 278) for 'file_permissions_var_log_audit'
+# BEGIN fix (120 / 282) for 'file_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 116/278: 'file_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 120/282: 'file_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4134,16 +4254,16 @@ fi
 # END fix for 'file_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (117 / 278) for 'auditd_audispd_configure_sufficiently_large_partition'
+# BEGIN fix (121 / 282) for 'auditd_audispd_configure_sufficiently_large_partition'
 ###############################################################################
-(>&2 echo "Remediating rule 117/278: 'auditd_audispd_configure_sufficiently_large_partition'")
+(>&2 echo "Remediating rule 121/282: 'auditd_audispd_configure_sufficiently_large_partition'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'auditd_audispd_configure_sufficiently_large_partition'
 
 ###############################################################################
-# BEGIN fix (118 / 278) for 'auditd_data_disk_error_action'
+# BEGIN fix (122 / 282) for 'auditd_data_disk_error_action'
 ###############################################################################
-(>&2 echo "Remediating rule 118/278: 'auditd_data_disk_error_action'")
+(>&2 echo "Remediating rule 122/282: 'auditd_data_disk_error_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4171,9 +4291,9 @@ fi
 # END fix for 'auditd_data_disk_error_action'
 
 ###############################################################################
-# BEGIN fix (119 / 278) for 'auditd_data_disk_full_action'
+# BEGIN fix (123 / 282) for 'auditd_data_disk_full_action'
 ###############################################################################
-(>&2 echo "Remediating rule 119/278: 'auditd_data_disk_full_action'")
+(>&2 echo "Remediating rule 123/282: 'auditd_data_disk_full_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4264,9 +4384,9 @@ fi
 # END fix for 'auditd_data_disk_full_action'
 
 ###############################################################################
-# BEGIN fix (120 / 278) for 'auditd_data_retention_action_mail_acct'
+# BEGIN fix (124 / 282) for 'auditd_data_retention_action_mail_acct'
 ###############################################################################
-(>&2 echo "Remediating rule 120/278: 'auditd_data_retention_action_mail_acct'")
+(>&2 echo "Remediating rule 124/282: 'auditd_data_retention_action_mail_acct'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4361,9 +4481,9 @@ fi
 # END fix for 'auditd_data_retention_action_mail_acct'
 
 ###############################################################################
-# BEGIN fix (121 / 278) for 'auditd_data_retention_max_log_file_action'
+# BEGIN fix (125 / 282) for 'auditd_data_retention_max_log_file_action'
 ###############################################################################
-(>&2 echo "Remediating rule 121/278: 'auditd_data_retention_max_log_file_action'")
+(>&2 echo "Remediating rule 125/282: 'auditd_data_retention_max_log_file_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4458,9 +4578,9 @@ fi
 # END fix for 'auditd_data_retention_max_log_file_action'
 
 ###############################################################################
-# BEGIN fix (122 / 278) for 'auditd_data_retention_space_left_action'
+# BEGIN fix (126 / 282) for 'auditd_data_retention_space_left_action'
 ###############################################################################
-(>&2 echo "Remediating rule 122/278: 'auditd_data_retention_space_left_action'")
+(>&2 echo "Remediating rule 126/282: 'auditd_data_retention_space_left_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4561,9 +4681,9 @@ fi
 # END fix for 'auditd_data_retention_space_left_action'
 
 ###############################################################################
-# BEGIN fix (123 / 278) for 'auditd_local_events'
+# BEGIN fix (127 / 282) for 'auditd_local_events'
 ###############################################################################
-(>&2 echo "Remediating rule 123/278: 'auditd_local_events'")
+(>&2 echo "Remediating rule 127/282: 'auditd_local_events'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4585,9 +4705,9 @@ fi
 # END fix for 'auditd_local_events'
 
 ###############################################################################
-# BEGIN fix (124 / 278) for 'auditd_log_format'
+# BEGIN fix (128 / 282) for 'auditd_log_format'
 ###############################################################################
-(>&2 echo "Remediating rule 124/278: 'auditd_log_format'")
+(>&2 echo "Remediating rule 128/282: 'auditd_log_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4609,9 +4729,9 @@ fi
 # END fix for 'auditd_log_format'
 
 ###############################################################################
-# BEGIN fix (125 / 278) for 'auditd_name_format'
+# BEGIN fix (129 / 282) for 'auditd_name_format'
 ###############################################################################
-(>&2 echo "Remediating rule 125/278: 'auditd_name_format'")
+(>&2 echo "Remediating rule 129/282: 'auditd_name_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4633,9 +4753,9 @@ fi
 # END fix for 'auditd_name_format'
 
 ###############################################################################
-# BEGIN fix (126 / 278) for 'grub2_pti_argument'
+# BEGIN fix (130 / 282) for 'grub2_pti_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 126/278: 'grub2_pti_argument'")
+(>&2 echo "Remediating rule 130/282: 'grub2_pti_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -4650,9 +4770,9 @@ fi
 # END fix for 'grub2_pti_argument'
 
 ###############################################################################
-# BEGIN fix (127 / 278) for 'grub2_vsyscall_argument'
+# BEGIN fix (131 / 282) for 'grub2_vsyscall_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 127/278: 'grub2_vsyscall_argument'")
+(>&2 echo "Remediating rule 131/282: 'grub2_vsyscall_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -4667,37 +4787,37 @@ fi
 # END fix for 'grub2_vsyscall_argument'
 
 ###############################################################################
-# BEGIN fix (128 / 278) for 'grub2_admin_username'
+# BEGIN fix (132 / 282) for 'grub2_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 128/278: 'grub2_admin_username'")
+(>&2 echo "Remediating rule 132/282: 'grub2_admin_username'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_admin_username'
 
 ###############################################################################
-# BEGIN fix (129 / 278) for 'grub2_password'
+# BEGIN fix (133 / 282) for 'grub2_password'
 ###############################################################################
-(>&2 echo "Remediating rule 129/278: 'grub2_password'")
+(>&2 echo "Remediating rule 133/282: 'grub2_password'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_password'
 
 ###############################################################################
-# BEGIN fix (130 / 278) for 'grub2_uefi_admin_username'
+# BEGIN fix (134 / 282) for 'grub2_uefi_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 130/278: 'grub2_uefi_admin_username'")
+(>&2 echo "Remediating rule 134/282: 'grub2_uefi_admin_username'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_uefi_admin_username'
 
 ###############################################################################
-# BEGIN fix (131 / 278) for 'grub2_uefi_password'
+# BEGIN fix (135 / 282) for 'grub2_uefi_password'
 ###############################################################################
-(>&2 echo "Remediating rule 131/278: 'grub2_uefi_password'")
+(>&2 echo "Remediating rule 135/282: 'grub2_uefi_password'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_uefi_password'
 
 ###############################################################################
-# BEGIN fix (132 / 278) for 'package_rsyslog-gnutls_installed'
+# BEGIN fix (136 / 282) for 'package_rsyslog-gnutls_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 132/278: 'package_rsyslog-gnutls_installed'")
+(>&2 echo "Remediating rule 136/282: 'package_rsyslog-gnutls_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4711,9 +4831,9 @@ fi
 # END fix for 'package_rsyslog-gnutls_installed'
 
 ###############################################################################
-# BEGIN fix (133 / 278) for 'package_rsyslog_installed'
+# BEGIN fix (137 / 282) for 'package_rsyslog_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 133/278: 'package_rsyslog_installed'")
+(>&2 echo "Remediating rule 137/282: 'package_rsyslog_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4727,9 +4847,9 @@ fi
 # END fix for 'package_rsyslog_installed'
 
 ###############################################################################
-# BEGIN fix (134 / 278) for 'service_rsyslog_enabled'
+# BEGIN fix (138 / 282) for 'service_rsyslog_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 134/278: 'service_rsyslog_enabled'")
+(>&2 echo "Remediating rule 138/282: 'service_rsyslog_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4744,9 +4864,9 @@ fi
 # END fix for 'service_rsyslog_enabled'
 
 ###############################################################################
-# BEGIN fix (135 / 278) for 'rsyslog_cron_logging'
+# BEGIN fix (139 / 282) for 'rsyslog_cron_logging'
 ###############################################################################
-(>&2 echo "Remediating rule 135/278: 'rsyslog_cron_logging'")
+(>&2 echo "Remediating rule 139/282: 'rsyslog_cron_logging'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4761,9 +4881,9 @@ fi
 # END fix for 'rsyslog_cron_logging'
 
 ###############################################################################
-# BEGIN fix (136 / 278) for 'rsyslog_remote_access_monitoring'
+# BEGIN fix (140 / 282) for 'rsyslog_remote_access_monitoring'
 ###############################################################################
-(>&2 echo "Remediating rule 136/278: 'rsyslog_remote_access_monitoring'")
+(>&2 echo "Remediating rule 140/282: 'rsyslog_remote_access_monitoring'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4797,9 +4917,9 @@ fi
 # END fix for 'rsyslog_remote_access_monitoring'
 
 ###############################################################################
-# BEGIN fix (137 / 278) for 'rsyslog_remote_loghost'
+# BEGIN fix (141 / 282) for 'rsyslog_remote_loghost'
 ###############################################################################
-(>&2 echo "Remediating rule 137/278: 'rsyslog_remote_loghost'")
+(>&2 echo "Remediating rule 141/282: 'rsyslog_remote_loghost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4890,23 +5010,23 @@ fi
 # END fix for 'rsyslog_remote_loghost'
 
 ###############################################################################
-# BEGIN fix (138 / 278) for 'network_configure_name_resolution'
+# BEGIN fix (142 / 282) for 'network_configure_name_resolution'
 ###############################################################################
-(>&2 echo "Remediating rule 138/278: 'network_configure_name_resolution'")
+(>&2 echo "Remediating rule 142/282: 'network_configure_name_resolution'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'network_configure_name_resolution'
 
 ###############################################################################
-# BEGIN fix (139 / 278) for 'network_sniffer_disabled'
+# BEGIN fix (143 / 282) for 'network_sniffer_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 139/278: 'network_sniffer_disabled'")
+(>&2 echo "Remediating rule 143/282: 'network_sniffer_disabled'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'network_sniffer_disabled'
 
 ###############################################################################
-# BEGIN fix (140 / 278) for 'package_firewalld_installed'
+# BEGIN fix (144 / 282) for 'package_firewalld_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 140/278: 'package_firewalld_installed'")
+(>&2 echo "Remediating rule 144/282: 'package_firewalld_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4920,9 +5040,9 @@ fi
 # END fix for 'package_firewalld_installed'
 
 ###############################################################################
-# BEGIN fix (141 / 278) for 'service_firewalld_enabled'
+# BEGIN fix (145 / 282) for 'service_firewalld_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 141/278: 'service_firewalld_enabled'")
+(>&2 echo "Remediating rule 145/282: 'service_firewalld_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4937,9 +5057,9 @@ fi
 # END fix for 'service_firewalld_enabled'
 
 ###############################################################################
-# BEGIN fix (142 / 278) for 'configure_firewalld_ports'
+# BEGIN fix (146 / 282) for 'configure_firewalld_ports'
 ###############################################################################
-(>&2 echo "Remediating rule 142/278: 'configure_firewalld_ports'")
+(>&2 echo "Remediating rule 146/282: 'configure_firewalld_ports'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5068,9 +5188,9 @@ fi
 # END fix for 'configure_firewalld_ports'
 
 ###############################################################################
-# BEGIN fix (143 / 278) for 'sysctl_net_ipv6_conf_all_accept_ra'
+# BEGIN fix (147 / 282) for 'sysctl_net_ipv6_conf_all_accept_ra'
 ###############################################################################
-(>&2 echo "Remediating rule 143/278: 'sysctl_net_ipv6_conf_all_accept_ra'")
+(>&2 echo "Remediating rule 147/282: 'sysctl_net_ipv6_conf_all_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5173,9 +5293,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_ra'
 
 ###############################################################################
-# BEGIN fix (144 / 278) for 'sysctl_net_ipv6_conf_all_accept_redirects'
+# BEGIN fix (148 / 282) for 'sysctl_net_ipv6_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 144/278: 'sysctl_net_ipv6_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 148/282: 'sysctl_net_ipv6_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5278,9 +5398,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (145 / 278) for 'sysctl_net_ipv6_conf_all_accept_source_route'
+# BEGIN fix (149 / 282) for 'sysctl_net_ipv6_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 145/278: 'sysctl_net_ipv6_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 149/282: 'sysctl_net_ipv6_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5383,9 +5503,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (146 / 278) for 'sysctl_net_ipv6_conf_default_accept_ra'
+# BEGIN fix (150 / 282) for 'sysctl_net_ipv6_conf_default_accept_ra'
 ###############################################################################
-(>&2 echo "Remediating rule 146/278: 'sysctl_net_ipv6_conf_default_accept_ra'")
+(>&2 echo "Remediating rule 150/282: 'sysctl_net_ipv6_conf_default_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5488,9 +5608,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_ra'
 
 ###############################################################################
-# BEGIN fix (147 / 278) for 'sysctl_net_ipv6_conf_default_accept_redirects'
+# BEGIN fix (151 / 282) for 'sysctl_net_ipv6_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 147/278: 'sysctl_net_ipv6_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 151/282: 'sysctl_net_ipv6_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5593,9 +5713,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (148 / 278) for 'sysctl_net_ipv6_conf_default_accept_source_route'
+# BEGIN fix (152 / 282) for 'sysctl_net_ipv6_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 148/278: 'sysctl_net_ipv6_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 152/282: 'sysctl_net_ipv6_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5698,9 +5818,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (149 / 278) for 'sysctl_net_ipv4_conf_all_accept_redirects'
+# BEGIN fix (153 / 282) for 'sysctl_net_ipv4_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 149/278: 'sysctl_net_ipv4_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 153/282: 'sysctl_net_ipv4_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5803,9 +5923,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (150 / 278) for 'sysctl_net_ipv4_conf_all_accept_source_route'
+# BEGIN fix (154 / 282) for 'sysctl_net_ipv4_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 150/278: 'sysctl_net_ipv4_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 154/282: 'sysctl_net_ipv4_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5908,9 +6028,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (151 / 278) for 'sysctl_net_ipv4_conf_all_rp_filter'
+# BEGIN fix (155 / 282) for 'sysctl_net_ipv4_conf_all_rp_filter'
 ###############################################################################
-(>&2 echo "Remediating rule 151/278: 'sysctl_net_ipv4_conf_all_rp_filter'")
+(>&2 echo "Remediating rule 155/282: 'sysctl_net_ipv4_conf_all_rp_filter'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6013,9 +6133,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_rp_filter'
 
 ###############################################################################
-# BEGIN fix (152 / 278) for 'sysctl_net_ipv4_conf_default_accept_redirects'
+# BEGIN fix (156 / 282) for 'sysctl_net_ipv4_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 152/278: 'sysctl_net_ipv4_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 156/282: 'sysctl_net_ipv4_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6118,9 +6238,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (153 / 278) for 'sysctl_net_ipv4_conf_default_accept_source_route'
+# BEGIN fix (157 / 282) for 'sysctl_net_ipv4_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 153/278: 'sysctl_net_ipv4_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 157/282: 'sysctl_net_ipv4_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6223,9 +6343,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (154 / 278) for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
+# BEGIN fix (158 / 282) for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 ###############################################################################
-(>&2 echo "Remediating rule 154/278: 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
+(>&2 echo "Remediating rule 158/282: 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6328,9 +6448,9 @@ fi
 # END fix for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 
 ###############################################################################
-# BEGIN fix (155 / 278) for 'sysctl_net_ipv4_conf_all_send_redirects'
+# BEGIN fix (159 / 282) for 'sysctl_net_ipv4_conf_all_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 155/278: 'sysctl_net_ipv4_conf_all_send_redirects'")
+(>&2 echo "Remediating rule 159/282: 'sysctl_net_ipv4_conf_all_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6430,9 +6550,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_send_redirects'
 
 ###############################################################################
-# BEGIN fix (156 / 278) for 'sysctl_net_ipv4_conf_default_send_redirects'
+# BEGIN fix (160 / 282) for 'sysctl_net_ipv4_conf_default_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 156/278: 'sysctl_net_ipv4_conf_default_send_redirects'")
+(>&2 echo "Remediating rule 160/282: 'sysctl_net_ipv4_conf_default_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6532,9 +6652,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_send_redirects'
 
 ###############################################################################
-# BEGIN fix (157 / 278) for 'sysctl_net_ipv4_ip_forward'
+# BEGIN fix (161 / 282) for 'sysctl_net_ipv4_ip_forward'
 ###############################################################################
-(>&2 echo "Remediating rule 157/278: 'sysctl_net_ipv4_ip_forward'")
+(>&2 echo "Remediating rule 161/282: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6634,9 +6754,9 @@ fi
 # END fix for 'sysctl_net_ipv4_ip_forward'
 
 ###############################################################################
-# BEGIN fix (158 / 278) for 'kernel_module_atm_disabled'
+# BEGIN fix (162 / 282) for 'kernel_module_atm_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 158/278: 'kernel_module_atm_disabled'")
+(>&2 echo "Remediating rule 162/282: 'kernel_module_atm_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6654,9 +6774,9 @@ fi
 # END fix for 'kernel_module_atm_disabled'
 
 ###############################################################################
-# BEGIN fix (159 / 278) for 'kernel_module_can_disabled'
+# BEGIN fix (163 / 282) for 'kernel_module_can_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 159/278: 'kernel_module_can_disabled'")
+(>&2 echo "Remediating rule 163/282: 'kernel_module_can_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6674,9 +6794,9 @@ fi
 # END fix for 'kernel_module_can_disabled'
 
 ###############################################################################
-# BEGIN fix (160 / 278) for 'kernel_module_firewire-core_disabled'
+# BEGIN fix (164 / 282) for 'kernel_module_firewire-core_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 160/278: 'kernel_module_firewire-core_disabled'")
+(>&2 echo "Remediating rule 164/282: 'kernel_module_firewire-core_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6694,9 +6814,9 @@ fi
 # END fix for 'kernel_module_firewire-core_disabled'
 
 ###############################################################################
-# BEGIN fix (161 / 278) for 'kernel_module_sctp_disabled'
+# BEGIN fix (165 / 282) for 'kernel_module_sctp_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 161/278: 'kernel_module_sctp_disabled'")
+(>&2 echo "Remediating rule 165/282: 'kernel_module_sctp_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6714,9 +6834,9 @@ fi
 # END fix for 'kernel_module_sctp_disabled'
 
 ###############################################################################
-# BEGIN fix (162 / 278) for 'kernel_module_tipc_disabled'
+# BEGIN fix (166 / 282) for 'kernel_module_tipc_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 162/278: 'kernel_module_tipc_disabled'")
+(>&2 echo "Remediating rule 166/282: 'kernel_module_tipc_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6734,9 +6854,9 @@ fi
 # END fix for 'kernel_module_tipc_disabled'
 
 ###############################################################################
-# BEGIN fix (163 / 278) for 'kernel_module_bluetooth_disabled'
+# BEGIN fix (167 / 282) for 'kernel_module_bluetooth_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 163/278: 'kernel_module_bluetooth_disabled'")
+(>&2 echo "Remediating rule 167/282: 'kernel_module_bluetooth_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6754,9 +6874,9 @@ fi
 # END fix for 'kernel_module_bluetooth_disabled'
 
 ###############################################################################
-# BEGIN fix (164 / 278) for 'wireless_disable_interfaces'
+# BEGIN fix (168 / 282) for 'wireless_disable_interfaces'
 ###############################################################################
-(>&2 echo "Remediating rule 164/278: 'wireless_disable_interfaces'")
+(>&2 echo "Remediating rule 168/282: 'wireless_disable_interfaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6768,18 +6888,18 @@ fi
 # END fix for 'wireless_disable_interfaces'
 
 ###############################################################################
-# BEGIN fix (165 / 278) for 'dir_perms_world_writable_root_owned'
+# BEGIN fix (169 / 282) for 'dir_perms_world_writable_root_owned'
 ###############################################################################
-(>&2 echo "Remediating rule 165/278: 'dir_perms_world_writable_root_owned'")
+(>&2 echo "Remediating rule 169/282: 'dir_perms_world_writable_root_owned'")
 #!/bin/bash
 
 find / -not -fstype afs -not -fstype ceph -not -fstype cifs -not -fstype smb3 -not -fstype smbfs -not -fstype sshfs -not -fstype ncpfs -not -fstype ncp -not -fstype nfs -not -fstype nfs4 -not -fstype gfs -not -fstype gfs2 -not -fstype glusterfs -not -fstype gpfs -not -fstype pvfs2 -not -fstype ocfs2 -not -fstype lustre -not -fstype davfs -not -fstype fuse.sshfs -type d -perm -0002 -uid +0 -exec chown root {} \;
 # END fix for 'dir_perms_world_writable_root_owned'
 
 ###############################################################################
-# BEGIN fix (166 / 278) for 'dir_perms_world_writable_sticky_bits'
+# BEGIN fix (170 / 282) for 'dir_perms_world_writable_sticky_bits'
 ###############################################################################
-(>&2 echo "Remediating rule 166/278: 'dir_perms_world_writable_sticky_bits'")
+(>&2 echo "Remediating rule 170/282: 'dir_perms_world_writable_sticky_bits'")
 df --local -P | awk '{if (NR!=1) print $6}' \
 | xargs -I '{}' find '{}' -xdev -type d \
 \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null \
@@ -6787,18 +6907,18 @@ df --local -P | awk '{if (NR!=1) print $6}' \
 # END fix for 'dir_perms_world_writable_sticky_bits'
 
 ###############################################################################
-# BEGIN fix (167 / 278) for 'file_permissions_etc_audit_auditd'
+# BEGIN fix (171 / 282) for 'file_permissions_etc_audit_auditd'
 ###############################################################################
-(>&2 echo "Remediating rule 167/278: 'file_permissions_etc_audit_auditd'")
+(>&2 echo "Remediating rule 171/282: 'file_permissions_etc_audit_auditd'")
 
 
 chmod 0640 /etc/audit/auditd.conf
 # END fix for 'file_permissions_etc_audit_auditd'
 
 ###############################################################################
-# BEGIN fix (168 / 278) for 'file_permissions_etc_audit_rulesd'
+# BEGIN fix (172 / 282) for 'file_permissions_etc_audit_rulesd'
 ###############################################################################
-(>&2 echo "Remediating rule 168/278: 'file_permissions_etc_audit_rulesd'")
+(>&2 echo "Remediating rule 172/282: 'file_permissions_etc_audit_rulesd'")
 
 
 readarray -t files < <(find /etc/audit/rules.d/)
@@ -6810,23 +6930,23 @@ done
 # END fix for 'file_permissions_etc_audit_rulesd'
 
 ###############################################################################
-# BEGIN fix (169 / 278) for 'file_permissions_ungroupowned'
+# BEGIN fix (173 / 282) for 'file_permissions_ungroupowned'
 ###############################################################################
-(>&2 echo "Remediating rule 169/278: 'file_permissions_ungroupowned'")
+(>&2 echo "Remediating rule 173/282: 'file_permissions_ungroupowned'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permissions_ungroupowned'
 
 ###############################################################################
-# BEGIN fix (170 / 278) for 'no_files_unowned_by_user'
+# BEGIN fix (174 / 282) for 'no_files_unowned_by_user'
 ###############################################################################
-(>&2 echo "Remediating rule 170/278: 'no_files_unowned_by_user'")
+(>&2 echo "Remediating rule 174/282: 'no_files_unowned_by_user'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'no_files_unowned_by_user'
 
 ###############################################################################
-# BEGIN fix (171 / 278) for 'sysctl_fs_protected_hardlinks'
+# BEGIN fix (175 / 282) for 'sysctl_fs_protected_hardlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 171/278: 'sysctl_fs_protected_hardlinks'")
+(>&2 echo "Remediating rule 175/282: 'sysctl_fs_protected_hardlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6926,9 +7046,9 @@ fi
 # END fix for 'sysctl_fs_protected_hardlinks'
 
 ###############################################################################
-# BEGIN fix (172 / 278) for 'sysctl_fs_protected_symlinks'
+# BEGIN fix (176 / 282) for 'sysctl_fs_protected_symlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 172/278: 'sysctl_fs_protected_symlinks'")
+(>&2 echo "Remediating rule 176/282: 'sysctl_fs_protected_symlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7028,63 +7148,63 @@ fi
 # END fix for 'sysctl_fs_protected_symlinks'
 
 ###############################################################################
-# BEGIN fix (173 / 278) for 'file_groupowner_var_log'
+# BEGIN fix (177 / 282) for 'file_groupowner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 173/278: 'file_groupowner_var_log'")
+(>&2 echo "Remediating rule 177/282: 'file_groupowner_var_log'")
 
 
 chgrp 0 /var/log/
 # END fix for 'file_groupowner_var_log'
 
 ###############################################################################
-# BEGIN fix (174 / 278) for 'file_groupowner_var_log_messages'
+# BEGIN fix (178 / 282) for 'file_groupowner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 174/278: 'file_groupowner_var_log_messages'")
+(>&2 echo "Remediating rule 178/282: 'file_groupowner_var_log_messages'")
 
 
 chgrp 0 /var/log/messages
 # END fix for 'file_groupowner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (175 / 278) for 'file_owner_var_log'
+# BEGIN fix (179 / 282) for 'file_owner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 175/278: 'file_owner_var_log'")
+(>&2 echo "Remediating rule 179/282: 'file_owner_var_log'")
 
 
 chown 0 /var/log/
 # END fix for 'file_owner_var_log'
 
 ###############################################################################
-# BEGIN fix (176 / 278) for 'file_owner_var_log_messages'
+# BEGIN fix (180 / 282) for 'file_owner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 176/278: 'file_owner_var_log_messages'")
+(>&2 echo "Remediating rule 180/282: 'file_owner_var_log_messages'")
 
 
 chown 0 /var/log/messages
 # END fix for 'file_owner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (177 / 278) for 'file_permissions_var_log'
+# BEGIN fix (181 / 282) for 'file_permissions_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 177/278: 'file_permissions_var_log'")
+(>&2 echo "Remediating rule 181/282: 'file_permissions_var_log'")
 
 
 chmod 0755 /var/log/
 # END fix for 'file_permissions_var_log'
 
 ###############################################################################
-# BEGIN fix (178 / 278) for 'file_permissions_var_log_messages'
+# BEGIN fix (182 / 282) for 'file_permissions_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 178/278: 'file_permissions_var_log_messages'")
+(>&2 echo "Remediating rule 182/282: 'file_permissions_var_log_messages'")
 
 
 chmod 0640 /var/log/messages
 # END fix for 'file_permissions_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (179 / 278) for 'dir_group_ownership_library_dirs'
+# BEGIN fix (183 / 282) for 'dir_group_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 179/278: 'dir_group_ownership_library_dirs'")
+(>&2 echo "Remediating rule 183/282: 'dir_group_ownership_library_dirs'")
 
 find /lib \
 /lib64 \
@@ -7094,9 +7214,9 @@ find /lib \
 # END fix for 'dir_group_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (180 / 278) for 'file_groupownership_system_commands_dirs'
+# BEGIN fix (184 / 282) for 'file_groupownership_system_commands_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 180/278: 'file_groupownership_system_commands_dirs'")
+(>&2 echo "Remediating rule 184/282: 'file_groupownership_system_commands_dirs'")
 
 for SYSCMDFILES in /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin
 do
@@ -7105,9 +7225,9 @@ done
 # END fix for 'file_groupownership_system_commands_dirs'
 
 ###############################################################################
-# BEGIN fix (181 / 278) for 'file_ownership_binary_dirs'
+# BEGIN fix (185 / 282) for 'file_ownership_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 181/278: 'file_ownership_binary_dirs'")
+(>&2 echo "Remediating rule 185/282: 'file_ownership_binary_dirs'")
 find /bin/ \
 /usr/bin/ \
 /usr/local/bin/ \
@@ -7119,9 +7239,9 @@ find /bin/ \
 # END fix for 'file_ownership_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (182 / 278) for 'file_ownership_library_dirs'
+# BEGIN fix (186 / 282) for 'file_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 182/278: 'file_ownership_library_dirs'")
+(>&2 echo "Remediating rule 186/282: 'file_ownership_library_dirs'")
 for LIBDIR in /usr/lib /usr/lib64 /lib /lib64
 do
   if [ -d $LIBDIR ]
@@ -7132,9 +7252,9 @@ done
 # END fix for 'file_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (183 / 278) for 'file_permissions_binary_dirs'
+# BEGIN fix (187 / 282) for 'file_permissions_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 183/278: 'file_permissions_binary_dirs'")
+(>&2 echo "Remediating rule 187/282: 'file_permissions_binary_dirs'")
 DIRS="/bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec"
 for dirPath in $DIRS; do
 	find "$dirPath" -perm /022 -exec chmod go-w '{}' \;
@@ -7142,9 +7262,9 @@ done
 # END fix for 'file_permissions_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (184 / 278) for 'file_permissions_library_dirs'
+# BEGIN fix (188 / 282) for 'file_permissions_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 184/278: 'file_permissions_library_dirs'")
+(>&2 echo "Remediating rule 188/282: 'file_permissions_library_dirs'")
 DIRS="/lib /lib64 /usr/lib /usr/lib64"
 for dirPath in $DIRS; do
 	find "$dirPath" -perm /022 -type f -exec chmod go-w '{}' \;
@@ -7152,9 +7272,9 @@ done
 # END fix for 'file_permissions_library_dirs'
 
 ###############################################################################
-# BEGIN fix (185 / 278) for 'root_permissions_syslibrary_files'
+# BEGIN fix (189 / 282) for 'root_permissions_syslibrary_files'
 ###############################################################################
-(>&2 echo "Remediating rule 185/278: 'root_permissions_syslibrary_files'")
+(>&2 echo "Remediating rule 189/282: 'root_permissions_syslibrary_files'")
 
 find /lib \
 /lib64 \
@@ -7164,9 +7284,9 @@ find /lib \
 # END fix for 'root_permissions_syslibrary_files'
 
 ###############################################################################
-# BEGIN fix (186 / 278) for 'service_autofs_disabled'
+# BEGIN fix (190 / 282) for 'service_autofs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 186/278: 'service_autofs_disabled'")
+(>&2 echo "Remediating rule 190/282: 'service_autofs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7190,9 +7310,9 @@ fi
 # END fix for 'service_autofs_disabled'
 
 ###############################################################################
-# BEGIN fix (187 / 278) for 'kernel_module_cramfs_disabled'
+# BEGIN fix (191 / 282) for 'kernel_module_cramfs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 187/278: 'kernel_module_cramfs_disabled'")
+(>&2 echo "Remediating rule 191/282: 'kernel_module_cramfs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7210,9 +7330,9 @@ fi
 # END fix for 'kernel_module_cramfs_disabled'
 
 ###############################################################################
-# BEGIN fix (188 / 278) for 'kernel_module_usb-storage_disabled'
+# BEGIN fix (192 / 282) for 'kernel_module_usb-storage_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 188/278: 'kernel_module_usb-storage_disabled'")
+(>&2 echo "Remediating rule 192/282: 'kernel_module_usb-storage_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7230,9 +7350,9 @@ fi
 # END fix for 'kernel_module_usb-storage_disabled'
 
 ###############################################################################
-# BEGIN fix (189 / 278) for 'mount_option_boot_nosuid'
+# BEGIN fix (193 / 282) for 'mount_option_boot_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 189/278: 'mount_option_boot_nosuid'")
+(>&2 echo "Remediating rule 193/282: 'mount_option_boot_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7311,8 +7431,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /boot || { echo "Not remediating, because there is no record of /boot in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7329,9 +7449,9 @@ fi
 # END fix for 'mount_option_boot_nosuid'
 
 ###############################################################################
-# BEGIN fix (190 / 278) for 'mount_option_dev_shm_nodev'
+# BEGIN fix (194 / 282) for 'mount_option_dev_shm_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 190/278: 'mount_option_dev_shm_nodev'")
+(>&2 echo "Remediating rule 194/282: 'mount_option_dev_shm_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7410,8 +7530,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "no" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "no" != 'no'; then
 		assert_mount_point_in_fstab /dev/shm || { echo "Not remediating, because there is no record of /dev/shm in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7428,9 +7548,9 @@ fi
 # END fix for 'mount_option_dev_shm_nodev'
 
 ###############################################################################
-# BEGIN fix (191 / 278) for 'mount_option_dev_shm_noexec'
+# BEGIN fix (195 / 282) for 'mount_option_dev_shm_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 191/278: 'mount_option_dev_shm_noexec'")
+(>&2 echo "Remediating rule 195/282: 'mount_option_dev_shm_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7509,8 +7629,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "no" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "no" != 'no'; then
 		assert_mount_point_in_fstab /dev/shm || { echo "Not remediating, because there is no record of /dev/shm in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7527,9 +7647,9 @@ fi
 # END fix for 'mount_option_dev_shm_noexec'
 
 ###############################################################################
-# BEGIN fix (192 / 278) for 'mount_option_dev_shm_nosuid'
+# BEGIN fix (196 / 282) for 'mount_option_dev_shm_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 192/278: 'mount_option_dev_shm_nosuid'")
+(>&2 echo "Remediating rule 196/282: 'mount_option_dev_shm_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7608,8 +7728,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "no" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "no" != 'no'; then
 		assert_mount_point_in_fstab /dev/shm || { echo "Not remediating, because there is no record of /dev/shm in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7626,9 +7746,9 @@ fi
 # END fix for 'mount_option_dev_shm_nosuid'
 
 ###############################################################################
-# BEGIN fix (193 / 278) for 'mount_option_home_noexec'
+# BEGIN fix (197 / 282) for 'mount_option_home_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 193/278: 'mount_option_home_noexec'")
+(>&2 echo "Remediating rule 197/282: 'mount_option_home_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7707,8 +7827,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /home || { echo "Not remediating, because there is no record of /home in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7725,9 +7845,9 @@ fi
 # END fix for 'mount_option_home_noexec'
 
 ###############################################################################
-# BEGIN fix (194 / 278) for 'mount_option_home_nosuid'
+# BEGIN fix (198 / 282) for 'mount_option_home_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 194/278: 'mount_option_home_nosuid'")
+(>&2 echo "Remediating rule 198/282: 'mount_option_home_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7806,8 +7926,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /home || { echo "Not remediating, because there is no record of /home in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -7824,9 +7944,9 @@ fi
 # END fix for 'mount_option_home_nosuid'
 
 ###############################################################################
-# BEGIN fix (195 / 278) for 'mount_option_nodev_nonroot_local_partitions'
+# BEGIN fix (199 / 282) for 'mount_option_nodev_nonroot_local_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 195/278: 'mount_option_nodev_nonroot_local_partitions'")
+(>&2 echo "Remediating rule 199/282: 'mount_option_nodev_nonroot_local_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7924,9 +8044,9 @@ fi
 # END fix for 'mount_option_nodev_nonroot_local_partitions'
 
 ###############################################################################
-# BEGIN fix (196 / 278) for 'mount_option_nodev_removable_partitions'
+# BEGIN fix (200 / 282) for 'mount_option_nodev_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 196/278: 'mount_option_nodev_removable_partitions'")
+(>&2 echo "Remediating rule 200/282: 'mount_option_nodev_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7952,9 +8072,9 @@ fi
 # END fix for 'mount_option_nodev_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (197 / 278) for 'mount_option_noexec_removable_partitions'
+# BEGIN fix (201 / 282) for 'mount_option_noexec_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 197/278: 'mount_option_noexec_removable_partitions'")
+(>&2 echo "Remediating rule 201/282: 'mount_option_noexec_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7980,9 +8100,9 @@ fi
 # END fix for 'mount_option_noexec_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (198 / 278) for 'mount_option_nosuid_removable_partitions'
+# BEGIN fix (202 / 282) for 'mount_option_nosuid_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 198/278: 'mount_option_nosuid_removable_partitions'")
+(>&2 echo "Remediating rule 202/282: 'mount_option_nosuid_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8008,9 +8128,9 @@ fi
 # END fix for 'mount_option_nosuid_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (199 / 278) for 'mount_option_tmp_nodev'
+# BEGIN fix (203 / 282) for 'mount_option_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 199/278: 'mount_option_tmp_nodev'")
+(>&2 echo "Remediating rule 203/282: 'mount_option_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8089,8 +8209,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /tmp || { echo "Not remediating, because there is no record of /tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8107,9 +8227,9 @@ fi
 # END fix for 'mount_option_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (200 / 278) for 'mount_option_tmp_noexec'
+# BEGIN fix (204 / 282) for 'mount_option_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 200/278: 'mount_option_tmp_noexec'")
+(>&2 echo "Remediating rule 204/282: 'mount_option_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8188,8 +8308,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /tmp || { echo "Not remediating, because there is no record of /tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8206,9 +8326,9 @@ fi
 # END fix for 'mount_option_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (201 / 278) for 'mount_option_tmp_nosuid'
+# BEGIN fix (205 / 282) for 'mount_option_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 201/278: 'mount_option_tmp_nosuid'")
+(>&2 echo "Remediating rule 205/282: 'mount_option_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8287,8 +8407,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /tmp || { echo "Not remediating, because there is no record of /tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8305,9 +8425,9 @@ fi
 # END fix for 'mount_option_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (202 / 278) for 'mount_option_var_log_audit_nodev'
+# BEGIN fix (206 / 282) for 'mount_option_var_log_audit_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 202/278: 'mount_option_var_log_audit_nodev'")
+(>&2 echo "Remediating rule 206/282: 'mount_option_var_log_audit_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8386,8 +8506,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log/audit || { echo "Not remediating, because there is no record of /var/log/audit in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8404,9 +8524,9 @@ fi
 # END fix for 'mount_option_var_log_audit_nodev'
 
 ###############################################################################
-# BEGIN fix (203 / 278) for 'mount_option_var_log_audit_noexec'
+# BEGIN fix (207 / 282) for 'mount_option_var_log_audit_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 203/278: 'mount_option_var_log_audit_noexec'")
+(>&2 echo "Remediating rule 207/282: 'mount_option_var_log_audit_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8485,8 +8605,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log/audit || { echo "Not remediating, because there is no record of /var/log/audit in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8503,9 +8623,9 @@ fi
 # END fix for 'mount_option_var_log_audit_noexec'
 
 ###############################################################################
-# BEGIN fix (204 / 278) for 'mount_option_var_log_audit_nosuid'
+# BEGIN fix (208 / 282) for 'mount_option_var_log_audit_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 204/278: 'mount_option_var_log_audit_nosuid'")
+(>&2 echo "Remediating rule 208/282: 'mount_option_var_log_audit_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8584,8 +8704,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log/audit || { echo "Not remediating, because there is no record of /var/log/audit in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8602,9 +8722,9 @@ fi
 # END fix for 'mount_option_var_log_audit_nosuid'
 
 ###############################################################################
-# BEGIN fix (205 / 278) for 'mount_option_var_log_nodev'
+# BEGIN fix (209 / 282) for 'mount_option_var_log_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 205/278: 'mount_option_var_log_nodev'")
+(>&2 echo "Remediating rule 209/282: 'mount_option_var_log_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8683,8 +8803,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log || { echo "Not remediating, because there is no record of /var/log in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8701,9 +8821,9 @@ fi
 # END fix for 'mount_option_var_log_nodev'
 
 ###############################################################################
-# BEGIN fix (206 / 278) for 'mount_option_var_log_noexec'
+# BEGIN fix (210 / 282) for 'mount_option_var_log_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 206/278: 'mount_option_var_log_noexec'")
+(>&2 echo "Remediating rule 210/282: 'mount_option_var_log_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8782,8 +8902,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log || { echo "Not remediating, because there is no record of /var/log in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8800,9 +8920,9 @@ fi
 # END fix for 'mount_option_var_log_noexec'
 
 ###############################################################################
-# BEGIN fix (207 / 278) for 'mount_option_var_log_nosuid'
+# BEGIN fix (211 / 282) for 'mount_option_var_log_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 207/278: 'mount_option_var_log_nosuid'")
+(>&2 echo "Remediating rule 211/282: 'mount_option_var_log_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8881,8 +9001,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/log || { echo "Not remediating, because there is no record of /var/log in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8899,9 +9019,9 @@ fi
 # END fix for 'mount_option_var_log_nosuid'
 
 ###############################################################################
-# BEGIN fix (208 / 278) for 'mount_option_var_tmp_nodev'
+# BEGIN fix (212 / 282) for 'mount_option_var_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 208/278: 'mount_option_var_tmp_nodev'")
+(>&2 echo "Remediating rule 212/282: 'mount_option_var_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8980,8 +9100,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/tmp || { echo "Not remediating, because there is no record of /var/tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -8998,9 +9118,9 @@ fi
 # END fix for 'mount_option_var_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (209 / 278) for 'mount_option_var_tmp_noexec'
+# BEGIN fix (213 / 282) for 'mount_option_var_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 209/278: 'mount_option_var_tmp_noexec'")
+(>&2 echo "Remediating rule 213/282: 'mount_option_var_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9079,8 +9199,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/tmp || { echo "Not remediating, because there is no record of /var/tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -9097,9 +9217,9 @@ fi
 # END fix for 'mount_option_var_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (210 / 278) for 'mount_option_var_tmp_nosuid'
+# BEGIN fix (214 / 282) for 'mount_option_var_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 210/278: 'mount_option_var_tmp_nosuid'")
+(>&2 echo "Remediating rule 214/282: 'mount_option_var_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9178,8 +9298,8 @@ function ensure_partition_is_mounted {
 include_mount_options_functions
 
 function perform_remediation {
-	# test "$mount_has_to_exist" = 'yes'
-	if test "yes" = 'yes'; then
+	# test "$mount_has_to_exist" != 'no'
+	if test "yes" != 'no'; then
 		assert_mount_point_in_fstab /var/tmp || { echo "Not remediating, because there is no record of /var/tmp in /etc/fstab" >&2; return 1; }
 	fi
 
@@ -9196,9 +9316,9 @@ fi
 # END fix for 'mount_option_var_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (211 / 278) for 'sysctl_kernel_core_pattern'
+# BEGIN fix (215 / 282) for 'sysctl_kernel_core_pattern'
 ###############################################################################
-(>&2 echo "Remediating rule 211/278: 'sysctl_kernel_core_pattern'")
+(>&2 echo "Remediating rule 215/282: 'sysctl_kernel_core_pattern'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9298,9 +9418,9 @@ fi
 # END fix for 'sysctl_kernel_core_pattern'
 
 ###############################################################################
-# BEGIN fix (212 / 278) for 'sysctl_kernel_dmesg_restrict'
+# BEGIN fix (216 / 282) for 'sysctl_kernel_dmesg_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 212/278: 'sysctl_kernel_dmesg_restrict'")
+(>&2 echo "Remediating rule 216/282: 'sysctl_kernel_dmesg_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9400,9 +9520,9 @@ fi
 # END fix for 'sysctl_kernel_dmesg_restrict'
 
 ###############################################################################
-# BEGIN fix (213 / 278) for 'sysctl_kernel_kexec_load_disabled'
+# BEGIN fix (217 / 282) for 'sysctl_kernel_kexec_load_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 213/278: 'sysctl_kernel_kexec_load_disabled'")
+(>&2 echo "Remediating rule 217/282: 'sysctl_kernel_kexec_load_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9502,9 +9622,9 @@ fi
 # END fix for 'sysctl_kernel_kexec_load_disabled'
 
 ###############################################################################
-# BEGIN fix (214 / 278) for 'sysctl_kernel_perf_event_paranoid'
+# BEGIN fix (218 / 282) for 'sysctl_kernel_perf_event_paranoid'
 ###############################################################################
-(>&2 echo "Remediating rule 214/278: 'sysctl_kernel_perf_event_paranoid'")
+(>&2 echo "Remediating rule 218/282: 'sysctl_kernel_perf_event_paranoid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9604,9 +9724,9 @@ fi
 # END fix for 'sysctl_kernel_perf_event_paranoid'
 
 ###############################################################################
-# BEGIN fix (215 / 278) for 'sysctl_kernel_unprivileged_bpf_disabled'
+# BEGIN fix (219 / 282) for 'sysctl_kernel_unprivileged_bpf_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 215/278: 'sysctl_kernel_unprivileged_bpf_disabled'")
+(>&2 echo "Remediating rule 219/282: 'sysctl_kernel_unprivileged_bpf_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9706,9 +9826,9 @@ fi
 # END fix for 'sysctl_kernel_unprivileged_bpf_disabled'
 
 ###############################################################################
-# BEGIN fix (216 / 278) for 'sysctl_kernel_yama_ptrace_scope'
+# BEGIN fix (220 / 282) for 'sysctl_kernel_yama_ptrace_scope'
 ###############################################################################
-(>&2 echo "Remediating rule 216/278: 'sysctl_kernel_yama_ptrace_scope'")
+(>&2 echo "Remediating rule 220/282: 'sysctl_kernel_yama_ptrace_scope'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9808,9 +9928,9 @@ fi
 # END fix for 'sysctl_kernel_yama_ptrace_scope'
 
 ###############################################################################
-# BEGIN fix (217 / 278) for 'sysctl_user_max_user_namespaces'
+# BEGIN fix (221 / 282) for 'sysctl_user_max_user_namespaces'
 ###############################################################################
-(>&2 echo "Remediating rule 217/278: 'sysctl_user_max_user_namespaces'")
+(>&2 echo "Remediating rule 221/282: 'sysctl_user_max_user_namespaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9910,9 +10030,9 @@ fi
 # END fix for 'sysctl_user_max_user_namespaces'
 
 ###############################################################################
-# BEGIN fix (218 / 278) for 'service_systemd-coredump_disabled'
+# BEGIN fix (222 / 282) for 'service_systemd-coredump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 218/278: 'service_systemd-coredump_disabled'")
+(>&2 echo "Remediating rule 222/282: 'service_systemd-coredump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9936,9 +10056,9 @@ fi
 # END fix for 'service_systemd-coredump_disabled'
 
 ###############################################################################
-# BEGIN fix (219 / 278) for 'coredump_disable_backtraces'
+# BEGIN fix (223 / 282) for 'coredump_disable_backtraces'
 ###############################################################################
-(>&2 echo "Remediating rule 219/278: 'coredump_disable_backtraces'")
+(>&2 echo "Remediating rule 223/282: 'coredump_disable_backtraces'")
 if [ -e "/etc/systemd/coredump.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*ProcessSizeMax\s*=\s*/Id" "/etc/systemd/coredump.conf"
@@ -9953,9 +10073,9 @@ rm "/etc/systemd/coredump.conf.bak"
 # END fix for 'coredump_disable_backtraces'
 
 ###############################################################################
-# BEGIN fix (220 / 278) for 'coredump_disable_storage'
+# BEGIN fix (224 / 282) for 'coredump_disable_storage'
 ###############################################################################
-(>&2 echo "Remediating rule 220/278: 'coredump_disable_storage'")
+(>&2 echo "Remediating rule 224/282: 'coredump_disable_storage'")
 if [ -e "/etc/systemd/coredump.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*Storage\s*=\s*/Id" "/etc/systemd/coredump.conf"
@@ -9970,9 +10090,9 @@ rm "/etc/systemd/coredump.conf.bak"
 # END fix for 'coredump_disable_storage'
 
 ###############################################################################
-# BEGIN fix (221 / 278) for 'disable_users_coredumps'
+# BEGIN fix (225 / 282) for 'disable_users_coredumps'
 ###############################################################################
-(>&2 echo "Remediating rule 221/278: 'disable_users_coredumps'")
+(>&2 echo "Remediating rule 225/282: 'disable_users_coredumps'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -9990,9 +10110,9 @@ fi
 # END fix for 'disable_users_coredumps'
 
 ###############################################################################
-# BEGIN fix (222 / 278) for 'sysctl_kernel_kptr_restrict'
+# BEGIN fix (226 / 282) for 'sysctl_kernel_kptr_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 222/278: 'sysctl_kernel_kptr_restrict'")
+(>&2 echo "Remediating rule 226/282: 'sysctl_kernel_kptr_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10092,9 +10212,9 @@ fi
 # END fix for 'sysctl_kernel_kptr_restrict'
 
 ###############################################################################
-# BEGIN fix (223 / 278) for 'sysctl_kernel_randomize_va_space'
+# BEGIN fix (227 / 282) for 'sysctl_kernel_randomize_va_space'
 ###############################################################################
-(>&2 echo "Remediating rule 223/278: 'sysctl_kernel_randomize_va_space'")
+(>&2 echo "Remediating rule 227/282: 'sysctl_kernel_randomize_va_space'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10194,16 +10314,16 @@ fi
 # END fix for 'sysctl_kernel_randomize_va_space'
 
 ###############################################################################
-# BEGIN fix (224 / 278) for 'bios_enable_execution_restrictions'
+# BEGIN fix (228 / 282) for 'bios_enable_execution_restrictions'
 ###############################################################################
-(>&2 echo "Remediating rule 224/278: 'bios_enable_execution_restrictions'")
+(>&2 echo "Remediating rule 228/282: 'bios_enable_execution_restrictions'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'bios_enable_execution_restrictions'
 
 ###############################################################################
-# BEGIN fix (225 / 278) for 'grub2_page_poison_argument'
+# BEGIN fix (229 / 282) for 'grub2_page_poison_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 225/278: 'grub2_page_poison_argument'")
+(>&2 echo "Remediating rule 229/282: 'grub2_page_poison_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -10218,9 +10338,9 @@ fi
 # END fix for 'grub2_page_poison_argument'
 
 ###############################################################################
-# BEGIN fix (226 / 278) for 'grub2_slub_debug_argument'
+# BEGIN fix (230 / 282) for 'grub2_slub_debug_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 226/278: 'grub2_slub_debug_argument'")
+(>&2 echo "Remediating rule 230/282: 'grub2_slub_debug_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -10235,9 +10355,9 @@ fi
 # END fix for 'grub2_slub_debug_argument'
 
 ###############################################################################
-# BEGIN fix (227 / 278) for 'package_policycoreutils_installed'
+# BEGIN fix (231 / 282) for 'package_policycoreutils_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 227/278: 'package_policycoreutils_installed'")
+(>&2 echo "Remediating rule 231/282: 'package_policycoreutils_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10251,9 +10371,9 @@ fi
 # END fix for 'package_policycoreutils_installed'
 
 ###############################################################################
-# BEGIN fix (228 / 278) for 'selinux_policytype'
+# BEGIN fix (232 / 282) for 'selinux_policytype'
 ###############################################################################
-(>&2 echo "Remediating rule 228/278: 'selinux_policytype'")
+(>&2 echo "Remediating rule 232/282: 'selinux_policytype'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10280,9 +10400,9 @@ fi
 # END fix for 'selinux_policytype'
 
 ###############################################################################
-# BEGIN fix (229 / 278) for 'selinux_state'
+# BEGIN fix (233 / 282) for 'selinux_state'
 ###############################################################################
-(>&2 echo "Remediating rule 229/278: 'selinux_state'")
+(>&2 echo "Remediating rule 233/282: 'selinux_state'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10312,9 +10432,9 @@ fi
 # END fix for 'selinux_state'
 
 ###############################################################################
-# BEGIN fix (230 / 278) for 'package_abrt_removed'
+# BEGIN fix (234 / 282) for 'package_abrt_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 230/278: 'package_abrt_removed'")
+(>&2 echo "Remediating rule 234/282: 'package_abrt_removed'")
 
 # CAUTION: This remediation script will remove abrt
 #	   from the system, and may remove any packages
@@ -10328,9 +10448,9 @@ fi
 # END fix for 'package_abrt_removed'
 
 ###############################################################################
-# BEGIN fix (231 / 278) for 'service_kdump_disabled'
+# BEGIN fix (235 / 282) for 'service_kdump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 231/278: 'service_kdump_disabled'")
+(>&2 echo "Remediating rule 235/282: 'service_kdump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10354,9 +10474,9 @@ fi
 # END fix for 'service_kdump_disabled'
 
 ###############################################################################
-# BEGIN fix (232 / 278) for 'package_fapolicyd_installed'
+# BEGIN fix (236 / 282) for 'package_fapolicyd_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 232/278: 'package_fapolicyd_installed'")
+(>&2 echo "Remediating rule 236/282: 'package_fapolicyd_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10370,9 +10490,9 @@ fi
 # END fix for 'package_fapolicyd_installed'
 
 ###############################################################################
-# BEGIN fix (233 / 278) for 'service_fapolicyd_enabled'
+# BEGIN fix (237 / 282) for 'service_fapolicyd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 233/278: 'service_fapolicyd_enabled'")
+(>&2 echo "Remediating rule 237/282: 'service_fapolicyd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10387,9 +10507,9 @@ fi
 # END fix for 'service_fapolicyd_enabled'
 
 ###############################################################################
-# BEGIN fix (234 / 278) for 'package_vsftpd_removed'
+# BEGIN fix (238 / 282) for 'package_vsftpd_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 234/278: 'package_vsftpd_removed'")
+(>&2 echo "Remediating rule 238/282: 'package_vsftpd_removed'")
 
 # CAUTION: This remediation script will remove vsftpd
 #	   from the system, and may remove any packages
@@ -10403,9 +10523,9 @@ fi
 # END fix for 'package_vsftpd_removed'
 
 ###############################################################################
-# BEGIN fix (235 / 278) for 'kerberos_disable_no_keytab'
+# BEGIN fix (239 / 282) for 'kerberos_disable_no_keytab'
 ###############################################################################
-(>&2 echo "Remediating rule 235/278: 'kerberos_disable_no_keytab'")
+(>&2 echo "Remediating rule 239/282: 'kerberos_disable_no_keytab'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10417,9 +10537,9 @@ fi
 # END fix for 'kerberos_disable_no_keytab'
 
 ###############################################################################
-# BEGIN fix (236 / 278) for 'package_sendmail_removed'
+# BEGIN fix (240 / 282) for 'package_sendmail_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 236/278: 'package_sendmail_removed'")
+(>&2 echo "Remediating rule 240/282: 'package_sendmail_removed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10439,9 +10559,9 @@ fi
 # END fix for 'package_sendmail_removed'
 
 ###############################################################################
-# BEGIN fix (237 / 278) for 'postfix_client_configure_mail_alias'
+# BEGIN fix (241 / 282) for 'postfix_client_configure_mail_alias'
 ###############################################################################
-(>&2 echo "Remediating rule 237/278: 'postfix_client_configure_mail_alias'")
+(>&2 echo "Remediating rule 241/282: 'postfix_client_configure_mail_alias'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10534,9 +10654,9 @@ fi
 # END fix for 'postfix_client_configure_mail_alias'
 
 ###############################################################################
-# BEGIN fix (238 / 278) for 'mount_option_nodev_remote_filesystems'
+# BEGIN fix (242 / 282) for 'mount_option_nodev_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 238/278: 'mount_option_nodev_remote_filesystems'")
+(>&2 echo "Remediating rule 242/282: 'mount_option_nodev_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10622,9 +10742,9 @@ fi
 # END fix for 'mount_option_nodev_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (239 / 278) for 'mount_option_noexec_remote_filesystems'
+# BEGIN fix (243 / 282) for 'mount_option_noexec_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 239/278: 'mount_option_noexec_remote_filesystems'")
+(>&2 echo "Remediating rule 243/282: 'mount_option_noexec_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10710,9 +10830,9 @@ fi
 # END fix for 'mount_option_noexec_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (240 / 278) for 'mount_option_nosuid_remote_filesystems'
+# BEGIN fix (244 / 282) for 'mount_option_nosuid_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 240/278: 'mount_option_nosuid_remote_filesystems'")
+(>&2 echo "Remediating rule 244/282: 'mount_option_nosuid_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10798,9 +10918,9 @@ fi
 # END fix for 'mount_option_nosuid_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (241 / 278) for 'chronyd_client_only'
+# BEGIN fix (245 / 282) for 'chronyd_client_only'
 ###############################################################################
-(>&2 echo "Remediating rule 241/278: 'chronyd_client_only'")
+(>&2 echo "Remediating rule 245/282: 'chronyd_client_only'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10890,9 +11010,9 @@ fi
 # END fix for 'chronyd_client_only'
 
 ###############################################################################
-# BEGIN fix (242 / 278) for 'chronyd_no_chronyc_network'
+# BEGIN fix (246 / 282) for 'chronyd_no_chronyc_network'
 ###############################################################################
-(>&2 echo "Remediating rule 242/278: 'chronyd_no_chronyc_network'")
+(>&2 echo "Remediating rule 246/282: 'chronyd_no_chronyc_network'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10982,9 +11102,9 @@ fi
 # END fix for 'chronyd_no_chronyc_network'
 
 ###############################################################################
-# BEGIN fix (243 / 278) for 'chronyd_or_ntpd_set_maxpoll'
+# BEGIN fix (247 / 282) for 'chronyd_or_ntpd_set_maxpoll'
 ###############################################################################
-(>&2 echo "Remediating rule 243/278: 'chronyd_or_ntpd_set_maxpoll'")
+(>&2 echo "Remediating rule 247/282: 'chronyd_or_ntpd_set_maxpoll'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q chrony || rpm --quiet -q ntp; }; then
 
@@ -11012,9 +11132,9 @@ fi
 # END fix for 'chronyd_or_ntpd_set_maxpoll'
 
 ###############################################################################
-# BEGIN fix (244 / 278) for 'package_rsh-server_removed'
+# BEGIN fix (248 / 282) for 'package_rsh-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 244/278: 'package_rsh-server_removed'")
+(>&2 echo "Remediating rule 248/282: 'package_rsh-server_removed'")
 
 # CAUTION: This remediation script will remove rsh-server
 #	   from the system, and may remove any packages
@@ -11028,9 +11148,9 @@ fi
 # END fix for 'package_rsh-server_removed'
 
 ###############################################################################
-# BEGIN fix (245 / 278) for 'no_host_based_files'
+# BEGIN fix (249 / 282) for 'no_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 245/278: 'no_host_based_files'")
+(>&2 echo "Remediating rule 249/282: 'no_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -11043,9 +11163,9 @@ done
 # END fix for 'no_host_based_files'
 
 ###############################################################################
-# BEGIN fix (246 / 278) for 'no_user_host_based_files'
+# BEGIN fix (250 / 282) for 'no_user_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 246/278: 'no_user_host_based_files'")
+(>&2 echo "Remediating rule 250/282: 'no_user_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -11058,9 +11178,9 @@ done
 # END fix for 'no_user_host_based_files'
 
 ###############################################################################
-# BEGIN fix (247 / 278) for 'package_telnet-server_removed'
+# BEGIN fix (251 / 282) for 'package_telnet-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 247/278: 'package_telnet-server_removed'")
+(>&2 echo "Remediating rule 251/282: 'package_telnet-server_removed'")
 
 # CAUTION: This remediation script will remove telnet-server
 #	   from the system, and may remove any packages
@@ -11074,9 +11194,9 @@ fi
 # END fix for 'package_telnet-server_removed'
 
 ###############################################################################
-# BEGIN fix (248 / 278) for 'package_tftp-server_removed'
+# BEGIN fix (252 / 282) for 'package_tftp-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 248/278: 'package_tftp-server_removed'")
+(>&2 echo "Remediating rule 252/282: 'package_tftp-server_removed'")
 
 # CAUTION: This remediation script will remove tftp-server
 #	   from the system, and may remove any packages
@@ -11090,9 +11210,9 @@ fi
 # END fix for 'package_tftp-server_removed'
 
 ###############################################################################
-# BEGIN fix (249 / 278) for 'tftpd_uses_secure_mode'
+# BEGIN fix (253 / 282) for 'tftpd_uses_secure_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 249/278: 'tftpd_uses_secure_mode'")
+(>&2 echo "Remediating rule 253/282: 'tftpd_uses_secure_mode'")
 #!/bin/bash
 
 
@@ -11108,9 +11228,9 @@ fi
 # END fix for 'tftpd_uses_secure_mode'
 
 ###############################################################################
-# BEGIN fix (250 / 278) for 'service_rngd_enabled'
+# BEGIN fix (254 / 282) for 'service_rngd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 250/278: 'service_rngd_enabled'")
+(>&2 echo "Remediating rule 254/282: 'service_rngd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11125,9 +11245,9 @@ fi
 # END fix for 'service_rngd_enabled'
 
 ###############################################################################
-# BEGIN fix (251 / 278) for 'package_openssh-server_installed'
+# BEGIN fix (255 / 282) for 'package_openssh-server_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 251/278: 'package_openssh-server_installed'")
+(>&2 echo "Remediating rule 255/282: 'package_openssh-server_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11141,9 +11261,9 @@ fi
 # END fix for 'package_openssh-server_installed'
 
 ###############################################################################
-# BEGIN fix (252 / 278) for 'service_sshd_enabled'
+# BEGIN fix (256 / 282) for 'service_sshd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 252/278: 'service_sshd_enabled'")
+(>&2 echo "Remediating rule 256/282: 'service_sshd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11158,9 +11278,9 @@ fi
 # END fix for 'service_sshd_enabled'
 
 ###############################################################################
-# BEGIN fix (253 / 278) for 'file_permissions_sshd_private_key'
+# BEGIN fix (257 / 282) for 'file_permissions_sshd_private_key'
 ###############################################################################
-(>&2 echo "Remediating rule 253/278: 'file_permissions_sshd_private_key'")
+(>&2 echo "Remediating rule 257/282: 'file_permissions_sshd_private_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11177,9 +11297,9 @@ fi
 # END fix for 'file_permissions_sshd_private_key'
 
 ###############################################################################
-# BEGIN fix (254 / 278) for 'file_permissions_sshd_pub_key'
+# BEGIN fix (258 / 282) for 'file_permissions_sshd_pub_key'
 ###############################################################################
-(>&2 echo "Remediating rule 254/278: 'file_permissions_sshd_pub_key'")
+(>&2 echo "Remediating rule 258/282: 'file_permissions_sshd_pub_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11196,9 +11316,9 @@ fi
 # END fix for 'file_permissions_sshd_pub_key'
 
 ###############################################################################
-# BEGIN fix (255 / 278) for 'ssh_client_rekey_limit'
+# BEGIN fix (259 / 282) for 'ssh_client_rekey_limit'
 ###############################################################################
-(>&2 echo "Remediating rule 255/278: 'ssh_client_rekey_limit'")
+(>&2 echo "Remediating rule 259/282: 'ssh_client_rekey_limit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11240,9 +11360,9 @@ fi
 # END fix for 'ssh_client_rekey_limit'
 
 ###############################################################################
-# BEGIN fix (256 / 278) for 'sshd_disable_compression'
+# BEGIN fix (260 / 282) for 'sshd_disable_compression'
 ###############################################################################
-(>&2 echo "Remediating rule 256/278: 'sshd_disable_compression'")
+(>&2 echo "Remediating rule 260/282: 'sshd_disable_compression'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11333,9 +11453,9 @@ fi
 # END fix for 'sshd_disable_compression'
 
 ###############################################################################
-# BEGIN fix (257 / 278) for 'sshd_disable_empty_passwords'
+# BEGIN fix (261 / 282) for 'sshd_disable_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 257/278: 'sshd_disable_empty_passwords'")
+(>&2 echo "Remediating rule 261/282: 'sshd_disable_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11366,9 +11486,9 @@ fi
 # END fix for 'sshd_disable_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (258 / 278) for 'sshd_disable_gssapi_auth'
+# BEGIN fix (262 / 282) for 'sshd_disable_gssapi_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 258/278: 'sshd_disable_gssapi_auth'")
+(>&2 echo "Remediating rule 262/282: 'sshd_disable_gssapi_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11399,9 +11519,9 @@ fi
 # END fix for 'sshd_disable_gssapi_auth'
 
 ###############################################################################
-# BEGIN fix (259 / 278) for 'sshd_disable_kerb_auth'
+# BEGIN fix (263 / 282) for 'sshd_disable_kerb_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 259/278: 'sshd_disable_kerb_auth'")
+(>&2 echo "Remediating rule 263/282: 'sshd_disable_kerb_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11432,9 +11552,9 @@ fi
 # END fix for 'sshd_disable_kerb_auth'
 
 ###############################################################################
-# BEGIN fix (260 / 278) for 'sshd_disable_root_login'
+# BEGIN fix (264 / 282) for 'sshd_disable_root_login'
 ###############################################################################
-(>&2 echo "Remediating rule 260/278: 'sshd_disable_root_login'")
+(>&2 echo "Remediating rule 264/282: 'sshd_disable_root_login'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11465,9 +11585,9 @@ fi
 # END fix for 'sshd_disable_root_login'
 
 ###############################################################################
-# BEGIN fix (261 / 278) for 'sshd_disable_user_known_hosts'
+# BEGIN fix (265 / 282) for 'sshd_disable_user_known_hosts'
 ###############################################################################
-(>&2 echo "Remediating rule 261/278: 'sshd_disable_user_known_hosts'")
+(>&2 echo "Remediating rule 265/282: 'sshd_disable_user_known_hosts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11498,9 +11618,9 @@ fi
 # END fix for 'sshd_disable_user_known_hosts'
 
 ###############################################################################
-# BEGIN fix (262 / 278) for 'sshd_disable_x11_forwarding'
+# BEGIN fix (266 / 282) for 'sshd_disable_x11_forwarding'
 ###############################################################################
-(>&2 echo "Remediating rule 262/278: 'sshd_disable_x11_forwarding'")
+(>&2 echo "Remediating rule 266/282: 'sshd_disable_x11_forwarding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11531,9 +11651,9 @@ fi
 # END fix for 'sshd_disable_x11_forwarding'
 
 ###############################################################################
-# BEGIN fix (263 / 278) for 'sshd_do_not_permit_user_env'
+# BEGIN fix (267 / 282) for 'sshd_do_not_permit_user_env'
 ###############################################################################
-(>&2 echo "Remediating rule 263/278: 'sshd_do_not_permit_user_env'")
+(>&2 echo "Remediating rule 267/282: 'sshd_do_not_permit_user_env'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11564,9 +11684,9 @@ fi
 # END fix for 'sshd_do_not_permit_user_env'
 
 ###############################################################################
-# BEGIN fix (264 / 278) for 'sshd_enable_strictmodes'
+# BEGIN fix (268 / 282) for 'sshd_enable_strictmodes'
 ###############################################################################
-(>&2 echo "Remediating rule 264/278: 'sshd_enable_strictmodes'")
+(>&2 echo "Remediating rule 268/282: 'sshd_enable_strictmodes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11597,9 +11717,9 @@ fi
 # END fix for 'sshd_enable_strictmodes'
 
 ###############################################################################
-# BEGIN fix (265 / 278) for 'sshd_enable_warning_banner'
+# BEGIN fix (269 / 282) for 'sshd_enable_warning_banner'
 ###############################################################################
-(>&2 echo "Remediating rule 265/278: 'sshd_enable_warning_banner'")
+(>&2 echo "Remediating rule 269/282: 'sshd_enable_warning_banner'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11630,9 +11750,9 @@ fi
 # END fix for 'sshd_enable_warning_banner'
 
 ###############################################################################
-# BEGIN fix (266 / 278) for 'sshd_print_last_log'
+# BEGIN fix (270 / 282) for 'sshd_print_last_log'
 ###############################################################################
-(>&2 echo "Remediating rule 266/278: 'sshd_print_last_log'")
+(>&2 echo "Remediating rule 270/282: 'sshd_print_last_log'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11663,9 +11783,9 @@ fi
 # END fix for 'sshd_print_last_log'
 
 ###############################################################################
-# BEGIN fix (267 / 278) for 'sshd_rekey_limit'
+# BEGIN fix (271 / 282) for 'sshd_rekey_limit'
 ###############################################################################
-(>&2 echo "Remediating rule 267/278: 'sshd_rekey_limit'")
+(>&2 echo "Remediating rule 271/282: 'sshd_rekey_limit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11703,9 +11823,9 @@ fi
 # END fix for 'sshd_rekey_limit'
 
 ###############################################################################
-# BEGIN fix (268 / 278) for 'sshd_set_idle_timeout'
+# BEGIN fix (272 / 282) for 'sshd_set_idle_timeout'
 ###############################################################################
-(>&2 echo "Remediating rule 268/278: 'sshd_set_idle_timeout'")
+(>&2 echo "Remediating rule 272/282: 'sshd_set_idle_timeout'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11741,9 +11861,9 @@ fi
 # END fix for 'sshd_set_idle_timeout'
 
 ###############################################################################
-# BEGIN fix (269 / 278) for 'sshd_set_keepalive_0'
+# BEGIN fix (273 / 282) for 'sshd_set_keepalive_0'
 ###############################################################################
-(>&2 echo "Remediating rule 269/278: 'sshd_set_keepalive_0'")
+(>&2 echo "Remediating rule 273/282: 'sshd_set_keepalive_0'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11774,9 +11894,9 @@ fi
 # END fix for 'sshd_set_keepalive_0'
 
 ###############################################################################
-# BEGIN fix (270 / 278) for 'sshd_use_strong_rng'
+# BEGIN fix (274 / 282) for 'sshd_use_strong_rng'
 ###############################################################################
-(>&2 echo "Remediating rule 270/278: 'sshd_use_strong_rng'")
+(>&2 echo "Remediating rule 274/282: 'sshd_use_strong_rng'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11807,9 +11927,9 @@ fi
 # END fix for 'sshd_use_strong_rng'
 
 ###############################################################################
-# BEGIN fix (271 / 278) for 'sshd_x11_use_localhost'
+# BEGIN fix (275 / 282) for 'sshd_x11_use_localhost'
 ###############################################################################
-(>&2 echo "Remediating rule 271/278: 'sshd_x11_use_localhost'")
+(>&2 echo "Remediating rule 275/282: 'sshd_x11_use_localhost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11840,9 +11960,9 @@ fi
 # END fix for 'sshd_x11_use_localhost'
 
 ###############################################################################
-# BEGIN fix (272 / 278) for 'sssd_enable_smartcards'
+# BEGIN fix (276 / 282) for 'sssd_enable_smartcards'
 ###############################################################################
-(>&2 echo "Remediating rule 272/278: 'sssd_enable_smartcards'")
+(>&2 echo "Remediating rule 276/282: 'sssd_enable_smartcards'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -11868,9 +11988,9 @@ fi
 # END fix for 'sssd_enable_smartcards'
 
 ###############################################################################
-# BEGIN fix (273 / 278) for 'sssd_offline_cred_expiration'
+# BEGIN fix (277 / 282) for 'sssd_offline_cred_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 273/278: 'sssd_offline_cred_expiration'")
+(>&2 echo "Remediating rule 277/282: 'sssd_offline_cred_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -11899,9 +12019,9 @@ fi
 # END fix for 'sssd_offline_cred_expiration'
 
 ###############################################################################
-# BEGIN fix (274 / 278) for 'package_usbguard_installed'
+# BEGIN fix (278 / 282) for 'package_usbguard_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 274/278: 'package_usbguard_installed'")
+(>&2 echo "Remediating rule 278/282: 'package_usbguard_installed'")
 
 if ! rpm -q --quiet "usbguard" ; then
     yum install -y "usbguard"
@@ -11909,9 +12029,9 @@ fi
 # END fix for 'package_usbguard_installed'
 
 ###############################################################################
-# BEGIN fix (275 / 278) for 'service_usbguard_enabled'
+# BEGIN fix (279 / 282) for 'service_usbguard_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 275/278: 'service_usbguard_enabled'")
+(>&2 echo "Remediating rule 279/282: 'service_usbguard_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11926,9 +12046,9 @@ fi
 # END fix for 'service_usbguard_enabled'
 
 ###############################################################################
-# BEGIN fix (276 / 278) for 'configure_usbguard_auditbackend'
+# BEGIN fix (280 / 282) for 'configure_usbguard_auditbackend'
 ###############################################################################
-(>&2 echo "Remediating rule 276/278: 'configure_usbguard_auditbackend'")
+(>&2 echo "Remediating rule 280/282: 'configure_usbguard_auditbackend'")
 if [ -e "/etc/usbguard/usbguard-daemon.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*AuditBackend=/d" "/etc/usbguard/usbguard-daemon.conf"
@@ -11943,9 +12063,9 @@ rm "/etc/usbguard/usbguard-daemon.conf.bak"
 # END fix for 'configure_usbguard_auditbackend'
 
 ###############################################################################
-# BEGIN fix (277 / 278) for 'usbguard_generate_policy'
+# BEGIN fix (281 / 282) for 'usbguard_generate_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 277/278: 'usbguard_generate_policy'")
+(>&2 echo "Remediating rule 281/282: 'usbguard_generate_policy'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11972,9 +12092,9 @@ fi
 # END fix for 'usbguard_generate_policy'
 
 ###############################################################################
-# BEGIN fix (278 / 278) for 'xwindows_remove_packages'
+# BEGIN fix (282 / 282) for 'xwindows_remove_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 278/278: 'xwindows_remove_packages'")
+(>&2 echo "Remediating rule 282/282: 'xwindows_remove_packages'")
 
 
 # remove packages
