@@ -768,7 +768,10 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 33/282: 'sudo_remove_no_authenticate'")
 
-for f in $( ls /etc/sudoers /etc/sudoers.d/* 2> /dev/null ) ; do
+for f in /etc/sudoers /etc/sudoers.d/* ; do
+  if [ ! -e "$f" ] ; then
+    continue
+  fi
   matching_list=$(grep -P '^(?!#).*[\s]+\!authenticate.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -786,7 +789,10 @@ done
 ###############################################################################
 (>&2 echo "Remediating rule 34/282: 'sudo_remove_nopasswd'")
 
-for f in $( ls /etc/sudoers /etc/sudoers.d/* 2> /dev/null ) ; do
+for f in /etc/sudoers /etc/sudoers.d/* ; do
+  if [ ! -e "$f" ] ; then
+    continue
+  fi
   matching_list=$(grep -P '^(?!#).*[\s]+NOPASSWD[\s]*\:.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
