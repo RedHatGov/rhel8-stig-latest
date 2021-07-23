@@ -2115,10 +2115,12 @@
         - no_reboot_needed
 
     - name: Check if pam_lastlog.so is set
-      find:
-        path: /etc/pam.d/
-        pattern: postlogin
-        contains: ^\s*(session)(\s+)[^\s]+(\s+)(pam_lastlog\.so)(\s+)(.*)
+      lineinfile:
+        path: /etc/pam.d/postlogin
+        regexp: ^\s*(session)(\s+)[^\s]+(\s+)(pam_lastlog\.so)(\s+)(.*)
+        state: absent
+      check_mode: true
+      changed_when: false
       register: pam_lastlog_exists
       when: '"pam" in ansible_facts.packages'
       tags:
@@ -2162,7 +2164,7 @@
         line: session required pam_lastlog.so showfailed
       when:
         - '"pam" in ansible_facts.packages'
-        - pam_lastlog_exists.matched == 0
+        - not pam_lastlog_exists.found
       register: add_new_pam_lastlog_control_result
       tags:
         - CCE-80788-3
