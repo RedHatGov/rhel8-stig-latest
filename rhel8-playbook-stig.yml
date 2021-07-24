@@ -425,46 +425,6 @@
         - no_reboot_needed
         - unknown_strategy
 
-    - name: Ensure system crypto policy has OpenSSL library using TLS encryption
-      block:
-
-        - name: Check for duplicate values
-          lineinfile:
-            path: /etc/crypto-policies/back-ends/opensslcnf.config
-            create: false
-            regexp: ^MinProtocol\s*=\s*
-            state: absent
-          check_mode: true
-          changed_when: false
-          register: dupes
-
-        - name: Deduplicate values from /etc/crypto-policies/back-ends/opensslcnf.config
-          lineinfile:
-            path: /etc/crypto-policies/back-ends/opensslcnf.config
-            create: false
-            regexp: ^MinProtocol\s*=\s*
-            state: absent
-          when: dupes.found is defined and dupes.found > 1
-
-        - name: Insert correct line to /etc/crypto-policies/back-ends/opensslcnf.config
-          lineinfile:
-            path: /etc/crypto-policies/back-ends/opensslcnf.config
-            create: true
-            regexp: ^MinProtocol\s*=\s*
-            line: MinProtocol = TLSv1.2
-            state: present
-            insertbefore: '^#?MaxProtocol '
-      tags:
-        - CCE-84255-9
-        - DISA-STIG-RHEL-08-010294
-        - NIST-800-53-AC-17(2)
-        - configure_openssl_tls_crypto_policy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
     - name: Configure SSH to use System Crypto Policy
       lineinfile:
         dest: /etc/sysconfig/sshd
@@ -4931,6 +4891,42 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Appropriate Action Must be Setup When the Internal Audit Event Queue is Full
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/audit/auditd.conf
+            create: false
+            regexp: ^\s*overflow_action=
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/audit/auditd.conf
+          lineinfile:
+            path: /etc/audit/auditd.conf
+            create: false
+            regexp: ^\s*overflow_action=
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/audit/auditd.conf
+          lineinfile:
+            path: /etc/audit/auditd.conf
+            create: false
+            regexp: ^\s*overflow_action=
+            line: overflow_action=syslog
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85889-4
+        - DISA-STIG-RHEL-08-030700
+        - NIST-800-53-AU-4(1)
+        - auditd_overflow_action
+        - medium_severity
+
     - name: Gather the package facts
       package_facts:
         manager: auto
@@ -5097,6 +5093,78 @@
         - medium_severity
         - no_reboot_needed
         - service_rsyslog_enabled
+
+    - name: Ensure Rsyslog Encrypts Off-Loaded Audit Records
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: false
+            regexp: '^\s*\$ActionSendStreamDriverMode '
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/rsyslog.d/encrypt.conf
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: false
+            regexp: '^\s*\$ActionSendStreamDriverMode '
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/rsyslog.d/encrypt.conf
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: true
+            regexp: '^\s*\$ActionSendStreamDriverMode '
+            line: \$ActionSendStreamDriverMode 1
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-86098-1
+        - DISA-STIG-RHEL-08-030710
+        - NIST-800-53-AU-4(1)
+        - medium_severity
+        - rsyslog_encrypt_offload_actionsendstreamdrivermode
+
+    - name: Ensure Rsyslog Encrypts Off-Loaded Audit Records
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: false
+            regexp: '^\s*\$DefaultNetstreamDriver '
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/rsyslog.d/encrypt.conf
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: false
+            regexp: '^\s*\$DefaultNetstreamDriver '
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/rsyslog.d/encrypt.conf
+          lineinfile:
+            path: /etc/rsyslog.d/encrypt.conf
+            create: true
+            regexp: '^\s*\$DefaultNetstreamDriver '
+            line: \$DefaultNetstreamDriver gtls
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85992-6
+        - DISA-STIG-RHEL-08-030710
+        - NIST-800-53-AU-4(1)
+        - medium_severity
+        - rsyslog_encrypt_offload_defaultnetstreamdriver
 
     - name: 'Ensure remote access methods are monitored in Rsyslog: Set facts'
       set_fact:

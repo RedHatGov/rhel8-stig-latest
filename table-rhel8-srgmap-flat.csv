@@ -35,6 +35,42 @@ If the service is running, it should return the following: active
       ","Ensure the operating system's application firewall is enabled, if available.","
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service",,,,
+CCI-000016,SRG-OS-000002-GPOS-00002,TBD - Assigned by DISA after STIG release,The operating system must automatically remove or disable temporary user accounts after 72 hours.,CCE-85910-8:Assign Expiration Date to Emergency Accounts,"If temporary user accounts remain active when no longer needed or for an excessive period, these accounts may be used to gain unauthorized access. To mitigate this risk, automated termination of all temporary accounts must be set upon account creation.
+
+Temporary accounts are established as part of normal account activation procedures when there is a need for short-term accounts without the demand for immediacy in account activation.
+
+If temporary accounts are used, the operating system must be configured to automatically terminate these types of accounts after a DoD-defined time period of 72 hours.
+
+To address access requirements, many operating systems may be integrated with enterprise-level authentication/access mechanisms that meet or exceed access control policy requirements.","Emergency accounts are privileged accounts established in response to
+crisis situations where the need for rapid account activation is required.
+In the event emergency accounts are required, configure the system to
+terminate them after a documented time period. For every emergency account,
+run the following command to set an expiration date on it, substituting
+ACCOUNT_NAME and YYYY-MM-DD
+appropriately:
+$ sudo chage -E YYYY-MM-DD ACCOUNT_NAME
+YYYY-MM-DD indicates the documented expiration date for the
+account. For U.S. Government systems, the operating system must be
+configured to automatically terminate these types of accounts after a
+period of 72 hours.","
+                  Applicable - Configurable
+                ","Verify the operating system automatically removes or disables local temporary user accounts after 72 hours. If it does not, this is a finding.","For every emergency account, run the following command
+to obtain its account aging and expiration information:
+$ sudo chage -l ACCOUNT_NAME
+Verify each of these accounts has an expiration date set as documented.
+      Is it the case that any emergency accounts have no expiration date set or do not expire within a documented time frame?
+      ",Configure the operating system to automatically remove or disable local temporary user accounts after 72 hours.,"Emergency accounts are privileged accounts established in response to
+crisis situations where the need for rapid account activation is required.
+In the event emergency accounts are required, configure the system to
+terminate them after a documented time period. For every emergency account,
+run the following command to set an expiration date on it, substituting
+ACCOUNT_NAME and YYYY-MM-DD
+appropriately:
+$ sudo chage -E YYYY-MM-DD ACCOUNT_NAME
+YYYY-MM-DD indicates the documented expiration date for the
+account. For U.S. Government systems, the operating system must be
+configured to automatically terminate these types of accounts after a
+period of 72 hours.",,,,
 CCI-000016,SRG-OS-000002-GPOS-00002,TBD - Assigned by DISA after STIG release,The operating system must automatically remove or disable temporary user accounts after 72 hours.,CCE-82474-8:Assign Expiration Date to Temporary Accounts,"If temporary user accounts remain active when no longer needed or for an excessive period, these accounts may be used to gain unauthorized access. To mitigate this risk, automated termination of all temporary accounts must be set upon account creation.
 
 Temporary accounts are established as part of normal account activation procedures when there is a need for short-term accounts without the demand for immediacy in account activation.
@@ -3375,6 +3411,24 @@ name_format = hostname
 syscall as computer node name in the audit events,
 set name_format to hostname
 in /etc/audit/auditd.conf.",,,,
+CCI-001851,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-85889-4:Appropriate Action Must be Setup When the Internal Audit Event Queue is Full,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","The audit system should have an action setup in the event the internal event queue becomes full.
+To setup an overflow action edit /etc/audit/auditd.conf. Set overflow_action
+to one of the following values: syslog, single, halt.","
+                  Applicable - Configurable
+                ","Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.","Verify the audit system is configured to take an appropriate action when the internal event queue is full:
+$ sudo grep -i overflow_action /etc/audit/auditd.conf
+
+The output should contain be like overflow_action = syslog
+
+If the value of the ""overflow_action"" option is not set to syslog, 
+single, halt or the line is commented out, ask the System Administrator
+to indicate how the audit logs are off-loaded to a different system or media. 
+      Is it the case that auditd overflow action is not setup correctly?
+      ","Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.","The audit system should have an action setup in the event the internal event queue becomes full.
+To setup an overflow action edit /etc/audit/auditd.conf. Set overflow_action
+to one of the following values: syslog, single, halt.",,,,
 CCI-001851,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-80847-7:Ensure rsyslog is Installed,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
 
 Off-loading is a common process in information systems with limited audit storage capacity.",Rsyslog is installed by default. The rsyslog package can be installed with the following command:  $ sudo yum install rsyslog,"
@@ -3382,6 +3436,54 @@ Off-loading is a common process in information systems with limited audit storag
                 ","Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.","Run the following command to determine if the rsyslog package is installed: $ rpm -q rsyslog
       Is it the case that the package is not installed?
       ","Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.",Rsyslog is installed by default. The rsyslog package can be installed with the following command:  $ sudo yum install rsyslog,,,,
+CCI-001851,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-86098-1:Ensure Rsyslog Encrypts Off-Loaded Audit Records,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.","
+                  Applicable - Configurable
+                ","Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.","Verify the operating system encrypts audit records off-loaded onto a different system
+or media from the system being audited with the following commands:
+
+$ sudo grep -i '$ActionSendStreamDriverMode' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+/etc/rsyslog.conf:$ActionSendStreamDriverMode 1
+      Is it the case that rsyslogd ActionSendStreamDriverMode not set to 1?
+      ","Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.",,,,
+CCI-001851,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-85992-6:Ensure Rsyslog Encrypts Off-Loaded Audit Records,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.","
+                  Applicable - Configurable
+                ","Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.","Verify the operating system encrypts audit records off-loaded onto a different system
+or media from the system being audited with the following commands:
+
+$ sudo grep -i '$DefaultNetstreamDriver' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+/etc/rsyslog.conf:$DefaultNetstreamDriver gtls
+      Is it the case that rsyslogd DefaultNetstreamDriver not set to gtls?
+      ","Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.",,,,
 CCI-001851,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-80863-4:Ensure Logs Sent To Remote Host,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
 
 Off-loading is a common process in information systems with limited audit storage capacity.","To configure rsyslog to send logs to a remote log server,
@@ -4591,6 +4693,40 @@ This requirement is a permanent not a finding. No fix is required.
                 ","Verify the operating system uses internal system clocks to generate time stamps for audit records. If it does not, this is a finding.",,Configure the operating system to use internal system clocks to generate time stamps for audit records.,"
 This requirement is a permanent not a finding. No fix is required.
 ",,,,
+CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88225-8:System Audit Directories Must Be Group Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized read access.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.",,,,
+CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit 
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized read access.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ",,,,
 CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-84048-8:System Audit Logs Must Have Mode 0750 or Less Permissive,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 
 Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","If log_group in /etc/audit/auditd.conf is set to a group other than the root
@@ -4610,27 +4746,37 @@ $ sudo chmod 0750 /var/log/audit
 
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit",,,,
-CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-80808-9:System Audit Logs Must Be Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized read access.,"All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.",,,,
+CCI-000162,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88228-2:System Audit Logs Must Be Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
-
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* 
       Is it the case that ?
-      ",Configure the operating system to protect audit information from unauthorized read access.,"All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
-
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+      ",Configure the operating system to protect audit information from unauthorized read access.,"All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ",,,,
@@ -4662,6 +4808,44 @@ This requirement is a permanent not a finding. No fix is required.
                 ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.",,Configure the operating system to protect audit information from unauthorized read access.,"
 This requirement is a permanent not a finding. No fix is required.
 ",,,,
+CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88225-8:System Audit Directories Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized modification.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.",,,,
+CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit 
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized modification.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ",,,,
 CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-84048-8:System Audit Logs Must Have Mode 0750 or Less Permissive,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
@@ -4683,29 +4867,41 @@ $ sudo chmod 0750 /var/log/audit
 
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit",,,,
-CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-80808-9:System Audit Logs Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized modification.,"All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.",,,,
+CCI-000163,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88228-2:System Audit Logs Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
-
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* 
       Is it the case that ?
-      ",Configure the operating system to protect audit information from unauthorized modification.,"All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
-
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+      ",Configure the operating system to protect audit information from unauthorized modification.,"All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ",,,,
@@ -4741,6 +4937,44 @@ This requirement is a permanent not a finding. No fix is required.
                 ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.",,Configure the operating system to protect audit information from unauthorized modification.,"
 This requirement is a permanent not a finding. No fix is required.
 ",,,,
+CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88225-8:System Audit Directories Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.",,,,
+CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit 
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ",,,,
 CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-84048-8:System Audit Logs Must Have Mode 0750 or Less Permissive,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
@@ -4762,29 +4996,41 @@ $ sudo chmod 0750 /var/log/audit
 
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit",,,,
-CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-80808-9:System Audit Logs Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+      Is it the case that ?
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.",,,,
+CCI-000164,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88228-2:System Audit Logs Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
+
+To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
+
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
-
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* 
       Is it the case that ?
-      ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
-
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ",,,,
@@ -7892,6 +8138,40 @@ Temporary passwords are typically used to allow access when new accounts are cre
                 ","Verify the operating system allows the use of a temporary password for system logons with an immediate change to a permanent password. If it does not, this is a finding.",,Configure the operating system to allow the use of a temporary password for system logons with an immediate change to a permanent password.,"<VulnDiscussion>Without providing this capability, an account may be created without a password. Non-repudiation cannot be guaranteed once an account is created if a user is not forced to change the temporary password upon initial logon.
 
 Temporary passwords are typically used to allow access when new accounts are created or passwords are changed. It is common practice for administrators to create temporary passwords for user accounts which allow the users to log on, yet force them to change the password once they have successfully authenticated.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
+CCI-001682,SRG-OS-000123-GPOS-00064,TBD - Assigned by DISA after STIG release,The information system must automatically remove or disable emergency accounts after the crisis is resolved or 72 hours.,CCE-85910-8:Assign Expiration Date to Emergency Accounts,"Emergency accounts are privileged accounts that are established in response to crisis situations where the need for rapid account activation is required. Therefore, emergency account activation may bypass normal account authorization processes. If these accounts are automatically disabled, system maintenance during emergencies may not be possible, thus adversely affecting system availability. 
+
+Emergency accounts are different from infrequently used accounts (i.e., local logon accounts used by the organization's system administrators when network or normal logon/access is not available). Infrequently used accounts are not subject to automatic termination dates.  Emergency accounts are accounts created in response to crisis situations, usually for use by maintenance personnel. The automatic expiration or disabling time period may be extended as needed until the crisis is resolved; however, it must not be extended indefinitely. A permanent account should be established for privileged users who need long-term maintenance accounts.
+
+To address access requirements, many operating systems can be integrated with enterprise-level authentication/access mechanisms that meet or exceed access control policy requirements. ","Emergency accounts are privileged accounts established in response to
+crisis situations where the need for rapid account activation is required.
+In the event emergency accounts are required, configure the system to
+terminate them after a documented time period. For every emergency account,
+run the following command to set an expiration date on it, substituting
+ACCOUNT_NAME and YYYY-MM-DD
+appropriately:
+$ sudo chage -E YYYY-MM-DD ACCOUNT_NAME
+YYYY-MM-DD indicates the documented expiration date for the
+account. For U.S. Government systems, the operating system must be
+configured to automatically terminate these types of accounts after a
+period of 72 hours.","
+                  Applicable - Configurable
+                ","Verify the operating system is configured such that emergency administrator accounts are automatically removed or disabled within 72 hours. If it is not, this is a finding.","For every emergency account, run the following command
+to obtain its account aging and expiration information:
+$ sudo chage -l ACCOUNT_NAME
+Verify each of these accounts has an expiration date set as documented.
+      Is it the case that any emergency accounts have no expiration date set or do not expire within a documented time frame?
+      ",Configure the operating system such that emergency administrator accounts are automatically removed or disabled within 72 hours.,"Emergency accounts are privileged accounts established in response to
+crisis situations where the need for rapid account activation is required.
+In the event emergency accounts are required, configure the system to
+terminate them after a documented time period. For every emergency account,
+run the following command to set an expiration date on it, substituting
+ACCOUNT_NAME and YYYY-MM-DD
+appropriately:
+$ sudo chage -E YYYY-MM-DD ACCOUNT_NAME
+YYYY-MM-DD indicates the documented expiration date for the
+account. For U.S. Government systems, the operating system must be
+configured to automatically terminate these types of accounts after a
+period of 72 hours.",,,,
 CCI-001682,SRG-OS-000123-GPOS-00064,TBD - Assigned by DISA after STIG release,The information system must automatically remove or disable emergency accounts after the crisis is resolved or 72 hours.,CCE-82474-8:Assign Expiration Date to Temporary Accounts,"Emergency accounts are privileged accounts that are established in response to crisis situations where the need for rapid account activation is required. Therefore, emergency account activation may bypass normal account authorization processes. If these accounts are automatically disabled, system maintenance during emergencies may not be possible, thus adversely affecting system availability. 
 
 Emergency accounts are different from infrequently used accounts (i.e., local logon accounts used by the organization's system administrators when network or normal logon/access is not available). Infrequently used accounts are not subject to automatic termination dates.  Emergency accounts are accounts created in response to crisis situations, usually for use by maintenance personnel. The automatic expiration or disabling time period may be extended as needed until the crisis is resolved; however, it must not be extended indefinitely. A permanent account should be established for privileged users who need long-term maintenance accounts.
@@ -9520,27 +9800,71 @@ Organizations carefully consider the structure/content of error messages. The ex
                 ","Verify the operating system generates error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries. If it does not, this is a finding.",,Configure the operating system to generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.,"<VulnDiscussion> Any operating system providing too much information in error messages risks compromising the data and security of the structure, and content of error messages needs to be carefully considered by the organization.
 
 Organizations carefully consider the structure/content of error messages. The extent to which information systems are able to identify and handle error conditions is guided by organizational policy and operational requirements. Information that could be exploited by adversaries includes, for example, erroneous logon attempts with passwords entered by mistake as the username, mission/business information that can be derived from (if not stated explicitly by) information recorded, and personal information, such as account numbers, social security numbers, and credit card numbers.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
-CCI-001314,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-80808-9:System Audit Logs Must Be Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
+CCI-001314,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-88225-8:System Audit Directories Must Be Group Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
 
-The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.","All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
+The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.","All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+      Is it the case that ?
+      ",Configure the operating system to reveal error messages only to authorized users.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit, run the command:
+$ sudo chgrp root /var/log/audit
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit directories to this specific group.",,,,
+CCI-001314,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
+
+The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.","All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ","
+                  Applicable - Configurable
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
+To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
+      Is it the case that ?
+      ",Configure the operating system to reveal error messages only to authorized users.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the owner of /var/log/audit, run the command:
+$ sudo chown root /var/log/audit ",,,,
+CCI-001314,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
+
+The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.","All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.","
+                  Applicable - Configurable
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+      Is it the case that ?
+      ",Configure the operating system to reveal error messages only to authorized users.,"All audit logs must be group owned by root user. By default, the path for audit log is /var/log/audit/.
+
+To properly set the group owner of /var/log/audit/*, run the command:
+$ sudo chgrp root /var/log/audit/*
+If log_group in /etc/audit/auditd.conf is set to a group other than the root
+group account, change the group ownership of the audit logs to this specific group.",,,,
+CCI-001314,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-88228-2:System Audit Logs Must Be Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
+
+The structure and content of error messages must be carefully considered by the organization and development team. The extent to which the information system is able to identify and handle error conditions is guided by organizational policy and operational requirements.","All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
                 ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
-
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* 
       Is it the case that ?
-      ",Configure the operating system to reveal error messages only to authorized users.,"All audit logs must be owned by root user and group. By default, the path for audit log is /var/log/audit/.
-
-To properly set the owner of /var/log/audit, run the command:
-$ sudo chown root /var/log/audit 
+      ",Configure the operating system to reveal error messages only to authorized users.,"All audit logs must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ",,,,
@@ -10016,19 +10340,25 @@ Remote access (e.g., RDP) is access to DoD nonpublic information systems by an a
 Cryptographic mechanisms used for protecting the integrity of information include, for example, signed hash functions using asymmetric cryptography enabling distribution of the public key to verify the hash information while maintaining the confidentiality of the secret key used to generate the hash.","Crypto Policies are means of enforcing certain cryptographic settings for
 selected applications including OpenSSL. OpenSSL is by default configured to
 modify its configuration based on currently configured Crypto Policy.
-However, in certain cases it might be needed to override the Crypto Policy
-specific to OpenSSL and leave rest of the Crypto Policy intact.","
+Editing the Crypto Policy back-end is not recommended.
+
+Check the crypto-policies(7) man page and choose a policy that configures TLS
+protocol to version 1.2 or higher, for example DEFAULT, FUTURE or FIPS policy.
+Or create and apply a custom policy that restricts minimum TLS version to 1.2.","
                   Applicable - Configurable
                 ","Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.","To verify if the OpenSSL uses defined TLS Crypto Policy, run:
-$ grep 'MinProtocol' /etc/crypto-policies/back-ends/opensslcnf.config | tail -n 1
-and verify that the line matches
-MinProtocol = TLSv1.2
+$ grep -P '^(TLS\.)?MinProtocol' /etc/crypto-policies/back-ends/opensslcnf.config
+and verify that the value is
+TLSv1.2
       Is it the case that cryptographic policy for openssl is not configured or is configured incorrectly?
       ",Configure the operating system to implement cryptography to protect the integrity of remote access sessions.,"Crypto Policies are means of enforcing certain cryptographic settings for
 selected applications including OpenSSL. OpenSSL is by default configured to
 modify its configuration based on currently configured Crypto Policy.
-However, in certain cases it might be needed to override the Crypto Policy
-specific to OpenSSL and leave rest of the Crypto Policy intact.",,,,
+Editing the Crypto Policy back-end is not recommended.
+
+Check the crypto-policies(7) man page and choose a policy that configures TLS
+protocol to version 1.2 or higher, for example DEFAULT, FUTURE or FIPS policy.
+Or create and apply a custom policy that restricts minimum TLS version to 1.2.",,,,
 CCI-001453,SRG-OS-000250-GPOS-00093,TBD - Assigned by DISA after STIG release,The operating system must implement cryptography to protect the integrity of remote access sessions.,CCE-80939-2:Configure SSH to use System Crypto Policy,"Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
 
 Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
@@ -11761,6 +12091,72 @@ name_format = hostname
 syscall as computer node name in the audit events,
 set name_format to hostname
 in /etc/audit/auditd.conf.",,,,
+CCI-001851,SRG-OS-000342-GPOS-00133,TBD - Assigned by DISA after STIG release,The operating system must off-load audit records onto a different system or media from the system being audited.,CCE-85889-4:Appropriate Action Must be Setup When the Internal Audit Event Queue is Full,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","The audit system should have an action setup in the event the internal event queue becomes full.
+To setup an overflow action edit /etc/audit/auditd.conf. Set overflow_action
+to one of the following values: syslog, single, halt.","
+                  Applicable - Configurable
+                ","Verify the operating system off-loads audit records onto a different system or media from the system being audited. If it does not, this is a finding.","Verify the audit system is configured to take an appropriate action when the internal event queue is full:
+$ sudo grep -i overflow_action /etc/audit/auditd.conf
+
+The output should contain be like overflow_action = syslog
+
+If the value of the ""overflow_action"" option is not set to syslog, 
+single, halt or the line is commented out, ask the System Administrator
+to indicate how the audit logs are off-loaded to a different system or media. 
+      Is it the case that auditd overflow action is not setup correctly?
+      ",Configure the operating system to off-load audit records onto a different system or media from the system being audited.,"The audit system should have an action setup in the event the internal event queue becomes full.
+To setup an overflow action edit /etc/audit/auditd.conf. Set overflow_action
+to one of the following values: syslog, single, halt.",,,,
+CCI-001851,SRG-OS-000342-GPOS-00133,TBD - Assigned by DISA after STIG release,The operating system must off-load audit records onto a different system or media from the system being audited.,CCE-86098-1:Ensure Rsyslog Encrypts Off-Loaded Audit Records,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.","
+                  Applicable - Configurable
+                ","Verify the operating system off-loads audit records onto a different system or media from the system being audited. If it does not, this is a finding.","Verify the operating system encrypts audit records off-loaded onto a different system
+or media from the system being audited with the following commands:
+
+$ sudo grep -i '$ActionSendStreamDriverMode' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+/etc/rsyslog.conf:$ActionSendStreamDriverMode 1
+      Is it the case that rsyslogd ActionSendStreamDriverMode not set to 1?
+      ",Configure the operating system to off-load audit records onto a different system or media from the system being audited.,"Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.",,,,
+CCI-001851,SRG-OS-000342-GPOS-00133,TBD - Assigned by DISA after STIG release,The operating system must off-load audit records onto a different system or media from the system being audited.,CCE-85992-6:Ensure Rsyslog Encrypts Off-Loaded Audit Records,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.","Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.","
+                  Applicable - Configurable
+                ","Verify the operating system off-loads audit records onto a different system or media from the system being audited. If it does not, this is a finding.","Verify the operating system encrypts audit records off-loaded onto a different system
+or media from the system being audited with the following commands:
+
+$ sudo grep -i '$DefaultNetstreamDriver' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+/etc/rsyslog.conf:$DefaultNetstreamDriver gtls
+      Is it the case that rsyslogd DefaultNetstreamDriver not set to gtls?
+      ",Configure the operating system to off-load audit records onto a different system or media from the system being audited.,"Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs off a encrpytion system must be used.",,,,
 CCI-001851,SRG-OS-000342-GPOS-00133,TBD - Assigned by DISA after STIG release,The operating system must off-load audit records onto a different system or media from the system being audited.,CCE-80863-4:Ensure Logs Sent To Remote Host,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
 
 Off-loading is a common process in information systems with limited audit storage capacity.","To configure rsyslog to send logs to a remote log server,
