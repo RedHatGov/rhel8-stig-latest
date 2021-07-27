@@ -1349,7 +1349,8 @@ or logical volume at installation time, or migrate it using LVM.</td>
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
 <td xml:lang="en-US">System logs are stored in the <code>/var/log</code> directory.
-Ensure that it has its own partition or logical
+
+Ensure that <code>/var/log</code> has its own partition or logical
 volume at installation time, or migrate it using LVM.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
@@ -1362,7 +1363,8 @@ If /var/log has its own partition or volume group, a line will be returned.
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>System logs are stored in the /var/log directory.
-Ensure that it has its own partition or logical
+
+Ensure that /var/log has its own partition or logical
 volume at installation time, or migrate it using LVM.</td>
 <td>medium</td>
 <td></td>
@@ -1378,9 +1380,11 @@ volume at installation time, or migrate it using LVM.</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
-<td xml:lang="en-US">Audit logs are stored in the <code>/var/log/audit</code> directory.  Ensure that it
-has its own partition or logical volume at installation time, or migrate it
-later using LVM. Make absolutely certain that it is large enough to store all
+<td xml:lang="en-US">Audit logs are stored in the <code>/var/log/audit</code> directory.
+
+Ensure that <code>/var/log/audit</code> has its own partition or logical
+volume at installation time, or migrate it using LVM.
+Make absolutely certain that it is large enough to store all
 audit logs that will be created by the auditing daemon.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
@@ -1392,9 +1396,11 @@ If /var/log/audit has its own partition or volume group, a line will be returned
       Is it the case that no line is returned?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
-<td>Audit logs are stored in the /var/log/audit directory.  Ensure that it
-has its own partition or logical volume at installation time, or migrate it
-later using LVM. Make absolutely certain that it is large enough to store all
+<td>Audit logs are stored in the /var/log/audit directory.
+
+Ensure that /var/log/audit has its own partition or logical
+volume at installation time, or migrate it using LVM.
+Make absolutely certain that it is large enough to store all
 audit logs that will be created by the auditing daemon.</td>
 <td>low</td>
 <td></td>
@@ -3704,7 +3710,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/boot</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /boot mount point, run the following command:
+<td>To verify the nosuid option is configured for the /boot mount point,
+    run the following command:
     $ mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -3738,7 +3745,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/home</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /home mount point, run the following command:
+<td>To verify the noexec option is configured for the /home mount point,
+    run the following command:
     $ mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -3772,7 +3780,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/home</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /home mount point, run the following command:
+<td>To verify the nosuid option is configured for the /home mount point,
+    run the following command:
     $ mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -10305,6 +10314,32 @@ To make sure that the setting is persistent, add the following line to a file in
 <td>SRG-OS-000433-GPOS-00192</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement non-executable data to protect its memory from unauthorized code execution.</td>
+<td>CCE-83918-3:Enable NX or XD Support in the BIOS</td>
+<td>Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Security safeguards employed to protect memory include, for example, data execution prevention and address space layout randomization. Data execution prevention safeguards can either be hardware-enforced or software-enforced with hardware providing the greater strength of mechanism.
+
+Examples of attacks are buffer overflow attacks.</td>
+<td xml:lang="en-US">Reboot the system and enter the BIOS or Setup configuration menu.
+Navigate the BIOS configuration menu and make sure that the option is enabled. The setting may be located
+under a Security section. Look for Execute Disable (XD) on Intel-based systems and No Execute (NX)
+on AMD-based systems.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements non-executable data to protect its memory from unauthorized code execution. If it does not, this is a finding.</td>
+<td></td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61621r1_fix">Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.</fixtext></td>
+<td>Reboot the system and enter the BIOS or Setup configuration menu.
+Navigate the BIOS configuration menu and make sure that the option is enabled. The setting may be located
+under a Security section. Look for Execute Disable (XD) on Intel-based systems and No Execute (NX)
+on AMD-based systems.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-002824</td>
+<td>SRG-OS-000433-GPOS-00192</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement non-executable data to protect its memory from unauthorized code execution.</td>
 <td>CCE-80945-9:Enable SLUB/SLAB allocator poisoning</td>
 <td>Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Security safeguards employed to protect memory include, for example, data execution prevention and address space layout randomization. Data execution prevention safeguards can either be hardware-enforced or software-enforced with hardware providing the greater strength of mechanism.
 
@@ -15109,7 +15144,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/boot</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /boot mount point, run the following command:
+<td>To verify the nosuid option is configured for the /boot mount point,
+    run the following command:
     $ mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15146,7 +15182,8 @@ Add the <code>nodev</code> option to the fourth column of
 <code>/dev/shm</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nodev option is configured for the /dev/shm mount point, run the following command:
+<td>To verify the nodev option is configured for the /dev/shm mount point,
+    run the following command:
     $ mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
@@ -15184,7 +15221,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/dev/shm</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /dev/shm mount point, run the following command:
+<td>To verify the noexec option is configured for the /dev/shm mount point,
+    run the following command:
     $ mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -15222,7 +15260,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/dev/shm</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /dev/shm mount point, run the following command:
+<td>To verify the nosuid option is configured for the /dev/shm mount point,
+    run the following command:
     $ mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15259,7 +15298,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/home</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /home mount point, run the following command:
+<td>To verify the nosuid option is configured for the /home mount point,
+    run the following command:
     $ mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15337,7 +15377,8 @@ Add the <code>nodev</code> option to the fourth column of
 <code>/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nodev option is configured for the /tmp mount point, run the following command:
+<td>To verify the nodev option is configured for the /tmp mount point,
+    run the following command:
     $ mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
@@ -15373,7 +15414,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /tmp mount point, run the following command:
+<td>To verify the noexec option is configured for the /tmp mount point,
+    run the following command:
     $ mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -15409,7 +15451,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /tmp mount point, run the following command:
+<td>To verify the nosuid option is configured for the /tmp mount point,
+    run the following command:
     $ mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15448,7 +15491,8 @@ Add the <code>nodev</code> option to the fourth column of
 <code>/var/log/audit</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nodev option is configured for the /var/log/audit mount point, run the following command:
+<td>To verify the nodev option is configured for the /var/log/audit mount point,
+    run the following command:
     $ mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
@@ -15486,7 +15530,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/var/log/audit</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /var/log/audit mount point, run the following command:
+<td>To verify the noexec option is configured for the /var/log/audit mount point,
+    run the following command:
     $ mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -15522,7 +15567,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/var/log/audit</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /var/log/audit mount point, run the following command:
+<td>To verify the nosuid option is configured for the /var/log/audit mount point,
+    run the following command:
     $ mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15561,7 +15607,8 @@ Add the <code>nodev</code> option to the fourth column of
 <code>/var/log</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nodev option is configured for the /var/log mount point, run the following command:
+<td>To verify the nodev option is configured for the /var/log mount point,
+    run the following command:
     $ mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
@@ -15599,7 +15646,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/var/log</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /var/log mount point, run the following command:
+<td>To verify the noexec option is configured for the /var/log mount point,
+    run the following command:
     $ mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -15635,7 +15683,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/var/log</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /var/log mount point, run the following command:
+<td>To verify the nosuid option is configured for the /var/log mount point,
+    run the following command:
     $ mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -15672,7 +15721,8 @@ Add the <code>nodev</code> option to the fourth column of
 <code>/var/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nodev option is configured for the /var/tmp mount point, run the following command:
+<td>To verify the nodev option is configured for the /var/tmp mount point,
+    run the following command:
     $ mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
@@ -15708,7 +15758,8 @@ Add the <code>noexec</code> option to the fourth column of
 <code>/var/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the noexec option is configured for the /var/tmp mount point, run the following command:
+<td>To verify the noexec option is configured for the /var/tmp mount point,
+    run the following command:
     $ mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
@@ -15744,7 +15795,8 @@ Add the <code>nosuid</code> option to the fourth column of
 <code>/var/tmp</code>.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
-<td>To verify the nosuid option is configured for the /var/tmp mount point, run the following command:
+<td>To verify the nosuid option is configured for the /var/tmp mount point,
+    run the following command:
     $ mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
@@ -19936,9 +19988,11 @@ If both the "b32" and "b64" audit rules for "SGID" files are not defined, this i
 <td>In order to ensure operating systems have a sufficient storage capacity in which to write the audit logs, operating systems need to be able to allocate audit record storage capacity.
 
 The task of allocating audit record storage capacity is usually performed during initial installation of the operating system.</td>
-<td xml:lang="en-US">Audit logs are stored in the <code>/var/log/audit</code> directory.  Ensure that it
-has its own partition or logical volume at installation time, or migrate it
-later using LVM. Make absolutely certain that it is large enough to store all
+<td xml:lang="en-US">Audit logs are stored in the <code>/var/log/audit</code> directory.
+
+Ensure that <code>/var/log/audit</code> has its own partition or logical
+volume at installation time, or migrate it using LVM.
+Make absolutely certain that it is large enough to store all
 audit logs that will be created by the auditing daemon.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system allocates audit record storage capacity to store at least one week's worth of audit records, when audit records are not immediately sent to a central audit record storage facility. If it does not, this is a finding.</td>
@@ -19950,9 +20004,11 @@ If /var/log/audit has its own partition or volume group, a line will be returned
       Is it the case that no line is returned?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62179r1_fix">Configure the operating system to allocate audit record storage capacity to store at least one week's worth of audit records, when audit records are not immediately sent to a central audit record storage facility.</fixtext></td>
-<td>Audit logs are stored in the /var/log/audit directory.  Ensure that it
-has its own partition or logical volume at installation time, or migrate it
-later using LVM. Make absolutely certain that it is large enough to store all
+<td>Audit logs are stored in the /var/log/audit directory.
+
+Ensure that /var/log/audit has its own partition or logical
+volume at installation time, or migrate it using LVM.
+Make absolutely certain that it is large enough to store all
 audit logs that will be created by the auditing daemon.</td>
 <td>low</td>
 <td></td>
