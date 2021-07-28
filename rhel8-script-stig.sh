@@ -3195,7 +3195,6 @@ fi
 if rpm --quiet -q shadow-utils; then
 
 
-declare var_accounts_password_minlen_login_defs
 var_accounts_password_minlen_login_defs="15"
 
 
@@ -3666,8 +3665,13 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?audit=1(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?audit=1(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts audit=1"
+  else
+    grub2-editenv - set "kernelopts=audit=1"
+  fi
 fi
 
 else
@@ -3683,8 +3687,13 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?audit_backlog_limit=8192(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit_backlog_limit=8192"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?audit_backlog_limit=8192(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts audit_backlog_limit=8192"
+  else
+    grub2-editenv - set "kernelopts=audit_backlog_limit=8192"
+  fi
 fi
 
 else
@@ -4827,8 +4836,13 @@ fi
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?pti=on(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) pti=on"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?pti=on(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts pti=on"
+  else
+    grub2-editenv - set "kernelopts=pti=on"
+  fi
 fi
 
 else
@@ -4844,8 +4858,13 @@ fi
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?vsyscall=none(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) vsyscall=none"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?vsyscall=none(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts vsyscall=none"
+  else
+    grub2-editenv - set "kernelopts=vsyscall=none"
+  fi
 fi
 
 else
@@ -10446,8 +10465,13 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?page_poison=1(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) page_poison=1"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?page_poison=1(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts page_poison=1"
+  else
+    grub2-editenv - set "kernelopts=page_poison=1"
+  fi
 fi
 
 else
@@ -10463,8 +10487,13 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
 # Correct grub2 kernelopts value using grub2-editenv
-if ! grub2-editenv - list | grep -qE '^kernelopts=(.*\s)?slub_debug=P(\s.*)?$'; then
-  grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) slub_debug=P"
+existing_kernelopts="$(grub2-editenv - list | grep kernelopts)"
+if ! printf '%s' "$existing_kernelopts" | grep -qE '^kernelopts=(.*\s)?slub_debug=P(\s.*)?$'; then
+  if test -n "$existing_kernelopts"; then
+    grub2-editenv - set "$existing_kernelopts slub_debug=P"
+  else
+    grub2-editenv - set "kernelopts=slub_debug=P"
+  fi
 fi
 
 else
