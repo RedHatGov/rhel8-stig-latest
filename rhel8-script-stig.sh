@@ -5063,7 +5063,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
-    LC_ALL=C sed -i "/^\s*\$ActionSendStreamDriverMode /Id" "/etc/rsyslog.d/encrypt.conf"
+    LC_ALL=C sed -i "/^\s*\\$ActionSendStreamDriverMode /Id" "/etc/rsyslog.d/encrypt.conf"
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
@@ -5088,7 +5088,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 #!/bin/bash
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
-    LC_ALL=C sed -i "/^\s*\$DefaultNetstreamDriver /Id" "/etc/rsyslog.d/encrypt.conf"
+    LC_ALL=C sed -i "/^\s*\\$DefaultNetstreamDriver /Id" "/etc/rsyslog.d/encrypt.conf"
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
