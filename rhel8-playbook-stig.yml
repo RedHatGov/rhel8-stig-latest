@@ -1371,7 +1371,7 @@
         state: present
       tags:
         - CCE-82968-9
-        - DISA-STIG-RHEL-08-010471
+        - DISA-STIG-RHEL-08-010472
         - enable_strategy
         - low_complexity
         - low_disruption
@@ -1841,7 +1841,7 @@
         manager: auto
       tags:
         - CCE-80768-5
-        - DISA-STIG-RHEL-08-010050
+        - DISA-STIG-RHEL-08-010049
         - NIST-800-171-3.1.9
         - NIST-800-53-AC-8(a)
         - NIST-800-53-AC-8(b)
@@ -1864,7 +1864,7 @@
       when: '"gdm" in ansible_facts.packages'
       tags:
         - CCE-80768-5
-        - DISA-STIG-RHEL-08-010050
+        - DISA-STIG-RHEL-08-010049
         - NIST-800-171-3.1.9
         - NIST-800-53-AC-8(a)
         - NIST-800-53-AC-8(b)
@@ -1885,7 +1885,7 @@
       when: '"gdm" in ansible_facts.packages'
       tags:
         - CCE-80768-5
-        - DISA-STIG-RHEL-08-010050
+        - DISA-STIG-RHEL-08-010049
         - NIST-800-171-3.1.9
         - NIST-800-53-AC-8(a)
         - NIST-800-53-AC-8(b)
@@ -1902,7 +1902,7 @@
       when: '"gdm" in ansible_facts.packages'
       tags:
         - CCE-80768-5
-        - DISA-STIG-RHEL-08-010050
+        - DISA-STIG-RHEL-08-010049
         - NIST-800-171-3.1.9
         - NIST-800-53-AC-8(a)
         - NIST-800-53-AC-8(b)
@@ -3681,7 +3681,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82186-8
-        - DISA-STIG-RHEL-08-010151
+        - DISA-STIG-RHEL-08-010152
         - NIST-800-171-3.1.1
         - NIST-800-171-3.4.5
         - NIST-800-53-AC-3
@@ -3723,7 +3723,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80644-8
-        - DISA-STIG-RHEL-08-020040
+        - DISA-STIG-RHEL-08-020039
         - NIST-800-171-3.1.10
         - NIST-800-53-CM-6(a)
         - enable_strategy
@@ -4032,7 +4032,7 @@
         manager: auto
       tags:
         - CCE-83386-3
-        - DISA-STIG-RHEL-08-010130
+        - DISA-STIG-RHEL-08-010131
         - accounts_password_pam_unix_rounds_system_auth
         - configure_strategy
         - low_complexity
@@ -4051,7 +4051,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-83386-3
-        - DISA-STIG-RHEL-08-010130
+        - DISA-STIG-RHEL-08-010131
         - accounts_password_pam_unix_rounds_system_auth
         - configure_strategy
         - low_complexity
@@ -4067,7 +4067,7 @@
       tags:
         - CCE-80841-0
         - CJIS-5.5.2
-        - DISA-STIG-RHEL-08-020330
+        - DISA-STIG-RHEL-08-020331
         - NIST-800-171-3.1.1
         - NIST-800-171-3.1.5
         - NIST-800-53-CM-6(a)
@@ -4089,7 +4089,7 @@
       tags:
         - CCE-80841-0
         - CJIS-5.5.2
-        - DISA-STIG-RHEL-08-020330
+        - DISA-STIG-RHEL-08-020331
         - NIST-800-171-3.1.1
         - NIST-800-171-3.1.5
         - NIST-800-53-CM-6(a)
@@ -4365,7 +4365,7 @@
       tags:
         - CCE-80872-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-010560
+        - DISA-STIG-RHEL-08-030181
         - NIST-800-171-3.3.1
         - NIST-800-171-3.3.2
         - NIST-800-171-3.3.6
@@ -15147,7 +15147,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80877-4
-        - DISA-STIG-RHEL-08-040100
+        - DISA-STIG-RHEL-08-040101
         - NIST-800-171-3.1.3
         - NIST-800-171-3.4.7
         - NIST-800-53-AC-4
@@ -15302,7 +15302,7 @@
       tags:
         - CCE-80917-8
         - CJIS-5.10.1.1
-        - DISA-STIG-RHEL-08-040280
+        - DISA-STIG-RHEL-08-040279
         - NIST-800-171-3.1.20
         - NIST-800-53-CM-6(a)
         - NIST-800-53-CM-7(a)
@@ -15324,7 +15324,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-81011-9
-        - DISA-STIG-RHEL-08-040240
+        - DISA-STIG-RHEL-08-040239
         - NIST-800-171-3.1.20
         - NIST-800-53-CM-6(a)
         - NIST-800-53-CM-7(a)
@@ -15370,7 +15370,7 @@
       tags:
         - CCE-80919-4
         - CJIS-5.10.1.1
-        - DISA-STIG-RHEL-08-040210
+        - DISA-STIG-RHEL-08-040209
         - NIST-800-171-3.1.20
         - NIST-800-53-CM-6(a)
         - NIST-800-53-CM-7(a)
@@ -15393,7 +15393,7 @@
       tags:
         - CCE-80920-2
         - CJIS-5.10.1.1
-        - DISA-STIG-RHEL-08-040250
+        - DISA-STIG-RHEL-08-040249
         - NIST-800-171-3.1.20
         - NIST-800-53-CM-7(a)
         - NIST-800-53-CM-7(b)
@@ -19438,7 +19438,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82249-4
-        - DISA-STIG-RHEL-08-040135
+        - DISA-STIG-RHEL-08-040136
         - NIST-800-53-CM-6(a)
         - NIST-800-53-SI-4(22)
         - enable_strategy
@@ -19785,7 +19785,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-83303-8
-        - DISA-STIG-RHEL-08-040160
+        - DISA-STIG-RHEL-08-040159
         - NIST-800-53-CM-6(a)
         - enable_strategy
         - low_complexity
@@ -20122,7 +20122,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80897-2
-        - DISA-STIG-RHEL-08-010521
+        - DISA-STIG-RHEL-08-010522
         - NIST-800-171-3.1.12
         - NIST-800-53-AC-17(a)
         - NIST-800-53-CM-6(a)
@@ -20585,7 +20585,7 @@
       tags:
         - CCE-80906-1
         - CJIS-5.5.6
-        - DISA-STIG-RHEL-08-010200
+        - DISA-STIG-RHEL-08-010201
         - NIST-800-171-3.1.11
         - NIST-800-53-AC-12
         - NIST-800-53-AC-17(a)
@@ -20915,7 +20915,7 @@
         state: present
       tags:
         - CCE-82959-8
-        - DISA-STIG-RHEL-08-040140
+        - DISA-STIG-RHEL-08-040139
         - enable_strategy
         - low_complexity
         - low_disruption
@@ -20941,7 +20941,7 @@
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82853-3
-        - DISA-STIG-RHEL-08-040140
+        - DISA-STIG-RHEL-08-040141
         - NIST-800-53-CM-8(3)(a)
         - NIST-800-53-IA-3
         - enable_strategy

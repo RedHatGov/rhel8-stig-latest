@@ -10524,50 +10524,6 @@ form to /etc/audit/audit.rules:
 <td>SRG-OS-000471-GPOS-00215</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must generate audit records for privileged activities or other system-level access.</td>
-<td>CCE-80989-7:Ensure auditd Collects Information on the Use of Privileged Commands - mount</td>
-<td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
-<td xml:lang="en-US">At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the <code>auditd</code> daemon is
-configured to use the <code>augenrules</code> program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code>
-utility to read audit rules during daemon startup, add a line of the following
-form to <code>/etc/audit/audit.rules</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
-<td>To verify that auditing of privileged command use is configured, run the
-following command:
-$ sudo grep mount /etc/audit/audit.rules /etc/audit/rules.d/*
-It should return a relevant line in the audit rules.
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61513r1_fix">Configure the operating system to generate audit records for privileged activities or other system-level access.</fixtext></td>
-<td>At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the auditd daemon is
-configured to use the augenrules program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix .rules in the directory /etc/audit/rules.d:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged
-If the auditd daemon is configured to use the auditctl
-utility to read audit rules during daemon startup, add a line of the following
-form to /etc/audit/audit.rules:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000172</td>
-<td>SRG-OS-000471-GPOS-00215</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must generate audit records for privileged activities or other system-level access.</td>
 <td>CCE-80729-7:Ensure auditd Collects Information on the Use of Privileged Commands - newgrp</td>
 <td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
@@ -17997,50 +17953,6 @@ form to /etc/audit/audit.rules:
 <td>SRG-OS-000462-GPOS-00206</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
-<td>CCE-80989-7:Ensure auditd Collects Information on the Use of Privileged Commands - mount</td>
-<td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
-<td xml:lang="en-US">At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the <code>auditd</code> daemon is
-configured to use the <code>augenrules</code> program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code>
-utility to read audit rules during daemon startup, add a line of the following
-form to <code>/etc/audit/audit.rules</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
-<td>To verify that auditing of privileged command use is configured, run the
-following command:
-$ sudo grep mount /etc/audit/audit.rules /etc/audit/rules.d/*
-It should return a relevant line in the audit rules.
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61541r1_fix">Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</fixtext></td>
-<td>At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the auditd daemon is
-configured to use the augenrules program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix .rules in the directory /etc/audit/rules.d:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged
-If the auditd daemon is configured to use the auditctl
-utility to read audit rules during daemon startup, add a line of the following
-form to /etc/audit/audit.rules:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000172</td>
-<td>SRG-OS-000462-GPOS-00206</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
 <td>CCE-80729-7:Ensure auditd Collects Information on the Use of Privileged Commands - newgrp</td>
 <td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
@@ -18431,50 +18343,6 @@ If the auditd daemon is configured to use the auditctl
 utility to read audit rules during daemon startup, add a line of the following
 form to /etc/audit/audit.rules:
 -a always,exit -F path=/usr/bin/sudo -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000172</td>
-<td>SRG-OS-000462-GPOS-00206</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
-<td>CCE-80739-6:Ensure auditd Collects Information on the Use of Privileged Commands - umount</td>
-<td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
-<td xml:lang="en-US">At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the <code>auditd</code> daemon is
-configured to use the <code>augenrules</code> program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code>:
-<pre>-a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code>
-utility to read audit rules during daemon startup, add a line of the following
-form to <code>/etc/audit/audit.rules</code>:
-<pre>-a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
-<td>To verify that auditing of privileged command use is configured, run the
-following command:
-$ sudo grep umount /etc/audit/audit.rules /etc/audit/rules.d/*
-It should return a relevant line in the audit rules.
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61541r1_fix">Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</fixtext></td>
-<td>At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the auditd daemon is
-configured to use the augenrules program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix .rules in the directory /etc/audit/rules.d:
--a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged
-If the auditd daemon is configured to use the auditctl
-utility to read audit rules during daemon startup, add a line of the following
-form to /etc/audit/audit.rules:
--a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -31496,84 +31364,6 @@ form to /etc/audit/audit.rules:
 <td>SRG-OS-000062-GPOS-00031</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must provide audit record generation capability for DoD-defined auditable events for all operating system components.</td>
-<td>CCE-80989-7:Ensure auditd Collects Information on the Use of Privileged Commands - mount</td>
-<td>Without the capability to generate audit records, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).
-
-The list of audited events is the set of events for which audits are to be generated. This set of events is typically a subset of the list of all events for which the system is capable of generating audit records.
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.</td>
-<td xml:lang="en-US">At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the <code>auditd</code> daemon is
-configured to use the <code>augenrules</code> program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code>
-utility to read audit rules during daemon startup, add a line of the following
-form to <code>/etc/audit/audit.rules</code>:
-<pre>-a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides audit record generation capability for DoD-defined auditable events for all operating system components. 
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.
-
-If it does not, this is a finding.</td>
-<td>To verify that auditing of privileged command use is configured, run the
-following command:
-$ sudo grep mount /etc/audit/audit.rules /etc/audit/rules.d/*
-It should return a relevant line in the audit rules.
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61573r1_fix">Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.</fixtext></td>
-<td>At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the auditd daemon is
-configured to use the augenrules program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix .rules in the directory /etc/audit/rules.d:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged
-If the auditd daemon is configured to use the auditctl
-utility to read audit rules during daemon startup, add a line of the following
-form to /etc/audit/audit.rules:
--a always,exit -F path=/usr/bin/mount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000169</td>
-<td>SRG-OS-000062-GPOS-00031</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide audit record generation capability for DoD-defined auditable events for all operating system components.</td>
 <td>CCE-80729-7:Ensure auditd Collects Information on the Use of Privileged Commands - newgrp</td>
 <td>Without the capability to generate audit records, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
@@ -32270,84 +32060,6 @@ If the auditd daemon is configured to use the auditctl
 utility to read audit rules during daemon startup, add a line of the following
 form to /etc/audit/audit.rules:
 -a always,exit -F path=/usr/bin/sudo -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000169</td>
-<td>SRG-OS-000062-GPOS-00031</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide audit record generation capability for DoD-defined auditable events for all operating system components.</td>
-<td>CCE-80739-6:Ensure auditd Collects Information on the Use of Privileged Commands - umount</td>
-<td>Without the capability to generate audit records, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).
-
-The list of audited events is the set of events for which audits are to be generated. This set of events is typically a subset of the list of all events for which the system is capable of generating audit records.
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.</td>
-<td xml:lang="en-US">At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the <code>auditd</code> daemon is
-configured to use the <code>augenrules</code> program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code>:
-<pre>-a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code>
-utility to read audit rules during daemon startup, add a line of the following
-form to <code>/etc/audit/audit.rules</code>:
-<pre>-a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides audit record generation capability for DoD-defined auditable events for all operating system components. 
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.
-
-If it does not, this is a finding.</td>
-<td>To verify that auditing of privileged command use is configured, run the
-following command:
-$ sudo grep umount /etc/audit/audit.rules /etc/audit/rules.d/*
-It should return a relevant line in the audit rules.
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61573r1_fix">Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
-
-DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
-
-1) Successful and unsuccessful attempts to access, modify, or delete privileges, security objects, security levels, or categories of information (e.g., classification levels);
-
-2) Access actions, such as successful and unsuccessful logon attempts, privileged activities or other system-level access, starting and ending time for user access to the system, concurrent logons from different workstations, successful and unsuccessful accesses to objects, all program initiations, and all direct access to the information system;
-
-3) All account creations, modifications, disabling, and terminations; and 
-
-4) All kernel module load, unload, and restart actions.</fixtext></td>
-<td>At a minimum, the audit system should collect the execution of
-privileged commands for all users and root. If the auditd daemon is
-configured to use the augenrules program to read audit rules during
-daemon startup (the default), add a line of the following form to a file with
-suffix .rules in the directory /etc/audit/rules.d:
--a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged
-If the auditd daemon is configured to use the auditctl
-utility to read audit rules during daemon startup, add a line of the following
-form to /etc/audit/audit.rules:
--a always,exit -F path=/usr/bin/umount -F perm=x -F auid&gt;=1000 -F auid!=unset -F key=privileged</td>
 <td>medium</td>
 <td></td>
 <td></td>
