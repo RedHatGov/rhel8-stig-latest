@@ -2760,6 +2760,34 @@ is executed.
       Is it the case that the correct value is not returned?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To set the runtime status of the kernel.yama.ptrace_scope kernel parameter, run the following command: $ sudo sysctl -w kernel.yama.ptrace_scope=1
 To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.yama.ptrace_scope = 1",,,,
+CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82934-1:Harden the operation of the BPF just-in-time compiler,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set the runtime status of the net.core.bpf_jit_harden kernel parameter, run the following command: $ sudo sysctl -w net.core.bpf_jit_harden=2
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: net.core.bpf_jit_harden = 2","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","The runtime status of the net.core.bpf_jit_harden kernel parameter can be queried
+by running the following command:
+$ sysctl net.core.bpf_jit_harden
+The output of the command should indicate a value of 2.
+The preferable way how to assure the runtime compliance is to have
+correct persistent configuration, and rebooting the system.
+
+The persistent kernel parameter configuration is performed by specifying the appropriate
+assignment in any file located in the /etc/sysctl.d directory.
+Verify that there is not any existing incorrect configuration by executing the following command:
+$ grep -r '^\s*net.core.bpf_jit_harden\s*=' /etc/sysctl.conf /etc/sysctl.d
+If any assignments other than
+net.core.bpf_jit_harden = 2
+are found, or the correct assignment is duplicated, remove those offending lines from respective files,
+and make sure that exactly one file in 
+/etc/sysctl.d contains net.core.bpf_jit_harden = 2, and that one assignment
+is returned when 
+$ grep -r net.core.bpf_jit_harden /etc/sysctl.conf /etc/sysctl.d
+is executed.
+
+      Is it the case that the correct value is not returned?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To set the runtime status of the net.core.bpf_jit_harden kernel parameter, run the following command: $ sudo sysctl -w net.core.bpf_jit_harden=2
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: net.core.bpf_jit_harden = 2",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82211-4:Disable the use of user namespaces,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set the runtime status of the user.max_user_namespaces kernel parameter,
@@ -3620,6 +3648,16 @@ FAIL_DELAY
       ",Configure the operating system to enforce a delay of at least 4 seconds between logon prompts following a failed logon attempt.,"To ensure the logon failure delay controlled by /etc/login.defs is set properly,
 add or correct the FAIL_DELAY setting in /etc/login.defs to read as follows:
 FAIL_DELAY ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00225,TBD - Assigned by DISA after STIG release,The operating system must prevent the use of dictionary words for passwords.,CCE-86233-4:Ensure PAM Enforces Password Requirements - Prevent the Use of Dictionary Words,"If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.","The pam_pwquality module's dictcheck check if passwords contains dictionary words. When
+dictcheck is set to 1 passwords will be checked for dictionary words.","
+                  Applicable - Configurable
+                ","Verify the operating system prevents the use of dictionary words for passwords. If it does not, this is a finding.","To check if dictionary words are disallowed run the following command:
+$ sudo grep dictcheck /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf
+The dictcheck parameter should be equal to 1. The value should look like
+dictcheck=1
+      Is it the case that dictcheck is not found or not equal to the required value?
+      ",Configure the operating system to prevent the use of dictionary words for passwords.,"The pam_pwquality module's dictcheck check if passwords contains dictionary words. When
+dictcheck is set to 1 passwords will be checked for dictionary words.",,,,
 CCI-000366,SRG-OS-000480-GPOS-00225,TBD - Assigned by DISA after STIG release,The operating system must prevent the use of dictionary words for passwords.,CCE-80664-6:Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session,"If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.","To configure the number of retry prompts that are permitted per-session:
 Edit the pam_pwquality.so statement in
 /etc/pam.d/system-auth  and
@@ -23132,9 +23170,35 @@ This requirement is a permanent not a finding. No fix is required.
                 ","Verify the operating system, for PKI-based authentication, enforces authorized access to the corresponding private key. If it does not, this is a finding.",,"Configure the operating system, for PKI-based authentication, to enforce authorized access to the corresponding private key.","
 This requirement is a permanent not a finding. No fix is required.
 ",,,,
-CCI-000187,SRG-OS-000068-GPOS-00036,TBD - Assigned by DISA after STIG release,The operating system must map the authenticated identity to the user or group account for PKI-based authentication.,CCI-000187:The operating system must map the authenticated identity to the user or group account for PKI-based authentication.,"Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.","<VulnDiscussion>Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
+CCI-000187,SRG-OS-000068-GPOS-00036,TBD - Assigned by DISA after STIG release,The operating system must map the authenticated identity to the user or group account for PKI-based authentication.,CCE-86060-1:Enable Certmap in SSSD,"Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.","SSSD should be configured to verify the certificate of the user or group. To set this up
+ ensure that section like certmap/testing.test/rule_name is setup in
+/etc/sssd/sssd.conf. For example
+
+[certmap/testing.test/rule_name]
+matchrule =<SAN>.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+","
                   Applicable - Configurable
-                ","Verify the operating system maps the authenticated identity to the user or group account for PKI-based authentication. If it does not, this is a finding.",,Configure the operating system to map the authenticated identity to the user or group account for PKI-based authentication.,"<VulnDiscussion>Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
+                ","Verify the operating system maps the authenticated identity to the user or group account for PKI-based authentication. If it does not, this is a finding.","To verify Certmap is enabled in SSSD, run the following command:
+$ cat sudo cat /etc/sssd/sssd.conf
+If configured properly, output should contain section like the following
+
+[certmap/testing.test/rule_name]
+matchrule =<SAN>.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+
+      Is it the case that Certmap is not configured in SSSD?
+      ",Configure the operating system to map the authenticated identity to the user or group account for PKI-based authentication.,"SSSD should be configured to verify the certificate of the user or group. To set this up
+ ensure that section like certmap/testing.test/rule_name is setup in
+/etc/sssd/sssd.conf. For example
+
+[certmap/testing.test/rule_name]
+matchrule =<SAN>.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+",,,,
 CCI-000192,SRG-OS-000069-GPOS-00037,TBD - Assigned by DISA after STIG release,The operating system must enforce password complexity by requiring that at least one upper-case character be used.,CCE-80664-6:Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session,"Use of a complex password helps to increase the time and resources required to compromise the password. Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks.
 
 Password complexity is one factor of several that determines how long it takes to crack a password. The more complex the password, the greater the number of possible combinations that need to be tested before the password is compromised.","To configure the number of retry prompts that are permitted per-session:

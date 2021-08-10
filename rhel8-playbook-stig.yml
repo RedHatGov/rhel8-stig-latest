@@ -14713,7 +14713,11 @@
         - DISA-STIG-RHEL-08-030700
         - NIST-800-53-AU-4(1)
         - auditd_overflow_action
+        - low_complexity
+        - low_disruption
         - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
 
     - name: Put contents into /etc/audit/rules.d/11-loginuid.rules according to policy
       copy:
@@ -14934,7 +14938,11 @@
         - CCE-86098-1
         - DISA-STIG-RHEL-08-030710
         - NIST-800-53-AU-4(1)
+        - configure_strategy
+        - low_complexity
+        - low_disruption
         - medium_severity
+        - no_reboot_needed
         - rsyslog_encrypt_offload_actionsendstreamdrivermode
 
     - name: Ensure Rsyslog Encrypts Off-Loaded Audit Records
@@ -14970,7 +14978,11 @@
         - CCE-85992-6
         - DISA-STIG-RHEL-08-030710
         - NIST-800-53-AU-4(1)
+        - configure_strategy
+        - low_complexity
+        - low_disruption
         - medium_severity
+        - no_reboot_needed
         - rsyslog_encrypt_offload_defaultnetstreamdriver
 
     - name: 'Ensure remote access methods are monitored in Rsyslog: Set facts'
@@ -18875,6 +18887,24 @@
         - medium_severity
         - reboot_required
         - sysctl_kernel_yama_ptrace_scope
+
+    - name: Ensure sysctl net.core.bpf_jit_harden is set to 2
+      sysctl:
+        name: net.core.bpf_jit_harden
+        value: '2'
+        state: present
+        reload: true
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82934-1
+        - DISA-STIG-RHEL-08-040286
+        - NIST-800-53-CM-6b
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_core_bpf_jit_harden
 
     - name: Ensure sysctl user.max_user_namespaces is set to 0
       sysctl:

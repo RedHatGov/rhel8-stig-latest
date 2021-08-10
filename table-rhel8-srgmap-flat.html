@@ -4468,6 +4468,50 @@ To make sure that the setting is persistent, add the following line to a file in
 <td>SRG-OS-000480-GPOS-00227</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-82934-1:Harden the operation of the BPF just-in-time compiler</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">To set the runtime status of the <code>net.core.bpf_jit_harden</code> kernel parameter, run the following command: <pre>$ sudo sysctl -w net.core.bpf_jit_harden=2</pre>
+To make sure that the setting is persistent, add the following line to a file in the directory <code>/etc/sysctl.d</code>: <pre>net.core.bpf_jit_harden = 2</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>The runtime status of the net.core.bpf_jit_harden kernel parameter can be queried
+by running the following command:
+$ sysctl net.core.bpf_jit_harden
+The output of the command should indicate a value of 2.
+The preferable way how to assure the runtime compliance is to have
+correct persistent configuration, and rebooting the system.
+
+The persistent kernel parameter configuration is performed by specifying the appropriate
+assignment in any file located in the /etc/sysctl.d directory.
+Verify that there is not any existing incorrect configuration by executing the following command:
+$ grep -r '^\s*net.core.bpf_jit_harden\s*=' /etc/sysctl.conf /etc/sysctl.d
+If any assignments other than
+net.core.bpf_jit_harden = 2
+are found, or the correct assignment is duplicated, remove those offending lines from respective files,
+and make sure that exactly one file in 
+/etc/sysctl.d contains net.core.bpf_jit_harden = 2, and that one assignment
+is returned when 
+$ grep -r net.core.bpf_jit_harden /etc/sysctl.conf /etc/sysctl.d
+is executed.
+
+      Is it the case that the correct value is not returned?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>To set the runtime status of the net.core.bpf_jit_harden kernel parameter, run the following command: $ sudo sysctl -w net.core.bpf_jit_harden=2
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: net.core.bpf_jit_harden = 2</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
 <td>CCE-82211-4:Disable the use of user namespaces</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -5945,6 +5989,31 @@ FAIL_DELAY
 <td>To ensure the logon failure delay controlled by /etc/login.defs is set properly,
 add or correct the FAIL_DELAY setting in /etc/login.defs to read as follows:
 FAIL_DELAY </td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-OS-000480-GPOS-00225</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must prevent the use of dictionary words for passwords.</td>
+<td>CCE-86233-4:Ensure PAM Enforces Password Requirements - Prevent the Use of Dictionary Words</td>
+<td>If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.</td>
+<td xml:lang="en-US">The pam_pwquality module's <code>dictcheck</code> check if passwords contains dictionary words. When
+<code>dictcheck</code> is set to <code>1</code> passwords will be checked for dictionary words.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system prevents the use of dictionary words for passwords. If it does not, this is a finding.</td>
+<td>To check if dictionary words are disallowed run the following command:
+$ sudo grep dictcheck /etc/security/pwquality.conf /etc/pwquality.conf.d/*.conf
+The dictcheck parameter should be equal to 1. The value should look like
+dictcheck=1
+      Is it the case that dictcheck is not found or not equal to the required value?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61493r1_fix">Configure the operating system to prevent the use of dictionary words for passwords.</fixtext></td>
+<td>The pam_pwquality module's dictcheck check if passwords contains dictionary words. When
+dictcheck is set to 1 passwords will be checked for dictionary words.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -33845,19 +33914,45 @@ This requirement is a permanent not a finding. No fix is required.
 <td>SRG-OS-000068-GPOS-00036</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must map the authenticated identity to the user or group account for PKI-based authentication.</td>
-<td></td>
+<td>CCE-86060-1:Enable Certmap in SSSD</td>
 <td>Without mapping the certificate used to authenticate to the user account, the ability to determine the identity of the individual user or group will not be available for forensic analysis.</td>
-<td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td xml:lang="en-US">SSSD should be configured to verify the certificate of the user or group. To set this up
+ ensure that section like <code>certmap/testing.test/rule_name</code> is setup in
+<code>/etc/sssd/sssd.conf</code>. For example
+<pre>
+[certmap/testing.test/rule_name]
+matchrule =&lt;SAN&gt;.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+</pre>
 </td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system maps the authenticated identity to the user or group account for PKI-based authentication. If it does not, this is a finding.</td>
+<td>To verify Certmap is enabled in SSSD, run the following command:
+$ cat sudo cat /etc/sssd/sssd.conf
+If configured properly, output should contain section like the following
+
+[certmap/testing.test/rule_name]
+matchrule =&lt;SAN&gt;.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+
+      Is it the case that Certmap is not configured in SSSD?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61583r2_fix">Configure the operating system to map the authenticated identity to the user or group account for PKI-based authentication.</fixtext></td>
+<td>SSSD should be configured to verify the certificate of the user or group. To set this up
+ ensure that section like certmap/testing.test/rule_name is setup in
+/etc/sssd/sssd.conf. For example
+
+[certmap/testing.test/rule_name]
+matchrule =&lt;SAN&gt;.*EDIPI@mil
+maprule = (userCertificate;binary={cert!bin})
+domains = testing.test
+</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>CCI-000192</td>
