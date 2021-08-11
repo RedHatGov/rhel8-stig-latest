@@ -107,8 +107,6 @@
       var_selinux_state: !!str enforcing
       var_postfix_root_mail_alias: !!str system.administrator@mail.mil
       var_tftpd_secure_directory: !!str /var/lib/tftpboot
-      var_ssh_client_rekey_limit_size: !!str 1G
-      var_ssh_client_rekey_limit_time: !!str 1h
       var_sshd_disable_compression: !!str no
       var_rekey_limit_size: !!str 1G
       var_rekey_limit_time: !!str 1h
@@ -131,6 +129,84 @@
         - medium_severity
         - no_reboot_needed
         - package_aide_installed
+
+    - name: Ensure aide is installed
+      package:
+        name: '{{ item }}'
+        state: present
+      with_items:
+        - aide
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85964-5
+        - DISA-STIG-RHEL-08-030650
+        - NIST-800-53-AU-9(3)
+        - NIST-800-53-AU-9(3).1
+        - aide_check_audit_tools
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Set audit_tools fact
+      set_fact:
+        audit_tools:
+          - /usr/sbin/auditctl
+          - /usr/sbin/auditd
+          - /usr/sbin/augenrules
+          - /usr/sbin/aureport
+          - /usr/sbin/ausearch
+          - /usr/sbin/autrace
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85964-5
+        - DISA-STIG-RHEL-08-030650
+        - NIST-800-53-AU-9(3)
+        - NIST-800-53-AU-9(3).1
+        - aide_check_audit_tools
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure existing AIDE configuration for audit tools are correct
+      lineinfile:
+        path: /etc/aide.conf
+        regexp: ^{{ item }}\s
+        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512'
+      with_items: '{{ audit_tools }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85964-5
+        - DISA-STIG-RHEL-08-030650
+        - NIST-800-53-AU-9(3)
+        - NIST-800-53-AU-9(3).1
+        - aide_check_audit_tools
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Configure AIDE to properly protect audit tools
+      lineinfile:
+        path: /etc/aide.conf
+        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512'
+      with_items: '{{ audit_tools }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85964-5
+        - DISA-STIG-RHEL-08-030650
+        - NIST-800-53-AU-9(3)
+        - NIST-800-53-AU-9(3).1
+        - aide_check_audit_tools
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
 
     - name: Ensure AIDE is installed
       package:
@@ -475,7 +551,6 @@
             state: present
       tags:
         - CCE-85902-5
-        - DISA-STIG-RHEL-08-010291
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_openssh_conf_crypto_policy
         - low_complexity
@@ -491,7 +566,7 @@
         correct_value: -oCiphers={{ sshd_approved_ciphers }}
       tags:
         - CCE-85897-7
-        - DISA-STIG-RHEL-08-010290
+        - DISA-STIG-RHEL-08-010291
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_opensshserver_conf_crypto_policy
         - low_complexity
@@ -508,7 +583,7 @@
       register: opensshserver_file
       tags:
         - CCE-85897-7
-        - DISA-STIG-RHEL-08-010290
+        - DISA-STIG-RHEL-08-010291
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_opensshserver_conf_crypto_policy
         - low_complexity
@@ -526,7 +601,7 @@
       when: not opensshserver_file.stat.exists or opensshserver_file.stat.size <= correct_value|length
       tags:
         - CCE-85897-7
-        - DISA-STIG-RHEL-08-010290
+        - DISA-STIG-RHEL-08-010291
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_opensshserver_conf_crypto_policy
         - low_complexity
@@ -557,7 +632,7 @@
       when: opensshserver_file.stat.exists and opensshserver_file.stat.size > correct_value|length
       tags:
         - CCE-85897-7
-        - DISA-STIG-RHEL-08-010290
+        - DISA-STIG-RHEL-08-010291
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_opensshserver_conf_crypto_policy
         - low_complexity
@@ -596,7 +671,6 @@
             state: present
       tags:
         - CCE-85870-4
-        - DISA-STIG-RHEL-08-010290
         - NIST-800-53-AC-17(2)
         - harden_sshd_macs_openssh_conf_crypto_policy
         - low_complexity
@@ -14547,7 +14621,7 @@
       tags:
         - CCE-80684-4
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030730
+        - DISA-STIG-RHEL-08-030731
         - NIST-800-171-3.3.1
         - NIST-800-53-AU-5(1)
         - NIST-800-53-AU-5(2)
@@ -19946,84 +20020,6 @@
         - low_disruption
         - medium_severity
         - no_reboot_needed
-
-    - name: XCCDF Value var_ssh_client_rekey_limit_time # promote to variable
-      set_fact:
-        var_ssh_client_rekey_limit_time: !!str 1h
-      tags:
-        - always
-
-    - name: Ensure RekeyLimit is not configured in /etc/ssh/ssh_config
-      lineinfile:
-        path: /etc/ssh/ssh_config
-        create: false
-        regexp: ^\s*RekeyLimit.*$
-        state: absent
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-82880-6
-        - DISA-STIG-RHEL-08-040162
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - ssh_client_rekey_limit
-
-    - name: Collect all include config files for ssh client which configure RekeyLimit
-      find:
-        paths: /etc/ssh/ssh_config.d/
-        contains: ^[\s]*RekeyLimit.*$
-        patterns: '*.config'
-      register: ssh_config_include_files
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-82880-6
-        - DISA-STIG-RHEL-08-040162
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - ssh_client_rekey_limit
-
-    - name: Remove all occurences of RekeyLimit configuration from include config files
-        of ssh client
-      lineinfile:
-        path: '{{ item }}'
-        regexp: ^[\s]*RekeyLimit.*$
-        state: absent
-      loop: '{{ ssh_config_include_files.files }}'
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-82880-6
-        - DISA-STIG-RHEL-08-040162
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - ssh_client_rekey_limit
-
-    - name: Ensure that rekey limit is set to {{ var_ssh_client_rekey_limit_size }} {{
-        var_ssh_client_rekey_limit_time }} in /etc/ssh/ssh_config.d/02-rekey-limit.conf
-      lineinfile:
-        path: /etc/ssh/ssh_config.d/02-rekey-limit.conf
-        create: true
-        regexp: ^\s*RekeyLimit.*$
-        line: RekeyLimit {{ var_ssh_client_rekey_limit_size }} {{ var_ssh_client_rekey_limit_time
-          }}
-        state: present
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-82880-6
-        - DISA-STIG-RHEL-08-040162
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - ssh_client_rekey_limit
 
     - name: Disable Compression Or Set Compression to delayed
       block:

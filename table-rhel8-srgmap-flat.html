@@ -14790,59 +14790,6 @@ include /etc/crypto-policies/back-ends/libreswan.config</td>
 <td>SRG-OS-000033-GPOS-00014</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.</td>
-<td>CCE-82880-6:Configure session renegotiation for SSH client</td>
-<td>Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
-
-Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
-
-Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.</td>
-<td xml:lang="en-US">The <code>RekeyLimit</code> parameter specifies how often
-the session key is renegotiated, both in terms of
-amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-<code>RekeyLimit <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_ssh_client_rekey_limit_size"></xccdf-1.1:sub> <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_ssh_client_rekey_limit_time"></xccdf-1.1:sub></code> to file <code>/etc/ssh/ssh_config.d/02-rekey-limit.conf</code>.
-Make sure that there is no other <code>RekeyLimit</code> configuration preceding
-the <code>include</code> directive in the main config file
-<code>/etc/ssh/ssh_config</code>. Check also other files in
-<code>/etc/ssh/ssh_config.d</code> directory. Files are processed according to
-lexicographical order of file names. Make sure that there is no file
-processed before <code>02-rekey-limit.conf</code> containing definition of
-<code>RekeyLimit</code>.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions. If it does not, this is a finding.</td>
-<td>To check if RekeyLimit is set correctly, run the following command: $
-sudo grep RekeyLimit /etc/ssh/ssh_config.d/*.conf If configured
-properly, output should be /etc/ssh/ssh_config.d/02-rekey-limit.conf:
-RekeyLimit 
- Check also the
-main configuration file with the following command: sudo grep
-RekeyLimit /etc/ssh/ssh_config The command should not return any
-output.
-      Is it the case that it is commented out or is not set?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61537r1_fix">Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.</fixtext></td>
-<td>The RekeyLimit parameter specifies how often
-the session key is renegotiated, both in terms of
-amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/ssh_config.d/02-rekey-limit.conf.
-Make sure that there is no other RekeyLimit configuration preceding
-the include directive in the main config file
-/etc/ssh/ssh_config. Check also other files in
-/etc/ssh/ssh_config.d directory. Files are processed according to
-lexicographical order of file names. Make sure that there is no file
-processed before 02-rekey-limit.conf containing definition of
-RekeyLimit.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000068</td>
-<td>SRG-OS-000033-GPOS-00014</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.</td>
 <td>CCE-82177-7:Force frequent session key renegotiation</td>
 <td>Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
 
@@ -37101,59 +37048,6 @@ $ sudo systemctl enable sshd.service</td>
 <td></td>
 </tr>
 <tr>
-<td>CCI-002418</td>
-<td>SRG-OS-000423-GPOS-00187</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must protect the confidentiality and integrity of transmitted information.</td>
-<td>CCE-82880-6:Configure session renegotiation for SSH client</td>
-<td>Without protection of the transmitted information, confidentiality and integrity may be compromised because unprotected communications can be intercepted and either read or altered. 
-
-This requirement applies to both internal and external networks and all types of information system components from which information can be transmitted (e.g., servers, mobile devices, notebook computers, printers, copiers, scanners, and facsimile machines). Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of interception and modification. 
-
-Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are employed, then logical means (cryptography) do not have to be employed, and vice versa.</td>
-<td xml:lang="en-US">The <code>RekeyLimit</code> parameter specifies how often
-the session key is renegotiated, both in terms of
-amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-<code>RekeyLimit <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_ssh_client_rekey_limit_size"></xccdf-1.1:sub> <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_ssh_client_rekey_limit_time"></xccdf-1.1:sub></code> to file <code>/etc/ssh/ssh_config.d/02-rekey-limit.conf</code>.
-Make sure that there is no other <code>RekeyLimit</code> configuration preceding
-the <code>include</code> directive in the main config file
-<code>/etc/ssh/ssh_config</code>. Check also other files in
-<code>/etc/ssh/ssh_config.d</code> directory. Files are processed according to
-lexicographical order of file names. Make sure that there is no file
-processed before <code>02-rekey-limit.conf</code> containing definition of
-<code>RekeyLimit</code>.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system protects the confidentiality and integrity of transmitted information. If it does not, this is a finding.</td>
-<td>To check if RekeyLimit is set correctly, run the following command: $
-sudo grep RekeyLimit /etc/ssh/ssh_config.d/*.conf If configured
-properly, output should be /etc/ssh/ssh_config.d/02-rekey-limit.conf:
-RekeyLimit 
- Check also the
-main configuration file with the following command: sudo grep
-RekeyLimit /etc/ssh/ssh_config The command should not return any
-output.
-      Is it the case that it is commented out or is not set?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61631r1_fix">Configure the operating system to protect the confidentiality and integrity of transmitted information.</fixtext></td>
-<td>The RekeyLimit parameter specifies how often
-the session key is renegotiated, both in terms of
-amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/ssh_config.d/02-rekey-limit.conf.
-Make sure that there is no other RekeyLimit configuration preceding
-the include directive in the main config file
-/etc/ssh/ssh_config. Check also other files in
-/etc/ssh/ssh_config.d directory. Files are processed according to
-lexicographical order of file names. Make sure that there is no file
-processed before 02-rekey-limit.conf containing definition of
-RekeyLimit.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>CCI-002385</td>
 <td>SRG-OS-000420-GPOS-00186</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -49875,7 +49769,7 @@ maxpoll </td>
 <td>SRG-OS-000278-GPOS-00108</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must use cryptographic mechanisms to protect the integrity of audit tools.</td>
-<td></td>
+<td>CCE-85964-5:Configure AIDE to Verify the Audit Tools</td>
 <td>Protecting the integrity of the tools used for auditing purposes is a critical step toward ensuring the integrity of audit information. Audit information includes all information (e.g., audit records, audit settings, and audit reports) needed to successfully audit information system activity.
 
 Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
@@ -49883,17 +49777,34 @@ Audit tools include, but are not limited to, vendor-provided and open source aud
 It is not uncommon for attackers to replace the audit tools or inject code into the existing tools with the purpose of providing the capability to hide or erase system activity from the audit logs.
 
 To address this risk, audit tools must be cryptographically signed in order to provide the capability to identify when the audit tools have been modified, manipulated, or replaced. An example is a checksum hash of the file or files.</td>
-<td>
+<td xml:lang="en-US">The operating system file integrity tool must be configured to protect the integrity of the audit tools.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system uses cryptographic mechanisms to protect the integrity of audit tools. If it does not, this is a finding.</td>
+<td>Check that AIDE is properly configured to protect the integrity of the
+audit tools by running the following command:
+
+# sudo cat /etc/aide.conf | grep /usr/sbin/au
+
+/usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512
+/usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512
+/usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512
+/usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512
+/usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512
+
+/usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512
+
+If AIDE is configured properly to protect the integrity of the audit tools,
+all lines listed above will be returned from the command.
+
+If one or more lines are missing, this is a finding.
+      Is it the case that integrity checks of the audit tools are missing or incomplete?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62115r1_fix">Configure the operating system to use cryptographic mechanisms to protect the integrity of audit tools.</fixtext></td>
+<td>The operating system file integrity tool must be configured to protect the integrity of the audit tools.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</td>
 </tr>
 <tr>
 <td>CCI-002361</td>
