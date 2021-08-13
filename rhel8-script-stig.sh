@@ -3002,10 +3002,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-# The process to disable ctrl+alt+del has changed in RHEL7. 
-# Reference: https://access.redhat.com/solutions/1123873
-
-systemctl disable --now ctrl-alt-del.target
 systemctl mask --now ctrl-alt-del.target
 
 else
