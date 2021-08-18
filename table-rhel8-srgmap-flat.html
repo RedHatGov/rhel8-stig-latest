@@ -2253,6 +2253,53 @@ as this file may be restored during future system updates.</td>
 <td>SRG-OS-000480-GPOS-00227</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-85987-6:Only Authorized Local User Accounts Exist on Operating System</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">Enterprise Application tends to use the server or virtual machine exclusively.
+Besides the default operating system user, there should be only authorized local
+users required by the installed softoware groups and applications that exist on
+the operating system. The authorized user list can be customized in the refine
+value variable <code>var_accounts_authorized_local_users_regex</code>.
+OVAL regular expression is used for the user list.
+Configure the system so all accounts on the system are assigned to an active system,
+application, or user account. Remove accounts that do not support approved system
+activities or that allow for a normal user to perform administrative-level actions.
+To remove unauthorized system accounts, use the following command:
+<pre>$ sudo userdel <i>unauthorized_user</i></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To verify that there are no unauthorized local user accounts, run the following command:
+$ less /etc/passwd 
+Inspect the results, and if unauthorized local user accounts exist, remove them by running
+the following command:
+$ sudo userdel unauthorized_user
+      Is it the case that there are unauthorized local user accounts on the system?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>Enterprise Application tends to use the server or virtual machine exclusively.
+Besides the default operating system user, there should be only authorized local
+users required by the installed softoware groups and applications that exist on
+the operating system. The authorized user list can be customized in the refine
+value variable var_accounts_authorized_local_users_regex.
+OVAL regular expression is used for the user list.
+Configure the system so all accounts on the system are assigned to an active system,
+application, or user account. Remove accounts that do not support approved system
+activities or that allow for a normal user to perform administrative-level actions.
+To remove unauthorized system accounts, use the following command:
+$ sudo userdel unauthorized_user</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000366</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
 <td>CCE-80841-0:Prevent Login to Accounts With Empty Password</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -6138,6 +6185,44 @@ Off-loading is a common process in information systems with limited audit storag
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61495r1_fix">Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.</fixtext></td>
 <td>Rsyslog is installed by default. The rsyslog package can be installed with the following command:  $ sudo yum install rsyslog</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001851</td>
+<td>SRG-OS-000479-GPOS-00224</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.</td>
+<td>CCE-86339-9:Ensure Rsyslog Authenticates Off-Loaded Audit Records</td>
+<td>Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.</td>
+<td xml:lang="en-US">Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with <code>gnutls</code> (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using <code>rsyslogd</code> to off-load logs the remote system must be authenticated.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.</td>
+<td>Verify the operating system authenticates the remote logging server for off-loading audit logs with the following command:
+
+$ sudo grep -i '$ActionSendStreamDriverAuthMode' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+$/etc/rsyslog.conf:$ActionSendStreamDriverAuthMode x509/name
+      Is it the case that $ActionSendStreamDriverAuthMode in /etc/rsyslog.conf is not set to x509/name?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61495r1_fix">Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.</fixtext></td>
+<td>Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs the remote system must be authenticated.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -52319,6 +52404,44 @@ to indicate how the audit logs are off-loaded to a different system or media.
 <td>The audit system should have an action setup in the event the internal event queue becomes full.
 To setup an overflow action edit /etc/audit/auditd.conf. Set overflow_action
 to one of the following values: syslog, single, halt.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001851</td>
+<td>SRG-OS-000342-GPOS-00133</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must off-load audit records onto a different system or media from the system being audited.</td>
+<td>CCE-86339-9:Ensure Rsyslog Authenticates Off-Loaded Audit Records</td>
+<td>Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
+
+Off-loading is a common process in information systems with limited audit storage capacity.</td>
+<td xml:lang="en-US">Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with <code>gnutls</code> (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using <code>rsyslogd</code> to off-load logs the remote system must be authenticated.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system off-loads audit records onto a different system or media from the system being audited. If it does not, this is a finding.</td>
+<td>Verify the operating system authenticates the remote logging server for off-loading audit logs with the following command:
+
+$ sudo grep -i '$ActionSendStreamDriverAuthMode' /etc/rsyslog.conf /etc/rsyslog.d/*.conf
+The output should be
+$/etc/rsyslog.conf:$ActionSendStreamDriverAuthMode x509/name
+      Is it the case that $ActionSendStreamDriverAuthMode in /etc/rsyslog.conf is not set to x509/name?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62181r1_fix">Configure the operating system to off-load audit records onto a different system or media from the system being audited.</fixtext></td>
+<td>Rsyslogd is a system utility providing support for message logging. Support
+for both internet and UNIX domain sockets enables this utility to support both local
+and remote logging.  Couple this utility with gnutls (which is a secure communications
+library implementing the SSL, TLS and DTLS protocols), and you have a method to securely
+encrypt and off-load auditing.
+
+When using rsyslogd to off-load logs the remote system must be authenticated.</td>
 <td>medium</td>
 <td></td>
 <td></td>

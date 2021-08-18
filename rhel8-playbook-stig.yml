@@ -14979,6 +14979,69 @@
         - no_reboot_needed
         - service_rsyslog_enabled
 
+    - name: Ensure Rsyslog Authenticates Off-Loaded Audit Records
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/rsyslog.conf
+            create: false
+            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/rsyslog.conf
+          lineinfile:
+            path: /etc/rsyslog.conf
+            create: false
+            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Check if /etc/rsyslog.d exists
+          stat:
+            path: /etc/rsyslog.d
+          register: _etc_rsyslog_d_exists
+
+        - name: Check if the parameter $ActionSendStreamDriverAuthMode is present in /etc/rsyslog.d
+          find:
+            paths: /etc/rsyslog.d
+            recurse: 'yes'
+            follow: 'no'
+            contains: ^\s*$ActionSendStreamDriverAuthMode\s
+          register: _etc_rsyslog_d_has_parameter
+          when: _etc_rsyslog_d_exists.stat.isdir is defined and _etc_rsyslog_d_exists.stat.isdir
+
+        - name: Remove parameter from files in /etc/rsyslog.d
+          lineinfile:
+            path: '{{ item.path }}'
+            create: false
+            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            state: absent
+          with_items: '{{ _etc_rsyslog_d_has_parameter.files }}'
+          when: _etc_rsyslog_d_has_parameter.matched
+
+        - name: Insert correct line to /etc/rsyslog.conf
+          lineinfile:
+            path: /etc/rsyslog.conf
+            create: true
+            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            line: $ActionSendStreamDriverAuthMode x509/name
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-86339-9
+        - DISA-STIG-RHEL-08-030720
+        - NIST-800-53-AU-4(1)
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - rsyslog_encrypt_offload_actionsendstreamdriverauthmode
+
     - name: Ensure Rsyslog Encrypts Off-Loaded Audit Records
       block:
 
