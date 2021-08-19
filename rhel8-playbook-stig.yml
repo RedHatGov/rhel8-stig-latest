@@ -3185,12 +3185,30 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-86233-4
+        - DISA-STIG-RHEL-08-020300
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-5(1)(a)
+        - NIST-800-53-IA-5(4)
+        - NIST-800-53-IA-5(c)
+        - accounts_password_pam_dictcheck
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Ensure PAM variable dictcheck is set accordingly
       lineinfile:
         create: true
         dest: /etc/security/pwquality.conf
         regexp: ^#?\s*dictcheck
         line: dictcheck = {{ var_password_pam_dictcheck }}
+      when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-86233-4
         - DISA-STIG-RHEL-08-020300

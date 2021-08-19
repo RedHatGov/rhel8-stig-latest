@@ -1977,6 +1977,9 @@ fi
 # BEGIN fix (66 / 359) for 'accounts_password_pam_dictcheck'
 ###############################################################################
 (>&2 echo "Remediating rule 66/359: 'accounts_password_pam_dictcheck'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q pam; then
+
 
 var_password_pam_dictcheck="1"
 # Function to replace configuration setting in config file or add the configuration setting if
@@ -2057,6 +2060,10 @@ function replace_or_append {
   fi
 }
 replace_or_append '/etc/security/pwquality.conf' '^dictcheck' $var_password_pam_dictcheck 'CCE-86233-4' '%s = %s'
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'accounts_password_pam_dictcheck'
 
 ###############################################################################
