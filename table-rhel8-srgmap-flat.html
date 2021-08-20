@@ -46327,21 +46327,63 @@ the Red Hat Enterprise Linux 8 Documentation web site:
 <td>SRG-OS-000191-GPOS-00080</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).</td>
-<td></td>
+<td>CCE-86260-7:Install McAfee Endpoint Security for Linux (ENSL)</td>
 <td>Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
 To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.</td>
-<td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td xml:lang="en-US">Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.
+
+The <code>mcafeetp</code> package can be installed with the following command:
+<pre>
+$ sudo yum install mcafeetp</pre>
 </td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP). If it does not, this is a finding.</td>
+<td>Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
+      Is it the case that the package is not installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61779r1_fix">Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).</fixtext></td>
+<td>Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.
+
+The mcafeetp package can be installed with the following command:
+
+$ sudo yum install mcafeetp</td>
+<td>high</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001233</td>
+<td>SRG-OS-000191-GPOS-00080</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).</td>
+<td>CCE-86261-5:Ensure McAfee Endpoint Security for Linux (ENSL) is running</td>
+<td>Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.</td>
+<td xml:lang="en-US">Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP). If it does not, this is a finding.</td>
+<td>To verify that McAfee Endpoint Security for Linux is
+running, run the following command:
+$ sudo ps -ef | grep -i mfetpd
+      Is it the case that virus scanning software is not running?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61779r1_fix">Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).</fixtext></td>
+<td>Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.</td>
+<td>high</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td>CCI-001312</td>
@@ -52675,6 +52717,40 @@ syslogemailexecsuspendsinglehalt
 Set this to email (instead of the default,
 which is suspend) as it is more likely to get prompt attention. Acceptable values
 also include suspend, single, and halt.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001855</td>
+<td>SRG-OS-000343-GPOS-00134</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must immediately notify the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.</td>
+<td>CCE-86055-1:Configure auditd space_left on Low Disk Space</td>
+<td>If security personnel are not notified immediately when storage volume reaches 75% utilization, they are unable to plan for audit record storage capacity expansion.</td>
+<td xml:lang="en-US">The <code>auditd</code> service can be configured to take an action
+when disk space is running low but prior to running out of space completely.
+Edit the file <code>/etc/audit/auditd.conf</code>. Add or modify the following line,
+substituting <i>PERCENTAGE</i> appropriately:
+<pre>space_left = <i>PERCENTAGE</i>%</pre>
+Set this value to at least 25 to cause the system to
+notify the user of an issue.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system immediately notifies the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity. If it does not, this is a finding.</td>
+<td>Inspect /etc/audit/auditd.conf and locate the following line to
+determine if the system is configured correctly:
+space_left PERCENTAGE%
+      Is it the case that the system is not configured with a specific percentage to notify administrators of an issue?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-62183r1_fix">Configure the operating system to immediately notify the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.</fixtext></td>
+<td>The auditd service can be configured to take an action
+when disk space is running low but prior to running out of space completely.
+Edit the file /etc/audit/auditd.conf. Add or modify the following line,
+substituting PERCENTAGE appropriately:
+space_left = PERCENTAGE%
+Set this value to at least 25 to cause the system to
+notify the user of an issue.</td>
 <td>medium</td>
 <td></td>
 <td></td>

@@ -31277,15 +31277,38 @@ the Red Hat Enterprise Linux 8 Documentation web site:
 
     
     https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.",,,,
-CCI-001233,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).","CCI-001233:The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).","Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+CCI-001233,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86260-7:Install McAfee Endpoint Security for Linux (ENSL),"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.","<VulnDiscussion>Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.
 
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
+The mcafeetp package can be installed with the following command:
+
+$ sudo yum install mcafeetp","
                   Applicable - Configurable
-                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP). If it does not, this is a finding.",,"Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).","<VulnDiscussion>Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP). If it does not, this is a finding.","Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
+      Is it the case that the package is not installed?
+      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).","Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.
 
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
+The mcafeetp package can be installed with the following command:
+
+$ sudo yum install mcafeetp",,,,
+CCI-001233,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86261-5:Ensure McAfee Endpoint Security for Linux (ENSL) is running,"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.","
+                  Applicable - Configurable
+                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP). If it does not, this is a finding.","To verify that McAfee Endpoint Security for Linux is
+running, run the following command:
+$ sudo ps -ef | grep -i mfetpd
+      Is it the case that virus scanning software is not running?
+      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not covered by HBSS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).","Install McAfee Endpoint Security for Linux antivirus software
+which is provided for DoD systems and uses signatures to search for the
+presence of viruses on the filesystem.",,,,
 CCI-001312,SRG-OS-000205-GPOS-00083,TBD - Assigned by DISA after STIG release,The operating system must generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.,CCI-001312:The operating system must generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.," Any operating system providing too much information in error messages risks compromising the data and security of the structure, and content of error messages needs to be carefully considered by the organization.
 
 Organizations carefully consider the structure/content of error messages. The extent to which information systems are able to identify and handle error conditions is guided by organizational policy and operational requirements. Information that could be exploited by adversaries includes, for example, erroneous logon attempts with passwords entered by mistake as the username, mission/business information that can be derived from (if not stated explicitly by) information recorded, and personal information, such as account numbers, social security numbers, and credit card numbers.","<VulnDiscussion> Any operating system providing too much information in error messages risks compromising the data and security of the structure, and content of error messages needs to be carefully considered by the organization.
@@ -35143,6 +35166,25 @@ syslogemailexecsuspendsinglehalt
 Set this to email (instead of the default,
 which is suspend) as it is more likely to get prompt attention. Acceptable values
 also include suspend, single, and halt.",,,,
+CCI-001855,SRG-OS-000343-GPOS-00134,TBD - Assigned by DISA after STIG release,The operating system must immediately notify the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.,CCE-86055-1:Configure auditd space_left on Low Disk Space,"If security personnel are not notified immediately when storage volume reaches 75% utilization, they are unable to plan for audit record storage capacity expansion.","The auditd service can be configured to take an action
+when disk space is running low but prior to running out of space completely.
+Edit the file /etc/audit/auditd.conf. Add or modify the following line,
+substituting PERCENTAGE appropriately:
+space_left = PERCENTAGE%
+Set this value to at least 25 to cause the system to
+notify the user of an issue.","
+                  Applicable - Configurable
+                ","Verify the operating system immediately notifies the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity. If it does not, this is a finding.","Inspect /etc/audit/auditd.conf and locate the following line to
+determine if the system is configured correctly:
+space_left PERCENTAGE%
+      Is it the case that the system is not configured with a specific percentage to notify administrators of an issue?
+      ",Configure the operating system to immediately notify the SA and ISSO (at a minimum) when allocated audit record storage volume reaches 75% of the repository maximum audit record storage capacity.,"The auditd service can be configured to take an action
+when disk space is running low but prior to running out of space completely.
+Edit the file /etc/audit/auditd.conf. Add or modify the following line,
+substituting PERCENTAGE appropriately:
+space_left = PERCENTAGE%
+Set this value to at least 25 to cause the system to
+notify the user of an issue.",,,,
 CCI-001858,SRG-OS-000344-GPOS-00135,TBD - Assigned by DISA after STIG release,"The operating system must provide an immediate real-time alert to the SA and ISSO, at a minimum, of all audit failure events requiring real-time alerts.","CCI-001858:The operating system must provide an immediate real-time alert to the SA and ISSO, at a minimum, of all audit failure events requiring real-time alerts.","It is critical for the appropriate personnel to be aware if a system is at risk of failing to process audit logs as required. Without a real-time alert, security personnel may be unaware of an impending failure of the audit capability and system operation may be adversely affected.
 
 Alerts provide organizations with urgent messages. Real-time alerts provide these messages immediately (i.e., the time from event detection to alert occurs in seconds or less).","<VulnDiscussion>It is critical for the appropriate personnel to be aware if a system is at risk of failing to process audit logs as required. Without a real-time alert, security personnel may be unaware of an impending failure of the audit capability and system operation may be adversely affected.
