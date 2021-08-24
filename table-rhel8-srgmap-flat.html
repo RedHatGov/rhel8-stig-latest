@@ -44007,6 +44007,42 @@ $ sudo yum install openssl-pkcs11</td>
 <td></td>
 </tr>
 <tr>
+<td>CCI-001954</td>
+<td>SRG-OS-000377-GPOS-00162</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must electronically verify Personal Identity Verification (PIV) credentials.</td>
+<td>CCE-86120-3:Certificate certificate status checking in SSSD</td>
+<td>The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.
+
+DoD has mandated the use of the CAC to support identity management and personal authentication for systems covered under Homeland Security Presidential Directive (HSPD) 12, as well as making the CAC a primary component of layered protection for national security systems.</td>
+<td xml:lang="en-US">Multifactor solutions that require devices separate from information systems gaining access include,
+for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
+By configuring <code>certificate_verification</code> to <code>ocsp_dgst=sha1</code> sures that certificates for
+multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system electronically verifies Personal Identity Verification (PIV) credentials. If it does not, this is a finding.</td>
+<td>Check to see if Online Certificate Status Protocol (OCSP)
+is enabled and using the proper digest value on the system with the following command:
+$ sudo grep certificate_verification /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf | grep -v "^#"
+If configured properly, output should look like
+
+    certificate_verification = ocsp_dgst=sha1
+
+The "sssd" service must be restarted for the changes to take effect. To restart the "sssd" service, run the following command:
+$ sudo systemctl restart sssd.service
+      Is it the case that certificate_verification in sssd is not configured?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61709r1_fix">Configure the operating system to electronically verify Personal Identity Verification (PIV) credentials.</fixtext></td>
+<td>Multifactor solutions that require devices separate from information systems gaining access include,
+for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
+By configuring certificate_verification to ocsp_dgst=sha1 sures that certificates for
+multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>CCI-001953</td>
 <td>SRG-OS-000376-GPOS-00161</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -44110,6 +44146,50 @@ installing the required package with the following command:
 The openssl-pkcs11 package can be installed with the following command:
 
 $ sudo yum install openssl-pkcs11</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-001948</td>
+<td>SRG-OS-000375-GPOS-00160</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</td>
+<td>CCE-86120-3:Certificate certificate status checking in SSSD</td>
+<td>Using an authentication device, such as a CAC or token that is separate from the information system, ensures that even if the information system is compromised, that compromise will not affect credentials stored on the authentication device.
+
+Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
+
+A privileged account is defined as an information system account with authorizations of a privileged user.
+
+Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
+
+This requirement only applies to components where this is specific to the function of the device or has the concept of an organizational user (e.g., VPN, proxy capability). This does not apply to authentication for the purpose of configuring the device itself (management).
+
+Requires further clarification from NIST.</td>
+<td xml:lang="en-US">Multifactor solutions that require devices separate from information systems gaining access include,
+for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
+By configuring <code>certificate_verification</code> to <code>ocsp_dgst=sha1</code> sures that certificates for
+multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.</td>
+<td>Check to see if Online Certificate Status Protocol (OCSP)
+is enabled and using the proper digest value on the system with the following command:
+$ sudo grep certificate_verification /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf | grep -v "^#"
+If configured properly, output should look like
+
+    certificate_verification = ocsp_dgst=sha1
+
+The "sssd" service must be restarted for the changes to take effect. To restart the "sssd" service, run the following command:
+$ sudo systemctl restart sssd.service
+      Is it the case that certificate_verification in sssd is not configured?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61713r1_fix">Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</fixtext></td>
+<td>Multifactor solutions that require devices separate from information systems gaining access include,
+for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
+By configuring certificate_verification to ocsp_dgst=sha1 sures that certificates for
+multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
 <td>medium</td>
 <td></td>
 <td></td>

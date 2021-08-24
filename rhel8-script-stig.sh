@@ -33,9 +33,9 @@
 ###############################################################################
 
 ###############################################################################
-# BEGIN fix (1 / 362) for 'package_aide_installed'
+# BEGIN fix (1 / 363) for 'package_aide_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 1/362: 'package_aide_installed'")
+(>&2 echo "Remediating rule 1/363: 'package_aide_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -49,9 +49,9 @@ fi
 # END fix for 'package_aide_installed'
 
 ###############################################################################
-# BEGIN fix (2 / 362) for 'aide_check_audit_tools'
+# BEGIN fix (2 / 363) for 'aide_check_audit_tools'
 ###############################################################################
-(>&2 echo "Remediating rule 2/362: 'aide_check_audit_tools'")
+(>&2 echo "Remediating rule 2/363: 'aide_check_audit_tools'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -60,6 +60,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
 fi
+
+
+
 
 
 
@@ -112,9 +115,9 @@ fi
 # END fix for 'aide_check_audit_tools'
 
 ###############################################################################
-# BEGIN fix (3 / 362) for 'aide_scan_notification'
+# BEGIN fix (3 / 363) for 'aide_scan_notification'
 ###############################################################################
-(>&2 echo "Remediating rule 3/362: 'aide_scan_notification'")
+(>&2 echo "Remediating rule 3/363: 'aide_scan_notification'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -154,9 +157,9 @@ fi
 # END fix for 'aide_scan_notification'
 
 ###############################################################################
-# BEGIN fix (4 / 362) for 'aide_verify_acls'
+# BEGIN fix (4 / 363) for 'aide_verify_acls'
 ###############################################################################
-(>&2 echo "Remediating rule 4/362: 'aide_verify_acls'")
+(>&2 echo "Remediating rule 4/363: 'aide_verify_acls'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -190,9 +193,9 @@ fi
 # END fix for 'aide_verify_acls'
 
 ###############################################################################
-# BEGIN fix (5 / 362) for 'aide_verify_ext_attributes'
+# BEGIN fix (5 / 363) for 'aide_verify_ext_attributes'
 ###############################################################################
-(>&2 echo "Remediating rule 5/362: 'aide_verify_ext_attributes'")
+(>&2 echo "Remediating rule 5/363: 'aide_verify_ext_attributes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -226,16 +229,16 @@ fi
 # END fix for 'aide_verify_ext_attributes'
 
 ###############################################################################
-# BEGIN fix (6 / 362) for 'enable_dracut_fips_module'
+# BEGIN fix (6 / 363) for 'enable_dracut_fips_module'
 ###############################################################################
-(>&2 echo "Remediating rule 6/362: 'enable_dracut_fips_module'")
+(>&2 echo "Remediating rule 6/363: 'enable_dracut_fips_module'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'enable_dracut_fips_module'
 
 ###############################################################################
-# BEGIN fix (7 / 362) for 'enable_fips_mode'
+# BEGIN fix (7 / 363) for 'enable_fips_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 7/362: 'enable_fips_mode'")
+(>&2 echo "Remediating rule 7/363: 'enable_fips_mode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -247,16 +250,16 @@ fi
 # END fix for 'enable_fips_mode'
 
 ###############################################################################
-# BEGIN fix (8 / 362) for 'sysctl_crypto_fips_enabled'
+# BEGIN fix (8 / 363) for 'sysctl_crypto_fips_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 8/362: 'sysctl_crypto_fips_enabled'")
+(>&2 echo "Remediating rule 8/363: 'sysctl_crypto_fips_enabled'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'sysctl_crypto_fips_enabled'
 
 ###############################################################################
-# BEGIN fix (9 / 362) for 'configure_bind_crypto_policy'
+# BEGIN fix (9 / 363) for 'configure_bind_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 9/362: 'configure_bind_crypto_policy'")
+(>&2 echo "Remediating rule 9/363: 'configure_bind_crypto_policy'")
 
 function remediate_bind_crypto_policy() {
 	CONFIG_FILE="/etc/named.conf"
@@ -273,9 +276,9 @@ remediate_bind_crypto_policy
 # END fix for 'configure_bind_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (10 / 362) for 'configure_crypto_policy'
+# BEGIN fix (10 / 363) for 'configure_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 10/362: 'configure_crypto_policy'")
+(>&2 echo "Remediating rule 10/363: 'configure_crypto_policy'")
 
 # include remediation functions library
 
@@ -300,9 +303,9 @@ fi
 # END fix for 'configure_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (11 / 362) for 'configure_gnutls_tls_crypto_policy'
+# BEGIN fix (11 / 363) for 'configure_gnutls_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 11/362: 'configure_gnutls_tls_crypto_policy'")
+(>&2 echo "Remediating rule 11/363: 'configure_gnutls_tls_crypto_policy'")
 
 CONF_FILE=/etc/crypto-policies/back-ends/gnutls.config
 correct_value='+VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0'
@@ -328,18 +331,18 @@ fi
 # END fix for 'configure_gnutls_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (12 / 362) for 'configure_kerberos_crypto_policy'
+# BEGIN fix (12 / 363) for 'configure_kerberos_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 12/362: 'configure_kerberos_crypto_policy'")
+(>&2 echo "Remediating rule 12/363: 'configure_kerberos_crypto_policy'")
 
 rm -f /etc/krb5.conf.d/crypto-policies
 ln -s /etc/crypto-policies/back-ends/krb5.config /etc/krb5.conf.d/crypto-policies
 # END fix for 'configure_kerberos_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (13 / 362) for 'configure_libreswan_crypto_policy'
+# BEGIN fix (13 / 363) for 'configure_libreswan_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 13/362: 'configure_libreswan_crypto_policy'")
+(>&2 echo "Remediating rule 13/363: 'configure_libreswan_crypto_policy'")
 
 function remediate_libreswan_crypto_policy() {
     CONFIG_FILE="/etc/ipsec.conf"
@@ -353,9 +356,9 @@ remediate_libreswan_crypto_policy
 # END fix for 'configure_libreswan_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (14 / 362) for 'configure_openssl_crypto_policy'
+# BEGIN fix (14 / 363) for 'configure_openssl_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 14/362: 'configure_openssl_crypto_policy'")
+(>&2 echo "Remediating rule 14/363: 'configure_openssl_crypto_policy'")
 
 OPENSSL_CRYPTO_POLICY_SECTION='[ crypto_policy ]'
 OPENSSL_CRYPTO_POLICY_SECTION_REGEX='\[\s*crypto_policy\s*\]'
@@ -382,16 +385,16 @@ remediate_openssl_crypto_policy
 # END fix for 'configure_openssl_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (15 / 362) for 'configure_openssl_tls_crypto_policy'
+# BEGIN fix (15 / 363) for 'configure_openssl_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 15/362: 'configure_openssl_tls_crypto_policy'")
+(>&2 echo "Remediating rule 15/363: 'configure_openssl_tls_crypto_policy'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'configure_openssl_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (16 / 362) for 'configure_ssh_crypto_policy'
+# BEGIN fix (16 / 363) for 'configure_ssh_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 16/362: 'configure_ssh_crypto_policy'")
+(>&2 echo "Remediating rule 16/363: 'configure_ssh_crypto_policy'")
 
 SSH_CONF="/etc/sysconfig/sshd"
 
@@ -399,9 +402,9 @@ sed -i "/^\s*CRYPTO_POLICY.*$/d" $SSH_CONF
 # END fix for 'configure_ssh_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (17 / 362) for 'harden_sshd_ciphers_openssh_conf_crypto_policy'
+# BEGIN fix (17 / 363) for 'harden_sshd_ciphers_openssh_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 17/362: 'harden_sshd_ciphers_openssh_conf_crypto_policy'")
+(>&2 echo "Remediating rule 17/363: 'harden_sshd_ciphers_openssh_conf_crypto_policy'")
 
 sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
 
@@ -421,9 +424,9 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 # END fix for 'harden_sshd_ciphers_openssh_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (18 / 362) for 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'
+# BEGIN fix (18 / 363) for 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 18/362: 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
+(>&2 echo "Remediating rule 18/363: 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
 
 sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
 
@@ -459,9 +462,9 @@ fi
 # END fix for 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (19 / 362) for 'harden_sshd_macs_openssh_conf_crypto_policy'
+# BEGIN fix (19 / 363) for 'harden_sshd_macs_openssh_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 19/362: 'harden_sshd_macs_openssh_conf_crypto_policy'")
+(>&2 echo "Remediating rule 19/363: 'harden_sshd_macs_openssh_conf_crypto_policy'")
 
 sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
 
@@ -481,9 +484,9 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 # END fix for 'harden_sshd_macs_openssh_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (20 / 362) for 'harden_sshd_macs_opensshserver_conf_crypto_policy'
+# BEGIN fix (20 / 363) for 'harden_sshd_macs_opensshserver_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 20/362: 'harden_sshd_macs_opensshserver_conf_crypto_policy'")
+(>&2 echo "Remediating rule 20/363: 'harden_sshd_macs_opensshserver_conf_crypto_policy'")
 
 sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
 
@@ -519,79 +522,79 @@ fi
 # END fix for 'harden_sshd_macs_opensshserver_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (21 / 362) for 'installed_OS_is_vendor_supported'
+# BEGIN fix (21 / 363) for 'installed_OS_is_vendor_supported'
 ###############################################################################
-(>&2 echo "Remediating rule 21/362: 'installed_OS_is_vendor_supported'")
+(>&2 echo "Remediating rule 21/363: 'installed_OS_is_vendor_supported'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'installed_OS_is_vendor_supported'
 
 ###############################################################################
-# BEGIN fix (22 / 362) for 'package_mcafeetp_installed'
+# BEGIN fix (22 / 363) for 'package_mcafeetp_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 22/362: 'package_mcafeetp_installed'")
+(>&2 echo "Remediating rule 22/363: 'package_mcafeetp_installed'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'package_mcafeetp_installed'
 
 ###############################################################################
-# BEGIN fix (23 / 362) for 'agent_mfetpd_running'
+# BEGIN fix (23 / 363) for 'agent_mfetpd_running'
 ###############################################################################
-(>&2 echo "Remediating rule 23/362: 'agent_mfetpd_running'")
+(>&2 echo "Remediating rule 23/363: 'agent_mfetpd_running'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'agent_mfetpd_running'
 
 ###############################################################################
-# BEGIN fix (24 / 362) for 'encrypt_partitions'
+# BEGIN fix (24 / 363) for 'encrypt_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 24/362: 'encrypt_partitions'")
+(>&2 echo "Remediating rule 24/363: 'encrypt_partitions'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'encrypt_partitions'
 
 ###############################################################################
-# BEGIN fix (25 / 362) for 'partition_for_home'
+# BEGIN fix (25 / 363) for 'partition_for_home'
 ###############################################################################
-(>&2 echo "Remediating rule 25/362: 'partition_for_home'")
+(>&2 echo "Remediating rule 25/363: 'partition_for_home'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_home'
 
 ###############################################################################
-# BEGIN fix (26 / 362) for 'partition_for_tmp'
+# BEGIN fix (26 / 363) for 'partition_for_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 26/362: 'partition_for_tmp'")
+(>&2 echo "Remediating rule 26/363: 'partition_for_tmp'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_tmp'
 
 ###############################################################################
-# BEGIN fix (27 / 362) for 'partition_for_var'
+# BEGIN fix (27 / 363) for 'partition_for_var'
 ###############################################################################
-(>&2 echo "Remediating rule 27/362: 'partition_for_var'")
+(>&2 echo "Remediating rule 27/363: 'partition_for_var'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var'
 
 ###############################################################################
-# BEGIN fix (28 / 362) for 'partition_for_var_log'
+# BEGIN fix (28 / 363) for 'partition_for_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 28/362: 'partition_for_var_log'")
+(>&2 echo "Remediating rule 28/363: 'partition_for_var_log'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_log'
 
 ###############################################################################
-# BEGIN fix (29 / 362) for 'partition_for_var_log_audit'
+# BEGIN fix (29 / 363) for 'partition_for_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 29/362: 'partition_for_var_log_audit'")
+(>&2 echo "Remediating rule 29/363: 'partition_for_var_log_audit'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (30 / 362) for 'partition_for_var_tmp'
+# BEGIN fix (30 / 363) for 'partition_for_var_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 30/362: 'partition_for_var_tmp'")
+(>&2 echo "Remediating rule 30/363: 'partition_for_var_tmp'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'partition_for_var_tmp'
 
 ###############################################################################
-# BEGIN fix (31 / 362) for 'dconf_gnome_lock_screen_on_smartcard_removal'
+# BEGIN fix (31 / 363) for 'dconf_gnome_lock_screen_on_smartcard_removal'
 ###############################################################################
-(>&2 echo "Remediating rule 31/362: 'dconf_gnome_lock_screen_on_smartcard_removal'")
+(>&2 echo "Remediating rule 31/363: 'dconf_gnome_lock_screen_on_smartcard_removal'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -640,9 +643,9 @@ fi
 # END fix for 'dconf_gnome_lock_screen_on_smartcard_removal'
 
 ###############################################################################
-# BEGIN fix (32 / 362) for 'gnome_gdm_disable_automatic_login'
+# BEGIN fix (32 / 363) for 'gnome_gdm_disable_automatic_login'
 ###############################################################################
-(>&2 echo "Remediating rule 32/362: 'gnome_gdm_disable_automatic_login'")
+(>&2 echo "Remediating rule 32/363: 'gnome_gdm_disable_automatic_login'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -663,9 +666,9 @@ fi
 # END fix for 'gnome_gdm_disable_automatic_login'
 
 ###############################################################################
-# BEGIN fix (33 / 362) for 'dconf_gnome_screensaver_idle_delay'
+# BEGIN fix (33 / 363) for 'dconf_gnome_screensaver_idle_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 33/362: 'dconf_gnome_screensaver_idle_delay'")
+(>&2 echo "Remediating rule 33/363: 'dconf_gnome_screensaver_idle_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -719,9 +722,9 @@ fi
 # END fix for 'dconf_gnome_screensaver_idle_delay'
 
 ###############################################################################
-# BEGIN fix (34 / 362) for 'dconf_gnome_screensaver_lock_enabled'
+# BEGIN fix (34 / 363) for 'dconf_gnome_screensaver_lock_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 34/362: 'dconf_gnome_screensaver_lock_enabled'")
+(>&2 echo "Remediating rule 34/363: 'dconf_gnome_screensaver_lock_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -770,9 +773,9 @@ fi
 # END fix for 'dconf_gnome_screensaver_lock_enabled'
 
 ###############################################################################
-# BEGIN fix (35 / 362) for 'dconf_gnome_disable_ctrlaltdel_reboot'
+# BEGIN fix (35 / 363) for 'dconf_gnome_disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 35/362: 'dconf_gnome_disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 35/363: 'dconf_gnome_disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -821,9 +824,9 @@ fi
 # END fix for 'dconf_gnome_disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (36 / 362) for 'sudo_remove_no_authenticate'
+# BEGIN fix (36 / 363) for 'sudo_remove_no_authenticate'
 ###############################################################################
-(>&2 echo "Remediating rule 36/362: 'sudo_remove_no_authenticate'")
+(>&2 echo "Remediating rule 36/363: 'sudo_remove_no_authenticate'")
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -842,9 +845,9 @@ done
 # END fix for 'sudo_remove_no_authenticate'
 
 ###############################################################################
-# BEGIN fix (37 / 362) for 'sudo_remove_nopasswd'
+# BEGIN fix (37 / 363) for 'sudo_remove_nopasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 37/362: 'sudo_remove_nopasswd'")
+(>&2 echo "Remediating rule 37/363: 'sudo_remove_nopasswd'")
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -863,9 +866,9 @@ done
 # END fix for 'sudo_remove_nopasswd'
 
 ###############################################################################
-# BEGIN fix (38 / 362) for 'sudo_require_reauthentication'
+# BEGIN fix (38 / 363) for 'sudo_require_reauthentication'
 ###############################################################################
-(>&2 echo "Remediating rule 38/362: 'sudo_require_reauthentication'")
+(>&2 echo "Remediating rule 38/363: 'sudo_require_reauthentication'")
 
 
 var_sudo_timestamp_timeout="0"
@@ -900,16 +903,16 @@ fi
 # END fix for 'sudo_require_reauthentication'
 
 ###############################################################################
-# BEGIN fix (39 / 362) for 'sudo_restrict_privilege_elevation_to_authorized'
+# BEGIN fix (39 / 363) for 'sudo_restrict_privilege_elevation_to_authorized'
 ###############################################################################
-(>&2 echo "Remediating rule 39/362: 'sudo_restrict_privilege_elevation_to_authorized'")
+(>&2 echo "Remediating rule 39/363: 'sudo_restrict_privilege_elevation_to_authorized'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'sudo_restrict_privilege_elevation_to_authorized'
 
 ###############################################################################
-# BEGIN fix (40 / 362) for 'sudoers_validate_passwd'
+# BEGIN fix (40 / 363) for 'sudoers_validate_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 40/362: 'sudoers_validate_passwd'")
+(>&2 echo "Remediating rule 40/363: 'sudoers_validate_passwd'")
 
 if [ -e "/etc/sudoers" ] ; then
     
@@ -947,9 +950,9 @@ rm "/etc/sudoers.bak"
 # END fix for 'sudoers_validate_passwd'
 
 ###############################################################################
-# BEGIN fix (41 / 362) for 'package_rng-tools_installed'
+# BEGIN fix (41 / 363) for 'package_rng-tools_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 41/362: 'package_rng-tools_installed'")
+(>&2 echo "Remediating rule 41/363: 'package_rng-tools_installed'")
 
 if ! rpm -q --quiet "rng-tools" ; then
     yum install -y "rng-tools"
@@ -957,9 +960,9 @@ fi
 # END fix for 'package_rng-tools_installed'
 
 ###############################################################################
-# BEGIN fix (42 / 362) for 'package_abrt-addon-ccpp_removed'
+# BEGIN fix (42 / 363) for 'package_abrt-addon-ccpp_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 42/362: 'package_abrt-addon-ccpp_removed'")
+(>&2 echo "Remediating rule 42/363: 'package_abrt-addon-ccpp_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-ccpp
 #	   from the system, and may remove any packages
@@ -973,9 +976,9 @@ fi
 # END fix for 'package_abrt-addon-ccpp_removed'
 
 ###############################################################################
-# BEGIN fix (43 / 362) for 'package_abrt-addon-kerneloops_removed'
+# BEGIN fix (43 / 363) for 'package_abrt-addon-kerneloops_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 43/362: 'package_abrt-addon-kerneloops_removed'")
+(>&2 echo "Remediating rule 43/363: 'package_abrt-addon-kerneloops_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-kerneloops
 #	   from the system, and may remove any packages
@@ -989,9 +992,9 @@ fi
 # END fix for 'package_abrt-addon-kerneloops_removed'
 
 ###############################################################################
-# BEGIN fix (44 / 362) for 'package_abrt-addon-python_removed'
+# BEGIN fix (44 / 363) for 'package_abrt-addon-python_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 44/362: 'package_abrt-addon-python_removed'")
+(>&2 echo "Remediating rule 44/363: 'package_abrt-addon-python_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-python
 #	   from the system, and may remove any packages
@@ -1005,9 +1008,9 @@ fi
 # END fix for 'package_abrt-addon-python_removed'
 
 ###############################################################################
-# BEGIN fix (45 / 362) for 'package_abrt-cli_removed'
+# BEGIN fix (45 / 363) for 'package_abrt-cli_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 45/362: 'package_abrt-cli_removed'")
+(>&2 echo "Remediating rule 45/363: 'package_abrt-cli_removed'")
 
 # CAUTION: This remediation script will remove abrt-cli
 #	   from the system, and may remove any packages
@@ -1021,9 +1024,9 @@ fi
 # END fix for 'package_abrt-cli_removed'
 
 ###############################################################################
-# BEGIN fix (46 / 362) for 'package_abrt-plugin-logger_removed'
+# BEGIN fix (46 / 363) for 'package_abrt-plugin-logger_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 46/362: 'package_abrt-plugin-logger_removed'")
+(>&2 echo "Remediating rule 46/363: 'package_abrt-plugin-logger_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-logger
 #	   from the system, and may remove any packages
@@ -1037,9 +1040,9 @@ fi
 # END fix for 'package_abrt-plugin-logger_removed'
 
 ###############################################################################
-# BEGIN fix (47 / 362) for 'package_abrt-plugin-rhtsupport_removed'
+# BEGIN fix (47 / 363) for 'package_abrt-plugin-rhtsupport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 47/362: 'package_abrt-plugin-rhtsupport_removed'")
+(>&2 echo "Remediating rule 47/363: 'package_abrt-plugin-rhtsupport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-rhtsupport
 #	   from the system, and may remove any packages
@@ -1053,9 +1056,9 @@ fi
 # END fix for 'package_abrt-plugin-rhtsupport_removed'
 
 ###############################################################################
-# BEGIN fix (48 / 362) for 'package_abrt-plugin-sosreport_removed'
+# BEGIN fix (48 / 363) for 'package_abrt-plugin-sosreport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 48/362: 'package_abrt-plugin-sosreport_removed'")
+(>&2 echo "Remediating rule 48/363: 'package_abrt-plugin-sosreport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-sosreport
 #	   from the system, and may remove any packages
@@ -1069,9 +1072,9 @@ fi
 # END fix for 'package_abrt-plugin-sosreport_removed'
 
 ###############################################################################
-# BEGIN fix (49 / 362) for 'package_gssproxy_removed'
+# BEGIN fix (49 / 363) for 'package_gssproxy_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 49/362: 'package_gssproxy_removed'")
+(>&2 echo "Remediating rule 49/363: 'package_gssproxy_removed'")
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -1085,9 +1088,9 @@ fi
 # END fix for 'package_gssproxy_removed'
 
 ###############################################################################
-# BEGIN fix (50 / 362) for 'package_iprutils_removed'
+# BEGIN fix (50 / 363) for 'package_iprutils_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 50/362: 'package_iprutils_removed'")
+(>&2 echo "Remediating rule 50/363: 'package_iprutils_removed'")
 
 # CAUTION: This remediation script will remove iprutils
 #	   from the system, and may remove any packages
@@ -1101,9 +1104,9 @@ fi
 # END fix for 'package_iprutils_removed'
 
 ###############################################################################
-# BEGIN fix (51 / 362) for 'package_krb5-workstation_removed'
+# BEGIN fix (51 / 363) for 'package_krb5-workstation_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 51/362: 'package_krb5-workstation_removed'")
+(>&2 echo "Remediating rule 51/363: 'package_krb5-workstation_removed'")
 
 # CAUTION: This remediation script will remove krb5-workstation
 #	   from the system, and may remove any packages
@@ -1117,9 +1120,9 @@ fi
 # END fix for 'package_krb5-workstation_removed'
 
 ###############################################################################
-# BEGIN fix (52 / 362) for 'package_tuned_removed'
+# BEGIN fix (52 / 363) for 'package_tuned_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 52/362: 'package_tuned_removed'")
+(>&2 echo "Remediating rule 52/363: 'package_tuned_removed'")
 
 # CAUTION: This remediation script will remove tuned
 #	   from the system, and may remove any packages
@@ -1133,9 +1136,9 @@ fi
 # END fix for 'package_tuned_removed'
 
 ###############################################################################
-# BEGIN fix (53 / 362) for 'clean_components_post_updating'
+# BEGIN fix (53 / 363) for 'clean_components_post_updating'
 ###############################################################################
-(>&2 echo "Remediating rule 53/362: 'clean_components_post_updating'")
+(>&2 echo "Remediating rule 53/363: 'clean_components_post_updating'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1152,90 +1155,43 @@ fi
 # END fix for 'clean_components_post_updating'
 
 ###############################################################################
-# BEGIN fix (54 / 362) for 'ensure_gpgcheck_globally_activated'
+# BEGIN fix (54 / 363) for 'ensure_gpgcheck_globally_activated'
 ###############################################################################
-(>&2 echo "Remediating rule 54/362: 'ensure_gpgcheck_globally_activated'")
+(>&2 echo "Remediating rule 54/363: 'ensure_gpgcheck_globally_activated'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/yum.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80790-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80790-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^gpgcheck")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^gpgcheck\\>" "/etc/yum.conf"; then
+    "${sed_command[@]}" "s/^gpgcheck\\>.*/$formatted_output/gi" "/etc/yum.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append "/etc/yum.conf" '^gpgcheck' '1' 'CCE-80790-9'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1243,90 +1199,43 @@ fi
 # END fix for 'ensure_gpgcheck_globally_activated'
 
 ###############################################################################
-# BEGIN fix (55 / 362) for 'ensure_gpgcheck_local_packages'
+# BEGIN fix (55 / 363) for 'ensure_gpgcheck_local_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 55/362: 'ensure_gpgcheck_local_packages'")
+(>&2 echo "Remediating rule 55/363: 'ensure_gpgcheck_local_packages'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/yum.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80791-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80791-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^localpkg_gpgcheck")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^localpkg_gpgcheck\\>" "/etc/yum.conf"; then
+    "${sed_command[@]}" "s/^localpkg_gpgcheck\\>.*/$formatted_output/gi" "/etc/yum.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/yum.conf' '^localpkg_gpgcheck' '1' 'CCE-80791-7'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1334,18 +1243,18 @@ fi
 # END fix for 'ensure_gpgcheck_local_packages'
 
 ###############################################################################
-# BEGIN fix (56 / 362) for 'security_patches_up_to_date'
+# BEGIN fix (56 / 363) for 'security_patches_up_to_date'
 ###############################################################################
-(>&2 echo "Remediating rule 56/362: 'security_patches_up_to_date'")
+(>&2 echo "Remediating rule 56/363: 'security_patches_up_to_date'")
 
 
 yum -y update
 # END fix for 'security_patches_up_to_date'
 
 ###############################################################################
-# BEGIN fix (57 / 362) for 'banner_etc_issue'
+# BEGIN fix (57 / 363) for 'banner_etc_issue'
 ###############################################################################
-(>&2 echo "Remediating rule 57/362: 'banner_etc_issue'")
+(>&2 echo "Remediating rule 57/363: 'banner_etc_issue'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -1378,9 +1287,9 @@ fi
 # END fix for 'banner_etc_issue'
 
 ###############################################################################
-# BEGIN fix (58 / 362) for 'dconf_gnome_banner_enabled'
+# BEGIN fix (58 / 363) for 'dconf_gnome_banner_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 58/362: 'dconf_gnome_banner_enabled'")
+(>&2 echo "Remediating rule 58/363: 'dconf_gnome_banner_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1429,9 +1338,9 @@ fi
 # END fix for 'dconf_gnome_banner_enabled'
 
 ###############################################################################
-# BEGIN fix (59 / 362) for 'dconf_gnome_login_banner_text'
+# BEGIN fix (59 / 363) for 'dconf_gnome_login_banner_text'
 ###############################################################################
-(>&2 echo "Remediating rule 59/362: 'dconf_gnome_login_banner_text'")
+(>&2 echo "Remediating rule 59/363: 'dconf_gnome_login_banner_text'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1501,9 +1410,9 @@ fi
 # END fix for 'dconf_gnome_login_banner_text'
 
 ###############################################################################
-# BEGIN fix (60 / 362) for 'display_login_attempts'
+# BEGIN fix (60 / 363) for 'display_login_attempts'
 ###############################################################################
-(>&2 echo "Remediating rule 60/362: 'display_login_attempts'")
+(>&2 echo "Remediating rule 60/363: 'display_login_attempts'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1574,9 +1483,9 @@ fi
 # END fix for 'display_login_attempts'
 
 ###############################################################################
-# BEGIN fix (61 / 362) for 'accounts_password_pam_pwhistory_remember_password_auth'
+# BEGIN fix (61 / 363) for 'accounts_password_pam_pwhistory_remember_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 61/362: 'accounts_password_pam_pwhistory_remember_password_auth'")
+(>&2 echo "Remediating rule 61/363: 'accounts_password_pam_pwhistory_remember_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1622,9 +1531,9 @@ fi
 # END fix for 'accounts_password_pam_pwhistory_remember_password_auth'
 
 ###############################################################################
-# BEGIN fix (62 / 362) for 'accounts_password_pam_pwhistory_remember_system_auth'
+# BEGIN fix (62 / 363) for 'accounts_password_pam_pwhistory_remember_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 62/362: 'accounts_password_pam_pwhistory_remember_system_auth'")
+(>&2 echo "Remediating rule 62/363: 'accounts_password_pam_pwhistory_remember_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1670,9 +1579,9 @@ fi
 # END fix for 'accounts_password_pam_pwhistory_remember_system_auth'
 
 ###############################################################################
-# BEGIN fix (63 / 362) for 'accounts_passwords_pam_faillock_deny'
+# BEGIN fix (63 / 363) for 'accounts_passwords_pam_faillock_deny'
 ###############################################################################
-(>&2 echo "Remediating rule 63/362: 'accounts_passwords_pam_faillock_deny'")
+(>&2 echo "Remediating rule 63/363: 'accounts_passwords_pam_faillock_deny'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1726,9 +1635,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_deny'
 
 ###############################################################################
-# BEGIN fix (64 / 362) for 'accounts_passwords_pam_faillock_deny_root'
+# BEGIN fix (64 / 363) for 'accounts_passwords_pam_faillock_deny_root'
 ###############################################################################
-(>&2 echo "Remediating rule 64/362: 'accounts_passwords_pam_faillock_deny_root'")
+(>&2 echo "Remediating rule 64/363: 'accounts_passwords_pam_faillock_deny_root'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1782,9 +1691,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_deny_root'
 
 ###############################################################################
-# BEGIN fix (65 / 362) for 'accounts_passwords_pam_faillock_interval'
+# BEGIN fix (65 / 363) for 'accounts_passwords_pam_faillock_interval'
 ###############################################################################
-(>&2 echo "Remediating rule 65/362: 'accounts_passwords_pam_faillock_interval'")
+(>&2 echo "Remediating rule 65/363: 'accounts_passwords_pam_faillock_interval'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1839,9 +1748,9 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_interval'
 
 ###############################################################################
-# BEGIN fix (66 / 362) for 'accounts_passwords_pam_faillock_unlock_time'
+# BEGIN fix (66 / 363) for 'accounts_passwords_pam_faillock_unlock_time'
 ###############################################################################
-(>&2 echo "Remediating rule 66/362: 'accounts_passwords_pam_faillock_unlock_time'")
+(>&2 echo "Remediating rule 66/363: 'accounts_passwords_pam_faillock_unlock_time'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1895,92 +1804,48 @@ fi
 # END fix for 'accounts_passwords_pam_faillock_unlock_time'
 
 ###############################################################################
-# BEGIN fix (67 / 362) for 'accounts_password_pam_dcredit'
+# BEGIN fix (67 / 363) for 'accounts_password_pam_dcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 67/362: 'accounts_password_pam_dcredit'")
+(>&2 echo "Remediating rule 67/363: 'accounts_password_pam_dcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_dcredit="-1"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80653-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80653-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dcredit")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_dcredit"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^dcredit\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^dcredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^dcredit' $var_password_pam_dcredit 'CCE-80653-9' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1988,92 +1853,48 @@ fi
 # END fix for 'accounts_password_pam_dcredit'
 
 ###############################################################################
-# BEGIN fix (68 / 362) for 'accounts_password_pam_dictcheck'
+# BEGIN fix (68 / 363) for 'accounts_password_pam_dictcheck'
 ###############################################################################
-(>&2 echo "Remediating rule 68/362: 'accounts_password_pam_dictcheck'")
+(>&2 echo "Remediating rule 68/363: 'accounts_password_pam_dictcheck'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_dictcheck="1"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-86233-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-86233-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dictcheck")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_dictcheck"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^dictcheck\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^dictcheck\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^dictcheck' $var_password_pam_dictcheck 'CCE-86233-4' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2081,92 +1902,48 @@ fi
 # END fix for 'accounts_password_pam_dictcheck'
 
 ###############################################################################
-# BEGIN fix (69 / 362) for 'accounts_password_pam_difok'
+# BEGIN fix (69 / 363) for 'accounts_password_pam_difok'
 ###############################################################################
-(>&2 echo "Remediating rule 69/362: 'accounts_password_pam_difok'")
+(>&2 echo "Remediating rule 69/363: 'accounts_password_pam_difok'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_difok="8"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80654-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80654-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^difok")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_difok"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^difok\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^difok\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^difok' $var_password_pam_difok 'CCE-80654-7' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2174,92 +1951,48 @@ fi
 # END fix for 'accounts_password_pam_difok'
 
 ###############################################################################
-# BEGIN fix (70 / 362) for 'accounts_password_pam_lcredit'
+# BEGIN fix (70 / 363) for 'accounts_password_pam_lcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 70/362: 'accounts_password_pam_lcredit'")
+(>&2 echo "Remediating rule 70/363: 'accounts_password_pam_lcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_lcredit="-1"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80655-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80655-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^lcredit")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_lcredit"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^lcredit\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^lcredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^lcredit' $var_password_pam_lcredit 'CCE-80655-4' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2267,92 +2000,48 @@ fi
 # END fix for 'accounts_password_pam_lcredit'
 
 ###############################################################################
-# BEGIN fix (71 / 362) for 'accounts_password_pam_maxclassrepeat'
+# BEGIN fix (71 / 363) for 'accounts_password_pam_maxclassrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 71/362: 'accounts_password_pam_maxclassrepeat'")
+(>&2 echo "Remediating rule 71/363: 'accounts_password_pam_maxclassrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_maxclassrepeat="4"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81034-1" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81034-1"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxclassrepeat")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_maxclassrepeat"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^maxclassrepeat\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^maxclassrepeat\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^maxclassrepeat' $var_password_pam_maxclassrepeat 'CCE-81034-1' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2360,92 +2049,48 @@ fi
 # END fix for 'accounts_password_pam_maxclassrepeat'
 
 ###############################################################################
-# BEGIN fix (72 / 362) for 'accounts_password_pam_maxrepeat'
+# BEGIN fix (72 / 363) for 'accounts_password_pam_maxrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 72/362: 'accounts_password_pam_maxrepeat'")
+(>&2 echo "Remediating rule 72/363: 'accounts_password_pam_maxrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_maxrepeat="3"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82066-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82066-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxrepeat")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_maxrepeat"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^maxrepeat\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^maxrepeat\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^maxrepeat' $var_password_pam_maxrepeat 'CCE-82066-2' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2453,92 +2098,48 @@ fi
 # END fix for 'accounts_password_pam_maxrepeat'
 
 ###############################################################################
-# BEGIN fix (73 / 362) for 'accounts_password_pam_minclass'
+# BEGIN fix (73 / 363) for 'accounts_password_pam_minclass'
 ###############################################################################
-(>&2 echo "Remediating rule 73/362: 'accounts_password_pam_minclass'")
+(>&2 echo "Remediating rule 73/363: 'accounts_password_pam_minclass'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_minclass="4"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82046-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82046-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minclass")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_minclass"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^minclass\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^minclass\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^minclass' $var_password_pam_minclass 'CCE-82046-4' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2546,92 +2147,48 @@ fi
 # END fix for 'accounts_password_pam_minclass'
 
 ###############################################################################
-# BEGIN fix (74 / 362) for 'accounts_password_pam_minlen'
+# BEGIN fix (74 / 363) for 'accounts_password_pam_minlen'
 ###############################################################################
-(>&2 echo "Remediating rule 74/362: 'accounts_password_pam_minlen'")
+(>&2 echo "Remediating rule 74/363: 'accounts_password_pam_minlen'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_minlen="15"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80656-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80656-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minlen")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_minlen"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^minlen\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^minlen\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^minlen' $var_password_pam_minlen 'CCE-80656-2' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2639,92 +2196,48 @@ fi
 # END fix for 'accounts_password_pam_minlen'
 
 ###############################################################################
-# BEGIN fix (75 / 362) for 'accounts_password_pam_ocredit'
+# BEGIN fix (75 / 363) for 'accounts_password_pam_ocredit'
 ###############################################################################
-(>&2 echo "Remediating rule 75/362: 'accounts_password_pam_ocredit'")
+(>&2 echo "Remediating rule 75/363: 'accounts_password_pam_ocredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_ocredit="-1"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80663-8" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80663-8"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ocredit")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_ocredit"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^ocredit\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^ocredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^ocredit' $var_password_pam_ocredit 'CCE-80663-8' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2732,9 +2245,9 @@ fi
 # END fix for 'accounts_password_pam_ocredit'
 
 ###############################################################################
-# BEGIN fix (76 / 362) for 'accounts_password_pam_retry'
+# BEGIN fix (76 / 363) for 'accounts_password_pam_retry'
 ###############################################################################
-(>&2 echo "Remediating rule 76/362: 'accounts_password_pam_retry'")
+(>&2 echo "Remediating rule 76/363: 'accounts_password_pam_retry'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2761,92 +2274,48 @@ fi
 # END fix for 'accounts_password_pam_retry'
 
 ###############################################################################
-# BEGIN fix (77 / 362) for 'accounts_password_pam_ucredit'
+# BEGIN fix (77 / 363) for 'accounts_password_pam_ucredit'
 ###############################################################################
-(>&2 echo "Remediating rule 77/362: 'accounts_password_pam_ucredit'")
+(>&2 echo "Remediating rule 77/363: 'accounts_password_pam_ucredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
 
 var_password_pam_ucredit="-1"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80665-3" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80665-3"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ucredit")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_ucredit"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^ucredit\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^ucredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/security/pwquality.conf' '^ucredit' $var_password_pam_ucredit 'CCE-80665-3' '%s = %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2854,9 +2323,9 @@ fi
 # END fix for 'accounts_password_pam_ucredit'
 
 ###############################################################################
-# BEGIN fix (78 / 362) for 'set_password_hashing_algorithm_logindefs'
+# BEGIN fix (78 / 363) for 'set_password_hashing_algorithm_logindefs'
 ###############################################################################
-(>&2 echo "Remediating rule 78/362: 'set_password_hashing_algorithm_logindefs'")
+(>&2 echo "Remediating rule 78/363: 'set_password_hashing_algorithm_logindefs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -2878,9 +2347,9 @@ fi
 # END fix for 'set_password_hashing_algorithm_logindefs'
 
 ###############################################################################
-# BEGIN fix (79 / 362) for 'set_password_hashing_algorithm_systemauth'
+# BEGIN fix (79 / 363) for 'set_password_hashing_algorithm_systemauth'
 ###############################################################################
-(>&2 echo "Remediating rule 79/362: 'set_password_hashing_algorithm_systemauth'")
+(>&2 echo "Remediating rule 79/363: 'set_password_hashing_algorithm_systemauth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2900,9 +2369,9 @@ fi
 # END fix for 'set_password_hashing_algorithm_systemauth'
 
 ###############################################################################
-# BEGIN fix (80 / 362) for 'service_debug-shell_disabled'
+# BEGIN fix (80 / 363) for 'service_debug-shell_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 80/362: 'service_debug-shell_disabled'")
+(>&2 echo "Remediating rule 80/363: 'service_debug-shell_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2926,90 +2395,43 @@ fi
 # END fix for 'service_debug-shell_disabled'
 
 ###############################################################################
-# BEGIN fix (81 / 362) for 'disable_ctrlaltdel_burstaction'
+# BEGIN fix (81 / 363) for 'disable_ctrlaltdel_burstaction'
 ###############################################################################
-(>&2 echo "Remediating rule 81/362: 'disable_ctrlaltdel_burstaction'")
+(>&2 echo "Remediating rule 81/363: 'disable_ctrlaltdel_burstaction'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q systemd; then
 
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/systemd/system.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80784-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80784-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^CtrlAltDelBurstAction=")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s=%s" "$stripped_key" "none"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^CtrlAltDelBurstAction=\\>" "/etc/systemd/system.conf"; then
+    "${sed_command[@]}" "s/^CtrlAltDelBurstAction=\\>.*/$formatted_output/gi" "/etc/systemd/system.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/systemd/system.conf' '^CtrlAltDelBurstAction=' 'none' 'CCE-80784-2' '%s=%s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/systemd/system.conf" >> "/etc/systemd/system.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/systemd/system.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -3017,9 +2439,9 @@ fi
 # END fix for 'disable_ctrlaltdel_burstaction'
 
 ###############################################################################
-# BEGIN fix (82 / 362) for 'disable_ctrlaltdel_reboot'
+# BEGIN fix (82 / 363) for 'disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 82/362: 'disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 82/363: 'disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3032,9 +2454,9 @@ fi
 # END fix for 'disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (83 / 362) for 'require_emergency_target_auth'
+# BEGIN fix (83 / 363) for 'require_emergency_target_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 83/362: 'require_emergency_target_auth'")
+(>&2 echo "Remediating rule 83/363: 'require_emergency_target_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3054,9 +2476,9 @@ fi
 # END fix for 'require_emergency_target_auth'
 
 ###############################################################################
-# BEGIN fix (84 / 362) for 'require_singleuser_auth'
+# BEGIN fix (84 / 363) for 'require_singleuser_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 84/362: 'require_singleuser_auth'")
+(>&2 echo "Remediating rule 84/363: 'require_singleuser_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3076,9 +2498,9 @@ fi
 # END fix for 'require_singleuser_auth'
 
 ###############################################################################
-# BEGIN fix (85 / 362) for 'package_tmux_installed'
+# BEGIN fix (85 / 363) for 'package_tmux_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 85/362: 'package_tmux_installed'")
+(>&2 echo "Remediating rule 85/363: 'package_tmux_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3092,9 +2514,9 @@ fi
 # END fix for 'package_tmux_installed'
 
 ###############################################################################
-# BEGIN fix (86 / 362) for 'configure_bashrc_exec_tmux'
+# BEGIN fix (86 / 363) for 'configure_bashrc_exec_tmux'
 ###############################################################################
-(>&2 echo "Remediating rule 86/362: 'configure_bashrc_exec_tmux'")
+(>&2 echo "Remediating rule 86/363: 'configure_bashrc_exec_tmux'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3114,9 +2536,9 @@ fi
 # END fix for 'configure_bashrc_exec_tmux'
 
 ###############################################################################
-# BEGIN fix (87 / 362) for 'configure_tmux_lock_after_time'
+# BEGIN fix (87 / 363) for 'configure_tmux_lock_after_time'
 ###############################################################################
-(>&2 echo "Remediating rule 87/362: 'configure_tmux_lock_after_time'")
+(>&2 echo "Remediating rule 87/363: 'configure_tmux_lock_after_time'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3134,9 +2556,9 @@ fi
 # END fix for 'configure_tmux_lock_after_time'
 
 ###############################################################################
-# BEGIN fix (88 / 362) for 'configure_tmux_lock_command'
+# BEGIN fix (88 / 363) for 'configure_tmux_lock_command'
 ###############################################################################
-(>&2 echo "Remediating rule 88/362: 'configure_tmux_lock_command'")
+(>&2 echo "Remediating rule 88/363: 'configure_tmux_lock_command'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3154,9 +2576,9 @@ fi
 # END fix for 'configure_tmux_lock_command'
 
 ###############################################################################
-# BEGIN fix (89 / 362) for 'no_tmux_in_shells'
+# BEGIN fix (89 / 363) for 'no_tmux_in_shells'
 ###############################################################################
-(>&2 echo "Remediating rule 89/362: 'no_tmux_in_shells'")
+(>&2 echo "Remediating rule 89/363: 'no_tmux_in_shells'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3170,9 +2592,9 @@ fi
 # END fix for 'no_tmux_in_shells'
 
 ###############################################################################
-# BEGIN fix (90 / 362) for 'package_opensc_installed'
+# BEGIN fix (90 / 363) for 'package_opensc_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 90/362: 'package_opensc_installed'")
+(>&2 echo "Remediating rule 90/363: 'package_opensc_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3186,9 +2608,9 @@ fi
 # END fix for 'package_opensc_installed'
 
 ###############################################################################
-# BEGIN fix (91 / 362) for 'install_smartcard_packages'
+# BEGIN fix (91 / 363) for 'install_smartcard_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 91/362: 'install_smartcard_packages'")
+(>&2 echo "Remediating rule 91/363: 'install_smartcard_packages'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3202,106 +2624,62 @@ fi
 # END fix for 'install_smartcard_packages'
 
 ###############################################################################
-# BEGIN fix (92 / 362) for 'account_unique_id'
+# BEGIN fix (92 / 363) for 'account_unique_id'
 ###############################################################################
-(>&2 echo "Remediating rule 92/362: 'account_unique_id'")
+(>&2 echo "Remediating rule 92/363: 'account_unique_id'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'account_unique_id'
 
 ###############################################################################
-# BEGIN fix (93 / 362) for 'accounts_authorized_local_users'
+# BEGIN fix (93 / 363) for 'accounts_authorized_local_users'
 ###############################################################################
-(>&2 echo "Remediating rule 93/362: 'accounts_authorized_local_users'")
+(>&2 echo "Remediating rule 93/363: 'accounts_authorized_local_users'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_authorized_local_users'
 
 ###############################################################################
-# BEGIN fix (94 / 362) for 'account_disable_post_pw_expiration'
+# BEGIN fix (94 / 363) for 'account_disable_post_pw_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 94/362: 'account_disable_post_pw_expiration'")
+(>&2 echo "Remediating rule 94/363: 'account_disable_post_pw_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
 
 var_account_disable_post_pw_expiration="35"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/default/useradd"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80954-1" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80954-1"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^INACTIVE")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s=%s" "$stripped_key" "$var_account_disable_post_pw_expiration"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^INACTIVE\\>" "/etc/default/useradd"; then
+    "${sed_command[@]}" "s/^INACTIVE\\>.*/$formatted_output/gi" "/etc/default/useradd"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/default/useradd' '^INACTIVE' "$var_account_disable_post_pw_expiration" 'CCE-80954-1' '%s=%s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/default/useradd" >> "/etc/default/useradd"
+    printf '%s\n' "$formatted_output" >> "/etc/default/useradd"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -3309,23 +2687,23 @@ fi
 # END fix for 'account_disable_post_pw_expiration'
 
 ###############################################################################
-# BEGIN fix (95 / 362) for 'account_emergency_expire_date'
+# BEGIN fix (95 / 363) for 'account_emergency_expire_date'
 ###############################################################################
-(>&2 echo "Remediating rule 95/362: 'account_emergency_expire_date'")
+(>&2 echo "Remediating rule 95/363: 'account_emergency_expire_date'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'account_emergency_expire_date'
 
 ###############################################################################
-# BEGIN fix (96 / 362) for 'account_temp_expire_date'
+# BEGIN fix (96 / 363) for 'account_temp_expire_date'
 ###############################################################################
-(>&2 echo "Remediating rule 96/362: 'account_temp_expire_date'")
+(>&2 echo "Remediating rule 96/363: 'account_temp_expire_date'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'account_temp_expire_date'
 
 ###############################################################################
-# BEGIN fix (97 / 362) for 'accounts_maximum_age_login_defs'
+# BEGIN fix (97 / 363) for 'accounts_maximum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 97/362: 'accounts_maximum_age_login_defs'")
+(>&2 echo "Remediating rule 97/363: 'accounts_maximum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3346,9 +2724,9 @@ fi
 # END fix for 'accounts_maximum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (98 / 362) for 'accounts_minimum_age_login_defs'
+# BEGIN fix (98 / 363) for 'accounts_minimum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 98/362: 'accounts_minimum_age_login_defs'")
+(>&2 echo "Remediating rule 98/363: 'accounts_minimum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3369,9 +2747,9 @@ fi
 # END fix for 'accounts_minimum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (99 / 362) for 'accounts_password_minlen_login_defs'
+# BEGIN fix (99 / 363) for 'accounts_password_minlen_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 99/362: 'accounts_password_minlen_login_defs'")
+(>&2 echo "Remediating rule 99/363: 'accounts_password_minlen_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3393,30 +2771,30 @@ fi
 # END fix for 'accounts_password_minlen_login_defs'
 
 ###############################################################################
-# BEGIN fix (100 / 362) for 'accounts_password_set_max_life_existing'
+# BEGIN fix (100 / 363) for 'accounts_password_set_max_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 100/362: 'accounts_password_set_max_life_existing'")
+(>&2 echo "Remediating rule 100/363: 'accounts_password_set_max_life_existing'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_set_max_life_existing'
 
 ###############################################################################
-# BEGIN fix (101 / 362) for 'accounts_password_set_min_life_existing'
+# BEGIN fix (101 / 363) for 'accounts_password_set_min_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 101/362: 'accounts_password_set_min_life_existing'")
+(>&2 echo "Remediating rule 101/363: 'accounts_password_set_min_life_existing'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_set_min_life_existing'
 
 ###############################################################################
-# BEGIN fix (102 / 362) for 'accounts_password_all_shadowed_sha512'
+# BEGIN fix (102 / 363) for 'accounts_password_all_shadowed_sha512'
 ###############################################################################
-(>&2 echo "Remediating rule 102/362: 'accounts_password_all_shadowed_sha512'")
+(>&2 echo "Remediating rule 102/363: 'accounts_password_all_shadowed_sha512'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_password_all_shadowed_sha512'
 
 ###############################################################################
-# BEGIN fix (103 / 362) for 'accounts_password_pam_unix_rounds_password_auth'
+# BEGIN fix (103 / 363) for 'accounts_password_pam_unix_rounds_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 103/362: 'accounts_password_pam_unix_rounds_password_auth'")
+(>&2 echo "Remediating rule 103/363: 'accounts_password_pam_unix_rounds_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3440,9 +2818,9 @@ fi
 # END fix for 'accounts_password_pam_unix_rounds_password_auth'
 
 ###############################################################################
-# BEGIN fix (104 / 362) for 'accounts_password_pam_unix_rounds_system_auth'
+# BEGIN fix (104 / 363) for 'accounts_password_pam_unix_rounds_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 104/362: 'accounts_password_pam_unix_rounds_system_auth'")
+(>&2 echo "Remediating rule 104/363: 'accounts_password_pam_unix_rounds_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3466,9 +2844,9 @@ fi
 # END fix for 'accounts_password_pam_unix_rounds_system_auth'
 
 ###############################################################################
-# BEGIN fix (105 / 362) for 'no_empty_passwords'
+# BEGIN fix (105 / 363) for 'no_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 105/362: 'no_empty_passwords'")
+(>&2 echo "Remediating rule 105/363: 'no_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3481,16 +2859,16 @@ fi
 # END fix for 'no_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (106 / 362) for 'accounts_no_uid_except_zero'
+# BEGIN fix (106 / 363) for 'accounts_no_uid_except_zero'
 ###############################################################################
-(>&2 echo "Remediating rule 106/362: 'accounts_no_uid_except_zero'")
+(>&2 echo "Remediating rule 106/363: 'accounts_no_uid_except_zero'")
 awk -F: '$3 == 0 && $1 != "root" { print $1 }' /etc/passwd | xargs --max-lines=1 passwd -l
 # END fix for 'accounts_no_uid_except_zero'
 
 ###############################################################################
-# BEGIN fix (107 / 362) for 'accounts_have_homedir_login_defs'
+# BEGIN fix (107 / 363) for 'accounts_have_homedir_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 107/362: 'accounts_have_homedir_login_defs'")
+(>&2 echo "Remediating rule 107/363: 'accounts_have_homedir_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3521,9 +2899,9 @@ fi
 # END fix for 'accounts_have_homedir_login_defs'
 
 ###############################################################################
-# BEGIN fix (108 / 362) for 'accounts_logon_fail_delay'
+# BEGIN fix (108 / 363) for 'accounts_logon_fail_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 108/362: 'accounts_logon_fail_delay'")
+(>&2 echo "Remediating rule 108/363: 'accounts_logon_fail_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -3531,84 +2909,40 @@ if rpm --quiet -q shadow-utils; then
 
 # Set variables
 var_accounts_fail_delay="4"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/login.defs"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-84037-1" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-84037-1"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^FAIL_DELAY")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_fail_delay"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^FAIL_DELAY\\>" "/etc/login.defs"; then
+    "${sed_command[@]}" "s/^FAIL_DELAY\\>.*/$formatted_output/gi" "/etc/login.defs"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/login.defs' '^FAIL_DELAY' "$var_accounts_fail_delay" 'CCE-84037-1' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -3616,9 +2950,9 @@ fi
 # END fix for 'accounts_logon_fail_delay'
 
 ###############################################################################
-# BEGIN fix (109 / 362) for 'accounts_max_concurrent_login_sessions'
+# BEGIN fix (109 / 363) for 'accounts_max_concurrent_login_sessions'
 ###############################################################################
-(>&2 echo "Remediating rule 109/362: 'accounts_max_concurrent_login_sessions'")
+(>&2 echo "Remediating rule 109/363: 'accounts_max_concurrent_login_sessions'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3641,58 +2975,58 @@ fi
 # END fix for 'accounts_max_concurrent_login_sessions'
 
 ###############################################################################
-# BEGIN fix (110 / 362) for 'accounts_user_dot_no_world_writable_programs'
+# BEGIN fix (110 / 363) for 'accounts_user_dot_no_world_writable_programs'
 ###############################################################################
-(>&2 echo "Remediating rule 110/362: 'accounts_user_dot_no_world_writable_programs'")
+(>&2 echo "Remediating rule 110/363: 'accounts_user_dot_no_world_writable_programs'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_dot_no_world_writable_programs'
 
 ###############################################################################
-# BEGIN fix (111 / 362) for 'accounts_user_home_paths_only'
+# BEGIN fix (111 / 363) for 'accounts_user_home_paths_only'
 ###############################################################################
-(>&2 echo "Remediating rule 111/362: 'accounts_user_home_paths_only'")
+(>&2 echo "Remediating rule 111/363: 'accounts_user_home_paths_only'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_home_paths_only'
 
 ###############################################################################
-# BEGIN fix (112 / 362) for 'accounts_user_interactive_home_directory_defined'
+# BEGIN fix (112 / 363) for 'accounts_user_interactive_home_directory_defined'
 ###############################################################################
-(>&2 echo "Remediating rule 112/362: 'accounts_user_interactive_home_directory_defined'")
+(>&2 echo "Remediating rule 112/363: 'accounts_user_interactive_home_directory_defined'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_interactive_home_directory_defined'
 
 ###############################################################################
-# BEGIN fix (113 / 362) for 'accounts_user_interactive_home_directory_exists'
+# BEGIN fix (113 / 363) for 'accounts_user_interactive_home_directory_exists'
 ###############################################################################
-(>&2 echo "Remediating rule 113/362: 'accounts_user_interactive_home_directory_exists'")
+(>&2 echo "Remediating rule 113/363: 'accounts_user_interactive_home_directory_exists'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_user_interactive_home_directory_exists'
 
 ###############################################################################
-# BEGIN fix (114 / 362) for 'file_groupownership_home_directories'
+# BEGIN fix (114 / 363) for 'file_groupownership_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 114/362: 'file_groupownership_home_directories'")
+(>&2 echo "Remediating rule 114/363: 'file_groupownership_home_directories'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_groupownership_home_directories'
 
 ###############################################################################
-# BEGIN fix (115 / 362) for 'file_permission_user_init_files'
+# BEGIN fix (115 / 363) for 'file_permission_user_init_files'
 ###############################################################################
-(>&2 echo "Remediating rule 115/362: 'file_permission_user_init_files'")
+(>&2 echo "Remediating rule 115/363: 'file_permission_user_init_files'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permission_user_init_files'
 
 ###############################################################################
-# BEGIN fix (116 / 362) for 'file_permissions_home_directories'
+# BEGIN fix (116 / 363) for 'file_permissions_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 116/362: 'file_permissions_home_directories'")
+(>&2 echo "Remediating rule 116/363: 'file_permissions_home_directories'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permissions_home_directories'
 
 ###############################################################################
-# BEGIN fix (117 / 362) for 'accounts_umask_etc_bashrc'
+# BEGIN fix (117 / 363) for 'accounts_umask_etc_bashrc'
 ###############################################################################
-(>&2 echo "Remediating rule 117/362: 'accounts_umask_etc_bashrc'")
+(>&2 echo "Remediating rule 117/363: 'accounts_umask_etc_bashrc'")
 
 var_accounts_user_umask="077"
 
@@ -3706,92 +3040,48 @@ fi
 # END fix for 'accounts_umask_etc_bashrc'
 
 ###############################################################################
-# BEGIN fix (118 / 362) for 'accounts_umask_etc_login_defs'
+# BEGIN fix (118 / 363) for 'accounts_umask_etc_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 118/362: 'accounts_umask_etc_login_defs'")
+(>&2 echo "Remediating rule 118/363: 'accounts_umask_etc_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
 
 var_accounts_user_umask="077"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/login.defs"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82888-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82888-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^UMASK")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_user_umask"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^UMASK\\>" "/etc/login.defs"; then
+    "${sed_command[@]}" "s/^UMASK\\>.*/$formatted_output/gi" "/etc/login.defs"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/login.defs' '^UMASK' "$var_accounts_user_umask" 'CCE-82888-9' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -3799,16 +3089,16 @@ fi
 # END fix for 'accounts_umask_etc_login_defs'
 
 ###############################################################################
-# BEGIN fix (119 / 362) for 'accounts_umask_interactive_users'
+# BEGIN fix (119 / 363) for 'accounts_umask_interactive_users'
 ###############################################################################
-(>&2 echo "Remediating rule 119/362: 'accounts_umask_interactive_users'")
+(>&2 echo "Remediating rule 119/363: 'accounts_umask_interactive_users'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'accounts_umask_interactive_users'
 
 ###############################################################################
-# BEGIN fix (120 / 362) for 'package_audit_installed'
+# BEGIN fix (120 / 363) for 'package_audit_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 120/362: 'package_audit_installed'")
+(>&2 echo "Remediating rule 120/363: 'package_audit_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3822,9 +3112,9 @@ fi
 # END fix for 'package_audit_installed'
 
 ###############################################################################
-# BEGIN fix (121 / 362) for 'service_auditd_enabled'
+# BEGIN fix (121 / 363) for 'service_auditd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 121/362: 'service_auditd_enabled'")
+(>&2 echo "Remediating rule 121/363: 'service_auditd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3839,9 +3129,9 @@ fi
 # END fix for 'service_auditd_enabled'
 
 ###############################################################################
-# BEGIN fix (122 / 362) for 'grub2_audit_argument'
+# BEGIN fix (122 / 363) for 'grub2_audit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 122/362: 'grub2_audit_argument'")
+(>&2 echo "Remediating rule 122/363: 'grub2_audit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -3861,9 +3151,9 @@ fi
 # END fix for 'grub2_audit_argument'
 
 ###############################################################################
-# BEGIN fix (123 / 362) for 'grub2_audit_backlog_limit_argument'
+# BEGIN fix (123 / 363) for 'grub2_audit_backlog_limit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 123/362: 'grub2_audit_backlog_limit_argument'")
+(>&2 echo "Remediating rule 123/363: 'grub2_audit_backlog_limit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -3883,9 +3173,9 @@ fi
 # END fix for 'grub2_audit_backlog_limit_argument'
 
 ###############################################################################
-# BEGIN fix (124 / 362) for 'audit_rules_immutable'
+# BEGIN fix (124 / 363) for 'audit_rules_immutable'
 ###############################################################################
-(>&2 echo "Remediating rule 124/362: 'audit_rules_immutable'")
+(>&2 echo "Remediating rule 124/363: 'audit_rules_immutable'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -3909,6 +3199,7 @@ do
 	echo '# Set the audit.rules configuration immutable per security requirements' >> $AUDIT_FILE
 	echo '# Reboot is required to change audit rules once this setting is applied' >> $AUDIT_FILE
 	echo '-e 2' >> $AUDIT_FILE
+	chmod o-rwx $AUDIT_FILE
 done
 
 else
@@ -3917,9 +3208,9 @@ fi
 # END fix for 'audit_rules_immutable'
 
 ###############################################################################
-# BEGIN fix (125 / 362) for 'audit_rules_media_export'
+# BEGIN fix (125 / 363) for 'audit_rules_media_export'
 ###############################################################################
-(>&2 echo "Remediating rule 125/362: 'audit_rules_media_export'")
+(>&2 echo "Remediating rule 125/363: 'audit_rules_media_export'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4187,9 +3478,9 @@ fi
 # END fix for 'audit_rules_media_export'
 
 ###############################################################################
-# BEGIN fix (126 / 362) for 'audit_rules_sudoers'
+# BEGIN fix (126 / 363) for 'audit_rules_sudoers'
 ###############################################################################
-(>&2 echo "Remediating rule 126/362: 'audit_rules_sudoers'")
+(>&2 echo "Remediating rule 126/363: 'audit_rules_sudoers'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4334,9 +3625,9 @@ fi
 # END fix for 'audit_rules_sudoers'
 
 ###############################################################################
-# BEGIN fix (127 / 362) for 'audit_rules_sudoers_d'
+# BEGIN fix (127 / 363) for 'audit_rules_sudoers_d'
 ###############################################################################
-(>&2 echo "Remediating rule 127/362: 'audit_rules_sudoers_d'")
+(>&2 echo "Remediating rule 127/363: 'audit_rules_sudoers_d'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4481,9 +3772,9 @@ fi
 # END fix for 'audit_rules_sudoers_d'
 
 ###############################################################################
-# BEGIN fix (128 / 362) for 'audit_rules_suid_privilege_function'
+# BEGIN fix (128 / 363) for 'audit_rules_suid_privilege_function'
 ###############################################################################
-(>&2 echo "Remediating rule 128/362: 'audit_rules_suid_privilege_function'")
+(>&2 echo "Remediating rule 128/363: 'audit_rules_suid_privilege_function'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5001,9 +4292,9 @@ fi
 # END fix for 'audit_rules_suid_privilege_function'
 
 ###############################################################################
-# BEGIN fix (129 / 362) for 'audit_rules_usergroup_modification_group'
+# BEGIN fix (129 / 363) for 'audit_rules_usergroup_modification_group'
 ###############################################################################
-(>&2 echo "Remediating rule 129/362: 'audit_rules_usergroup_modification_group'")
+(>&2 echo "Remediating rule 129/363: 'audit_rules_usergroup_modification_group'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5148,9 +4439,9 @@ fi
 # END fix for 'audit_rules_usergroup_modification_group'
 
 ###############################################################################
-# BEGIN fix (130 / 362) for 'audit_rules_usergroup_modification_gshadow'
+# BEGIN fix (130 / 363) for 'audit_rules_usergroup_modification_gshadow'
 ###############################################################################
-(>&2 echo "Remediating rule 130/362: 'audit_rules_usergroup_modification_gshadow'")
+(>&2 echo "Remediating rule 130/363: 'audit_rules_usergroup_modification_gshadow'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5295,9 +4586,9 @@ fi
 # END fix for 'audit_rules_usergroup_modification_gshadow'
 
 ###############################################################################
-# BEGIN fix (131 / 362) for 'audit_rules_usergroup_modification_opasswd'
+# BEGIN fix (131 / 363) for 'audit_rules_usergroup_modification_opasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 131/362: 'audit_rules_usergroup_modification_opasswd'")
+(>&2 echo "Remediating rule 131/363: 'audit_rules_usergroup_modification_opasswd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5442,9 +4733,9 @@ fi
 # END fix for 'audit_rules_usergroup_modification_opasswd'
 
 ###############################################################################
-# BEGIN fix (132 / 362) for 'audit_rules_usergroup_modification_passwd'
+# BEGIN fix (132 / 363) for 'audit_rules_usergroup_modification_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 132/362: 'audit_rules_usergroup_modification_passwd'")
+(>&2 echo "Remediating rule 132/363: 'audit_rules_usergroup_modification_passwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5589,9 +4880,9 @@ fi
 # END fix for 'audit_rules_usergroup_modification_passwd'
 
 ###############################################################################
-# BEGIN fix (133 / 362) for 'audit_rules_usergroup_modification_shadow'
+# BEGIN fix (133 / 363) for 'audit_rules_usergroup_modification_shadow'
 ###############################################################################
-(>&2 echo "Remediating rule 133/362: 'audit_rules_usergroup_modification_shadow'")
+(>&2 echo "Remediating rule 133/363: 'audit_rules_usergroup_modification_shadow'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5736,9 +5027,9 @@ fi
 # END fix for 'audit_rules_usergroup_modification_shadow'
 
 ###############################################################################
-# BEGIN fix (134 / 362) for 'directory_group_ownership_var_log_audit'
+# BEGIN fix (134 / 363) for 'directory_group_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 134/362: 'directory_group_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 134/363: 'directory_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5759,9 +5050,9 @@ fi
 # END fix for 'directory_group_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (135 / 362) for 'directory_ownership_var_log_audit'
+# BEGIN fix (135 / 363) for 'directory_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 135/362: 'directory_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 135/363: 'directory_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5773,9 +5064,9 @@ fi
 # END fix for 'directory_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (136 / 362) for 'directory_permissions_var_log_audit'
+# BEGIN fix (136 / 363) for 'directory_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 136/362: 'directory_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 136/363: 'directory_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5796,9 +5087,9 @@ fi
 # END fix for 'directory_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (137 / 362) for 'file_group_ownership_var_log_audit'
+# BEGIN fix (137 / 363) for 'file_group_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 137/362: 'file_group_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 137/363: 'file_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5819,9 +5110,9 @@ fi
 # END fix for 'file_group_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (138 / 362) for 'file_ownership_var_log_audit_stig'
+# BEGIN fix (138 / 363) for 'file_ownership_var_log_audit_stig'
 ###############################################################################
-(>&2 echo "Remediating rule 138/362: 'file_ownership_var_log_audit_stig'")
+(>&2 echo "Remediating rule 138/363: 'file_ownership_var_log_audit_stig'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5833,9 +5124,9 @@ fi
 # END fix for 'file_ownership_var_log_audit_stig'
 
 ###############################################################################
-# BEGIN fix (139 / 362) for 'file_permissions_var_log_audit'
+# BEGIN fix (139 / 363) for 'file_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 139/362: 'file_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 139/363: 'file_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5859,9 +5150,9 @@ fi
 # END fix for 'file_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (140 / 362) for 'audit_rules_dac_modification_chmod'
+# BEGIN fix (140 / 363) for 'audit_rules_dac_modification_chmod'
 ###############################################################################
-(>&2 echo "Remediating rule 140/362: 'audit_rules_dac_modification_chmod'")
+(>&2 echo "Remediating rule 140/363: 'audit_rules_dac_modification_chmod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6129,9 +5420,9 @@ fi
 # END fix for 'audit_rules_dac_modification_chmod'
 
 ###############################################################################
-# BEGIN fix (141 / 362) for 'audit_rules_dac_modification_chown'
+# BEGIN fix (141 / 363) for 'audit_rules_dac_modification_chown'
 ###############################################################################
-(>&2 echo "Remediating rule 141/362: 'audit_rules_dac_modification_chown'")
+(>&2 echo "Remediating rule 141/363: 'audit_rules_dac_modification_chown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6399,9 +5690,9 @@ fi
 # END fix for 'audit_rules_dac_modification_chown'
 
 ###############################################################################
-# BEGIN fix (142 / 362) for 'audit_rules_dac_modification_fchmod'
+# BEGIN fix (142 / 363) for 'audit_rules_dac_modification_fchmod'
 ###############################################################################
-(>&2 echo "Remediating rule 142/362: 'audit_rules_dac_modification_fchmod'")
+(>&2 echo "Remediating rule 142/363: 'audit_rules_dac_modification_fchmod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6669,9 +5960,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fchmod'
 
 ###############################################################################
-# BEGIN fix (143 / 362) for 'audit_rules_dac_modification_fchmodat'
+# BEGIN fix (143 / 363) for 'audit_rules_dac_modification_fchmodat'
 ###############################################################################
-(>&2 echo "Remediating rule 143/362: 'audit_rules_dac_modification_fchmodat'")
+(>&2 echo "Remediating rule 143/363: 'audit_rules_dac_modification_fchmodat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -6939,9 +6230,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fchmodat'
 
 ###############################################################################
-# BEGIN fix (144 / 362) for 'audit_rules_dac_modification_fchown'
+# BEGIN fix (144 / 363) for 'audit_rules_dac_modification_fchown'
 ###############################################################################
-(>&2 echo "Remediating rule 144/362: 'audit_rules_dac_modification_fchown'")
+(>&2 echo "Remediating rule 144/363: 'audit_rules_dac_modification_fchown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7209,9 +6500,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fchown'
 
 ###############################################################################
-# BEGIN fix (145 / 362) for 'audit_rules_dac_modification_fchownat'
+# BEGIN fix (145 / 363) for 'audit_rules_dac_modification_fchownat'
 ###############################################################################
-(>&2 echo "Remediating rule 145/362: 'audit_rules_dac_modification_fchownat'")
+(>&2 echo "Remediating rule 145/363: 'audit_rules_dac_modification_fchownat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -7479,9 +6770,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fchownat'
 
 ###############################################################################
-# BEGIN fix (146 / 362) for 'audit_rules_dac_modification_fremovexattr'
+# BEGIN fix (146 / 363) for 'audit_rules_dac_modification_fremovexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 146/362: 'audit_rules_dac_modification_fremovexattr'")
+(>&2 echo "Remediating rule 146/363: 'audit_rules_dac_modification_fremovexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8003,9 +7294,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fremovexattr'
 
 ###############################################################################
-# BEGIN fix (147 / 362) for 'audit_rules_dac_modification_fsetxattr'
+# BEGIN fix (147 / 363) for 'audit_rules_dac_modification_fsetxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 147/362: 'audit_rules_dac_modification_fsetxattr'")
+(>&2 echo "Remediating rule 147/363: 'audit_rules_dac_modification_fsetxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8527,9 +7818,9 @@ fi
 # END fix for 'audit_rules_dac_modification_fsetxattr'
 
 ###############################################################################
-# BEGIN fix (148 / 362) for 'audit_rules_dac_modification_lchown'
+# BEGIN fix (148 / 363) for 'audit_rules_dac_modification_lchown'
 ###############################################################################
-(>&2 echo "Remediating rule 148/362: 'audit_rules_dac_modification_lchown'")
+(>&2 echo "Remediating rule 148/363: 'audit_rules_dac_modification_lchown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -8797,9 +8088,9 @@ fi
 # END fix for 'audit_rules_dac_modification_lchown'
 
 ###############################################################################
-# BEGIN fix (149 / 362) for 'audit_rules_dac_modification_lremovexattr'
+# BEGIN fix (149 / 363) for 'audit_rules_dac_modification_lremovexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 149/362: 'audit_rules_dac_modification_lremovexattr'")
+(>&2 echo "Remediating rule 149/363: 'audit_rules_dac_modification_lremovexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9321,9 +8612,9 @@ fi
 # END fix for 'audit_rules_dac_modification_lremovexattr'
 
 ###############################################################################
-# BEGIN fix (150 / 362) for 'audit_rules_dac_modification_lsetxattr'
+# BEGIN fix (150 / 363) for 'audit_rules_dac_modification_lsetxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 150/362: 'audit_rules_dac_modification_lsetxattr'")
+(>&2 echo "Remediating rule 150/363: 'audit_rules_dac_modification_lsetxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -9845,9 +9136,9 @@ fi
 # END fix for 'audit_rules_dac_modification_lsetxattr'
 
 ###############################################################################
-# BEGIN fix (151 / 362) for 'audit_rules_dac_modification_removexattr'
+# BEGIN fix (151 / 363) for 'audit_rules_dac_modification_removexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 151/362: 'audit_rules_dac_modification_removexattr'")
+(>&2 echo "Remediating rule 151/363: 'audit_rules_dac_modification_removexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10369,9 +9660,9 @@ fi
 # END fix for 'audit_rules_dac_modification_removexattr'
 
 ###############################################################################
-# BEGIN fix (152 / 362) for 'audit_rules_dac_modification_setxattr'
+# BEGIN fix (152 / 363) for 'audit_rules_dac_modification_setxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 152/362: 'audit_rules_dac_modification_setxattr'")
+(>&2 echo "Remediating rule 152/363: 'audit_rules_dac_modification_setxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -10893,9 +10184,9 @@ fi
 # END fix for 'audit_rules_dac_modification_setxattr'
 
 ###############################################################################
-# BEGIN fix (153 / 362) for 'audit_rules_execution_chacl'
+# BEGIN fix (153 / 363) for 'audit_rules_execution_chacl'
 ###############################################################################
-(>&2 echo "Remediating rule 153/362: 'audit_rules_execution_chacl'")
+(>&2 echo "Remediating rule 153/363: 'audit_rules_execution_chacl'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11155,9 +10446,9 @@ fi
 # END fix for 'audit_rules_execution_chacl'
 
 ###############################################################################
-# BEGIN fix (154 / 362) for 'audit_rules_execution_setfacl'
+# BEGIN fix (154 / 363) for 'audit_rules_execution_setfacl'
 ###############################################################################
-(>&2 echo "Remediating rule 154/362: 'audit_rules_execution_setfacl'")
+(>&2 echo "Remediating rule 154/363: 'audit_rules_execution_setfacl'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11417,9 +10708,9 @@ fi
 # END fix for 'audit_rules_execution_setfacl'
 
 ###############################################################################
-# BEGIN fix (155 / 362) for 'audit_rules_execution_chcon'
+# BEGIN fix (155 / 363) for 'audit_rules_execution_chcon'
 ###############################################################################
-(>&2 echo "Remediating rule 155/362: 'audit_rules_execution_chcon'")
+(>&2 echo "Remediating rule 155/363: 'audit_rules_execution_chcon'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11679,9 +10970,9 @@ fi
 # END fix for 'audit_rules_execution_chcon'
 
 ###############################################################################
-# BEGIN fix (156 / 362) for 'audit_rules_execution_semanage'
+# BEGIN fix (156 / 363) for 'audit_rules_execution_semanage'
 ###############################################################################
-(>&2 echo "Remediating rule 156/362: 'audit_rules_execution_semanage'")
+(>&2 echo "Remediating rule 156/363: 'audit_rules_execution_semanage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -11941,9 +11232,9 @@ fi
 # END fix for 'audit_rules_execution_semanage'
 
 ###############################################################################
-# BEGIN fix (157 / 362) for 'audit_rules_execution_setfiles'
+# BEGIN fix (157 / 363) for 'audit_rules_execution_setfiles'
 ###############################################################################
-(>&2 echo "Remediating rule 157/362: 'audit_rules_execution_setfiles'")
+(>&2 echo "Remediating rule 157/363: 'audit_rules_execution_setfiles'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -12203,9 +11494,9 @@ fi
 # END fix for 'audit_rules_execution_setfiles'
 
 ###############################################################################
-# BEGIN fix (158 / 362) for 'audit_rules_execution_setsebool'
+# BEGIN fix (158 / 363) for 'audit_rules_execution_setsebool'
 ###############################################################################
-(>&2 echo "Remediating rule 158/362: 'audit_rules_execution_setsebool'")
+(>&2 echo "Remediating rule 158/363: 'audit_rules_execution_setsebool'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -12465,9 +11756,9 @@ fi
 # END fix for 'audit_rules_execution_setsebool'
 
 ###############################################################################
-# BEGIN fix (159 / 362) for 'audit_rules_file_deletion_events_rename'
+# BEGIN fix (159 / 363) for 'audit_rules_file_deletion_events_rename'
 ###############################################################################
-(>&2 echo "Remediating rule 159/362: 'audit_rules_file_deletion_events_rename'")
+(>&2 echo "Remediating rule 159/363: 'audit_rules_file_deletion_events_rename'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -12734,9 +12025,9 @@ fi
 # END fix for 'audit_rules_file_deletion_events_rename'
 
 ###############################################################################
-# BEGIN fix (160 / 362) for 'audit_rules_file_deletion_events_renameat'
+# BEGIN fix (160 / 363) for 'audit_rules_file_deletion_events_renameat'
 ###############################################################################
-(>&2 echo "Remediating rule 160/362: 'audit_rules_file_deletion_events_renameat'")
+(>&2 echo "Remediating rule 160/363: 'audit_rules_file_deletion_events_renameat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -13003,9 +12294,9 @@ fi
 # END fix for 'audit_rules_file_deletion_events_renameat'
 
 ###############################################################################
-# BEGIN fix (161 / 362) for 'audit_rules_file_deletion_events_rmdir'
+# BEGIN fix (161 / 363) for 'audit_rules_file_deletion_events_rmdir'
 ###############################################################################
-(>&2 echo "Remediating rule 161/362: 'audit_rules_file_deletion_events_rmdir'")
+(>&2 echo "Remediating rule 161/363: 'audit_rules_file_deletion_events_rmdir'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -13272,9 +12563,9 @@ fi
 # END fix for 'audit_rules_file_deletion_events_rmdir'
 
 ###############################################################################
-# BEGIN fix (162 / 362) for 'audit_rules_file_deletion_events_unlink'
+# BEGIN fix (162 / 363) for 'audit_rules_file_deletion_events_unlink'
 ###############################################################################
-(>&2 echo "Remediating rule 162/362: 'audit_rules_file_deletion_events_unlink'")
+(>&2 echo "Remediating rule 162/363: 'audit_rules_file_deletion_events_unlink'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -13541,9 +12832,9 @@ fi
 # END fix for 'audit_rules_file_deletion_events_unlink'
 
 ###############################################################################
-# BEGIN fix (163 / 362) for 'audit_rules_file_deletion_events_unlinkat'
+# BEGIN fix (163 / 363) for 'audit_rules_file_deletion_events_unlinkat'
 ###############################################################################
-(>&2 echo "Remediating rule 163/362: 'audit_rules_file_deletion_events_unlinkat'")
+(>&2 echo "Remediating rule 163/363: 'audit_rules_file_deletion_events_unlinkat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -13810,9 +13101,9 @@ fi
 # END fix for 'audit_rules_file_deletion_events_unlinkat'
 
 ###############################################################################
-# BEGIN fix (164 / 362) for 'audit_rules_unsuccessful_file_modification_creat'
+# BEGIN fix (164 / 363) for 'audit_rules_unsuccessful_file_modification_creat'
 ###############################################################################
-(>&2 echo "Remediating rule 164/362: 'audit_rules_unsuccessful_file_modification_creat'")
+(>&2 echo "Remediating rule 164/363: 'audit_rules_unsuccessful_file_modification_creat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -14327,9 +13618,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_creat'
 
 ###############################################################################
-# BEGIN fix (165 / 362) for 'audit_rules_unsuccessful_file_modification_ftruncate'
+# BEGIN fix (165 / 363) for 'audit_rules_unsuccessful_file_modification_ftruncate'
 ###############################################################################
-(>&2 echo "Remediating rule 165/362: 'audit_rules_unsuccessful_file_modification_ftruncate'")
+(>&2 echo "Remediating rule 165/363: 'audit_rules_unsuccessful_file_modification_ftruncate'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -14844,9 +14135,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_ftruncate'
 
 ###############################################################################
-# BEGIN fix (166 / 362) for 'audit_rules_unsuccessful_file_modification_open'
+# BEGIN fix (166 / 363) for 'audit_rules_unsuccessful_file_modification_open'
 ###############################################################################
-(>&2 echo "Remediating rule 166/362: 'audit_rules_unsuccessful_file_modification_open'")
+(>&2 echo "Remediating rule 166/363: 'audit_rules_unsuccessful_file_modification_open'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -15361,9 +14652,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_open'
 
 ###############################################################################
-# BEGIN fix (167 / 362) for 'audit_rules_unsuccessful_file_modification_open_by_handle_at'
+# BEGIN fix (167 / 363) for 'audit_rules_unsuccessful_file_modification_open_by_handle_at'
 ###############################################################################
-(>&2 echo "Remediating rule 167/362: 'audit_rules_unsuccessful_file_modification_open_by_handle_at'")
+(>&2 echo "Remediating rule 167/363: 'audit_rules_unsuccessful_file_modification_open_by_handle_at'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -15878,9 +15169,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_open_by_handle_at'
 
 ###############################################################################
-# BEGIN fix (168 / 362) for 'audit_rules_unsuccessful_file_modification_openat'
+# BEGIN fix (168 / 363) for 'audit_rules_unsuccessful_file_modification_openat'
 ###############################################################################
-(>&2 echo "Remediating rule 168/362: 'audit_rules_unsuccessful_file_modification_openat'")
+(>&2 echo "Remediating rule 168/363: 'audit_rules_unsuccessful_file_modification_openat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -16395,9 +15686,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_openat'
 
 ###############################################################################
-# BEGIN fix (169 / 362) for 'audit_rules_unsuccessful_file_modification_truncate'
+# BEGIN fix (169 / 363) for 'audit_rules_unsuccessful_file_modification_truncate'
 ###############################################################################
-(>&2 echo "Remediating rule 169/362: 'audit_rules_unsuccessful_file_modification_truncate'")
+(>&2 echo "Remediating rule 169/363: 'audit_rules_unsuccessful_file_modification_truncate'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -16912,9 +16203,9 @@ fi
 # END fix for 'audit_rules_unsuccessful_file_modification_truncate'
 
 ###############################################################################
-# BEGIN fix (170 / 362) for 'audit_rules_kernel_module_loading_delete'
+# BEGIN fix (170 / 363) for 'audit_rules_kernel_module_loading_delete'
 ###############################################################################
-(>&2 echo "Remediating rule 170/362: 'audit_rules_kernel_module_loading_delete'")
+(>&2 echo "Remediating rule 170/363: 'audit_rules_kernel_module_loading_delete'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -17185,9 +16476,9 @@ fi
 # END fix for 'audit_rules_kernel_module_loading_delete'
 
 ###############################################################################
-# BEGIN fix (171 / 362) for 'audit_rules_kernel_module_loading_finit'
+# BEGIN fix (171 / 363) for 'audit_rules_kernel_module_loading_finit'
 ###############################################################################
-(>&2 echo "Remediating rule 171/362: 'audit_rules_kernel_module_loading_finit'")
+(>&2 echo "Remediating rule 171/363: 'audit_rules_kernel_module_loading_finit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -17458,9 +16749,9 @@ fi
 # END fix for 'audit_rules_kernel_module_loading_finit'
 
 ###############################################################################
-# BEGIN fix (172 / 362) for 'audit_rules_kernel_module_loading_init'
+# BEGIN fix (172 / 363) for 'audit_rules_kernel_module_loading_init'
 ###############################################################################
-(>&2 echo "Remediating rule 172/362: 'audit_rules_kernel_module_loading_init'")
+(>&2 echo "Remediating rule 172/363: 'audit_rules_kernel_module_loading_init'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -17731,9 +17022,9 @@ fi
 # END fix for 'audit_rules_kernel_module_loading_init'
 
 ###############################################################################
-# BEGIN fix (173 / 362) for 'audit_rules_login_events_lastlog'
+# BEGIN fix (173 / 363) for 'audit_rules_login_events_lastlog'
 ###############################################################################
-(>&2 echo "Remediating rule 173/362: 'audit_rules_login_events_lastlog'")
+(>&2 echo "Remediating rule 173/363: 'audit_rules_login_events_lastlog'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -17878,9 +17169,9 @@ fi
 # END fix for 'audit_rules_login_events_lastlog'
 
 ###############################################################################
-# BEGIN fix (174 / 362) for 'audit_rules_privileged_commands_chage'
+# BEGIN fix (174 / 363) for 'audit_rules_privileged_commands_chage'
 ###############################################################################
-(>&2 echo "Remediating rule 174/362: 'audit_rules_privileged_commands_chage'")
+(>&2 echo "Remediating rule 174/363: 'audit_rules_privileged_commands_chage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -18140,9 +17431,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_chage'
 
 ###############################################################################
-# BEGIN fix (175 / 362) for 'audit_rules_privileged_commands_chsh'
+# BEGIN fix (175 / 363) for 'audit_rules_privileged_commands_chsh'
 ###############################################################################
-(>&2 echo "Remediating rule 175/362: 'audit_rules_privileged_commands_chsh'")
+(>&2 echo "Remediating rule 175/363: 'audit_rules_privileged_commands_chsh'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -18402,9 +17693,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_chsh'
 
 ###############################################################################
-# BEGIN fix (176 / 362) for 'audit_rules_privileged_commands_crontab'
+# BEGIN fix (176 / 363) for 'audit_rules_privileged_commands_crontab'
 ###############################################################################
-(>&2 echo "Remediating rule 176/362: 'audit_rules_privileged_commands_crontab'")
+(>&2 echo "Remediating rule 176/363: 'audit_rules_privileged_commands_crontab'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -18664,9 +17955,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_crontab'
 
 ###############################################################################
-# BEGIN fix (177 / 362) for 'audit_rules_privileged_commands_gpasswd'
+# BEGIN fix (177 / 363) for 'audit_rules_privileged_commands_gpasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 177/362: 'audit_rules_privileged_commands_gpasswd'")
+(>&2 echo "Remediating rule 177/363: 'audit_rules_privileged_commands_gpasswd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -18926,9 +18217,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_gpasswd'
 
 ###############################################################################
-# BEGIN fix (178 / 362) for 'audit_rules_privileged_commands_kmod'
+# BEGIN fix (178 / 363) for 'audit_rules_privileged_commands_kmod'
 ###############################################################################
-(>&2 echo "Remediating rule 178/362: 'audit_rules_privileged_commands_kmod'")
+(>&2 echo "Remediating rule 178/363: 'audit_rules_privileged_commands_kmod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -19188,9 +18479,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_kmod'
 
 ###############################################################################
-# BEGIN fix (179 / 362) for 'audit_rules_privileged_commands_mount'
+# BEGIN fix (179 / 363) for 'audit_rules_privileged_commands_mount'
 ###############################################################################
-(>&2 echo "Remediating rule 179/362: 'audit_rules_privileged_commands_mount'")
+(>&2 echo "Remediating rule 179/363: 'audit_rules_privileged_commands_mount'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -19450,9 +18741,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_mount'
 
 ###############################################################################
-# BEGIN fix (180 / 362) for 'audit_rules_privileged_commands_newgrp'
+# BEGIN fix (180 / 363) for 'audit_rules_privileged_commands_newgrp'
 ###############################################################################
-(>&2 echo "Remediating rule 180/362: 'audit_rules_privileged_commands_newgrp'")
+(>&2 echo "Remediating rule 180/363: 'audit_rules_privileged_commands_newgrp'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -19712,9 +19003,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_newgrp'
 
 ###############################################################################
-# BEGIN fix (181 / 362) for 'audit_rules_privileged_commands_pam_timestamp_check'
+# BEGIN fix (181 / 363) for 'audit_rules_privileged_commands_pam_timestamp_check'
 ###############################################################################
-(>&2 echo "Remediating rule 181/362: 'audit_rules_privileged_commands_pam_timestamp_check'")
+(>&2 echo "Remediating rule 181/363: 'audit_rules_privileged_commands_pam_timestamp_check'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -19974,9 +19265,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_pam_timestamp_check'
 
 ###############################################################################
-# BEGIN fix (182 / 362) for 'audit_rules_privileged_commands_passwd'
+# BEGIN fix (182 / 363) for 'audit_rules_privileged_commands_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 182/362: 'audit_rules_privileged_commands_passwd'")
+(>&2 echo "Remediating rule 182/363: 'audit_rules_privileged_commands_passwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -20236,9 +19527,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_passwd'
 
 ###############################################################################
-# BEGIN fix (183 / 362) for 'audit_rules_privileged_commands_postdrop'
+# BEGIN fix (183 / 363) for 'audit_rules_privileged_commands_postdrop'
 ###############################################################################
-(>&2 echo "Remediating rule 183/362: 'audit_rules_privileged_commands_postdrop'")
+(>&2 echo "Remediating rule 183/363: 'audit_rules_privileged_commands_postdrop'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -20498,9 +19789,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_postdrop'
 
 ###############################################################################
-# BEGIN fix (184 / 362) for 'audit_rules_privileged_commands_postqueue'
+# BEGIN fix (184 / 363) for 'audit_rules_privileged_commands_postqueue'
 ###############################################################################
-(>&2 echo "Remediating rule 184/362: 'audit_rules_privileged_commands_postqueue'")
+(>&2 echo "Remediating rule 184/363: 'audit_rules_privileged_commands_postqueue'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -20760,9 +20051,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_postqueue'
 
 ###############################################################################
-# BEGIN fix (185 / 362) for 'audit_rules_privileged_commands_ssh_agent'
+# BEGIN fix (185 / 363) for 'audit_rules_privileged_commands_ssh_agent'
 ###############################################################################
-(>&2 echo "Remediating rule 185/362: 'audit_rules_privileged_commands_ssh_agent'")
+(>&2 echo "Remediating rule 185/363: 'audit_rules_privileged_commands_ssh_agent'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -21022,9 +20313,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_ssh_agent'
 
 ###############################################################################
-# BEGIN fix (186 / 362) for 'audit_rules_privileged_commands_ssh_keysign'
+# BEGIN fix (186 / 363) for 'audit_rules_privileged_commands_ssh_keysign'
 ###############################################################################
-(>&2 echo "Remediating rule 186/362: 'audit_rules_privileged_commands_ssh_keysign'")
+(>&2 echo "Remediating rule 186/363: 'audit_rules_privileged_commands_ssh_keysign'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -21284,9 +20575,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_ssh_keysign'
 
 ###############################################################################
-# BEGIN fix (187 / 362) for 'audit_rules_privileged_commands_su'
+# BEGIN fix (187 / 363) for 'audit_rules_privileged_commands_su'
 ###############################################################################
-(>&2 echo "Remediating rule 187/362: 'audit_rules_privileged_commands_su'")
+(>&2 echo "Remediating rule 187/363: 'audit_rules_privileged_commands_su'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -21546,9 +20837,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_su'
 
 ###############################################################################
-# BEGIN fix (188 / 362) for 'audit_rules_privileged_commands_sudo'
+# BEGIN fix (188 / 363) for 'audit_rules_privileged_commands_sudo'
 ###############################################################################
-(>&2 echo "Remediating rule 188/362: 'audit_rules_privileged_commands_sudo'")
+(>&2 echo "Remediating rule 188/363: 'audit_rules_privileged_commands_sudo'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -21808,9 +21099,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_sudo'
 
 ###############################################################################
-# BEGIN fix (189 / 362) for 'audit_rules_privileged_commands_umount'
+# BEGIN fix (189 / 363) for 'audit_rules_privileged_commands_umount'
 ###############################################################################
-(>&2 echo "Remediating rule 189/362: 'audit_rules_privileged_commands_umount'")
+(>&2 echo "Remediating rule 189/363: 'audit_rules_privileged_commands_umount'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -22070,9 +21361,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_umount'
 
 ###############################################################################
-# BEGIN fix (190 / 362) for 'audit_rules_privileged_commands_unix_chkpwd'
+# BEGIN fix (190 / 363) for 'audit_rules_privileged_commands_unix_chkpwd'
 ###############################################################################
-(>&2 echo "Remediating rule 190/362: 'audit_rules_privileged_commands_unix_chkpwd'")
+(>&2 echo "Remediating rule 190/363: 'audit_rules_privileged_commands_unix_chkpwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -22332,9 +21623,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_unix_chkpwd'
 
 ###############################################################################
-# BEGIN fix (191 / 362) for 'audit_rules_privileged_commands_unix_update'
+# BEGIN fix (191 / 363) for 'audit_rules_privileged_commands_unix_update'
 ###############################################################################
-(>&2 echo "Remediating rule 191/362: 'audit_rules_privileged_commands_unix_update'")
+(>&2 echo "Remediating rule 191/363: 'audit_rules_privileged_commands_unix_update'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -22594,9 +21885,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_unix_update'
 
 ###############################################################################
-# BEGIN fix (192 / 362) for 'audit_rules_privileged_commands_userhelper'
+# BEGIN fix (192 / 363) for 'audit_rules_privileged_commands_userhelper'
 ###############################################################################
-(>&2 echo "Remediating rule 192/362: 'audit_rules_privileged_commands_userhelper'")
+(>&2 echo "Remediating rule 192/363: 'audit_rules_privileged_commands_userhelper'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -22856,9 +22147,9 @@ fi
 # END fix for 'audit_rules_privileged_commands_userhelper'
 
 ###############################################################################
-# BEGIN fix (193 / 362) for 'audit_rules_privileged_commands_usermod'
+# BEGIN fix (193 / 363) for 'audit_rules_privileged_commands_usermod'
 ###############################################################################
-(>&2 echo "Remediating rule 193/362: 'audit_rules_privileged_commands_usermod'")
+(>&2 echo "Remediating rule 193/363: 'audit_rules_privileged_commands_usermod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23118,16 +22409,16 @@ fi
 # END fix for 'audit_rules_privileged_commands_usermod'
 
 ###############################################################################
-# BEGIN fix (194 / 362) for 'auditd_audispd_configure_sufficiently_large_partition'
+# BEGIN fix (194 / 363) for 'auditd_audispd_configure_sufficiently_large_partition'
 ###############################################################################
-(>&2 echo "Remediating rule 194/362: 'auditd_audispd_configure_sufficiently_large_partition'")
+(>&2 echo "Remediating rule 194/363: 'auditd_audispd_configure_sufficiently_large_partition'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'auditd_audispd_configure_sufficiently_large_partition'
 
 ###############################################################################
-# BEGIN fix (195 / 362) for 'auditd_data_disk_error_action'
+# BEGIN fix (195 / 363) for 'auditd_data_disk_error_action'
 ###############################################################################
-(>&2 echo "Remediating rule 195/362: 'auditd_data_disk_error_action'")
+(>&2 echo "Remediating rule 195/363: 'auditd_data_disk_error_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23155,92 +22446,48 @@ fi
 # END fix for 'auditd_data_disk_error_action'
 
 ###############################################################################
-# BEGIN fix (196 / 362) for 'auditd_data_disk_full_action'
+# BEGIN fix (196 / 363) for 'auditd_data_disk_full_action'
 ###############################################################################
-(>&2 echo "Remediating rule 196/362: 'auditd_data_disk_full_action'")
+(>&2 echo "Remediating rule 196/363: 'auditd_data_disk_full_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 
 var_auditd_disk_full_action="halt"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/audit/auditd.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-84045-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-84045-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^disk_full_action")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_disk_full_action"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^disk_full_action\\>" "/etc/audit/auditd.conf"; then
+    "${sed_command[@]}" "s/^disk_full_action\\>.*/$formatted_output/gi" "/etc/audit/auditd.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append /etc/audit/auditd.conf '^disk_full_action' "$var_auditd_disk_full_action" "CCE-84045-4"
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/audit/auditd.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -23248,9 +22495,9 @@ fi
 # END fix for 'auditd_data_disk_full_action'
 
 ###############################################################################
-# BEGIN fix (197 / 362) for 'auditd_data_retention_action_mail_acct'
+# BEGIN fix (197 / 363) for 'auditd_data_retention_action_mail_acct'
 ###############################################################################
-(>&2 echo "Remediating rule 197/362: 'auditd_data_retention_action_mail_acct'")
+(>&2 echo "Remediating rule 197/363: 'auditd_data_retention_action_mail_acct'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23260,84 +22507,38 @@ var_auditd_action_mail_acct="root"
 
 
 AUDITCONFIG=/etc/audit/auditd.conf
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80678-6" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80678-6"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^action_mail_acct")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_action_mail_acct"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^action_mail_acct\\>" "$AUDITCONFIG"; then
+    "${sed_command[@]}" "s/^action_mail_acct\\>.*/$formatted_output/gi" "$AUDITCONFIG"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append $AUDITCONFIG '^action_mail_acct' "$var_auditd_action_mail_acct" "CCE-80678-6"
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
+    printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -23345,9 +22546,9 @@ fi
 # END fix for 'auditd_data_retention_action_mail_acct'
 
 ###############################################################################
-# BEGIN fix (198 / 362) for 'auditd_data_retention_max_log_file_action'
+# BEGIN fix (198 / 363) for 'auditd_data_retention_max_log_file_action'
 ###############################################################################
-(>&2 echo "Remediating rule 198/362: 'auditd_data_retention_max_log_file_action'")
+(>&2 echo "Remediating rule 198/363: 'auditd_data_retention_max_log_file_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23357,84 +22558,38 @@ var_auditd_max_log_file_action="syslog"
 
 
 AUDITCONFIG=/etc/audit/auditd.conf
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80682-8" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80682-8"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^max_log_file_action")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_max_log_file_action"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^max_log_file_action\\>" "$AUDITCONFIG"; then
+    "${sed_command[@]}" "s/^max_log_file_action\\>.*/$formatted_output/gi" "$AUDITCONFIG"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append $AUDITCONFIG '^max_log_file_action' "$var_auditd_max_log_file_action" "CCE-80682-8"
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
+    printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -23442,9 +22597,9 @@ fi
 # END fix for 'auditd_data_retention_max_log_file_action'
 
 ###############################################################################
-# BEGIN fix (199 / 362) for 'auditd_data_retention_space_left_action'
+# BEGIN fix (199 / 363) for 'auditd_data_retention_space_left_action'
 ###############################################################################
-(>&2 echo "Remediating rule 199/362: 'auditd_data_retention_space_left_action'")
+(>&2 echo "Remediating rule 199/363: 'auditd_data_retention_space_left_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23460,84 +22615,38 @@ var_auditd_space_left_action="email"
 #
 
 AUDITCONFIG=/etc/audit/auditd.conf
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80684-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80684-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^space_left_action")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_space_left_action"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^space_left_action\\>" "$AUDITCONFIG"; then
+    "${sed_command[@]}" "s/^space_left_action\\>.*/$formatted_output/gi" "$AUDITCONFIG"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append $AUDITCONFIG '^space_left_action' "$var_auditd_space_left_action" "CCE-80684-4"
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
+    printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -23545,9 +22654,9 @@ fi
 # END fix for 'auditd_data_retention_space_left_action'
 
 ###############################################################################
-# BEGIN fix (200 / 362) for 'auditd_data_retention_space_left_percentage'
+# BEGIN fix (200 / 363) for 'auditd_data_retention_space_left_percentage'
 ###############################################################################
-(>&2 echo "Remediating rule 200/362: 'auditd_data_retention_space_left_percentage'")
+(>&2 echo "Remediating rule 200/363: 'auditd_data_retention_space_left_percentage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23566,9 +22675,9 @@ fi
 # END fix for 'auditd_data_retention_space_left_percentage'
 
 ###############################################################################
-# BEGIN fix (201 / 362) for 'auditd_local_events'
+# BEGIN fix (201 / 363) for 'auditd_local_events'
 ###############################################################################
-(>&2 echo "Remediating rule 201/362: 'auditd_local_events'")
+(>&2 echo "Remediating rule 201/363: 'auditd_local_events'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23590,9 +22699,9 @@ fi
 # END fix for 'auditd_local_events'
 
 ###############################################################################
-# BEGIN fix (202 / 362) for 'auditd_log_format'
+# BEGIN fix (202 / 363) for 'auditd_log_format'
 ###############################################################################
-(>&2 echo "Remediating rule 202/362: 'auditd_log_format'")
+(>&2 echo "Remediating rule 202/363: 'auditd_log_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23614,9 +22723,9 @@ fi
 # END fix for 'auditd_log_format'
 
 ###############################################################################
-# BEGIN fix (203 / 362) for 'auditd_name_format'
+# BEGIN fix (203 / 363) for 'auditd_name_format'
 ###############################################################################
-(>&2 echo "Remediating rule 203/362: 'auditd_name_format'")
+(>&2 echo "Remediating rule 203/363: 'auditd_name_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23638,9 +22747,9 @@ fi
 # END fix for 'auditd_name_format'
 
 ###############################################################################
-# BEGIN fix (204 / 362) for 'auditd_overflow_action'
+# BEGIN fix (204 / 363) for 'auditd_overflow_action'
 ###############################################################################
-(>&2 echo "Remediating rule 204/362: 'auditd_overflow_action'")
+(>&2 echo "Remediating rule 204/363: 'auditd_overflow_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23663,9 +22772,9 @@ fi
 # END fix for 'auditd_overflow_action'
 
 ###############################################################################
-# BEGIN fix (205 / 362) for 'audit_immutable_login_uids'
+# BEGIN fix (205 / 363) for 'audit_immutable_login_uids'
 ###############################################################################
-(>&2 echo "Remediating rule 205/362: 'audit_immutable_login_uids'")
+(>&2 echo "Remediating rule 205/363: 'audit_immutable_login_uids'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23673,6 +22782,8 @@ cat << 'EOF' > /etc/audit/rules.d/11-loginuid.rules
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 EOF
+
+chmod o-rwx /etc/audit/rules.d/11-loginuid.rules
 
 augenrules --load
 
@@ -23682,9 +22793,9 @@ fi
 # END fix for 'audit_immutable_login_uids'
 
 ###############################################################################
-# BEGIN fix (206 / 362) for 'grub2_pti_argument'
+# BEGIN fix (206 / 363) for 'grub2_pti_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 206/362: 'grub2_pti_argument'")
+(>&2 echo "Remediating rule 206/363: 'grub2_pti_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -23704,9 +22815,9 @@ fi
 # END fix for 'grub2_pti_argument'
 
 ###############################################################################
-# BEGIN fix (207 / 362) for 'grub2_vsyscall_argument'
+# BEGIN fix (207 / 363) for 'grub2_vsyscall_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 207/362: 'grub2_vsyscall_argument'")
+(>&2 echo "Remediating rule 207/363: 'grub2_vsyscall_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -23726,37 +22837,37 @@ fi
 # END fix for 'grub2_vsyscall_argument'
 
 ###############################################################################
-# BEGIN fix (208 / 362) for 'grub2_admin_username'
+# BEGIN fix (208 / 363) for 'grub2_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 208/362: 'grub2_admin_username'")
+(>&2 echo "Remediating rule 208/363: 'grub2_admin_username'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_admin_username'
 
 ###############################################################################
-# BEGIN fix (209 / 362) for 'grub2_password'
+# BEGIN fix (209 / 363) for 'grub2_password'
 ###############################################################################
-(>&2 echo "Remediating rule 209/362: 'grub2_password'")
+(>&2 echo "Remediating rule 209/363: 'grub2_password'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_password'
 
 ###############################################################################
-# BEGIN fix (210 / 362) for 'grub2_uefi_admin_username'
+# BEGIN fix (210 / 363) for 'grub2_uefi_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 210/362: 'grub2_uefi_admin_username'")
+(>&2 echo "Remediating rule 210/363: 'grub2_uefi_admin_username'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_uefi_admin_username'
 
 ###############################################################################
-# BEGIN fix (211 / 362) for 'grub2_uefi_password'
+# BEGIN fix (211 / 363) for 'grub2_uefi_password'
 ###############################################################################
-(>&2 echo "Remediating rule 211/362: 'grub2_uefi_password'")
+(>&2 echo "Remediating rule 211/363: 'grub2_uefi_password'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'grub2_uefi_password'
 
 ###############################################################################
-# BEGIN fix (212 / 362) for 'package_rsyslog-gnutls_installed'
+# BEGIN fix (212 / 363) for 'package_rsyslog-gnutls_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 212/362: 'package_rsyslog-gnutls_installed'")
+(>&2 echo "Remediating rule 212/363: 'package_rsyslog-gnutls_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23770,9 +22881,9 @@ fi
 # END fix for 'package_rsyslog-gnutls_installed'
 
 ###############################################################################
-# BEGIN fix (213 / 362) for 'package_rsyslog_installed'
+# BEGIN fix (213 / 363) for 'package_rsyslog_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 213/362: 'package_rsyslog_installed'")
+(>&2 echo "Remediating rule 213/363: 'package_rsyslog_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23786,9 +22897,9 @@ fi
 # END fix for 'package_rsyslog_installed'
 
 ###############################################################################
-# BEGIN fix (214 / 362) for 'service_rsyslog_enabled'
+# BEGIN fix (214 / 363) for 'service_rsyslog_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 214/362: 'service_rsyslog_enabled'")
+(>&2 echo "Remediating rule 214/363: 'service_rsyslog_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23803,9 +22914,9 @@ fi
 # END fix for 'service_rsyslog_enabled'
 
 ###############################################################################
-# BEGIN fix (215 / 362) for 'rsyslog_cron_logging'
+# BEGIN fix (215 / 363) for 'rsyslog_cron_logging'
 ###############################################################################
-(>&2 echo "Remediating rule 215/362: 'rsyslog_cron_logging'")
+(>&2 echo "Remediating rule 215/363: 'rsyslog_cron_logging'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23820,9 +22931,9 @@ fi
 # END fix for 'rsyslog_cron_logging'
 
 ###############################################################################
-# BEGIN fix (216 / 362) for 'rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
+# BEGIN fix (216 / 363) for 'rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
 ###############################################################################
-(>&2 echo "Remediating rule 216/362: 'rsyslog_encrypt_offload_actionsendstreamdriverauthmode'")
+(>&2 echo "Remediating rule 216/363: 'rsyslog_encrypt_offload_actionsendstreamdriverauthmode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23838,9 +22949,9 @@ fi
 # END fix for 'rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
 
 ###############################################################################
-# BEGIN fix (217 / 362) for 'rsyslog_encrypt_offload_actionsendstreamdrivermode'
+# BEGIN fix (217 / 363) for 'rsyslog_encrypt_offload_actionsendstreamdrivermode'
 ###############################################################################
-(>&2 echo "Remediating rule 217/362: 'rsyslog_encrypt_offload_actionsendstreamdrivermode'")
+(>&2 echo "Remediating rule 217/363: 'rsyslog_encrypt_offload_actionsendstreamdrivermode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23864,9 +22975,9 @@ fi
 # END fix for 'rsyslog_encrypt_offload_actionsendstreamdrivermode'
 
 ###############################################################################
-# BEGIN fix (218 / 362) for 'rsyslog_encrypt_offload_defaultnetstreamdriver'
+# BEGIN fix (218 / 363) for 'rsyslog_encrypt_offload_defaultnetstreamdriver'
 ###############################################################################
-(>&2 echo "Remediating rule 218/362: 'rsyslog_encrypt_offload_defaultnetstreamdriver'")
+(>&2 echo "Remediating rule 218/363: 'rsyslog_encrypt_offload_defaultnetstreamdriver'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23889,9 +23000,9 @@ fi
 # END fix for 'rsyslog_encrypt_offload_defaultnetstreamdriver'
 
 ###############################################################################
-# BEGIN fix (219 / 362) for 'rsyslog_remote_access_monitoring'
+# BEGIN fix (219 / 363) for 'rsyslog_remote_access_monitoring'
 ###############################################################################
-(>&2 echo "Remediating rule 219/362: 'rsyslog_remote_access_monitoring'")
+(>&2 echo "Remediating rule 219/363: 'rsyslog_remote_access_monitoring'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -23925,92 +23036,48 @@ fi
 # END fix for 'rsyslog_remote_access_monitoring'
 
 ###############################################################################
-# BEGIN fix (220 / 362) for 'rsyslog_remote_loghost'
+# BEGIN fix (220 / 363) for 'rsyslog_remote_loghost'
 ###############################################################################
-(>&2 echo "Remediating rule 220/362: 'rsyslog_remote_loghost'")
+(>&2 echo "Remediating rule 220/363: 'rsyslog_remote_loghost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 
 rsyslog_remote_loghost_address="logcollector"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/rsyslog.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80863-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80863-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^\*\.\*")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "@@$rsyslog_remote_loghost_address"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^\*\.\*\\>" "/etc/rsyslog.conf"; then
+    "${sed_command[@]}" "s/^\*\.\*\\>.*/$formatted_output/gi" "/etc/rsyslog.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/rsyslog.conf' '^\*\.\*' "@@$rsyslog_remote_loghost_address" 'CCE-80863-4' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/rsyslog.conf" >> "/etc/rsyslog.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/rsyslog.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24018,23 +23085,23 @@ fi
 # END fix for 'rsyslog_remote_loghost'
 
 ###############################################################################
-# BEGIN fix (221 / 362) for 'network_configure_name_resolution'
+# BEGIN fix (221 / 363) for 'network_configure_name_resolution'
 ###############################################################################
-(>&2 echo "Remediating rule 221/362: 'network_configure_name_resolution'")
+(>&2 echo "Remediating rule 221/363: 'network_configure_name_resolution'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'network_configure_name_resolution'
 
 ###############################################################################
-# BEGIN fix (222 / 362) for 'network_sniffer_disabled'
+# BEGIN fix (222 / 363) for 'network_sniffer_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 222/362: 'network_sniffer_disabled'")
+(>&2 echo "Remediating rule 222/363: 'network_sniffer_disabled'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'network_sniffer_disabled'
 
 ###############################################################################
-# BEGIN fix (223 / 362) for 'package_firewalld_installed'
+# BEGIN fix (223 / 363) for 'package_firewalld_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 223/362: 'package_firewalld_installed'")
+(>&2 echo "Remediating rule 223/363: 'package_firewalld_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24048,9 +23115,9 @@ fi
 # END fix for 'package_firewalld_installed'
 
 ###############################################################################
-# BEGIN fix (224 / 362) for 'service_firewalld_enabled'
+# BEGIN fix (224 / 363) for 'service_firewalld_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 224/362: 'service_firewalld_enabled'")
+(>&2 echo "Remediating rule 224/363: 'service_firewalld_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24065,17 +23132,17 @@ fi
 # END fix for 'service_firewalld_enabled'
 
 ###############################################################################
-# BEGIN fix (225 / 362) for 'configure_firewalld_ports'
+# BEGIN fix (225 / 363) for 'configure_firewalld_ports'
 ###############################################################################
-(>&2 echo "Remediating rule 225/362: 'configure_firewalld_ports'")
+(>&2 echo "Remediating rule 225/363: 'configure_firewalld_ports'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 if ! rpm -q --quiet "firewalld" ; then
     yum install -y "firewalld"
 fi
+
+
 firewalld_sshd_zone="public"
 
 
@@ -24103,84 +23170,37 @@ if [ $nic_bound = false ];then
     # Add first NIC to SSH enabled zone
 
     if ! firewall-cmd --state -q; then
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
+        # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+        # Otherwise, regular sed command will do.
+        sed_command=('sed' '-i')
+        if test -L "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
+            sed_command+=('--follow-symlinks')
+        fi
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
+        # If the cce arg is empty, CCE is not assigned.
+        if [ -z "CCE-84300-3" ]; then
+            cce="CCE"
+        else
+            cce="CCE-84300-3"
+        fi
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
-    sed_command+=('--follow-symlinks')
-  fi
+        # Strip any search characters in the key arg so that the key can be replaced without
+        # adding any search characters to the config file.
+        stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ZONE=")
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
-    cce="CCE"
-  fi
+        # shellcheck disable=SC2059
+        printf -v formatted_output "%s=%s" "$stripped_key" "$firewalld_sshd_zone"
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
-
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
-
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
-    # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-        replace_or_append "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" '^ZONE=' "$firewalld_sshd_zone" 'CCE-84300-3' '%s=%s'
+        # If the key exists, change it. Otherwise, add it to the config_file.
+        # We search for the key string followed by a word boundary (matched by \>),
+        # so if we search for 'setting', 'setting2' won't match.
+        if LC_ALL=C grep -q -m 1 -i -e "^ZONE=\\>" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
+            "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+        else
+            # \n is precaution for case where file ends without trailing newline
+            printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+            printf '%s\n' "$formatted_output" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+        fi
     else
         # If firewalld service is running, we need to do this step with firewall-cmd
         # Otherwise firewalld will comunicate with NetworkManage and will revert assigned zone
@@ -24196,9 +23216,9 @@ fi
 # END fix for 'configure_firewalld_ports'
 
 ###############################################################################
-# BEGIN fix (226 / 362) for 'sysctl_net_ipv6_conf_all_accept_ra'
+# BEGIN fix (226 / 363) for 'sysctl_net_ipv6_conf_all_accept_ra'
 ###############################################################################
-(>&2 echo "Remediating rule 226/362: 'sysctl_net_ipv6_conf_all_accept_ra'")
+(>&2 echo "Remediating rule 226/363: 'sysctl_net_ipv6_conf_all_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24216,84 +23236,37 @@ sysctl_net_ipv6_conf_all_accept_ra_value="0"
 # If net.ipv6.conf.all.accept_ra present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.all.accept_ra = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81006-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81006-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_ra")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_accept_ra_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_ra\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_ra\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.all.accept_ra' "$sysctl_net_ipv6_conf_all_accept_ra_value" 'CCE-81006-9'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24301,9 +23274,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_ra'
 
 ###############################################################################
-# BEGIN fix (227 / 362) for 'sysctl_net_ipv6_conf_all_accept_redirects'
+# BEGIN fix (227 / 363) for 'sysctl_net_ipv6_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 227/362: 'sysctl_net_ipv6_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 227/363: 'sysctl_net_ipv6_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24321,84 +23294,37 @@ sysctl_net_ipv6_conf_all_accept_redirects_value="0"
 # If net.ipv6.conf.all.accept_redirects present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.all.accept_redirects = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81009-3" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81009-3"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_accept_redirects_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.all.accept_redirects' "$sysctl_net_ipv6_conf_all_accept_redirects_value" 'CCE-81009-3'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24406,9 +23332,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (228 / 362) for 'sysctl_net_ipv6_conf_all_accept_source_route'
+# BEGIN fix (228 / 363) for 'sysctl_net_ipv6_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 228/362: 'sysctl_net_ipv6_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 228/363: 'sysctl_net_ipv6_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24426,84 +23352,37 @@ sysctl_net_ipv6_conf_all_accept_source_route_value="0"
 # If net.ipv6.conf.all.accept_source_route present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.all.accept_source_route = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81013-5" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81013-5"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_source_route")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_accept_source_route_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_source_route\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.all.accept_source_route' "$sysctl_net_ipv6_conf_all_accept_source_route_value" 'CCE-81013-5'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24511,9 +23390,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (229 / 362) for 'sysctl_net_ipv6_conf_default_accept_ra'
+# BEGIN fix (229 / 363) for 'sysctl_net_ipv6_conf_default_accept_ra'
 ###############################################################################
-(>&2 echo "Remediating rule 229/362: 'sysctl_net_ipv6_conf_default_accept_ra'")
+(>&2 echo "Remediating rule 229/363: 'sysctl_net_ipv6_conf_default_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24531,84 +23410,37 @@ sysctl_net_ipv6_conf_default_accept_ra_value="0"
 # If net.ipv6.conf.default.accept_ra present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.default.accept_ra = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81007-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81007-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_ra")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_default_accept_ra_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_ra\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_ra\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.default.accept_ra' "$sysctl_net_ipv6_conf_default_accept_ra_value" 'CCE-81007-7'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24616,9 +23448,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_ra'
 
 ###############################################################################
-# BEGIN fix (230 / 362) for 'sysctl_net_ipv6_conf_default_accept_redirects'
+# BEGIN fix (230 / 363) for 'sysctl_net_ipv6_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 230/362: 'sysctl_net_ipv6_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 230/363: 'sysctl_net_ipv6_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24636,84 +23468,37 @@ sysctl_net_ipv6_conf_default_accept_redirects_value="0"
 # If net.ipv6.conf.default.accept_redirects present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.default.accept_redirects = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81010-1" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81010-1"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_default_accept_redirects_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.default.accept_redirects' "$sysctl_net_ipv6_conf_default_accept_redirects_value" 'CCE-81010-1'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24721,9 +23506,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (231 / 362) for 'sysctl_net_ipv6_conf_default_accept_source_route'
+# BEGIN fix (231 / 363) for 'sysctl_net_ipv6_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 231/362: 'sysctl_net_ipv6_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 231/363: 'sysctl_net_ipv6_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24741,84 +23526,37 @@ sysctl_net_ipv6_conf_default_accept_source_route_value="0"
 # If net.ipv6.conf.default.accept_source_route present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv6.conf.default.accept_source_route = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81015-0" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81015-0"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_source_route")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_default_accept_source_route_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_source_route\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv6.conf.default.accept_source_route' "$sysctl_net_ipv6_conf_default_accept_source_route_value" 'CCE-81015-0'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24826,9 +23564,9 @@ fi
 # END fix for 'sysctl_net_ipv6_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (232 / 362) for 'sysctl_net_ipv4_conf_all_accept_redirects'
+# BEGIN fix (232 / 363) for 'sysctl_net_ipv4_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 232/362: 'sysctl_net_ipv4_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 232/363: 'sysctl_net_ipv4_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24846,84 +23584,37 @@ sysctl_net_ipv4_conf_all_accept_redirects_value="0"
 # If net.ipv4.conf.all.accept_redirects present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.conf.all.accept_redirects = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80917-8" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80917-8"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_accept_redirects_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.all.accept_redirects' "$sysctl_net_ipv4_conf_all_accept_redirects_value" 'CCE-80917-8'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -24931,9 +23622,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (233 / 362) for 'sysctl_net_ipv4_conf_all_accept_source_route'
+# BEGIN fix (233 / 363) for 'sysctl_net_ipv4_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 233/362: 'sysctl_net_ipv4_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 233/363: 'sysctl_net_ipv4_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -24951,84 +23642,37 @@ sysctl_net_ipv4_conf_all_accept_source_route_value="0"
 # If net.ipv4.conf.all.accept_source_route present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.conf.all.accept_source_route = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81011-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81011-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_source_route")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_accept_source_route_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_source_route\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.all.accept_source_route' "$sysctl_net_ipv4_conf_all_accept_source_route_value" 'CCE-81011-9'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25036,9 +23680,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (234 / 362) for 'sysctl_net_ipv4_conf_all_rp_filter'
+# BEGIN fix (234 / 363) for 'sysctl_net_ipv4_conf_all_rp_filter'
 ###############################################################################
-(>&2 echo "Remediating rule 234/362: 'sysctl_net_ipv4_conf_all_rp_filter'")
+(>&2 echo "Remediating rule 234/363: 'sysctl_net_ipv4_conf_all_rp_filter'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25056,84 +23700,37 @@ sysctl_net_ipv4_conf_all_rp_filter_value="1"
 # If net.ipv4.conf.all.rp_filter present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.conf.all.rp_filter = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81021-8" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81021-8"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.rp_filter")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_rp_filter_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.rp_filter\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.all.rp_filter\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.all.rp_filter' "$sysctl_net_ipv4_conf_all_rp_filter_value" 'CCE-81021-8'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25141,9 +23738,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_rp_filter'
 
 ###############################################################################
-# BEGIN fix (235 / 362) for 'sysctl_net_ipv4_conf_default_accept_redirects'
+# BEGIN fix (235 / 363) for 'sysctl_net_ipv4_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 235/362: 'sysctl_net_ipv4_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 235/363: 'sysctl_net_ipv4_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25161,84 +23758,37 @@ sysctl_net_ipv4_conf_default_accept_redirects_value="0"
 # If net.ipv4.conf.default.accept_redirects present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.conf.default.accept_redirects = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80919-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80919-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_default_accept_redirects_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.default.accept_redirects' "$sysctl_net_ipv4_conf_default_accept_redirects_value" 'CCE-80919-4'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25246,9 +23796,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (236 / 362) for 'sysctl_net_ipv4_conf_default_accept_source_route'
+# BEGIN fix (236 / 363) for 'sysctl_net_ipv4_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 236/362: 'sysctl_net_ipv4_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 236/363: 'sysctl_net_ipv4_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25266,84 +23816,37 @@ sysctl_net_ipv4_conf_default_accept_source_route_value="0"
 # If net.ipv4.conf.default.accept_source_route present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.conf.default.accept_source_route = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80920-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80920-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_source_route")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_default_accept_source_route_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_source_route\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.default.accept_source_route' "$sysctl_net_ipv4_conf_default_accept_source_route_value" 'CCE-80920-2'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25351,9 +23854,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (237 / 362) for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
+# BEGIN fix (237 / 363) for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 ###############################################################################
-(>&2 echo "Remediating rule 237/362: 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
+(>&2 echo "Remediating rule 237/363: 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25371,84 +23874,37 @@ sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value="1"
 # If net.ipv4.icmp_echo_ignore_broadcasts present in /etc/sysctl.conf, change value to appropriate value
 #	else, add "net.ipv4.icmp_echo_ignore_broadcasts = value" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80922-8" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80922-8"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.icmp_echo_ignore_broadcasts")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.icmp_echo_ignore_broadcasts\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.icmp_echo_ignore_broadcasts\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.icmp_echo_ignore_broadcasts' "$sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value" 'CCE-80922-8'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25456,9 +23912,9 @@ fi
 # END fix for 'sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 
 ###############################################################################
-# BEGIN fix (238 / 362) for 'sysctl_net_ipv4_conf_all_send_redirects'
+# BEGIN fix (238 / 363) for 'sysctl_net_ipv4_conf_all_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 238/362: 'sysctl_net_ipv4_conf_all_send_redirects'")
+(>&2 echo "Remediating rule 238/363: 'sysctl_net_ipv4_conf_all_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25473,84 +23929,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If net.ipv4.conf.all.send_redirects present in /etc/sysctl.conf, change value to "0"
 #	else, add "net.ipv4.conf.all.send_redirects = 0" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80918-6" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80918-6"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.send_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.send_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.all.send_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.all.send_redirects' "0" 'CCE-80918-6'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25558,9 +23967,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_all_send_redirects'
 
 ###############################################################################
-# BEGIN fix (239 / 362) for 'sysctl_net_ipv4_conf_default_send_redirects'
+# BEGIN fix (239 / 363) for 'sysctl_net_ipv4_conf_default_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 239/362: 'sysctl_net_ipv4_conf_default_send_redirects'")
+(>&2 echo "Remediating rule 239/363: 'sysctl_net_ipv4_conf_default_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25575,84 +23984,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If net.ipv4.conf.default.send_redirects present in /etc/sysctl.conf, change value to "0"
 #	else, add "net.ipv4.conf.default.send_redirects = 0" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80921-0" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80921-0"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.send_redirects")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.send_redirects\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.conf.default.send_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.conf.default.send_redirects' "0" 'CCE-80921-0'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25660,9 +24022,9 @@ fi
 # END fix for 'sysctl_net_ipv4_conf_default_send_redirects'
 
 ###############################################################################
-# BEGIN fix (240 / 362) for 'sysctl_net_ipv4_ip_forward'
+# BEGIN fix (240 / 363) for 'sysctl_net_ipv4_ip_forward'
 ###############################################################################
-(>&2 echo "Remediating rule 240/362: 'sysctl_net_ipv4_ip_forward'")
+(>&2 echo "Remediating rule 240/363: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25677,84 +24039,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If net.ipv4.ip_forward present in /etc/sysctl.conf, change value to "0"
 #	else, add "net.ipv4.ip_forward = 0" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81024-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81024-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.ip_forward")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.ip_forward\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.ipv4.ip_forward\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.ipv4.ip_forward' "0" 'CCE-81024-2'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -25762,9 +24077,9 @@ fi
 # END fix for 'sysctl_net_ipv4_ip_forward'
 
 ###############################################################################
-# BEGIN fix (241 / 362) for 'kernel_module_atm_disabled'
+# BEGIN fix (241 / 363) for 'kernel_module_atm_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 241/362: 'kernel_module_atm_disabled'")
+(>&2 echo "Remediating rule 241/363: 'kernel_module_atm_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25782,9 +24097,9 @@ fi
 # END fix for 'kernel_module_atm_disabled'
 
 ###############################################################################
-# BEGIN fix (242 / 362) for 'kernel_module_can_disabled'
+# BEGIN fix (242 / 363) for 'kernel_module_can_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 242/362: 'kernel_module_can_disabled'")
+(>&2 echo "Remediating rule 242/363: 'kernel_module_can_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25802,9 +24117,9 @@ fi
 # END fix for 'kernel_module_can_disabled'
 
 ###############################################################################
-# BEGIN fix (243 / 362) for 'kernel_module_firewire-core_disabled'
+# BEGIN fix (243 / 363) for 'kernel_module_firewire-core_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 243/362: 'kernel_module_firewire-core_disabled'")
+(>&2 echo "Remediating rule 243/363: 'kernel_module_firewire-core_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25822,9 +24137,9 @@ fi
 # END fix for 'kernel_module_firewire-core_disabled'
 
 ###############################################################################
-# BEGIN fix (244 / 362) for 'kernel_module_sctp_disabled'
+# BEGIN fix (244 / 363) for 'kernel_module_sctp_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 244/362: 'kernel_module_sctp_disabled'")
+(>&2 echo "Remediating rule 244/363: 'kernel_module_sctp_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25842,9 +24157,9 @@ fi
 # END fix for 'kernel_module_sctp_disabled'
 
 ###############################################################################
-# BEGIN fix (245 / 362) for 'kernel_module_tipc_disabled'
+# BEGIN fix (245 / 363) for 'kernel_module_tipc_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 245/362: 'kernel_module_tipc_disabled'")
+(>&2 echo "Remediating rule 245/363: 'kernel_module_tipc_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25862,9 +24177,9 @@ fi
 # END fix for 'kernel_module_tipc_disabled'
 
 ###############################################################################
-# BEGIN fix (246 / 362) for 'kernel_module_bluetooth_disabled'
+# BEGIN fix (246 / 363) for 'kernel_module_bluetooth_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 246/362: 'kernel_module_bluetooth_disabled'")
+(>&2 echo "Remediating rule 246/363: 'kernel_module_bluetooth_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25882,9 +24197,9 @@ fi
 # END fix for 'kernel_module_bluetooth_disabled'
 
 ###############################################################################
-# BEGIN fix (247 / 362) for 'wireless_disable_interfaces'
+# BEGIN fix (247 / 363) for 'wireless_disable_interfaces'
 ###############################################################################
-(>&2 echo "Remediating rule 247/362: 'wireless_disable_interfaces'")
+(>&2 echo "Remediating rule 247/363: 'wireless_disable_interfaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25896,18 +24211,18 @@ fi
 # END fix for 'wireless_disable_interfaces'
 
 ###############################################################################
-# BEGIN fix (248 / 362) for 'dir_perms_world_writable_root_owned'
+# BEGIN fix (248 / 363) for 'dir_perms_world_writable_root_owned'
 ###############################################################################
-(>&2 echo "Remediating rule 248/362: 'dir_perms_world_writable_root_owned'")
+(>&2 echo "Remediating rule 248/363: 'dir_perms_world_writable_root_owned'")
 #!/bin/bash
 
 find / -not -fstype afs -not -fstype ceph -not -fstype cifs -not -fstype smb3 -not -fstype smbfs -not -fstype sshfs -not -fstype ncpfs -not -fstype ncp -not -fstype nfs -not -fstype nfs4 -not -fstype gfs -not -fstype gfs2 -not -fstype glusterfs -not -fstype gpfs -not -fstype pvfs2 -not -fstype ocfs2 -not -fstype lustre -not -fstype davfs -not -fstype fuse.sshfs -type d -perm -0002 -uid +0 -exec chown root {} \;
 # END fix for 'dir_perms_world_writable_root_owned'
 
 ###############################################################################
-# BEGIN fix (249 / 362) for 'dir_perms_world_writable_sticky_bits'
+# BEGIN fix (249 / 363) for 'dir_perms_world_writable_sticky_bits'
 ###############################################################################
-(>&2 echo "Remediating rule 249/362: 'dir_perms_world_writable_sticky_bits'")
+(>&2 echo "Remediating rule 249/363: 'dir_perms_world_writable_sticky_bits'")
 df --local -P | awk '{if (NR!=1) print $6}' \
 | xargs -I '{}' find '{}' -xdev -type d \
 \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null \
@@ -25915,18 +24230,18 @@ df --local -P | awk '{if (NR!=1) print $6}' \
 # END fix for 'dir_perms_world_writable_sticky_bits'
 
 ###############################################################################
-# BEGIN fix (250 / 362) for 'file_permissions_etc_audit_auditd'
+# BEGIN fix (250 / 363) for 'file_permissions_etc_audit_auditd'
 ###############################################################################
-(>&2 echo "Remediating rule 250/362: 'file_permissions_etc_audit_auditd'")
+(>&2 echo "Remediating rule 250/363: 'file_permissions_etc_audit_auditd'")
 
 
 chmod 0640 /etc/audit/auditd.conf
 # END fix for 'file_permissions_etc_audit_auditd'
 
 ###############################################################################
-# BEGIN fix (251 / 362) for 'file_permissions_etc_audit_rulesd'
+# BEGIN fix (251 / 363) for 'file_permissions_etc_audit_rulesd'
 ###############################################################################
-(>&2 echo "Remediating rule 251/362: 'file_permissions_etc_audit_rulesd'")
+(>&2 echo "Remediating rule 251/363: 'file_permissions_etc_audit_rulesd'")
 
 
 readarray -t files < <(find /etc/audit/rules.d/)
@@ -25938,23 +24253,23 @@ done
 # END fix for 'file_permissions_etc_audit_rulesd'
 
 ###############################################################################
-# BEGIN fix (252 / 362) for 'file_permissions_ungroupowned'
+# BEGIN fix (252 / 363) for 'file_permissions_ungroupowned'
 ###############################################################################
-(>&2 echo "Remediating rule 252/362: 'file_permissions_ungroupowned'")
+(>&2 echo "Remediating rule 252/363: 'file_permissions_ungroupowned'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'file_permissions_ungroupowned'
 
 ###############################################################################
-# BEGIN fix (253 / 362) for 'no_files_unowned_by_user'
+# BEGIN fix (253 / 363) for 'no_files_unowned_by_user'
 ###############################################################################
-(>&2 echo "Remediating rule 253/362: 'no_files_unowned_by_user'")
+(>&2 echo "Remediating rule 253/363: 'no_files_unowned_by_user'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'no_files_unowned_by_user'
 
 ###############################################################################
-# BEGIN fix (254 / 362) for 'sysctl_fs_protected_hardlinks'
+# BEGIN fix (254 / 363) for 'sysctl_fs_protected_hardlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 254/362: 'sysctl_fs_protected_hardlinks'")
+(>&2 echo "Remediating rule 254/363: 'sysctl_fs_protected_hardlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -25969,84 +24284,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If fs.protected_hardlinks present in /etc/sysctl.conf, change value to "1"
 #	else, add "fs.protected_hardlinks = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81027-5" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81027-5"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_hardlinks")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_hardlinks\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^fs.protected_hardlinks\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^fs.protected_hardlinks' "1" 'CCE-81027-5'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -26054,9 +24322,9 @@ fi
 # END fix for 'sysctl_fs_protected_hardlinks'
 
 ###############################################################################
-# BEGIN fix (255 / 362) for 'sysctl_fs_protected_symlinks'
+# BEGIN fix (255 / 363) for 'sysctl_fs_protected_symlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 255/362: 'sysctl_fs_protected_symlinks'")
+(>&2 echo "Remediating rule 255/363: 'sysctl_fs_protected_symlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26071,84 +24339,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If fs.protected_symlinks present in /etc/sysctl.conf, change value to "1"
 #	else, add "fs.protected_symlinks = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81030-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81030-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_symlinks")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_symlinks\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^fs.protected_symlinks\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^fs.protected_symlinks' "1" 'CCE-81030-9'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -26156,63 +24377,63 @@ fi
 # END fix for 'sysctl_fs_protected_symlinks'
 
 ###############################################################################
-# BEGIN fix (256 / 362) for 'file_groupowner_var_log'
+# BEGIN fix (256 / 363) for 'file_groupowner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 256/362: 'file_groupowner_var_log'")
+(>&2 echo "Remediating rule 256/363: 'file_groupowner_var_log'")
 
 
 chgrp 0 /var/log/
 # END fix for 'file_groupowner_var_log'
 
 ###############################################################################
-# BEGIN fix (257 / 362) for 'file_groupowner_var_log_messages'
+# BEGIN fix (257 / 363) for 'file_groupowner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 257/362: 'file_groupowner_var_log_messages'")
+(>&2 echo "Remediating rule 257/363: 'file_groupowner_var_log_messages'")
 
 
 chgrp 0 /var/log/messages
 # END fix for 'file_groupowner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (258 / 362) for 'file_owner_var_log'
+# BEGIN fix (258 / 363) for 'file_owner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 258/362: 'file_owner_var_log'")
+(>&2 echo "Remediating rule 258/363: 'file_owner_var_log'")
 
 
 chown 0 /var/log/
 # END fix for 'file_owner_var_log'
 
 ###############################################################################
-# BEGIN fix (259 / 362) for 'file_owner_var_log_messages'
+# BEGIN fix (259 / 363) for 'file_owner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 259/362: 'file_owner_var_log_messages'")
+(>&2 echo "Remediating rule 259/363: 'file_owner_var_log_messages'")
 
 
 chown 0 /var/log/messages
 # END fix for 'file_owner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (260 / 362) for 'file_permissions_var_log'
+# BEGIN fix (260 / 363) for 'file_permissions_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 260/362: 'file_permissions_var_log'")
+(>&2 echo "Remediating rule 260/363: 'file_permissions_var_log'")
 
 
 chmod 0755 /var/log/
 # END fix for 'file_permissions_var_log'
 
 ###############################################################################
-# BEGIN fix (261 / 362) for 'file_permissions_var_log_messages'
+# BEGIN fix (261 / 363) for 'file_permissions_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 261/362: 'file_permissions_var_log_messages'")
+(>&2 echo "Remediating rule 261/363: 'file_permissions_var_log_messages'")
 
 
 chmod 0640 /var/log/messages
 # END fix for 'file_permissions_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (262 / 362) for 'dir_group_ownership_library_dirs'
+# BEGIN fix (262 / 363) for 'dir_group_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 262/362: 'dir_group_ownership_library_dirs'")
+(>&2 echo "Remediating rule 262/363: 'dir_group_ownership_library_dirs'")
 
 find /lib \
 /lib64 \
@@ -26222,9 +24443,9 @@ find /lib \
 # END fix for 'dir_group_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (263 / 362) for 'file_groupownership_system_commands_dirs'
+# BEGIN fix (263 / 363) for 'file_groupownership_system_commands_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 263/362: 'file_groupownership_system_commands_dirs'")
+(>&2 echo "Remediating rule 263/363: 'file_groupownership_system_commands_dirs'")
 
 for SYSCMDFILES in /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin
 do
@@ -26233,9 +24454,9 @@ done
 # END fix for 'file_groupownership_system_commands_dirs'
 
 ###############################################################################
-# BEGIN fix (264 / 362) for 'file_ownership_binary_dirs'
+# BEGIN fix (264 / 363) for 'file_ownership_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 264/362: 'file_ownership_binary_dirs'")
+(>&2 echo "Remediating rule 264/363: 'file_ownership_binary_dirs'")
 find /bin/ \
 /usr/bin/ \
 /usr/local/bin/ \
@@ -26247,9 +24468,9 @@ find /bin/ \
 # END fix for 'file_ownership_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (265 / 362) for 'file_ownership_library_dirs'
+# BEGIN fix (265 / 363) for 'file_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 265/362: 'file_ownership_library_dirs'")
+(>&2 echo "Remediating rule 265/363: 'file_ownership_library_dirs'")
 for LIBDIR in /usr/lib /usr/lib64 /lib /lib64
 do
   if [ -d $LIBDIR ]
@@ -26260,9 +24481,9 @@ done
 # END fix for 'file_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (266 / 362) for 'file_permissions_binary_dirs'
+# BEGIN fix (266 / 363) for 'file_permissions_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 266/362: 'file_permissions_binary_dirs'")
+(>&2 echo "Remediating rule 266/363: 'file_permissions_binary_dirs'")
 DIRS="/bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec"
 for dirPath in $DIRS; do
 	find "$dirPath" -perm /022 -exec chmod go-w '{}' \;
@@ -26270,9 +24491,9 @@ done
 # END fix for 'file_permissions_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (267 / 362) for 'file_permissions_library_dirs'
+# BEGIN fix (267 / 363) for 'file_permissions_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 267/362: 'file_permissions_library_dirs'")
+(>&2 echo "Remediating rule 267/363: 'file_permissions_library_dirs'")
 DIRS="/lib /lib64 /usr/lib /usr/lib64"
 for dirPath in $DIRS; do
 	find "$dirPath" -perm /022 -type f -exec chmod go-w '{}' \;
@@ -26280,9 +24501,9 @@ done
 # END fix for 'file_permissions_library_dirs'
 
 ###############################################################################
-# BEGIN fix (268 / 362) for 'root_permissions_syslibrary_files'
+# BEGIN fix (268 / 363) for 'root_permissions_syslibrary_files'
 ###############################################################################
-(>&2 echo "Remediating rule 268/362: 'root_permissions_syslibrary_files'")
+(>&2 echo "Remediating rule 268/363: 'root_permissions_syslibrary_files'")
 
 find /lib \
 /lib64 \
@@ -26292,9 +24513,9 @@ find /lib \
 # END fix for 'root_permissions_syslibrary_files'
 
 ###############################################################################
-# BEGIN fix (269 / 362) for 'service_autofs_disabled'
+# BEGIN fix (269 / 363) for 'service_autofs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 269/362: 'service_autofs_disabled'")
+(>&2 echo "Remediating rule 269/363: 'service_autofs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26318,9 +24539,9 @@ fi
 # END fix for 'service_autofs_disabled'
 
 ###############################################################################
-# BEGIN fix (270 / 362) for 'kernel_module_cramfs_disabled'
+# BEGIN fix (270 / 363) for 'kernel_module_cramfs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 270/362: 'kernel_module_cramfs_disabled'")
+(>&2 echo "Remediating rule 270/363: 'kernel_module_cramfs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26338,9 +24559,9 @@ fi
 # END fix for 'kernel_module_cramfs_disabled'
 
 ###############################################################################
-# BEGIN fix (271 / 362) for 'kernel_module_usb-storage_disabled'
+# BEGIN fix (271 / 363) for 'kernel_module_usb-storage_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 271/362: 'kernel_module_usb-storage_disabled'")
+(>&2 echo "Remediating rule 271/363: 'kernel_module_usb-storage_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26358,9 +24579,9 @@ fi
 # END fix for 'kernel_module_usb-storage_disabled'
 
 ###############################################################################
-# BEGIN fix (272 / 362) for 'mount_option_boot_nosuid'
+# BEGIN fix (272 / 363) for 'mount_option_boot_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 272/362: 'mount_option_boot_nosuid'")
+(>&2 echo "Remediating rule 272/363: 'mount_option_boot_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26457,9 +24678,9 @@ fi
 # END fix for 'mount_option_boot_nosuid'
 
 ###############################################################################
-# BEGIN fix (273 / 362) for 'mount_option_dev_shm_nodev'
+# BEGIN fix (273 / 363) for 'mount_option_dev_shm_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 273/362: 'mount_option_dev_shm_nodev'")
+(>&2 echo "Remediating rule 273/363: 'mount_option_dev_shm_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26556,9 +24777,9 @@ fi
 # END fix for 'mount_option_dev_shm_nodev'
 
 ###############################################################################
-# BEGIN fix (274 / 362) for 'mount_option_dev_shm_noexec'
+# BEGIN fix (274 / 363) for 'mount_option_dev_shm_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 274/362: 'mount_option_dev_shm_noexec'")
+(>&2 echo "Remediating rule 274/363: 'mount_option_dev_shm_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26655,9 +24876,9 @@ fi
 # END fix for 'mount_option_dev_shm_noexec'
 
 ###############################################################################
-# BEGIN fix (275 / 362) for 'mount_option_dev_shm_nosuid'
+# BEGIN fix (275 / 363) for 'mount_option_dev_shm_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 275/362: 'mount_option_dev_shm_nosuid'")
+(>&2 echo "Remediating rule 275/363: 'mount_option_dev_shm_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26754,9 +24975,9 @@ fi
 # END fix for 'mount_option_dev_shm_nosuid'
 
 ###############################################################################
-# BEGIN fix (276 / 362) for 'mount_option_home_noexec'
+# BEGIN fix (276 / 363) for 'mount_option_home_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 276/362: 'mount_option_home_noexec'")
+(>&2 echo "Remediating rule 276/363: 'mount_option_home_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26853,9 +25074,9 @@ fi
 # END fix for 'mount_option_home_noexec'
 
 ###############################################################################
-# BEGIN fix (277 / 362) for 'mount_option_home_nosuid'
+# BEGIN fix (277 / 363) for 'mount_option_home_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 277/362: 'mount_option_home_nosuid'")
+(>&2 echo "Remediating rule 277/363: 'mount_option_home_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -26952,9 +25173,9 @@ fi
 # END fix for 'mount_option_home_nosuid'
 
 ###############################################################################
-# BEGIN fix (278 / 362) for 'mount_option_nodev_nonroot_local_partitions'
+# BEGIN fix (278 / 363) for 'mount_option_nodev_nonroot_local_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 278/362: 'mount_option_nodev_nonroot_local_partitions'")
+(>&2 echo "Remediating rule 278/363: 'mount_option_nodev_nonroot_local_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27052,9 +25273,9 @@ fi
 # END fix for 'mount_option_nodev_nonroot_local_partitions'
 
 ###############################################################################
-# BEGIN fix (279 / 362) for 'mount_option_nodev_removable_partitions'
+# BEGIN fix (279 / 363) for 'mount_option_nodev_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 279/362: 'mount_option_nodev_removable_partitions'")
+(>&2 echo "Remediating rule 279/363: 'mount_option_nodev_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27080,9 +25301,9 @@ fi
 # END fix for 'mount_option_nodev_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (280 / 362) for 'mount_option_noexec_removable_partitions'
+# BEGIN fix (280 / 363) for 'mount_option_noexec_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 280/362: 'mount_option_noexec_removable_partitions'")
+(>&2 echo "Remediating rule 280/363: 'mount_option_noexec_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27108,9 +25329,9 @@ fi
 # END fix for 'mount_option_noexec_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (281 / 362) for 'mount_option_nosuid_removable_partitions'
+# BEGIN fix (281 / 363) for 'mount_option_nosuid_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 281/362: 'mount_option_nosuid_removable_partitions'")
+(>&2 echo "Remediating rule 281/363: 'mount_option_nosuid_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27136,9 +25357,9 @@ fi
 # END fix for 'mount_option_nosuid_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (282 / 362) for 'mount_option_tmp_nodev'
+# BEGIN fix (282 / 363) for 'mount_option_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 282/362: 'mount_option_tmp_nodev'")
+(>&2 echo "Remediating rule 282/363: 'mount_option_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27235,9 +25456,9 @@ fi
 # END fix for 'mount_option_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (283 / 362) for 'mount_option_tmp_noexec'
+# BEGIN fix (283 / 363) for 'mount_option_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 283/362: 'mount_option_tmp_noexec'")
+(>&2 echo "Remediating rule 283/363: 'mount_option_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27334,9 +25555,9 @@ fi
 # END fix for 'mount_option_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (284 / 362) for 'mount_option_tmp_nosuid'
+# BEGIN fix (284 / 363) for 'mount_option_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 284/362: 'mount_option_tmp_nosuid'")
+(>&2 echo "Remediating rule 284/363: 'mount_option_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27433,9 +25654,9 @@ fi
 # END fix for 'mount_option_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (285 / 362) for 'mount_option_var_log_audit_nodev'
+# BEGIN fix (285 / 363) for 'mount_option_var_log_audit_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 285/362: 'mount_option_var_log_audit_nodev'")
+(>&2 echo "Remediating rule 285/363: 'mount_option_var_log_audit_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27532,9 +25753,9 @@ fi
 # END fix for 'mount_option_var_log_audit_nodev'
 
 ###############################################################################
-# BEGIN fix (286 / 362) for 'mount_option_var_log_audit_noexec'
+# BEGIN fix (286 / 363) for 'mount_option_var_log_audit_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 286/362: 'mount_option_var_log_audit_noexec'")
+(>&2 echo "Remediating rule 286/363: 'mount_option_var_log_audit_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27631,9 +25852,9 @@ fi
 # END fix for 'mount_option_var_log_audit_noexec'
 
 ###############################################################################
-# BEGIN fix (287 / 362) for 'mount_option_var_log_audit_nosuid'
+# BEGIN fix (287 / 363) for 'mount_option_var_log_audit_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 287/362: 'mount_option_var_log_audit_nosuid'")
+(>&2 echo "Remediating rule 287/363: 'mount_option_var_log_audit_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27730,9 +25951,9 @@ fi
 # END fix for 'mount_option_var_log_audit_nosuid'
 
 ###############################################################################
-# BEGIN fix (288 / 362) for 'mount_option_var_log_nodev'
+# BEGIN fix (288 / 363) for 'mount_option_var_log_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 288/362: 'mount_option_var_log_nodev'")
+(>&2 echo "Remediating rule 288/363: 'mount_option_var_log_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27829,9 +26050,9 @@ fi
 # END fix for 'mount_option_var_log_nodev'
 
 ###############################################################################
-# BEGIN fix (289 / 362) for 'mount_option_var_log_noexec'
+# BEGIN fix (289 / 363) for 'mount_option_var_log_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 289/362: 'mount_option_var_log_noexec'")
+(>&2 echo "Remediating rule 289/363: 'mount_option_var_log_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -27928,9 +26149,9 @@ fi
 # END fix for 'mount_option_var_log_noexec'
 
 ###############################################################################
-# BEGIN fix (290 / 362) for 'mount_option_var_log_nosuid'
+# BEGIN fix (290 / 363) for 'mount_option_var_log_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 290/362: 'mount_option_var_log_nosuid'")
+(>&2 echo "Remediating rule 290/363: 'mount_option_var_log_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28027,9 +26248,9 @@ fi
 # END fix for 'mount_option_var_log_nosuid'
 
 ###############################################################################
-# BEGIN fix (291 / 362) for 'mount_option_var_tmp_nodev'
+# BEGIN fix (291 / 363) for 'mount_option_var_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 291/362: 'mount_option_var_tmp_nodev'")
+(>&2 echo "Remediating rule 291/363: 'mount_option_var_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28126,9 +26347,9 @@ fi
 # END fix for 'mount_option_var_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (292 / 362) for 'mount_option_var_tmp_noexec'
+# BEGIN fix (292 / 363) for 'mount_option_var_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 292/362: 'mount_option_var_tmp_noexec'")
+(>&2 echo "Remediating rule 292/363: 'mount_option_var_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28225,9 +26446,9 @@ fi
 # END fix for 'mount_option_var_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (293 / 362) for 'mount_option_var_tmp_nosuid'
+# BEGIN fix (293 / 363) for 'mount_option_var_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 293/362: 'mount_option_var_tmp_nosuid'")
+(>&2 echo "Remediating rule 293/363: 'mount_option_var_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28324,9 +26545,9 @@ fi
 # END fix for 'mount_option_var_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (294 / 362) for 'sysctl_kernel_core_pattern'
+# BEGIN fix (294 / 363) for 'sysctl_kernel_core_pattern'
 ###############################################################################
-(>&2 echo "Remediating rule 294/362: 'sysctl_kernel_core_pattern'")
+(>&2 echo "Remediating rule 294/363: 'sysctl_kernel_core_pattern'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28341,84 +26562,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.core_pattern present in /etc/sysctl.conf, change value to "|/bin/false"
 #	else, add "kernel.core_pattern = |/bin/false" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82215-5" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82215-5"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.core_pattern")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "|/bin/false"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.core_pattern\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.core_pattern\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.core_pattern' "|/bin/false" 'CCE-82215-5'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28426,9 +26600,9 @@ fi
 # END fix for 'sysctl_kernel_core_pattern'
 
 ###############################################################################
-# BEGIN fix (295 / 362) for 'sysctl_kernel_dmesg_restrict'
+# BEGIN fix (295 / 363) for 'sysctl_kernel_dmesg_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 295/362: 'sysctl_kernel_dmesg_restrict'")
+(>&2 echo "Remediating rule 295/363: 'sysctl_kernel_dmesg_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28443,84 +26617,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.dmesg_restrict present in /etc/sysctl.conf, change value to "1"
 #	else, add "kernel.dmesg_restrict = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80913-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80913-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.dmesg_restrict")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.dmesg_restrict\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.dmesg_restrict\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.dmesg_restrict' "1" 'CCE-80913-7'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28528,9 +26655,9 @@ fi
 # END fix for 'sysctl_kernel_dmesg_restrict'
 
 ###############################################################################
-# BEGIN fix (296 / 362) for 'sysctl_kernel_kexec_load_disabled'
+# BEGIN fix (296 / 363) for 'sysctl_kernel_kexec_load_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 296/362: 'sysctl_kernel_kexec_load_disabled'")
+(>&2 echo "Remediating rule 296/363: 'sysctl_kernel_kexec_load_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28545,84 +26672,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.kexec_load_disabled present in /etc/sysctl.conf, change value to "1"
 #	else, add "kernel.kexec_load_disabled = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80952-5" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80952-5"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kexec_load_disabled")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.kexec_load_disabled\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.kexec_load_disabled\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.kexec_load_disabled' "1" 'CCE-80952-5'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28630,9 +26710,9 @@ fi
 # END fix for 'sysctl_kernel_kexec_load_disabled'
 
 ###############################################################################
-# BEGIN fix (297 / 362) for 'sysctl_kernel_perf_event_paranoid'
+# BEGIN fix (297 / 363) for 'sysctl_kernel_perf_event_paranoid'
 ###############################################################################
-(>&2 echo "Remediating rule 297/362: 'sysctl_kernel_perf_event_paranoid'")
+(>&2 echo "Remediating rule 297/363: 'sysctl_kernel_perf_event_paranoid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28647,84 +26727,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.perf_event_paranoid present in /etc/sysctl.conf, change value to "2"
 #	else, add "kernel.perf_event_paranoid = 2" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-81054-9" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-81054-9"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.perf_event_paranoid")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "2"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.perf_event_paranoid\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.perf_event_paranoid\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.perf_event_paranoid' "2" 'CCE-81054-9'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28732,9 +26765,9 @@ fi
 # END fix for 'sysctl_kernel_perf_event_paranoid'
 
 ###############################################################################
-# BEGIN fix (298 / 362) for 'sysctl_kernel_unprivileged_bpf_disabled'
+# BEGIN fix (298 / 363) for 'sysctl_kernel_unprivileged_bpf_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 298/362: 'sysctl_kernel_unprivileged_bpf_disabled'")
+(>&2 echo "Remediating rule 298/363: 'sysctl_kernel_unprivileged_bpf_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28749,84 +26782,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.unprivileged_bpf_disabled present in /etc/sysctl.conf, change value to "1"
 #	else, add "kernel.unprivileged_bpf_disabled = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82974-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82974-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.unprivileged_bpf_disabled")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.unprivileged_bpf_disabled\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.unprivileged_bpf_disabled\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.unprivileged_bpf_disabled' "1" 'CCE-82974-7'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28834,9 +26820,9 @@ fi
 # END fix for 'sysctl_kernel_unprivileged_bpf_disabled'
 
 ###############################################################################
-# BEGIN fix (299 / 362) for 'sysctl_kernel_yama_ptrace_scope'
+# BEGIN fix (299 / 363) for 'sysctl_kernel_yama_ptrace_scope'
 ###############################################################################
-(>&2 echo "Remediating rule 299/362: 'sysctl_kernel_yama_ptrace_scope'")
+(>&2 echo "Remediating rule 299/363: 'sysctl_kernel_yama_ptrace_scope'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28851,84 +26837,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.yama.ptrace_scope present in /etc/sysctl.conf, change value to "1"
 #	else, add "kernel.yama.ptrace_scope = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80953-3" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80953-3"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.yama.ptrace_scope")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.yama.ptrace_scope\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.yama.ptrace_scope\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.yama.ptrace_scope' "1" 'CCE-80953-3'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28936,9 +26875,9 @@ fi
 # END fix for 'sysctl_kernel_yama_ptrace_scope'
 
 ###############################################################################
-# BEGIN fix (300 / 362) for 'sysctl_net_core_bpf_jit_harden'
+# BEGIN fix (300 / 363) for 'sysctl_net_core_bpf_jit_harden'
 ###############################################################################
-(>&2 echo "Remediating rule 300/362: 'sysctl_net_core_bpf_jit_harden'")
+(>&2 echo "Remediating rule 300/363: 'sysctl_net_core_bpf_jit_harden'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -28953,84 +26892,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If net.core.bpf_jit_harden present in /etc/sysctl.conf, change value to "2"
 #	else, add "net.core.bpf_jit_harden = 2" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82934-1" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82934-1"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.core.bpf_jit_harden")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "2"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^net.core.bpf_jit_harden\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^net.core.bpf_jit_harden\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^net.core.bpf_jit_harden' "2" 'CCE-82934-1'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -29038,9 +26930,9 @@ fi
 # END fix for 'sysctl_net_core_bpf_jit_harden'
 
 ###############################################################################
-# BEGIN fix (301 / 362) for 'sysctl_user_max_user_namespaces'
+# BEGIN fix (301 / 363) for 'sysctl_user_max_user_namespaces'
 ###############################################################################
-(>&2 echo "Remediating rule 301/362: 'sysctl_user_max_user_namespaces'")
+(>&2 echo "Remediating rule 301/363: 'sysctl_user_max_user_namespaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29055,84 +26947,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If user.max_user_namespaces present in /etc/sysctl.conf, change value to "0"
 #	else, add "user.max_user_namespaces = 0" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82211-4" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82211-4"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^user.max_user_namespaces")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^user.max_user_namespaces\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^user.max_user_namespaces\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^user.max_user_namespaces' "0" 'CCE-82211-4'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -29140,9 +26985,9 @@ fi
 # END fix for 'sysctl_user_max_user_namespaces'
 
 ###############################################################################
-# BEGIN fix (302 / 362) for 'service_systemd-coredump_disabled'
+# BEGIN fix (302 / 363) for 'service_systemd-coredump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 302/362: 'service_systemd-coredump_disabled'")
+(>&2 echo "Remediating rule 302/363: 'service_systemd-coredump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29166,9 +27011,9 @@ fi
 # END fix for 'service_systemd-coredump_disabled'
 
 ###############################################################################
-# BEGIN fix (303 / 362) for 'coredump_disable_backtraces'
+# BEGIN fix (303 / 363) for 'coredump_disable_backtraces'
 ###############################################################################
-(>&2 echo "Remediating rule 303/362: 'coredump_disable_backtraces'")
+(>&2 echo "Remediating rule 303/363: 'coredump_disable_backtraces'")
 if [ -e "/etc/systemd/coredump.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*ProcessSizeMax\s*=\s*/Id" "/etc/systemd/coredump.conf"
@@ -29183,9 +27028,9 @@ rm "/etc/systemd/coredump.conf.bak"
 # END fix for 'coredump_disable_backtraces'
 
 ###############################################################################
-# BEGIN fix (304 / 362) for 'coredump_disable_storage'
+# BEGIN fix (304 / 363) for 'coredump_disable_storage'
 ###############################################################################
-(>&2 echo "Remediating rule 304/362: 'coredump_disable_storage'")
+(>&2 echo "Remediating rule 304/363: 'coredump_disable_storage'")
 if [ -e "/etc/systemd/coredump.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*Storage\s*=\s*/Id" "/etc/systemd/coredump.conf"
@@ -29200,9 +27045,9 @@ rm "/etc/systemd/coredump.conf.bak"
 # END fix for 'coredump_disable_storage'
 
 ###############################################################################
-# BEGIN fix (305 / 362) for 'disable_users_coredumps'
+# BEGIN fix (305 / 363) for 'disable_users_coredumps'
 ###############################################################################
-(>&2 echo "Remediating rule 305/362: 'disable_users_coredumps'")
+(>&2 echo "Remediating rule 305/363: 'disable_users_coredumps'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -29220,9 +27065,9 @@ fi
 # END fix for 'disable_users_coredumps'
 
 ###############################################################################
-# BEGIN fix (306 / 362) for 'sysctl_kernel_kptr_restrict'
+# BEGIN fix (306 / 363) for 'sysctl_kernel_kptr_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 306/362: 'sysctl_kernel_kptr_restrict'")
+(>&2 echo "Remediating rule 306/363: 'sysctl_kernel_kptr_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29237,84 +27082,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.kptr_restrict present in /etc/sysctl.conf, change value to "1"
 #	else, add "kernel.kptr_restrict = 1" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80915-2" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80915-2"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kptr_restrict")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "1"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.kptr_restrict\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.kptr_restrict\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.kptr_restrict' "1" 'CCE-80915-2'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -29322,9 +27120,9 @@ fi
 # END fix for 'sysctl_kernel_kptr_restrict'
 
 ###############################################################################
-# BEGIN fix (307 / 362) for 'sysctl_kernel_randomize_va_space'
+# BEGIN fix (307 / 363) for 'sysctl_kernel_randomize_va_space'
 ###############################################################################
-(>&2 echo "Remediating rule 307/362: 'sysctl_kernel_randomize_va_space'")
+(>&2 echo "Remediating rule 307/363: 'sysctl_kernel_randomize_va_space'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29339,84 +27137,37 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 # If kernel.randomize_va_space present in /etc/sysctl.conf, change value to "2"
 #	else, add "kernel.randomize_va_space = 2" to /etc/sysctl.conf
 #
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80916-0" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80916-0"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.randomize_va_space")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "2"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^kernel.randomize_va_space\\>" "/etc/sysctl.conf"; then
+    "${sed_command[@]}" "s/^kernel.randomize_va_space\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' "2" 'CCE-80916-0'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -29424,16 +27175,16 @@ fi
 # END fix for 'sysctl_kernel_randomize_va_space'
 
 ###############################################################################
-# BEGIN fix (308 / 362) for 'bios_enable_execution_restrictions'
+# BEGIN fix (308 / 363) for 'bios_enable_execution_restrictions'
 ###############################################################################
-(>&2 echo "Remediating rule 308/362: 'bios_enable_execution_restrictions'")
+(>&2 echo "Remediating rule 308/363: 'bios_enable_execution_restrictions'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'bios_enable_execution_restrictions'
 
 ###############################################################################
-# BEGIN fix (309 / 362) for 'grub2_page_poison_argument'
+# BEGIN fix (309 / 363) for 'grub2_page_poison_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 309/362: 'grub2_page_poison_argument'")
+(>&2 echo "Remediating rule 309/363: 'grub2_page_poison_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -29453,9 +27204,9 @@ fi
 # END fix for 'grub2_page_poison_argument'
 
 ###############################################################################
-# BEGIN fix (310 / 362) for 'grub2_slub_debug_argument'
+# BEGIN fix (310 / 363) for 'grub2_slub_debug_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 310/362: 'grub2_slub_debug_argument'")
+(>&2 echo "Remediating rule 310/363: 'grub2_slub_debug_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -29475,9 +27226,9 @@ fi
 # END fix for 'grub2_slub_debug_argument'
 
 ###############################################################################
-# BEGIN fix (311 / 362) for 'package_policycoreutils_installed'
+# BEGIN fix (311 / 363) for 'package_policycoreutils_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 311/362: 'package_policycoreutils_installed'")
+(>&2 echo "Remediating rule 311/363: 'package_policycoreutils_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29491,9 +27242,9 @@ fi
 # END fix for 'package_policycoreutils_installed'
 
 ###############################################################################
-# BEGIN fix (312 / 362) for 'selinux_policytype'
+# BEGIN fix (312 / 363) for 'selinux_policytype'
 ###############################################################################
-(>&2 echo "Remediating rule 312/362: 'selinux_policytype'")
+(>&2 echo "Remediating rule 312/363: 'selinux_policytype'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29520,9 +27271,9 @@ fi
 # END fix for 'selinux_policytype'
 
 ###############################################################################
-# BEGIN fix (313 / 362) for 'selinux_state'
+# BEGIN fix (313 / 363) for 'selinux_state'
 ###############################################################################
-(>&2 echo "Remediating rule 313/362: 'selinux_state'")
+(>&2 echo "Remediating rule 313/363: 'selinux_state'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29552,9 +27303,9 @@ fi
 # END fix for 'selinux_state'
 
 ###############################################################################
-# BEGIN fix (314 / 362) for 'package_abrt_removed'
+# BEGIN fix (314 / 363) for 'package_abrt_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 314/362: 'package_abrt_removed'")
+(>&2 echo "Remediating rule 314/363: 'package_abrt_removed'")
 
 # CAUTION: This remediation script will remove abrt
 #	   from the system, and may remove any packages
@@ -29568,9 +27319,9 @@ fi
 # END fix for 'package_abrt_removed'
 
 ###############################################################################
-# BEGIN fix (315 / 362) for 'service_kdump_disabled'
+# BEGIN fix (315 / 363) for 'service_kdump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 315/362: 'service_kdump_disabled'")
+(>&2 echo "Remediating rule 315/363: 'service_kdump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29594,9 +27345,9 @@ fi
 # END fix for 'service_kdump_disabled'
 
 ###############################################################################
-# BEGIN fix (316 / 362) for 'package_fapolicyd_installed'
+# BEGIN fix (316 / 363) for 'package_fapolicyd_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 316/362: 'package_fapolicyd_installed'")
+(>&2 echo "Remediating rule 316/363: 'package_fapolicyd_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29610,9 +27361,9 @@ fi
 # END fix for 'package_fapolicyd_installed'
 
 ###############################################################################
-# BEGIN fix (317 / 362) for 'service_fapolicyd_enabled'
+# BEGIN fix (317 / 363) for 'service_fapolicyd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 317/362: 'service_fapolicyd_enabled'")
+(>&2 echo "Remediating rule 317/363: 'service_fapolicyd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29627,9 +27378,9 @@ fi
 # END fix for 'service_fapolicyd_enabled'
 
 ###############################################################################
-# BEGIN fix (318 / 362) for 'package_vsftpd_removed'
+# BEGIN fix (318 / 363) for 'package_vsftpd_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 318/362: 'package_vsftpd_removed'")
+(>&2 echo "Remediating rule 318/363: 'package_vsftpd_removed'")
 
 # CAUTION: This remediation script will remove vsftpd
 #	   from the system, and may remove any packages
@@ -29643,9 +27394,9 @@ fi
 # END fix for 'package_vsftpd_removed'
 
 ###############################################################################
-# BEGIN fix (319 / 362) for 'kerberos_disable_no_keytab'
+# BEGIN fix (319 / 363) for 'kerberos_disable_no_keytab'
 ###############################################################################
-(>&2 echo "Remediating rule 319/362: 'kerberos_disable_no_keytab'")
+(>&2 echo "Remediating rule 319/363: 'kerberos_disable_no_keytab'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29657,9 +27408,9 @@ fi
 # END fix for 'kerberos_disable_no_keytab'
 
 ###############################################################################
-# BEGIN fix (320 / 362) for 'package_sendmail_removed'
+# BEGIN fix (320 / 363) for 'package_sendmail_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 320/362: 'package_sendmail_removed'")
+(>&2 echo "Remediating rule 320/363: 'package_sendmail_removed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29679,92 +27430,48 @@ fi
 # END fix for 'package_sendmail_removed'
 
 ###############################################################################
-# BEGIN fix (321 / 362) for 'postfix_client_configure_mail_alias'
+# BEGIN fix (321 / 363) for 'postfix_client_configure_mail_alias'
 ###############################################################################
-(>&2 echo "Remediating rule 321/362: 'postfix_client_configure_mail_alias'")
+(>&2 echo "Remediating rule 321/363: 'postfix_client_configure_mail_alias'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 
 var_postfix_root_mail_alias="system.administrator@mail.mil"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/aliases"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82381-5" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82381-5"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^root")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s: %s" "$stripped_key" "$var_postfix_root_mail_alias"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^root\\>" "/etc/aliases"; then
+    "${sed_command[@]}" "s/^root\\>.*/$formatted_output/gi" "/etc/aliases"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/aliases' '^root' "$var_postfix_root_mail_alias" 'CCE-82381-5' '%s: %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/aliases" >> "/etc/aliases"
+    printf '%s\n' "$formatted_output" >> "/etc/aliases"
+fi
 
 newaliases
 
@@ -29774,9 +27481,9 @@ fi
 # END fix for 'postfix_client_configure_mail_alias'
 
 ###############################################################################
-# BEGIN fix (322 / 362) for 'mount_option_nodev_remote_filesystems'
+# BEGIN fix (322 / 363) for 'mount_option_nodev_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 322/362: 'mount_option_nodev_remote_filesystems'")
+(>&2 echo "Remediating rule 322/363: 'mount_option_nodev_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29862,9 +27569,9 @@ fi
 # END fix for 'mount_option_nodev_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (323 / 362) for 'mount_option_noexec_remote_filesystems'
+# BEGIN fix (323 / 363) for 'mount_option_noexec_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 323/362: 'mount_option_noexec_remote_filesystems'")
+(>&2 echo "Remediating rule 323/363: 'mount_option_noexec_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29950,9 +27657,9 @@ fi
 # END fix for 'mount_option_noexec_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (324 / 362) for 'mount_option_nosuid_remote_filesystems'
+# BEGIN fix (324 / 363) for 'mount_option_nosuid_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 324/362: 'mount_option_nosuid_remote_filesystems'")
+(>&2 echo "Remediating rule 324/363: 'mount_option_nosuid_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30038,91 +27745,43 @@ fi
 # END fix for 'mount_option_nosuid_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (325 / 362) for 'chronyd_client_only'
+# BEGIN fix (325 / 363) for 'chronyd_client_only'
 ###############################################################################
-(>&2 echo "Remediating rule 325/362: 'chronyd_client_only'")
+(>&2 echo "Remediating rule 325/363: 'chronyd_client_only'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-# Include source function library
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/chrony.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82988-7" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82988-7"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^port")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^port\\>" "/etc/chrony.conf"; then
+    "${sed_command[@]}" "s/^port\\>.*/$formatted_output/gi" "/etc/chrony.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append /etc/chrony.conf '^port' 0 'CCE-82988-7' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -30130,91 +27789,43 @@ fi
 # END fix for 'chronyd_client_only'
 
 ###############################################################################
-# BEGIN fix (326 / 362) for 'chronyd_no_chronyc_network'
+# BEGIN fix (326 / 363) for 'chronyd_no_chronyc_network'
 ###############################################################################
-(>&2 echo "Remediating rule 326/362: 'chronyd_no_chronyc_network'")
+(>&2 echo "Remediating rule 326/363: 'chronyd_no_chronyc_network'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-# Include source function library
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
-
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
-
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/chrony.conf"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-82840-0" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-82840-0"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^cmdport")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "0"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^cmdport\\>" "/etc/chrony.conf"; then
+    "${sed_command[@]}" "s/^cmdport\\>.*/$formatted_output/gi" "/etc/chrony.conf"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append /etc/chrony.conf '^cmdport' 0 'CCE-82840-0' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -30222,9 +27833,9 @@ fi
 # END fix for 'chronyd_no_chronyc_network'
 
 ###############################################################################
-# BEGIN fix (327 / 362) for 'chronyd_or_ntpd_set_maxpoll'
+# BEGIN fix (327 / 363) for 'chronyd_or_ntpd_set_maxpoll'
 ###############################################################################
-(>&2 echo "Remediating rule 327/362: 'chronyd_or_ntpd_set_maxpoll'")
+(>&2 echo "Remediating rule 327/363: 'chronyd_or_ntpd_set_maxpoll'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q chrony || rpm --quiet -q ntp; }; then
 
@@ -30252,9 +27863,9 @@ fi
 # END fix for 'chronyd_or_ntpd_set_maxpoll'
 
 ###############################################################################
-# BEGIN fix (328 / 362) for 'package_rsh-server_removed'
+# BEGIN fix (328 / 363) for 'package_rsh-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 328/362: 'package_rsh-server_removed'")
+(>&2 echo "Remediating rule 328/363: 'package_rsh-server_removed'")
 
 # CAUTION: This remediation script will remove rsh-server
 #	   from the system, and may remove any packages
@@ -30268,9 +27879,9 @@ fi
 # END fix for 'package_rsh-server_removed'
 
 ###############################################################################
-# BEGIN fix (329 / 362) for 'no_host_based_files'
+# BEGIN fix (329 / 363) for 'no_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 329/362: 'no_host_based_files'")
+(>&2 echo "Remediating rule 329/363: 'no_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -30283,9 +27894,9 @@ done
 # END fix for 'no_host_based_files'
 
 ###############################################################################
-# BEGIN fix (330 / 362) for 'no_user_host_based_files'
+# BEGIN fix (330 / 363) for 'no_user_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 330/362: 'no_user_host_based_files'")
+(>&2 echo "Remediating rule 330/363: 'no_user_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -30298,9 +27909,9 @@ done
 # END fix for 'no_user_host_based_files'
 
 ###############################################################################
-# BEGIN fix (331 / 362) for 'package_telnet-server_removed'
+# BEGIN fix (331 / 363) for 'package_telnet-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 331/362: 'package_telnet-server_removed'")
+(>&2 echo "Remediating rule 331/363: 'package_telnet-server_removed'")
 
 # CAUTION: This remediation script will remove telnet-server
 #	   from the system, and may remove any packages
@@ -30314,9 +27925,9 @@ fi
 # END fix for 'package_telnet-server_removed'
 
 ###############################################################################
-# BEGIN fix (332 / 362) for 'package_tftp-server_removed'
+# BEGIN fix (332 / 363) for 'package_tftp-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 332/362: 'package_tftp-server_removed'")
+(>&2 echo "Remediating rule 332/363: 'package_tftp-server_removed'")
 
 # CAUTION: This remediation script will remove tftp-server
 #	   from the system, and may remove any packages
@@ -30330,9 +27941,9 @@ fi
 # END fix for 'package_tftp-server_removed'
 
 ###############################################################################
-# BEGIN fix (333 / 362) for 'tftpd_uses_secure_mode'
+# BEGIN fix (333 / 363) for 'tftpd_uses_secure_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 333/362: 'tftpd_uses_secure_mode'")
+(>&2 echo "Remediating rule 333/363: 'tftpd_uses_secure_mode'")
 #!/bin/bash
 
 
@@ -30348,9 +27959,9 @@ fi
 # END fix for 'tftpd_uses_secure_mode'
 
 ###############################################################################
-# BEGIN fix (334 / 362) for 'service_rngd_enabled'
+# BEGIN fix (334 / 363) for 'service_rngd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 334/362: 'service_rngd_enabled'")
+(>&2 echo "Remediating rule 334/363: 'service_rngd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30365,9 +27976,9 @@ fi
 # END fix for 'service_rngd_enabled'
 
 ###############################################################################
-# BEGIN fix (335 / 362) for 'package_openssh-server_installed'
+# BEGIN fix (335 / 363) for 'package_openssh-server_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 335/362: 'package_openssh-server_installed'")
+(>&2 echo "Remediating rule 335/363: 'package_openssh-server_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30381,9 +27992,9 @@ fi
 # END fix for 'package_openssh-server_installed'
 
 ###############################################################################
-# BEGIN fix (336 / 362) for 'service_sshd_enabled'
+# BEGIN fix (336 / 363) for 'service_sshd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 336/362: 'service_sshd_enabled'")
+(>&2 echo "Remediating rule 336/363: 'service_sshd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30398,9 +28009,9 @@ fi
 # END fix for 'service_sshd_enabled'
 
 ###############################################################################
-# BEGIN fix (337 / 362) for 'file_permissions_sshd_private_key'
+# BEGIN fix (337 / 363) for 'file_permissions_sshd_private_key'
 ###############################################################################
-(>&2 echo "Remediating rule 337/362: 'file_permissions_sshd_private_key'")
+(>&2 echo "Remediating rule 337/363: 'file_permissions_sshd_private_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30417,9 +28028,9 @@ fi
 # END fix for 'file_permissions_sshd_private_key'
 
 ###############################################################################
-# BEGIN fix (338 / 362) for 'file_permissions_sshd_pub_key'
+# BEGIN fix (338 / 363) for 'file_permissions_sshd_pub_key'
 ###############################################################################
-(>&2 echo "Remediating rule 338/362: 'file_permissions_sshd_pub_key'")
+(>&2 echo "Remediating rule 338/363: 'file_permissions_sshd_pub_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30436,92 +28047,48 @@ fi
 # END fix for 'file_permissions_sshd_pub_key'
 
 ###############################################################################
-# BEGIN fix (339 / 362) for 'sshd_disable_compression'
+# BEGIN fix (339 / 363) for 'sshd_disable_compression'
 ###############################################################################
-(>&2 echo "Remediating rule 339/362: 'sshd_disable_compression'")
+(>&2 echo "Remediating rule 339/363: 'sshd_disable_compression'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 
 var_sshd_disable_compression="no"
-# Function to replace configuration setting in config file or add the configuration setting if
-# it does not exist.
-#
-# Expects arguments:
-#
-# config_file:		Configuration file that will be modified
-# key:			Configuration option to change
-# value:		Value of the configuration option to change
-# cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
-# format:		The printf-like format string that will be given stripped key and value as arguments,
-#			so e.g. '%s=%s' will result in key=value subsitution (i.e. without spaces around =)
-#
-# Optional arugments:
-#
-# format:		Optional argument to specify the format of how key/value should be
-# 			modified/appended in the configuration file. The default is key = value.
-#
-# Example Call(s):
-#
-#     With default format of 'key = value':
-#     replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
-#
-#     With custom key/value format:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
-#
-#     With a variable:
-#     replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
-#
-function replace_or_append {
-  local default_format='%s = %s' case_insensitive_mode=yes sed_case_insensitive_option='' grep_case_insensitive_option=''
-  local config_file=$1
-  local key=$2
-  local value=$3
-  local cce=$4
-  local format=$5
 
-  if [ "$case_insensitive_mode" = yes ]; then
-    sed_case_insensitive_option="i"
-    grep_case_insensitive_option="-i"
-  fi
-  [ -n "$format" ] || format="$default_format"
-  # Check sanity of the input
-  [ $# -ge "3" ] || { echo "Usage: replace_or_append <config_file_location> <key_to_search> <new_value> [<CCE number or literal '@CCENUM@' if unknown>] [printf-like format, default is '$default_format']" >&2; exit 1; }
 
-  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-  # Otherwise, regular sed command will do.
-  sed_command=('sed' '-i')
-  if test -L "$config_file"; then
+
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/ssh/sshd_config"; then
     sed_command+=('--follow-symlinks')
-  fi
+fi
 
-  # Test that the cce arg is not empty or does not equal @CCENUM@.
-  # If @CCENUM@ exists, it means that there is no CCE assigned.
-  if [ -n "$cce" ] && [ "$cce" != '@CCENUM@' ]; then
-    cce="${cce}"
-  else
+# If the cce arg is empty, CCE is not assigned.
+if [ -z "CCE-80895-6" ]; then
     cce="CCE"
-  fi
+else
+    cce="CCE-80895-6"
+fi
 
-  # Strip any search characters in the key arg so that the key can be replaced without
-  # adding any search characters to the config file.
-  stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "$key")
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^Compression")
 
-  # shellcheck disable=SC2059
-  printf -v formatted_output "$format" "$stripped_key" "$value"
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_sshd_disable_compression"
 
-  # If the key exists, change it. Otherwise, add it to the config_file.
-  # We search for the key string followed by a word boundary (matched by \>),
-  # so if we search for 'setting', 'setting2' won't match.
-  if LC_ALL=C grep -q -m 1 $grep_case_insensitive_option -e "${key}\\>" "$config_file"; then
-    "${sed_command[@]}" "s/${key}\\>.*/$formatted_output/g$sed_case_insensitive_option" "$config_file"
-  else
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^Compression\\>" "/etc/ssh/sshd_config"; then
+    "${sed_command[@]}" "s/^Compression\\>.*/$formatted_output/gi" "/etc/ssh/sshd_config"
+else
     # \n is precaution for case where file ends without trailing newline
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$config_file" >> "$config_file"
-    printf '%s\n' "$formatted_output" >> "$config_file"
-  fi
-}
-replace_or_append '/etc/ssh/sshd_config' '^Compression' "$var_sshd_disable_compression" 'CCE-80895-6' '%s %s'
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/ssh/sshd_config" >> "/etc/ssh/sshd_config"
+    printf '%s\n' "$formatted_output" >> "/etc/ssh/sshd_config"
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -30529,9 +28096,9 @@ fi
 # END fix for 'sshd_disable_compression'
 
 ###############################################################################
-# BEGIN fix (340 / 362) for 'sshd_disable_empty_passwords'
+# BEGIN fix (340 / 363) for 'sshd_disable_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 340/362: 'sshd_disable_empty_passwords'")
+(>&2 echo "Remediating rule 340/363: 'sshd_disable_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30562,9 +28129,9 @@ fi
 # END fix for 'sshd_disable_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (341 / 362) for 'sshd_disable_gssapi_auth'
+# BEGIN fix (341 / 363) for 'sshd_disable_gssapi_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 341/362: 'sshd_disable_gssapi_auth'")
+(>&2 echo "Remediating rule 341/363: 'sshd_disable_gssapi_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30595,9 +28162,9 @@ fi
 # END fix for 'sshd_disable_gssapi_auth'
 
 ###############################################################################
-# BEGIN fix (342 / 362) for 'sshd_disable_kerb_auth'
+# BEGIN fix (342 / 363) for 'sshd_disable_kerb_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 342/362: 'sshd_disable_kerb_auth'")
+(>&2 echo "Remediating rule 342/363: 'sshd_disable_kerb_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30628,9 +28195,9 @@ fi
 # END fix for 'sshd_disable_kerb_auth'
 
 ###############################################################################
-# BEGIN fix (343 / 362) for 'sshd_disable_root_login'
+# BEGIN fix (343 / 363) for 'sshd_disable_root_login'
 ###############################################################################
-(>&2 echo "Remediating rule 343/362: 'sshd_disable_root_login'")
+(>&2 echo "Remediating rule 343/363: 'sshd_disable_root_login'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30661,9 +28228,9 @@ fi
 # END fix for 'sshd_disable_root_login'
 
 ###############################################################################
-# BEGIN fix (344 / 362) for 'sshd_disable_user_known_hosts'
+# BEGIN fix (344 / 363) for 'sshd_disable_user_known_hosts'
 ###############################################################################
-(>&2 echo "Remediating rule 344/362: 'sshd_disable_user_known_hosts'")
+(>&2 echo "Remediating rule 344/363: 'sshd_disable_user_known_hosts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30694,9 +28261,9 @@ fi
 # END fix for 'sshd_disable_user_known_hosts'
 
 ###############################################################################
-# BEGIN fix (345 / 362) for 'sshd_disable_x11_forwarding'
+# BEGIN fix (345 / 363) for 'sshd_disable_x11_forwarding'
 ###############################################################################
-(>&2 echo "Remediating rule 345/362: 'sshd_disable_x11_forwarding'")
+(>&2 echo "Remediating rule 345/363: 'sshd_disable_x11_forwarding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30727,9 +28294,9 @@ fi
 # END fix for 'sshd_disable_x11_forwarding'
 
 ###############################################################################
-# BEGIN fix (346 / 362) for 'sshd_do_not_permit_user_env'
+# BEGIN fix (346 / 363) for 'sshd_do_not_permit_user_env'
 ###############################################################################
-(>&2 echo "Remediating rule 346/362: 'sshd_do_not_permit_user_env'")
+(>&2 echo "Remediating rule 346/363: 'sshd_do_not_permit_user_env'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30760,9 +28327,9 @@ fi
 # END fix for 'sshd_do_not_permit_user_env'
 
 ###############################################################################
-# BEGIN fix (347 / 362) for 'sshd_enable_strictmodes'
+# BEGIN fix (347 / 363) for 'sshd_enable_strictmodes'
 ###############################################################################
-(>&2 echo "Remediating rule 347/362: 'sshd_enable_strictmodes'")
+(>&2 echo "Remediating rule 347/363: 'sshd_enable_strictmodes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30793,9 +28360,9 @@ fi
 # END fix for 'sshd_enable_strictmodes'
 
 ###############################################################################
-# BEGIN fix (348 / 362) for 'sshd_enable_warning_banner'
+# BEGIN fix (348 / 363) for 'sshd_enable_warning_banner'
 ###############################################################################
-(>&2 echo "Remediating rule 348/362: 'sshd_enable_warning_banner'")
+(>&2 echo "Remediating rule 348/363: 'sshd_enable_warning_banner'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30826,9 +28393,9 @@ fi
 # END fix for 'sshd_enable_warning_banner'
 
 ###############################################################################
-# BEGIN fix (349 / 362) for 'sshd_print_last_log'
+# BEGIN fix (349 / 363) for 'sshd_print_last_log'
 ###############################################################################
-(>&2 echo "Remediating rule 349/362: 'sshd_print_last_log'")
+(>&2 echo "Remediating rule 349/363: 'sshd_print_last_log'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30859,9 +28426,9 @@ fi
 # END fix for 'sshd_print_last_log'
 
 ###############################################################################
-# BEGIN fix (350 / 362) for 'sshd_rekey_limit'
+# BEGIN fix (350 / 363) for 'sshd_rekey_limit'
 ###############################################################################
-(>&2 echo "Remediating rule 350/362: 'sshd_rekey_limit'")
+(>&2 echo "Remediating rule 350/363: 'sshd_rekey_limit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30899,9 +28466,9 @@ fi
 # END fix for 'sshd_rekey_limit'
 
 ###############################################################################
-# BEGIN fix (351 / 362) for 'sshd_set_idle_timeout'
+# BEGIN fix (351 / 363) for 'sshd_set_idle_timeout'
 ###############################################################################
-(>&2 echo "Remediating rule 351/362: 'sshd_set_idle_timeout'")
+(>&2 echo "Remediating rule 351/363: 'sshd_set_idle_timeout'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30937,9 +28504,9 @@ fi
 # END fix for 'sshd_set_idle_timeout'
 
 ###############################################################################
-# BEGIN fix (352 / 362) for 'sshd_set_keepalive_0'
+# BEGIN fix (352 / 363) for 'sshd_set_keepalive_0'
 ###############################################################################
-(>&2 echo "Remediating rule 352/362: 'sshd_set_keepalive_0'")
+(>&2 echo "Remediating rule 352/363: 'sshd_set_keepalive_0'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30970,9 +28537,9 @@ fi
 # END fix for 'sshd_set_keepalive_0'
 
 ###############################################################################
-# BEGIN fix (353 / 362) for 'sshd_use_strong_rng'
+# BEGIN fix (353 / 363) for 'sshd_use_strong_rng'
 ###############################################################################
-(>&2 echo "Remediating rule 353/362: 'sshd_use_strong_rng'")
+(>&2 echo "Remediating rule 353/363: 'sshd_use_strong_rng'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31003,9 +28570,9 @@ fi
 # END fix for 'sshd_use_strong_rng'
 
 ###############################################################################
-# BEGIN fix (354 / 362) for 'sshd_x11_use_localhost'
+# BEGIN fix (354 / 363) for 'sshd_x11_use_localhost'
 ###############################################################################
-(>&2 echo "Remediating rule 354/362: 'sshd_x11_use_localhost'")
+(>&2 echo "Remediating rule 354/363: 'sshd_x11_use_localhost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31036,16 +28603,57 @@ fi
 # END fix for 'sshd_x11_use_localhost'
 
 ###############################################################################
-# BEGIN fix (355 / 362) for 'sssd_enable_certmap'
+# BEGIN fix (355 / 363) for 'sssd_certificate_verification'
 ###############################################################################
-(>&2 echo "Remediating rule 355/362: 'sssd_enable_certmap'")
+(>&2 echo "Remediating rule 355/363: 'sssd_certificate_verification'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q sssd-common; then
+
+# include our remediation functions library
+
+var_sssd_certificate_verification_digest_function="sha1"
+
+
+
+found=false
+for f in /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf; do
+	if [ ! -e "$f" ]; then
+		continue
+	fi
+	cert=$( awk '/^\s*\[/{f=0} /^\s*\[sssd\]/{f=1} f{nu=gensub("^\\s*certificate_verification\\s*=\\s*ocsp_dgst\\s*=\\s*(\\w+).*","\\1",1); if($0!=nu){cert=nu}} END{print cert}' "$f" )
+	if [ -n "$cert" ] ; then
+		if [ "$cert" != $var_sssd_certificate_verification_digest_function ] ; then
+			sed -i "s/^certificate_verification\s*=.*/certificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function/" "$f"
+		fi
+		found=true
+	fi
+done
+
+if ! $found ; then
+	SSSD_CONF="/etc/sssd/conf.d/certificate_verification.conf"
+	mkdir -p $( dirname $SSSD_CONF )
+	touch $SSSD_CONF
+	chown root:root $SSSD_CONF
+	chmod 600 $SSSD_CONF
+	echo -e "[sssd]\ncertificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" >> $SSSD_CONF
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
+# END fix for 'sssd_certificate_verification'
+
+###############################################################################
+# BEGIN fix (356 / 363) for 'sssd_enable_certmap'
+###############################################################################
+(>&2 echo "Remediating rule 356/363: 'sssd_enable_certmap'")
 # FIX FOR THIS RULE IS MISSING
 # END fix for 'sssd_enable_certmap'
 
 ###############################################################################
-# BEGIN fix (356 / 362) for 'sssd_enable_smartcards'
+# BEGIN fix (357 / 363) for 'sssd_enable_smartcards'
 ###############################################################################
-(>&2 echo "Remediating rule 356/362: 'sssd_enable_smartcards'")
+(>&2 echo "Remediating rule 357/363: 'sssd_enable_smartcards'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -31071,9 +28679,9 @@ fi
 # END fix for 'sssd_enable_smartcards'
 
 ###############################################################################
-# BEGIN fix (357 / 362) for 'sssd_offline_cred_expiration'
+# BEGIN fix (358 / 363) for 'sssd_offline_cred_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 357/362: 'sssd_offline_cred_expiration'")
+(>&2 echo "Remediating rule 358/363: 'sssd_offline_cred_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -31102,9 +28710,9 @@ fi
 # END fix for 'sssd_offline_cred_expiration'
 
 ###############################################################################
-# BEGIN fix (358 / 362) for 'package_usbguard_installed'
+# BEGIN fix (359 / 363) for 'package_usbguard_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 358/362: 'package_usbguard_installed'")
+(>&2 echo "Remediating rule 359/363: 'package_usbguard_installed'")
 
 if ! rpm -q --quiet "usbguard" ; then
     yum install -y "usbguard"
@@ -31112,9 +28720,9 @@ fi
 # END fix for 'package_usbguard_installed'
 
 ###############################################################################
-# BEGIN fix (359 / 362) for 'service_usbguard_enabled'
+# BEGIN fix (360 / 363) for 'service_usbguard_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 359/362: 'service_usbguard_enabled'")
+(>&2 echo "Remediating rule 360/363: 'service_usbguard_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31129,9 +28737,9 @@ fi
 # END fix for 'service_usbguard_enabled'
 
 ###############################################################################
-# BEGIN fix (360 / 362) for 'configure_usbguard_auditbackend'
+# BEGIN fix (361 / 363) for 'configure_usbguard_auditbackend'
 ###############################################################################
-(>&2 echo "Remediating rule 360/362: 'configure_usbguard_auditbackend'")
+(>&2 echo "Remediating rule 361/363: 'configure_usbguard_auditbackend'")
 if [ -e "/etc/usbguard/usbguard-daemon.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*AuditBackend=/d" "/etc/usbguard/usbguard-daemon.conf"
@@ -31146,9 +28754,9 @@ rm "/etc/usbguard/usbguard-daemon.conf.bak"
 # END fix for 'configure_usbguard_auditbackend'
 
 ###############################################################################
-# BEGIN fix (361 / 362) for 'usbguard_generate_policy'
+# BEGIN fix (362 / 363) for 'usbguard_generate_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 361/362: 'usbguard_generate_policy'")
+(>&2 echo "Remediating rule 362/363: 'usbguard_generate_policy'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31175,9 +28783,9 @@ fi
 # END fix for 'usbguard_generate_policy'
 
 ###############################################################################
-# BEGIN fix (362 / 362) for 'xwindows_remove_packages'
+# BEGIN fix (363 / 363) for 'xwindows_remove_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 362/362: 'xwindows_remove_packages'")
+(>&2 echo "Remediating rule 363/363: 'xwindows_remove_packages'")
 
 
 # remove packages

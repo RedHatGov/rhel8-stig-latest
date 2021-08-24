@@ -4658,6 +4658,7 @@
         path: '{{ item }}'
         create: true
         line: -e 2
+        mode: o-rwx
       loop:
         - /etc/audit/audit.rules
         - /etc/audit/rules.d/immutable.rules
@@ -21739,6 +21740,22 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Remove any permissions from other group
+      file:
+        path: /etc/audit/rules.d/11-loginuid.rules
+        mode: o-rwx
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82828-5
+        - DISA-STIG-RHEL-08-030122
+        - NIST-800-53-AU-2(a)
+        - audit_immutable_login_uids
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Gather the package facts
       package_facts:
         manager: auto
@@ -27750,6 +27767,75 @@
         - no_reboot_needed
         - restrict_strategy
         - sshd_x11_use_localhost
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-86120-3
+        - DISA-STIG-RHEL-08-010400
+        - NIST-800-53-IA-2(11)
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sssd_certificate_verification
+
+    - name: Ensure that "certificate_verification" is not set in /etc/sssd/sssd.conf
+      ini_file:
+        path: /etc/sssd/sssd.conf
+        section: sssd
+        option: certificate_verification
+        state: absent
+      when: '"sssd-common" in ansible_facts.packages'
+      tags:
+        - CCE-86120-3
+        - DISA-STIG-RHEL-08-010400
+        - NIST-800-53-IA-2(11)
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sssd_certificate_verification
+
+    - name: Ensure that "certificate_verification" is not set in  /etc/sssd/conf.d/*.conf
+      ini_file:
+        path: /etc/sssd/conf.d/*.conf
+        section: sssd
+        option: certificate_verification
+        state: absent
+      when: '"sssd-common" in ansible_facts.packages'
+      tags:
+        - CCE-86120-3
+        - DISA-STIG-RHEL-08-010400
+        - NIST-800-53-IA-2(11)
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sssd_certificate_verification
+
+    - name: Ensure that "certificate_verification" is set
+      ini_file:
+        path: /etc/sssd/conf.d/certificate_verification.conf
+        section: sssd
+        option: certificate_verification
+        value: ocsp_dgst = sha1
+        state: present
+      when: '"sssd-common" in ansible_facts.packages'
+      tags:
+        - CCE-86120-3
+        - DISA-STIG-RHEL-08-010400
+        - NIST-800-53-IA-2(11)
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sssd_certificate_verification
 
     - name: Gather the package facts
       package_facts:
