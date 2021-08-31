@@ -27851,7 +27851,7 @@
         - sssd_enable_smartcards
 
     - name: Test for domain group
-      command: grep '\s*\[domain\/[^]]*]' /etc/sssd/sssd.conf
+      command: grep '^\s*\[domain\/[^]]*]' /etc/sssd/sssd.conf
       register: test_grep_domain
       ignore_errors: true
       changed_when: false
