@@ -3080,6 +3080,21 @@ not installed by default.
 The sendmail package can be removed with the following command:
 
 $ sudo yum erase sendmail",,,,
+CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84054-6:Prevent Unrestricted Mail Relaying,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Modify the /etc/postfix/main.cf file to restrict client connections
+to the local network with the following command:
+$ sudo postconf -e 'smtpd_client_restrictions = permit_mynetworks,reject'","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the system is configured to prevent unrestricted mail relaying,
+run the following command:
+$ sudo postconf -n smtpd_client_restrictions
+The output should return:
+smtpd_client_restrictions = permit_mynetworks,reject
+      Is it the case that it is not?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Modify the /etc/postfix/main.cf file to restrict client connections
+to the local network with the following command:
+$ sudo postconf -e 'smtpd_client_restrictions = permit_mynetworks,reject'",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84052-0:Mount Remote Filesystems with nodev,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Add the nodev option to the fourth column of /etc/fstab for the line which controls mounting of
