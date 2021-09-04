@@ -27241,6 +27241,9 @@ if ! grep -s "^\s*cron\.\*\s*/var/log/cron$" /etc/rsyslog.conf /etc/rsyslog.d/*.
 	echo "cron.*	/var/log/cron" >> /etc/rsyslog.d/cron.conf
 fi
 
+
+systemctl restart rsyslog.service
+
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
 fi
