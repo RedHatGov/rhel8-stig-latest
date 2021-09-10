@@ -4470,6 +4470,7 @@
         - NIST-800-53-AU-2(d)
         - NIST-800-53-AU-3
         - NIST-800-53-CM-6(a)
+        - NIST-800-53-SI-4(23)
         - PCI-DSS-Req-10.1
         - enable_strategy
         - low_complexity
