@@ -5765,13 +5765,13 @@ yes within the SSH server configuration file.</td>
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
 <td xml:lang="en-US">By removing the following packages,  the system no longer has X Windows installed.
- 
+
 <code>xorg-x11-server-Xorg xorg-x11-server-common xorg-x11-server-utils xorg-x11-server-Xwayland</code>
 
 If X Windows is not installed then the system cannot boot into graphical user mode.
 This prevents the system from being accidentally or maliciously booted into a <code>graphical.target</code>
 mode. To do so, run the following command:
- 
+
 <pre>sudo yum remove xorg-x11-server-Xorg xorg-x11-server-common xorg-x11-server-utils xorg-x11-server-Xwayland</pre>
 
 Additionally, setting the system's default target to
@@ -5785,7 +5785,7 @@ Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/syst
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To ensure the X Windows package group is removed, run the following command:
- 
+
 $ rpm -qi xorg-x11-server-Xorg xorg-x11-server-common xorg-x11-server-utils xorg-x11-server-Xwayland
 
 For each package mentioned above you should receive following line:
@@ -5794,13 +5794,13 @@ package &lt;package&gt; is not installed
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>By removing the following packages,  the system no longer has X Windows installed.
- 
+
 xorg-x11-server-Xorg xorg-x11-server-common xorg-x11-server-utils xorg-x11-server-Xwayland
 
 If X Windows is not installed then the system cannot boot into graphical user mode.
 This prevents the system from being accidentally or maliciously booted into a graphical.target
 mode. To do so, run the following command:
- 
+
 sudo yum remove xorg-x11-server-Xorg xorg-x11-server-common xorg-x11-server-utils xorg-x11-server-Xwayland
 
 Additionally, setting the system's default target to
