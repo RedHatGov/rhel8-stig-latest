@@ -3092,7 +3092,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 121/364: 'service_auditd_enabled'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q audit; }; then
 
 SYSTEMCTL_EXEC='/usr/bin/systemctl'
 "$SYSTEMCTL_EXEC" unmask 'auditd.service'
@@ -3153,7 +3153,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 124/364: 'audit_rules_immutable'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Traverse all of:
 #
@@ -3188,7 +3188,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 125/364: 'audit_rules_media_export'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -3521,7 +3521,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 126/364: 'audit_rules_sudoers'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 # Create a list of audit *.rules files that should be inspected for presence and correctness
@@ -3552,12 +3552,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/sudoers $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -3573,7 +3571,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/sudoers$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -3597,7 +3595,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/actions.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/sudoers" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/sudoers" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -3631,12 +3629,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/sudoers $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -3652,7 +3648,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/sudoers$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -3671,7 +3667,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 127/364: 'audit_rules_sudoers_d'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 # Create a list of audit *.rules files that should be inspected for presence and correctness
@@ -3702,12 +3698,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/sudoers.d/ $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -3723,7 +3717,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/sudoers.d/$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -3747,7 +3741,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/actions.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/sudoers.d/" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/sudoers.d/" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -3781,12 +3775,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/sudoers.d/ $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -3802,7 +3794,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/sudoers.d/$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -3821,7 +3813,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 128/364: 'audit_rules_suid_privilege_function'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -4469,7 +4461,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 129/364: 'audit_rules_usergroup_modification_group'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -4501,12 +4493,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/group $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4522,7 +4512,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/group$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4546,7 +4536,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/audit_rules_usergroup_modification.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/group" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/group" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -4580,12 +4570,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/group $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4601,7 +4589,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/group$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4620,7 +4608,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 130/364: 'audit_rules_usergroup_modification_gshadow'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -4652,12 +4640,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/gshadow $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4673,7 +4659,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/gshadow$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4697,7 +4683,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/audit_rules_usergroup_modification.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/gshadow" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/gshadow" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -4731,12 +4717,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/gshadow $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4752,7 +4736,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/gshadow$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4771,7 +4755,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 131/364: 'audit_rules_usergroup_modification_opasswd'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -4803,12 +4787,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/security/opasswd $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4824,7 +4806,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/security/opasswd$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4848,7 +4830,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/audit_rules_usergroup_modification.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/security/opasswd" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/security/opasswd" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -4882,12 +4864,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/security/opasswd $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4903,7 +4883,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/security/opasswd$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4922,7 +4902,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 132/364: 'audit_rules_usergroup_modification_passwd'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -4954,12 +4934,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/passwd $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -4975,7 +4953,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/passwd$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -4999,7 +4977,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/audit_rules_usergroup_modification.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/passwd" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/passwd" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -5033,12 +5011,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/passwd $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -5054,7 +5030,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/passwd$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -5073,7 +5049,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 133/364: 'audit_rules_usergroup_modification_shadow'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -5105,12 +5081,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/shadow $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -5126,7 +5100,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/shadow$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -5150,7 +5124,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/audit_rules_usergroup_modification.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/etc/shadow" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/etc/shadow" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -5184,12 +5158,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/etc/shadow $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -5205,7 +5177,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/etc/shadow$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -5224,7 +5196,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 134/364: 'directory_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
@@ -5247,7 +5219,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 135/364: 'directory_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 chown root /var/log/audit
 
@@ -5261,7 +5233,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 136/364: 'directory_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
@@ -5284,7 +5256,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 137/364: 'file_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
@@ -5307,7 +5279,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 138/364: 'file_ownership_var_log_audit_stig'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 chown root /var/log/audit/audit.log*
 
@@ -5321,7 +5293,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 139/364: 'file_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
@@ -5347,7 +5319,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 140/364: 'audit_rules_dac_modification_chmod'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -5680,7 +5652,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 141/364: 'audit_rules_dac_modification_chown'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -6013,7 +5985,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 142/364: 'audit_rules_dac_modification_fchmod'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -6346,7 +6318,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 143/364: 'audit_rules_dac_modification_fchmodat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -6679,7 +6651,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 144/364: 'audit_rules_dac_modification_fchown'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -7012,7 +6984,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 145/364: 'audit_rules_dac_modification_fchownat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -7345,7 +7317,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 146/364: 'audit_rules_dac_modification_fremovexattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -7997,7 +7969,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 147/364: 'audit_rules_dac_modification_fsetxattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -8649,7 +8621,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 148/364: 'audit_rules_dac_modification_lchown'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -8982,7 +8954,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 149/364: 'audit_rules_dac_modification_lremovexattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -9634,7 +9606,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 150/364: 'audit_rules_dac_modification_lsetxattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -10286,7 +10258,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 151/364: 'audit_rules_dac_modification_removexattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -10938,7 +10910,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 152/364: 'audit_rules_dac_modification_setxattr'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -11590,7 +11562,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 153/364: 'audit_rules_execution_chacl'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/chacl -F perm=x"
@@ -11915,7 +11887,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 154/364: 'audit_rules_execution_setfacl'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/setfacl -F perm=x"
@@ -12240,7 +12212,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 155/364: 'audit_rules_execution_chcon'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/chcon -F perm=x"
@@ -12565,7 +12537,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 156/364: 'audit_rules_execution_semanage'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/semanage -F perm=x"
@@ -12890,7 +12862,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 157/364: 'audit_rules_execution_setfiles'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/setfiles -F perm=x"
@@ -13215,7 +13187,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 158/364: 'audit_rules_execution_setsebool'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/setsebool -F perm=x"
@@ -13540,7 +13512,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 159/364: 'audit_rules_file_deletion_events_rename'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -13872,7 +13844,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 160/364: 'audit_rules_file_deletion_events_renameat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -14204,7 +14176,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 161/364: 'audit_rules_file_deletion_events_rmdir'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -14536,7 +14508,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 162/364: 'audit_rules_file_deletion_events_unlink'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -14868,7 +14840,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 163/364: 'audit_rules_file_deletion_events_unlinkat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -15200,7 +15172,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 164/364: 'audit_rules_unsuccessful_file_modification_creat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -15845,7 +15817,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 165/364: 'audit_rules_unsuccessful_file_modification_ftruncate'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -16490,7 +16462,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 166/364: 'audit_rules_unsuccessful_file_modification_open'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -17135,7 +17107,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 167/364: 'audit_rules_unsuccessful_file_modification_open_by_handle_at'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -17780,7 +17752,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 168/364: 'audit_rules_unsuccessful_file_modification_openat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -18425,7 +18397,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 169/364: 'audit_rules_unsuccessful_file_modification_truncate'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -19070,7 +19042,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 170/364: 'audit_rules_kernel_module_loading_delete'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -19406,7 +19378,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 171/364: 'audit_rules_kernel_module_loading_finit'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -19742,7 +19714,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 172/364: 'audit_rules_kernel_module_loading_init'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -20078,7 +20050,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 173/364: 'audit_rules_login_events_lastlog'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
@@ -20110,12 +20082,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/var/log/lastlog $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -20131,7 +20101,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/var/log/lastlog$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -20155,7 +20125,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/logins.rules' to list of files for inspection.
-readarray -t matches < <(grep -P "[\s]*-w[\s]+/var/log/lastlog" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+/var/log/lastlog" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -20189,12 +20159,10 @@ do
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
 
-        # Escape slashes in path for use in sed pattern below
-        esc_path=${path//$'/'/$'\/'}
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/var/log/lastlog $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -20210,7 +20178,7 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+/var/log/lastlog$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
@@ -20229,7 +20197,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 174/364: 'audit_rules_privileged_commands_chage'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/chage -F perm=x"
@@ -20554,7 +20522,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 175/364: 'audit_rules_privileged_commands_chsh'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/chsh -F perm=x"
@@ -20879,7 +20847,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 176/364: 'audit_rules_privileged_commands_crontab'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/crontab -F perm=x"
@@ -21204,7 +21172,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 177/364: 'audit_rules_privileged_commands_gpasswd'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/gpasswd -F perm=x"
@@ -21529,7 +21497,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 178/364: 'audit_rules_privileged_commands_kmod'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/kmod -F perm=x"
@@ -21854,7 +21822,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 179/364: 'audit_rules_privileged_commands_mount'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/mount -F perm=x"
@@ -22179,7 +22147,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 180/364: 'audit_rules_privileged_commands_newgrp'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/newgrp -F perm=x"
@@ -22504,7 +22472,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 181/364: 'audit_rules_privileged_commands_pam_timestamp_check'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/pam_timestamp_check -F perm=x"
@@ -22829,7 +22797,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 182/364: 'audit_rules_privileged_commands_passwd'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/passwd -F perm=x"
@@ -23154,7 +23122,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 183/364: 'audit_rules_privileged_commands_postdrop'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/postdrop -F perm=x"
@@ -23479,7 +23447,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 184/364: 'audit_rules_privileged_commands_postqueue'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/postqueue -F perm=x"
@@ -23804,7 +23772,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 185/364: 'audit_rules_privileged_commands_ssh_agent'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/ssh-agent -F perm=x"
@@ -24129,7 +24097,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 186/364: 'audit_rules_privileged_commands_ssh_keysign'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/libexec/openssh/ssh-keysign -F perm=x"
@@ -24454,7 +24422,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 187/364: 'audit_rules_privileged_commands_su'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/su -F perm=x"
@@ -24779,7 +24747,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 188/364: 'audit_rules_privileged_commands_sudo'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/sudo -F perm=x"
@@ -25104,7 +25072,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 189/364: 'audit_rules_privileged_commands_umount'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/bin/umount -F perm=x"
@@ -25429,7 +25397,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 190/364: 'audit_rules_privileged_commands_unix_chkpwd'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/unix_chkpwd -F perm=x"
@@ -25754,7 +25722,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 191/364: 'audit_rules_privileged_commands_unix_update'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/unix_update -F perm=x"
@@ -26079,7 +26047,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 192/364: 'audit_rules_privileged_commands_userhelper'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/userhelper -F perm=x"
@@ -26404,7 +26372,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 193/364: 'audit_rules_privileged_commands_usermod'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 ACTION_ARCH_FILTERS="-a always,exit"
 OTHER_FILTERS="-F path=/usr/sbin/usermod -F perm=x"
@@ -26736,7 +26704,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 195/364: 'auditd_data_disk_error_action'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_disk_error_action="halt"
@@ -26766,7 +26734,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 196/364: 'auditd_data_disk_full_action'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_disk_full_action="halt"
@@ -26815,7 +26783,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 197/364: 'auditd_data_retention_action_mail_acct'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_action_mail_acct="root"
@@ -26866,7 +26834,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 198/364: 'auditd_data_retention_max_log_file_action'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_max_log_file_action="syslog"
@@ -26917,7 +26885,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 199/364: 'auditd_data_retention_space_left_action'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_space_left_action="email"
@@ -26974,7 +26942,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 200/364: 'auditd_data_retention_space_left_percentage'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 
 var_auditd_space_left_percentage="25"
@@ -26995,7 +26963,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 201/364: 'auditd_local_events'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if [ -e "/etc/audit/auditd.conf" ] ; then
     
@@ -27019,7 +26987,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 202/364: 'auditd_log_format'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if [ -e "/etc/audit/auditd.conf" ] ; then
     
@@ -27043,7 +27011,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 203/364: 'auditd_name_format'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if [ -e "/etc/audit/auditd.conf" ] ; then
     
@@ -27067,7 +27035,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 204/364: 'auditd_overflow_action'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q audit; then
 
 if [ -e "/etc/audit/auditd.conf" ] ; then
     

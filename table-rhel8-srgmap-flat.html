@@ -6106,15 +6106,19 @@ dictcheck is set to 1 passwords will be checked for dictionary words.</td>
 <td>If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.</td>
 <td xml:lang="en-US">To configure the number of retry prompts that are permitted per-session:
 Edit the <code>pam_pwquality.so</code> statement in
+
 <code>/etc/pam.d/system-auth</code>  and
 <code>/etc/pam.d/password-auth</code>  to show
+
 <code>retry=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_retry"></xccdf-1.1:sub></code>, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
 per session.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents the use of dictionary words for passwords. If it does not, this is a finding.</td>
 <td>To check how many retry attempts are permitted on a per-session basis, run the following command:
+
 $ grep pam_pwquality /etc/pam.d/system-auth /etc/pam.d/password-auth
+
 The retry parameter will indicate how many attempts are permitted.
 The DoD required value is less than or equal to 3.
 This would appear as retry=3, or a lower value.
@@ -6123,8 +6127,10 @@ This would appear as retry=3, or a lower value.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61493r1_fix">Configure the operating system to prevent the use of dictionary words for passwords.</fixtext></td>
 <td>To configure the number of retry prompts that are permitted per-session:
 Edit the pam_pwquality.so statement in
+
 /etc/pam.d/system-auth  and
 /etc/pam.d/password-auth  to show
+
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
 per session.</td>
@@ -34028,15 +34034,19 @@ domains = testing.test
 Password complexity is one factor of several that determines how long it takes to crack a password. The more complex the password, the greater the number of possible combinations that need to be tested before the password is compromised.</td>
 <td xml:lang="en-US">To configure the number of retry prompts that are permitted per-session:
 Edit the <code>pam_pwquality.so</code> statement in
+
 <code>/etc/pam.d/system-auth</code>  and
 <code>/etc/pam.d/password-auth</code>  to show
+
 <code>retry=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_retry"></xccdf-1.1:sub></code>, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
 per session.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system enforces password complexity by requiring that at least one upper-case character be used. If it does not, this is a finding.</td>
 <td>To check how many retry attempts are permitted on a per-session basis, run the following command:
+
 $ grep pam_pwquality /etc/pam.d/system-auth /etc/pam.d/password-auth
+
 The retry parameter will indicate how many attempts are permitted.
 The DoD required value is less than or equal to 3.
 This would appear as retry=3, or a lower value.
@@ -34045,8 +34055,10 @@ This would appear as retry=3, or a lower value.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61585r1_fix">Configure the operating system to enforce password complexity by requiring that at least one upper-case character be used.</fixtext></td>
 <td>To configure the number of retry prompts that are permitted per-session:
 Edit the pam_pwquality.so statement in
+
 /etc/pam.d/system-auth  and
 /etc/pam.d/password-auth  to show
+
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
 per session.</td>
