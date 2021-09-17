@@ -55,8 +55,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
 fi
@@ -121,13 +119,10 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
 fi
 var_aide_scan_notification_email="root@localhost"
-
 
 
     
@@ -280,10 +275,7 @@ remediate_bind_crypto_policy
 ###############################################################################
 (>&2 echo "Remediating rule 10/364: 'configure_crypto_policy'")
 
-# include remediation functions library
-
 var_system_crypto_policy="FIPS"
-
 
 
 stderr_of_call=$(update-crypto-policies --set ${var_system_crypto_policy} 2>&1 > /dev/null)
@@ -409,7 +401,6 @@ sed -i "/^\s*CRYPTO_POLICY.*$/d" $SSH_CONF
 sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
 
 
-
 if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
     
     LC_ALL=C sed -i "/^.*Ciphers\s\+/d" "/etc/crypto-policies/back-ends/openssh.config"
@@ -429,7 +420,6 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 (>&2 echo "Remediating rule 18/364: 'harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
 
 sshd_approved_ciphers="aes256-ctr,aes192-ctr,aes128-ctr"
-
 
 
 CONF_FILE=/etc/crypto-policies/back-ends/opensshserver.config
@@ -469,7 +459,6 @@ fi
 sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
 
 
-
 if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
     
     LC_ALL=C sed -i "/^.*MACs\s\+/d" "/etc/crypto-policies/back-ends/openssh.config"
@@ -489,7 +478,6 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 (>&2 echo "Remediating rule 20/364: 'harden_sshd_macs_opensshserver_conf_crypto_policy'")
 
 sshd_approved_macs="hmac-sha2-512,hmac-sha2-256"
-
 
 
 CONF_FILE=/etc/crypto-policies/back-ends/opensshserver.config
@@ -672,9 +660,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
-
 inactivity_timeout_value="900"
-
 
 
 # Check for setting in any of the DConf db directories
@@ -872,7 +858,6 @@ done
 
 
 var_sudo_timestamp_timeout="0"
-
 
 
 if /usr/sbin/visudo -qcf /etc/sudoers; then
@@ -1258,9 +1243,7 @@ yum -y update
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 login_banner_text="^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Government[\s\n]+\(USG\)[\s\n]+Information[\s\n]+System[\s\n]+\(IS\)[\s\n]+that[\s\n]+is[\s\n]+provided[\s\n]+for[\s\n]+USG\-authorized[\s\n]+use[\s\n]+only\.[\s\n]+By[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+\(which[\s\n]+includes[\s\n]+any[\s\n]+device[\s\n]+attached[\s\n]+to[\s\n]+this[\s\n]+IS\)\,[\s\n]+you[\s\n]+consent[\s\n]+to[\s\n]+the[\s\n]+following[\s\n]+conditions\:(?:[\n]+|(?:\\n)+)\-The[\s\n]+USG[\s\n]+routinely[\s\n]+intercepts[\s\n]+and[\s\n]+monitors[\s\n]+communications[\s\n]+on[\s\n]+this[\s\n]+IS[\s\n]+for[\s\n]+purposes[\s\n]+including\,[\s\n]+but[\s\n]+not[\s\n]+limited[\s\n]+to\,[\s\n]+penetration[\s\n]+testing\,[\s\n]+COMSEC[\s\n]+monitoring\,[\s\n]+network[\s\n]+operations[\s\n]+and[\s\n]+defense\,[\s\n]+personnel[\s\n]+misconduct[\s\n]+\(PM\)\,[\s\n]+law[\s\n]+enforcement[\s\n]+\(LE\)\,[\s\n]+and[\s\n]+counterintelligence[\s\n]+\(CI\)[\s\n]+investigations\.(?:[\n]+|(?:\\n)+)\-At[\s\n]+any[\s\n]+time\,[\s\n]+the[\s\n]+USG[\s\n]+may[\s\n]+inspect[\s\n]+and[\s\n]+seize[\s\n]+data[\s\n]+stored[\s\n]+on[\s\n]+this[\s\n]+IS\.(?:[\n]+|(?:\\n)+)\-Communications[\s\n]+using\,[\s\n]+or[\s\n]+data[\s\n]+stored[\s\n]+on\,[\s\n]+this[\s\n]+IS[\s\n]+are[\s\n]+not[\s\n]+private\,[\s\n]+are[\s\n]+subject[\s\n]+to[\s\n]+routine[\s\n]+monitoring\,[\s\n]+interception\,[\s\n]+and[\s\n]+search\,[\s\n]+and[\s\n]+may[\s\n]+be[\s\n]+disclosed[\s\n]+or[\s\n]+used[\s\n]+for[\s\n]+any[\s\n]+USG\-authorized[\s\n]+purpose\.(?:[\n]+|(?:\\n)+)\-This[\s\n]+IS[\s\n]+includes[\s\n]+security[\s\n]+measures[\s\n]+\(e\.g\.\,[\s\n]+authentication[\s\n]+and[\s\n]+access[\s\n]+controls\)[\s\n]+to[\s\n]+protect[\s\n]+USG[\s\n]+interests\-\-not[\s\n]+for[\s\n]+your[\s\n]+personal[\s\n]+benefit[\s\n]+or[\s\n]+privacy\.(?:[\n]+|(?:\\n)+)\-Notwithstanding[\s\n]+the[\s\n]+above\,[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+does[\s\n]+not[\s\n]+constitute[\s\n]+consent[\s\n]+to[\s\n]+PM\,[\s\n]+LE[\s\n]+or[\s\n]+CI[\s\n]+investigative[\s\n]+searching[\s\n]+or[\s\n]+monitoring[\s\n]+of[\s\n]+the[\s\n]+content[\s\n]+of[\s\n]+privileged[\s\n]+communications\,[\s\n]+or[\s\n]+work[\s\n]+product\,[\s\n]+related[\s\n]+to[\s\n]+personal[\s\n]+representation[\s\n]+or[\s\n]+services[\s\n]+by[\s\n]+attorneys\,[\s\n]+psychotherapists\,[\s\n]+or[\s\n]+clergy\,[\s\n]+and[\s\n]+their[\s\n]+assistants\.[\s\n]+Such[\s\n]+communications[\s\n]+and[\s\n]+work[\s\n]+product[\s\n]+are[\s\n]+private[\s\n]+and[\s\n]+confidential\.[\s\n]+See[\s\n]+User[\s\n]+Agreement[\s\n]+for[\s\n]+details\.|I've[\s\n]+read[\s\n]+\&[\s\n]+consent[\s\n]+to[\s\n]+terms[\s\n]+in[\s\n]+IS[\s\n]+user[\s\n]+agreem't\.)$"
-
 
 
 # Multiple regexes transform the banner regex into a usable banner
@@ -1344,9 +1327,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
-
 login_banner_text="^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Government[\s\n]+\(USG\)[\s\n]+Information[\s\n]+System[\s\n]+\(IS\)[\s\n]+that[\s\n]+is[\s\n]+provided[\s\n]+for[\s\n]+USG\-authorized[\s\n]+use[\s\n]+only\.[\s\n]+By[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+\(which[\s\n]+includes[\s\n]+any[\s\n]+device[\s\n]+attached[\s\n]+to[\s\n]+this[\s\n]+IS\)\,[\s\n]+you[\s\n]+consent[\s\n]+to[\s\n]+the[\s\n]+following[\s\n]+conditions\:(?:[\n]+|(?:\\n)+)\-The[\s\n]+USG[\s\n]+routinely[\s\n]+intercepts[\s\n]+and[\s\n]+monitors[\s\n]+communications[\s\n]+on[\s\n]+this[\s\n]+IS[\s\n]+for[\s\n]+purposes[\s\n]+including\,[\s\n]+but[\s\n]+not[\s\n]+limited[\s\n]+to\,[\s\n]+penetration[\s\n]+testing\,[\s\n]+COMSEC[\s\n]+monitoring\,[\s\n]+network[\s\n]+operations[\s\n]+and[\s\n]+defense\,[\s\n]+personnel[\s\n]+misconduct[\s\n]+\(PM\)\,[\s\n]+law[\s\n]+enforcement[\s\n]+\(LE\)\,[\s\n]+and[\s\n]+counterintelligence[\s\n]+\(CI\)[\s\n]+investigations\.(?:[\n]+|(?:\\n)+)\-At[\s\n]+any[\s\n]+time\,[\s\n]+the[\s\n]+USG[\s\n]+may[\s\n]+inspect[\s\n]+and[\s\n]+seize[\s\n]+data[\s\n]+stored[\s\n]+on[\s\n]+this[\s\n]+IS\.(?:[\n]+|(?:\\n)+)\-Communications[\s\n]+using\,[\s\n]+or[\s\n]+data[\s\n]+stored[\s\n]+on\,[\s\n]+this[\s\n]+IS[\s\n]+are[\s\n]+not[\s\n]+private\,[\s\n]+are[\s\n]+subject[\s\n]+to[\s\n]+routine[\s\n]+monitoring\,[\s\n]+interception\,[\s\n]+and[\s\n]+search\,[\s\n]+and[\s\n]+may[\s\n]+be[\s\n]+disclosed[\s\n]+or[\s\n]+used[\s\n]+for[\s\n]+any[\s\n]+USG\-authorized[\s\n]+purpose\.(?:[\n]+|(?:\\n)+)\-This[\s\n]+IS[\s\n]+includes[\s\n]+security[\s\n]+measures[\s\n]+\(e\.g\.\,[\s\n]+authentication[\s\n]+and[\s\n]+access[\s\n]+controls\)[\s\n]+to[\s\n]+protect[\s\n]+USG[\s\n]+interests\-\-not[\s\n]+for[\s\n]+your[\s\n]+personal[\s\n]+benefit[\s\n]+or[\s\n]+privacy\.(?:[\n]+|(?:\\n)+)\-Notwithstanding[\s\n]+the[\s\n]+above\,[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+does[\s\n]+not[\s\n]+constitute[\s\n]+consent[\s\n]+to[\s\n]+PM\,[\s\n]+LE[\s\n]+or[\s\n]+CI[\s\n]+investigative[\s\n]+searching[\s\n]+or[\s\n]+monitoring[\s\n]+of[\s\n]+the[\s\n]+content[\s\n]+of[\s\n]+privileged[\s\n]+communications\,[\s\n]+or[\s\n]+work[\s\n]+product\,[\s\n]+related[\s\n]+to[\s\n]+personal[\s\n]+representation[\s\n]+or[\s\n]+services[\s\n]+by[\s\n]+attorneys\,[\s\n]+psychotherapists\,[\s\n]+or[\s\n]+clergy\,[\s\n]+and[\s\n]+their[\s\n]+assistants\.[\s\n]+Such[\s\n]+communications[\s\n]+and[\s\n]+work[\s\n]+product[\s\n]+are[\s\n]+private[\s\n]+and[\s\n]+confidential\.[\s\n]+See[\s\n]+User[\s\n]+Agreement[\s\n]+for[\s\n]+details\.|I've[\s\n]+read[\s\n]+\&[\s\n]+consent[\s\n]+to[\s\n]+terms[\s\n]+in[\s\n]+IS[\s\n]+user[\s\n]+agreem't\.)$"
-
 
 
 # Multiple regexes transform the banner regex into a usable banner
@@ -1465,11 +1446,8 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_remember="5"
-
 var_password_pam_remember_control_flag="required"
-
 
 
 pamFile="/etc/pam.d/password-auth"
@@ -1513,11 +1491,8 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_remember="5"
-
 var_password_pam_remember_control_flag="required"
-
 
 
 pamFile="/etc/pam.d/system-auth"
@@ -1561,9 +1536,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_accounts_passwords_pam_faillock_deny="3"
-
 
 
 AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
@@ -1673,10 +1646,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-# include our remediation functions library
-
 var_accounts_passwords_pam_faillock_fail_interval="900"
-
 
 
 AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
@@ -1730,9 +1700,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_accounts_passwords_pam_faillock_unlock_time="0"
-
 
 
 AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
@@ -1786,9 +1754,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_dcredit="-1"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -1835,9 +1801,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_dictcheck="1"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -1884,9 +1848,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_difok="8"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -1933,9 +1895,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_lcredit="-1"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -1982,9 +1942,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_maxclassrepeat="4"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2031,9 +1989,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_maxrepeat="3"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2080,9 +2036,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_minclass="4"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2129,9 +2083,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_minlen="15"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2178,9 +2130,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_ocredit="-1"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2227,9 +2177,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_retry="3"
-
 
 
 if grep -q "retry=" /etc/pam.d/system-auth ; then
@@ -2256,9 +2204,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_ucredit="-1"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2305,9 +2251,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_password_hashing_algorithm="SHA512"
-
 
 
 if grep --silent ^ENCRYPT_METHOD /etc/login.defs ; then
@@ -2620,9 +2564,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_account_disable_post_pw_expiration="35"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2683,9 +2625,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_accounts_maximum_age_login_defs="60"
-
 
 
 grep -q ^PASS_MAX_DAYS /etc/login.defs && \
@@ -2706,9 +2646,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_accounts_minimum_age_login_defs="1"
-
 
 
 grep -q ^PASS_MIN_DAYS /etc/login.defs && \
@@ -2729,9 +2667,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_accounts_password_minlen_login_defs="15"
-
 
 
 grep -q ^PASS_MIN_LEN /etc/login.defs && \
@@ -2774,9 +2710,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_unix_rounds="5000"
-
 
 
 pamFile="/etc/pam.d/password-auth"
@@ -2800,9 +2734,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_password_pam_unix_rounds="5000"
-
 
 
 pamFile="/etc/pam.d/system-auth"
@@ -2881,11 +2813,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
-
-# Set variables
 var_accounts_fail_delay="4"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -2932,9 +2860,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-
 var_accounts_max_concurrent_login_sessions="10"
-
 
 
 if grep -q '^[^#]*\<maxlogins\>' /etc/security/limits.d/*.conf; then
@@ -3007,7 +2933,6 @@ fi
 var_accounts_user_umask="077"
 
 
-
 grep -q umask /etc/bashrc && \
   sed -i "s/umask.*/umask $var_accounts_user_umask/g" /etc/bashrc
 if ! [ $? -eq 0 ]; then
@@ -3022,9 +2947,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
-
 var_accounts_user_umask="077"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -26706,9 +26629,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_disk_error_action="halt"
-
 
 
 #
@@ -26736,9 +26657,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_disk_full_action="halt"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -26785,9 +26704,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_action_mail_acct="root"
-
 
 
 AUDITCONFIG=/etc/audit/auditd.conf
@@ -26836,9 +26753,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_max_log_file_action="syslog"
-
 
 
 AUDITCONFIG=/etc/audit/auditd.conf
@@ -26887,9 +26802,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_space_left_action="email"
-
 
 
 #
@@ -26944,9 +26857,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-
 var_auditd_space_left_percentage="25"
-
 
 
 grep -q "^space_left[[:space:]]*=.*$" /etc/audit/auditd.conf && \
@@ -27329,9 +27240,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 rsyslog_remote_loghost_address="logcollector"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -27433,7 +27342,6 @@ fi
 firewalld_sshd_zone="public"
 
 
-
 # This assumes that firewalld_sshd_zone is one of the pre-defined zones
 if [ ! -f /etc/firewalld/zones/${firewalld_sshd_zone}.xml ]; then
     cp /usr/lib/firewalld/zones/${firewalld_sshd_zone}.xml /etc/firewalld/zones/${firewalld_sshd_zone}.xml
@@ -27509,9 +27417,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_all_accept_ra_value="0"
-
 
 
 #
@@ -27567,9 +27473,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_all_accept_redirects_value="0"
-
 
 
 #
@@ -27625,9 +27529,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_all_accept_source_route_value="0"
-
 
 
 #
@@ -27683,9 +27585,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_default_accept_ra_value="0"
-
 
 
 #
@@ -27741,9 +27641,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_default_accept_redirects_value="0"
-
 
 
 #
@@ -27799,9 +27697,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv6_conf_default_accept_source_route_value="0"
-
 
 
 #
@@ -27857,9 +27753,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_conf_all_accept_redirects_value="0"
-
 
 
 #
@@ -27915,9 +27809,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_conf_all_accept_source_route_value="0"
-
 
 
 #
@@ -27973,9 +27865,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_conf_all_rp_filter_value="1"
-
 
 
 #
@@ -28031,9 +27921,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_conf_default_accept_redirects_value="0"
-
 
 
 #
@@ -28089,9 +27977,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_conf_default_accept_source_route_value="0"
-
 
 
 #
@@ -28147,9 +28033,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value="1"
-
 
 
 #
@@ -28205,8 +28089,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for net.ipv4.conf.all.send_redirects
 #
@@ -28260,8 +28142,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for net.ipv4.conf.default.send_redirects
 #
@@ -28314,8 +28194,6 @@ fi
 (>&2 echo "Remediating rule 240/364: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for net.ipv4.ip_forward
@@ -28560,8 +28438,6 @@ done
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for fs.protected_hardlinks
 #
@@ -28614,8 +28490,6 @@ fi
 (>&2 echo "Remediating rule 255/364: 'sysctl_fs_protected_symlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for fs.protected_symlinks
@@ -29181,9 +29055,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_removable_partition="/dev/cdrom"
-
 
 
 device_regex="^\s*$var_removable_partition\s\+"
@@ -29209,9 +29081,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_removable_partition="/dev/cdrom"
-
 
 
 device_regex="^\s*$var_removable_partition\s\+"
@@ -29237,9 +29107,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_removable_partition="/dev/cdrom"
-
 
 
 device_regex="^\s*$var_removable_partition\s\+"
@@ -29829,8 +29697,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for kernel.core_pattern
 #
@@ -29883,8 +29749,6 @@ fi
 (>&2 echo "Remediating rule 295/364: 'sysctl_kernel_dmesg_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for kernel.dmesg_restrict
@@ -29939,8 +29803,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for kernel.kexec_load_disabled
 #
@@ -29993,8 +29855,6 @@ fi
 (>&2 echo "Remediating rule 297/364: 'sysctl_kernel_perf_event_paranoid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for kernel.perf_event_paranoid
@@ -30049,8 +29909,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for kernel.unprivileged_bpf_disabled
 #
@@ -30103,8 +29961,6 @@ fi
 (>&2 echo "Remediating rule 299/364: 'sysctl_kernel_yama_ptrace_scope'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for kernel.yama.ptrace_scope
@@ -30159,8 +30015,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for net.core.bpf_jit_harden
 #
@@ -30213,8 +30067,6 @@ fi
 (>&2 echo "Remediating rule 301/364: 'sysctl_user_max_user_namespaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for user.max_user_namespaces
@@ -30349,8 +30201,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
-
 #
 # Set runtime for kernel.kptr_restrict
 #
@@ -30403,8 +30253,6 @@ fi
 (>&2 echo "Remediating rule 307/364: 'sysctl_kernel_randomize_va_space'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-
 
 #
 # Set runtime for kernel.randomize_va_space
@@ -30526,9 +30374,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_selinux_policy_name="targeted"
-
 
 
 if [ -e "/etc/selinux/config" ] ; then
@@ -30555,9 +30401,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_selinux_state="enforcing"
-
 
 
 if [ -e "/etc/selinux/config" ] ; then
@@ -30714,9 +30558,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_postfix_root_mail_alias="system.administrator@mail.mil"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -30970,9 +30812,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q chrony || rpm --quiet -q ntp; }; then
 
-
 var_time_service_set_maxpoll="16"
-
 
 
 
@@ -31077,9 +30917,7 @@ fi
 (>&2 echo "Remediating rule 334/364: 'tftpd_uses_secure_mode'")
 #!/bin/bash
 
-
 var_tftpd_secure_directory="/var/lib/tftpboot"
-
 
 
 if grep -q 'server_args' /etc/xinetd.d/tftp; then
@@ -31184,9 +31022,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_sshd_disable_compression="no"
-
 
 
 # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
@@ -31563,11 +31399,8 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 var_rekey_limit_size="1G"
-
 var_rekey_limit_time="1h"
-
 
 
 if [ -e "/etc/ssh/sshd_config" ] ; then
@@ -31603,9 +31436,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-
 sshd_idle_timeout_value="600"
-
 
 
 if [ -e "/etc/ssh/sshd_config" ] ; then
@@ -31740,10 +31571,7 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common; then
 
-# include our remediation functions library
-
 var_sssd_certificate_verification_digest_function="sha1"
-
 
 
 found=false
