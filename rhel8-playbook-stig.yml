@@ -3749,6 +3749,7 @@
     - name: Disable Ctrl-Alt-Del Reboot Activation
       systemd:
         name: ctrl-alt-del.target
+        force: true
         masked: true
         state: stopped
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -23378,7 +23379,7 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: false
-            regexp: '^\s*\$ActionSendStreamDriverMode '
+            regexp: '^\s*$ActionSendStreamDriverMode '
             state: absent
           check_mode: true
           changed_when: false
@@ -23388,7 +23389,7 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: false
-            regexp: '^\s*\$ActionSendStreamDriverMode '
+            regexp: '^\s*$ActionSendStreamDriverMode '
             state: absent
           when: dupes.found is defined and dupes.found > 1
 
@@ -23396,8 +23397,8 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: true
-            regexp: '^\s*\$ActionSendStreamDriverMode '
-            line: \$ActionSendStreamDriverMode 1
+            regexp: '^\s*$ActionSendStreamDriverMode '
+            line: $ActionSendStreamDriverMode 1
             state: present
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -23418,7 +23419,7 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: false
-            regexp: '^\s*\$DefaultNetstreamDriver '
+            regexp: '^\s*$DefaultNetstreamDriver '
             state: absent
           check_mode: true
           changed_when: false
@@ -23428,7 +23429,7 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: false
-            regexp: '^\s*\$DefaultNetstreamDriver '
+            regexp: '^\s*$DefaultNetstreamDriver '
             state: absent
           when: dupes.found is defined and dupes.found > 1
 
@@ -23436,8 +23437,8 @@
           lineinfile:
             path: /etc/rsyslog.d/encrypt.conf
             create: true
-            regexp: '^\s*\$DefaultNetstreamDriver '
-            line: \$DefaultNetstreamDriver gtls
+            regexp: '^\s*$DefaultNetstreamDriver '
+            line: $DefaultNetstreamDriver gtls
             state: present
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:

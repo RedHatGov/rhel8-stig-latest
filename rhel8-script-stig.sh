@@ -956,7 +956,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-addon-ccpp" ; then
+
     yum remove -y "abrt-addon-ccpp"
+
 fi
 # END fix for 'package_abrt-addon-ccpp_removed'
 
@@ -972,7 +974,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-addon-kerneloops" ; then
+
     yum remove -y "abrt-addon-kerneloops"
+
 fi
 # END fix for 'package_abrt-addon-kerneloops_removed'
 
@@ -988,7 +992,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-addon-python" ; then
+
     yum remove -y "abrt-addon-python"
+
 fi
 # END fix for 'package_abrt-addon-python_removed'
 
@@ -1004,7 +1010,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-cli" ; then
+
     yum remove -y "abrt-cli"
+
 fi
 # END fix for 'package_abrt-cli_removed'
 
@@ -1020,7 +1028,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-plugin-logger" ; then
+
     yum remove -y "abrt-plugin-logger"
+
 fi
 # END fix for 'package_abrt-plugin-logger_removed'
 
@@ -1036,7 +1046,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-plugin-rhtsupport" ; then
+
     yum remove -y "abrt-plugin-rhtsupport"
+
 fi
 # END fix for 'package_abrt-plugin-rhtsupport_removed'
 
@@ -1052,7 +1064,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt-plugin-sosreport" ; then
+
     yum remove -y "abrt-plugin-sosreport"
+
 fi
 # END fix for 'package_abrt-plugin-sosreport_removed'
 
@@ -1068,7 +1082,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "gssproxy" ; then
+
     yum remove -y "gssproxy"
+
 fi
 # END fix for 'package_gssproxy_removed'
 
@@ -1084,7 +1100,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "iprutils" ; then
+
     yum remove -y "iprutils"
+
 fi
 # END fix for 'package_iprutils_removed'
 
@@ -1100,7 +1118,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "krb5-workstation" ; then
+
     yum remove -y "krb5-workstation"
+
 fi
 # END fix for 'package_krb5-workstation_removed'
 
@@ -1116,7 +1136,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "tuned" ; then
+
     yum remove -y "tuned"
+
 fi
 # END fix for 'package_tuned_removed'
 
@@ -2531,16 +2553,7 @@ fi
 # BEGIN fix (91 / 364) for 'install_smartcard_packages'
 ###############################################################################
 (>&2 echo "Remediating rule 91/364: 'install_smartcard_packages'")
-# Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
-
-if ! rpm -q --quiet "openssl-pkcs11" ; then
-    yum install -y "openssl-pkcs11"
-fi
-
-else
-    >&2 echo 'Remediation is not applicable, nothing was done'
-fi
+# FIX FOR THIS RULE IS MISSING
 # END fix for 'install_smartcard_packages'
 
 ###############################################################################
@@ -30436,7 +30449,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "abrt" ; then
+
     yum remove -y "abrt"
+
 fi
 # END fix for 'package_abrt_removed'
 
@@ -30511,7 +30526,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "vsftpd" ; then
+
     yum remove -y "vsftpd"
+
 fi
 # END fix for 'package_vsftpd_removed'
 
@@ -30543,7 +30560,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 #	   system!
 
 if rpm -q --quiet "sendmail" ; then
+
     yum remove -y "sendmail"
+
 fi
 
 else
@@ -30845,7 +30864,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "rsh-server" ; then
+
     yum remove -y "rsh-server"
+
 fi
 # END fix for 'package_rsh-server_removed'
 
@@ -30891,7 +30912,9 @@ done
 #	   system!
 
 if rpm -q --quiet "telnet-server" ; then
+
     yum remove -y "telnet-server"
+
 fi
 # END fix for 'package_telnet-server_removed'
 
@@ -30907,7 +30930,9 @@ fi
 #	   system!
 
 if rpm -q --quiet "tftp-server" ; then
+
     yum remove -y "tftp-server"
+
 fi
 # END fix for 'package_tftp-server_removed'
 
@@ -31749,17 +31774,25 @@ fi
 
 # remove packages
 if rpm -q --quiet "xorg-x11-server-Xorg" ; then
+
     yum remove -y "xorg-x11-server-Xorg"
+
 fi
 if rpm -q --quiet "xorg-x11-server-utils" ; then
+
     yum remove -y "xorg-x11-server-utils"
+
 fi
 if rpm -q --quiet "xorg-x11-server-common" ; then
+
     yum remove -y "xorg-x11-server-common"
+
 fi
 
 if rpm -q --quiet "xorg-x11-server-Xwayland" ; then
+
     yum remove -y "xorg-x11-server-Xwayland"
+
 fi
 
 
