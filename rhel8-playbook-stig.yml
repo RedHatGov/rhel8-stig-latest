@@ -277,6 +277,7 @@
         create: true
       tags:
         - CCE-80935-0
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - NIST-800-53-AC-17(a)
         - NIST-800-53-CM-6(a)
@@ -295,6 +296,7 @@
       command: /usr/bin/update-crypto-policies --set {{ var_system_crypto_policy }}
       tags:
         - CCE-80935-0
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - NIST-800-53-AC-17(a)
         - NIST-800-53-CM-6(a)
@@ -398,6 +400,7 @@
         state: link
       tags:
         - CCE-80936-8
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-SC-12(2)
         - NIST-800-53-SC-12(3)
         - NIST-800-53-SC-13
@@ -415,6 +418,7 @@
         create: true
       tags:
         - CCE-80937-6
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-CM-6(a)
         - NIST-800-53-MA-4(6)
         - NIST-800-53-SC-12(2)
