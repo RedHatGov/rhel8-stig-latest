@@ -2553,7 +2553,16 @@ fi
 # BEGIN fix (91 / 364) for 'install_smartcard_packages'
 ###############################################################################
 (>&2 echo "Remediating rule 91/364: 'install_smartcard_packages'")
-# FIX FOR THIS RULE IS MISSING
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+if ! rpm -q --quiet "openssl-pkcs11" ; then
+    yum install -y "openssl-pkcs11"
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'install_smartcard_packages'
 
 ###############################################################################
@@ -28379,7 +28388,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 247/364: 'wireless_disable_interfaces'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if rpm --quiet -q wifi-iface; then
 
 nmcli radio wifi off
 
