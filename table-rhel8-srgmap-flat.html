@@ -25985,6 +25985,7 @@ by <code>auditd</code>, add or correct the line in <code>/etc/audit/auditd.conf<
 Possible values for <i>ACTION</i> are described in the <code>auditd.conf</code> man
 page. These include:
 <ul>
+<li><code>ignore</code></li>
 <li><code>syslog</code></li>
 <li><code>suspend</code></li>
 <li><code>rotate</code></li>
@@ -26008,7 +26009,7 @@ by auditd, add or correct the line in /etc/audit/auditd.conf:
 max_log_file_action = ACTION
 Possible values for ACTION are described in the auditd.conf man
 page. These include:
-syslogsuspendrotatekeep_logs
+ignoresyslogsuspendrotatekeep_logs
 Set the ACTION to rotate to ensure log rotation
 occurs. This is the default. The setting is case-insensitive.</td>
 <td>medium</td>
