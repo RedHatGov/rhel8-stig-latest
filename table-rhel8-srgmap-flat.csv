@@ -23172,6 +23172,34 @@ If the system is 64 bit then also add the following lines:
 
 -a always,exit -F arch=b64 -S truncate -F exit=-EACCES -F auid>=1000 -F auid!=unset -F key=access
 -a always,exit -F arch=b64 -S truncate -F exit=-EPERM -F auid>=1000 -F auid!=unset -F key=access",,,,
+CCI-000172,SRG-OS-000064-GPOS-00033,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful attempts to access privileges occur.,CCE-89480-8:Ensure auditd Collects Information on the Use of Privileged Commands - unix_update,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).","At a minimum, the audit system should collect the execution of
+privileged commands for all users and root. If the auditd daemon is
+configured to use the augenrules program to read audit rules during
+daemon startup (the default), add a line of the following form to a file with
+suffix .rules in the directory /etc/audit/rules.d:
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged
+If the auditd daemon is configured to use the auditctl
+utility to read audit rules during daemon startup, add a line of the following
+form to /etc/audit/audit.rules:
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged","
+                  Applicable - Configurable
+                ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To verify that auditing of privileged command use is configured, run the
+following command:
+$ sudo grep unix_update /etc/audit/audit.rules /etc/audit/rules.d/*
+It should return a relevant line in the audit rules.
+      Is it the case that it is not the case?
+      ",Configure the operating system to generate audit records when successful/unsuccessful attempts to access privileges occur.,"At a minimum, the audit system should collect the execution of
+privileged commands for all users and root. If the auditd daemon is
+configured to use the augenrules program to read audit rules during
+daemon startup (the default), add a line of the following form to a file with
+suffix .rules in the directory /etc/audit/rules.d:
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged
+If the auditd daemon is configured to use the auditctl
+utility to read audit rules during daemon startup, add a line of the following
+form to /etc/audit/audit.rules:
+-a always,exit -F path=/usr/sbin/unix_update -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged",,,,
 CCI-000172,SRG-OS-000064-GPOS-00033,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful attempts to access privileges occur.,Product Meets this Requirement,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
 Audit records can be generated from various components within the information system (e.g., module or policy filter).","
