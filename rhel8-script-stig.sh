@@ -5180,15 +5180,21 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
+if LC_ALL=C grep -iw ^log_file /etc/audit/auditd.conf; then
+  DIR=$(awk -F "=" '/^log_file/ {print $2}' /etc/audit/auditd.conf | tr -d ' ' | rev | cut -d"/" -f2- | rev)
+else
+  DIR="/var/log/audit"
+fi
+
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
   if ! [ "${GROUP}" == 'root' ] ; then
-    chmod 0750 /var/log/audit
+    chmod 0750 $DIR
   else
-    chmod 0700 /var/log/audit
+    chmod 0700 $DIR
   fi
 else
-  chmod 0700 /var/log/audit
+  chmod 0700 $DIR
 fi
 
 else
@@ -5203,15 +5209,21 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
+if LC_ALL=C grep -iw log_file /etc/audit/auditd.conf; then
+  FILE=$(awk -F "=" '/^log_file/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
+else
+  FILE="/var/log/audit/audit.log"
+fi
+
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
-  if ! [ "${GROUP}" == 'root' ] ; then
-    chgrp ${GROUP} /var/log/audit/audit.log*
+  if ! [ "${GROUP}" == 'root' ]; then
+    chgrp ${GROUP} $FILE*
   else
-    chgrp root /var/log/audit/audit.log*
+    chgrp root $FILE*
   fi
 else
-  chgrp root /var/log/audit/audit.log*
+  chgrp root $FILE*
 fi
 
 else
@@ -5226,7 +5238,12 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
-chown root /var/log/audit/audit.log*
+if LC_ALL=C grep -iw log_file /etc/audit/auditd.conf; then
+    FILE=$(awk -F "=" '/^log_file/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
+    chown root $FILE*
+else
+    chown root /var/log/audit/audit.log*
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -5240,18 +5257,24 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q audit; then
 
+if LC_ALL=C grep -iw log_file /etc/audit/auditd.conf; then
+    FILE=$(awk -F "=" '/^log_file/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
+else
+    FILE="/var/log/audit/audit.log"
+fi
+
 if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
   GROUP=$(awk -F "=" '/log_group/ {print $2}' /etc/audit/auditd.conf | tr -d ' ')
   if ! [ "${GROUP}" == 'root' ] ; then
-    chmod 0640 /var/log/audit/audit.log
-    chmod 0440 /var/log/audit/audit.log.*
+    chmod 0640 $FILE
+    chmod 0440 $FILE.*
   else
-    chmod 0600 /var/log/audit/audit.log
-    chmod 0400 /var/log/audit/audit.log.*
+    chmod 0600 $FILE
+    chmod 0400 $FILE.*
   fi
 else
-  chmod 0600 /var/log/audit/audit.log
-  chmod 0400 /var/log/audit/audit.log.*
+  chmod 0600 $FILE
+  chmod 0400 $FILE.*
 fi
 
 else
