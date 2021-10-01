@@ -514,6 +514,7 @@
         regexp: ^\s*CRYPTO_POLICY.*$
       tags:
         - CCE-80939-2
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - NIST-800-53-AC-17(a)
         - NIST-800-53-CM-6(a)
@@ -556,6 +557,7 @@
             state: present
       tags:
         - CCE-85902-5
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - harden_sshd_ciphers_openssh_conf_crypto_policy
         - low_complexity
@@ -676,6 +678,7 @@
             state: present
       tags:
         - CCE-85870-4
+        - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - harden_sshd_macs_openssh_conf_crypto_policy
         - low_complexity
