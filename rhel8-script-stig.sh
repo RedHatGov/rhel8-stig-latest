@@ -1175,13 +1175,6 @@ if test -L "/etc/yum.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80790-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-80790-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^gpgcheck")
@@ -1196,6 +1189,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^gpgcheck\\>" "/etc/yum.conf"; then
     "${sed_command[@]}" "s/^gpgcheck\\>.*/$formatted_output/gi" "/etc/yum.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80790-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
     printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
 fi
@@ -1219,13 +1213,6 @@ if test -L "/etc/yum.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80791-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-80791-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^localpkg_gpgcheck")
@@ -1240,6 +1227,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^localpkg_gpgcheck\\>" "/etc/yum.conf"; then
     "${sed_command[@]}" "s/^localpkg_gpgcheck\\>.*/$formatted_output/gi" "/etc/yum.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80791-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
     printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
 fi
@@ -1786,13 +1774,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80653-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-80653-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dcredit")
@@ -1807,6 +1788,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^dcredit\\>" "/etc/security/pwquality.conf"; the
     "${sed_command[@]}" "s/^dcredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80653-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -1833,13 +1815,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-86233-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-86233-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dictcheck")
@@ -1854,6 +1829,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^dictcheck\\>" "/etc/security/pwquality.conf"; t
     "${sed_command[@]}" "s/^dictcheck\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-86233-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -1880,13 +1856,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80654-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-80654-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^difok")
@@ -1901,6 +1870,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^difok\\>" "/etc/security/pwquality.conf"; then
     "${sed_command[@]}" "s/^difok\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80654-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -1927,13 +1897,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80655-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-80655-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^lcredit")
@@ -1948,6 +1911,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^lcredit\\>" "/etc/security/pwquality.conf"; the
     "${sed_command[@]}" "s/^lcredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80655-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -1974,13 +1938,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81034-1" ]; then
-    cce="CCE"
-else
-    cce="CCE-81034-1"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxclassrepeat")
@@ -1995,6 +1952,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^maxclassrepeat\\>" "/etc/security/pwquality.con
     "${sed_command[@]}" "s/^maxclassrepeat\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81034-1"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2021,13 +1979,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82066-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-82066-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxrepeat")
@@ -2042,6 +1993,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^maxrepeat\\>" "/etc/security/pwquality.conf"; t
     "${sed_command[@]}" "s/^maxrepeat\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82066-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2068,13 +2020,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82046-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-82046-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minclass")
@@ -2089,6 +2034,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^minclass\\>" "/etc/security/pwquality.conf"; th
     "${sed_command[@]}" "s/^minclass\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82046-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2115,13 +2061,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80656-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-80656-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minlen")
@@ -2136,6 +2075,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^minlen\\>" "/etc/security/pwquality.conf"; then
     "${sed_command[@]}" "s/^minlen\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80656-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2162,13 +2102,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80663-8" ]; then
-    cce="CCE"
-else
-    cce="CCE-80663-8"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ocredit")
@@ -2183,6 +2116,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^ocredit\\>" "/etc/security/pwquality.conf"; the
     "${sed_command[@]}" "s/^ocredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80663-8"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2236,13 +2170,6 @@ if test -L "/etc/security/pwquality.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80665-3" ]; then
-    cce="CCE"
-else
-    cce="CCE-80665-3"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ucredit")
@@ -2257,6 +2184,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^ucredit\\>" "/etc/security/pwquality.conf"; the
     "${sed_command[@]}" "s/^ucredit\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80665-3"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
@@ -2350,13 +2278,6 @@ if test -L "/etc/systemd/system.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80784-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-80784-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^CtrlAltDelBurstAction=")
@@ -2371,6 +2292,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^CtrlAltDelBurstAction=\\>" "/etc/systemd/system
     "${sed_command[@]}" "s/^CtrlAltDelBurstAction=\\>.*/$formatted_output/gi" "/etc/systemd/system.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80784-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/systemd/system.conf" >> "/etc/systemd/system.conf"
     printf '%s\n' "$formatted_output" >> "/etc/systemd/system.conf"
 fi
@@ -2596,13 +2518,6 @@ if test -L "/etc/default/useradd"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80954-1" ]; then
-    cce="CCE"
-else
-    cce="CCE-80954-1"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^INACTIVE")
@@ -2617,6 +2532,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^INACTIVE\\>" "/etc/default/useradd"; then
     "${sed_command[@]}" "s/^INACTIVE\\>.*/$formatted_output/gi" "/etc/default/useradd"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80954-1"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/default/useradd" >> "/etc/default/useradd"
     printf '%s\n' "$formatted_output" >> "/etc/default/useradd"
 fi
@@ -2845,13 +2761,6 @@ if test -L "/etc/login.defs"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-84037-1" ]; then
-    cce="CCE"
-else
-    cce="CCE-84037-1"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^FAIL_DELAY")
@@ -2866,6 +2775,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^FAIL_DELAY\\>" "/etc/login.defs"; then
     "${sed_command[@]}" "s/^FAIL_DELAY\\>.*/$formatted_output/gi" "/etc/login.defs"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-84037-1"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
     printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
@@ -2979,13 +2889,6 @@ if test -L "/etc/login.defs"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82888-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-82888-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^UMASK")
@@ -3000,6 +2903,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^UMASK\\>" "/etc/login.defs"; then
     "${sed_command[@]}" "s/^UMASK\\>.*/$formatted_output/gi" "/etc/login.defs"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82888-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
     printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
@@ -26712,13 +26616,6 @@ if test -L "/etc/audit/auditd.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-84045-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-84045-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^disk_full_action")
@@ -26733,6 +26630,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^disk_full_action\\>" "/etc/audit/auditd.conf"; 
     "${sed_command[@]}" "s/^disk_full_action\\>.*/$formatted_output/gi" "/etc/audit/auditd.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-84045-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
     printf '%s\n' "$formatted_output" >> "/etc/audit/auditd.conf"
 fi
@@ -26761,13 +26659,6 @@ if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80678-6" ]; then
-    cce="CCE"
-else
-    cce="CCE-80678-6"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^action_mail_acct")
@@ -26782,6 +26673,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^action_mail_acct\\>" "$AUDITCONFIG"; then
     "${sed_command[@]}" "s/^action_mail_acct\\>.*/$formatted_output/gi" "$AUDITCONFIG"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80678-6"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
     printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
 fi
@@ -26810,13 +26702,6 @@ if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80682-8" ]; then
-    cce="CCE"
-else
-    cce="CCE-80682-8"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^max_log_file_action")
@@ -26831,6 +26716,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^max_log_file_action\\>" "$AUDITCONFIG"; then
     "${sed_command[@]}" "s/^max_log_file_action\\>.*/$formatted_output/gi" "$AUDITCONFIG"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80682-8"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
     printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
 fi
@@ -26865,13 +26751,6 @@ if test -L "$AUDITCONFIG"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80684-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-80684-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^space_left_action")
@@ -26886,6 +26765,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^space_left_action\\>" "$AUDITCONFIG"; then
     "${sed_command[@]}" "s/^space_left_action\\>.*/$formatted_output/gi" "$AUDITCONFIG"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80684-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
     printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
 fi
@@ -27295,13 +27175,6 @@ if test -L "/etc/rsyslog.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80863-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-80863-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^\*\.\*")
@@ -27316,6 +27189,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^\*\.\*\\>" "/etc/rsyslog.conf"; then
     "${sed_command[@]}" "s/^\*\.\*\\>.*/$formatted_output/gi" "/etc/rsyslog.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80863-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/rsyslog.conf" >> "/etc/rsyslog.conf"
     printf '%s\n' "$formatted_output" >> "/etc/rsyslog.conf"
 fi
@@ -27417,13 +27291,6 @@ if [ $nic_bound = false ];then
             sed_command+=('--follow-symlinks')
         fi
 
-        # If the cce arg is empty, CCE is not assigned.
-        if [ -z "CCE-84300-3" ]; then
-            cce="CCE"
-        else
-            cce="CCE-84300-3"
-        fi
-
         # Strip any search characters in the key arg so that the key can be replaced without
         # adding any search characters to the config file.
         stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ZONE=")
@@ -27438,6 +27305,7 @@ if [ $nic_bound = false ];then
             "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
         else
             # \n is precaution for case where file ends without trailing newline
+            cce="CCE-84300-3"
             printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
             printf '%s\n' "$formatted_output" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
         fi
@@ -27481,13 +27349,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81006-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-81006-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_ra")
@@ -27502,6 +27363,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_ra\\>" "/etc/sysctl.co
     "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_ra\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81006-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27537,13 +27399,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81009-3" ]; then
-    cce="CCE"
-else
-    cce="CCE-81009-3"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_redirects")
@@ -27558,6 +27413,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_redirects\\>" "/etc/sy
     "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81009-3"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27593,13 +27449,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81013-5" ]; then
-    cce="CCE"
-else
-    cce="CCE-81013-5"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_source_route")
@@ -27614,6 +27463,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_source_route\\>" "/etc
     "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81013-5"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27649,13 +27499,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81007-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-81007-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_ra")
@@ -27670,6 +27513,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_ra\\>" "/etc/sysct
     "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_ra\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81007-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27705,13 +27549,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81010-1" ]; then
-    cce="CCE"
-else
-    cce="CCE-81010-1"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_redirects")
@@ -27726,6 +27563,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_redirects\\>" "/et
     "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81010-1"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27761,13 +27599,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81015-0" ]; then
-    cce="CCE"
-else
-    cce="CCE-81015-0"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_source_route")
@@ -27782,6 +27613,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_source_route\\>" "
     "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81015-0"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27817,13 +27649,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80917-8" ]; then
-    cce="CCE"
-else
-    cce="CCE-80917-8"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_redirects")
@@ -27838,6 +27663,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_redirects\\>" "/etc/sy
     "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80917-8"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27873,13 +27699,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81011-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-81011-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_source_route")
@@ -27894,6 +27713,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_source_route\\>" "/etc
     "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81011-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27929,13 +27749,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81021-8" ]; then
-    cce="CCE"
-else
-    cce="CCE-81021-8"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.rp_filter")
@@ -27950,6 +27763,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.rp_filter\\>" "/etc/sysctl.co
     "${sed_command[@]}" "s/^net.ipv4.conf.all.rp_filter\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81021-8"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -27985,13 +27799,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80919-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-80919-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_redirects")
@@ -28006,6 +27813,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_redirects\\>" "/et
     "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80919-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28041,13 +27849,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80920-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-80920-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_source_route")
@@ -28062,6 +27863,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_source_route\\>" "
     "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_source_route\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80920-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28097,13 +27899,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80922-8" ]; then
-    cce="CCE"
-else
-    cce="CCE-80922-8"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.icmp_echo_ignore_broadcasts")
@@ -28118,6 +27913,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.icmp_echo_ignore_broadcasts\\>" "/etc/
     "${sed_command[@]}" "s/^net.ipv4.icmp_echo_ignore_broadcasts\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80922-8"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28150,13 +27946,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80918-6" ]; then
-    cce="CCE"
-else
-    cce="CCE-80918-6"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.send_redirects")
@@ -28171,6 +27960,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.send_redirects\\>" "/etc/sysc
     "${sed_command[@]}" "s/^net.ipv4.conf.all.send_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80918-6"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28203,13 +27993,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80921-0" ]; then
-    cce="CCE"
-else
-    cce="CCE-80921-0"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.send_redirects")
@@ -28224,6 +28007,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.send_redirects\\>" "/etc/
     "${sed_command[@]}" "s/^net.ipv4.conf.default.send_redirects\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80921-0"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28256,13 +28040,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81024-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-81024-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.ip_forward")
@@ -28277,6 +28054,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.ip_forward\\>" "/etc/sysctl.conf"; the
     "${sed_command[@]}" "s/^net.ipv4.ip_forward\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81024-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28499,13 +28277,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81027-5" ]; then
-    cce="CCE"
-else
-    cce="CCE-81027-5"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_hardlinks")
@@ -28520,6 +28291,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_hardlinks\\>" "/etc/sysctl.conf"; 
     "${sed_command[@]}" "s/^fs.protected_hardlinks\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81027-5"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -28552,13 +28324,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81030-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-81030-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_symlinks")
@@ -28573,6 +28338,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_symlinks\\>" "/etc/sysctl.conf"; t
     "${sed_command[@]}" "s/^fs.protected_symlinks\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81030-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -29758,13 +29524,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82215-5" ]; then
-    cce="CCE"
-else
-    cce="CCE-82215-5"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.core_pattern")
@@ -29779,6 +29538,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.core_pattern\\>" "/etc/sysctl.conf"; the
     "${sed_command[@]}" "s/^kernel.core_pattern\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82215-5"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -29811,13 +29571,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80913-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-80913-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.dmesg_restrict")
@@ -29832,6 +29585,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.dmesg_restrict\\>" "/etc/sysctl.conf"; t
     "${sed_command[@]}" "s/^kernel.dmesg_restrict\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80913-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -29864,13 +29618,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80952-5" ]; then
-    cce="CCE"
-else
-    cce="CCE-80952-5"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kexec_load_disabled")
@@ -29885,6 +29632,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.kexec_load_disabled\\>" "/etc/sysctl.con
     "${sed_command[@]}" "s/^kernel.kexec_load_disabled\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80952-5"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -29917,13 +29665,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-81054-9" ]; then
-    cce="CCE"
-else
-    cce="CCE-81054-9"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.perf_event_paranoid")
@@ -29938,6 +29679,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.perf_event_paranoid\\>" "/etc/sysctl.con
     "${sed_command[@]}" "s/^kernel.perf_event_paranoid\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-81054-9"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -29970,13 +29712,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82974-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-82974-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.unprivileged_bpf_disabled")
@@ -29991,6 +29726,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.unprivileged_bpf_disabled\\>" "/etc/sysc
     "${sed_command[@]}" "s/^kernel.unprivileged_bpf_disabled\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82974-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30023,13 +29759,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80953-3" ]; then
-    cce="CCE"
-else
-    cce="CCE-80953-3"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.yama.ptrace_scope")
@@ -30044,6 +29773,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.yama.ptrace_scope\\>" "/etc/sysctl.conf"
     "${sed_command[@]}" "s/^kernel.yama.ptrace_scope\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80953-3"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30076,13 +29806,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82934-1" ]; then
-    cce="CCE"
-else
-    cce="CCE-82934-1"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.core.bpf_jit_harden")
@@ -30097,6 +29820,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^net.core.bpf_jit_harden\\>" "/etc/sysctl.conf";
     "${sed_command[@]}" "s/^net.core.bpf_jit_harden\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82934-1"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30129,13 +29853,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82211-4" ]; then
-    cce="CCE"
-else
-    cce="CCE-82211-4"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^user.max_user_namespaces")
@@ -30150,6 +29867,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^user.max_user_namespaces\\>" "/etc/sysctl.conf"
     "${sed_command[@]}" "s/^user.max_user_namespaces\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82211-4"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30262,13 +29980,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80915-2" ]; then
-    cce="CCE"
-else
-    cce="CCE-80915-2"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kptr_restrict")
@@ -30283,6 +29994,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.kptr_restrict\\>" "/etc/sysctl.conf"; th
     "${sed_command[@]}" "s/^kernel.kptr_restrict\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80915-2"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30315,13 +30027,6 @@ if test -L "/etc/sysctl.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80916-0" ]; then
-    cce="CCE"
-else
-    cce="CCE-80916-0"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.randomize_va_space")
@@ -30336,6 +30041,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^kernel.randomize_va_space\\>" "/etc/sysctl.conf
     "${sed_command[@]}" "s/^kernel.randomize_va_space\\>.*/$formatted_output/gi" "/etc/sysctl.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80916-0"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysctl.conf" >> "/etc/sysctl.conf"
     printf '%s\n' "$formatted_output" >> "/etc/sysctl.conf"
 fi
@@ -30619,13 +30325,6 @@ if test -L "/etc/aliases"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82381-5" ]; then
-    cce="CCE"
-else
-    cce="CCE-82381-5"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^root")
@@ -30640,6 +30339,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^root\\>" "/etc/aliases"; then
     "${sed_command[@]}" "s/^root\\>.*/$formatted_output/gi" "/etc/aliases"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82381-5"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/aliases" >> "/etc/aliases"
     printf '%s\n' "$formatted_output" >> "/etc/aliases"
 fi
@@ -30782,13 +30482,6 @@ if test -L "/etc/chrony.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82988-7" ]; then
-    cce="CCE"
-else
-    cce="CCE-82988-7"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^port")
@@ -30803,6 +30496,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^port\\>" "/etc/chrony.conf"; then
     "${sed_command[@]}" "s/^port\\>.*/$formatted_output/gi" "/etc/chrony.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82988-7"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
     printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
 fi
@@ -30826,13 +30520,6 @@ if test -L "/etc/chrony.conf"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-82840-0" ]; then
-    cce="CCE"
-else
-    cce="CCE-82840-0"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^cmdport")
@@ -30847,6 +30534,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^cmdport\\>" "/etc/chrony.conf"; then
     "${sed_command[@]}" "s/^cmdport\\>.*/$formatted_output/gi" "/etc/chrony.conf"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-82840-0"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
     printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
 fi
@@ -31089,13 +30777,6 @@ if test -L "/etc/ssh/sshd_config"; then
     sed_command+=('--follow-symlinks')
 fi
 
-# If the cce arg is empty, CCE is not assigned.
-if [ -z "CCE-80895-6" ]; then
-    cce="CCE"
-else
-    cce="CCE-80895-6"
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^Compression")
@@ -31110,6 +30791,7 @@ if LC_ALL=C grep -q -m 1 -i -e "^Compression\\>" "/etc/ssh/sshd_config"; then
     "${sed_command[@]}" "s/^Compression\\>.*/$formatted_output/gi" "/etc/ssh/sshd_config"
 else
     # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80895-6"
     printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/ssh/sshd_config" >> "/etc/ssh/sshd_config"
     printf '%s\n' "$formatted_output" >> "/etc/ssh/sshd_config"
 fi
