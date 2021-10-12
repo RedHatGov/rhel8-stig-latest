@@ -1261,7 +1261,7 @@ login_banner_text="^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Go
 login_banner_text=$(echo "$login_banner_text" | sed 's/^\^\(.*\)\$$/\1/g')
 # 1 - Keep only the first banners if there are multiple
 #    (dod_banners contains the long and short banner)
-login_banner_text=$(echo "$login_banner_text" | sed 's/^(\(.*\)|.*)$/\1/g')
+login_banner_text=$(echo "$login_banner_text" | sed 's/^(\(.*\.\)|.*)$/\1/g')
 # 2 - Add spaces ' '. (Transforms regex for "space or newline" into a " ")
 login_banner_text=$(echo "$login_banner_text" | sed 's/\[\\s\\n\]+/ /g')
 # 3 - Adds newlines. (Transforms "(?:\[\\n\]+|(?:\\n)+)" into "\n")
@@ -1345,7 +1345,7 @@ login_banner_text="^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Go
 login_banner_text=$(echo "$login_banner_text" | sed 's/^\^\(.*\)\$$/\1/g')
 # 1 - Keep only the first banners if there are multiple
 #    (dod_banners contains the long and short banner)
-login_banner_text=$(echo "$login_banner_text" | sed 's/^(\(.*\)|.*)$/\1/g')
+login_banner_text=$(echo "$login_banner_text" | sed 's/^(\(.*\.\)|.*)$/\1/g')
 # 2 - Add spaces ' '. (Transforms regex for "space or newline" into a " ")
 login_banner_text=$(echo "$login_banner_text" | sed 's/\[\\s\\n\]+/ /g')
 # 3 - Adds newline "tokens". (Transforms "(?:\[\\n\]+|(?:\\n)+)" into "(n)*")

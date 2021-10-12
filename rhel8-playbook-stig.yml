@@ -1901,7 +1901,7 @@
     - name: Modify the System Login Banner - ensure correct banner
       copy:
         dest: /etc/issue
-        content: '{{ login_banner_text | regex_replace("^\^(.*)\$$", "\1") | regex_replace("^\((.*)\|.*\)$",
+        content: '{{ login_banner_text | regex_replace("^\^(.*)\$$", "\1") | regex_replace("^\((.*\.)\|.*\)$",
           "\1") | regex_replace("\[\\s\\n\]\+"," ") | regex_replace("\(\?:\[\\n\]\+\|\(\?:\\\\n\)\+\)",
           "\n") | regex_replace("\\", "") | wordwrap() }}'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -2065,7 +2065,7 @@
         dest: /etc/dconf/db/gdm.d/00-security-settings
         section: org/gnome/login-screen
         option: banner-message-text
-        value: '''{{ login_banner_text | regex_replace("^\^(.*)\$$", "\1") | regex_replace("^\((.*)\|.*\)$",
+        value: '''{{ login_banner_text | regex_replace("^\^(.*)\$$", "\1") | regex_replace("^\((.*\.)\|.*\)$",
           "\1") | regex_replace("\[\\s\\n\]\+"," ") | regex_replace("\(\?:\[\\n\]\+\|\(\?:\\\\n\)\+\)",
           "(n)*") | regex_replace("\\", "") | regex_replace("\(n\)\*", "\\n") }}'''
         create: true
