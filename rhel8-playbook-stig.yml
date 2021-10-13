@@ -3667,6 +3667,7 @@
         - CCE-80876-6
         - DISA-STIG-RHEL-08-040180
         - NIST-800-171-3.4.5
+        - NIST-800-53-CM-6
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -3687,6 +3688,7 @@
         - CCE-80876-6
         - DISA-STIG-RHEL-08-040180
         - NIST-800-171-3.4.5
+        - NIST-800-53-CM-6
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -3707,6 +3709,7 @@
         - CCE-80876-6
         - DISA-STIG-RHEL-08-040180
         - NIST-800-171-3.4.5
+        - NIST-800-53-CM-6
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -22908,6 +22911,7 @@
       tags:
         - CCE-82233-8
         - DISA-STIG-RHEL-08-030061
+        - NIST-800-53-CM-6
         - auditd_local_events
         - low_complexity
         - low_disruption
@@ -22947,6 +22951,7 @@
       tags:
         - CCE-82233-8
         - DISA-STIG-RHEL-08-030061
+        - NIST-800-53-CM-6
         - auditd_local_events
         - low_complexity
         - low_disruption
@@ -22960,6 +22965,8 @@
       tags:
         - CCE-82201-5
         - DISA-STIG-RHEL-08-030063
+        - NIST-800-53-AU-3
+        - NIST-800-53-CM-6
         - auditd_log_format
         - low_complexity
         - low_disruption
@@ -22999,6 +23006,8 @@
       tags:
         - CCE-82201-5
         - DISA-STIG-RHEL-08-030063
+        - NIST-800-53-AU-3
+        - NIST-800-53-CM-6
         - auditd_log_format
         - low_complexity
         - low_disruption
@@ -23012,6 +23021,8 @@
       tags:
         - CCE-82897-0
         - DISA-STIG-RHEL-08-030062
+        - NIST-800-53-AU-3
+        - NIST-800-53-CM-6
         - auditd_name_format
         - low_complexity
         - low_disruption
@@ -23051,6 +23062,8 @@
       tags:
         - CCE-82897-0
         - DISA-STIG-RHEL-08-030062
+        - NIST-800-53-AU-3
+        - NIST-800-53-CM-6
         - auditd_name_format
         - low_complexity
         - low_disruption
@@ -23995,6 +24008,7 @@
       tags:
         - CCE-82028-2
         - DISA-STIG-RHEL-08-040021
+        - NIST-800-53-AC-18
         - disable_strategy
         - kernel_module_atm_disabled
         - low_complexity
@@ -24012,6 +24026,7 @@
       tags:
         - CCE-82059-7
         - DISA-STIG-RHEL-08-040022
+        - NIST-800-53-AC-18
         - disable_strategy
         - kernel_module_can_disabled
         - low_complexity
@@ -24029,6 +24044,7 @@
       tags:
         - CCE-82005-0
         - DISA-STIG-RHEL-08-040026
+        - NIST-800-53-AC-18
         - disable_strategy
         - kernel_module_firewire-core_disabled
         - low_complexity
@@ -27287,6 +27303,7 @@
       tags:
         - CCE-82215-5
         - DISA-STIG-RHEL-08-010671
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27324,6 +27341,7 @@
       tags:
         - CCE-80952-5
         - DISA-STIG-RHEL-08-010372
+        - NIST-800-53-CM-6
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27341,6 +27359,7 @@
       tags:
         - CCE-81054-9
         - DISA-STIG-RHEL-08-010376
+        - NIST-800-53-AC-6
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27358,6 +27377,8 @@
       tags:
         - CCE-82974-7
         - DISA-STIG-RHEL-08-040281
+        - NIST-800-53-AC-6
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27375,6 +27396,7 @@
       tags:
         - CCE-80953-3
         - DISA-STIG-RHEL-08-040282
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27392,7 +27414,8 @@
       tags:
         - CCE-82934-1
         - DISA-STIG-RHEL-08-040286
-        - NIST-800-53-CM-6b
+        - NIST-800-53-CM-6
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - medium_disruption
@@ -27436,6 +27459,7 @@
       tags:
         - CCE-82881-4
         - DISA-STIG-RHEL-08-010672
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -27455,6 +27479,7 @@
       tags:
         - CCE-82881-4
         - DISA-STIG-RHEL-08-010672
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -27474,6 +27499,7 @@
       tags:
         - CCE-82881-4
         - DISA-STIG-RHEL-08-010672
+        - NIST-800-53-SC-7(10)
         - disable_strategy
         - low_complexity
         - low_disruption
@@ -27512,6 +27538,7 @@
       tags:
         - CCE-82251-0
         - DISA-STIG-RHEL-08-010675
+        - NIST-800-53-CM-6
         - coredump_disable_backtraces
         - low_complexity
         - low_disruption
@@ -27550,6 +27577,7 @@
       tags:
         - CCE-82252-8
         - DISA-STIG-RHEL-08-010674
+        - NIST-800-53-CM-6
         - coredump_disable_storage
         - low_complexity
         - low_disruption
@@ -27563,6 +27591,8 @@
       tags:
         - CCE-81038-2
         - DISA-STIG-RHEL-08-010673
+        - NIST-800-53-CM-6
+        - NIST-800-53-SC-7(10)
         - disable_users_coredumps
         - low_complexity
         - low_disruption
@@ -27580,6 +27610,8 @@
       tags:
         - CCE-81038-2
         - DISA-STIG-RHEL-08-010673
+        - NIST-800-53-CM-6
+        - NIST-800-53-SC-7(10)
         - disable_users_coredumps
         - low_complexity
         - low_disruption
@@ -29433,6 +29465,8 @@
       tags:
         - CCE-82959-8
         - DISA-STIG-RHEL-08-040139
+        - NIST-800-53-CM-8(3)
+        - NIST-800-53-IA-3
         - enable_strategy
         - low_complexity
         - low_disruption
