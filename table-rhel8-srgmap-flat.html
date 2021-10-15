@@ -5294,9 +5294,8 @@ $ sudo systemctl enable rngd.service</td>
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
 <td xml:lang="en-US">
-
 To properly set the permissions of <code>/etc/ssh/*_key</code>, run the command:
-<pre>$ sudo chmod 0640 /etc/ssh/*_key</pre>
+<pre>$ sudo chmod 0600 /etc/ssh/*_key</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
@@ -5304,14 +5303,13 @@ To properly set the permissions of <code>/etc/ssh/*_key</code>, run the command:
 run the command:
 $ ls -l /etc/ssh/*_key
 If properly configured, the output should indicate the following permissions:
--rw-r-----
-      Is it the case that /etc/ssh/*_key has unix mode -rw-r-----?
+-rw-------
+      Is it the case that /etc/ssh/*_key has unix mode -rw-------?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61487r1_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>
-
 To properly set the permissions of /etc/ssh/*_key, run the command:
-$ sudo chmod 0640 /etc/ssh/*_key</td>
+$ sudo chmod 0600 /etc/ssh/*_key</td>
 <td>medium</td>
 <td></td>
 <td></td>

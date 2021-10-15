@@ -3223,20 +3223,18 @@ $ sudo systemctl enable rngd.service",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82424-3:Verify Permissions on SSH Server Private *_key Key Files,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","
-
 To properly set the permissions of /etc/ssh/*_key, run the command:
-$ sudo chmod 0640 /etc/ssh/*_key","
+$ sudo chmod 0600 /etc/ssh/*_key","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check the permissions of /etc/ssh/*_key,
 run the command:
 $ ls -l /etc/ssh/*_key
 If properly configured, the output should indicate the following permissions:
--rw-r-----
-      Is it the case that /etc/ssh/*_key has unix mode -rw-r-----?
+-rw-------
+      Is it the case that /etc/ssh/*_key has unix mode -rw-------?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","
-
 To properly set the permissions of /etc/ssh/*_key, run the command:
-$ sudo chmod 0640 /etc/ssh/*_key",,,,
+$ sudo chmod 0600 /etc/ssh/*_key",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82428-4:Verify Permissions on SSH Server Public *.pub Key Files,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections."," To properly set the permissions of /etc/ssh/*.pub, run the command: $ sudo chmod 0644 /etc/ssh/*.pub","
