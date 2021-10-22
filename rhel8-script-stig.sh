@@ -3073,7 +3073,18 @@ do
 	SYSCALL_GROUPING=""
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -3090,6 +3101,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -3232,7 +3244,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -3249,6 +3272,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -3697,7 +3721,18 @@ do
 	KEY="setuid"
 	SYSCALL_GROUPING=""
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -3714,6 +3749,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -3856,7 +3892,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -3873,6 +3920,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -4013,7 +4061,18 @@ do
 	KEY="setgid"
 	SYSCALL_GROUPING=""
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -4030,6 +4089,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -4172,7 +4232,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -4189,6 +4260,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -5227,7 +5299,18 @@ do
 	SYSCALL_GROUPING="chmod fchmod fchmodat"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -5244,6 +5327,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -5386,7 +5470,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -5403,6 +5498,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -5560,7 +5656,18 @@ do
 	SYSCALL_GROUPING="chown fchown fchownat lchown"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -5577,6 +5684,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -5719,7 +5827,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -5736,6 +5855,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -5893,7 +6013,18 @@ do
 	SYSCALL_GROUPING="chmod fchmod fchmodat"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -5910,6 +6041,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -6052,7 +6184,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6069,6 +6212,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -6226,7 +6370,18 @@ do
 	SYSCALL_GROUPING="chmod fchmod fchmodat"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6243,6 +6398,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -6385,7 +6541,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6402,6 +6569,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -6559,7 +6727,18 @@ do
 	SYSCALL_GROUPING="chown fchown fchownat lchown"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6576,6 +6755,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -6718,7 +6898,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6735,6 +6926,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -6892,7 +7084,18 @@ do
 	SYSCALL_GROUPING="chown fchown fchownat lchown"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -6909,6 +7112,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -7051,7 +7255,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7068,6 +7283,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -7225,7 +7441,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7242,6 +7469,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -7384,7 +7612,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7401,6 +7640,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -7544,7 +7784,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7561,6 +7812,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -7703,7 +7955,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7720,6 +7983,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -7877,7 +8141,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -7894,6 +8169,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -8036,7 +8312,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8053,6 +8340,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8196,7 +8484,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8213,6 +8512,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -8355,7 +8655,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8372,6 +8683,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8529,7 +8841,18 @@ do
 	SYSCALL_GROUPING="chown fchown fchownat lchown"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8546,6 +8869,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -8688,7 +9012,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8705,6 +9040,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8862,7 +9198,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -8879,6 +9226,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -9021,7 +9369,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9038,6 +9397,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9181,7 +9541,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9198,6 +9569,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -9340,7 +9712,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9357,6 +9740,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9514,7 +9898,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9531,6 +9926,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -9673,7 +10069,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9690,6 +10097,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9833,7 +10241,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -9850,6 +10269,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -9992,7 +10412,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10009,6 +10440,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10166,7 +10598,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10183,6 +10626,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -10325,7 +10769,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10342,6 +10797,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10485,7 +10941,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10502,6 +10969,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -10644,7 +11112,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10661,6 +11140,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10818,7 +11298,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10835,6 +11326,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -10977,7 +11469,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -10994,6 +11497,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11137,7 +11641,18 @@ do
 	SYSCALL_GROUPING="fremovexattr lremovexattr removexattr fsetxattr lsetxattr setxattr"
 
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -11154,6 +11669,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -11296,7 +11812,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -11313,6 +11840,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11463,6 +11991,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -11480,6 +12019,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -11622,6 +12162,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -11639,6 +12190,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11788,6 +12340,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -11805,6 +12368,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -11947,6 +12511,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -11964,6 +12539,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12113,6 +12689,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12130,6 +12717,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -12272,6 +12860,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12289,6 +12888,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12438,6 +13038,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12455,6 +13066,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -12597,6 +13209,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12614,6 +13237,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12763,6 +13387,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12780,6 +13415,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -12922,6 +13558,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -12939,6 +13586,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13088,6 +13736,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -13105,6 +13764,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -13247,6 +13907,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -13264,6 +13935,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13419,7 +14091,18 @@ do
 	KEY="delete"
 	SYSCALL_GROUPING="unlink unlinkat rename renameat rmdir"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -13436,6 +14119,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -13578,7 +14262,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -13595,6 +14290,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13751,7 +14447,18 @@ do
 	KEY="delete"
 	SYSCALL_GROUPING="unlink unlinkat rename renameat rmdir"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -13768,6 +14475,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -13910,7 +14618,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -13927,6 +14646,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14083,7 +14803,18 @@ do
 	KEY="delete"
 	SYSCALL_GROUPING="unlink unlinkat rename renameat rmdir"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14100,6 +14831,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -14242,7 +14974,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14259,6 +15002,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14415,7 +15159,18 @@ do
 	KEY="delete"
 	SYSCALL_GROUPING="unlink unlinkat rename renameat rmdir"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14432,6 +15187,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -14574,7 +15330,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14591,6 +15358,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14747,7 +15515,18 @@ do
 	KEY="delete"
 	SYSCALL_GROUPING="unlink unlinkat rename renameat rmdir"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14764,6 +15543,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -14906,7 +15686,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -14923,6 +15714,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15080,7 +15872,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15097,6 +15900,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -15239,7 +16043,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15256,6 +16071,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15392,7 +16208,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15409,6 +16236,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -15551,7 +16379,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15568,6 +16407,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15725,7 +16565,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15742,6 +16593,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -15884,7 +16736,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -15901,6 +16764,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16037,7 +16901,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16054,6 +16929,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -16196,7 +17072,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16213,6 +17100,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16370,7 +17258,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16387,6 +17286,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -16529,7 +17429,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16546,6 +17457,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16682,7 +17594,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16699,6 +17622,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -16841,7 +17765,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -16858,6 +17793,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17015,7 +17951,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17032,6 +17979,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -17174,7 +18122,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17191,6 +18150,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17327,7 +18287,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17344,6 +18315,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -17486,7 +18458,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17503,6 +18486,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17660,7 +18644,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17677,6 +18672,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -17819,7 +18815,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17836,6 +18843,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17972,7 +18980,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -17989,6 +19008,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -18131,7 +19151,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18148,6 +19179,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18305,7 +19337,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EACCES"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18322,6 +19365,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -18464,7 +19508,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18481,6 +19536,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18617,7 +19673,18 @@ do
 	ACTION_ARCH_FILTERS="-a always,exit -F arch=$ARCH"
 	OTHER_FILTERS="-F exit=-EPERM"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18634,6 +19701,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -18776,7 +19844,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18793,6 +19872,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18953,7 +20033,18 @@ do
 	KEY="modules"
 	SYSCALL_GROUPING="delete_module"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -18970,6 +20061,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -19112,7 +20204,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -19129,6 +20232,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -19289,7 +20393,18 @@ do
 	KEY="modules"
 	SYSCALL_GROUPING="init_module finit_module"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -19306,6 +20421,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -19448,7 +20564,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -19465,6 +20592,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -19625,7 +20753,18 @@ do
 	KEY="modules"
 	SYSCALL_GROUPING="init_module finit_module"
 	# Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -19642,6 +20781,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -19784,7 +20924,18 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
-	# Load macro arguments into arrays
+	unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
+# Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
 
@@ -19801,6 +20952,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20098,6 +21250,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20115,6 +21278,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -20257,6 +21421,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20274,6 +21449,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20423,6 +21599,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20440,6 +21627,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -20582,6 +21770,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20599,6 +21798,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20748,6 +21948,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20765,6 +21976,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -20907,6 +22119,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -20924,6 +22147,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21073,6 +22297,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21090,6 +22325,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -21232,6 +22468,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21249,6 +22496,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21398,6 +22646,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21415,6 +22674,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -21557,6 +22817,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21574,6 +22845,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21723,6 +22995,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21740,6 +23023,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -21882,6 +23166,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -21899,6 +23194,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -22048,6 +23344,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22065,6 +23372,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -22207,6 +23515,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22224,6 +23543,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -22373,6 +23693,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22390,6 +23721,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -22532,6 +23864,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22549,6 +23892,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -22698,6 +24042,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22715,6 +24070,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -22857,6 +24213,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -22874,6 +24241,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23023,6 +24391,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23040,6 +24419,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -23182,6 +24562,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23199,6 +24590,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23348,6 +24740,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23365,6 +24768,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -23507,6 +24911,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23524,6 +24939,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23673,6 +25089,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23690,6 +25117,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -23832,6 +25260,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -23849,6 +25288,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23998,6 +25438,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24015,6 +25466,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -24157,6 +25609,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24174,6 +25637,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24323,6 +25787,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24340,6 +25815,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -24482,6 +25958,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24499,6 +25986,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24648,6 +26136,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24665,6 +26164,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -24807,6 +26307,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24824,6 +26335,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24973,6 +26485,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -24990,6 +26513,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -25132,6 +26656,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25149,6 +26684,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25298,6 +26834,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25315,6 +26862,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -25457,6 +27005,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25474,6 +27033,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25623,6 +27183,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25640,6 +27211,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -25782,6 +27354,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25799,6 +27382,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25948,6 +27532,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -25965,6 +27560,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -26107,6 +27703,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -26124,6 +27731,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26273,6 +27881,17 @@ SYSCALL=""
 KEY="privileged"
 SYSCALL_GROUPING=""
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -26290,6 +27909,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
@@ -26432,6 +28052,17 @@ if [ "$skip" -ne 0 ]; then
         sed -i -e "\#${rule_to_edit}#s#${rule_syscalls_to_edit}#${new_grouped_syscalls}#" "$file_to_edit"
     fi
 fi
+unset syscall_a
+unset syscall_grouping
+unset syscall_string
+unset syscall
+unset file_to_edit
+unset rule_to_edit
+unset rule_syscalls_to_edit
+unset other_string
+unset auid_string
+unset full_rule
+
 # Load macro arguments into arrays
 read -a syscall_a <<< $SYSCALL
 read -a syscall_grouping <<< $SYSCALL_GROUPING
@@ -26449,6 +28080,7 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
+
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26897,8 +28529,7 @@ if [ -e "/etc/audit/auditd.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*overflow_action\s*=\s*/Id" "/etc/audit/auditd.conf"
 else
-    printf '%s\n' "Path '/etc/audit/auditd.conf' wasn't found on this system. Refusing to continue." >&2
-    return 1
+    touch "/etc/audit/auditd.conf"
 fi
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file

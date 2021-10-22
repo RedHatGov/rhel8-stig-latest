@@ -23109,7 +23109,7 @@
         - name: Insert correct line to /etc/audit/auditd.conf
           lineinfile:
             path: /etc/audit/auditd.conf
-            create: false
+            create: true
             regexp: (?i)^\s*overflow_action\s*=\s*
             line: overflow_action = syslog
             state: present
