@@ -4377,6 +4377,132 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Get all local users from /etc/passwd
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+      tags:
+        - CCE-83434-1
+        - DISA-STIG-RHEL-08-010740
+        - file_groupownership_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd|dict2items }}'
+      tags:
+        - CCE-83434-1
+        - DISA-STIG-RHEL-08-010740
+        - file_groupownership_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Test for existence of home directories to avoid creating them, but only fixing
+        group ownership
+      ansible.builtin.stat:
+        path: '{{ item.value[4] }}'
+      register: path_exists
+      loop: '{{ local_users }}'
+      when:
+        - item.value[2]|int >= 1000
+        - item.value[2]|int != 65534
+      tags:
+        - CCE-83434-1
+        - DISA-STIG-RHEL-08-010740
+        - file_groupownership_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure interactive local users are the group-owners of their respective home
+        directories
+      ansible.builtin.file:
+        path: '{{ item.0.value[4] }}'
+        group: '{{ item.0.value[2] }}'
+      loop: '{{ local_users|zip(path_exists.results)|list }}'
+      when: item.1.stat is defined and item.1.stat.exists
+      tags:
+        - CCE-83434-1
+        - DISA-STIG-RHEL-08-010740
+        - file_groupownership_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Get all local users from /etc/passwd
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+      tags:
+        - CCE-84038-9
+        - DISA-STIG-RHEL-08-010730
+        - file_permissions_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd|dict2items }}'
+      tags:
+        - CCE-84038-9
+        - DISA-STIG-RHEL-08-010730
+        - file_permissions_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Test for existence home directories to avoid creating them, but only fixing
+        group ownership
+      ansible.builtin.stat:
+        path: '{{ item.value[4] }}'
+      register: path_exists
+      loop: '{{ local_users }}'
+      when:
+        - item.value[2]|int >= 1000
+        - item.value[2]|int != 65534
+      tags:
+        - CCE-84038-9
+        - DISA-STIG-RHEL-08-010730
+        - file_permissions_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure interactive local users are the group-owners of their respective home
+        directories
+      ansible.builtin.file:
+        path: '{{ item.0.value[4] }}'
+        mode: '0700'
+      loop: '{{ local_users|zip(path_exists.results)|list }}'
+      when: item.1.stat is defined and item.1.stat.exists
+      tags:
+        - CCE-84038-9
+        - DISA-STIG-RHEL-08-010730
+        - file_permissions_home_directories
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Set user umask in /etc/bashrc
       replace:
         path: /etc/bashrc
@@ -24578,48 +24704,77 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Read list libraries without root ownership
-      find:
-        paths:
-          - /usr/lib
-          - /usr/lib64
-          - /lib
-          - /lib64
-        file_type: directory
-      register: library_dirs_not_group_owned_by_root
-      tags:
-        - CCE-85894-4
-        - DISA-STIG-RHEL-08-010350
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - dir_group_ownership_library_dirs
-        - medium_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-        - restrict_strategy
-
-    - name: Set group ownership of system library dirs to root
+    - name: Ensure group owner on /lib/ recursively
       file:
-        path: '{{ item.path }}'
-        group: root
+        path: /lib/
         state: directory
-        mode: '{{ item.mode }}'
-      with_items: '{{ library_dirs_not_group_owned_by_root.files }}'
-      when:
-        - library_dirs_not_group_owned_by_root.matched > 0
-        - item.gid != 0
+        recurse: true
+        group: '0'
       tags:
         - CCE-85894-4
         - DISA-STIG-RHEL-08-010350
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
+        - configure_strategy
         - dir_group_ownership_library_dirs
-        - medium_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
+
+    - name: Ensure group owner on /lib64/ recursively
+      file:
+        path: /lib64/
+        state: directory
+        recurse: true
+        group: '0'
+      tags:
+        - CCE-85894-4
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_group_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure group owner on /usr/lib/ recursively
+      file:
+        path: /usr/lib/
+        state: directory
+        recurse: true
+        group: '0'
+      tags:
+        - CCE-85894-4
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_group_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure group owner on /usr/lib64/ recursively
+      file:
+        path: /usr/lib64/
+        state: directory
+        recurse: true
+        group: '0'
+      tags:
+        - CCE-85894-4
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_group_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
 
     - name: Retrieve the system command files and set their group ownership to root
       command: find -L {{ item }}  ! -group root -type f -exec chgrp root '{}' \;

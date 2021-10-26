@@ -2860,7 +2860,8 @@ fi
 # BEGIN fix (114 / 364) for 'file_groupownership_home_directories'
 ###############################################################################
 (>&2 echo "Remediating rule 114/364: 'file_groupownership_home_directories'")
-# FIX FOR THIS RULE IS MISSING
+
+awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chgrp -f " $4" "$6) }' /etc/passwd
 # END fix for 'file_groupownership_home_directories'
 
 ###############################################################################
@@ -2874,7 +2875,8 @@ fi
 # BEGIN fix (116 / 364) for 'file_permissions_home_directories'
 ###############################################################################
 (>&2 echo "Remediating rule 116/364: 'file_permissions_home_directories'")
-# FIX FOR THIS RULE IS MISSING
+
+awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chmod -f 700 "$6) }' /etc/passwd
 # END fix for 'file_permissions_home_directories'
 
 ###############################################################################
@@ -29874,6 +29876,7 @@ df --local -P | awk '{if (NR!=1) print $6}' \
 (>&2 echo "Remediating rule 250/364: 'file_permissions_etc_audit_auditd'")
 
 
+
 chmod 0640 /etc/audit/auditd.conf
 # END fix for 'file_permissions_etc_audit_auditd'
 
@@ -29883,9 +29886,10 @@ chmod 0640 /etc/audit/auditd.conf
 (>&2 echo "Remediating rule 251/364: 'file_permissions_etc_audit_rulesd'")
 
 
+
 readarray -t files < <(find /etc/audit/rules.d/)
 for file in "${files[@]}"; do
-    if basename $file | grep -q '^.*rules$'; then
+    if basename $file | grep -qE '^.*rules$'; then
         chmod 0640 $file
     fi    
 done
@@ -30005,6 +30009,7 @@ fi
 (>&2 echo "Remediating rule 256/364: 'file_groupowner_var_log'")
 
 
+
 chgrp 0 /var/log/
 # END fix for 'file_groupowner_var_log'
 
@@ -30012,6 +30017,7 @@ chgrp 0 /var/log/
 # BEGIN fix (257 / 364) for 'file_groupowner_var_log_messages'
 ###############################################################################
 (>&2 echo "Remediating rule 257/364: 'file_groupowner_var_log_messages'")
+
 
 
 chgrp 0 /var/log/messages
@@ -30023,6 +30029,7 @@ chgrp 0 /var/log/messages
 (>&2 echo "Remediating rule 258/364: 'file_owner_var_log'")
 
 
+
 chown 0 /var/log/
 # END fix for 'file_owner_var_log'
 
@@ -30030,6 +30037,7 @@ chown 0 /var/log/
 # BEGIN fix (259 / 364) for 'file_owner_var_log_messages'
 ###############################################################################
 (>&2 echo "Remediating rule 259/364: 'file_owner_var_log_messages'")
+
 
 
 chown 0 /var/log/messages
@@ -30041,6 +30049,7 @@ chown 0 /var/log/messages
 (>&2 echo "Remediating rule 260/364: 'file_permissions_var_log'")
 
 
+
 chmod 0755 /var/log/
 # END fix for 'file_permissions_var_log'
 
@@ -30048,6 +30057,7 @@ chmod 0755 /var/log/
 # BEGIN fix (261 / 364) for 'file_permissions_var_log_messages'
 ###############################################################################
 (>&2 echo "Remediating rule 261/364: 'file_permissions_var_log_messages'")
+
 
 
 chmod 0640 /var/log/messages
@@ -30058,11 +30068,21 @@ chmod 0640 /var/log/messages
 ###############################################################################
 (>&2 echo "Remediating rule 262/364: 'dir_group_ownership_library_dirs'")
 
-find /lib \
-/lib64 \
-/usr/lib \
-/usr/lib64 \
-\! -group root -type d -exec chgrp root '{}' \;
+
+
+find -L /lib/ -type d -exec chgrp 0 {} \;
+
+
+
+find -L /lib64/ -type d -exec chgrp 0 {} \;
+
+
+
+find -L /usr/lib/ -type d -exec chgrp 0 {} \;
+
+
+
+find -L /usr/lib64/ -type d -exec chgrp 0 {} \;
 # END fix for 'dir_group_ownership_library_dirs'
 
 ###############################################################################
@@ -32382,7 +32402,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 readarray -t files < <(find /etc/ssh/)
 for file in "${files[@]}"; do
-    if basename $file | grep -q '^.*_key$'; then
+    if basename $file | grep -qE '^.*_key$'; then
         chmod 0600 $file
     fi    
 done
@@ -32401,7 +32421,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 readarray -t files < <(find /etc/ssh/)
 for file in "${files[@]}"; do
-    if basename $file | grep -q '^.*.pub$'; then
+    if basename $file | grep -qE '^.*.pub$'; then
         chmod 0644 $file
     fi    
 done

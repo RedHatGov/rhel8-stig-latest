@@ -2559,7 +2559,10 @@ Configuration settings are the set of parameters that can be changed in hardware
 group found in <code>/etc/passwd</code>. To change the group owner of
 interactive users home directory, use the following command:
 <pre>$ sudo chgrp <i>USER_GROUP</i> /home/<i>USER</i></pre>
-</td>
+
+This rule ensures every home directory related to an interactive user is
+group-owned by an interactive user. It also ensures that interactive users
+are group-owners of one and only one home directory.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To verify the assigned home directory of all interactive users is group-
@@ -2571,7 +2574,11 @@ owned by that users primary GID, run the following command:
 <td>Change the group owner of interactive users home directory to the
 group found in /etc/passwd. To change the group owner of
 interactive users home directory, use the following command:
-$ sudo chgrp USER_GROUP /home/USER</td>
+$ sudo chgrp USER_GROUP /home/USER
+
+This rule ensures every home directory related to an interactive user is
+group-owned by an interactive user. It also ensures that interactive users
+are group-owners of one and only one home directory.</td>
 <td>medium</td>
 <td></td>
 <td></td>
