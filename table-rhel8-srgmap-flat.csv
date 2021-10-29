@@ -3973,7 +3973,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for all kernel module load, unload, and restart actions, and also for all program initiations. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4002,7 +4002,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for all kernel module load, unload, and restart actions, and also for all program initiations. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4031,7 +4031,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for all kernel module load, unload, and restart actions, and also for all program initiations. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4428,7 +4428,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4468,7 +4468,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4508,7 +4508,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4554,7 +4554,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4604,7 +4604,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4645,7 +4645,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4691,7 +4691,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4741,7 +4741,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4790,7 +4790,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4915,7 +4915,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the audit system is configured to audit the loading and unloading of dynamic kernel modules. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4944,7 +4944,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the audit system is configured to audit the loading and unloading of dynamic kernel modules. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -4973,7 +4973,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the audit system is configured to audit the loading and unloading of dynamic kernel modules. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5352,7 +5352,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5389,7 +5389,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5426,7 +5426,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5463,7 +5463,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5503,7 +5503,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5543,7 +5543,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5589,7 +5589,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5639,7 +5639,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5680,7 +5680,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5726,7 +5726,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5776,7 +5776,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5825,7 +5825,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -5874,7 +5874,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6090,7 +6090,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6123,7 +6123,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6156,7 +6156,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6189,7 +6189,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6222,7 +6222,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6263,7 +6263,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6315,7 +6315,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6370,7 +6370,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6422,7 +6422,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6474,7 +6474,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6529,7 +6529,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6571,7 +6571,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6600,7 +6600,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -6629,7 +6629,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7532,7 +7532,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7582,7 +7582,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7632,7 +7632,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7681,7 +7681,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7752,7 +7752,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7785,7 +7785,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7818,7 +7818,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7851,7 +7851,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7884,7 +7884,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7954,7 +7954,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security levels occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -7987,7 +7987,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security levels occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8020,7 +8020,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security levels occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8053,7 +8053,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security levels occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8086,7 +8086,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete security levels occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8338,7 +8338,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8375,7 +8375,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8412,7 +8412,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8449,7 +8449,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8489,7 +8489,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8529,7 +8529,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8575,7 +8575,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8621,7 +8621,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8667,7 +8667,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8721,7 +8721,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8795,7 +8795,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8828,7 +8828,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8861,7 +8861,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8894,7 +8894,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -8927,7 +8927,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -9679,7 +9679,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -9729,7 +9729,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -9779,7 +9779,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -9829,7 +9829,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -9878,7 +9878,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10348,7 +10348,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10385,7 +10385,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10422,7 +10422,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10459,7 +10459,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10499,7 +10499,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10539,7 +10539,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10585,7 +10585,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10635,7 +10635,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10676,7 +10676,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10722,7 +10722,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10772,7 +10772,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10821,7 +10821,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -10870,7 +10870,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11086,7 +11086,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11119,7 +11119,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11152,7 +11152,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11185,7 +11185,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11218,7 +11218,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11259,7 +11259,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11311,7 +11311,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11366,7 +11366,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11418,7 +11418,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11470,7 +11470,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11525,7 +11525,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11567,7 +11567,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11596,7 +11596,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -11625,7 +11625,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12601,7 +12601,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12640,7 +12640,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12679,7 +12679,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12718,7 +12718,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12760,7 +12760,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12802,7 +12802,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12850,7 +12850,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12902,7 +12902,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12945,7 +12945,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -12993,7 +12993,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13045,7 +13045,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13096,7 +13096,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13147,7 +13147,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13377,7 +13377,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13412,7 +13412,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13447,7 +13447,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13482,7 +13482,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13517,7 +13517,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13560,7 +13560,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13614,7 +13614,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13671,7 +13671,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13725,7 +13725,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13779,7 +13779,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13836,7 +13836,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13880,7 +13880,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13911,7 +13911,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -13942,7 +13942,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15098,7 +15098,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15135,7 +15135,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15172,7 +15172,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15209,7 +15209,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15249,7 +15249,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15289,7 +15289,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15335,7 +15335,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15385,7 +15385,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15426,7 +15426,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15472,7 +15472,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15522,7 +15522,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15571,7 +15571,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15620,7 +15620,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15836,7 +15836,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15869,7 +15869,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15902,7 +15902,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15935,7 +15935,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -15968,7 +15968,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16009,7 +16009,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16061,7 +16061,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16116,7 +16116,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16168,7 +16168,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16220,7 +16220,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16275,7 +16275,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16317,7 +16317,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16346,7 +16346,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -16375,7 +16375,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -18649,7 +18649,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -18720,7 +18720,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -18791,7 +18791,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -18862,7 +18862,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -18936,7 +18936,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19010,7 +19010,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19090,7 +19090,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19174,7 +19174,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19249,7 +19249,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19329,7 +19329,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19413,7 +19413,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19496,7 +19496,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -19579,7 +19579,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20033,7 +20033,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20100,7 +20100,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20167,7 +20167,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20234,7 +20234,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20301,7 +20301,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20376,7 +20376,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20462,7 +20462,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20551,7 +20551,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20637,7 +20637,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20723,7 +20723,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20812,7 +20812,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20888,7 +20888,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -20951,7 +20951,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -21014,7 +21014,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22367,7 +22367,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22404,7 +22404,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22441,7 +22441,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22478,7 +22478,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22518,7 +22518,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22558,7 +22558,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22604,7 +22604,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22654,7 +22654,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22695,7 +22695,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22741,7 +22741,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22791,7 +22791,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22840,7 +22840,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22889,7 +22889,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22936,7 +22936,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -22988,7 +22988,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23043,7 +23043,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23095,7 +23095,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23147,7 +23147,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23202,7 +23202,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access privileges occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23792,7 +23792,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23844,7 +23844,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23899,7 +23899,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -23951,7 +23951,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24003,7 +24003,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24058,7 +24058,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access categories of information (e.g., classification levels) occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24113,7 +24113,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24150,7 +24150,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24187,7 +24187,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24224,7 +24224,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24264,7 +24264,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24304,7 +24304,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24350,7 +24350,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24400,7 +24400,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24441,7 +24441,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24487,7 +24487,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24537,7 +24537,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24586,7 +24586,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24635,7 +24635,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24682,7 +24682,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24734,7 +24734,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24789,7 +24789,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24841,7 +24841,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24893,7 +24893,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -24948,7 +24948,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful attempts to access security objects occur. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27565,7 +27565,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chmod system call, run the following command:
-preserve$ sudo grep ""chmod"" /etc/audit/audit.*
+$ sudo grep ""chmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27606,7 +27606,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 chown system call, run the following command:
-preserve$ sudo grep ""chown"" /etc/audit/audit.*
+$ sudo grep ""chown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27647,7 +27647,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmod system call, run the following command:
-preserve$ sudo grep ""fchmod"" /etc/audit/audit.*
+$ sudo grep ""fchmod"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27688,7 +27688,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchmodat system call, run the following command:
-preserve$ sudo grep ""fchmodat"" /etc/audit/audit.*
+$ sudo grep ""fchmodat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27732,7 +27732,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchown system call, run the following command:
-preserve$ sudo grep ""fchown"" /etc/audit/audit.*
+$ sudo grep ""fchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27776,7 +27776,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fchownat system call, run the following command:
-preserve$ sudo grep ""fchownat"" /etc/audit/audit.*
+$ sudo grep ""fchownat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27826,7 +27826,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fremovexattr system call, run the following command:
-preserve$ sudo grep ""fremovexattr"" /etc/audit/audit.*
+$ sudo grep ""fremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27880,7 +27880,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 fsetxattr system call, run the following command:
-preserve$ sudo grep ""fsetxattr"" /etc/audit/audit.*
+$ sudo grep ""fsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27925,7 +27925,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lchown system call, run the following command:
-preserve$ sudo grep ""lchown"" /etc/audit/audit.*
+$ sudo grep ""lchown"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -27975,7 +27975,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lremovexattr system call, run the following command:
-preserve$ sudo grep ""lremovexattr"" /etc/audit/audit.*
+$ sudo grep ""lremovexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28029,7 +28029,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 lsetxattr system call, run the following command:
-preserve$ sudo grep ""lsetxattr"" /etc/audit/audit.*
+$ sudo grep ""lsetxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28082,7 +28082,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 removexattr system call, run the following command:
-preserve$ sudo grep ""removexattr"" /etc/audit/audit.*
+$ sudo grep ""removexattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28135,7 +28135,7 @@ If the system is 64 bit then also add the following line:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 setxattr system call, run the following command:
-preserve$ sudo grep ""setxattr"" /etc/audit/audit.*
+$ sudo grep ""setxattr"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28379,7 +28379,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rename system call, run the following command:
-preserve$ sudo grep ""rename"" /etc/audit/audit.*
+$ sudo grep ""rename"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28416,7 +28416,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 renameat system call, run the following command:
-preserve$ sudo grep ""renameat"" /etc/audit/audit.*
+$ sudo grep ""renameat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28453,7 +28453,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 rmdir system call, run the following command:
-preserve$ sudo grep ""rmdir"" /etc/audit/audit.*
+$ sudo grep ""rmdir"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28490,7 +28490,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlink system call, run the following command:
-preserve$ sudo grep ""unlink"" /etc/audit/audit.*
+$ sudo grep ""unlink"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28527,7 +28527,7 @@ appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 unlinkat system call, run the following command:
-preserve$ sudo grep ""unlinkat"" /etc/audit/audit.*
+$ sudo grep ""unlinkat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28572,7 +28572,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 creat system call, run the following command:
-preserve$ sudo grep ""creat"" /etc/audit/audit.*
+$ sudo grep ""creat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28628,7 +28628,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 ftruncate system call, run the following command:
-preserve$ sudo grep ""ftruncate"" /etc/audit/audit.*
+$ sudo grep ""ftruncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28687,7 +28687,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open system call, run the following command:
-preserve$ sudo grep ""open"" /etc/audit/audit.*
+$ sudo grep ""open"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28743,7 +28743,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 open_by_handle_at system call, run the following command:
-preserve$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
+$ sudo grep ""open_by_handle_at"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28799,7 +28799,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 openat system call, run the following command:
-preserve$ sudo grep ""openat"" /etc/audit/audit.*
+$ sudo grep ""openat"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28858,7 +28858,7 @@ If the system is 64 bit then also add the following lines:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 truncate system call, run the following command:
-preserve$ sudo grep ""truncate"" /etc/audit/audit.*
+$ sudo grep ""truncate"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28904,7 +28904,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 delete_module system call, run the following command:
-preserve$ sudo grep ""delete_module"" /etc/audit/audit.*
+$ sudo grep ""delete_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28937,7 +28937,7 @@ b64 as appropriate for your system:
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 finit_module system call, run the following command:
-preserve$ sudo grep ""finit_module"" /etc/audit/audit.*
+$ sudo grep ""finit_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
@@ -28970,7 +28970,7 @@ add the line to file /etc/audit/audit.rules.","
                   Applicable - Configurable
                 ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To determine if the system is configured to audit calls to the
 init_module system call, run the following command:
-preserve$ sudo grep ""init_module"" /etc/audit/audit.*
+$ sudo grep ""init_module"" /etc/audit/audit.*
 If the system is configured to audit this activity, it will return a line.
 
       Is it the case that no line is returned?
