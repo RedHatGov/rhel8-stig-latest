@@ -1985,9 +1985,9 @@ $ grep -r '^\s*net.ipv6.conf.all.accept_ra\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 net.ipv6.conf.all.accept_ra = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.all.accept_ra = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.all.accept_ra /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2013,9 +2013,9 @@ $ grep -r '^\s*net.ipv6.conf.all.accept_redirects\s*=' /etc/sysctl.conf /etc/sys
 If any assignments other than
 net.ipv6.conf.all.accept_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.all.accept_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.all.accept_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2041,9 +2041,9 @@ $ grep -r '^\s*net.ipv6.conf.all.accept_source_route\s*=' /etc/sysctl.conf /etc/
 If any assignments other than
 net.ipv6.conf.all.accept_source_route = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.all.accept_source_route = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.all.accept_source_route /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2069,9 +2069,9 @@ $ grep -r '^\s*net.ipv6.conf.default.accept_ra\s*=' /etc/sysctl.conf /etc/sysctl
 If any assignments other than
 net.ipv6.conf.default.accept_ra = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.default.accept_ra = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.default.accept_ra /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2097,9 +2097,9 @@ $ grep -r '^\s*net.ipv6.conf.default.accept_redirects\s*=' /etc/sysctl.conf /etc
 If any assignments other than
 net.ipv6.conf.default.accept_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.default.accept_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.default.accept_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2125,9 +2125,9 @@ $ grep -r '^\s*net.ipv6.conf.default.accept_source_route\s*=' /etc/sysctl.conf /
 If any assignments other than
 net.ipv6.conf.default.accept_source_route = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv6.conf.default.accept_source_route = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv6.conf.default.accept_source_route /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2153,9 +2153,9 @@ $ grep -r '^\s*net.ipv4.conf.all.accept_redirects\s*=' /etc/sysctl.conf /etc/sys
 If any assignments other than
 net.ipv4.conf.all.accept_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.all.accept_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.all.accept_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2181,9 +2181,9 @@ $ grep -r '^\s*net.ipv4.conf.all.accept_source_route\s*=' /etc/sysctl.conf /etc/
 If any assignments other than
 net.ipv4.conf.all.accept_source_route = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.all.accept_source_route = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.all.accept_source_route /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2209,9 +2209,9 @@ $ grep -r '^\s*net.ipv4.conf.all.rp_filter\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 net.ipv4.conf.all.rp_filter = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.all.rp_filter = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.all.rp_filter /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2237,9 +2237,9 @@ $ grep -r '^\s*net.ipv4.conf.default.accept_redirects\s*=' /etc/sysctl.conf /etc
 If any assignments other than
 net.ipv4.conf.default.accept_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.default.accept_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.default.accept_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2265,9 +2265,9 @@ $ grep -r '^\s*net.ipv4.conf.default.accept_source_route\s*=' /etc/sysctl.conf /
 If any assignments other than
 net.ipv4.conf.default.accept_source_route = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.default.accept_source_route = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.default.accept_source_route /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2293,9 +2293,9 @@ $ grep -r '^\s*net.ipv4.icmp_echo_ignore_broadcasts\s*=' /etc/sysctl.conf /etc/s
 If any assignments other than
 net.ipv4.icmp_echo_ignore_broadcasts = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.icmp_echo_ignore_broadcasts = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.icmp_echo_ignore_broadcasts /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2321,9 +2321,9 @@ $ grep -r '^\s*net.ipv4.conf.all.send_redirects\s*=' /etc/sysctl.conf /etc/sysct
 If any assignments other than
 net.ipv4.conf.all.send_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.all.send_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.all.send_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2349,9 +2349,9 @@ $ grep -r '^\s*net.ipv4.conf.default.send_redirects\s*=' /etc/sysctl.conf /etc/s
 If any assignments other than
 net.ipv4.conf.default.send_redirects = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.conf.default.send_redirects = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.conf.default.send_redirects /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2377,9 +2377,9 @@ $ grep -r '^\s*net.ipv4.ip_forward\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 net.ipv4.ip_forward = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.ipv4.ip_forward = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.ipv4.ip_forward /etc/sysctl.conf /etc/sysctl.d
 is executed.
 The ability to forward packets is only appropriate for routers.
@@ -2706,9 +2706,9 @@ $ grep -r '^\s*kernel.core_pattern\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.core_pattern = |/bin/false
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.core_pattern = |/bin/false, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.core_pattern /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2734,9 +2734,9 @@ $ grep -r '^\s*kernel.kexec_load_disabled\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.kexec_load_disabled = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.kexec_load_disabled = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.kexec_load_disabled /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2762,9 +2762,9 @@ $ grep -r '^\s*kernel.unprivileged_bpf_disabled\s*=' /etc/sysctl.conf /etc/sysct
 If any assignments other than
 kernel.unprivileged_bpf_disabled = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.unprivileged_bpf_disabled = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.unprivileged_bpf_disabled /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2790,9 +2790,9 @@ $ grep -r '^\s*kernel.yama.ptrace_scope\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.yama.ptrace_scope = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.yama.ptrace_scope = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.yama.ptrace_scope /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2818,9 +2818,9 @@ $ grep -r '^\s*net.core.bpf_jit_harden\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 net.core.bpf_jit_harden = 2
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains net.core.bpf_jit_harden = 2, and that one assignment
-is returned when 
+is returned when
 $ grep -r net.core.bpf_jit_harden /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2853,9 +2853,9 @@ $ grep -r '^\s*user.max_user_namespaces\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 user.max_user_namespaces = 0
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains user.max_user_namespaces = 0, and that one assignment
-is returned when 
+is returned when
 $ grep -r user.max_user_namespaces /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2955,9 +2955,9 @@ $ grep -r '^\s*kernel.kptr_restrict\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.kptr_restrict = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.kptr_restrict = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -2983,9 +2983,9 @@ $ grep -r '^\s*kernel.randomize_va_space\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.randomize_va_space = 2
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.randomize_va_space = 2, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.randomize_va_space /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -25128,9 +25128,9 @@ $ grep -r '^\s*kernel.randomize_va_space\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.randomize_va_space = 2
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.randomize_va_space = 2, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.randomize_va_space /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -25156,9 +25156,9 @@ $ grep -r '^\s*kernel.kptr_restrict\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.kptr_restrict = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.kptr_restrict = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -30260,9 +30260,9 @@ $ grep -r '^\s*kernel.dmesg_restrict\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.dmesg_restrict = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.dmesg_restrict = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.dmesg_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -30292,9 +30292,9 @@ $ grep -r '^\s*kernel.perf_event_paranoid\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.perf_event_paranoid = 2
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.perf_event_paranoid = 2, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.perf_event_paranoid /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -30324,9 +30324,9 @@ $ grep -r '^\s*kernel.unprivileged_bpf_disabled\s*=' /etc/sysctl.conf /etc/sysct
 If any assignments other than
 kernel.unprivileged_bpf_disabled = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.unprivileged_bpf_disabled = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.unprivileged_bpf_disabled /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -30356,9 +30356,9 @@ $ grep -r '^\s*kernel.yama.ptrace_scope\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.yama.ptrace_scope = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.yama.ptrace_scope = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.yama.ptrace_scope /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -30388,9 +30388,9 @@ $ grep -r '^\s*kernel.kptr_restrict\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.kptr_restrict = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.kptr_restrict = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -31105,9 +31105,9 @@ $ grep -r '^\s*kernel.kexec_load_disabled\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.kexec_load_disabled = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.kexec_load_disabled = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.kexec_load_disabled /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -31234,9 +31234,9 @@ $ grep -r '^\s*kernel.dmesg_restrict\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.dmesg_restrict = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.dmesg_restrict = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.dmesg_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -31264,9 +31264,9 @@ $ grep -r '^\s*kernel.perf_event_paranoid\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 kernel.perf_event_paranoid = 2
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains kernel.perf_event_paranoid = 2, and that one assignment
-is returned when 
+is returned when
 $ grep -r kernel.perf_event_paranoid /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -34703,9 +34703,9 @@ $ grep -r '^\s*fs.protected_hardlinks\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 fs.protected_hardlinks = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains fs.protected_hardlinks = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r fs.protected_hardlinks /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
@@ -34731,9 +34731,9 @@ $ grep -r '^\s*fs.protected_symlinks\s*=' /etc/sysctl.conf /etc/sysctl.d
 If any assignments other than
 fs.protected_symlinks = 1
 are found, or the correct assignment is duplicated, remove those offending lines from respective files,
-and make sure that exactly one file in 
+and make sure that exactly one file in
 /etc/sysctl.d contains fs.protected_symlinks = 1, and that one assignment
-is returned when 
+is returned when
 $ grep -r fs.protected_symlinks /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
