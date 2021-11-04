@@ -407,6 +407,9 @@ if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
 else
     touch "/etc/crypto-policies/back-ends/openssh.config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/crypto-policies/back-ends/openssh.config"
+
 cp "/etc/crypto-policies/back-ends/openssh.config" "/etc/crypto-policies/back-ends/openssh.config.bak"
 # Insert at the end of the file
 printf '%s\n' "Ciphers ${sshd_approved_ciphers}" >> "/etc/crypto-policies/back-ends/openssh.config"
@@ -465,6 +468,9 @@ if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
 else
     touch "/etc/crypto-policies/back-ends/openssh.config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/crypto-policies/back-ends/openssh.config"
+
 cp "/etc/crypto-policies/back-ends/openssh.config" "/etc/crypto-policies/back-ends/openssh.config.bak"
 # Insert at the end of the file
 printf '%s\n' "MACs ${sshd_approved_macs}" >> "/etc/crypto-policies/back-ends/openssh.config"
@@ -905,6 +911,9 @@ if [ -e "/etc/sudoers" ] ; then
 else
     touch "/etc/sudoers"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/sudoers"
+
 cp "/etc/sudoers" "/etc/sudoers.bak"
 # Insert at the end of the file
 printf '%s\n' "Defaults !targetpw" >> "/etc/sudoers"
@@ -916,6 +925,9 @@ if [ -e "/etc/sudoers" ] ; then
 else
     touch "/etc/sudoers"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/sudoers"
+
 cp "/etc/sudoers" "/etc/sudoers.bak"
 # Insert at the end of the file
 printf '%s\n' "Defaults !rootpw" >> "/etc/sudoers"
@@ -927,6 +939,9 @@ if [ -e "/etc/sudoers" ] ; then
 else
     touch "/etc/sudoers"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/sudoers"
+
 cp "/etc/sudoers" "/etc/sudoers.bak"
 # Insert at the end of the file
 printf '%s\n' "Defaults !runaspw" >> "/etc/sudoers"
@@ -2744,6 +2759,9 @@ if [ -e "/etc/login.defs" ] ; then
 else
     touch "/etc/login.defs"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/login.defs"
+
 cp "/etc/login.defs" "/etc/login.defs.bak"
 # Insert before the line matching the regex '^\s*CREATE_HOME'.
 line_number="$(LC_ALL=C grep -n "^\s*CREATE_HOME" "/etc/login.defs.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -28461,6 +28479,9 @@ if [ -e "/etc/audit/auditd.conf" ] ; then
 else
     touch "/etc/audit/auditd.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/audit/auditd.conf"
+
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "local_events = yes" >> "/etc/audit/auditd.conf"
@@ -28485,6 +28506,9 @@ if [ -e "/etc/audit/auditd.conf" ] ; then
 else
     touch "/etc/audit/auditd.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/audit/auditd.conf"
+
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "log_format = ENRICHED" >> "/etc/audit/auditd.conf"
@@ -28509,6 +28533,9 @@ if [ -e "/etc/audit/auditd.conf" ] ; then
 else
     touch "/etc/audit/auditd.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/audit/auditd.conf"
+
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "name_format = hostname" >> "/etc/audit/auditd.conf"
@@ -28533,6 +28560,9 @@ if [ -e "/etc/audit/auditd.conf" ] ; then
 else
     touch "/etc/audit/auditd.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/audit/auditd.conf"
+
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "overflow_action = syslog" >> "/etc/audit/auditd.conf"
@@ -28739,6 +28769,9 @@ if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/rsyslog.d/encrypt.conf"
+
 cp "/etc/rsyslog.d/encrypt.conf" "/etc/rsyslog.d/encrypt.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "\$ActionSendStreamDriverMode 1" >> "/etc/rsyslog.d/encrypt.conf"
@@ -28764,6 +28797,9 @@ if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/rsyslog.d/encrypt.conf"
+
 cp "/etc/rsyslog.d/encrypt.conf" "/etc/rsyslog.d/encrypt.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "\$DefaultNetstreamDriver gtls" >> "/etc/rsyslog.d/encrypt.conf"
@@ -31584,6 +31620,9 @@ if [ -e "/etc/systemd/coredump.conf" ] ; then
 else
     touch "/etc/systemd/coredump.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/systemd/coredump.conf"
+
 cp "/etc/systemd/coredump.conf" "/etc/systemd/coredump.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "ProcessSizeMax=0" >> "/etc/systemd/coredump.conf"
@@ -31601,6 +31640,9 @@ if [ -e "/etc/systemd/coredump.conf" ] ; then
 else
     touch "/etc/systemd/coredump.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/systemd/coredump.conf"
+
 cp "/etc/systemd/coredump.conf" "/etc/systemd/coredump.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "Storage=none" >> "/etc/systemd/coredump.conf"
@@ -31805,6 +31847,9 @@ if [ -e "/etc/selinux/config" ] ; then
 else
     touch "/etc/selinux/config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/selinux/config"
+
 cp "/etc/selinux/config" "/etc/selinux/config.bak"
 # Insert at the end of the file
 printf '%s\n' "SELINUXTYPE=$var_selinux_policy_name" >> "/etc/selinux/config"
@@ -31832,6 +31877,9 @@ if [ -e "/etc/selinux/config" ] ; then
 else
     touch "/etc/selinux/config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/selinux/config"
+
 cp "/etc/selinux/config" "/etc/selinux/config.bak"
 # Insert at the end of the file
 printf '%s\n' "SELINUX=$var_selinux_state" >> "/etc/selinux/config"
@@ -32485,6 +32533,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32518,6 +32569,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32551,6 +32605,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32584,6 +32641,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32617,6 +32677,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32650,6 +32713,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32683,6 +32749,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32716,6 +32785,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32749,6 +32821,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32782,6 +32857,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32819,6 +32897,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32855,6 +32936,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32888,6 +32972,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32921,6 +33008,9 @@ if [ -e "/etc/sysconfig/sshd" ] ; then
 else
     touch "/etc/sysconfig/sshd"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/sysconfig/sshd"
+
 cp "/etc/sysconfig/sshd" "/etc/sysconfig/sshd.bak"
 # Insert before the line matching the regex '^#\s*SSH_USE_STRONG_RNG'.
 line_number="$(LC_ALL=C grep -n "^#\s*SSH_USE_STRONG_RNG" "/etc/sysconfig/sshd.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -32954,6 +33044,9 @@ if [ -e "/etc/ssh/sshd_config" ] ; then
 else
     touch "/etc/ssh/sshd_config"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/ssh/sshd_config"
+
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
 # Insert before the line matching the regex '^Match'.
 line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
@@ -33115,6 +33208,9 @@ if [ -e "/etc/usbguard/usbguard-daemon.conf" ] ; then
 else
     touch "/etc/usbguard/usbguard-daemon.conf"
 fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/usbguard/usbguard-daemon.conf"
+
 cp "/etc/usbguard/usbguard-daemon.conf" "/etc/usbguard/usbguard-daemon.conf.bak"
 # Insert at the end of the file
 printf '%s\n' "AuditBackend=LinuxAudit" >> "/etc/usbguard/usbguard-daemon.conf"
