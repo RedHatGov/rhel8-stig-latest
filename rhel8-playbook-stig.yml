@@ -23462,7 +23462,7 @@
           lineinfile:
             path: /etc/rsyslog.conf
             create: false
-            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            regexp: ^\s*{{ "$ActionSendStreamDriverAuthMode"| regex_escape }}\s
             state: absent
           check_mode: true
           changed_when: false
@@ -23472,7 +23472,7 @@
           lineinfile:
             path: /etc/rsyslog.conf
             create: false
-            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            regexp: ^\s*{{ "$ActionSendStreamDriverAuthMode"| regex_escape }}\s
             state: absent
           when: dupes.found is defined and dupes.found > 1
 
@@ -23486,7 +23486,7 @@
             paths: /etc/rsyslog.d
             recurse: 'yes'
             follow: 'no'
-            contains: ^\s*$ActionSendStreamDriverAuthMode\s
+            contains: ^\s*{{ "$ActionSendStreamDriverAuthMode"| regex_escape }}\s
           register: _etc_rsyslog_d_has_parameter
           when: _etc_rsyslog_d_exists.stat.isdir is defined and _etc_rsyslog_d_exists.stat.isdir
 
@@ -23494,7 +23494,7 @@
           lineinfile:
             path: '{{ item.path }}'
             create: false
-            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            regexp: ^\s*{{ "$ActionSendStreamDriverAuthMode"| regex_escape }}\s
             state: absent
           with_items: '{{ _etc_rsyslog_d_has_parameter.files }}'
           when: _etc_rsyslog_d_has_parameter.matched
@@ -23503,7 +23503,7 @@
           lineinfile:
             path: /etc/rsyslog.conf
             create: true
-            regexp: ^\s*$ActionSendStreamDriverAuthMode\s
+            regexp: ^\s*{{ "$ActionSendStreamDriverAuthMode"| regex_escape }}\s
             line: $ActionSendStreamDriverAuthMode x509/name
             state: present
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -23523,27 +23523,50 @@
 
         - name: Check for duplicate values
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: /etc/rsyslog.conf
             create: false
-            regexp: '^\s*$ActionSendStreamDriverMode '
+            regexp: '^\s*{{ "$ActionSendStreamDriverMode"| regex_escape }} '
             state: absent
           check_mode: true
           changed_when: false
           register: dupes
 
-        - name: Deduplicate values from /etc/rsyslog.d/encrypt.conf
+        - name: Deduplicate values from /etc/rsyslog.conf
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: /etc/rsyslog.conf
             create: false
-            regexp: '^\s*$ActionSendStreamDriverMode '
+            regexp: '^\s*{{ "$ActionSendStreamDriverMode"| regex_escape }} '
             state: absent
           when: dupes.found is defined and dupes.found > 1
 
-        - name: Insert correct line to /etc/rsyslog.d/encrypt.conf
+        - name: Check if /etc/rsyslog.d exists
+          stat:
+            path: /etc/rsyslog.d
+          register: _etc_rsyslog_d_exists
+
+        - name: Check if the parameter $ActionSendStreamDriverMode is present in /etc/rsyslog.d
+          find:
+            paths: /etc/rsyslog.d
+            recurse: 'yes'
+            follow: 'no'
+            contains: '^\s*{{ "$ActionSendStreamDriverMode"| regex_escape }} '
+          register: _etc_rsyslog_d_has_parameter
+          when: _etc_rsyslog_d_exists.stat.isdir is defined and _etc_rsyslog_d_exists.stat.isdir
+
+        - name: Remove parameter from files in /etc/rsyslog.d
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: '{{ item.path }}'
+            create: false
+            regexp: '^\s*{{ "$ActionSendStreamDriverMode"| regex_escape }} '
+            state: absent
+          with_items: '{{ _etc_rsyslog_d_has_parameter.files }}'
+          when: _etc_rsyslog_d_has_parameter.matched
+
+        - name: Insert correct line to /etc/rsyslog.conf
+          lineinfile:
+            path: /etc/rsyslog.conf
             create: true
-            regexp: '^\s*$ActionSendStreamDriverMode '
+            regexp: '^\s*{{ "$ActionSendStreamDriverMode"| regex_escape }} '
             line: $ActionSendStreamDriverMode 1
             state: present
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -23563,27 +23586,50 @@
 
         - name: Check for duplicate values
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: /etc/rsyslog.conf
             create: false
-            regexp: '^\s*$DefaultNetstreamDriver '
+            regexp: '^\s*{{ "$DefaultNetstreamDriver"| regex_escape }} '
             state: absent
           check_mode: true
           changed_when: false
           register: dupes
 
-        - name: Deduplicate values from /etc/rsyslog.d/encrypt.conf
+        - name: Deduplicate values from /etc/rsyslog.conf
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: /etc/rsyslog.conf
             create: false
-            regexp: '^\s*$DefaultNetstreamDriver '
+            regexp: '^\s*{{ "$DefaultNetstreamDriver"| regex_escape }} '
             state: absent
           when: dupes.found is defined and dupes.found > 1
 
-        - name: Insert correct line to /etc/rsyslog.d/encrypt.conf
+        - name: Check if /etc/rsyslog.d exists
+          stat:
+            path: /etc/rsyslog.d
+          register: _etc_rsyslog_d_exists
+
+        - name: Check if the parameter $DefaultNetstreamDriver is present in /etc/rsyslog.d
+          find:
+            paths: /etc/rsyslog.d
+            recurse: 'yes'
+            follow: 'no'
+            contains: '^\s*{{ "$DefaultNetstreamDriver"| regex_escape }} '
+          register: _etc_rsyslog_d_has_parameter
+          when: _etc_rsyslog_d_exists.stat.isdir is defined and _etc_rsyslog_d_exists.stat.isdir
+
+        - name: Remove parameter from files in /etc/rsyslog.d
           lineinfile:
-            path: /etc/rsyslog.d/encrypt.conf
+            path: '{{ item.path }}'
+            create: false
+            regexp: '^\s*{{ "$DefaultNetstreamDriver"| regex_escape }} '
+            state: absent
+          with_items: '{{ _etc_rsyslog_d_has_parameter.files }}'
+          when: _etc_rsyslog_d_has_parameter.matched
+
+        - name: Insert correct line to /etc/rsyslog.conf
+          lineinfile:
+            path: /etc/rsyslog.conf
             create: true
-            regexp: '^\s*$DefaultNetstreamDriver '
+            regexp: '^\s*{{ "$DefaultNetstreamDriver"| regex_escape }} '
             line: $DefaultNetstreamDriver gtls
             state: present
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
