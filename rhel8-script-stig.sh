@@ -2743,7 +2743,7 @@ fi
 # BEGIN fix (106 / 364) for 'accounts_no_uid_except_zero'
 ###############################################################################
 (>&2 echo "Remediating rule 106/364: 'accounts_no_uid_except_zero'")
-awk -F: '$3 == 0 && $1 != "root" { print $1 }' /etc/passwd | xargs --max-lines=1 passwd -l
+awk -F: '$3 == 0 && $1 != "root" { print $1 }' /etc/passwd | xargs --no-run-if-empty --max-lines=1 passwd -l
 # END fix for 'accounts_no_uid_except_zero'
 
 ###############################################################################
