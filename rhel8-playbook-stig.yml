@@ -4397,6 +4397,98 @@
         database: passwd
         split: ':'
       tags:
+        - CCE-84036-3
+        - DISA-STIG-RHEL-08-010720
+        - accounts_user_interactive_home_directory_defined
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd|dict2items }}'
+      tags:
+        - CCE-84036-3
+        - DISA-STIG-RHEL-08-010720
+        - accounts_user_interactive_home_directory_defined
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure interactive users have an exclusive home directory defined
+      ansible.builtin.user:
+        name: '{{ item.key }}'
+        home: /home/{{ item.key }}
+        create_home: false
+      loop: '{{ local_users }}'
+      when:
+        - item.value[2]|int >= 1000
+        - item.value[2]|int != 65534
+        - not item.value[4] | regex_search('^\/\w*\/\w{1,}')
+      tags:
+        - CCE-84036-3
+        - DISA-STIG-RHEL-08-010720
+        - accounts_user_interactive_home_directory_defined
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Get all local users from /etc/passwd
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+      tags:
+        - CCE-83424-2
+        - DISA-STIG-RHEL-08-010750
+        - accounts_user_interactive_home_directory_exists
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd|dict2items }}'
+      tags:
+        - CCE-83424-2
+        - DISA-STIG-RHEL-08-010750
+        - accounts_user_interactive_home_directory_exists
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure interactive users have a home directory exists
+      ansible.builtin.user:
+        name: '{{ item.key }}'
+        create_home: true
+      loop: '{{ local_users }}'
+      when:
+        - item.value[2]|int >= 1000
+        - item.value[2]|int != 65534
+      tags:
+        - CCE-83424-2
+        - DISA-STIG-RHEL-08-010750
+        - accounts_user_interactive_home_directory_exists
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Get all local users from /etc/passwd
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+      tags:
         - CCE-83434-1
         - DISA-STIG-RHEL-08-010740
         - file_groupownership_home_directories

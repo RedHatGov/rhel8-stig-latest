@@ -2865,14 +2865,23 @@ awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chmod -f g-w,o-w "$6"/.[^\.]
 # BEGIN fix (112 / 364) for 'accounts_user_interactive_home_directory_defined'
 ###############################################################################
 (>&2 echo "Remediating rule 112/364: 'accounts_user_interactive_home_directory_defined'")
-# FIX FOR THIS RULE IS MISSING
+
+for user in $(awk -F':' '{ if ($4 >= 1000 && $4 != 65534) print $1 }' /etc/passwd); do
+    # This follows the same logic of evaluation of home directories as used in OVAL.
+    if ! grep -q $user /etc/passwd | cut -d: -f6 | grep '^\/\w*\/\w\{1,\}'; then
+        sed -i "s/\($user:x:[0-9]*:[0-9]*:.*:\).*\(:.*\)$/\1\/home\/$user\2/g" /etc/passwd;
+    fi
+done
 # END fix for 'accounts_user_interactive_home_directory_defined'
 
 ###############################################################################
 # BEGIN fix (113 / 364) for 'accounts_user_interactive_home_directory_exists'
 ###############################################################################
 (>&2 echo "Remediating rule 113/364: 'accounts_user_interactive_home_directory_exists'")
-# FIX FOR THIS RULE IS MISSING
+
+for user in $(awk -F':' '{ if ($4 >= 1000 && $4 != 65534) print $1}' /etc/passwd); do
+    mkhomedir_helper $user 0077;
+done
 # END fix for 'accounts_user_interactive_home_directory_exists'
 
 ###############################################################################
