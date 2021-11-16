@@ -250,9 +250,32 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: enable fips mode
-      command: /usr/bin/fips-mode-setup --enable
+    - name: Check to see the current status of FIPS mode
+      command: /usr/bin/fips-mode-setup --check
+      register: is_fips_enabled
+      changed_when: false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80942-6
+        - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-7
+        - NIST-800-53-SC-12
+        - NIST-800-53-SC-12(2)
+        - NIST-800-53-SC-12(3)
+        - NIST-800-53-SC-13
+        - enable_fips_mode
+        - high_severity
+        - medium_complexity
+        - medium_disruption
+        - reboot_required
+        - restrict_strategy
+
+    - name: Enable FIPS mode
+      command: /usr/bin/fips-mode-setup --enable
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - is_fips_enabled.stdout.find('FIPS mode is enabled.') == -1
       tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
