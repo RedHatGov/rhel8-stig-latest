@@ -25745,13 +25745,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-grub2-mkconfig -o /boot/grub2/grub.cfg","
+","
                   Applicable - Configurable
                 ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser password has been set, run the following
 command:
@@ -25779,13 +25773,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-grub2-mkconfig -o /boot/grub2/grub.cfg",,,,
+",,,,
 CCI-000213,SRG-OS-000080-GPOS-00048,TBD - Assigned by DISA after STIG release,The operating system must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,CCE-83542-1:Set the UEFI Boot Loader Admin Username to a Non-Default Value,"To mitigate the risk of unauthorized access to sensitive information by entities that have been issued certificates by DoD-approved PKIs, all DoD systems (e.g., web servers and web portals) must be properly configured to incorporate access control methods that do not rely solely on the possession of a certificate for access. Successful authentication must not automatically give an entity access to an asset or security boundary. Authorization procedures and controls must be implemented to ensure each authenticated entity also has a validated and current authorization. Authorization is the process of determining whether an entity, once authenticated, is permitted to access a specific asset. Information systems use access control policies and enforcement mechanisms to implement this requirement.
 
 Access control policies include: identity-based policies, role-based policies, and attribute-based policies. Access enforcement mechanisms include: access control lists, access control matrices, and cryptography. These policies and mechanisms must be employed by the application to control access between users (or processes acting on behalf of users) and objects (e.g., devices, files, records, processes, programs, and domains) in the information system.","The grub2 boot loader should have a superuser account and password
@@ -25841,13 +25829,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-
-grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg","
+","
                   Applicable - Configurable
                 ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser password has been set, run the following
 command:
@@ -25875,13 +25857,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-
-grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg",,,,
+",,,,
 CCI-000381,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82919-2:Uninstall abrt-addon-ccpp Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
@@ -25910,20 +25886,6 @@ $ rpm -q abrt-addon-kerneloops
       ",Configure the operating system to disable non-essential capabilities.,"The abrt-addon-kerneloops package can be removed with the following command:
 
 $ sudo yum erase abrt-addon-kerneloops",,,,
-CCI-000381,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82923-4:Uninstall abrt-addon-python Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
-
-Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
-
-Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The abrt-addon-python package can be removed with the following command:
-
-$ sudo yum erase abrt-addon-python","
-                  Applicable - Configurable
-                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the abrt-addon-python package is installed:
-$ rpm -q abrt-addon-python
-      Is it the case that the package is installed?
-      ",Configure the operating system to disable non-essential capabilities.,"The abrt-addon-python package can be removed with the following command:
-
-$ sudo yum erase abrt-addon-python",,,,
 CCI-000381,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82907-7:Uninstall abrt-cli Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
@@ -26022,6 +25984,20 @@ $ rpm -q krb5-workstation
       ",Configure the operating system to disable non-essential capabilities.,"The krb5-workstation package can be removed with the following command:
 
 $ sudo yum erase krb5-workstation",,,,
+CCI-000381,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-86084-1:Uninstall python3-abrt-addon Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
+
+Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The python3-abrt-addon package can be removed with the following command:
+
+$ sudo yum erase python3-abrt-addon","
+                  Applicable - Configurable
+                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the python3-abrt-addon package is installed:
+$ rpm -q python3-abrt-addon
+      Is it the case that the package is installed?
+      ",Configure the operating system to disable non-essential capabilities.,"The python3-abrt-addon package can be removed with the following command:
+
+$ sudo yum erase python3-abrt-addon",,,,
 CCI-000381,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82904-4:Uninstall tuned Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).

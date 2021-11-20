@@ -996,27 +996,9 @@ fi
 # END fix for 'package_abrt-addon-kerneloops_removed'
 
 ###############################################################################
-# BEGIN fix (44 / 364) for 'package_abrt-addon-python_removed'
+# BEGIN fix (44 / 364) for 'package_abrt-cli_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 44/364: 'package_abrt-addon-python_removed'")
-
-# CAUTION: This remediation script will remove abrt-addon-python
-#	   from the system, and may remove any packages
-#	   that depend on abrt-addon-python. Execute this
-#	   remediation AFTER testing on a non-production
-#	   system!
-
-if rpm -q --quiet "abrt-addon-python" ; then
-
-    yum remove -y "abrt-addon-python"
-
-fi
-# END fix for 'package_abrt-addon-python_removed'
-
-###############################################################################
-# BEGIN fix (45 / 364) for 'package_abrt-cli_removed'
-###############################################################################
-(>&2 echo "Remediating rule 45/364: 'package_abrt-cli_removed'")
+(>&2 echo "Remediating rule 44/364: 'package_abrt-cli_removed'")
 
 # CAUTION: This remediation script will remove abrt-cli
 #	   from the system, and may remove any packages
@@ -1032,9 +1014,9 @@ fi
 # END fix for 'package_abrt-cli_removed'
 
 ###############################################################################
-# BEGIN fix (46 / 364) for 'package_abrt-plugin-logger_removed'
+# BEGIN fix (45 / 364) for 'package_abrt-plugin-logger_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 46/364: 'package_abrt-plugin-logger_removed'")
+(>&2 echo "Remediating rule 45/364: 'package_abrt-plugin-logger_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-logger
 #	   from the system, and may remove any packages
@@ -1050,9 +1032,9 @@ fi
 # END fix for 'package_abrt-plugin-logger_removed'
 
 ###############################################################################
-# BEGIN fix (47 / 364) for 'package_abrt-plugin-rhtsupport_removed'
+# BEGIN fix (46 / 364) for 'package_abrt-plugin-rhtsupport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 47/364: 'package_abrt-plugin-rhtsupport_removed'")
+(>&2 echo "Remediating rule 46/364: 'package_abrt-plugin-rhtsupport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-rhtsupport
 #	   from the system, and may remove any packages
@@ -1068,9 +1050,9 @@ fi
 # END fix for 'package_abrt-plugin-rhtsupport_removed'
 
 ###############################################################################
-# BEGIN fix (48 / 364) for 'package_abrt-plugin-sosreport_removed'
+# BEGIN fix (47 / 364) for 'package_abrt-plugin-sosreport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 48/364: 'package_abrt-plugin-sosreport_removed'")
+(>&2 echo "Remediating rule 47/364: 'package_abrt-plugin-sosreport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-sosreport
 #	   from the system, and may remove any packages
@@ -1086,9 +1068,9 @@ fi
 # END fix for 'package_abrt-plugin-sosreport_removed'
 
 ###############################################################################
-# BEGIN fix (49 / 364) for 'package_gssproxy_removed'
+# BEGIN fix (48 / 364) for 'package_gssproxy_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 49/364: 'package_gssproxy_removed'")
+(>&2 echo "Remediating rule 48/364: 'package_gssproxy_removed'")
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -1104,9 +1086,9 @@ fi
 # END fix for 'package_gssproxy_removed'
 
 ###############################################################################
-# BEGIN fix (50 / 364) for 'package_iprutils_removed'
+# BEGIN fix (49 / 364) for 'package_iprutils_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 50/364: 'package_iprutils_removed'")
+(>&2 echo "Remediating rule 49/364: 'package_iprutils_removed'")
 
 # CAUTION: This remediation script will remove iprutils
 #	   from the system, and may remove any packages
@@ -1122,9 +1104,9 @@ fi
 # END fix for 'package_iprutils_removed'
 
 ###############################################################################
-# BEGIN fix (51 / 364) for 'package_krb5-workstation_removed'
+# BEGIN fix (50 / 364) for 'package_krb5-workstation_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 51/364: 'package_krb5-workstation_removed'")
+(>&2 echo "Remediating rule 50/364: 'package_krb5-workstation_removed'")
 
 # CAUTION: This remediation script will remove krb5-workstation
 #	   from the system, and may remove any packages
@@ -1138,6 +1120,24 @@ if rpm -q --quiet "krb5-workstation" ; then
 
 fi
 # END fix for 'package_krb5-workstation_removed'
+
+###############################################################################
+# BEGIN fix (51 / 364) for 'package_python3-abrt-addon_removed'
+###############################################################################
+(>&2 echo "Remediating rule 51/364: 'package_python3-abrt-addon_removed'")
+
+# CAUTION: This remediation script will remove python3-abrt-addon
+#	   from the system, and may remove any packages
+#	   that depend on python3-abrt-addon. Execute this
+#	   remediation AFTER testing on a non-production
+#	   system!
+
+if rpm -q --quiet "python3-abrt-addon" ; then
+
+    yum remove -y "python3-abrt-addon"
+
+fi
+# END fix for 'package_python3-abrt-addon_removed'
 
 ###############################################################################
 # BEGIN fix (52 / 364) for 'package_tuned_removed'
@@ -2969,7 +2969,9 @@ fi
 (>&2 echo "Remediating rule 119/364: 'accounts_umask_interactive_users'")
 
 for dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd); do
-    sed -i 's/^\([\s]*umask\s*\)/#\1/g' $dir/.[^\.]?*
+    for file in $(find $dir -maxdepth 1 -type f -name ".*"); do
+        sed -i 's/^\([\s]*umask\s*\)/#\1/g' $file
+    done
 done
 # END fix for 'accounts_umask_interactive_users'
 

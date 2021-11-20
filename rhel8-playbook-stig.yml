@@ -1512,20 +1512,6 @@
         - no_reboot_needed
         - package_abrt-addon-kerneloops_removed
 
-    - name: Ensure abrt-addon-python is removed
-      package:
-        name: abrt-addon-python
-        state: absent
-      tags:
-        - CCE-82923-4
-        - DISA-STIG-RHEL-08-040001
-        - disable_strategy
-        - low_complexity
-        - low_disruption
-        - low_severity
-        - no_reboot_needed
-        - package_abrt-addon-python_removed
-
     - name: Ensure abrt-cli is removed
       package:
         name: abrt-cli
@@ -1623,6 +1609,20 @@
         - medium_severity
         - no_reboot_needed
         - package_krb5-workstation_removed
+
+    - name: Ensure python3-abrt-addon is removed
+      package:
+        name: python3-abrt-addon
+        state: absent
+      tags:
+        - CCE-86084-1
+        - DISA-STIG-RHEL-08-040001
+        - disable_strategy
+        - low_complexity
+        - low_disruption
+        - low_severity
+        - no_reboot_needed
+        - package_python3-abrt-addon_removed
 
     - name: Ensure tuned is removed
       package:
@@ -4689,7 +4689,9 @@
       ansible.builtin.shell:
         cmd: |-
           for dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd); do
-            sed -i 's/^\([\s]*umask\s*\)/#\1/g' $dir/.[^\.]?*
+            for file in $(find $dir -maxdepth 1 -type f -name ".*"); do
+              sed -i 's/^\([\s]*umask\s*\)/#\1/g' $file
+            done
           done
       tags:
         - CCE-84044-7

@@ -37744,12 +37744,6 @@ by running the following command:
 
 When prompted, enter the password that was selected.
 <br><br>
-
-<br><br>
-Once the superuser password has been added,
-update the
-<code>grub.cfg</code> file by running:
-<pre>grub2-mkconfig -o /boot/grub2/grub.cfg</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.</td>
@@ -37781,13 +37775,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-grub2-mkconfig -o /boot/grub2/grub.cfg</td>
+</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -37872,12 +37860,6 @@ by running the following command:
 
 When prompted, enter the password that was selected.
 <br><br>
-
-Once the superuser password has been added,
-update the
-<code>grub.cfg</code> file by running:
-
-<pre>grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.</td>
@@ -37909,13 +37891,7 @@ by running the following command:
 $ grub2-setpassword
 
 When prompted, enter the password that was selected.
-
-
-Once the superuser password has been added,
-update the
-grub.cfg file by running:
-
-grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg</td>
+</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -37976,36 +37952,6 @@ $ rpm -q abrt-addon-kerneloops
 <td>The abrt-addon-kerneloops package can be removed with the following command:
 
 $ sudo yum erase abrt-addon-kerneloops</td>
-<td>low</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CCI-000381</td>
-<td>SRG-OS-000095-GPOS-00049</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must be configured to disable non-essential capabilities.</td>
-<td>CCE-82923-4:Uninstall abrt-addon-python Package</td>
-<td>It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
-
-Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
-
-Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.</td>
-<td xml:lang="en-US">The <code>abrt-addon-python</code> package can be removed with the following command:
-<pre>
-$ sudo yum erase abrt-addon-python</pre>
-</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.</td>
-<td>Run the following command to determine if the abrt-addon-python package is installed:
-$ rpm -q abrt-addon-python
-      Is it the case that the package is installed?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61645r1_fix">Configure the operating system to disable non-essential capabilities.</fixtext></td>
-<td>The abrt-addon-python package can be removed with the following command:
-
-$ sudo yum erase abrt-addon-python</td>
 <td>low</td>
 <td></td>
 <td></td>
@@ -38217,6 +38163,36 @@ $ rpm -q krb5-workstation
 
 $ sudo yum erase krb5-workstation</td>
 <td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CCI-000381</td>
+<td>SRG-OS-000095-GPOS-00049</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured to disable non-essential capabilities.</td>
+<td>CCE-86084-1:Uninstall python3-abrt-addon Package</td>
+<td>It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
+
+Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.</td>
+<td xml:lang="en-US">The <code>python3-abrt-addon</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase python3-abrt-addon</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.</td>
+<td>Run the following command to determine if the python3-abrt-addon package is installed:
+$ rpm -q python3-abrt-addon
+      Is it the case that the package is installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-61645r1_fix">Configure the operating system to disable non-essential capabilities.</fixtext></td>
+<td>The python3-abrt-addon package can be removed with the following command:
+
+$ sudo yum erase python3-abrt-addon</td>
+<td>low</td>
 <td></td>
 <td></td>
 <td></td>
