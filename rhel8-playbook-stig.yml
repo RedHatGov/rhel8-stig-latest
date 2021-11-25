@@ -4815,7 +4815,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
@@ -4884,7 +4884,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
@@ -23449,7 +23449,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
@@ -23504,7 +23504,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
@@ -28025,7 +28025,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
@@ -28080,7 +28080,7 @@
         - reboot_required
         - restrict_strategy
 
-    - name: get current kernel parameters
+    - name: Get current kernel parameters
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
