@@ -18,7 +18,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  RHEL-8
-# Benchmark Version:  0.1.59
+# Benchmark Version:  0.1.60
 #
 # XCCDF Version:  1.1
 #
@@ -4820,6 +4820,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -4849,10 +4850,35 @@
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?audit=1(?:\s.*)?$', multiline=True)
           is none
+      tags:
+        - CCE-80825-3
+        - CJIS-5.4.1.1
+        - DISA-STIG-RHEL-08-030601
+        - NIST-800-171-3.3.1
+        - NIST-800-53-AC-17(1)
+        - NIST-800-53-AU-10
+        - NIST-800-53-AU-14(1)
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IR-5(1)
+        - PCI-DSS-Req-10.3
+        - grub2_audit_argument
+        - low_disruption
+        - medium_complexity
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=audit=1"
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc != 0
       tags:
         - CCE-80825-3
         - CJIS-5.4.1.1
@@ -4889,6 +4915,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -4911,10 +4938,28 @@
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?audit_backlog_limit=8192(?:\s.*)?$',
           multiline=True) is none
+      tags:
+        - CCE-80943-4
+        - DISA-STIG-RHEL-08-030602
+        - NIST-800-53-CM-6(a)
+        - grub2_audit_backlog_limit_argument
+        - low_disruption
+        - medium_complexity
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=audit_backlog_limit=8192"
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc != 0
       tags:
         - CCE-80943-4
         - DISA-STIG-RHEL-08-030602
@@ -23454,6 +23499,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - '"grub2-common" in ansible_facts.packages'
@@ -23476,10 +23522,28 @@
       when:
         - '"grub2-common" in ansible_facts.packages'
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?pti=on(?:\s.*)?$', multiline=True)
           is none
+      tags:
+        - CCE-82194-2
+        - DISA-STIG-RHEL-08-040004
+        - NIST-800-53-SI-16
+        - grub2_pti_argument
+        - high_severity
+        - low_disruption
+        - medium_complexity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=pti=on"
+      when:
+        - '"grub2-common" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - kernelopts.rc != 0
       tags:
         - CCE-82194-2
         - DISA-STIG-RHEL-08-040004
@@ -23509,6 +23573,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - '"grub2-common" in ansible_facts.packages'
@@ -23531,10 +23596,28 @@
       when:
         - '"grub2-common" in ansible_facts.packages'
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?vsyscall=none(?:\s.*)?$',
           multiline=True) is none
+      tags:
+        - CCE-80946-7
+        - DISA-STIG-RHEL-08-010422
+        - NIST-800-53-CM-7(a)
+        - grub2_vsyscall_argument
+        - low_disruption
+        - medium_complexity
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=vsyscall=none"
+      when:
+        - '"grub2-common" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - kernelopts.rc != 0
       tags:
         - CCE-80946-7
         - DISA-STIG-RHEL-08-010422
@@ -28030,6 +28113,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -28052,10 +28136,28 @@
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?page_poison=1(?:\s.*)?$',
           multiline=True) is none
+      tags:
+        - CCE-80944-2
+        - DISA-STIG-RHEL-08-010421
+        - NIST-800-53-CM-6(a)
+        - grub2_page_poison_argument
+        - low_disruption
+        - medium_complexity
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=page_poison=1"
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc != 0
       tags:
         - CCE-80944-2
         - DISA-STIG-RHEL-08-010421
@@ -28085,6 +28187,7 @@
       ansible.builtin.shell:
         cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
       register: kernelopts
+      ignore_errors: true
       changed_when: false
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -28107,10 +28210,28 @@
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc == 0
         - kernelopts.stdout_lines is defined
         - kernelopts.stdout_lines | length > 0
         - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?slub_debug=P(?:\s.*)?$',
           multiline=True) is none
+      tags:
+        - CCE-80945-9
+        - DISA-STIG-RHEL-08-010423
+        - NIST-800-53-CM-6(a)
+        - grub2_slub_debug_argument
+        - low_disruption
+        - medium_complexity
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+
+    - name: Update the bootloader menu when there are no entries previously set
+      command: /usr/bin/grub2-editenv - set "kernelopts=slub_debug=P"
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"grub2-common" in ansible_facts.packages'
+        - kernelopts.rc != 0
       tags:
         - CCE-80945-9
         - DISA-STIG-RHEL-08-010423

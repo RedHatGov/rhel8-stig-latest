@@ -17,7 +17,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  RHEL-8
-# Benchmark Version:  0.1.59
+# Benchmark Version:  0.1.60
 #
 # XCCDF Version:  1.1
 #
