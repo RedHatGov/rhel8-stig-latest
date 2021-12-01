@@ -837,7 +837,11 @@ By using this IS (which includes any device attached to this IS), you consent to
 Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
 
 ""I've read & consent to terms in IS user agreem't.""","To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.","
@@ -865,7 +869,9 @@ Use the following verbiage for operating systems that have severe limitations on
 ""I've read & consent to terms in IS user agreem't.""
 
 If it does not, this is a finding.","To determine how the SSH daemon's Banner option is set, run the following command:
+
 $ sudo grep -i Banner /etc/ssh/sshd_config
+
 
 If a line indicating /etc/issue is returned, then the required value is set.
 
@@ -893,7 +899,11 @@ Use the following verbiage for operating systems that have severe limitations on
 ""I've read & consent to terms in IS user agreem't.""
 
 If it does not, this is a finding.","To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.",,,,
@@ -918,39 +928,71 @@ login to the system, set the AutomaticLoginEnable to false in the
 [daemon] section in /etc/gdm/custom.conf. For example:
 [daemon]
 AutomaticLoginEnable=false",,,,
-CCI-000366,SRG-OS-000480-GPOS-00229,TBD - Assigned by DISA after STIG release,The operating system must not allow an unattended or automatic logon to the system.,CCE-80896-4:Disable SSH Access via Empty Passwords,Failure to restrict system access to authenticated users negatively impacts operating system security.,"To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+CCI-000366,SRG-OS-000480-GPOS-00229,TBD - Assigned by DISA after STIG release,The operating system must not allow an unattended or automatic logon to the system.,CCE-80896-4:Disable SSH Access via Empty Passwords,Failure to restrict system access to authenticated users negatively impacts operating system security.,"Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.","
                   Applicable - Configurable
                 ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Verify the operating system does not allow an unattended or automatic logon to the system. If it does, this is a finding. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","To determine how the SSH daemon's PermitEmptyPasswords option is set, run the following command:
+
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+
 If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
-      ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+      ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.",,,,
-CCI-000366,SRG-OS-000480-GPOS-00229,TBD - Assigned by DISA after STIG release,The operating system must not allow an unattended or automatic logon to the system.,CCE-80903-8:Do Not Allow SSH Environment Options,Failure to restrict system access to authenticated users negatively impacts operating system security.,"To ensure users are not able to override environment
-variables of the SSH daemon, add or correct the following line
-in /etc/ssh/sshd_config:
+CCI-000366,SRG-OS-000480-GPOS-00229,TBD - Assigned by DISA after STIG release,The operating system must not allow an unattended or automatic logon to the system.,CCE-80903-8:Do Not Allow SSH Environment Options,Failure to restrict system access to authenticated users negatively impacts operating system security.,"Ensure that users are not able to override environment variables of the SSH daemon.
+
+The default SSH configuration disables environment processing. The appropriate
+configuration is used if no value is set for PermitUserEnvironment.
+
+To explicitly disable Environment options, add or correct the following
+
+
+/etc/ssh/sshd_config:
+
 PermitUserEnvironment no","
                   Applicable - Configurable
-                ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Verify the operating system does not allow an unattended or automatic logon to the system. If it does, this is a finding. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","To ensure users are not able to send environment variables, run the following command:
-$ sudo grep PermitUserEnvironment /etc/ssh/sshd_config
-If properly configured, output should be:
-PermitUserEnvironment no
-      Is it the case that PermitUserEnvironment is not disabled?
-      ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","To ensure users are not able to override environment
-variables of the SSH daemon, add or correct the following line
-in /etc/ssh/sshd_config:
+                ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Verify the operating system does not allow an unattended or automatic logon to the system. If it does, this is a finding. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","To determine how the SSH daemon's PermitUserEnvironment option is set, run the following command:
+
+$ sudo grep -i PermitUserEnvironment /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
+      ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","Ensure that users are not able to override environment variables of the SSH daemon.
+
+The default SSH configuration disables environment processing. The appropriate
+configuration is used if no value is set for PermitUserEnvironment.
+
+To explicitly disable Environment options, add or correct the following
+
+
+/etc/ssh/sshd_config:
+
 PermitUserEnvironment no",,,,
 CCI-000366,SRG-OS-000480-GPOS-00228,TBD - Assigned by DISA after STIG release,The operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,CCE-81036-6:Ensure the Default Bash Umask is Set Correctly,Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.,"To ensure the default umask for users of the Bash shell is set properly,
 add or correct the umask setting in /etc/bashrc to read
@@ -969,6 +1011,20 @@ umask
 add or correct the umask setting in /etc/bashrc to read
 as follows:
 umask ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00228,TBD - Assigned by DISA after STIG release,The operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,CCE-81037-4:Ensure the Default C Shell Umask is Set Correctly,Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.,"To ensure the default umask for users of the C shell is set properly,
+add or correct the umask setting in /etc/csh.cshrc to read as follows:
+umask ","
+                  Applicable - Configurable
+                ","Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.","Verify the umask setting is configured correctly in the /etc/csh.cshrc file by
+running the following command:
+# grep ""umask"" /etc/csh.cshrc
+All output must show the value of umask set as shown in the below:
+# grep ""umask"" /etc/csh.cshrc
+umask 
+      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      ",Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,"To ensure the default umask for users of the C shell is set properly,
+add or correct the umask setting in /etc/csh.cshrc to read as follows:
+umask ",,,,
 CCI-000366,SRG-OS-000480-GPOS-00228,TBD - Assigned by DISA after STIG release,The operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,CCE-82888-9:Ensure the Default Umask is Set Correctly in login.defs,Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.,"To ensure the default umask controlled by /etc/login.defs is set properly,
 add or correct the UMASK setting in /etc/login.defs to read as follows:
 UMASK ","
@@ -983,6 +1039,20 @@ umask
       ",Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,"To ensure the default umask controlled by /etc/login.defs is set properly,
 add or correct the UMASK setting in /etc/login.defs to read as follows:
 UMASK ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00228,TBD - Assigned by DISA after STIG release,The operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,CCE-81035-8:Ensure the Default Umask is Set Correctly in /etc/profile,Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.,"To ensure the default umask controlled by /etc/profile is set properly,
+add or correct the umask setting in /etc/profile to read as follows:
+umask ","
+                  Applicable - Configurable
+                ","Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.","Verify the umask setting is configured correctly in the /etc/profile file by
+running the following command:
+# grep ""umask"" /etc/profile
+All output must show the value of umask set as shown in the below:
+# grep ""umask"" /etc/profile
+umask 
+      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      ",Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,"To ensure the default umask controlled by /etc/profile is set properly,
+add or correct the umask setting in /etc/profile to read as follows:
+umask ",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84220-3:Configure AIDE to Verify Access Control Lists (ACLs),"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","By default, the acl option is added to the FIPSR ruleset in AIDE.
@@ -1698,6 +1768,38 @@ umask
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To ensure the default umask for users of the Bash shell is set properly,
 add or correct the umask setting in /etc/bashrc to read
 as follows:
+umask ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-81037-4:Ensure the Default C Shell Umask is Set Correctly,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To ensure the default umask for users of the C shell is set properly,
+add or correct the umask setting in /etc/csh.cshrc to read as follows:
+umask ","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","Verify the umask setting is configured correctly in the /etc/csh.cshrc file by
+running the following command:
+# grep ""umask"" /etc/csh.cshrc
+All output must show the value of umask set as shown in the below:
+# grep ""umask"" /etc/csh.cshrc
+umask 
+      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To ensure the default umask for users of the C shell is set properly,
+add or correct the umask setting in /etc/csh.cshrc to read as follows:
+umask ",,,,
+CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-81035-8:Ensure the Default Umask is Set Correctly in /etc/profile,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To ensure the default umask controlled by /etc/profile is set properly,
+add or correct the umask setting in /etc/profile to read as follows:
+umask ","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","Verify the umask setting is configured correctly in the /etc/profile file by
+running the following command:
+# grep ""umask"" /etc/profile
+All output must show the value of umask set as shown in the below:
+# grep ""umask"" /etc/profile
+umask 
+      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To ensure the default umask controlled by /etc/profile is set properly,
+add or correct the umask setting in /etc/profile to read as follows:
 umask ",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84044-7:Ensure the Default Umask is Set Correctly For Interactive Users,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -3292,88 +3394,153 @@ a user has successfully authenticated, add or correct the following line in the
 Compression ",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80896-4:Disable SSH Access via Empty Passwords,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's PermitEmptyPasswords option is set, run the following command:
+
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+
 If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80897-2:Disable GSSAPI Authentication,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like GSSAPI. To disable GSSAPI authentication, add or
-correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like GSSAPI.
+
+The default SSH configuration disallows authentications based on GSSAPI. The appropriate
+configuration is used if no value is set for GSSAPIAuthentication.
+
+To explicitly disable GSSAPI authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 GSSAPIAuthentication no","
                   Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check if GSSAPIAuthentication is disabled or set correctly, run the following
-command:
-$ sudo grep GSSAPIAuthentication /etc/ssh/sshd_config
-If configured properly, output should be no
-      Is it the case that it is commented out or is not disabled?
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's GSSAPIAuthentication option is set, run the following command:
+
+$ sudo grep -i GSSAPIAuthentication /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like GSSAPI. To disable GSSAPI authentication, add or
-correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like GSSAPI.
+
+The default SSH configuration disallows authentications based on GSSAPI. The appropriate
+configuration is used if no value is set for GSSAPIAuthentication.
+
+To explicitly disable GSSAPI authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 GSSAPIAuthentication no",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80898-0:Disable Kerberos Authentication,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like Kerberos. To disable Kerberos authentication, add
-or correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like Kerberos.
+
+The default SSH configuration disallows authentication validation through Kerberos.
+The appropriate configuration is used if no value is set for KerberosAuthentication.
+
+To explicitly disable Kerberos authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 KerberosAuthentication no","
                   Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check if KerberosAuthentication is disabled or set correctly, run the
-following command:
-$ sudo grep KerberosAuthentication /etc/ssh/sshd_config
-If configured properly, output should be no
-      Is it the case that it is commented out or is not disabled?
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's KerberosAuthentication option is set, run the following command:
+
+$ sudo grep -i KerberosAuthentication /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like Kerberos. To disable Kerberos authentication, add
-or correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like Kerberos.
+
+The default SSH configuration disallows authentication validation through Kerberos.
+The appropriate configuration is used if no value is set for KerberosAuthentication.
+
+To explicitly disable Kerberos authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 KerberosAuthentication no",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80901-2:Disable SSH Root Login,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","The root user should never be allowed to login to a
 system directly over a network.
-To disable root login via SSH, add or correct the following line
-in /etc/ssh/sshd_config:
+To disable root login via SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PermitRootLogin no","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's PermitRootLogin option is set, run the following command:
+
 $ sudo grep -i PermitRootLogin /etc/ssh/sshd_config
+
 
 If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The root user should never be allowed to login to a
 system directly over a network.
-To disable root login via SSH, add or correct the following line
-in /etc/ssh/sshd_config:
+To disable root login via SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PermitRootLogin no",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80902-0:Disable SSH Support for User Known Hosts,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","SSH can allow system users to connect to systems if a cache of the remote
 systems public keys is available.  This should be disabled.
 
-To ensure this behavior is disabled, add or correct the
-following line in /etc/ssh/sshd_config:
+To ensure this behavior is disabled, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 IgnoreUserKnownHosts yes","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's IgnoreUserKnownHosts option is set, run the following command:
+
 $ sudo grep -i IgnoreUserKnownHosts /etc/ssh/sshd_config
+
 
 If a line indicating yes is returned, then the required value is set.
 
@@ -3381,8 +3548,11 @@ If a line indicating yes is returned, then the required value is set.
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","SSH can allow system users to connect to systems if a cache of the remote
 systems public keys is available.  This should be disabled.
 
-To ensure this behavior is disabled, add or correct the
-following line in /etc/ssh/sshd_config:
+To ensure this behavior is disabled, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 IgnoreUserKnownHosts yes",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-83360-8:Disable X11 Forwarding,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -3391,12 +3561,20 @@ through the connection to enable remote graphic connections.
 SSH has the capability to encrypt remote X11 connections when SSH's
 X11Forwarding option is enabled.
 
-To disable X11 Forwarding, add or correct the
-following line in /etc/ssh/sshd_config:
+The default SSH configuration disables X11Forwarding. The appropriate
+configuration is used if no value is set for X11Forwarding.
+
+To explicitly disable X11 Forwarding, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 X11Forwarding no","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's X11Forwarding option is set, run the following command:
+
 $ sudo grep -i X11Forwarding /etc/ssh/sshd_config
+
 If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
@@ -3405,42 +3583,82 @@ through the connection to enable remote graphic connections.
 SSH has the capability to encrypt remote X11 connections when SSH's
 X11Forwarding option is enabled.
 
-To disable X11 Forwarding, add or correct the
-following line in /etc/ssh/sshd_config:
+The default SSH configuration disables X11Forwarding. The appropriate
+configuration is used if no value is set for X11Forwarding.
+
+To explicitly disable X11 Forwarding, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 X11Forwarding no",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80904-6:Enable Use of Strict Mode Checking,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","SSHs StrictModes option checks file and ownership permissions in
 the user's home directory .ssh folder before accepting login. If world-
-writable permissions are found, logon is rejected. To enable StrictModes in SSH,
-add or correct the following line in the /etc/ssh/sshd_config file:
+writable permissions are found, logon is rejected.
+
+The default SSH configuration has StrictModes enabled. The appropriate
+configuration is used if no value is set for StrictModes.
+
+To explicitly enable StrictModes in SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 StrictModes yes","
                   Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check if StrictModes is enabled or set correctly, run the
-following command:
-$ sudo grep StrictModes /etc/ssh/sshd_config
-If configured properly, output should be yes
-      Is it the case that it is commented out or is not enabled?
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's StricModes option is set, run the following command:
+
+$ sudo grep -i StricModes /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","SSHs StrictModes option checks file and ownership permissions in
 the user's home directory .ssh folder before accepting login. If world-
-writable permissions are found, logon is rejected. To enable StrictModes in SSH,
-add or correct the following line in the /etc/ssh/sshd_config file:
+writable permissions are found, logon is rejected.
+
+The default SSH configuration has StrictModes enabled. The appropriate
+configuration is used if no value is set for StrictModes.
+
+To explicitly enable StrictModes in SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 StrictModes yes",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82281-7:Enable SSH Print Last Log,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","When enabled, SSH will display the date and time of the last
-successful account logon. To enable LastLog in
-SSH, add or correct the following line in the /etc/ssh/sshd_config file:
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Ensure that SSH will display the date and time of the last successful account logon.
+
+The default SSH configuration enables print of the date and time of the last login.
+The appropriate configuration is used if no value is set for PrintLastLog.
+
+To explicitly enable LastLog in SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PrintLastLog yes","
                   Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check if PrintLastLog is enabled or set correctly, run the
-following command:
-$ sudo grep PrintLastLog /etc/ssh/sshd_config
-If configured properly, output should be yes
-      Is it the case that it is commented out or is not enabled?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","When enabled, SSH will display the date and time of the last
-successful account logon. To enable LastLog in
-SSH, add or correct the following line in the /etc/ssh/sshd_config file:
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's PrintLastLog option is set, run the following command:
+
+$ sudo grep -i PrintLastLog /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Ensure that SSH will display the date and time of the last successful account logon.
+
+The default SSH configuration enables print of the date and time of the last login.
+The appropriate configuration is used if no value is set for PrintLastLog.
+
+To explicitly enable LastLog in SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PrintLastLog yes",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82177-7:Force frequent session key renegotiation,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -3480,16 +3698,38 @@ SSH_USE_STRONG_RNG=32",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84058-7:Prevent remote hosts from connecting to the proxy display,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","The SSH daemon should prevent remote hosts from connecting to the proxy
-display. Make sure that the option X11UseLocalhost is set to
-yes within the SSH server configuration file.","
+display.
+
+The default SSH configuration for X11UseLocalhost is yes,
+which prevents remote hosts from connecting to the proxy display.
+
+To explicitly prevent remote connections to the proxy display, add or correct
+the following line in
+
+
+/etc/ssh/sshd_config:
+
+X11UseLocalhost yes","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's X11UseLocalhost option is set, run the following command:
+
 $ sudo grep -i X11UseLocalhost /etc/ssh/sshd_config
+
 If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
       Is it the case that the display proxy is listening on wildcard address?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The SSH daemon should prevent remote hosts from connecting to the proxy
-display. Make sure that the option X11UseLocalhost is set to
-yes within the SSH server configuration file.",,,,
+display.
+
+The default SSH configuration for X11UseLocalhost is yes,
+which prevents remote hosts from connecting to the proxy display.
+
+To explicitly prevent remote connections to the proxy display, add or correct
+the following line in
+
+
+/etc/ssh/sshd_config:
+
+X11UseLocalhost yes",,,,
 CCI-000366,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-83411-9:Disable graphical user interface,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","By removing the following packages,  the system no longer has X Windows installed.
@@ -3688,19 +3928,29 @@ to begin and end the string with ' and use \n for new lines.",,,,
 CCI-000050,SRG-OS-000024-GPOS-00007,TBD - Assigned by DISA after STIG release,The operating system must display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.,CCE-80905-3:Enable SSH Warning Banner,"The banner must be acknowledged by the user prior to allowing the user access to the operating system. This provides assurance that the user has seen the message and accepted the conditions for access. If the consent banner is not acknowledged by the user, DoD will not be in compliance with system use notifications required by law.
 
 To establish acceptance of the application usage policy, a click-through banner at system logon is required. The system must prevent further activity until the user executes a positive action to manifest agreement by clicking on a box indicating ""OK"".","To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.","
                   Applicable - Configurable
                 ","Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.","To determine how the SSH daemon's Banner option is set, run the following command:
+
 $ sudo grep -i Banner /etc/ssh/sshd_config
+
 
 If a line indicating /etc/issue is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ",Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.,"To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.",,,,
@@ -26529,24 +26779,40 @@ A non-privileged account is any information system account with authorizations o
 
 Network access is any access to an application by a user (or process acting on behalf of a user) where said access is obtained through a network connection.
 
-The DoD CAC with DoD-approved PKI is an example of multifactor authentication.","To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+The DoD CAC with DoD-approved PKI is an example of multifactor authentication.","Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.","
                   Applicable - Configurable
                 ","Verify the operating system uses multifactor authentication for network access to non-privileged accounts. If it does not, this is a finding.","To determine how the SSH daemon's PermitEmptyPasswords option is set, run the following command:
+
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+
 If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
-      ",Configure the operating system to use multifactor authentication for network access to non-privileged accounts.,"To explicitly disallow SSH login from accounts with
-empty passwords, add or correct the following line in /etc/ssh/sshd_config:
+      ",Configure the operating system to use multifactor authentication for network access to non-privileged accounts.,"Disallow SSH login with empty passwords.
+The default SSH configuration disables logins with empty passwords. The appropriate
+configuration is used if no value is set for PermitEmptyPasswords.
+
+To explicitly disallow SSH login from accounts with empty passwords,
+add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 
 PermitEmptyPasswords no
-
 Any accounts with empty passwords should be disabled immediately, and PAM configuration
 should prevent users from being able to assign themselves empty passwords.",,,,
 CCI-000767,SRG-OS-000107-GPOS-00054,TBD - Assigned by DISA after STIG release,The operating system must use multifactor authentication for local access to privileged accounts.,CCI-000767:The operating system must use multifactor authentication for local access to privileged accounts.,"To assure accountability and prevent unauthenticated access, privileged users must utilize multifactor authentication to prevent potential misuse and compromise of the system.
@@ -26643,20 +26909,28 @@ Users (and any processes acting on behalf of users) need to be uniquely identifi
 
 Requiring individuals to be authenticated with an individual authenticator prior to using a group authenticator allows for traceability of actions, as well as adding an additional level of protection of the actions that can be taken with group account knowledge.","The root user should never be allowed to login to a
 system directly over a network.
-To disable root login via SSH, add or correct the following line
-in /etc/ssh/sshd_config:
+To disable root login via SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PermitRootLogin no","
                   Applicable - Configurable
                 ","Verify the operating system requires individuals to be authenticated with an individual authenticator prior to using a group authenticator. If it does not, this is a finding.","To determine how the SSH daemon's PermitRootLogin option is set, run the following command:
+
 $ sudo grep -i PermitRootLogin /etc/ssh/sshd_config
+
 
 If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ",Configure the operating system to require individuals to be authenticated with an individual authenticator prior to using a group authenticator.,"The root user should never be allowed to login to a
 system directly over a network.
-To disable root login via SSH, add or correct the following line
-in /etc/ssh/sshd_config:
+To disable root login via SSH, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 PermitRootLogin no",,,,
 CCI-000770,SRG-OS-000109-GPOS-00056,TBD - Assigned by DISA after STIG release,The operating system must require individuals to be authenticated with an individual authenticator prior to using a group authenticator.,Product Meets this Requirement,"To assure individual accountability and prevent unauthorized access, organizational users must be individually identified and authenticated.
 
@@ -31342,10 +31616,15 @@ and terminated.
 
 To ensure the SSH idle timeout occurs precisely when the
 ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0.","
+value of 0 in
+
+
+/etc/ssh/sshd_config:","
                   Applicable - Configurable
                 ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity; and for user sessions (non-privileged session), the session must be terminated after 15 minutes of inactivity, except to fulfill documented and validated mission requirements. If it does not, this is a finding.","To ensure ClientAliveInterval is set correctly, run the following command:
+
 $ sudo grep ClientAliveCountMax /etc/ssh/sshd_config
+
 If properly configured, the output should be:
 ClientAliveCountMax 0
 
@@ -31361,7 +31640,10 @@ and terminated.
 
 To ensure the SSH idle timeout occurs precisely when the
 ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0.",,,,
+value of 0 in
+
+
+/etc/ssh/sshd_config:",,,,
 CCI-001190,SRG-OS-000184-GPOS-00078,TBD - Assigned by DISA after STIG release,"The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","CCI-001190:The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","Failure to a known safe state helps prevent systems from failing to a state that may cause loss of data or unauthorized access to system resources. Operating systems that fail suddenly and with no incorporated failure state planning may leave the system available but with a reduced security protection capability. Preserving operating system state information also facilitates system restart and return to the operational mode of the organization with less disruption to mission-essential processes. 
 
 Abort refers to stopping a program or function before it has finished naturally. The term abort refers to both requested and unexpected terminations.","<VulnDiscussion>Failure to a known safe state helps prevent systems from failing to a state that may cause loss of data or unauthorized access to system resources. Operating systems that fail suddenly and with no incorporated failure state planning may leave the system available but with a reduced security protection capability. Preserving operating system state information also facilitates system restart and return to the operational mode of the organization with less disruption to mission-essential processes. 
@@ -31898,7 +32180,11 @@ By using this IS (which includes any device attached to this IS), you consent to
 Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
 
 ""I've read & consent to terms in IS user agreem't.""","To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.","
@@ -31926,7 +32212,9 @@ Use the following verbiage for operating systems that have severe limitations on
 ""I've read & consent to terms in IS user agreem't.""
 
 If it does not, this is a finding.","To determine how the SSH daemon's Banner option is set, run the following command:
+
 $ sudo grep -i Banner /etc/ssh/sshd_config
+
 
 If a line indicating /etc/issue is returned, then the required value is set.
 
@@ -31952,7 +32240,11 @@ By using this IS (which includes any device attached to this IS), you consent to
 Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
 
 ""I've read & consent to terms in IS user agreem't.""","To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in /etc/ssh/sshd_config:
+across the system, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 Banner /etc/issue
 Another section contains information on how to create an
 appropriate system-wide warning banner.",,,,
@@ -32989,18 +33281,36 @@ When dealing with access restrictions pertaining to change control, it should be
 Accordingly, only qualified and authorized individuals should be allowed to obtain access to operating system components for the purposes of initiating changes, including upgrades and modifications.
 
 Logical access restrictions include, for example, controls that restrict access to workflow automation, media libraries, abstract layers (e.g., changes implemented into third-party interfaces rather than directly into information systems), and change windows (e.g., changes occur only during specified times, making unauthorized changes easy to discover).","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like GSSAPI. To disable GSSAPI authentication, add or
-correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like GSSAPI.
+
+The default SSH configuration disallows authentications based on GSSAPI. The appropriate
+configuration is used if no value is set for GSSAPIAuthentication.
+
+To explicitly disable GSSAPI authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 GSSAPIAuthentication no","
                   Applicable - Configurable
-                ","Verify the operating system enforces access restrictions. If it does not, this is a finding.","To check if GSSAPIAuthentication is disabled or set correctly, run the following
-command:
-$ sudo grep GSSAPIAuthentication /etc/ssh/sshd_config
-If configured properly, output should be no
-      Is it the case that it is commented out or is not disabled?
+                ","Verify the operating system enforces access restrictions. If it does not, this is a finding.","To determine how the SSH daemon's GSSAPIAuthentication option is set, run the following command:
+
+$ sudo grep -i GSSAPIAuthentication /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
       ",Configure the operating system to enforce access restrictions.,"Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like GSSAPI. To disable GSSAPI authentication, add or
-correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like GSSAPI.
+
+The default SSH configuration disallows authentications based on GSSAPI. The appropriate
+configuration is used if no value is set for GSSAPIAuthentication.
+
+To explicitly disable GSSAPI authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 GSSAPIAuthentication no",,,,
 CCI-001813,SRG-OS-000364-GPOS-00151,TBD - Assigned by DISA after STIG release,The operating system must enforce access restrictions.,CCE-80898-0:Disable Kerberos Authentication,"Failure to provide logical access restrictions associated with changes to system configuration may have significant effects on the overall security of the system.
 
@@ -33009,18 +33319,36 @@ When dealing with access restrictions pertaining to change control, it should be
 Accordingly, only qualified and authorized individuals should be allowed to obtain access to operating system components for the purposes of initiating changes, including upgrades and modifications.
 
 Logical access restrictions include, for example, controls that restrict access to workflow automation, media libraries, abstract layers (e.g., changes implemented into third-party interfaces rather than directly into information systems), and change windows (e.g., changes occur only during specified times, making unauthorized changes easy to discover).","Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like Kerberos. To disable Kerberos authentication, add
-or correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like Kerberos.
+
+The default SSH configuration disallows authentication validation through Kerberos.
+The appropriate configuration is used if no value is set for KerberosAuthentication.
+
+To explicitly disable Kerberos authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 KerberosAuthentication no","
                   Applicable - Configurable
-                ","Verify the operating system enforces access restrictions. If it does not, this is a finding.","To check if KerberosAuthentication is disabled or set correctly, run the
-following command:
-$ sudo grep KerberosAuthentication /etc/ssh/sshd_config
-If configured properly, output should be no
-      Is it the case that it is commented out or is not disabled?
+                ","Verify the operating system enforces access restrictions. If it does not, this is a finding.","To determine how the SSH daemon's KerberosAuthentication option is set, run the following command:
+
+$ sudo grep -i KerberosAuthentication /etc/ssh/sshd_config
+
+If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+
+      Is it the case that the required value is not set?
       ",Configure the operating system to enforce access restrictions.,"Unless needed, SSH should not permit extraneous or unnecessary
-authentication mechanisms like Kerberos. To disable Kerberos authentication, add
-or correct the following line in the /etc/ssh/sshd_config file:
+authentication mechanisms like Kerberos.
+
+The default SSH configuration disallows authentication validation through Kerberos.
+The appropriate configuration is used if no value is set for KerberosAuthentication.
+
+To explicitly disable Kerberos authentication, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
 KerberosAuthentication no",,,,
 CCI-001487,SRG-OS-000255-GPOS-00096,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the identity of any individual or process associated with the event.,CCE-80872-5:Enable auditd Service,"Without information that establishes the identity of the subjects (i.e., users or processes acting on behalf of users) associated with the events, security personnel cannot determine responsibility for the potentially harmful event.","The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
@@ -33850,10 +34178,15 @@ and terminated.
 
 To ensure the SSH idle timeout occurs precisely when the
 ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0.","
+value of 0 in
+
+
+/etc/ssh/sshd_config:","
                   Applicable - Configurable
                 ","Verify the operating system automatically terminates a user session after inactivity time-outs have expired or at shutdown. If it does not, this is a finding.","To ensure ClientAliveInterval is set correctly, run the following command:
+
 $ sudo grep ClientAliveCountMax /etc/ssh/sshd_config
+
 If properly configured, the output should be:
 ClientAliveCountMax 0
 
@@ -33869,7 +34202,10 @@ and terminated.
 
 To ensure the SSH idle timeout occurs precisely when the
 ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0.",,,,
+value of 0 in
+
+
+/etc/ssh/sshd_config:",,,,
 CCI-002363,SRG-OS-000280-GPOS-00110,TBD - Assigned by DISA after STIG release,The operating system must provide a logoff capability for user-initiated communications sessions when requiring user access authentication.,CCI-002363:The operating system must provide a logoff capability for user-initiated communications sessions when requiring user access authentication.,"If a user cannot explicitly end an operating system session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.
 
 Information resources to which users gain access via authentication include, for example, local workstations and remote services. For some types of interactive sessions, including, for example, remote logon, information systems typically send logoff messages as final messages prior to terminating sessions.","<VulnDiscussion>If a user cannot explicitly end an operating system session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.

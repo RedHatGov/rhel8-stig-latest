@@ -5,7 +5,7 @@
 # Profile Title:  DISA STIG for Red Hat Enterprise Linux 8
 # Profile Description:
 # This profile contains configuration checks that align to the
-# DISA STIG for Red Hat Enterprise Linux 8 V1R3.
+# DISA STIG for Red Hat Enterprise Linux 8 V1R4.
 #
 # In addition to being applicable to Red Hat Enterprise Linux 8, DISA recognizes this
 # configuration baseline as applicable to the operating system tier of
@@ -80,6 +80,8 @@
       var_password_pam_unix_rounds: !!str 5000
       var_accounts_fail_delay: !!str 4
       var_accounts_max_concurrent_login_sessions: !!str 10
+      var_accounts_user_umask: !!str 077
+      var_accounts_user_umask: !!str 077
       var_accounts_user_umask: !!str 077
       var_accounts_user_umask: !!str 077
       var_auditd_disk_error_action: !!str halt
@@ -4651,6 +4653,23 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: Set user umask in /etc/csh.cshrc
+      replace:
+        path: /etc/csh.cshrc
+        regexp: umask.*
+        replace: umask {{ var_accounts_user_umask }}
+      tags:
+        - CCE-81037-4
+        - DISA-STIG-RHEL-08-020353
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - accounts_umask_etc_csh_cshrc
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Gather the package facts
       package_facts:
         manager: auto
@@ -4679,6 +4698,23 @@
         - NIST-800-53-AC-6(1)
         - NIST-800-53-CM-6(a)
         - accounts_umask_etc_login_defs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Set user umask in /etc/profile
+      replace:
+        path: /etc/profile
+        regexp: umask.*
+        replace: umask {{ var_accounts_user_umask }}
+      tags:
+        - CCE-81035-8
+        - DISA-STIG-RHEL-08-020353
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - accounts_umask_etc_profile
         - low_complexity
         - low_disruption
         - medium_severity
