@@ -237,7 +237,25 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+var_system_crypto_policy='FIPS'
+
+
 fips-mode-setup --enable
+
+stderr_of_call=$(update-crypto-policies --set ${var_system_crypto_policy} 2>&1 > /dev/null)
+rc=$?
+
+if test "$rc" = 127; then
+	echo "$stderr_of_call" >&2
+	echo "Make sure that the script is installed on the remediated system." >&2
+	echo "See output of the 'dnf provides update-crypto-policies' command" >&2
+	echo "to see what package to (re)install" >&2
+
+	false  # end with an error code
+elif test "$rc" != 0; then
+	echo "Error invoking the update-crypto-policies script: $stderr_of_call" >&2
+	false  # end with an error code
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1489,7 +1507,7 @@ if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
 	option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
 	if [[ -z $option ]]; then
 		# option is not set, append to module
-		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/"
+		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
 	else
 		# option is set, replace value
 		sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
@@ -1534,7 +1552,7 @@ if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
 	option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
 	if [[ -z $option ]]; then
 		# option is not set, append to module
-		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/"
+		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
 	else
 		# option is set, replace value
 		sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
@@ -1564,7 +1582,35 @@ if rpm --quiet -q pam; then
 var_accounts_passwords_pam_faillock_deny='3'
 
 
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+SYSTEM_AUTH="/etc/pam.d/system-auth"
+PASSWORD_AUTH="/etc/pam.d/password-auth"
+FAILLOCK_CONF="/etc/security/faillock.conf"
+
+if [ $(grep -c "^\s*auth.*pam_unix.so" $SYSTEM_AUTH) > 1 ] || \
+   [ $(grep -c "^\s*auth.*pam_unix.so" $PASSWORD_AUTH) > 1 ]; then
+   echo "Skipping remediation because there are more pam_unix.so entries than expected."
+   false
+fi
+
+if [ -f $FAILLOCK_CONF ]; then
+    if $(grep -q '^\s*deny\s*=' $FAILLOCK_CONF); then
+        sed -i --follow-symlinks "s/^\s*\(deny\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_deny/g" $FAILLOCK_CONF
+    else
+        echo "deny = $var_accounts_passwords_pam_faillock_deny" >> $FAILLOCK_CONF
+    fi
+    # If the faillock.conf file is present, but for any reason, like an OS upgrade, the
+    # pam_faillock.so parameters are still defined in pam files, this makes them compatible with
+    # the newer versions of authselect tool and ensure the parameters are only in faillock.conf.
+    sed -i --follow-symlinks 's/\(pam_faillock.so preauth\).*$/\1 silent/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    sed -i --follow-symlinks 's/\(pam_faillock.so authfail\).*$/\1/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    authselect enable-feature with-faillock
+else
+    if [ -f /usr/sbin/authconfig ]; then
+        authconfig --enablefaillock --update
+    else
+        authselect enable-feature with-faillock
+    fi
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 
 for pam_file in "${AUTH_FILES[@]}"
 do
@@ -1602,6 +1648,7 @@ do
         sed -E -i --follow-symlinks '/^\s*account\s*required\s*pam_unix.so/i account     required      pam_faillock.so' "$pam_file"
     fi
 done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1615,49 +1662,38 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-AUTH_FILES[0]="/etc/pam.d/system-auth"
-AUTH_FILES[1]="/etc/pam.d/password-auth"
+SYSTEM_AUTH="/etc/pam.d/system-auth"
+PASSWORD_AUTH="/etc/pam.d/password-auth"
+FAILLOCK_CONF="/etc/security/faillock.conf"
 
-# This script fixes absence of pam_faillock.so in PAM stack or the
-# absense of even_deny_root in pam_faillock.so arguments
-# When inserting auth pam_faillock.so entries,
-# the entry with preauth argument will be added before pam_unix.so module
-# and entry with authfail argument will be added before pam_deny.so module.
+if [ $(grep -c "^\s*auth.*pam_unix.so" $SYSTEM_AUTH) > 1 ] || \
+   [ $(grep -c "^\s*auth.*pam_unix.so" $PASSWORD_AUTH) > 1 ]; then
+   echo "Skipping remediation because there are more pam_unix.so entries than expected."
+   false
+fi
 
-# The placement of pam_faillock.so entries will not be changed
-# if they are already present
-
-for pamFile in "${AUTH_FILES[@]}"
-do
-	# if PAM file is missing, system is not using PAM or broken
-	if [ ! -f $pamFile ]; then
-		continue
-	fi
-
-	# is 'auth required' here?
-	if grep -q "^auth.*required.*pam_faillock.so.*" $pamFile; then
-		# has 'auth required' even_deny_root option?
-		if ! grep -q "^auth.*required.*pam_faillock.so.*preauth.*even_deny_root" $pamFile; then
-			# even_deny_root is not present
-			sed -i --follow-symlinks "s/\(^auth.*required.*pam_faillock.so.*preauth.*\).*/\1 even_deny_root/" $pamFile
+if [ -f $FAILLOCK_CONF ]; then
+    if [ ! $(grep -q '^\s*even_deny_root' $FAILLOCK_CONF) ]; then
+        echo "even_deny_root" >> $FAILLOCK_CONF
+    fi
+    # If the faillock.conf file is present, but for any reason, like an OS upgrade, the
+    # pam_faillock.so parameters are still defined in pam files, this makes them compatible with
+    # the newer versions of authselect tool and ensure the parameters are only in faillock.conf.
+    sed -i --follow-symlinks 's/\(pam_faillock.so preauth\).*$/\1 silent/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    sed -i --follow-symlinks 's/\(pam_faillock.so authfail\).*$/\1/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    authselect enable-feature with-faillock
+else
+    if [ -f /usr/sbin/authconfig ]; then
+        authconfig --enablefaillock --update
+    else
+        authselect enable-feature with-faillock
+    fi
+    for file in $SYSTEM_AUTH $PASSWORD_AUTH; do
+        if ! grep -q "^auth.*pam_faillock.so \(preauth silent\|authfail\).*even_deny_root" $file; then
+			sed -i --follow-symlinks 's/\(pam_faillock.so \(preauth silent\|authfail\).*\)$/\1 even_deny_root/g' $file
 		fi
-	else
-		# no 'auth required', add it
-		sed -i --follow-symlinks "/^auth.*pam_unix.so.*/i auth required pam_faillock.so preauth silent even_deny_root" $pamFile
-	fi
-
-	# is 'auth [default=die]' here?
-	if grep -q "^auth.*\[default=die\].*pam_faillock.so.*" $pamFile; then
-		# has 'auth [default=die]' even_deny_root option?
-		if ! grep -q "^auth.*\[default=die\].*pam_faillock.so.*authfail.*even_deny_root" $pamFile; then
-			# even_deny_root is not present
-			sed -i --follow-symlinks "s/\(^auth.*\[default=die\].*pam_faillock.so.*authfail.*\).*/\1 even_deny_root/" $pamFile
-		fi
-	else
-		# no 'auth [default=die]', add it
-		sed -i --follow-symlinks "/^auth.*pam_unix.so.*/a auth [default=die] pam_faillock.so authfail silent even_deny_root" $pamFile
-	fi
-done
+    done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1674,7 +1710,35 @@ if rpm --quiet -q pam; then
 var_accounts_passwords_pam_faillock_fail_interval='900'
 
 
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+SYSTEM_AUTH="/etc/pam.d/system-auth"
+PASSWORD_AUTH="/etc/pam.d/password-auth"
+FAILLOCK_CONF="/etc/security/faillock.conf"
+
+if [ $(grep -c "^\s*auth.*pam_unix.so" $SYSTEM_AUTH) > 1 ] || \
+   [ $(grep -c "^\s*auth.*pam_unix.so" $PASSWORD_AUTH) > 1 ]; then
+   echo "Skipping remediation because there are more pam_unix.so entries than expected."
+   false
+fi
+
+if [ -f $FAILLOCK_CONF ]; then
+    if $(grep -q '^\s*fail_interval\s*=' $FAILLOCK_CONF); then
+        sed -i --follow-symlinks "s/^\s*\(fail_interval\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_fail_interval/g" $FAILLOCK_CONF
+    else
+        echo "fail_interval = $var_accounts_passwords_pam_faillock_fail_interval" >> $FAILLOCK_CONF
+    fi
+    # If the faillock.conf file is present, but for any reason, like an OS upgrade, the
+    # pam_faillock.so parameters are still defined in pam files, this makes them compatible with
+    # the newer versions of authselect tool and ensure the parameters are only in faillock.conf.
+    sed -i --follow-symlinks 's/\(pam_faillock.so preauth\).*$/\1 silent/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    sed -i --follow-symlinks 's/\(pam_faillock.so authfail\).*$/\1/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    authselect enable-feature with-faillock
+else
+    if [ -f /usr/sbin/authconfig ]; then
+        authconfig --enablefaillock --update
+    else
+        authselect enable-feature with-faillock
+    fi
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 
 for pam_file in "${AUTH_FILES[@]}"
 do
@@ -1712,6 +1776,7 @@ do
         sed -E -i --follow-symlinks '/^\s*account\s*required\s*pam_unix.so/i account     required      pam_faillock.so' "$pam_file"
     fi
 done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1728,7 +1793,35 @@ if rpm --quiet -q pam; then
 var_accounts_passwords_pam_faillock_unlock_time='0'
 
 
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+SYSTEM_AUTH="/etc/pam.d/system-auth"
+PASSWORD_AUTH="/etc/pam.d/password-auth"
+FAILLOCK_CONF="/etc/security/faillock.conf"
+
+if [ $(grep -c "^\s*auth.*pam_unix.so" $SYSTEM_AUTH) > 1 ] || \
+   [ $(grep -c "^\s*auth.*pam_unix.so" $PASSWORD_AUTH) > 1 ]; then
+   echo "Skipping remediation because there are more pam_unix.so entries than expected."
+   false
+fi
+
+if [ -f $FAILLOCK_CONF ]; then
+    if $(grep -q '^\s*unlock_time\s*=' $FAILLOCK_CONF); then
+        sed -i --follow-symlinks "s/^\s*\(unlock_time\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_unlock_time/g" $FAILLOCK_CONF
+    else
+        echo "unlock_time = $var_accounts_passwords_pam_faillock_unlock_time" >> $FAILLOCK_CONF
+    fi
+    # If the faillock.conf file is present, but for any reason, like an OS upgrade, the
+    # pam_faillock.so parameters are still defined in pam files, this makes them compatible with
+    # the newer versions of authselect tool and ensure the parameters are only in faillock.conf.
+    sed -i --follow-symlinks 's/\(pam_faillock.so preauth\).*$/\1 silent/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    sed -i --follow-symlinks 's/\(pam_faillock.so authfail\).*$/\1/g' $SYSTEM_AUTH $PASSWORD_AUTH
+    authselect enable-feature with-faillock
+else
+    if [ -f /usr/sbin/authconfig ]; then
+        authconfig --enablefaillock --update
+    else
+        authselect enable-feature with-faillock
+    fi
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 
 for pam_file in "${AUTH_FILES[@]}"
 do
@@ -1766,6 +1859,7 @@ do
         sed -E -i --follow-symlinks '/^\s*account\s*required\s*pam_unix.so/i account     required      pam_faillock.so' "$pam_file"
     fi
 done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -2904,7 +2998,12 @@ awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chgrp -f " $4" "$6) }' /etc/
 ###############################################################################
 (>&2 echo "Remediating rule 116/366: 'file_permissions_home_directories'")
 
-awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chmod -f 700 "$6) }' /etc/passwd
+for home_dir in $(awk -F':' '{ if ($4 >= 1000 && $4 != 65534) print $6 }' /etc/passwd); do
+    # Only update the permissions when necessary. This will avoid changing the inode timestamp when
+    # the permission is already defined as expected, therefore not impacting in possible integrity
+    # check systems that also check inodes timestamps.
+    find $home_dir -perm /7027 -exec chmod u-s,g-w-s,o=- {} \;
+done
 # END fix for 'file_permissions_home_directories'
 
 ###############################################################################
@@ -28996,7 +29095,7 @@ firewalld_sshd_zone='public'
 
 
 
-  {% set network_config_path = "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" %}
+  
 
 
 # This assumes that firewalld_sshd_zone is one of the pre-defined zones
@@ -29012,7 +29111,7 @@ fi
 nic_bound=false
 eth_interface_list=$(ip link show up | cut -d ' ' -f2 | cut -d ':' -s -f1 | grep -E '^(en|eth)')
 for interface in $eth_interface_list; do
-    if grep -qi "ZONE=$firewalld_sshd_zone" ; then
+    if grep -qi "ZONE=$firewalld_sshd_zone" /etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}; then
         nic_bound=true
         break;
     fi
@@ -29026,7 +29125,7 @@ if [ $nic_bound = false ];then
           # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
         # Otherwise, regular sed command will do.
         sed_command=('sed' '-i')
-        if test -L ""; then
+        if test -L "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
             sed_command+=('--follow-symlinks')
         fi
 
@@ -29040,13 +29139,13 @@ if [ $nic_bound = false ];then
         # If the key exists, change it. Otherwise, add it to the config_file.
         # We search for the key string followed by a word boundary (matched by \>),
         # so if we search for 'setting', 'setting2' won't match.
-        if LC_ALL=C grep -q -m 1 -i -e "^ZONE=\\>" ""; then
-            "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" ""
+        if LC_ALL=C grep -q -m 1 -i -e "^ZONE=\\>" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
+            "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
         else
             # \n is precaution for case where file ends without trailing newline
             cce="CCE-84300-3"
-            printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "" >> ""
-            printf '%s\n' "$formatted_output" >> ""
+            printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+            printf '%s\n' "$formatted_output" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
         fi
         
     else
