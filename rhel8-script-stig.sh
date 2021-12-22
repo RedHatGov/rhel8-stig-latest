@@ -29169,6 +29169,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.all.accept_ra from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.all.accept_ra.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.all.accept_ra" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_all_accept_ra_value='0'
 
 
@@ -29219,6 +29229,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.all.accept_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.all.accept_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.all.accept_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_all_accept_redirects_value='0'
 
 
@@ -29269,6 +29289,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.all.accept_source_route from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.all.accept_source_route.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.all.accept_source_route" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_all_accept_source_route_value='0'
 
 
@@ -29319,6 +29349,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.default.accept_ra from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.default.accept_ra.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.default.accept_ra" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_default_accept_ra_value='0'
 
 
@@ -29369,6 +29409,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.default.accept_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.default.accept_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.default.accept_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_default_accept_redirects_value='0'
 
 
@@ -29419,6 +29469,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv6.conf.default.accept_source_route from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv6.conf.default.accept_source_route.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv6.conf.default.accept_source_route" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv6_conf_default_accept_source_route_value='0'
 
 
@@ -29469,6 +29529,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.all.accept_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.all.accept_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.all.accept_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_conf_all_accept_redirects_value='0'
 
 
@@ -29519,6 +29589,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.all.accept_source_route from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.all.accept_source_route.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.all.accept_source_route" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_conf_all_accept_source_route_value='0'
 
 
@@ -29569,6 +29649,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.all.rp_filter from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.all.rp_filter.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.all.rp_filter" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_conf_all_rp_filter_value='1'
 
 
@@ -29619,6 +29709,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.default.accept_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.default.accept_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.default.accept_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_conf_default_accept_redirects_value='0'
 
 
@@ -29669,6 +29769,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.default.accept_source_route from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.default.accept_source_route.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.default.accept_source_route" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_conf_default_accept_source_route_value='0'
 
 
@@ -29719,6 +29829,16 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.icmp_echo_ignore_broadcasts from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.icmp_echo_ignore_broadcasts.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.icmp_echo_ignore_broadcasts" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value='1'
 
 
@@ -29769,6 +29889,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.all.send_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.all.send_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.all.send_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for net.ipv4.conf.all.send_redirects
 #
@@ -29816,6 +29947,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.ipv4.conf.default.send_redirects from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.conf.default.send_redirects.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.conf.default.send_redirects" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for net.ipv4.conf.default.send_redirects
 #
@@ -29862,6 +30004,17 @@ fi
 (>&2 echo "Remediating rule 242/366: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of net.ipv4.ip_forward from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.ipv4.ip_forward.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.ipv4.ip_forward" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for net.ipv4.ip_forward
@@ -30102,6 +30255,17 @@ done
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of fs.protected_hardlinks from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+fs.protected_hardlinks.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "fs.protected_hardlinks" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for fs.protected_hardlinks
 #
@@ -30148,6 +30312,17 @@ fi
 (>&2 echo "Remediating rule 257/366: 'sysctl_fs_protected_symlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of fs.protected_symlinks from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+fs.protected_symlinks.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "fs.protected_symlinks" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for fs.protected_symlinks
@@ -31365,6 +31540,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of kernel.core_pattern from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.core_pattern.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.core_pattern" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for kernel.core_pattern
 #
@@ -31411,6 +31597,17 @@ fi
 (>&2 echo "Remediating rule 297/366: 'sysctl_kernel_dmesg_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of kernel.dmesg_restrict from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.dmesg_restrict.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.dmesg_restrict" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for kernel.dmesg_restrict
@@ -31459,6 +31656,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of kernel.kexec_load_disabled from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.kexec_load_disabled.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.kexec_load_disabled" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for kernel.kexec_load_disabled
 #
@@ -31505,6 +31713,17 @@ fi
 (>&2 echo "Remediating rule 299/366: 'sysctl_kernel_perf_event_paranoid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of kernel.perf_event_paranoid from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.perf_event_paranoid.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.perf_event_paranoid" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for kernel.perf_event_paranoid
@@ -31553,6 +31772,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of kernel.unprivileged_bpf_disabled from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.unprivileged_bpf_disabled.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.unprivileged_bpf_disabled" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for kernel.unprivileged_bpf_disabled
 #
@@ -31599,6 +31829,17 @@ fi
 (>&2 echo "Remediating rule 301/366: 'sysctl_kernel_yama_ptrace_scope'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of kernel.yama.ptrace_scope from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.yama.ptrace_scope.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.yama.ptrace_scope" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for kernel.yama.ptrace_scope
@@ -31647,6 +31888,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of net.core.bpf_jit_harden from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+net.core.bpf_jit_harden.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "net.core.bpf_jit_harden" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for net.core.bpf_jit_harden
 #
@@ -31693,6 +31945,17 @@ fi
 (>&2 echo "Remediating rule 303/366: 'sysctl_user_max_user_namespaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of user.max_user_namespaces from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+user.max_user_namespaces.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "user.max_user_namespaces" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for user.max_user_namespaces
@@ -31827,6 +32090,17 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
+# Comment out any occurrences of kernel.kptr_restrict from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.kptr_restrict.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.kptr_restrict" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
+
 #
 # Set runtime for kernel.kptr_restrict
 #
@@ -31873,6 +32147,17 @@ fi
 (>&2 echo "Remediating rule 309/366: 'sysctl_kernel_randomize_va_space'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+# Comment out any occurrences of kernel.randomize_va_space from /etc/sysctl.d/*.conf files
+for f in /etc/sysctl.d/*.conf ; do
+  matching_list=$(grep -P '^(?!#).*[\s]+kernel.randomize_va_space.*$' $f | uniq )
+  if ! test -z "$matching_list"; then
+    while IFS= read -r entry; do
+      # comment out "kernel.randomize_va_space" matches to preserve user data
+      sed -i "s/^${entry}$/# &/g" $f
+    done <<< "$matching_list"
+  fi
+done
 
 #
 # Set runtime for kernel.randomize_va_space

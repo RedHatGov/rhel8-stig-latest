@@ -24636,6 +24636,49 @@
         - no_reboot_needed
         - service_firewalld_enabled
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.all.accept_ra.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81006-9
+        - DISA-STIG-RHEL-08-040261
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_ra
+
+    - name: Comment out any occurrences of net.ipv6.conf.all.accept_ra from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.all.accept_ra
+        replace: '#net.ipv6.conf.all.accept_ra'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81006-9
+        - DISA-STIG-RHEL-08-040261
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_ra
+
     - name: Ensure sysctl net.ipv6.conf.all.accept_ra is set
       sysctl:
         name: net.ipv6.conf.all.accept_ra
@@ -24656,6 +24699,53 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv6_conf_all_accept_ra
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.all.accept_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81009-3
+        - DISA-STIG-RHEL-08-040280
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-6(b)
+        - NIST-800-53-CM-6.1(iv)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_redirects
+
+    - name: Comment out any occurrences of net.ipv6.conf.all.accept_redirects from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.all.accept_redirects
+        replace: '#net.ipv6.conf.all.accept_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81009-3
+        - DISA-STIG-RHEL-08-040280
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-6(b)
+        - NIST-800-53-CM-6.1(iv)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_redirects
 
     - name: Ensure sysctl net.ipv6.conf.all.accept_redirects is set
       sysctl:
@@ -24680,6 +24770,49 @@
         - reboot_required
         - sysctl_net_ipv6_conf_all_accept_redirects
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.all.accept_source_route.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81013-5
+        - DISA-STIG-RHEL-08-040240
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_source_route
+
+    - name: Comment out any occurrences of net.ipv6.conf.all.accept_source_route from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.all.accept_source_route
+        replace: '#net.ipv6.conf.all.accept_source_route'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81013-5
+        - DISA-STIG-RHEL-08-040240
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_all_accept_source_route
+
     - name: Ensure sysctl net.ipv6.conf.all.accept_source_route is set
       sysctl:
         name: net.ipv6.conf.all.accept_source_route
@@ -24700,6 +24833,49 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv6_conf_all_accept_source_route
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.default.accept_ra.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81007-7
+        - DISA-STIG-RHEL-08-040262
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_ra
+
+    - name: Comment out any occurrences of net.ipv6.conf.default.accept_ra from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.default.accept_ra
+        replace: '#net.ipv6.conf.default.accept_ra'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81007-7
+        - DISA-STIG-RHEL-08-040262
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_ra
 
     - name: Ensure sysctl net.ipv6.conf.default.accept_ra is set
       sysctl:
@@ -24722,6 +24898,49 @@
         - reboot_required
         - sysctl_net_ipv6_conf_default_accept_ra
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.default.accept_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81010-1
+        - DISA-STIG-RHEL-08-040210
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_redirects
+
+    - name: Comment out any occurrences of net.ipv6.conf.default.accept_redirects from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.default.accept_redirects
+        replace: '#net.ipv6.conf.default.accept_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81010-1
+        - DISA-STIG-RHEL-08-040210
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_redirects
+
     - name: Ensure sysctl net.ipv6.conf.default.accept_redirects is set
       sysctl:
         name: net.ipv6.conf.default.accept_redirects
@@ -24742,6 +24961,53 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv6_conf_default_accept_redirects
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv6.conf.default.accept_source_route.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81015-0
+        - DISA-STIG-RHEL-08-040250
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-6(b)
+        - NIST-800-53-CM-6.1(iv)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_source_route
+
+    - name: Comment out any occurrences of net.ipv6.conf.default.accept_source_route from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv6.conf.default.accept_source_route
+        replace: '#net.ipv6.conf.default.accept_source_route'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81015-0
+        - DISA-STIG-RHEL-08-040250
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-6(b)
+        - NIST-800-53-CM-6.1(iv)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv6_conf_default_accept_source_route
 
     - name: Ensure sysctl net.ipv6.conf.default.accept_source_route is set
       sysctl:
@@ -24766,6 +25032,53 @@
         - reboot_required
         - sysctl_net_ipv6_conf_default_accept_source_route
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.all.accept_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80917-8
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040279
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_accept_redirects
+
+    - name: Comment out any occurrences of net.ipv4.conf.all.accept_redirects from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.all.accept_redirects
+        replace: '#net.ipv4.conf.all.accept_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80917-8
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040279
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_accept_redirects
+
     - name: Ensure sysctl net.ipv4.conf.all.accept_redirects is set
       sysctl:
         name: net.ipv4.conf.all.accept_redirects
@@ -24788,6 +25101,53 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv4_conf_all_accept_redirects
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.all.accept_source_route.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81011-9
+        - DISA-STIG-RHEL-08-040239
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_accept_source_route
+
+    - name: Comment out any occurrences of net.ipv4.conf.all.accept_source_route from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.all.accept_source_route
+        replace: '#net.ipv4.conf.all.accept_source_route'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81011-9
+        - DISA-STIG-RHEL-08-040239
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_accept_source_route
 
     - name: Ensure sysctl net.ipv4.conf.all.accept_source_route is set
       sysctl:
@@ -24812,6 +25172,51 @@
         - reboot_required
         - sysctl_net_ipv4_conf_all_accept_source_route
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.all.rp_filter.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81021-8
+        - DISA-STIG-RHEL-08-040285
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_rp_filter
+
+    - name: Comment out any occurrences of net.ipv4.conf.all.rp_filter from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.all.rp_filter
+        replace: '#net.ipv4.conf.all.rp_filter'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81021-8
+        - DISA-STIG-RHEL-08-040285
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_rp_filter
+
     - name: Ensure sysctl net.ipv4.conf.all.rp_filter is set
       sysctl:
         name: net.ipv4.conf.all.rp_filter
@@ -24833,6 +25238,53 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv4_conf_all_rp_filter
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.default.accept_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80919-4
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040209
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_accept_redirects
+
+    - name: Comment out any occurrences of net.ipv4.conf.default.accept_redirects from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.default.accept_redirects
+        replace: '#net.ipv4.conf.default.accept_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80919-4
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040209
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_accept_redirects
 
     - name: Ensure sysctl net.ipv4.conf.default.accept_redirects is set
       sysctl:
@@ -24857,6 +25309,53 @@
         - reboot_required
         - sysctl_net_ipv4_conf_default_accept_redirects
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.default.accept_source_route.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80920-2
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040249
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_accept_source_route
+
+    - name: Comment out any occurrences of net.ipv4.conf.default.accept_source_route from
+        /etc/sysctl.d/*.conf files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.default.accept_source_route
+        replace: '#net.ipv4.conf.default.accept_source_route'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80920-2
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040249
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_accept_source_route
+
     - name: Ensure sysctl net.ipv4.conf.default.accept_source_route is set
       sysctl:
         name: net.ipv4.conf.default.accept_source_route
@@ -24880,6 +25379,51 @@
         - reboot_required
         - sysctl_net_ipv4_conf_default_accept_source_route
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.icmp_echo_ignore_broadcasts.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80922-8
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040230
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_icmp_echo_ignore_broadcasts
+
+    - name: Comment out any occurrences of net.ipv4.icmp_echo_ignore_broadcasts from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.icmp_echo_ignore_broadcasts
+        replace: '#net.ipv4.icmp_echo_ignore_broadcasts'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80922-8
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040230
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_icmp_echo_ignore_broadcasts
+
     - name: Ensure sysctl net.ipv4.icmp_echo_ignore_broadcasts is set
       sysctl:
         name: net.ipv4.icmp_echo_ignore_broadcasts
@@ -24901,6 +25445,55 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv4_icmp_echo_ignore_broadcasts
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.all.send_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80918-6
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040220
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_send_redirects
+
+    - name: Comment out any occurrences of net.ipv4.conf.all.send_redirects from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.all.send_redirects
+        replace: '#net.ipv4.conf.all.send_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80918-6
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040220
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_all_send_redirects
 
     - name: Ensure sysctl net.ipv4.conf.all.send_redirects is set to 0
       sysctl:
@@ -24926,6 +25519,55 @@
         - reboot_required
         - sysctl_net_ipv4_conf_all_send_redirects
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.conf.default.send_redirects.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80921-0
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040270
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_send_redirects
+
+    - name: Comment out any occurrences of net.ipv4.conf.default.send_redirects from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.conf.default.send_redirects
+        replace: '#net.ipv4.conf.default.send_redirects'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80921-0
+        - CJIS-5.10.1.1
+        - DISA-STIG-RHEL-08-040270
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_conf_default_send_redirects
+
     - name: Ensure sysctl net.ipv4.conf.default.send_redirects is set to 0
       sysctl:
         name: net.ipv4.conf.default.send_redirects
@@ -24949,6 +25591,53 @@
         - medium_severity
         - reboot_required
         - sysctl_net_ipv4_conf_default_send_redirects
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.ipv4.ip_forward.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81024-2
+        - DISA-STIG-RHEL-08-040260
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_ip_forward
+
+    - name: Comment out any occurrences of net.ipv4.ip_forward from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.ipv4.ip_forward
+        replace: '#net.ipv4.ip_forward'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81024-2
+        - DISA-STIG-RHEL-08-040260
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_ip_forward
 
     - name: Ensure sysctl net.ipv4.ip_forward is set to 0
       sysctl:
@@ -25341,6 +26030,45 @@
         - medium_severity
         - no_reboot_needed
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*fs.protected_hardlinks.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81027-5
+        - DISA-STIG-RHEL-08-010374
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_fs_protected_hardlinks
+
+    - name: Comment out any occurrences of fs.protected_hardlinks from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*fs.protected_hardlinks
+        replace: '#fs.protected_hardlinks'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81027-5
+        - DISA-STIG-RHEL-08-010374
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_fs_protected_hardlinks
+
     - name: Ensure sysctl fs.protected_hardlinks is set to 1
       sysctl:
         name: fs.protected_hardlinks
@@ -25359,6 +26087,45 @@
         - medium_severity
         - reboot_required
         - sysctl_fs_protected_hardlinks
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*fs.protected_symlinks.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81030-9
+        - DISA-STIG-RHEL-08-010373
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_fs_protected_symlinks
+
+    - name: Comment out any occurrences of fs.protected_symlinks from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*fs.protected_symlinks
+        replace: '#fs.protected_symlinks'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81030-9
+        - DISA-STIG-RHEL-08-010373
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-6(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_fs_protected_symlinks
 
     - name: Ensure sysctl fs.protected_symlinks is set to 1
       sysctl:
@@ -28297,6 +29064,43 @@
         - mount_option_var_tmp_nosuid
         - no_reboot_needed
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.core_pattern.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82215-5
+        - DISA-STIG-RHEL-08-010671
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_core_pattern
+
+    - name: Comment out any occurrences of kernel.core_pattern from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.core_pattern
+        replace: '#kernel.core_pattern'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82215-5
+        - DISA-STIG-RHEL-08-010671
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_core_pattern
+
     - name: Ensure sysctl kernel.core_pattern is set to |/bin/false
       sysctl:
         name: kernel.core_pattern
@@ -28314,6 +29118,47 @@
         - medium_severity
         - reboot_required
         - sysctl_kernel_core_pattern
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.dmesg_restrict.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80913-7
+        - DISA-STIG-RHEL-08-010375
+        - NIST-800-171-3.1.5
+        - NIST-800-53-SI-11(a)
+        - NIST-800-53-SI-11(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_dmesg_restrict
+
+    - name: Comment out any occurrences of kernel.dmesg_restrict from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.dmesg_restrict
+        replace: '#kernel.dmesg_restrict'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80913-7
+        - DISA-STIG-RHEL-08-010375
+        - NIST-800-171-3.1.5
+        - NIST-800-53-SI-11(a)
+        - NIST-800-53-SI-11(b)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_dmesg_restrict
 
     - name: Ensure sysctl kernel.dmesg_restrict is set to 1
       sysctl:
@@ -28335,6 +29180,43 @@
         - reboot_required
         - sysctl_kernel_dmesg_restrict
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.kexec_load_disabled.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80952-5
+        - DISA-STIG-RHEL-08-010372
+        - NIST-800-53-CM-6
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_kexec_load_disabled
+
+    - name: Comment out any occurrences of kernel.kexec_load_disabled from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.kexec_load_disabled
+        replace: '#kernel.kexec_load_disabled'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80952-5
+        - DISA-STIG-RHEL-08-010372
+        - NIST-800-53-CM-6
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_kexec_load_disabled
+
     - name: Ensure sysctl kernel.kexec_load_disabled is set to 1
       sysctl:
         name: kernel.kexec_load_disabled
@@ -28353,6 +29235,43 @@
         - reboot_required
         - sysctl_kernel_kexec_load_disabled
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.perf_event_paranoid.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81054-9
+        - DISA-STIG-RHEL-08-010376
+        - NIST-800-53-AC-6
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_perf_event_paranoid
+
+    - name: Comment out any occurrences of kernel.perf_event_paranoid from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.perf_event_paranoid
+        replace: '#kernel.perf_event_paranoid'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-81054-9
+        - DISA-STIG-RHEL-08-010376
+        - NIST-800-53-AC-6
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_perf_event_paranoid
+
     - name: Ensure sysctl kernel.perf_event_paranoid is set to 2
       sysctl:
         name: kernel.perf_event_paranoid
@@ -28370,6 +29289,45 @@
         - medium_severity
         - reboot_required
         - sysctl_kernel_perf_event_paranoid
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.unprivileged_bpf_disabled.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82974-7
+        - DISA-STIG-RHEL-08-040281
+        - NIST-800-53-AC-6
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_unprivileged_bpf_disabled
+
+    - name: Comment out any occurrences of kernel.unprivileged_bpf_disabled from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.unprivileged_bpf_disabled
+        replace: '#kernel.unprivileged_bpf_disabled'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82974-7
+        - DISA-STIG-RHEL-08-040281
+        - NIST-800-53-AC-6
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_unprivileged_bpf_disabled
 
     - name: Ensure sysctl kernel.unprivileged_bpf_disabled is set to 1
       sysctl:
@@ -28390,6 +29348,43 @@
         - reboot_required
         - sysctl_kernel_unprivileged_bpf_disabled
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.yama.ptrace_scope.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80953-3
+        - DISA-STIG-RHEL-08-040282
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_yama_ptrace_scope
+
+    - name: Comment out any occurrences of kernel.yama.ptrace_scope from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.yama.ptrace_scope
+        replace: '#kernel.yama.ptrace_scope'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80953-3
+        - DISA-STIG-RHEL-08-040282
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_yama_ptrace_scope
+
     - name: Ensure sysctl kernel.yama.ptrace_scope is set to 1
       sysctl:
         name: kernel.yama.ptrace_scope
@@ -28407,6 +29402,45 @@
         - medium_severity
         - reboot_required
         - sysctl_kernel_yama_ptrace_scope
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*net.core.bpf_jit_harden.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82934-1
+        - DISA-STIG-RHEL-08-040286
+        - NIST-800-53-CM-6
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_core_bpf_jit_harden
+
+    - name: Comment out any occurrences of net.core.bpf_jit_harden from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*net.core.bpf_jit_harden
+        replace: '#net.core.bpf_jit_harden'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82934-1
+        - DISA-STIG-RHEL-08-040286
+        - NIST-800-53-CM-6
+        - NIST-800-53-SC-7(10)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_core_bpf_jit_harden
 
     - name: Ensure sysctl net.core.bpf_jit_harden is set to 2
       sysctl:
@@ -28426,6 +29460,45 @@
         - medium_severity
         - reboot_required
         - sysctl_net_core_bpf_jit_harden
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*user.max_user_namespaces.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82211-4
+        - DISA-STIG-RHEL-08-040284
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-39
+        - disable_strategy
+        - low_complexity
+        - low_severity
+        - medium_disruption
+        - reboot_required
+        - sysctl_user_max_user_namespaces
+
+    - name: Comment out any occurrences of user.max_user_namespaces from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*user.max_user_namespaces
+        replace: '#user.max_user_namespaces'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82211-4
+        - DISA-STIG-RHEL-08-040284
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-39
+        - disable_strategy
+        - low_complexity
+        - low_severity
+        - medium_disruption
+        - reboot_required
+        - sysctl_user_max_user_namespaces
 
     - name: Ensure sysctl user.max_user_namespaces is set to 0
       sysctl:
@@ -28623,6 +29696,49 @@
         - no_reboot_needed
         - restrict_strategy
 
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.kptr_restrict.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80915-2
+        - DISA-STIG-RHEL-08-040283
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-30
+        - NIST-800-53-SC-30(2)
+        - NIST-800-53-SC-30(5)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_kptr_restrict
+
+    - name: Comment out any occurrences of kernel.kptr_restrict from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.kptr_restrict
+        replace: '#kernel.kptr_restrict'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80915-2
+        - DISA-STIG-RHEL-08-040283
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-30
+        - NIST-800-53-SC-30(2)
+        - NIST-800-53-SC-30(5)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_kptr_restrict
+
     - name: Ensure sysctl kernel.kptr_restrict is set to 1
       sysctl:
         name: kernel.kptr_restrict
@@ -28643,6 +29759,49 @@
         - medium_severity
         - reboot_required
         - sysctl_kernel_kptr_restrict
+
+    - name: List /etc/sysctl.d/*.conf files
+      find:
+        paths: /etc/sysctl.d/
+        contains: ^[\s]*kernel.randomize_va_space.*$
+        patterns: '*.conf'
+      register: find_sysctl_d
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80916-0
+        - DISA-STIG-RHEL-08-010430
+        - NIST-800-171-3.1.7
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-30
+        - NIST-800-53-SC-30(2)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_randomize_va_space
+
+    - name: Comment out any occurrences of kernel.randomize_va_space from /etc/sysctl.d/*.conf
+        files
+      replace:
+        path: '{{ item }}'
+        regexp: ^[\s]*kernel.randomize_va_space
+        replace: '#kernel.randomize_va_space'
+      loop: '{{ find_sysctl_d.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80916-0
+        - DISA-STIG-RHEL-08-010430
+        - NIST-800-171-3.1.7
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-SC-30
+        - NIST-800-53-SC-30(2)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_kernel_randomize_va_space
 
     - name: Ensure sysctl kernel.randomize_va_space is set to 2
       sysctl:
