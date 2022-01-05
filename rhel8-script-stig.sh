@@ -858,6 +858,8 @@ done
 # BEGIN fix (37 / 366) for 'sudo_remove_nopasswd'
 ###############################################################################
 (>&2 echo "Remediating rule 37/366: 'sudo_remove_nopasswd'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q no_ovirt; then
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -873,6 +875,10 @@ for f in /etc/sudoers /etc/sudoers.d/* ; do
     /usr/sbin/visudo -cf $f &> /dev/null || echo "Fail to validate $f with visudo"
   fi
 done
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'sudo_remove_nopasswd'
 
 ###############################################################################
@@ -1089,6 +1095,8 @@ fi
 # BEGIN fix (48 / 366) for 'package_gssproxy_removed'
 ###############################################################################
 (>&2 echo "Remediating rule 48/366: 'package_gssproxy_removed'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q no_ovirt; then
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -1100,6 +1108,10 @@ if rpm -q --quiet "gssproxy" ; then
 
     yum remove -y "gssproxy"
 
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'package_gssproxy_removed'
 
@@ -1161,6 +1173,8 @@ fi
 # BEGIN fix (52 / 366) for 'package_tuned_removed'
 ###############################################################################
 (>&2 echo "Remediating rule 52/366: 'package_tuned_removed'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q no_ovirt; then
 
 # CAUTION: This remediation script will remove tuned
 #	   from the system, and may remove any packages
@@ -1172,6 +1186,10 @@ if rpm -q --quiet "tuned" ; then
 
     yum remove -y "tuned"
 
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'package_tuned_removed'
 
@@ -30003,7 +30021,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 242/366: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q no_ovirt; }; then
 
 # Comment out any occurrences of net.ipv4.ip_forward from /etc/sysctl.d/*.conf files
 for f in /etc/sysctl.d/*.conf ; do
@@ -33068,7 +33086,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 346/366: 'sshd_disable_root_login'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q no_ovirt; }; then
 
 if [ -e "/etc/ssh/sshd_config" ] ; then
     
@@ -33686,7 +33704,8 @@ fi
 # BEGIN fix (366 / 366) for 'xwindows_remove_packages'
 ###############################################################################
 (>&2 echo "Remediating rule 366/366: 'xwindows_remove_packages'")
-
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q no_ovirt; then
 
 # remove packages
 if rpm -q --quiet "xorg-x11-server-Xorg" ; then
@@ -33714,5 +33733,9 @@ fi
 
 # configure run level
 systemctl set-default multi-user.target
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'xwindows_remove_packages'
 

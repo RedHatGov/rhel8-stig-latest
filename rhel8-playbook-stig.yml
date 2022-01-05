@@ -1388,11 +1388,27 @@
         - restrict_strategy
         - sudo_remove_no_authenticate
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-82197-5
+        - DISA-STIG-RHEL-08-010380
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-11
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - sudo_remove_nopasswd
+
     - name: Find /etc/sudoers.d/ files
       find:
         paths:
           - /etc/sudoers.d/
       register: sudoers
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82197-5
         - DISA-STIG-RHEL-08-010380
@@ -1414,6 +1430,7 @@
       with_items:
         - path: /etc/sudoers
         - '{{ sudoers.files }}'
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82197-5
         - DISA-STIG-RHEL-08-010380
@@ -1614,10 +1631,24 @@
         - no_reboot_needed
         - package_abrt-plugin-sosreport_removed
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-82943-2
+        - DISA-STIG-RHEL-08-040370
+        - disable_strategy
+        - low_complexity
+        - low_disruption
+        - low_severity
+        - no_reboot_needed
+        - package_gssproxy_removed
+
     - name: Ensure gssproxy is removed
       package:
         name: gssproxy
         state: absent
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82943-2
         - DISA-STIG-RHEL-08-040370
@@ -1670,10 +1701,24 @@
         - no_reboot_needed
         - package_python3-abrt-addon_removed
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-82904-4
+        - DISA-STIG-RHEL-08-040390
+        - disable_strategy
+        - low_complexity
+        - low_disruption
+        - low_severity
+        - no_reboot_needed
+        - package_tuned_removed
+
     - name: Ensure tuned is removed
       package:
         name: tuned
         state: absent
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82904-4
         - DISA-STIG-RHEL-08-040390
@@ -25592,13 +25637,34 @@
         - reboot_required
         - sysctl_net_ipv4_conf_default_send_redirects
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-81024-2
+        - DISA-STIG-RHEL-08-040260
+        - NIST-800-171-3.1.20
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-SC-5
+        - NIST-800-53-SC-7(a)
+        - disable_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - reboot_required
+        - sysctl_net_ipv4_ip_forward
+
     - name: List /etc/sysctl.d/*.conf files
       find:
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.ip_forward.*$
         patterns: '*.conf'
       register: find_sysctl_d
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -25622,7 +25688,9 @@
         regexp: ^[\s]*net.ipv4.ip_forward
         replace: '#net.ipv4.ip_forward'
       loop: '{{ find_sysctl_d.files }}'
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -25645,7 +25713,9 @@
         value: '0'
         state: present
         reload: true
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -31003,6 +31073,29 @@
         - restrict_strategy
         - sshd_disable_kerb_auth
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-80901-2
+        - CJIS-5.5.6
+        - DISA-STIG-RHEL-08-010550
+        - NIST-800-171-3.1.1
+        - NIST-800-171-3.1.5
+        - NIST-800-53-AC-17(a)
+        - NIST-800-53-AC-6(2)
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-CM-7(a)
+        - NIST-800-53-CM-7(b)
+        - NIST-800-53-IA-2
+        - NIST-800-53-IA-2(5)
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - sshd_disable_root_login
+
     - name: Disable SSH Root Login
       block:
 
@@ -31033,7 +31126,9 @@
             state: present
             insertbefore: ^[#\s]*Match
             validate: /usr/sbin/sshd -t -f %s
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-80901-2
         - CJIS-5.5.6
@@ -31903,6 +31998,20 @@
         - no_reboot_needed
         - usbguard_generate_policy
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-83411-9
+        - DISA-STIG-RHEL-08-040320
+        - NIST-800-53-CM-6(b)
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - reboot_required
+        - restrict_strategy
+        - xwindows_remove_packages
+
     - name: Ensure xorg packages are removed
       package:
         name:
@@ -31911,6 +32020,7 @@
           - xorg-x11-server-utils
           - xorg-x11-server-Xwayland
         state: absent
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-83411-9
         - DISA-STIG-RHEL-08-040320
@@ -31928,6 +32038,7 @@
         dest: /etc/systemd/system/default.target
         state: link
         force: true
+      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-83411-9
         - DISA-STIG-RHEL-08-040320
