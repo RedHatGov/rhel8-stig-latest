@@ -26845,47 +26845,148 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: Read list libraries without root ownership
+    - name: Find /lib/ file(s) matching ^.*$
       find:
-        paths:
-          - /usr/lib
-          - /usr/lib64
-          - /lib
-          - /lib64
-        file_type: file
-      register: library_files_not_group_owned_by_root
+        paths: /lib/
+        patterns: ^.*$
+        use_regex: true
+      register: files_found
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
-        - high_complexity
-        - medium_disruption
+        - configure_strategy
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
         - root_permissions_syslibrary_files
 
-    - name: Set group ownership of system library files to root
+    - name: Ensure group owner on /lib/ file(s) matching ^.*$
       file:
         path: '{{ item.path }}'
-        group: root
-        state: file
-        mode: '{{ item.mode }}'
-      with_items: '{{ library_files_not_group_owned_by_root.files }}'
-      when:
-        - library_files_not_group_owned_by_root.matched > 0
-        - item.gid != 0
+        group: '0'
+      with_items:
+        - '{{ files_found.files }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
-        - high_complexity
-        - medium_disruption
+        - configure_strategy
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
+        - root_permissions_syslibrary_files
+
+    - name: Find /lib64/ file(s) matching ^.*$
+      find:
+        paths: /lib64/
+        patterns: ^.*$
+        use_regex: true
+      register: files_found
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - root_permissions_syslibrary_files
+
+    - name: Ensure group owner on /lib64/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        group: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - root_permissions_syslibrary_files
+
+    - name: Find /usr/lib/ file(s) matching ^.*$
+      find:
+        paths: /usr/lib/
+        patterns: ^.*$
+        use_regex: true
+      register: files_found
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - root_permissions_syslibrary_files
+
+    - name: Ensure group owner on /usr/lib/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        group: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - root_permissions_syslibrary_files
+
+    - name: Find /usr/lib64/ file(s) matching ^.*$
+      find:
+        paths: /usr/lib64/
+        patterns: ^.*$
+        use_regex: true
+      register: files_found
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - root_permissions_syslibrary_files
+
+    - name: Ensure group owner on /usr/lib64/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        group: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-86523-8
+        - DISA-STIG-RHEL-08-010350
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
         - root_permissions_syslibrary_files
 
     - name: Disable service autofs

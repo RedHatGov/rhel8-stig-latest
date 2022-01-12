@@ -30530,11 +30530,41 @@ done
 ###############################################################################
 (>&2 echo "Remediating rule 270/366: 'root_permissions_syslibrary_files'")
 
-find /lib \
-/lib64 \
-/usr/lib \
-/usr/lib64 \
-\! -group root -type f -exec chgrp root '{}' \;
+
+
+readarray -t files < <(find /lib/)
+for file in "${files[@]}"; do
+    if basename $file | grep -qE '^.*$'; then
+        chgrp 0 $file
+    fi
+done
+
+
+
+readarray -t files < <(find /lib64/)
+for file in "${files[@]}"; do
+    if basename $file | grep -qE '^.*$'; then
+        chgrp 0 $file
+    fi
+done
+
+
+
+readarray -t files < <(find /usr/lib/)
+for file in "${files[@]}"; do
+    if basename $file | grep -qE '^.*$'; then
+        chgrp 0 $file
+    fi
+done
+
+
+
+readarray -t files < <(find /usr/lib64/)
+for file in "${files[@]}"; do
+    if basename $file | grep -qE '^.*$'; then
+        chgrp 0 $file
+    fi
+done
 # END fix for 'root_permissions_syslibrary_files'
 
 ###############################################################################
