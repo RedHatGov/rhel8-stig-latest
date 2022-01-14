@@ -17528,6 +17528,55 @@ ENCRYPT_METHOD SHA512</td>
 <td>SRG-OS-000073-GPOS-00041</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must store only encrypted representations of passwords.</td>
+<td>CCE-85945-4:Set PAM's Password Hashing Algorithm - password-auth</td>
+<td>Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.</td>
+<td xml:lang="en-US">The PAM system service can be configured to only store encrypted
+representations of passwords. In
+<code>/etc/pam.d/password-auth</code>,
+the
+<code>password</code> section of the file controls which PAM modules execute
+during a password change. Set the <code>pam_unix.so</code> module in the
+<code>password</code> section to include the argument <code>sha512</code>, as shown
+below:
+<br>
+<pre>password    sufficient    pam_unix.so sha512 <i>other arguments...</i></pre>
+<br>
+This will help ensure when local users change their passwords, hashes for
+the new passwords will be generated using the SHA-512 algorithm. This is
+the default.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.</td>
+<td>Inspect the password section of /etc/pam.d/password-auth
+and ensure that the pam_unix.so module includes the argument
+sha512:
+$ grep sha512 /etc/pam.d/password-auth
+      Is it the case that it does not?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3754r557612_fix">Configure the operating system to store only encrypted representations of passwords.</fixtext></td>
+<td>The PAM system service can be configured to only store encrypted
+representations of passwords. In
+/etc/pam.d/password-auth,
+the
+password section of the file controls which PAM modules execute
+during a password change. Set the pam_unix.so module in the
+password section to include the argument sha512, as shown
+below:
+
+password    sufficient    pam_unix.so sha512 other arguments...
+
+This will help ensure when local users change their passwords, hashes for
+the new passwords will be generated using the SHA-512 algorithm. This is
+the default.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56697</td>
+<td>SRG-OS-000073-GPOS-00041</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must store only encrypted representations of passwords.</td>
 <td>CCE-80893-1:Set PAM's Password Hashing Algorithm</td>
 <td>Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.</td>
 <td xml:lang="en-US">The PAM system service can be configured to only store encrypted
@@ -23591,6 +23640,63 @@ group-owned by the root user. If the  directories, is found to be owned
 by a user other than root correct its
 ownership with the following command:
 $ sudo chgrp root DIR</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-57183</td>
+<td>SRG-OS-000259-GPOS-00100</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must limit privileges to change software resident within software libraries.</td>
+<td>CCE-88692-9:Verify that Shared Library Directories Have Restrictive Permissions</td>
+<td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
+
+This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.</td>
+<td xml:lang="en-US">System-wide shared library directories, which contain are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+<pre>/lib
+/lib64
+/usr/lib
+/usr/lib64
+</pre>
+Kernel modules, which can be added to the kernel during runtime, are
+stored in <code>/lib/modules</code>. All sub-directories in these directories
+should not be group-writable or world-writable. If any file in these
+directories is found to be group-writable or world-writable, correct
+its permission with the following command:
+<pre>$ sudo chmod go-w <i>DIR</i></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.</td>
+<td>Shared libraries are stored in the following directories:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+To find shared libraries that are group-writable or world-writable,
+run the following command for each directory DIR which contains shared libraries:
+$ sudo find -L DIR -perm /022 -type d
+      Is it the case that any of these files are group-writable or world-writable?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3800r374913_fix">Configure the operating system to limit privileges to change software resident within software libraries.</fixtext></td>
+<td>System-wide shared library directories, which contain are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+Kernel modules, which can be added to the kernel during runtime, are
+stored in /lib/modules. All sub-directories in these directories
+should not be group-writable or world-writable. If any file in these
+directories is found to be group-writable or world-writable, correct
+its permission with the following command:
+$ sudo chmod go-w DIR</td>
 <td>medium</td>
 <td></td>
 <td></td>

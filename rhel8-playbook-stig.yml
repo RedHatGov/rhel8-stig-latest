@@ -583,7 +583,7 @@
         regexp: ^\s*CRYPTO_POLICY.*$
       tags:
         - CCE-80939-2
-        - DISA-STIG-RHEL-08-010020
+        - DISA-STIG-RHEL-08-010287
         - NIST-800-53-AC-17(2)
         - NIST-800-53-AC-17(a)
         - NIST-800-53-CM-6(a)
@@ -26658,6 +26658,44 @@
         - low_disruption
         - medium_severity
         - no_reboot_needed
+
+    - name: Read list of world and group writable subdirectories in libraries directories
+      command: find /lib /lib64 /usr/lib /usr/lib64 -perm /022 -type d
+      register: world_writable_library_dirs
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      tags:
+        - CCE-88692-9
+        - DISA-STIG-RHEL-08-010331
+        - NIST-800-53-CM-5
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - dir_permissions_library_dirs
+        - high_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Disable world/group writability to library files
+      file:
+        path: '{{ item }}'
+        mode: go-w
+      with_items: '{{ world_writable_library_dirs.stdout_lines }}'
+      when: world_writable_library_dirs.stdout_lines | length > 0
+      tags:
+        - CCE-88692-9
+        - DISA-STIG-RHEL-08-010331
+        - NIST-800-53-CM-5
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - dir_permissions_library_dirs
+        - high_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
 
     - name: Retrieve the system command files and set their group ownership to root
       command: find -L {{ item }}  ! -group root -type f -exec chgrp root '{}' \;
