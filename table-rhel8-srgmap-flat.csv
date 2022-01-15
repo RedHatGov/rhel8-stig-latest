@@ -6593,7 +6593,6 @@ The following rules configure audit as described above:
 --loginuid-immutable
 
 
-
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
 To deploy this configuration, it is recommended to copy it over to the /etc/audit/rules.d/ directory:
 
@@ -6609,7 +6608,6 @@ The output has to be exactly as follows:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 
-
       Is it the case that the file does not exist or the content differs?
       ",Configure the operating system to protect audit information from unauthorized read access.,"Configure kernel to prevent modification of login UIDs once they are set.
 Changing login UIDs while this configuration is enforced requires special capabilities which are not available to unprivileged users.
@@ -6617,7 +6615,6 @@ Changing login UIDs while this configuration is enforced requires special capabi
 The following rules configure audit as described above:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
-
 
 
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
@@ -6804,7 +6801,6 @@ The following rules configure audit as described above:
 --loginuid-immutable
 
 
-
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
 To deploy this configuration, it is recommended to copy it over to the /etc/audit/rules.d/ directory:
 
@@ -6820,7 +6816,6 @@ The output has to be exactly as follows:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 
-
       Is it the case that the file does not exist or the content differs?
       ",Configure the operating system to protect audit information from unauthorized modification.,"Configure kernel to prevent modification of login UIDs once they are set.
 Changing login UIDs while this configuration is enforced requires special capabilities which are not available to unprivileged users.
@@ -6828,7 +6823,6 @@ Changing login UIDs while this configuration is enforced requires special capabi
 The following rules configure audit as described above:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
-
 
 
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
@@ -7015,7 +7009,6 @@ The following rules configure audit as described above:
 --loginuid-immutable
 
 
-
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
 To deploy this configuration, it is recommended to copy it over to the /etc/audit/rules.d/ directory:
 
@@ -7031,7 +7024,6 @@ The output has to be exactly as follows:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 
-
       Is it the case that the file does not exist or the content differs?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"Configure kernel to prevent modification of login UIDs once they are set.
 Changing login UIDs while this configuration is enforced requires special capabilities which are not available to unprivileged users.
@@ -7039,7 +7031,6 @@ Changing login UIDs while this configuration is enforced requires special capabi
 The following rules configure audit as described above:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
-
 
 
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
@@ -26964,7 +26955,6 @@ The following rules configure audit as described above:
 --loginuid-immutable
 
 
-
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
 To deploy this configuration, it is recommended to copy it over to the /etc/audit/rules.d/ directory:
 
@@ -26980,7 +26970,6 @@ The output has to be exactly as follows:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 
-
       Is it the case that the file does not exist or the content differs?
       ",Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.,"Configure kernel to prevent modification of login UIDs once they are set.
 Changing login UIDs while this configuration is enforced requires special capabilities which are not available to unprivileged users.
@@ -26988,7 +26977,6 @@ Changing login UIDs while this configuration is enforced requires special capabi
 The following rules configure audit as described above:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
-
 
 
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
@@ -32094,7 +32082,6 @@ The following rules configure audit as described above:
 --loginuid-immutable
 
 
-
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.
 To deploy this configuration, it is recommended to copy it over to the /etc/audit/rules.d/ directory:
 
@@ -32110,7 +32097,6 @@ The output has to be exactly as follows:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
 
-
       Is it the case that the file does not exist or the content differs?
       ",Configure the operating system to generate audit records for all direct access to the information system.,"Configure kernel to prevent modification of login UIDs once they are set.
 Changing login UIDs while this configuration is enforced requires special capabilities which are not available to unprivileged users.
@@ -32118,7 +32104,6 @@ Changing login UIDs while this configuration is enforced requires special capabi
 The following rules configure audit as described above:
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
-
 
 
 The Audit provides pre-configured  rules in /usr/share/audit/sample-rules. The above content can be found in /usr/share/audit/sample-rules/11-loginuid.rules.

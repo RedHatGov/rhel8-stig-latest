@@ -1388,27 +1388,11 @@
         - restrict_strategy
         - sudo_remove_no_authenticate
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-82197-5
-        - DISA-STIG-RHEL-08-010380
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-IA-11
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - restrict_strategy
-        - sudo_remove_nopasswd
-
     - name: Find /etc/sudoers.d/ files
       find:
         paths:
           - /etc/sudoers.d/
       register: sudoers
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82197-5
         - DISA-STIG-RHEL-08-010380
@@ -1430,7 +1414,6 @@
       with_items:
         - path: /etc/sudoers
         - '{{ sudoers.files }}'
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82197-5
         - DISA-STIG-RHEL-08-010380
@@ -1631,24 +1614,10 @@
         - no_reboot_needed
         - package_abrt-plugin-sosreport_removed
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-82943-2
-        - DISA-STIG-RHEL-08-040370
-        - disable_strategy
-        - low_complexity
-        - low_disruption
-        - low_severity
-        - no_reboot_needed
-        - package_gssproxy_removed
-
     - name: Ensure gssproxy is removed
       package:
         name: gssproxy
         state: absent
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82943-2
         - DISA-STIG-RHEL-08-040370
@@ -1701,24 +1670,10 @@
         - no_reboot_needed
         - package_python3-abrt-addon_removed
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-82904-4
-        - DISA-STIG-RHEL-08-040390
-        - disable_strategy
-        - low_complexity
-        - low_disruption
-        - low_severity
-        - no_reboot_needed
-        - package_tuned_removed
-
     - name: Ensure tuned is removed
       package:
         name: tuned
         state: absent
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-82904-4
         - DISA-STIG-RHEL-08-040390
@@ -2252,14 +2207,15 @@
         - low_severity
         - no_reboot_needed
 
-    - name: Check if pam_lastlog.so is set
-      lineinfile:
+    - name: Check for expected pam_lastlog.so entry
+      ansible.builtin.lineinfile:
         path: /etc/pam.d/postlogin
-        regexp: ^\s*(session)(\s+)[^\s]+(\s+)(pam_lastlog\.so)(\s+)(.*)
+        create: false
+        regexp: ^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$
         state: absent
       check_mode: true
       changed_when: false
-      register: pam_lastlog_exists
+      register: result_pam_lastlog_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-80788-3
@@ -2275,12 +2231,10 @@
         - low_severity
         - no_reboot_needed
 
-    - name: Make sure pam_lastlog.so control is required
-      replace:
-        path: /etc/pam.d/postlogin
-        regexp: ^\s*(session)(\s+)[^\s]+(\s+)(pam_lastlog\.so)(\s+)(.*)
-        replace: \1\2required\3\4\5\6
-      register: control_update_result
+    - name: Check if system relies on authselect
+      ansible.builtin.stat:
+        path: /usr/bin/authselect
+      register: result_authselect_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-80788-3
@@ -2296,14 +2250,138 @@
         - low_severity
         - no_reboot_needed
 
-    - name: Add control for pam_lastlog.so module
-      lineinfile:
-        path: /etc/pam.d/postlogin
-        line: session required pam_lastlog.so showfailed
+    - name: Remediation where authselect tool is present
+      block:
+
+        - name: Check the integrity of the current authselect profile
+          ansible.builtin.command:
+            cmd: authselect check
+          register: result_authselect_check_cmd
+          changed_when: false
+          ignore_errors: true
+
+        - name: Informative message based on the authselect integrity check result
+          ansible.builtin.assert:
+            that:
+              - result_authselect_check_cmd is success
+            fail_msg:
+              - authselect integrity check failed. Remediation aborted!
+              - This remediation could not be applied because the authselect profile is
+                not intact.
+              - It is not recommended to manually edit the PAM files when authselect is
+                available.
+              - In cases where the default authselect profile does not cover a specific
+                demand, a custom authselect profile is recommended.
+            success_msg:
+              - authselect integrity check passed
+
+        - name: Get authselect current profile
+          ansible.builtin.shell:
+            cmd: authselect current -r | awk '{ print $1 }'
+          register: result_authselect_profile
+          changed_when: false
+          when:
+            - result_authselect_check_cmd is success
+
+        - name: Define the current authselect profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: '{{ result_authselect_profile.stdout }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is match("custom/")
+
+        - name: Define the new authselect custom profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: custom/hardening
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is not match("custom/")
+
+        - name: Get authselect current features to also enable them in the custom profile
+          ansible.builtin.shell:
+            cmd: authselect current | tail -n+3 | awk '{ print $2 }'
+          register: result_authselect_features
+          changed_when: false
+          when:
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+
+        - name: Check if any custom profile with the same name was already created in
+            the past
+          ansible.builtin.stat:
+            path: /etc/authselect/{{ authselect_custom_profile }}
+          register: result_authselect_custom_profile_present
+          changed_when: false
+          when:
+            - authselect_current_profile is not match("custom/")
+
+        - name: Create a custom profile based on the current profile
+          ansible.builtin.command:
+            cmd: authselect create-profile hardening -b sssd
+          when:
+            - result_authselect_check_cmd is success
+            - authselect_current_profile is not match("custom/")
+            - not result_authselect_custom_profile_present.stat.exists
+
+        - name: Ensure the silent option is not present in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/postlogin
+            regexp: ^(session.*required.*pam_lastlog.so).*$
+            replace: \g<1> showfailed
+          when:
+            - result_authselect_profile is not skipped
+
+        - name: Ensure the desired configuration is present in the custom profile
+          ansible.builtin.lineinfile:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/postlogin
+            insertbefore: ^session.*
+            firstmatch: true
+            line: session     required                   pam_lastlog.so showfailed
+          when:
+            - result_authselect_profile is not skipped
+
+        - name: Ensure a backup of current authselect profile before selecting the custom
+            profile
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+          register: result_authselect_backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Ensure the custom profile is selected
+          ansible.builtin.command:
+            cmd: authselect select {{ authselect_custom_profile }} --force
+          register: result_pam_authselect_select_profile
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Restore the authselect features in the custom profile
+          ansible.builtin.command:
+            cmd: authselect enable-feature {{ item }}
+          loop: '{{ result_authselect_features.stdout_lines }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_features is not skipped
+            - result_pam_authselect_select_profile is not skipped
+
+        - name: Ensure the custom profile changes are applied
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
       when:
         - '"pam" in ansible_facts.packages'
-        - not pam_lastlog_exists.found
-      register: add_new_pam_lastlog_control_result
+        - result_pam_lastlog_present.found == 0
+        - result_authselect_present.stat.exists
       tags:
         - CCE-80788-3
         - CJIS-5.5.2
@@ -2318,42 +2396,26 @@
         - low_severity
         - no_reboot_needed
 
-    - name: Add 'showfailed' arg to pam_lastlog.so module
-      pamd:
-        name: postlogin
-        type: session
-        control: required
-        module_path: pam_lastlog.so
-        module_arguments: showfailed
-        state: args_present
-      when:
-        - '"pam" in ansible_facts.packages'
-        - not add_new_pam_lastlog_control_result.changed
-      tags:
-        - CCE-80788-3
-        - CJIS-5.5.2
-        - DISA-STIG-RHEL-08-020340
-        - NIST-800-53-AC-9(1)
-        - NIST-800-53-CM-6(a)
-        - PCI-DSS-Req-10.2.4
-        - configure_strategy
-        - display_login_attempts
-        - low_complexity
-        - low_disruption
-        - low_severity
-        - no_reboot_needed
+    - name: Remediation where authselect tool is not present and PAM files are directly
+        edited
+      block:
 
-    - name: Remove 'silent' arg for pam_lastlog.so module
-      pamd:
-        name: postlogin
-        type: session
-        control: required
-        module_path: pam_lastlog.so
-        module_arguments: silent
-        state: args_absent
+        - name: Ensure the silent option is not present in PAM files
+          ansible.builtin.replace:
+            dest: /etc/pam.d/postlogin
+            regexp: ^(session.*required.*pam_lastlog.so).*$
+            replace: \g<1> showfailed
+
+        - name: Ensure the desired configuration is present in PAM files
+          ansible.builtin.lineinfile:
+            dest: /etc/pam.d/postlogin
+            insertbefore: ^session.*
+            firstmatch: true
+            line: session     required                   pam_lastlog.so showfailed
       when:
         - '"pam" in ansible_facts.packages'
-        - not add_new_pam_lastlog_control_result.changed
+        - result_pam_lastlog_present.found == 0
+        - not result_authselect_present.stat.exists
       tags:
         - CCE-80788-3
         - CJIS-5.5.2
@@ -2392,31 +2454,30 @@
       tags:
         - always
 
-    - name: 'Limit Password Reuse: password-auth: Check for existing entry'
-      lineinfile:
+    - name: Check for existing pam_pwhistory.so entry
+      ansible.builtin.lineinfile:
         path: /etc/pam.d/password-auth
         create: false
         regexp: ^password.*pam_pwhistory.so.*
         state: absent
       check_mode: true
       changed_when: false
-      register: pam_pwhistory
+      register: result_pam_pwhistory_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-83478-8
         - CJIS-5.6.2.1.1
-        - DISA-STIG-RHEL-08-020220
-        -
+        - DISA-STIG-RHEL-08-0202
 
-    - name: 'Limit Password Reuse: password-auth: Check for existing entry'
-      lineinfile:
+    - name: Check for existing pam_pwhistory.so entry
+      ansible.builtin.lineinfile:
         path: /etc/pam.d/password-auth
         create: false
         regexp: ^password.*pam_pwhistory.so.*
         state: absent
       check_mode: true
       changed_when: false
-      register: pam_pwhistory
+      register: result_pam_pwhistory_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-83478-8
@@ -2433,34 +2494,206 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: 'Limit Password Reuse: password-auth'
+    - name: Check for existing remember parameter entry
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/password-auth
+        create: false
+        regexp: ^password.*pam_pwhistory.so.*remember=
+        state: absent
+      check_mode: true
+      changed_when: false
+      register: result_pam_pwhistory_remember_present
+      when:
+        - '"pam" in ansible_facts.packages'
+        - result_pam_pwhistory_present.found == 1
+      tags:
+        - CCE-83478-8
+        - CJIS-5.6.2.1.1
+        - DISA-STIG-RHEL-08-020220
+        - NIST-800-171-3.5.8
+        - NIST-800-53-IA-5(1)(e)
+        - NIST-800-53-IA-5(f)
+        - PCI-DSS-Req-8.2.5
+        - accounts_password_pam_pwhistory_remember_password_auth
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Check if system relies on authselect
+      ansible.builtin.stat:
+        path: /usr/bin/authselect
+      register: result_authselect_present
+      when: '"pam" in ansible_facts.packages'
+      tags:
+        - CCE-83478-8
+        - CJIS-5.6.2.1.1
+        - DISA-STIG-RHEL-08-020220
+        - NIST-800-171-3.5.8
+        - NIST-800-53-IA-5(1)(e)
+        - NIST-800-53-IA-5(f)
+        - PCI-DSS-Req-8.2.5
+        - accounts_password_pam_pwhistory_remember_password_auth
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Remediation where authselect tool is present
       block:
 
-        - name: 'Limit Password Reuse: password-auth - Ensure correct control value'
-          pamd:
-            name: password-auth
-            type: password
-            control: '{{ item }}'
-            module_path: pam_pwhistory.so
-            new_control: '{{ var_password_pam_remember_control_flag }}'
-          loop:
-            - required
-            - optional
-            - requisite
-            - sufficient
-            - binding
+        - name: Check the integrity of the current authselect profile
+          ansible.builtin.command:
+            cmd: authselect check
+          register: result_authselect_check_cmd
+          changed_when: false
+          ignore_errors: true
 
-        - name: 'Limit Password Reuse: password-auth - Ensure remember argument in pam_pwhistory'
-          pamd:
-            name: password-auth
-            type: password
-            control: '{{ var_password_pam_remember_control_flag }}'
-            module_path: pam_pwhistory.so
-            module_arguments: use_authtok remember={{ var_password_pam_remember }}
-            state: args_present
+        - name: Informative message based on the authselect integrity check result
+          ansible.builtin.assert:
+            that:
+              - result_authselect_check_cmd is success
+            fail_msg:
+              - authselect integrity check failed. Remediation aborted!
+              - This remediation could not be applied because the authselect profile is
+                not intact.
+              - It is not recommended to manually edit the PAM files when authselect is
+                available.
+              - In cases where the default authselect profile does not cover a specific
+                demand, a custom authselect profile is recommended.
+            success_msg:
+              - authselect integrity check passed
+
+        - name: Get authselect current profile
+          ansible.builtin.shell:
+            cmd: authselect current -r | awk '{ print $1 }'
+          register: result_authselect_profile
+          changed_when: false
+          when:
+            - result_authselect_check_cmd is success
+
+        - name: Define the current authselect profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: '{{ result_authselect_profile.stdout }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is match("custom/")
+
+        - name: Define the new authselect custom profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: custom/hardening
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is not match("custom/")
+
+        - name: Get authselect current features to also enable them in the custom profile
+          ansible.builtin.shell:
+            cmd: authselect current | tail -n+3 | awk '{ print $2 }'
+          register: result_authselect_features
+          changed_when: false
+          when:
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+
+        - name: Check if any custom profile with the same name was already created in
+            the past
+          ansible.builtin.stat:
+            path: /etc/authselect/{{ authselect_custom_profile }}
+          register: result_authselect_custom_profile_present
+          changed_when: false
+          when:
+            - authselect_current_profile is not match("custom/")
+
+        - name: Create a custom profile based on the current profile
+          ansible.builtin.command:
+            cmd: authselect create-profile hardening -b sssd
+          when:
+            - result_authselect_check_cmd is success
+            - authselect_current_profile is not match("custom/")
+            - not result_authselect_custom_profile_present.stat.exists
+
+        - name: Ensure the desired remember value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/password-auth
+            regexp: (.*pam_pwhistory.so.*remember=)(\S+)(.*)$
+            replace: \g<1>{{ var_password_pam_remember }}\g<3>
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 1
+
+        - name: Ensure the remember parameter is included in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/password-auth
+            regexp: (.*pam_pwhistory.so.*)(?! remember=\S+)(.*)$
+            replace: \g<1> \g<2> remember={{ var_password_pam_remember }}
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 0
+
+        - name: Ensure the desired control value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/password-auth
+            regexp: ^(password\s+)((?:(?:requisite)|(?:required)))(\s+pam_pwhistory\.so\s.*)$
+            replace: \g<1>{{ var_password_pam_remember_control_flag }}\g<3>
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the desired configuration is present in the custom profile
+          ansible.builtin.lineinfile:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/password-auth
+            insertafter: ^password.*requisite.*pam_pwquality.so.*
+            line: password    {{ var_password_pam_remember_control_flag }}     pam_pwhistory.so
+              remember={{ var_password_pam_remember }} use_authtok
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 0
+
+        - name: Ensure a backup of current authselect profile before selecting the custom
+            profile
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+          register: result_authselect_backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Ensure the custom profile is selected
+          ansible.builtin.command:
+            cmd: authselect select {{ authselect_custom_profile }} --force
+          register: result_pam_authselect_select_profile
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Restore the authselect features in the custom profile
+          ansible.builtin.command:
+            cmd: authselect enable-feature {{ item }}
+          loop: '{{ result_authselect_features.stdout_lines }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_features is not skipped
+            - result_pam_authselect_select_profile is not skipped
+
+        - name: Ensure the custom profile changes are applied
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
       when:
         - '"pam" in ansible_facts.packages'
-        - pam_pwhistory.found == 1
+        - result_authselect_present.stat.exists
       tags:
         - CCE-83478-8
         - CJIS-5.6.2.1.1
@@ -2476,20 +2709,46 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: 'Limit Password Reuse: password-auth - Add pam_pwhistory'
-      pamd:
-        name: password-auth
-        type: password
-        control: sufficient
-        module_path: pam_unix.so
-        new_type: password
-        new_control: '{{ var_password_pam_remember_control_flag }}'
-        new_module_path: pam_pwhistory.so
-        module_arguments: use_authtok remember={{ var_password_pam_remember }}
-        state: before
+    - name: Remediation where authselect tool is not present and PAM files are directly
+        edited
+      block:
+
+        - name: Ensure the desired remember value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/password-auth
+            regexp: (.*pam_pwhistory.so.*remember=)(\S+)(.*)$
+            replace: \g<1>{{ var_password_pam_remember }}\g<3>
+          when:
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the remember parameter is included in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/password-auth
+            regexp: (.*pam_pwhistory.so.*)(?! remember=\S+)(.*)$
+            replace: \g<1> \g<2> remember={{ var_password_pam_remember }}
+          when:
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 0
+
+        - name: Ensure the desired control value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/password-auth
+            regexp: ^(password\s+)((?:(?:requisite)|(?:required)))(\s+pam_pwhistory\.so\s.*)$
+            replace: \g<1>{{ var_password_pam_remember_control_flag }}\g<3>
+          when:
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the desired configuration is present in the custom profile
+          ansible.builtin.lineinfile:
+            dest: /etc/pam.d/password-auth
+            insertafter: ^password.*requisite.*pam_pwquality.so.*
+            line: password    {{ var_password_pam_remember_control_flag }}     pam_pwhistory.so
+              remember={{ var_password_pam_remember }} use_authtok
+          when:
+            - result_pam_pwhistory_present.found == 0
       when:
         - '"pam" in ansible_facts.packages'
-        - pam_pwhistory.found == 0
+        - not result_authselect_present.stat.exists
       tags:
         - CCE-83478-8
         - CJIS-5.6.2.1.1
@@ -2529,31 +2788,30 @@
       tags:
         - always
 
-    - name: 'Limit Password Reuse: system-auth: Check for existing entry'
-      lineinfile:
+    - name: Check for existing pam_pwhistory.so entry
+      ansible.builtin.lineinfile:
         path: /etc/pam.d/system-auth
         create: false
         regexp: ^password.*pam_pwhistory.so.*
         state: absent
       check_mode: true
       changed_when: false
-      register: pam_pwhistory
+      register: result_pam_pwhistory_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-83480-4
         - CJIS-5.6.2.1.1
-        - DISA-STIG-RHEL-08-020220
-        - NI
+        - DISA-STIG-RHEL-08-0202
 
-    - name: 'Limit Password Reuse: system-auth: Check for existing entry'
-      lineinfile:
+    - name: Check for existing pam_pwhistory.so entry
+      ansible.builtin.lineinfile:
         path: /etc/pam.d/system-auth
         create: false
         regexp: ^password.*pam_pwhistory.so.*
         state: absent
       check_mode: true
       changed_when: false
-      register: pam_pwhistory
+      register: result_pam_pwhistory_present
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-83480-4
@@ -2570,34 +2828,206 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: 'Limit Password Reuse: system-auth'
+    - name: Check for existing remember parameter entry
+      ansible.builtin.lineinfile:
+        path: /etc/pam.d/system-auth
+        create: false
+        regexp: ^password.*pam_pwhistory.so.*remember=
+        state: absent
+      check_mode: true
+      changed_when: false
+      register: result_pam_pwhistory_remember_present
+      when:
+        - '"pam" in ansible_facts.packages'
+        - result_pam_pwhistory_present.found == 1
+      tags:
+        - CCE-83480-4
+        - CJIS-5.6.2.1.1
+        - DISA-STIG-RHEL-08-020220
+        - NIST-800-171-3.5.8
+        - NIST-800-53-IA-5(1)(e)
+        - NIST-800-53-IA-5(f)
+        - PCI-DSS-Req-8.2.5
+        - accounts_password_pam_pwhistory_remember_system_auth
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Check if system relies on authselect
+      ansible.builtin.stat:
+        path: /usr/bin/authselect
+      register: result_authselect_present
+      when: '"pam" in ansible_facts.packages'
+      tags:
+        - CCE-83480-4
+        - CJIS-5.6.2.1.1
+        - DISA-STIG-RHEL-08-020220
+        - NIST-800-171-3.5.8
+        - NIST-800-53-IA-5(1)(e)
+        - NIST-800-53-IA-5(f)
+        - PCI-DSS-Req-8.2.5
+        - accounts_password_pam_pwhistory_remember_system_auth
+        - configure_strategy
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Remediation where authselect tool is present
       block:
 
-        - name: 'Limit Password Reuse: system-auth - Ensure correct control value'
-          pamd:
-            name: system-auth
-            type: password
-            control: '{{ item }}'
-            module_path: pam_pwhistory.so
-            new_control: '{{ var_password_pam_remember_control_flag }}'
-          loop:
-            - required
-            - optional
-            - requisite
-            - sufficient
-            - binding
+        - name: Check the integrity of the current authselect profile
+          ansible.builtin.command:
+            cmd: authselect check
+          register: result_authselect_check_cmd
+          changed_when: false
+          ignore_errors: true
 
-        - name: 'Limit Password Reuse: system-auth - Ensure remember argument in pam_pwhistory'
-          pamd:
-            name: system-auth
-            type: password
-            control: '{{ var_password_pam_remember_control_flag }}'
-            module_path: pam_pwhistory.so
-            module_arguments: use_authtok remember={{ var_password_pam_remember }}
-            state: args_present
+        - name: Informative message based on the authselect integrity check result
+          ansible.builtin.assert:
+            that:
+              - result_authselect_check_cmd is success
+            fail_msg:
+              - authselect integrity check failed. Remediation aborted!
+              - This remediation could not be applied because the authselect profile is
+                not intact.
+              - It is not recommended to manually edit the PAM files when authselect is
+                available.
+              - In cases where the default authselect profile does not cover a specific
+                demand, a custom authselect profile is recommended.
+            success_msg:
+              - authselect integrity check passed
+
+        - name: Get authselect current profile
+          ansible.builtin.shell:
+            cmd: authselect current -r | awk '{ print $1 }'
+          register: result_authselect_profile
+          changed_when: false
+          when:
+            - result_authselect_check_cmd is success
+
+        - name: Define the current authselect profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: '{{ result_authselect_profile.stdout }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is match("custom/")
+
+        - name: Define the new authselect custom profile as a local fact
+          ansible.builtin.set_fact:
+            authselect_current_profile: '{{ result_authselect_profile.stdout }}'
+            authselect_custom_profile: custom/hardening
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_profile.stdout is not match("custom/")
+
+        - name: Get authselect current features to also enable them in the custom profile
+          ansible.builtin.shell:
+            cmd: authselect current | tail -n+3 | awk '{ print $2 }'
+          register: result_authselect_features
+          changed_when: false
+          when:
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+
+        - name: Check if any custom profile with the same name was already created in
+            the past
+          ansible.builtin.stat:
+            path: /etc/authselect/{{ authselect_custom_profile }}
+          register: result_authselect_custom_profile_present
+          changed_when: false
+          when:
+            - authselect_current_profile is not match("custom/")
+
+        - name: Create a custom profile based on the current profile
+          ansible.builtin.command:
+            cmd: authselect create-profile hardening -b sssd
+          when:
+            - result_authselect_check_cmd is success
+            - authselect_current_profile is not match("custom/")
+            - not result_authselect_custom_profile_present.stat.exists
+
+        - name: Ensure the desired remember value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/system-auth
+            regexp: (.*pam_pwhistory.so.*remember=)(\S+)(.*)$
+            replace: \g<1>{{ var_password_pam_remember }}\g<3>
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 1
+
+        - name: Ensure the remember parameter is included in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/system-auth
+            regexp: (.*pam_pwhistory.so.*)(?! remember=\S+)(.*)$
+            replace: \g<1> \g<2> remember={{ var_password_pam_remember }}
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 0
+
+        - name: Ensure the desired control value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/system-auth
+            regexp: ^(password\s+)((?:(?:requisite)|(?:required)))(\s+pam_pwhistory\.so\s.*)$
+            replace: \g<1>{{ var_password_pam_remember_control_flag }}\g<3>
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the desired configuration is present in the custom profile
+          ansible.builtin.lineinfile:
+            dest: /etc/authselect/{{ authselect_custom_profile }}/system-auth
+            insertafter: ^password.*requisite.*pam_pwquality.so.*
+            line: password    {{ var_password_pam_remember_control_flag }}     pam_pwhistory.so
+              remember={{ var_password_pam_remember }} use_authtok
+          when:
+            - result_authselect_profile is not skipped
+            - result_pam_pwhistory_present.found == 0
+
+        - name: Ensure a backup of current authselect profile before selecting the custom
+            profile
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+          register: result_authselect_backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Ensure the custom profile is selected
+          ansible.builtin.command:
+            cmd: authselect select {{ authselect_custom_profile }} --force
+          register: result_pam_authselect_select_profile
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
+            - authselect_current_profile is not match("custom/")
+            - authselect_custom_profile is not match(authselect_current_profile)
+
+        - name: Restore the authselect features in the custom profile
+          ansible.builtin.command:
+            cmd: authselect enable-feature {{ item }}
+          loop: '{{ result_authselect_features.stdout_lines }}'
+          when:
+            - result_authselect_profile is not skipped
+            - result_authselect_features is not skipped
+            - result_pam_authselect_select_profile is not skipped
+
+        - name: Ensure the custom profile changes are applied
+          ansible.builtin.command:
+            cmd: authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+          when:
+            - result_authselect_check_cmd is success
+            - result_authselect_profile is not skipped
       when:
         - '"pam" in ansible_facts.packages'
-        - pam_pwhistory.found == 1
+        - result_authselect_present.stat.exists
       tags:
         - CCE-83480-4
         - CJIS-5.6.2.1.1
@@ -2613,20 +3043,46 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: 'Limit Password Reuse: system-auth - Add pam_pwhistory'
-      pamd:
-        name: system-auth
-        type: password
-        control: sufficient
-        module_path: pam_unix.so
-        new_type: password
-        new_control: '{{ var_password_pam_remember_control_flag }}'
-        new_module_path: pam_pwhistory.so
-        module_arguments: use_authtok remember={{ var_password_pam_remember }}
-        state: before
+    - name: Remediation where authselect tool is not present and PAM files are directly
+        edited
+      block:
+
+        - name: Ensure the desired remember value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/system-auth
+            regexp: (.*pam_pwhistory.so.*remember=)(\S+)(.*)$
+            replace: \g<1>{{ var_password_pam_remember }}\g<3>
+          when:
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the remember parameter is included in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/system-auth
+            regexp: (.*pam_pwhistory.so.*)(?! remember=\S+)(.*)$
+            replace: \g<1> \g<2> remember={{ var_password_pam_remember }}
+          when:
+            - result_pam_pwhistory_present.found == 1
+            - result_pam_pwhistory_remember_present.found == 0
+
+        - name: Ensure the desired control value is updated in the custom profile
+          ansible.builtin.replace:
+            dest: /etc/pam.d/system-auth
+            regexp: ^(password\s+)((?:(?:requisite)|(?:required)))(\s+pam_pwhistory\.so\s.*)$
+            replace: \g<1>{{ var_password_pam_remember_control_flag }}\g<3>
+          when:
+            - result_pam_pwhistory_present.found == 1
+
+        - name: Ensure the desired configuration is present in the custom profile
+          ansible.builtin.lineinfile:
+            dest: /etc/pam.d/system-auth
+            insertafter: ^password.*requisite.*pam_pwquality.so.*
+            line: password    {{ var_password_pam_remember_control_flag }}     pam_pwhistory.so
+              remember={{ var_password_pam_remember }} use_authtok
+          when:
+            - result_pam_pwhistory_present.found == 0
       when:
         - '"pam" in ansible_facts.packages'
-        - pam_pwhistory.found == 0
+        - not result_authselect_present.stat.exists
       tags:
         - CCE-83480-4
         - CJIS-5.6.2.1.1
@@ -4208,37 +4664,12 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Set Password Retry Prompts Permitted Per-Session - system-auth (change)
-      replace:
-        dest: '{{ item }}'
-        regexp: (^.*\spam_pwquality.so\s.*retry\s*=\s*)(\S+)(.*$)
-        replace: \g<1>{{ var_password_pam_retry }}\g<3>
-      loop:
-        - /etc/pam.d/system-auth
-        - /etc/pam.d/password-auth
-      when: '"pam" in ansible_facts.packages'
-      tags:
-        - CCE-80664-6
-        - CJIS-5.5.3
-        - DISA-STIG-RHEL-08-020100
-        - NIST-800-53-AC-7(a)
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-IA-5(4)
-        - accounts_password_pam_retry
-        - configure_strategy
-        - low_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-
-    - name: Set Password Retry Prompts Permitted Per-Session - system-auth (add)
-      replace:
-        dest: '{{ item }}'
-        regexp: ^.*\spam_pwquality.so\s(?!.*retry\s*=\s*).*$
-        replace: \g<0> retry={{ var_password_pam_retry }}
-      loop:
-        - /etc/pam.d/system-auth
-        - /etc/pam.d/password-auth
+    - name: Ensure PAM variable retry is set accordingly
+      ansible.builtin.lineinfile:
+        create: true
+        dest: /etc/security/pwquality.conf
+        regexp: ^#?\s*retry
+        line: retry = {{ var_password_pam_retry }}
       when: '"pam" in ansible_facts.packages'
       tags:
         - CCE-80664-6
@@ -24261,9 +24692,10 @@
     - name: Put contents into /etc/audit/rules.d/11-loginuid.rules according to policy
       copy:
         dest: /etc/audit/rules.d/11-loginuid.rules
-        content: |
+        content: |+
           ## Make the loginuid immutable. This prevents tampering with the auid.
           --loginuid-immutable
+
         force: true
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -25834,34 +26266,13 @@
         - reboot_required
         - sysctl_net_ipv4_conf_default_send_redirects
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-81024-2
-        - DISA-STIG-RHEL-08-040260
-        - NIST-800-171-3.1.20
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-CM-7(a)
-        - NIST-800-53-CM-7(b)
-        - NIST-800-53-SC-5
-        - NIST-800-53-SC-7(a)
-        - disable_strategy
-        - low_complexity
-        - medium_disruption
-        - medium_severity
-        - reboot_required
-        - sysctl_net_ipv4_ip_forward
-
     - name: List /etc/sysctl.d/*.conf files
       find:
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.ip_forward.*$
         patterns: '*.conf'
       register: find_sysctl_d
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"no_ovirt" in ansible_facts.packages'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -25885,9 +26296,7 @@
         regexp: ^[\s]*net.ipv4.ip_forward
         replace: '#net.ipv4.ip_forward'
       loop: '{{ find_sysctl_d.files }}'
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"no_ovirt" in ansible_facts.packages'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -25910,9 +26319,7 @@
         value: '0'
         state: present
         reload: true
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"no_ovirt" in ansible_facts.packages'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-81024-2
         - DISA-STIG-RHEL-08-040260
@@ -31409,29 +31816,6 @@
         - restrict_strategy
         - sshd_disable_kerb_auth
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-80901-2
-        - CJIS-5.5.6
-        - DISA-STIG-RHEL-08-010550
-        - NIST-800-171-3.1.1
-        - NIST-800-171-3.1.5
-        - NIST-800-53-AC-17(a)
-        - NIST-800-53-AC-6(2)
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-CM-7(a)
-        - NIST-800-53-CM-7(b)
-        - NIST-800-53-IA-2
-        - NIST-800-53-IA-2(5)
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - restrict_strategy
-        - sshd_disable_root_login
-
     - name: Disable SSH Root Login
       block:
 
@@ -31462,9 +31846,7 @@
             state: present
             insertbefore: ^[#\s]*Match
             validate: /usr/sbin/sshd -t -f %s
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"no_ovirt" in ansible_facts.packages'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80901-2
         - CJIS-5.5.6
@@ -32334,20 +32716,6 @@
         - no_reboot_needed
         - usbguard_generate_policy
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-83411-9
-        - DISA-STIG-RHEL-08-040320
-        - NIST-800-53-CM-6(b)
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-        - xwindows_remove_packages
-
     - name: Ensure xorg packages are removed
       package:
         name:
@@ -32356,7 +32724,6 @@
           - xorg-x11-server-utils
           - xorg-x11-server-Xwayland
         state: absent
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-83411-9
         - DISA-STIG-RHEL-08-040320
@@ -32374,7 +32741,6 @@
         dest: /etc/systemd/system/default.target
         state: link
         force: true
-      when: '"no_ovirt" in ansible_facts.packages'
       tags:
         - CCE-83411-9
         - DISA-STIG-RHEL-08-040320

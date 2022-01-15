@@ -858,8 +858,6 @@ done
 # BEGIN fix (37 / 368) for 'sudo_remove_nopasswd'
 ###############################################################################
 (>&2 echo "Remediating rule 37/368: 'sudo_remove_nopasswd'")
-# Remediation is applicable only in certain platforms
-if rpm --quiet -q no_ovirt; then
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -875,10 +873,6 @@ for f in /etc/sudoers /etc/sudoers.d/* ; do
     /usr/sbin/visudo -cf $f &> /dev/null || echo "Fail to validate $f with visudo"
   fi
 done
-
-else
-    >&2 echo 'Remediation is not applicable, nothing was done'
-fi
 # END fix for 'sudo_remove_nopasswd'
 
 ###############################################################################
@@ -1095,8 +1089,6 @@ fi
 # BEGIN fix (48 / 368) for 'package_gssproxy_removed'
 ###############################################################################
 (>&2 echo "Remediating rule 48/368: 'package_gssproxy_removed'")
-# Remediation is applicable only in certain platforms
-if rpm --quiet -q no_ovirt; then
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -1108,10 +1100,6 @@ if rpm -q --quiet "gssproxy" ; then
 
     yum remove -y "gssproxy"
 
-fi
-
-else
-    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'package_gssproxy_removed'
 
@@ -1173,8 +1161,6 @@ fi
 # BEGIN fix (52 / 368) for 'package_tuned_removed'
 ###############################################################################
 (>&2 echo "Remediating rule 52/368: 'package_tuned_removed'")
-# Remediation is applicable only in certain platforms
-if rpm --quiet -q no_ovirt; then
 
 # CAUTION: This remediation script will remove tuned
 #	   from the system, and may remove any packages
@@ -1186,10 +1172,6 @@ if rpm -q --quiet "tuned" ; then
 
     yum remove -y "tuned"
 
-fi
-
-else
-    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'package_tuned_removed'
 
@@ -1458,42 +1440,54 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-if [ -e "/etc/pam.d/postlogin" ] ; then
-    valueRegex="" defaultValue=""
-    # non-empty values need to be preceded by an equals sign
-    [ -n "${valueRegex}" ] && valueRegex="=${valueRegex}"
-    # add an equals sign to non-empty values
-    [ -n "${defaultValue}" ] && defaultValue="=${defaultValue}"
-
-    # fix 'type' if it's wrong
-    if grep -q -P "^\\s*(?"'!'"session\\s)[[:alnum:]]+\\s+[[:alnum:]]+\\s+pam_lastlog.so" < "/etc/pam.d/postlogin" ; then
-        sed --follow-symlinks -i -E -e "s/^(\\s*)[[:alnum:]]+(\\s+[[:alnum:]]+\\s+pam_lastlog.so)/\\1session\\2/" "/etc/pam.d/postlogin"
-    fi
-
-    # fix 'control' if it's wrong
-    if grep -q -P "^\\s*session\\s+(?"'!'"required)[[:alnum:]]+\\s+pam_lastlog.so" < "/etc/pam.d/postlogin" ; then
-        sed --follow-symlinks -i -E -e "s/^(\\s*session\\s+)[[:alnum:]]+(\\s+pam_lastlog.so)/\\1required\\2/" "/etc/pam.d/postlogin"
-    fi
-
-    # fix the value for 'option' if one exists but does not match 'valueRegex'
-    if grep -q -P "^\\s*session\\s+required\\s+pam_lastlog.so(\\s.+)?\\s+showfailed(?"'!'"${valueRegex}(\\s|\$))" < "/etc/pam.d/postlogin" ; then
-        sed --follow-symlinks -i -E -e "s/^(\\s*session\\s+required\\s+pam_lastlog.so(\\s.+)?\\s)showfailed=[^[:space:]]*/\\1showfailed${defaultValue}/" "/etc/pam.d/postlogin"
-
-    # add 'option=default' if option is not set
-    elif grep -q -E "^\\s*session\\s+required\\s+pam_lastlog.so" < "/etc/pam.d/postlogin" &&
-            grep    -E "^\\s*session\\s+required\\s+pam_lastlog.so" < "/etc/pam.d/postlogin" | grep -q -E -v "\\sshowfailed(=|\\s|\$)" ; then
-
-        sed --follow-symlinks -i -E -e "s/^(\\s*session\\s+required\\s+pam_lastlog.so[^\\n]*)/\\1 showfailed${defaultValue}/" "/etc/pam.d/postlogin"
-    # add a new entry if none exists
-    elif ! grep -q -P "^\\s*session\\s+required\\s+pam_lastlog.so(\\s.+)?\\s+showfailed${valueRegex}(\\s|\$)" < "/etc/pam.d/postlogin" ; then
-        echo "session required pam_lastlog.so showfailed${defaultValue}" >> "/etc/pam.d/postlogin"
+if [ -f /usr/bin/authselect ]; then
+    if authselect check; then
+        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+        # Standard profiles delivered with authselect should not be modified.
+        # If not already in use, a custom profile is created preserving the enabled features.
+        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+            authselect create-profile hardening -b $CURRENT_PROFILE
+            CURRENT_PROFILE="custom/hardening"
+            # Ensure a backup before changing the profile
+            authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+            authselect select $CURRENT_PROFILE
+            for feature in $ENABLED_FEATURES; do
+                authselect enable-feature $feature;
+            done
+        fi
+        # Include the desired configuration in the custom profile
+        CUSTOM_POSTLOGIN="/etc/authselect/$CURRENT_PROFILE/postlogin"
+        # The line should be included on the top of postlogin file
+        if [ $(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" $CUSTOM_POSTLOGIN) -eq 0 ]; then
+            sed -i --follow-symlinks '0,/^session.*/s/^session.*/session     required                   pam_lastlog.so showfailed\n&/' $CUSTOM_POSTLOGIN
+        fi
+        if grep -q "^\s*session.*required.*pam_lastlog.so.*silent.*"; then
+            # remove 'silent' option
+            sed -i --follow-symlinks 's/^\(session.*required.*pam_lastlog.so\).*/\1 showfailed/g' $CUSTOM_POSTLOGIN
+        fi
+        authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+    else
+        echo "
+authselect integrity check failed. Remediation aborted!
+This remediation could not be applied because the authselect profile is not intact.
+It is not recommended to manually edit the PAM files when authselect is available.
+In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        false
     fi
 else
-    echo "/etc/pam.d/postlogin doesn't exist" >&2
-fi
+    
+    
+    
 
-# remove 'silent' option
-sed -i --follow-symlinks -E -e 's/^([^#]+pam_lastlog\.so[^#]*)\ssilent/\1/' '/etc/pam.d/postlogin'
+    if [ $(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" /etc/pam.d/postlogin) -eq 0 ]; then
+        sed -i --follow-symlinks '0,/^session.*/s/^session.*/session     required                   pam_lastlog.so showfailed\n&/' /etc/pam.d/postlogin
+    fi
+    if grep -q "^\s*session.*required.*pam_lastlog.so.*silent.*" /etc/pam.d/postlogin; then
+        # remove 'silent' option
+        sed -i --follow-symlinks 's/^\(session.*required.*pam_lastlog.so\).*/\1 showfailed/g' /etc/pam.d/postlogin
+    fi
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1511,33 +1505,72 @@ var_password_pam_remember='5'
 var_password_pam_remember_control_flag='required'
 
 
-pamFile="/etc/pam.d/password-auth"
 # control required is for rhel8, while requisite is for other distros
 CONTROL=${var_password_pam_remember_control_flag}
 
-if [ ! -f $pamFile ]; then
-	continue
-fi
-
-# is 'password required|requisite pam_pwhistory.so' here?
-if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
-	# is the remember option set?
-	option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
-	if [[ -z $option ]]; then
-		# option is not set, append to module
-		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
-	else
-		# option is set, replace value
-		sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
-	fi
-	# ensure corect control is being used per os requirement
-	if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $pamFile; then
-		#replace incorrect value
-		sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $pamFile
-	fi
+if [ -f /usr/bin/authselect ]; then
+    if authselect check; then
+        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+        # Standard profiles delivered with authselect should not be modified.
+        # If not already in use, a custom profile is created preserving the enabled features.
+        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+            authselect create-profile hardening -b $CURRENT_PROFILE
+            CURRENT_PROFILE="custom/hardening"
+            # Ensure a backup before changing the profile
+            authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+            authselect select $CURRENT_PROFILE
+            for feature in $ENABLED_FEATURES; do
+                authselect enable-feature $feature;
+            done
+        fi
+        # Include the desired configuration in the custom profile
+        CUSTOM_PASSWORD_AUTH="/etc/authselect/$CURRENT_PROFILE/password-auth"
+		if grep -q "^password.*pam_pwhistory.so.*" $CUSTOM_PASSWORD_AUTH; then
+			if ! $(grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_PASSWORD_AUTH); then
+				sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $CUSTOM_PASSWORD_AUTH
+			else
+				sed -r -i --follow-symlinks "s/(.*pam_pwhistory.so.*)(remember=[[:digit:]]+)\s(.*)/\1remember=$var_password_pam_remember \3/g" $CUSTOM_PASSWORD_AUTH
+			fi
+			# Ensure correct control is being used per os requirement
+			if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $CUSTOM_PASSWORD_AUTH; then
+				# Replace incorrect value
+				sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $CUSTOM_PASSWORD_AUTH
+			fi
+		else
+			sed -i --follow-symlinks "/^password.*requisite.*pam_pwquality.so/a password    $CONTROL     pam_pwhistory.so remember=$var_password_pam_remember use_authtok" $CUSTOM_PASSWORD_AUTH
+		fi
+        authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+    else
+        echo "
+authselect integrity check failed. Remediation aborted!
+This remediation could not be applied because the authselect profile is not intact.
+It is not recommended to manually edit the PAM files when authselect is available.
+In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        false
+    fi
 else
-	# no 'password required|requisite pam_pwhistory.so', add it
-	sed -i --follow-symlinks "/^password.*pam_unix.so.*/i password $CONTROL pam_pwhistory.so use_authtok remember=$var_password_pam_remember" $pamFile
+	pamFile="/etc/pam.d/password-auth"
+	# is 'password required|requisite pam_pwhistory.so' here?
+	if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
+		# is the remember option set?
+		option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
+		if [[ -z $option ]]; then
+			# option is not set, append to module
+			sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
+		else
+			# option is set, replace value
+			sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
+		fi
+		# ensure correct control is being used per os requirement
+		if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $pamFile; then
+			#replace incorrect value
+			sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $pamFile
+		fi
+	else
+		# no 'password required|requisite pam_pwhistory.so', add it
+		sed -i --follow-symlinks "/^password.*pam_unix.so.*/i password $CONTROL pam_pwhistory.so use_authtok remember=$var_password_pam_remember" $pamFile
+	fi
 fi
 
 else
@@ -1556,33 +1589,72 @@ var_password_pam_remember='5'
 var_password_pam_remember_control_flag='required'
 
 
-pamFile="/etc/pam.d/system-auth"
 # control required is for rhel8, while requisite is for other distros
 CONTROL=${var_password_pam_remember_control_flag}
 
-if [ ! -f $pamFile ]; then
-	continue
-fi
-
-# is 'password required|requisite pam_pwhistory.so' here?
-if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
-	# is the remember option set?
-	option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
-	if [[ -z $option ]]; then
-		# option is not set, append to module
-		sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
-	else
-		# option is set, replace value
-		sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
-	fi
-	# ensure corect control is being used per os requirement
-	if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $pamFile; then
-		#replace incorrect value
-		sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $pamFile
-	fi
+if [ -f /usr/bin/authselect ]; then
+    if authselect check; then
+        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+        # Standard profiles delivered with authselect should not be modified.
+        # If not already in use, a custom profile is created preserving the enabled features.
+        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+            authselect create-profile hardening -b $CURRENT_PROFILE
+            CURRENT_PROFILE="custom/hardening"
+            # Ensure a backup before changing the profile
+            authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+            authselect select $CURRENT_PROFILE
+            for feature in $ENABLED_FEATURES; do
+                authselect enable-feature $feature;
+            done
+        fi
+        # Include the desired configuration in the custom profile
+        CUSTOM_SYSTEM_AUTH="/etc/authselect/$CURRENT_PROFILE/system-auth"
+		if grep -q "^password.*pam_pwhistory.so.*" $CUSTOM_SYSTEM_AUTH; then
+			if ! $(grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_SYSTEM_AUTH); then
+				sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $CUSTOM_SYSTEM_AUTH
+			else
+				sed -r -i --follow-symlinks "s/(.*pam_pwhistory.so.*)(remember=[[:digit:]]+)\s(.*)/\1remember=$var_password_pam_remember \3/g" $CUSTOM_SYSTEM_AUTH
+			fi
+			# Ensure correct control is being used per os requirement
+			if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $CUSTOM_SYSTEM_AUTH; then
+				# Replace incorrect value
+				sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $CUSTOM_SYSTEM_AUTH
+			fi
+		else
+			sed -i --follow-symlinks "/^password.*requisite.*pam_pwquality.so/a password    $CONTROL     pam_pwhistory.so remember=$var_password_pam_remember use_authtok" $CUSTOM_SYSTEM_AUTH
+		fi
+        authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+    else
+        echo "
+authselect integrity check failed. Remediation aborted!
+This remediation could not be applied because the authselect profile is not intact.
+It is not recommended to manually edit the PAM files when authselect is available.
+In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        false
+    fi
 else
-	# no 'password required|requisite pam_pwhistory.so', add it
-	sed -i --follow-symlinks "/^password.*pam_unix.so.*/i password $CONTROL pam_pwhistory.so use_authtok remember=$var_password_pam_remember" $pamFile
+	pamFile="/etc/pam.d/system-auth"
+	# is 'password required|requisite pam_pwhistory.so' here?
+	if grep -q "^password.*pam_pwhistory.so.*" $pamFile; then
+		# is the remember option set?
+		option=$(sed -rn 's/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\2/p' $pamFile)
+		if [[ -z $option ]]; then
+			# option is not set, append to module
+			sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $pamFile
+		else
+			# option is set, replace value
+			sed -r -i --follow-symlinks "s/^(.*pam_pwhistory\.so.*)(remember=[0-9]+)(.*)$/\1remember=$var_password_pam_remember\3/" $pamFile
+		fi
+		# ensure correct control is being used per os requirement
+		if ! grep -q "^password.*$CONTROL.*pam_pwhistory.so.*" $pamFile; then
+			#replace incorrect value
+			sed -r -i --follow-symlinks "s/(^password.*)(required|requisite)(.*pam_pwhistory\.so.*)$/\1$CONTROL\3/" $pamFile
+		fi
+	else
+		# no 'password required|requisite pam_pwhistory.so', add it
+		sed -i --follow-symlinks "/^password.*pam_unix.so.*/i password $CONTROL pam_pwhistory.so use_authtok remember=$var_password_pam_remember" $pamFile
+	fi
 fi
 
 else
@@ -2249,16 +2321,30 @@ if rpm --quiet -q pam; then
 var_password_pam_retry='3'
 
 
-if grep -q "retry=" /etc/pam.d/system-auth ; then
-	sed -i --follow-symlinks "s/\(retry *= *\).*/\1$var_password_pam_retry/" /etc/pam.d/system-auth
-else
-	sed -i --follow-symlinks "/pam_pwquality.so/ s/$/ retry=$var_password_pam_retry/" /etc/pam.d/system-auth
+# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+# Otherwise, regular sed command will do.
+sed_command=('sed' '-i')
+if test -L "/etc/security/pwquality.conf"; then
+    sed_command+=('--follow-symlinks')
 fi
 
-if grep -q "retry=" /etc/pam.d/password-auth ; then
-	sed -i --follow-symlinks "s/\(retry *= *\).*/\1$var_password_pam_retry/" /etc/pam.d/password-auth
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^retry")
+
+# shellcheck disable=SC2059
+printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_retry"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^retry\\>" "/etc/security/pwquality.conf"; then
+    "${sed_command[@]}" "s/^retry\\>.*/$formatted_output/gi" "/etc/security/pwquality.conf"
 else
-	sed -i --follow-symlinks "/pam_pwquality.so/ s/$/ retry=$var_password_pam_retry/" /etc/pam.d/password-auth
+    # \n is precaution for case where file ends without trailing newline
+    cce="CCE-80664-6"
+    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
 else
@@ -2752,8 +2838,6 @@ fi
 # BEGIN fix (101 / 368) for 'accounts_password_set_max_life_existing'
 ###############################################################################
 (>&2 echo "Remediating rule 101/368: 'accounts_password_set_max_life_existing'")
-#!/bin/bash
-
 
 var_accounts_maximum_age_login_defs='60'
 
@@ -2769,8 +2853,6 @@ done
 # BEGIN fix (102 / 368) for 'accounts_password_set_min_life_existing'
 ###############################################################################
 (>&2 echo "Remediating rule 102/368: 'accounts_password_set_min_life_existing'")
-#!/bin/bash
-
 
 var_accounts_minimum_age_login_defs='1'
 
@@ -3322,9 +3404,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -3387,7 +3466,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -3407,7 +3486,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -3480,9 +3559,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -3545,7 +3621,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -3565,7 +3641,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -3970,9 +4046,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -4035,7 +4108,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -4055,7 +4128,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -4128,9 +4201,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -4193,7 +4263,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -4213,7 +4283,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -4310,9 +4380,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -4375,7 +4442,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -4395,7 +4462,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -4468,9 +4535,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -4533,7 +4597,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -4553,7 +4617,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -5548,9 +5612,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -5613,7 +5674,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -5633,7 +5694,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -5706,9 +5767,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -5771,7 +5829,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -5791,7 +5849,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -5905,9 +5963,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -5970,7 +6025,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -5990,7 +6045,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6063,9 +6118,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -6128,7 +6180,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -6148,7 +6200,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6262,9 +6314,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -6327,7 +6376,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -6347,7 +6396,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6420,9 +6469,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -6485,7 +6531,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -6505,7 +6551,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6619,9 +6665,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -6684,7 +6727,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -6704,7 +6747,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6777,9 +6820,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -6842,7 +6882,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -6862,7 +6902,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -6976,9 +7016,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7041,7 +7078,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7061,7 +7098,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -7134,9 +7171,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7199,7 +7233,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7219,7 +7253,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -7333,9 +7367,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7398,7 +7429,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7418,7 +7449,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -7491,9 +7522,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7556,7 +7584,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7576,7 +7604,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -7690,9 +7718,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7755,7 +7780,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7775,7 +7800,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -7848,9 +7873,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -7913,7 +7935,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -7933,7 +7955,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8033,9 +8055,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8098,7 +8117,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8118,7 +8137,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8191,9 +8210,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8256,7 +8272,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8276,7 +8292,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8390,9 +8406,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8455,7 +8468,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8475,7 +8488,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8548,9 +8561,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8613,7 +8623,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8633,7 +8643,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8733,9 +8743,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8798,7 +8805,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8818,7 +8825,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -8891,9 +8898,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -8956,7 +8960,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -8976,7 +8980,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9090,9 +9094,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -9155,7 +9156,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -9175,7 +9176,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9248,9 +9249,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -9313,7 +9311,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -9333,7 +9331,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9447,9 +9445,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -9512,7 +9507,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -9532,7 +9527,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9605,9 +9600,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -9670,7 +9662,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -9690,7 +9682,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9790,9 +9782,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -9855,7 +9844,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -9875,7 +9864,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -9948,9 +9937,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10013,7 +9999,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10033,7 +10019,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -10147,9 +10133,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10212,7 +10195,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10232,7 +10215,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -10305,9 +10288,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10370,7 +10350,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10390,7 +10370,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -10490,9 +10470,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10555,7 +10532,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10575,7 +10552,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -10648,9 +10625,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10713,7 +10687,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10733,7 +10707,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -10847,9 +10821,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -10912,7 +10883,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -10932,7 +10903,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11005,9 +10976,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11070,7 +11038,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11090,7 +11058,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11190,9 +11158,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11255,7 +11220,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11275,7 +11240,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11348,9 +11313,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11413,7 +11375,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11433,7 +11395,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11547,9 +11509,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11612,7 +11571,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11632,7 +11591,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11705,9 +11664,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11770,7 +11726,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11790,7 +11746,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -11890,9 +11846,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -11955,7 +11908,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -11975,7 +11928,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12048,9 +12001,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -12113,7 +12063,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -12133,7 +12083,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12240,9 +12190,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -12305,7 +12252,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -12325,7 +12272,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12398,9 +12345,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -12463,7 +12407,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -12483,7 +12427,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12589,9 +12533,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -12654,7 +12595,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -12674,7 +12615,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12747,9 +12688,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -12812,7 +12750,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -12832,7 +12770,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -12938,9 +12876,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13003,7 +12938,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13023,7 +12958,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13096,9 +13031,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13161,7 +13093,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13181,7 +13113,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13287,9 +13219,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13352,7 +13281,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13372,7 +13301,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13445,9 +13374,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13510,7 +13436,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13530,7 +13456,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13636,9 +13562,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13701,7 +13624,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13721,7 +13644,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13794,9 +13717,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -13859,7 +13779,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -13879,7 +13799,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -13985,9 +13905,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14050,7 +13967,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14070,7 +13987,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -14143,9 +14060,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14208,7 +14122,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14228,7 +14142,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -14340,9 +14254,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14405,7 +14316,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14425,7 +14336,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -14498,9 +14409,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14563,7 +14471,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14583,7 +14491,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -14696,9 +14604,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14761,7 +14666,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14781,7 +14686,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -14854,9 +14759,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -14919,7 +14821,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -14939,7 +14841,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15052,9 +14954,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15117,7 +15016,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -15137,7 +15036,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15210,9 +15109,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15275,7 +15171,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -15295,7 +15191,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15408,9 +15304,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15473,7 +15366,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -15493,7 +15386,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15566,9 +15459,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15631,7 +15521,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -15651,7 +15541,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15764,9 +15654,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15829,7 +15716,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -15849,7 +15736,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -15922,9 +15809,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -15987,7 +15871,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16007,7 +15891,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16121,9 +16005,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -16186,7 +16067,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16206,7 +16087,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16279,9 +16160,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -16344,7 +16222,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16364,7 +16242,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16457,9 +16335,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -16522,7 +16397,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16542,7 +16417,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16615,9 +16490,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -16680,7 +16552,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16700,7 +16572,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16814,9 +16686,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -16879,7 +16748,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -16899,7 +16768,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -16972,9 +16841,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17037,7 +16903,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17057,7 +16923,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -17150,9 +17016,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17215,7 +17078,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17235,7 +17098,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -17308,9 +17171,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17373,7 +17233,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17393,7 +17253,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -17507,9 +17367,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17572,7 +17429,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17592,7 +17449,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -17665,9 +17522,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17730,7 +17584,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17750,7 +17604,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -17843,9 +17697,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -17908,7 +17759,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -17928,7 +17779,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18001,9 +17852,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18066,7 +17914,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18086,7 +17934,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18200,9 +18048,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18265,7 +18110,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18285,7 +18130,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18358,9 +18203,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18423,7 +18265,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18443,7 +18285,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18536,9 +18378,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18601,7 +18440,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18621,7 +18460,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18694,9 +18533,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18759,7 +18595,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18779,7 +18615,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -18893,9 +18729,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -18958,7 +18791,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -18978,7 +18811,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19051,9 +18884,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19116,7 +18946,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -19136,7 +18966,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19229,9 +19059,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19294,7 +19121,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -19314,7 +19141,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19387,9 +19214,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19452,7 +19276,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -19472,7 +19296,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19586,9 +19410,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19651,7 +19472,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -19671,7 +19492,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19744,9 +19565,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19809,7 +19627,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -19829,7 +19647,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -19922,9 +19740,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -19987,7 +19802,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20007,7 +19822,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -20080,9 +19895,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -20145,7 +19957,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20165,7 +19977,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -20282,9 +20094,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -20347,7 +20156,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20367,7 +20176,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -20440,9 +20249,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -20505,7 +20311,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20525,7 +20331,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -20642,9 +20448,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -20707,7 +20510,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20727,7 +20530,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -20800,9 +20603,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -20865,7 +20665,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -20885,7 +20685,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -21002,9 +20802,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -21067,7 +20864,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -21087,7 +20884,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -21160,9 +20957,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -21225,7 +21019,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -21245,7 +21039,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -21499,9 +21293,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -21564,7 +21355,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -21584,7 +21375,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -21657,9 +21448,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -21722,7 +21510,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -21742,7 +21530,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -21848,9 +21636,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -21913,7 +21698,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -21933,7 +21718,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22006,9 +21791,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22071,7 +21853,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22091,7 +21873,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22197,9 +21979,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22262,7 +22041,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22282,7 +22061,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22355,9 +22134,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22420,7 +22196,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22440,7 +22216,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22546,9 +22322,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22611,7 +22384,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22631,7 +22404,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22704,9 +22477,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22769,7 +22539,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22789,7 +22559,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -22895,9 +22665,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -22960,7 +22727,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -22980,7 +22747,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23053,9 +22820,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -23118,7 +22882,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -23138,7 +22902,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23244,9 +23008,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -23309,7 +23070,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -23329,7 +23090,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23402,9 +23163,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -23467,7 +23225,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -23487,7 +23245,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23593,9 +23351,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -23658,7 +23413,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -23678,7 +23433,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23751,9 +23506,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -23816,7 +23568,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -23836,7 +23588,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -23942,9 +23694,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24007,7 +23756,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24027,7 +23776,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24100,9 +23849,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24165,7 +23911,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24185,7 +23931,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24291,9 +24037,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24356,7 +24099,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24376,7 +24119,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24449,9 +24192,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24514,7 +24254,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24534,7 +24274,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24640,9 +24380,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24705,7 +24442,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24725,7 +24462,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24798,9 +24535,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -24863,7 +24597,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -24883,7 +24617,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -24989,9 +24723,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25054,7 +24785,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25074,7 +24805,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -25147,9 +24878,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25212,7 +24940,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25232,7 +24960,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -25338,9 +25066,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25403,7 +25128,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25423,7 +25148,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -25496,9 +25221,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25561,7 +25283,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25581,7 +25303,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -25687,9 +25409,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25752,7 +25471,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25772,7 +25491,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -25845,9 +25564,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -25910,7 +25626,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -25930,7 +25646,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26036,9 +25752,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26101,7 +25814,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26121,7 +25834,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26194,9 +25907,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26259,7 +25969,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26279,7 +25989,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26385,9 +26095,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26450,7 +26157,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26470,7 +26177,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26543,9 +26250,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26608,7 +26312,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26628,7 +26332,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26734,9 +26438,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26799,7 +26500,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26819,7 +26520,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -26892,9 +26593,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -26957,7 +26655,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -26977,7 +26675,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27083,9 +26781,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -27148,7 +26843,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -27168,7 +26863,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27241,9 +26936,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -27306,7 +26998,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -27326,7 +27018,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27432,9 +27124,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -27497,7 +27186,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -27517,7 +27206,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27590,9 +27279,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -27655,7 +27341,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -27675,7 +27361,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27781,9 +27467,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -27846,7 +27529,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -27866,7 +27549,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -27939,9 +27622,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -28004,7 +27684,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -28024,7 +27704,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -28130,9 +27810,6 @@ then
     fi
 fi
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -28195,7 +27872,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -28215,7 +27892,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -28288,9 +27965,6 @@ files_to_inspect=()
 default_file="/etc/audit/audit.rules"
 files_to_inspect+=('/etc/audit/audit.rules' )
 
-# Indicator that we want to append $full_rule into $audit_file or edit a rule in it
-append_expected_rule=0
-
 # After converting to jinja, we cannot return; therefore we skip the rest of the macro if needed instead
 skip=1
 
@@ -28353,7 +28027,7 @@ do
         done
     else
         # If there is any candidate rule, it is compliant; skip rest of macro
-        if [[ $candidate_rules ]]
+        if [ "${#candidate_rules[@]}" -gt 0 ]
         then
             skip=0
         fi
@@ -28373,7 +28047,7 @@ if [ "$skip" -ne 0 ]; then
     if [ -z ${rule_to_edit+x} ]
     then
         # Build full_rule while avoid adding double spaces when other_filters is empty
-        if [[ ${syscall_a} ]]
+        if [ "${#syscall_a[@]}" -gt 0 ]
         then
             syscall_string=""
             for syscall in "${syscall_a[@]}"
@@ -28764,6 +28438,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 cat << 'EOF' > /etc/audit/rules.d/11-loginuid.rules
 ## Make the loginuid immutable. This prevents tampering with the auid.
 --loginuid-immutable
+
 EOF
 
 chmod o-rwx /etc/audit/rules.d/11-loginuid.rules
@@ -28941,8 +28616,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-#!/bin/bash
-
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*\\$ActionSendStreamDriverMode /Id" "/etc/rsyslog.d/encrypt.conf"
@@ -28970,7 +28643,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-#!/bin/bash
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*\\$DefaultNetstreamDriver /Id" "/etc/rsyslog.d/encrypt.conf"
@@ -29008,7 +28680,7 @@ fi
 APPEND_LINE=$(sed -rn '/^\S+\s+\/var\/log\/secure$/p' /etc/rsyslog.conf)
 
 # Loop through the remote methods associative array
-for K in ${!REMOTE_METHODS[@]}
+for K in "${!REMOTE_METHODS[@]}"
 do
 	# Check to see if selector/value exists
 	if ! grep -rq "${REMOTE_METHODS[$K]}" /etc/rsyslog.*; then
@@ -30039,7 +29711,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 243/368: 'sysctl_net_ipv4_ip_forward'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q no_ovirt; }; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.ip_forward from /etc/sysctl.d/*.conf files
 for f in /etc/sysctl.d/*.conf ; do
@@ -30230,7 +29902,6 @@ fi
 # BEGIN fix (251 / 368) for 'dir_perms_world_writable_root_owned'
 ###############################################################################
 (>&2 echo "Remediating rule 251/368: 'dir_perms_world_writable_root_owned'")
-#!/bin/bash
 
 find / -not -fstype afs -not -fstype ceph -not -fstype cifs -not -fstype smb3 -not -fstype smbfs -not -fstype sshfs -not -fstype ncpfs -not -fstype ncp -not -fstype nfs -not -fstype nfs4 -not -fstype gfs -not -fstype gfs2 -not -fstype glusterfs -not -fstype gpfs -not -fstype pvfs2 -not -fstype ocfs2 -not -fstype lustre -not -fstype davfs -not -fstype fuse.sshfs -type d -perm -0002 -uid +0 -exec chown root {} \;
 # END fix for 'dir_perms_world_writable_root_owned'
@@ -32890,7 +32561,6 @@ fi
 # BEGIN fix (338 / 368) for 'tftpd_uses_secure_mode'
 ###############################################################################
 (>&2 echo "Remediating rule 338/368: 'tftpd_uses_secure_mode'")
-#!/bin/bash
 
 var_tftpd_secure_directory='/var/lib/tftpboot'
 
@@ -33144,7 +32814,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 348/368: 'sshd_disable_root_login'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q no_ovirt; }; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if [ -e "/etc/ssh/sshd_config" ] ; then
     
@@ -33593,7 +33263,7 @@ for f in /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf; do
 	if [ ! -e "$f" ]; then
 		continue
 	fi
-	cert=$( awk '/^\s*\[/{f=0} /^\s*\[sssd\]/{f=1} f{nu=gensub("^\\s*certificate_verification\\s*=\\s*ocsp_dgst\\s*=\\s*(\\w+).*","\\1",1); if($0!=nu){cert=nu}} END{print cert}' "$f" )
+	cert=$(awk '/^\s*\[/{f=0} /^\s*\[sssd\]/{f=1} f{nu=gensub("^\\s*certificate_verification\\s*=\\s*ocsp_dgst\\s*=\\s*(\\w+).*","\\1",1); if($0!=nu){cert=nu}} END{print cert}' "$f")
 	if [ -n "$cert" ] ; then
 		if [ "$cert" != $var_sssd_certificate_verification_digest_function ] ; then
 			sed -i "s/^certificate_verification\s*=.*/certificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function/" "$f"
@@ -33604,11 +33274,11 @@ done
 
 if ! $found ; then
 	SSSD_CONF="/etc/sssd/conf.d/certificate_verification.conf"
-	mkdir -p $( dirname $SSSD_CONF )
-	touch $SSSD_CONF
-	chown root:root $SSSD_CONF
-	chmod 600 $SSSD_CONF
-	echo -e "[sssd]\ncertificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" >> $SSSD_CONF
+	mkdir -p "$(dirname "$SSSD_CONF")"
+	touch "$SSSD_CONF"
+	chown root:root "$SSSD_CONF"
+	chmod 600 "$SSSD_CONF"
+	echo -e "[sssd]\ncertificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" >> "$SSSD_CONF"
 fi
 
 else
@@ -33762,8 +33432,7 @@ fi
 # BEGIN fix (368 / 368) for 'xwindows_remove_packages'
 ###############################################################################
 (>&2 echo "Remediating rule 368/368: 'xwindows_remove_packages'")
-# Remediation is applicable only in certain platforms
-if rpm --quiet -q no_ovirt; then
+
 
 # remove packages
 if rpm -q --quiet "xorg-x11-server-Xorg" ; then
@@ -33791,9 +33460,5 @@ fi
 
 # configure run level
 systemctl set-default multi-user.target
-
-else
-    >&2 echo 'Remediation is not applicable, nothing was done'
-fi
 # END fix for 'xwindows_remove_packages'
 
