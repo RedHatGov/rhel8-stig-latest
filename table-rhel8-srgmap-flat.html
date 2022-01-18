@@ -1001,6 +1001,7 @@ screen by setting <code>banner-message-text</code> to <code>'<i>APPROVED_BANNER<
 where <i>APPROVED_BANNER</i> is the approved banner for your environment.
 <br><br>
 To enable, add or edit <code>banner-message-text</code> to
+
 <code>/etc/dconf/db/gdm.d/00-security-settings</code>. For example:
 <pre>[org/gnome/login-screen]
 banner-message-text='<i>APPROVED_BANNER</i>'</pre>
@@ -1008,6 +1009,7 @@ Once the setting has been added, add a lock to
 <code>/etc/dconf/db/gdm.d/locks/00-security-settings-lock</code> to prevent user modification.
 For example:
 <pre>/org/gnome/login-screen/banner-message-text</pre>
+
 After the settings have been set, run <code>dconf update</code>.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with <code>'</code> and use <code>\n</code> for new lines.</td>
@@ -1035,7 +1037,8 @@ Use the following verbiage for operating systems that have severe limitations on
 "I've read &amp; consent to terms in IS user agreem't."
 
 If it does not, this is a finding.</td>
-<td>To ensure the login warning banner text is properly set, run the following:
+<td>
+To ensure the login warning banner text is properly set, run the following:
 $ grep banner-message-text /etc/dconf/db/gdm.d/*
 If properly configured, the proper banner text will appear.
 To ensure the login warning banner text is locked and cannot be changed by a user, run the following:
@@ -1072,6 +1075,7 @@ screen by setting banner-message-text to 'APPROVED_BANNER'
 where APPROVED_BANNER is the approved banner for your environment.
 
 To enable, add or edit banner-message-text to
+
 /etc/dconf/db/gdm.d/00-security-settings. For example:
 [org/gnome/login-screen]
 banner-message-text='APPROVED_BANNER'
@@ -1079,6 +1083,7 @@ Once the setting has been added, add a lock to
 /etc/dconf/db/gdm.d/locks/00-security-settings-lock to prevent user modification.
 For example:
 /org/gnome/login-screen/banner-message-text
+
 After the settings have been set, run dconf update.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with ' and use \n for new lines.</td>
@@ -1350,6 +1355,7 @@ screen by setting <code>banner-message-text</code> to <code>'<i>APPROVED_BANNER<
 where <i>APPROVED_BANNER</i> is the approved banner for your environment.
 <br><br>
 To enable, add or edit <code>banner-message-text</code> to
+
 <code>/etc/dconf/db/gdm.d/00-security-settings</code>. For example:
 <pre>[org/gnome/login-screen]
 banner-message-text='<i>APPROVED_BANNER</i>'</pre>
@@ -1357,12 +1363,14 @@ Once the setting has been added, add a lock to
 <code>/etc/dconf/db/gdm.d/locks/00-security-settings-lock</code> to prevent user modification.
 For example:
 <pre>/org/gnome/login-screen/banner-message-text</pre>
+
 After the settings have been set, run <code>dconf update</code>.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with <code>'</code> and use <code>\n</code> for new lines.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.</td>
-<td>To ensure the login warning banner text is properly set, run the following:
+<td>
+To ensure the login warning banner text is properly set, run the following:
 $ grep banner-message-text /etc/dconf/db/gdm.d/*
 If properly configured, the proper banner text will appear.
 To ensure the login warning banner text is locked and cannot be changed by a user, run the following:
@@ -1377,6 +1385,7 @@ screen by setting banner-message-text to 'APPROVED_BANNER'
 where APPROVED_BANNER is the approved banner for your environment.
 
 To enable, add or edit banner-message-text to
+
 /etc/dconf/db/gdm.d/00-security-settings. For example:
 [org/gnome/login-screen]
 banner-message-text='APPROVED_BANNER'
@@ -1384,6 +1393,7 @@ Once the setting has been added, add a lock to
 /etc/dconf/db/gdm.d/locks/00-security-settings-lock to prevent user modification.
 For example:
 /org/gnome/login-screen/banner-message-text
+
 After the settings have been set, run dconf update.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with ' and use \n for new lines.</td>
@@ -21737,6 +21747,7 @@ screen by setting <code>banner-message-text</code> to <code>'<i>APPROVED_BANNER<
 where <i>APPROVED_BANNER</i> is the approved banner for your environment.
 <br><br>
 To enable, add or edit <code>banner-message-text</code> to
+
 <code>/etc/dconf/db/gdm.d/00-security-settings</code>. For example:
 <pre>[org/gnome/login-screen]
 banner-message-text='<i>APPROVED_BANNER</i>'</pre>
@@ -21744,6 +21755,7 @@ Once the setting has been added, add a lock to
 <code>/etc/dconf/db/gdm.d/locks/00-security-settings-lock</code> to prevent user modification.
 For example:
 <pre>/org/gnome/login-screen/banner-message-text</pre>
+
 After the settings have been set, run <code>dconf update</code>.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with <code>'</code> and use <code>\n</code> for new lines.</td>
@@ -21771,7 +21783,8 @@ Use the following verbiage for operating systems that have severe limitations on
 "I've read &amp; consent to terms in IS user agreem't."
 
 If it does not, this is a finding.</td>
-<td>To ensure the login warning banner text is properly set, run the following:
+<td>
+To ensure the login warning banner text is properly set, run the following:
 $ grep banner-message-text /etc/dconf/db/gdm.d/*
 If properly configured, the proper banner text will appear.
 To ensure the login warning banner text is locked and cannot be changed by a user, run the following:
@@ -21806,6 +21819,7 @@ screen by setting banner-message-text to 'APPROVED_BANNER'
 where APPROVED_BANNER is the approved banner for your environment.
 
 To enable, add or edit banner-message-text to
+
 /etc/dconf/db/gdm.d/00-security-settings. For example:
 [org/gnome/login-screen]
 banner-message-text='APPROVED_BANNER'
@@ -21813,6 +21827,7 @@ Once the setting has been added, add a lock to
 /etc/dconf/db/gdm.d/locks/00-security-settings-lock to prevent user modification.
 For example:
 /org/gnome/login-screen/banner-message-text
+
 After the settings have been set, run dconf update.
 When entering a warning banner that spans several lines, remember
 to begin and end the string with ' and use \n for new lines.</td>
