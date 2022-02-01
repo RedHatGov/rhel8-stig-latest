@@ -34648,6 +34648,33 @@ to 1 in /etc/yum.conf.</td>
 <td>SRG-OS-000445-GPOS-00199</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must verify correct operation of all security functions.</td>
+<td>CCE-80844-4:Install AIDE</td>
+<td>Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.
+
+This requirement applies to operating systems performing security function verification/testing and/or systems and environments that require this functionality.</td>
+<td xml:lang="en-US">The <code>aide</code> package can be installed with the following command:
+<pre>
+$ sudo yum install aide</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.</td>
+<td>Run the following command to determine if the aide package is installed: $ rpm -q aide
+      Is it the case that the package is not installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3881r375390_fix">Configure the operating system to verify correct operation of all security functions.</fixtext></td>
+<td>The aide package can be installed with the following command:
+
+$ sudo yum install aide</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SV-70979</td>
+<td>SRG-OS-000445-GPOS-00199</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must verify correct operation of all security functions.</td>
 <td>CCE-80868-3:Configure SELinux Policy</td>
 <td>Without verification of the security functions, security functions may not operate correctly and the failure may go unnoticed. Security function is defined as the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Security functionality includes, but is not limited to, establishing system accounts, configuring access authorizations (i.e., permissions, privileges), setting events to be audited, and setting intrusion detection parameters.
 
