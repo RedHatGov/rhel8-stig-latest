@@ -5,7 +5,7 @@
 # Profile Title:  DISA STIG for Red Hat Enterprise Linux 8
 # Profile Description:
 # This profile contains configuration checks that align to the
-# DISA STIG for Red Hat Enterprise Linux 8 V1R4.
+# DISA STIG for Red Hat Enterprise Linux 8 V1R5.
 #
 # In addition to being applicable to Red Hat Enterprise Linux 8, DISA recognizes this
 # configuration baseline as applicable to the operating system tier of
@@ -26755,29 +26755,8 @@
         - medium_severity
         - reboot_required
 
-    - name: Gather the package facts
-      package_facts:
-        manager: auto
-      tags:
-        - CCE-83501-7
-        - DISA-STIG-RHEL-08-040110
-        - NIST-800-171-3.1.16
-        - NIST-800-53-AC-18(3)
-        - NIST-800-53-AC-18(a)
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-CM-7(a)
-        - NIST-800-53-CM-7(b)
-        - NIST-800-53-MP-7
-        - low_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-        - unknown_strategy
-        - wireless_disable_interfaces
-
     - name: Deactivate Wireless Network Interfaces
       command: nmcli radio wifi off
-      when: '"wifi-iface" in ansible_facts.packages'
       tags:
         - CCE-83501-7
         - DISA-STIG-RHEL-08-040110
@@ -26973,6 +26952,7 @@
         paths: /etc/audit/rules.d/
         patterns: ^.*rules$
         use_regex: true
+        hidden: true
       register: files_found
       tags:
         - CCE-85875-3
@@ -27300,7 +27280,7 @@
         group: '0'
       tags:
         - CCE-85894-4
-        - DISA-STIG-RHEL-08-010350
+        - DISA-STIG-RHEL-08-010351
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - configure_strategy
@@ -27318,7 +27298,7 @@
         group: '0'
       tags:
         - CCE-85894-4
-        - DISA-STIG-RHEL-08-010350
+        - DISA-STIG-RHEL-08-010351
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - configure_strategy
@@ -27336,7 +27316,7 @@
         group: '0'
       tags:
         - CCE-85894-4
-        - DISA-STIG-RHEL-08-010350
+        - DISA-STIG-RHEL-08-010351
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - configure_strategy
@@ -27354,11 +27334,83 @@
         group: '0'
       tags:
         - CCE-85894-4
-        - DISA-STIG-RHEL-08-010350
+        - DISA-STIG-RHEL-08-010351
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - configure_strategy
         - dir_group_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure owner on /lib/ recursively
+      file:
+        path: /lib/
+        state: directory
+        recurse: true
+        owner: '0'
+      tags:
+        - CCE-89021-0
+        - DISA-STIG-RHEL-08-010341
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure owner on /lib64/ recursively
+      file:
+        path: /lib64/
+        state: directory
+        recurse: true
+        owner: '0'
+      tags:
+        - CCE-89021-0
+        - DISA-STIG-RHEL-08-010341
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure owner on /usr/lib/ recursively
+      file:
+        path: /usr/lib/
+        state: directory
+        recurse: true
+        owner: '0'
+      tags:
+        - CCE-89021-0
+        - DISA-STIG-RHEL-08-010341
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure owner on /usr/lib64/ recursively
+      file:
+        path: /usr/lib64/
+        state: directory
+        recurse: true
+        owner: '0'
+      tags:
+        - CCE-89021-0
+        - DISA-STIG-RHEL-08-010341
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_ownership_library_dirs
         - low_complexity
         - low_disruption
         - medium_severity
@@ -27467,12 +27519,13 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: Read list libraries without root ownership
-      command: find -L /usr/lib /usr/lib64 /lib /lib64 \! -user root
-      register: libraries_not_owned_by_root
-      changed_when: false
-      failed_when: false
-      check_mode: false
+    - name: Find /lib/ file(s) matching ^.*$
+      find:
+        paths: /lib/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27480,19 +27533,19 @@
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - NIST-800-53-CM-6(a)
+        - configure_strategy
         - file_ownership_library_dirs
-        - medium_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
 
-    - name: Set ownership of system libraries to root
+    - name: Ensure group owner on /lib/ file(s) matching ^.*$
       file:
-        path: '{{ item }}'
-        owner: root
-      with_items: '{{ libraries_not_owned_by_root.stdout_lines }}'
-      when: libraries_not_owned_by_root | length > 0
+        path: '{{ item.path }}'
+        owner: '0'
+      with_items:
+        - '{{ files_found.files }}'
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27500,12 +27553,135 @@
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - NIST-800-53-CM-6(a)
+        - configure_strategy
         - file_ownership_library_dirs
-        - medium_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
+
+    - name: Find /lib64/ file(s) matching ^.*$
+      find:
+        paths: /lib64/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure group owner on /lib64/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        owner: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Find /usr/lib/ file(s) matching ^.*$
+      find:
+        paths: /usr/lib/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure group owner on /usr/lib/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        owner: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Find /usr/lib64/ file(s) matching ^.*$
+      find:
+        paths: /usr/lib64/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Ensure group owner on /usr/lib64/ file(s) matching ^.*$
+      file:
+        path: '{{ item.path }}'
+        owner: '0'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80807-1
+        - DISA-STIG-RHEL-08-010340
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_ownership_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
 
     - name: Read list of world and group writable system executables
       command: find /bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec
@@ -27548,12 +27724,13 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: Read list of world and group writable files in libraries directories
-      command: find /lib /lib64 /usr/lib /usr/lib64 -perm /022 -type f
-      register: world_writable_library_files
-      changed_when: false
-      failed_when: false
-      check_mode: false
+    - name: Find /lib/ file(s)
+      find:
+        paths: /lib/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27561,19 +27738,19 @@
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - NIST-800-53-CM-6(a)
+        - configure_strategy
         - file_permissions_library_dirs
-        - high_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
 
-    - name: Disable world/group writability to library files
+    - name: Set permissions for /lib/ file(s)
       file:
-        path: '{{ item }}'
-        mode: go-w
-      with_items: '{{ world_writable_library_files.stdout_lines }}'
-      when: world_writable_library_files.stdout_lines | length > 0
+        path: '{{ item.path }}'
+        mode: '0755'
+      with_items:
+        - '{{ files_found.files }}'
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27581,18 +27758,142 @@
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
         - NIST-800-53-CM-6(a)
+        - configure_strategy
         - file_permissions_library_dirs
-        - high_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
+
+    - name: Find /lib64/ file(s)
+      find:
+        paths: /lib64/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /lib64/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0755'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Find /usr/lib/ file(s)
+      find:
+        paths: /usr/lib/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /usr/lib/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0755'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Find /usr/lib64/ file(s)
+      find:
+        paths: /usr/lib64/
+        patterns: ^.*$
+        use_regex: true
+        hidden: true
+      register: files_found
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /usr/lib64/ file(s)
+      file:
+        path: '{{ item.path }}'
+        mode: '0755'
+      with_items:
+        - '{{ files_found.files }}'
+      tags:
+        - CCE-80815-4
+        - DISA-STIG-RHEL-08-010330
+        - NIST-800-53-AC-6(1)
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - NIST-800-53-CM-6(a)
+        - configure_strategy
+        - file_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
 
     - name: Find /lib/ file(s) matching ^.*$
       find:
         paths: /lib/
         patterns: ^.*$
         use_regex: true
+        hidden: true
       register: files_found
       tags:
         - CCE-86523-8
@@ -27629,6 +27930,7 @@
         paths: /lib64/
         patterns: ^.*$
         use_regex: true
+        hidden: true
       register: files_found
       tags:
         - CCE-86523-8
@@ -27665,6 +27967,7 @@
         paths: /usr/lib/
         patterns: ^.*$
         use_regex: true
+        hidden: true
       register: files_found
       tags:
         - CCE-86523-8
@@ -27701,6 +28004,7 @@
         paths: /usr/lib64/
         patterns: ^.*$
         use_regex: true
+        hidden: true
       register: files_found
       tags:
         - CCE-86523-8
@@ -31529,7 +31833,7 @@
       register: ntp_conf_exist_result
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
@@ -31548,7 +31852,7 @@
       register: chrony_conf_exist_result
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
@@ -31569,7 +31873,7 @@
         backrefs: true
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
         - ntp_conf_exist_result.stat.exists
       tags:
         - CCE-84059-5
@@ -31591,7 +31895,7 @@
         backrefs: true
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
         - chrony_conf_exist_result.stat.exists
       tags:
         - CCE-84059-5
@@ -31613,7 +31917,7 @@
         backrefs: true
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
         - ntp_conf_exist_result.stat.exists
       tags:
         - CCE-84059-5
@@ -31635,7 +31939,7 @@
         backrefs: true
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages'
+        - ( "chrony" in ansible_facts.packages or "ntp" in ansible_facts.packages )
         - chrony_conf_exist_result.stat.exists
       tags:
         - CCE-84059-5
@@ -31845,6 +32149,7 @@
         paths: /etc/ssh/
         patterns: ^.*_key$
         use_regex: true
+        hidden: true
       register: files_found
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31889,6 +32194,7 @@
         paths: /etc/ssh/
         patterns: ^.*.pub$
         use_regex: true
+        hidden: true
       register: files_found
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:

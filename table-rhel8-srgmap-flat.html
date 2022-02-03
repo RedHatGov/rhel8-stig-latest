@@ -23656,6 +23656,62 @@ $ sudo chgrp root DIR</td>
 <td>SRG-OS-000259-GPOS-00100</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must limit privileges to change software resident within software libraries.</td>
+<td>CCE-89021-0:Verify that Shared Library Directories Have Root Ownership</td>
+<td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
+
+This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.</td>
+<td xml:lang="en-US">System-wide shared library files, which are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+<pre>/lib
+/lib64
+/usr/lib
+/usr/lib64
+</pre>
+Kernel modules, which can be added to the kernel during runtime, are also
+stored in <code>/lib/modules</code>. All files in these directories should be
+owned by the <code>root</code> user. If the  directories, is found to be owned
+by a user other than root correct its
+ownership with the following command:
+<pre>$ sudo chown root <i>DIR</i></pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.</td>
+<td>Shared libraries are stored in the following directories:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+For each of these directories, run the following command to find files not
+owned by root:
+$ sudo find -L $DIR ! -user root -type d -exec chown root {} \;
+      Is it the case that any of these directories are not owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3800r374913_fix">Configure the operating system to limit privileges to change software resident within software libraries.</fixtext></td>
+<td>System-wide shared library files, which are linked to executables
+during process load time or run time, are stored in the following directories
+by default:
+/lib
+/lib64
+/usr/lib
+/usr/lib64
+
+Kernel modules, which can be added to the kernel during runtime, are also
+stored in /lib/modules. All files in these directories should be
+owned by the root user. If the  directories, is found to be owned
+by a user other than root correct its
+ownership with the following command:
+$ sudo chown root DIR</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-57183</td>
+<td>SRG-OS-000259-GPOS-00100</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must limit privileges to change software resident within software libraries.</td>
 <td>CCE-88692-9:Verify that Shared Library Directories Have Restrictive Permissions</td>
 <td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
 
@@ -23995,7 +24051,7 @@ $ sudo chmod go-w FILE</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must limit privileges to change software resident within software libraries.</td>
 <td>CCE-86523-8:Verify the system-wide library files in directories
-"/lib", "/lib64", "/usr/lib/" and "/usr/lib64" are owned by root.</td>
+"/lib", "/lib64", "/usr/lib/" and "/usr/lib64" are group-owned by root.</td>
 <td> If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
 
 This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.</td>
@@ -24007,7 +24063,7 @@ by default:
 /usr/lib64
 </pre>
 All system-wide shared library files should be protected from unauthorised
-access. If any of these files is not owned by root, correct its owner with
+access. If any of these files is not group-owned by root, correct its group-owner with
 the following command:
 <pre>$ sudo chgrp root <i>FILE</i></pre>
 </td>
@@ -24022,7 +24078,7 @@ the following command:
 To find if system-wide library files stored in these directories are not group-owned by
 root run the following command for each directory DIR:
 $ sudo find -L DIR ! -group root -type f 
-      Is it the case that system wide library files are not group owned by root?
+      Is it the case that system wide library files are not group-owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3800r374913_fix">Configure the operating system to limit privileges to change software resident within software libraries.</fixtext></td>
 <td>System-wide library files are stored in the following directories
@@ -24033,7 +24089,7 @@ by default:
 /usr/lib64
 
 All system-wide shared library files should be protected from unauthorised
-access. If any of these files is not owned by root, correct its owner with
+access. If any of these files is not group-owned by root, correct its group-owner with
 the following command:
 $ sudo chgrp root FILE</td>
 <td>medium</td>
