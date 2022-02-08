@@ -35546,6 +35546,30 @@ $ systemctl set-default multi-user.target
 You should see the following output:
 Removed symlink /etc/systemd/system/default.target.
 Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/multi-user.target.",,,,
+SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-83380-6:Disable X Windows Startup By Setting Default Target,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Systems that do not require a graphical user interface should only boot by
+default into multi-user.target mode. This prevents accidental booting of the system
+into a graphical.target mode. Setting the system's default target to
+multi-user.target will prevent automatic startup of the X server. To do so, run:
+$ systemctl set-default multi-user.target
+You should see the following output:
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/multi-user.target.","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the default target is multi-user, run the following command:
+$ systemctl get-default
+The output should show the following:
+multi-user.target
+      Is it the case that the X windows display server is running and/or has not been disabled?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Systems that do not require a graphical user interface should only boot by
+default into multi-user.target mode. This prevents accidental booting of the system
+into a graphical.target mode. Setting the system's default target to
+multi-user.target will prevent automatic startup of the X server. To do so, run:
+$ systemctl set-default multi-user.target
+You should see the following output:
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/multi-user.target.",,,,
 SV-70849,SRG-OS-000480-GPOS-00228,TBD - Assigned by DISA after STIG release,The operating system must define default permissions for all authenticated users in such a way that the user can only read and modify their own files.,CCE-81036-6:Ensure the Default Bash Umask is Set Correctly,Setting the most restrictive default permissions ensures that when new accounts are created they do not have unnecessary access.,"To ensure the default umask for users of the Bash shell is set properly,
 add or correct the umask setting in /etc/bashrc to read
 as follows:

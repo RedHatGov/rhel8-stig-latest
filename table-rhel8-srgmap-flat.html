@@ -52665,6 +52665,46 @@ Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/syst
 <td></td>
 </tr>
 <tr>
+<td>SV-70851</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-83380-6:Disable X Windows Startup By Setting Default Target</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">Systems that do not require a graphical user interface should only boot by
+default into <code>multi-user.target</code> mode. This prevents accidental booting of the system
+into a <code>graphical.target</code> mode. Setting the system's default target to
+<code>multi-user.target</code> will prevent automatic startup of the X server. To do so, run:
+<pre>$ systemctl set-default multi-user.target</pre>
+You should see the following output:
+<pre>Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/multi-user.target.</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To verify the default target is multi-user, run the following command:
+$ systemctl get-default
+The output should show the following:
+multi-user.target
+      Is it the case that the X windows display server is running and/or has not been disabled?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>Systems that do not require a graphical user interface should only boot by
+default into multi-user.target mode. This prevents accidental booting of the system
+into a graphical.target mode. Setting the system's default target to
+multi-user.target will prevent automatic startup of the X server. To do so, run:
+$ systemctl set-default multi-user.target
+You should see the following output:
+Removed symlink /etc/systemd/system/default.target.
+Created symlink from /etc/systemd/system/default.target to /usr/lib/systemd/system/multi-user.target.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>SV-70849</td>
 <td>SRG-OS-000480-GPOS-00228</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
