@@ -33613,10 +33613,6 @@ if rpm -q --quiet "xorg-x11-server-Xwayland" ; then
     yum remove -y "xorg-x11-server-Xwayland"
 
 fi
-
-
-# configure run level
-systemctl set-default multi-user.target
 # END fix for 'xwindows_remove_packages'
 
 ###############################################################################

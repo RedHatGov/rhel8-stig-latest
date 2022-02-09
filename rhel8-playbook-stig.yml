@@ -8833,7 +8833,7 @@
       tags:
         - CCE-80687-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030540
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -8853,7 +8853,7 @@
       tags:
         - CCE-80687-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030540
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -8996,7 +8996,7 @@
       tags:
         - CCE-80687-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030540
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9141,7 +9141,7 @@
       tags:
         - CCE-80687-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030540
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9160,7 +9160,7 @@
       tags:
         - CCE-80688-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030530
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9180,7 +9180,7 @@
       tags:
         - CCE-80688-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030530
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9323,7 +9323,7 @@
       tags:
         - CCE-80688-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030530
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9468,7 +9468,7 @@
       tags:
         - CCE-80688-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030530
+        - DISA-STIG-RHEL-08-030490
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9487,7 +9487,7 @@
       tags:
         - CCE-80689-3
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030520
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9507,7 +9507,7 @@
       tags:
         - CCE-80689-3
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030520
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9652,7 +9652,7 @@
       tags:
         - CCE-80689-3
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030520
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9799,7 +9799,7 @@
       tags:
         - CCE-80689-3
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030520
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9818,7 +9818,7 @@
       tags:
         - CCE-80690-1
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030510
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9838,7 +9838,7 @@
       tags:
         - CCE-80690-1
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030510
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -9983,7 +9983,7 @@
       tags:
         - CCE-80690-1
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030510
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10130,7 +10130,7 @@
       tags:
         - CCE-80690-1
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030510
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10149,7 +10149,7 @@
       tags:
         - CCE-80691-9
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030240
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10169,7 +10169,7 @@
       tags:
         - CCE-80691-9
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030240
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10446,7 +10446,7 @@
       tags:
         - CCE-80691-9
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030240
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10725,7 +10725,7 @@
       tags:
         - CCE-80691-9
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030240
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10744,7 +10744,7 @@
       tags:
         - CCE-80692-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030230
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -10764,7 +10764,7 @@
       tags:
         - CCE-80692-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030230
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11041,7 +11041,7 @@
       tags:
         - CCE-80692-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030230
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11320,7 +11320,7 @@
       tags:
         - CCE-80692-7
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030230
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11339,7 +11339,7 @@
       tags:
         - CCE-80693-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030500
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11359,7 +11359,7 @@
       tags:
         - CCE-80693-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030500
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11504,7 +11504,7 @@
       tags:
         - CCE-80693-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030500
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -11651,7 +11651,7 @@
       tags:
         - CCE-80693-5
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030500
+        - DISA-STIG-RHEL-08-030480
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12265,7 +12265,7 @@
       tags:
         - CCE-80695-0
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030220
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12285,7 +12285,7 @@
       tags:
         - CCE-80695-0
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030220
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12562,7 +12562,7 @@
       tags:
         - CCE-80695-0
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030220
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12841,7 +12841,7 @@
       tags:
         - CCE-80695-0
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030220
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12860,7 +12860,7 @@
       tags:
         - CCE-80696-8
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030210
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -12880,7 +12880,7 @@
       tags:
         - CCE-80696-8
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030210
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -13157,7 +13157,7 @@
       tags:
         - CCE-80696-8
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030210
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -13436,7 +13436,7 @@
       tags:
         - CCE-80696-8
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030210
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -13455,7 +13455,7 @@
       tags:
         - CCE-80697-6
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030270
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -13475,7 +13475,7 @@
       tags:
         - CCE-80697-6
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030270
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -13752,7 +13752,7 @@
       tags:
         - CCE-80697-6
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030270
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -14031,7 +14031,7 @@
       tags:
         - CCE-80697-6
         - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030270
+        - DISA-STIG-RHEL-08-030200
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15272,7 +15272,7 @@
         manager: auto
       tags:
         - CCE-80704-0
-        - DISA-STIG-RHEL-08-030362
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15291,7 +15291,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80704-0
-        - DISA-STIG-RHEL-08-030362
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15437,7 +15437,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80704-0
-        - DISA-STIG-RHEL-08-030362
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15585,7 +15585,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80704-0
-        - DISA-STIG-RHEL-08-030362
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15603,7 +15603,7 @@
         manager: auto
       tags:
         - CCE-80705-7
-        - DISA-STIG-RHEL-08-030363
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15622,7 +15622,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80705-7
-        - DISA-STIG-RHEL-08-030363
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15768,7 +15768,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80705-7
-        - DISA-STIG-RHEL-08-030363
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15916,7 +15916,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80705-7
-        - DISA-STIG-RHEL-08-030363
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15934,7 +15934,7 @@
         manager: auto
       tags:
         - CCE-80706-5
-        - DISA-STIG-RHEL-08-030364
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -15953,7 +15953,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80706-5
-        - DISA-STIG-RHEL-08-030364
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16099,7 +16099,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80706-5
-        - DISA-STIG-RHEL-08-030364
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16247,7 +16247,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80706-5
-        - DISA-STIG-RHEL-08-030364
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16265,7 +16265,7 @@
         manager: auto
       tags:
         - CCE-80707-3
-        - DISA-STIG-RHEL-08-030365
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16284,7 +16284,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80707-3
-        - DISA-STIG-RHEL-08-030365
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16430,7 +16430,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80707-3
-        - DISA-STIG-RHEL-08-030365
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16578,7 +16578,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80707-3
-        - DISA-STIG-RHEL-08-030365
+        - DISA-STIG-RHEL-08-030361
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16596,7 +16596,7 @@
         manager: auto
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16616,7 +16616,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16765,7 +16765,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -16916,7 +16916,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17065,7 +17065,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17216,7 +17216,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80751-1
-        - DISA-STIG-RHEL-08-030470
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17235,7 +17235,7 @@
         manager: auto
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17255,7 +17255,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17404,7 +17404,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17555,7 +17555,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17704,7 +17704,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17855,7 +17855,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80752-9
-        - DISA-STIG-RHEL-08-030460
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17874,7 +17874,7 @@
         manager: auto
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -17894,7 +17894,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18043,7 +18043,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18194,7 +18194,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18343,7 +18343,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18494,7 +18494,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80753-7
-        - DISA-STIG-RHEL-08-030440
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18513,7 +18513,7 @@
         manager: auto
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18533,7 +18533,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18682,7 +18682,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18834,7 +18834,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -18983,7 +18983,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19135,7 +19135,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80755-2
-        - DISA-STIG-RHEL-08-030450
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19154,7 +19154,7 @@
         manager: auto
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19174,7 +19174,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19323,7 +19323,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19474,7 +19474,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19623,7 +19623,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -19774,7 +19774,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80754-5
-        - DISA-STIG-RHEL-08-030430
+        - DISA-STIG-RHEL-08-030420
         - NIST-800-171-3.1.7
         - NIST-800-53-AU-12(c)
         - NIST-800-53-AU-2(d)
@@ -20739,7 +20739,7 @@
         manager: auto
       tags:
         - CCE-80712-3
-        - DISA-STIG-RHEL-08-030380
+        - DISA-STIG-RHEL-08-030360
         - NIST-800-171-3.1.7
         - NIST-800-53-AC-6(9)
         - NIST-800-53-AU-12(c)
@@ -20759,7 +20759,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80712-3
-        - DISA-STIG-RHEL-08-030380
+        - DISA-STIG-RHEL-08-030360
         - NIST-800-171-3.1.7
         - NIST-800-53-AC-6(9)
         - NIST-800-53-AU-12(c)
@@ -20896,7 +20896,7 @@
       when: '"audit" in ansible_facts.packages'
       tags:
         - CCE-80712-3
-        - DISA-STIG-RHEL-08-030380
+        - DISA-STIG-RHEL-08-030360
         - NIST-800-171-3.1.7
         - NIST-800-53-AC-6(9)
         - NIST-800-53-AU-12(c)
@@ -21035,7 +21035,7 @@
         - audit_arch == "b64"
       tags:
         - CCE-80712-3
-        - DISA-STIG-RHEL-08-030380
+        - DISA-STIG-RHEL-08-030360
         - NIST-800-171-3.1.7
         - NIST-800-53-AC-6(9)
         - NIST-800-53-AU-12(c)
@@ -33328,23 +33328,6 @@
           - xorg-x11-server-utils
           - xorg-x11-server-Xwayland
         state: absent
-      tags:
-        - CCE-83411-9
-        - DISA-STIG-RHEL-08-040320
-        - NIST-800-53-CM-6(b)
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-        - xwindows_remove_packages
-
-    - name: Switch to multi-user runlevel
-      file:
-        src: /usr/lib/systemd/system/multi-user.target
-        dest: /etc/systemd/system/default.target
-        state: link
-        force: true
       tags:
         - CCE-83411-9
         - DISA-STIG-RHEL-08-040320
