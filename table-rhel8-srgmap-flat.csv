@@ -1488,20 +1488,32 @@ Remote access is access to DoD nonpublic information systems by an authorized us
 Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.","The RekeyLimit parameter specifies how often
 the session key of the is renegotiated, both in terms of
 amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/sshd_config.","
+elapsed.
+To decrease the default limits, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
+RekeyLimit  ","
                   Applicable - Configurable
                 ","Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions. If it does not, this is a finding.","To check if RekeyLimit is set correctly, run the
 following command:
+
 $ sudo grep RekeyLimit /etc/ssh/sshd_config
+
 If configured properly, output should be
 RekeyLimit  
       Is it the case that it is commented out or is not set?
       ",Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.,"The RekeyLimit parameter specifies how often
 the session key of the is renegotiated, both in terms of
 amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/sshd_config.",,,,
+elapsed.
+To decrease the default limits, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
+RekeyLimit  ",,,,
 SV-70907,SRG-OS-000037-GPOS-00015,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish what type of events occurred.,CCE-80872-5:Enable auditd Service,"Without establishing what type of events occurred, it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.
 
 Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked.
@@ -12476,10 +12488,8 @@ domains = testing.test
 V-56689,SRG-OS-000069-GPOS-00037,TBD - Assigned by DISA after STIG release,The operating system must enforce password complexity by requiring that at least one upper-case character be used.,CCE-80664-6:Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session,"Use of a complex password helps to increase the time and resources required to compromise the password. Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks.
 
 Password complexity is one factor of several that determines how long it takes to crack a password. The more complex the password, the greater the number of possible combinations that need to be tested before the password is compromised.","To configure the number of retry prompts that are permitted per-session:
-Edit the pam_pwquality.so statement in
 
-/etc/pam.d/system-auth  and
-/etc/pam.d/password-auth  to show
+Edit the /etc/security/pwquality.conf to include
 
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
@@ -12487,17 +12497,15 @@ per session.","
                   Applicable - Configurable
                 ","Verify the operating system enforces password complexity by requiring that at least one upper-case character be used. If it does not, this is a finding.","To check how many retry attempts are permitted on a per-session basis, run the following command:
 
-$ grep pam_pwquality /etc/pam.d/system-auth /etc/pam.d/password-auth
+$ grep retry /etc/security/pwquality.conf
 
 The retry parameter will indicate how many attempts are permitted.
 The DoD required value is less than or equal to 3.
 This would appear as retry=3, or a lower value.
       Is it the case that it is not the required value?
       ",Configure the operating system to enforce password complexity by requiring that at least one upper-case character be used.,"To configure the number of retry prompts that are permitted per-session:
-Edit the pam_pwquality.so statement in
 
-/etc/pam.d/system-auth  and
-/etc/pam.d/password-auth  to show
+Edit the /etc/security/pwquality.conf to include
 
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
@@ -14431,42 +14439,21 @@ crypto.fips_enabled =  1
 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
-SV-71089,SRG-OS-000126-GPOS-00066,TBD - Assigned by DISA after STIG release,The operating system must terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.,CCE-80906-1:Set SSH Idle Timeout Interval," If a maintenance session or connection remains open after maintenance is completed, it may be hijacked by an attacker and used to compromise or damage the system.
+SV-71089,SRG-OS-000126-GPOS-00066,TBD - Assigned by DISA after STIG release,The operating system must terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.,SV-71089:The operating system must terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.," If a maintenance session or connection remains open after maintenance is completed, it may be hijacked by an attacker and used to compromise or damage the system.
 
 Some maintenance and test tools are either standalone devices with their own operating systems or are applications bundled with an operating system.
 
-Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.","<VulnDiscussion> If a maintenance session or connection remains open after maintenance is completed, it may be hijacked by an attacker and used to compromise or damage the system.
 
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
+Some maintenance and test tools are either standalone devices with their own operating systems or are applications bundled with an operating system.
 
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.","
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
-                ","Verify the operating system terminates all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed. If it does not, this is a finding.","Run the following command to see what the timeout interval is:
-$ sudo grep ClientAliveInterval /etc/ssh/sshd_config
-If properly configured, the output should be:
-ClientAliveInterval 
-      Is it the case that it is commented out or not configured properly?
-      ",Configure the operating system to terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.,"SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
+                ","Verify the operating system terminates all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed. If it does not, this is a finding.",,Configure the operating system to terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.,"<VulnDiscussion> If a maintenance session or connection remains open after maintenance is completed, it may be hijacked by an attacker and used to compromise or damage the system.
 
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
+Some maintenance and test tools are either standalone devices with their own operating systems or are applications bundled with an operating system.
 
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.",,,,
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 V-56835,SRG-OS-000132-GPOS-00067,TBD - Assigned by DISA after STIG release,The operating system must separate user functionality (including user interface services) from operating system management functionality.,CCE-80913-7:Restrict Access to Kernel Message Buffer,"Operating system management functionality includes functions necessary for administration and requires privileged user access. Allowing non-privileged users to access operating system management functionality capabilities increases the risk that non-privileged users may obtain elevated privileges.
 
 Operating system management functionality includes functions necessary to administer console, network components, workstations, or servers and typically requires privileged user access.
@@ -14807,79 +14794,15 @@ Managing excess capacity ensures that sufficient capacity is available to counte
                 ","Verify the operating system manages excess capacity, bandwidth, or other redundancy to limit the effects of information flooding types of Denial of Service (DoS) attacks. If it does not, this is a finding.",,"Configure the operating system to manage excess capacity, bandwidth, or other redundancy to limit the effects of information flooding types of Denial of Service (DoS) attacks.","<VulnDiscussion>DoS is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity. 
 
 Managing excess capacity ensures that sufficient capacity is available to counter flooding attacks. Employing increased capacity and service redundancy may reduce the susceptibility to some DoS attacks. Managing excess capacity may include, for example, establishing selected usage priorities, quotas, or partitioning.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
-SV-71125,SRG-OS-000163-GPOS-00072,TBD - Assigned by DISA after STIG release,"The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti",CCE-80906-1:Set SSH Idle Timeout Interval,"Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
+SV-71125,SRG-OS-000163-GPOS-00072,TBD - Assigned by DISA after STIG release,"The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti","SV-71125:The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti","Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
-Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
+Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.","<VulnDiscussion>Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.","
+Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
-                ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of ina","Run the following command to see what the timeout interval is:
-$ sudo grep ClientAliveInterval /etc/ssh/sshd_config
-If properly configured, the output should be:
-ClientAliveInterval 
-      Is it the case that it is commented out or not configured properly?
-      ","Configure the operating system to terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes o","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
+                ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of ina",,"Configure the operating system to terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes o","<VulnDiscussion>Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.",,,,
-SV-71125,SRG-OS-000163-GPOS-00072,TBD - Assigned by DISA after STIG release,"The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti",CCE-83405-1:Set SSH Client Alive Count Max to zero,"Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
-
-Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.","The SSH server sends at most ClientAliveCountMax messages
-during a SSH session and waits for a response from the SSH client.
-The option ClientAliveInterval configures timeout after
-each ClientAliveCountMax message. If the SSH server does not
-receive a response from the client, then the connection is considered idle
-and terminated.
-
-To ensure the SSH idle timeout occurs precisely when the
-ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0 in
-
-
-/etc/ssh/sshd_config:","
-                  Applicable - Configurable
-                ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of ina","To ensure ClientAliveInterval is set correctly, run the following command:
-
-$ sudo grep ClientAliveCountMax /etc/ssh/sshd_config
-
-If properly configured, the output should be:
-ClientAliveCountMax 0
-
-In this case, the SSH idle timeout occurs precisely when
-the ClientAliveInterval is set.
-      Is it the case that it is commented out or not configured properly?
-      ","Configure the operating system to terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes o","The SSH server sends at most ClientAliveCountMax messages
-during a SSH session and waits for a response from the SSH client.
-The option ClientAliveInterval configures timeout after
-each ClientAliveCountMax message. If the SSH server does not
-receive a response from the client, then the connection is considered idle
-and terminated.
-
-To ensure the SSH idle timeout occurs precisely when the
-ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0 in
-
-
-/etc/ssh/sshd_config:",,,,
+Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 V-56869,SRG-OS-000184-GPOS-00078,TBD - Assigned by DISA after STIG release,"The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","V-56869:The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","Failure to a known safe state helps prevent systems from failing to a state that may cause loss of data or unauthorized access to system resources. Operating systems that fail suddenly and with no incorporated failure state planning may leave the system available but with a reduced security protection capability. Preserving operating system state information also facilitates system restart and return to the operational mode of the organization with less disruption to mission-essential processes. 
 
 Abort refers to stopping a program or function before it has finished naturally. The term abort refers to both requested and unexpected terminations.","<VulnDiscussion>Failure to a known safe state helps prevent systems from failing to a state that may cause loss of data or unauthorized access to system resources. Operating systems that fail suddenly and with no incorporated failure state planning may leave the system available but with a reduced security protection capability. Preserving operating system state information also facilitates system restart and return to the operational mode of the organization with less disruption to mission-essential processes. 
@@ -17145,87 +17068,27 @@ all lines listed above will be returned from the command.
 If one or more lines are missing, this is a finding.
       Is it the case that integrity checks of the audit tools are missing or incomplete?
       ",Configure the operating system to use cryptographic mechanisms to protect the integrity of audit tools.,The operating system file integrity tool must be configured to protect the integrity of the audit tools.,,,,
-SV-71467,SRG-OS-000279-GPOS-00109,TBD - Assigned by DISA after STIG release,The operating system must automatically terminate a user session after inactivity time-outs have expired or at shutdown.,CCE-80906-1:Set SSH Idle Timeout Interval,"Automatic session termination addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions (i.e., network disconnect). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational information system. Such user sessions can be terminated (and thus terminate user access) without terminating network sessions.
+SV-71467,SRG-OS-000279-GPOS-00109,TBD - Assigned by DISA after STIG release,The operating system must automatically terminate a user session after inactivity time-outs have expired or at shutdown.,SV-71467:The operating system must automatically terminate a user session after inactivity time-outs have expired or at shutdown.,"Automatic session termination addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions (i.e., network disconnect). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational information system. Such user sessions can be terminated (and thus terminate user access) without terminating network sessions.
 
 Session termination terminates all processes associated with a user's logical session except those processes that are specifically created by the user (i.e., session owner) to continue after the session is terminated.
 
 Conditions or trigger events requiring automatic session termination can include, for example, organization-defined periods of user inactivity, targeted responses to certain types of incidents, and time-of-day restrictions on information system use.
 
-This capability is typically reserved for specific operating system functionality where the system owner, data owner, or organization requires additional assurance.","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
-
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.","
-                  Applicable - Configurable
-                ","Verify the operating system automatically terminates a user session after inactivity time-outs have expired or at shutdown. If it does not, this is a finding.","Run the following command to see what the timeout interval is:
-$ sudo grep ClientAliveInterval /etc/ssh/sshd_config
-If properly configured, the output should be:
-ClientAliveInterval 
-      Is it the case that it is commented out or not configured properly?
-      ",Configure the operating system to automatically terminate a user session after inactivity time-outs have expired or at shutdown.,"SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
-
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.",,,,
-SV-71467,SRG-OS-000279-GPOS-00109,TBD - Assigned by DISA after STIG release,The operating system must automatically terminate a user session after inactivity time-outs have expired or at shutdown.,CCE-83405-1:Set SSH Client Alive Count Max to zero,"Automatic session termination addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions (i.e., network disconnect). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational information system. Such user sessions can be terminated (and thus terminate user access) without terminating network sessions.
+This capability is typically reserved for specific operating system functionality where the system owner, data owner, or organization requires additional assurance.","<VulnDiscussion>Automatic session termination addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions (i.e., network disconnect). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational information system. Such user sessions can be terminated (and thus terminate user access) without terminating network sessions.
 
 Session termination terminates all processes associated with a user's logical session except those processes that are specifically created by the user (i.e., session owner) to continue after the session is terminated.
 
 Conditions or trigger events requiring automatic session termination can include, for example, organization-defined periods of user inactivity, targeted responses to certain types of incidents, and time-of-day restrictions on information system use.
 
-This capability is typically reserved for specific operating system functionality where the system owner, data owner, or organization requires additional assurance.","The SSH server sends at most ClientAliveCountMax messages
-during a SSH session and waits for a response from the SSH client.
-The option ClientAliveInterval configures timeout after
-each ClientAliveCountMax message. If the SSH server does not
-receive a response from the client, then the connection is considered idle
-and terminated.
-
-To ensure the SSH idle timeout occurs precisely when the
-ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0 in
-
-
-/etc/ssh/sshd_config:","
+This capability is typically reserved for specific operating system functionality where the system owner, data owner, or organization requires additional assurance.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
-                ","Verify the operating system automatically terminates a user session after inactivity time-outs have expired or at shutdown. If it does not, this is a finding.","To ensure ClientAliveInterval is set correctly, run the following command:
+                ","Verify the operating system automatically terminates a user session after inactivity time-outs have expired or at shutdown. If it does not, this is a finding.",,Configure the operating system to automatically terminate a user session after inactivity time-outs have expired or at shutdown.,"<VulnDiscussion>Automatic session termination addresses the termination of user-initiated logical sessions in contrast to the termination of network connections that are associated with communications sessions (i.e., network disconnect). A logical session (for local, network, and remote access) is initiated whenever a user (or process acting on behalf of a user) accesses an organizational information system. Such user sessions can be terminated (and thus terminate user access) without terminating network sessions.
 
-$ sudo grep ClientAliveCountMax /etc/ssh/sshd_config
+Session termination terminates all processes associated with a user's logical session except those processes that are specifically created by the user (i.e., session owner) to continue after the session is terminated.
 
-If properly configured, the output should be:
-ClientAliveCountMax 0
+Conditions or trigger events requiring automatic session termination can include, for example, organization-defined periods of user inactivity, targeted responses to certain types of incidents, and time-of-day restrictions on information system use.
 
-In this case, the SSH idle timeout occurs precisely when
-the ClientAliveInterval is set.
-      Is it the case that it is commented out or not configured properly?
-      ",Configure the operating system to automatically terminate a user session after inactivity time-outs have expired or at shutdown.,"The SSH server sends at most ClientAliveCountMax messages
-during a SSH session and waits for a response from the SSH client.
-The option ClientAliveInterval configures timeout after
-each ClientAliveCountMax message. If the SSH server does not
-receive a response from the client, then the connection is considered idle
-and terminated.
-
-To ensure the SSH idle timeout occurs precisely when the
-ClientAliveInterval is set, set the ClientAliveCountMax to
-value of 0 in
-
-
-/etc/ssh/sshd_config:",,,,
+This capability is typically reserved for specific operating system functionality where the system owner, data owner, or organization requires additional assurance.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 V-57209,SRG-OS-000280-GPOS-00110,TBD - Assigned by DISA after STIG release,The operating system must provide a logoff capability for user-initiated communications sessions when requiring user access authentication.,V-57209:The operating system must provide a logoff capability for user-initiated communications sessions when requiring user access authentication.,"If a user cannot explicitly end an operating system session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.
 
 Information resources to which users gain access via authentication include, for example, local workstations and remote services. For some types of interactive sessions, including, for example, remote logon, information systems typically send logoff messages as final messages prior to terminating sessions.","<VulnDiscussion>If a user cannot explicitly end an operating system session, the session may remain open and be exploited by an attacker; this is referred to as a zombie session.
@@ -22950,38 +22813,9 @@ policy, run the following command:
 $ sudo update-crypto-policies --set 
 The rule checks if settings for selected crypto policy are configured as expected. Configuration files in the /etc/crypto-policies/back-ends are either symlinks to correct files provided by Crypto-policies package or they are regular files in case crypto policy customizations are applied.
 Crypto policies may be customized by crypto policy modules, in which case it is delimited from the base policy using a colon.",,,,
-V-56787,SRG-OS-000395-GPOS-00175,TBD - Assigned by DISA after STIG release,"The operating system must verify remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions.",CCE-80906-1:Set SSH Idle Timeout Interval,"If the remote connection is not closed and verified as closed, the session may remain open and be exploited by an attacker; this is referred to as a zombie session. Remote connections must be disconnected and verified as disconnected when nonlocal maintenance sessions have been terminated and are no longer available for use.","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
-
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.","
+V-56787,SRG-OS-000395-GPOS-00175,TBD - Assigned by DISA after STIG release,"The operating system must verify remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions.","V-56787:The operating system must verify remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions.","If the remote connection is not closed and verified as closed, the session may remain open and be exploited by an attacker; this is referred to as a zombie session. Remote connections must be disconnected and verified as disconnected when nonlocal maintenance sessions have been terminated and are no longer available for use.","<VulnDiscussion>If the remote connection is not closed and verified as closed, the session may remain open and be exploited by an attacker; this is referred to as a zombie session. Remote connections must be disconnected and verified as disconnected when nonlocal maintenance sessions have been terminated and are no longer available for use.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
-                ","Verify the operating system verifies remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions. If it does not, this is a finding.","Run the following command to see what the timeout interval is:
-$ sudo grep ClientAliveInterval /etc/ssh/sshd_config
-If properly configured, the output should be:
-ClientAliveInterval 
-      Is it the case that it is commented out or not configured properly?
-      ","Configure the operating system to verify remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions.","SSH allows administrators to set an idle timeout interval. After this interval
-has passed, the idle user will be automatically logged out.
-
-To set an idle timeout interval, edit the following line in /etc/ssh/sshd_config as
-follows:
-ClientAliveInterval 
-
-The timeout interval is given in seconds. For example, have a timeout
-of 10 minutes, set interval to 600.
-
-If a shorter timeout has already been set for the login shell, that value will
-preempt any SSH setting made in /etc/ssh/sshd_config. Keep in mind that
-some processes may stop SSH  from correctly detecting that the user is idle.",,,,
+                ","Verify the operating system verifies remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions. If it does not, this is a finding.",,"Configure the operating system to verify remote disconnection at the termination of nonlocal maintenance and diagnostic sessions, when used for nonlocal maintenance sessions.","<VulnDiscussion>If the remote connection is not closed and verified as closed, the session may remain open and be exploited by an attacker; this is referred to as a zombie session. Remote connections must be disconnected and verified as disconnected when nonlocal maintenance sessions have been terminated and are no longer available for use.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 SV-71043,SRG-OS-000396-GPOS-00176,TBD - Assigned by DISA after STIG release,"The operating system must implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-80942-6:Enable FIPS Mode,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"To enable FIPS mode, run the following command:
 fips-mode-setup --enable
 
@@ -32788,10 +32622,8 @@ dictcheck=1
       ",Configure the operating system to prevent the use of dictionary words for passwords.,"The pam_pwquality module's dictcheck check if passwords contains dictionary words. When
 dictcheck is set to 1 passwords will be checked for dictionary words.",,,,
 SV-70857,SRG-OS-000480-GPOS-00225,TBD - Assigned by DISA after STIG release,The operating system must prevent the use of dictionary words for passwords.,CCE-80664-6:Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session,"If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.","To configure the number of retry prompts that are permitted per-session:
-Edit the pam_pwquality.so statement in
 
-/etc/pam.d/system-auth  and
-/etc/pam.d/password-auth  to show
+Edit the /etc/security/pwquality.conf to include
 
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
@@ -32799,17 +32631,15 @@ per session.","
                   Applicable - Configurable
                 ","Verify the operating system prevents the use of dictionary words for passwords. If it does not, this is a finding.","To check how many retry attempts are permitted on a per-session basis, run the following command:
 
-$ grep pam_pwquality /etc/pam.d/system-auth /etc/pam.d/password-auth
+$ grep retry /etc/security/pwquality.conf
 
 The retry parameter will indicate how many attempts are permitted.
 The DoD required value is less than or equal to 3.
 This would appear as retry=3, or a lower value.
       Is it the case that it is not the required value?
       ",Configure the operating system to prevent the use of dictionary words for passwords.,"To configure the number of retry prompts that are permitted per-session:
-Edit the pam_pwquality.so statement in
 
-/etc/pam.d/system-auth  and
-/etc/pam.d/password-auth  to show
+Edit the /etc/security/pwquality.conf to include
 
 retry=, or a lower value if site
 policy is more restrictive. The DoD requirement is a maximum of 3 prompts
@@ -33077,7 +32907,8 @@ sudo egrep -i '(!rootpw|!targetpw|!runaspw)' /etc/sudoers /etc/sudoers.d/* | gre
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","Run the following command to Verify that the sudoers security policy is configured to use the invoking user's password for privilege escalation:
  sudo egrep -i '(!rootpw|!targetpw|!runaspw)' /etc/sudoers /etc/sudoers.d/* | grep -v '#'
-If no results are returned, this is a finding
+If no results are returned, this is a finding.
+If results are returned from more than one file location, this is a finding.
 If ""Defaults !targetpw"" is not defined, this is a finding.
 If ""Defaults !rootpw"" is not defined, this is a finding.
 If ""Defaults !runaspw"" is not defined, this is a finding.
@@ -35440,20 +35271,32 @@ SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","The RekeyLimit parameter specifies how often
 the session key of the is renegotiated, both in terms of
 amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/sshd_config.","
+elapsed.
+To decrease the default limits, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
+RekeyLimit  ","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To check if RekeyLimit is set correctly, run the
 following command:
+
 $ sudo grep RekeyLimit /etc/ssh/sshd_config
+
 If configured properly, output should be
 RekeyLimit  
       Is it the case that it is commented out or is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The RekeyLimit parameter specifies how often
 the session key of the is renegotiated, both in terms of
 amount of data that may be transmitted and the time
-elapsed. To decrease the default limits, put line
-RekeyLimit   to file /etc/ssh/sshd_config.",,,,
+elapsed.
+To decrease the default limits, add or correct the following line in
+
+
+/etc/ssh/sshd_config:
+
+RekeyLimit  ",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82462-3:SSH server uses strong entropy to seed,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set up SSH server to use entropy from a high-quality source, edit the /etc/sysconfig/sshd file.
