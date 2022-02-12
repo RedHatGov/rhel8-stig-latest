@@ -2712,7 +2712,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if ! grep -x '  case "$name" in sshd|login) exec tmux ;; esac' /etc/bashrc; then
-    cat >> /etc/bashrc <<'EOF'
+    cat >> /etc/profile.d/tmux.sh <<'EOF'
 if [ "$PS1" ]; then
   parent=$(ps -o ppid= -p $$)
   name=$(ps -o comm= -p $parent)
@@ -3296,7 +3296,7 @@ awk -F':' '{ if ($4 >= 1000 && $4 != 65534) system("chgrp -f " $4" "$6) }' /etc/
 ###############################################################################
 (>&2 echo "Remediating rule 119/370: 'file_permissions_home_directories'")
 
-for home_dir in $(awk -F':' '{ if ($4 >= 1000 && $4 != 65534) print $6 }' /etc/passwd); do
+for home_dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6 }' /etc/passwd); do
     # Only update the permissions when necessary. This will avoid changing the inode timestamp when
     # the permission is already defined as expected, therefore not impacting in possible integrity
     # check systems that also check inodes timestamps.

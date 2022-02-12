@@ -1183,21 +1183,31 @@ The session lock is implemented at the point where session activity can be deter
 
 Regardless of where the session lock is determined and implemented, once invoked, the session lock shall remain in place until the user re-authenticates. No other activity aside from re-authentication shall unlock the system.","The tmux terminal multiplexer is used to implement
 automatic session locking. It should be started from
-/etc/bashrc.","
+/etc/bashrc or drop-in files within /etc/profile.d/.
+Additionally it must be ensured that the tmux process is running
+and it can be verified with the following command:
+ps all | grep tmux | grep -v grep","
                   Applicable - Configurable
                 ","Verify the operating system retains a user's session lock until that user reestablishes access using established identification and authentication procedures. If it does not, this is a finding.","To verify that tmux is configured to execute,
 run the following command:
-$ grep -A1 -B3 ""case ..name. in sshd|login) exec tmux ;; esac"" /etc/bashrc
+$ grep -A1 -B3 ""case ..name. in sshd|login) exec tmux ;; esac"" /etc/bashrc /etc/profile.d/*
 The output should return the following:
 if [ ""$PS1"" ]; then
   parent=$(ps -o ppid= -p $$)
   name=$(ps -o comm= -p $parent)
   case ""$name"" in sshd|login) exec tmux ;; esac
 fi
-      Is it the case that exec tmux is not present at the end of bashrc?
+To verify that the tmux process is running,
+run the following command:
+ps all | grep tmux | grep -v grep
+If the command does not produce output, this is a finding.
+      Is it the case that exec tmux is not present at the end of bashrc or tmux process is not running?
       ",Configure the operating system to retain a user's session lock until that user reestablishes access using established identification and authentication procedures.,"The tmux terminal multiplexer is used to implement
 automatic session locking. It should be started from
-/etc/bashrc.",,,,
+/etc/bashrc or drop-in files within /etc/profile.d/.
+Additionally it must be ensured that the tmux process is running
+and it can be verified with the following command:
+ps all | grep tmux | grep -v grep",,,,
 SV-70891,SRG-OS-000028-GPOS-00009,TBD - Assigned by DISA after STIG release,The operating system must retain a users session lock until that user reestablishes access using established identification and authentication procedures.,CCE-80940-0:Configure the tmux Lock Command,"A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not want to log out because of the temporary nature of the absence.
 
 The session lock is implemented at the point where session activity can be determined.
@@ -1389,21 +1399,31 @@ The session lock is implemented at the point where session activity can be deter
 
 Publicly viewable images can include static or dynamic images, for example, patterns used with screen savers, photographic images, solid colors, a clock, a battery life indicator, or a blank screen, with the additional caveat that none of the images convey sensitive information.","The tmux terminal multiplexer is used to implement
 automatic session locking. It should be started from
-/etc/bashrc.","
+/etc/bashrc or drop-in files within /etc/profile.d/.
+Additionally it must be ensured that the tmux process is running
+and it can be verified with the following command:
+ps all | grep tmux | grep -v grep","
                   Applicable - Configurable
                 ","Verify the operating system conceals, via the session lock, information previously visible on the display with a publicly viewable image. If it does not, this is a finding.","To verify that tmux is configured to execute,
 run the following command:
-$ grep -A1 -B3 ""case ..name. in sshd|login) exec tmux ;; esac"" /etc/bashrc
+$ grep -A1 -B3 ""case ..name. in sshd|login) exec tmux ;; esac"" /etc/bashrc /etc/profile.d/*
 The output should return the following:
 if [ ""$PS1"" ]; then
   parent=$(ps -o ppid= -p $$)
   name=$(ps -o comm= -p $parent)
   case ""$name"" in sshd|login) exec tmux ;; esac
 fi
-      Is it the case that exec tmux is not present at the end of bashrc?
+To verify that the tmux process is running,
+run the following command:
+ps all | grep tmux | grep -v grep
+If the command does not produce output, this is a finding.
+      Is it the case that exec tmux is not present at the end of bashrc or tmux process is not running?
       ","Configure the operating system to conceal, via the session lock, information previously visible on the display with a publicly viewable image.","The tmux terminal multiplexer is used to implement
 automatic session locking. It should be started from
-/etc/bashrc.",,,,
+/etc/bashrc or drop-in files within /etc/profile.d/.
+Additionally it must be ensured that the tmux process is running
+and it can be verified with the following command:
+ps all | grep tmux | grep -v grep",,,,
 V-56639,SRG-OS-000032-GPOS-00013,TBD - Assigned by DISA after STIG release,The operating system must monitor remote access methods.,CCE-83426-7:Ensure remote access methods are monitored in Rsyslog,"Remote access services, such as those providing remote access to network devices and information systems, which lack automated monitoring capabilities, increase risk and make remote user access management difficult at best.
 
 Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
