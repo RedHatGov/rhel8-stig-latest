@@ -2240,33 +2240,40 @@ Audit record content that may be necessary to satisfy this requirement includes,
 Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3729r557069_fix">Configure the operating system to produce audit records containing information to establish what type of events occurred.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -5802,33 +5809,40 @@ Edit the file "/etc/passwd" and provide each interactive user account that has a
 At a minimum, the organization must audit the full-text recording of privileged commands. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3734r557084_fix">Configure the operating system to generate audit records containing the full-text recording of privileged commands.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -10543,10 +10557,13 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides audit record generation capability for DoD-defined auditable events for all operating system components. 
@@ -10562,17 +10579,18 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.
 
 If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3744r557582_fix">Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -10588,10 +10606,13 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -18766,29 +18787,40 @@ Operating systems are capable of providing a wide variety of functions and servi
 Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.</td>
 <td xml:lang="en-US">To enable Kernel page-table isolation,
 add the argument <code>pti=on</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="pti=on"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>pti=on</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>pti=on</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... pti=on ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="pti=on"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include pti=on,
-then Kernel page-table isolation is enabled at boot time.
-
-To ensure pti=on is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="pti=on
-
+in /etc/default/grub. If it includes pti=on,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'pti=on'
+The command should not return any output.
       Is it the case that Kernel page-table isolation is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3762r557637_fix">Configure the operating system to disable non-essential capabilities.</fixtext></td>
 <td>To enable Kernel page-table isolation,
 add the argument pti=on to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="pti=on"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that pti=on is added as a kernel command line
+argument to newly installed kernels, ad pti=on to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... pti=on ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="pti=on"</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -20678,29 +20710,40 @@ Security functions are the hardware, software, and/or firmware of the informatio
 Developers and implementers can increase the assurance in security functions by employing well-defined security policy models; structured, disciplined, and rigorous hardware and software development techniques; and sound system/security engineering principles. Implementation may include isolation of memory space and libraries. Operating systems restrict access to security functions through the use of access control mechanisms and by implementing least privilege capabilities.</td>
 <td xml:lang="en-US">To disable use of virtual syscalls,
 add the argument <code>vsyscall=none</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="vsyscall=none"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>vsyscall=none</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>vsyscall=none</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... vsyscall=none ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="vsyscall=none"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system isolates security functions from nonsecurity functions. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include vsyscall=none,
-then virtyal syscalls are not enabled at boot time.
-
-To ensure vsyscall=none is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="vsyscall=none
-
+in /etc/default/grub. If it includes vsyscall=none,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'vsyscall=none'
+The command should not return any output.
       Is it the case that vsyscalls are enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3781r557214_fix">Configure the operating system to isolate security functions from nonsecurity functions.</fixtext></td>
 <td>To disable use of virtual syscalls,
 add the argument vsyscall=none to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="vsyscall=none"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that vsyscall=none is added as a kernel command line
+argument to newly installed kernels, ad vsyscall=none to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... vsyscall=none ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="vsyscall=none"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -20719,29 +20762,40 @@ Security functions are the hardware, software, and/or firmware of the informatio
 Developers and implementers can increase the assurance in security functions by employing well-defined security policy models; structured, disciplined, and rigorous hardware and software development techniques; and sound system/security engineering principles. Implementation may include isolation of memory space and libraries. Operating systems restrict access to security functions through the use of access control mechanisms and by implementing least privilege capabilities.</td>
 <td xml:lang="en-US">To enable poisoning of free pages,
 add the argument <code>page_poison=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="page_poison=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>page_poison=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>page_poison=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... page_poison=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="page_poison=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system isolates security functions from nonsecurity functions. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include page_poison=1,
-then page poisoning is enabled at boot time.
-
-To ensure page_poison=1 is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="page_poison=1
-
+in /etc/default/grub. If it includes page_poison=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'page_poison=1'
+The command should not return any output.
       Is it the case that page allocator poisoning is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3781r557214_fix">Configure the operating system to isolate security functions from nonsecurity functions.</fixtext></td>
 <td>To enable poisoning of free pages,
 add the argument page_poison=1 to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="page_poison=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that page_poison=1 is added as a kernel command line
+argument to newly installed kernels, ad page_poison=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... page_poison=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="page_poison=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -20760,29 +20814,40 @@ Security functions are the hardware, software, and/or firmware of the informatio
 Developers and implementers can increase the assurance in security functions by employing well-defined security policy models; structured, disciplined, and rigorous hardware and software development techniques; and sound system/security engineering principles. Implementation may include isolation of memory space and libraries. Operating systems restrict access to security functions through the use of access control mechanisms and by implementing least privilege capabilities.</td>
 <td xml:lang="en-US">To enable poisoning of SLUB/SLAB objects,
 add the argument <code>slub_debug=P</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="slub_debug=P"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>slub_debug=P</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>slub_debug=P</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... slub_debug=P ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="slub_debug=P"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system isolates security functions from nonsecurity functions. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include slub_debug=P,
-then SLUB/SLAB poisoning is enabled at boot time.
-
-To ensure slub_debug=P is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="slub_debug=P
-
+in /etc/default/grub. If it includes slub_debug=P,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'slub_debug=P'
+The command should not return any output.
       Is it the case that SLUB/SLAB poisoning is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3781r557214_fix">Configure the operating system to isolate security functions from nonsecurity functions.</fixtext></td>
 <td>To enable poisoning of SLUB/SLAB objects,
 add the argument slub_debug=P to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="slub_debug=P"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that slub_debug=P is added as a kernel command line
+argument to newly installed kernels, ad slub_debug=P to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... slub_debug=P ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="slub_debug=P"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -23312,33 +23377,40 @@ $ sudo systemctl enable auditd.service</td>
 <td>If auditing is enabled late in the start-up process, the actions of some start-up processes may not be audited. Some audit systems also maintain state information only available if auditing is enabled before a given process is created.</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system initiates session audits at system start-up. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3795r374838_fix">Configure the operating system to initiate session audits at system start-up.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -23353,29 +23425,40 @@ GRUB 2 command line for the Linux operating system in
 <td>If auditing is enabled late in the start-up process, the actions of some start-up processes may not be audited. Some audit systems also maintain state information only available if auditing is enabled before a given process is created.</td>
 <td xml:lang="en-US">To improve the kernel capacity to queue all log events, even those which occurred
 prior to the audit daemon, add the argument <code>audit_backlog_limit=8192</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 audit=1 audit_backlog_limit=8192"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit_backlog_limit=8192</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit_backlog_limit=8192</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit_backlog_limit=8192 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit_backlog_limit=8192"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system initiates session audits at system start-up. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include audit=1, then auditing
-is enabled at boot time.
-
-To ensure audit_backlog_limit=8192 is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="audit_backlog_limit=8192"
-
+in /etc/default/grub. If it includes audit_backlog_limit=8192,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
+The command should not return any output.
       Is it the case that audit backlog limit is not configured?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3795r374838_fix">Configure the operating system to initiate session audits at system start-up.</fixtext></td>
 <td>To improve the kernel capacity to queue all log events, even those which occurred
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 audit=1 audit_backlog_limit=8192"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit_backlog_limit=8192 is added as a kernel command line
+argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit_backlog_limit=8192 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit_backlog_limit=8192"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -26485,29 +26568,40 @@ audit logs that will be created by the auditing daemon.</td>
 The task of allocating audit record storage capacity is usually performed during initial installation of the operating system.</td>
 <td xml:lang="en-US">To improve the kernel capacity to queue all log events, even those which occurred
 prior to the audit daemon, add the argument <code>audit_backlog_limit=8192</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 audit=1 audit_backlog_limit=8192"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit_backlog_limit=8192</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit_backlog_limit=8192</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit_backlog_limit=8192 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit_backlog_limit=8192"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system allocates audit record storage capacity to store at least one week's worth of audit records, when audit records are not immediately sent to a central audit record storage facility. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include audit=1, then auditing
-is enabled at boot time.
-
-To ensure audit_backlog_limit=8192 is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="audit_backlog_limit=8192"
-
+in /etc/default/grub. If it includes audit_backlog_limit=8192,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
+The command should not return any output.
       Is it the case that audit backlog limit is not configured?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3825r375048_fix">Configure the operating system to allocate audit record storage capacity to store at least one week's worth of audit records, when audit records are not immediately sent to a central audit record storage facility.</fixtext></td>
 <td>To improve the kernel capacity to queue all log events, even those which occurred
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=VolGroup/LogVol06 rd.lvm.lv=VolGroup/lv_swap rhgb quiet rd.shell=0 audit=1 audit_backlog_limit=8192"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit_backlog_limit=8192 is added as a kernel command line
+argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit_backlog_limit=8192 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit_backlog_limit=8192"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27595,7 +27689,9 @@ Organizations should consider endpoints that may not have regular access to the 
 add the following:
 <pre>maxpoll <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_time_service_set_maxpoll"></xccdf-1.1:sub></pre>
 to <pre>server</pre> directives. If using chrony any <pre>pool</pre> directives
-should be configured too.</td>
+should be configured too.
+If no <code>server</code> or <code>pool</code> directives are configured, the rule evaluates
+to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system, for networked systems, compares internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS). If it does not, this is a finding.</td>
 <td>To verify that maxpoll has been set properly, perform the following:
@@ -27612,7 +27708,35 @@ maxpoll in /etc/ntp.conf or /etc/chrony.conf
 add the following:
 maxpoll 
 to server directives. If using chrony any pool directives
-should be configured too.</td>
+should be configured too.
+If no server or pool directives are configured, the rule evaluates
+to pass.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-57267</td>
+<td>SRG-OS-000355-GPOS-00143</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designat</td>
+<td>CCE-86077-5:Ensure Chrony is only configured with the server directive</td>
+<td>Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
+
+Synchronizing internal information system clocks provides uniformity of time stamps for information systems with multiple system clocks and systems connected over a network.
+
+Organizations should consider endpoints that may not have regular access to the authoritative time server (e.g., mobile, teleworking, and tactical endpoints).</td>
+<td xml:lang="en-US">Check that Chrony only has time sources configured with the <code>server</code> directive.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system, for networked systems, compares internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS). If it does not, this is a finding.</td>
+<td>Run the following command and verify that time sources are only configure with server directive:
+# grep -E "^(server|pool)" /etc/chrony.conf
+A line with the appropriate server should be returned, any line returned starting with pool is a finding.
+      Is it the case that a remote time server is not configured or configured with pool directive?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3836r375141_fix">Configure the operating system to, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).</fixtext></td>
+<td>Check that Chrony only has time sources configured with the server directive.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27636,7 +27760,9 @@ Organizations should also consider endpoints that may not have regular access to
 add the following:
 <pre>maxpoll <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_time_service_set_maxpoll"></xccdf-1.1:sub></pre>
 to <pre>server</pre> directives. If using chrony any <pre>pool</pre> directives
-should be configured too.</td>
+should be configured too.
+If no <code>server</code> or <code>pool</code> directives are configured, the rule evaluates
+to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system synchronizes internal information system clocks to the authoritative time source when the time difference is greater than one second. If it does not, this is a finding.</td>
 <td>To verify that maxpoll has been set properly, perform the following:
@@ -27653,7 +27779,35 @@ maxpoll in /etc/ntp.conf or /etc/chrony.conf
 add the following:
 maxpoll 
 to server directives. If using chrony any pool directives
-should be configured too.</td>
+should be configured too.
+If no server or pool directives are configured, the rule evaluates
+to pass.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-57203</td>
+<td>SRG-OS-000356-GPOS-00144</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must synchronize internal information system clocks to the authoritative time source when the time difference is greater than one second.</td>
+<td>CCE-86077-5:Ensure Chrony is only configured with the server directive</td>
+<td>Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events.
+
+Synchronizing internal information system clocks provides uniformity of time stamps for information systems with multiple system clocks and systems connected over a network. Organizations should consider setting time periods for different types of systems (e.g., financial, legal, or mission-critical systems).
+
+Organizations should also consider endpoints that may not have regular access to the authoritative time server (e.g., mobile, teleworking, and tactical endpoints). This requirement is related to the comparison done every 24 hours in SRG-OS-000355 because a comparison must be done in order to determine the time difference.</td>
+<td xml:lang="en-US">Check that Chrony only has time sources configured with the <code>server</code> directive.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system synchronizes internal information system clocks to the authoritative time source when the time difference is greater than one second. If it does not, this is a finding.</td>
+<td>Run the following command and verify that time sources are only configure with server directive:
+# grep -E "^(server|pool)" /etc/chrony.conf
+A line with the appropriate server should be returned, any line returned starting with pool is a finding.
+      Is it the case that a remote time server is not configured or configured with pool directive?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3837r375144_fix">Configure the operating system to synchronize internal information system clocks to the authoritative time source when the time difference is greater than the organization-defined time period.</fixtext></td>
+<td>Check that Chrony only has time sources configured with the server directive.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27817,7 +27971,9 @@ Time stamps generated by the operating system include date and time. Time is com
 add the following:
 <pre>maxpoll <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_time_service_set_maxpoll"></xccdf-1.1:sub></pre>
 to <pre>server</pre> directives. If using chrony any <pre>pool</pre> directives
-should be configured too.</td>
+should be configured too.
+If no <code>server</code> or <code>pool</code> directives are configured, the rule evaluates
+to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.</td>
 <td>To verify that maxpoll has been set properly, perform the following:
@@ -27834,7 +27990,33 @@ maxpoll in /etc/ntp.conf or /etc/chrony.conf
 add the following:
 maxpoll 
 to server directives. If using chrony any pool directives
-should be configured too.</td>
+should be configured too.
+If no server or pool directives are configured, the rule evaluates
+to pass.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-57189</td>
+<td>SRG-OS-000359-GPOS-00146</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</td>
+<td>CCE-86077-5:Ensure Chrony is only configured with the server directive</td>
+<td>If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
+
+Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.</td>
+<td xml:lang="en-US">Check that Chrony only has time sources configured with the <code>server</code> directive.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.</td>
+<td>Run the following command and verify that time sources are only configure with server directive:
+# grep -E "^(server|pool)" /etc/chrony.conf
+A line with the appropriate server should be returned, any line returned starting with pool is a finding.
+      Is it the case that a remote time server is not configured or configured with pool directive?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3839r375150_fix">Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</fixtext></td>
+<td>Check that Chrony only has time sources configured with the server directive.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -29196,6 +29378,7 @@ when using the "sudo" command to elevate privileges, run the following command:
 sudo grep -ri '^Defaults.*timestamp_timeout' /etc/sudoers /etc/sudoers.d
 The output should be:
 /etc/sudoers:Defaults timestamp_timeout=0 or "timestamp_timeout" is set to a positive number.
+If results are returned from more than one file location, this is a finding.
       Is it the case that timestamp_timeout is not set with the appropriate value for sudo?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3848r375177_fix">Configure the operating system to require users to re-authenticate for privilege escalation.</fixtext></td>
@@ -29983,33 +30166,40 @@ Nonlocal maintenance and diagnostic activities are those activities conducted by
 This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system, for example, the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch.</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3860r375270_fix">Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -34359,29 +34549,40 @@ on AMD-based systems.</td>
 Examples of attacks are buffer overflow attacks.</td>
 <td xml:lang="en-US">To enable poisoning of SLUB/SLAB objects,
 add the argument <code>slub_debug=P</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="slub_debug=P"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>slub_debug=P</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>slub_debug=P</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... slub_debug=P ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="slub_debug=P"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements non-executable data to protect its memory from unauthorized code execution. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include slub_debug=P,
-then SLUB/SLAB poisoning is enabled at boot time.
-
-To ensure slub_debug=P is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="slub_debug=P
-
+in /etc/default/grub. If it includes slub_debug=P,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'slub_debug=P'
+The command should not return any output.
       Is it the case that SLUB/SLAB poisoning is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3878r375381_fix">Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.</fixtext></td>
 <td>To enable poisoning of SLUB/SLAB objects,
 add the argument slub_debug=P to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="slub_debug=P"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that slub_debug=P is added as a kernel command line
+argument to newly installed kernels, ad slub_debug=P to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... slub_debug=P ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="slub_debug=P"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -34398,29 +34599,40 @@ GRUB_CMDLINE_LINUX="slub_debug=P"</td>
 Examples of attacks are buffer overflow attacks.</td>
 <td xml:lang="en-US">To enable Kernel page-table isolation,
 add the argument <code>pti=on</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="pti=on"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>pti=on</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>pti=on</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... pti=on ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="pti=on"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements address space layout randomization to protect its memory from unauthorized code execution. If it does not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include pti=on,
-then Kernel page-table isolation is enabled at boot time.
-
-To ensure pti=on is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="pti=on
-
+in /etc/default/grub. If it includes pti=on,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'pti=on'
+The command should not return any output.
       Is it the case that Kernel page-table isolation is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3879r375384_fix">Configure the operating system to implement address space layout randomization to protect its memory from unauthorized code execution.</fixtext></td>
 <td>To enable Kernel page-table isolation,
 add the argument pti=on to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="pti=on"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that pti=on is added as a kernel command line
+argument to newly installed kernels, ad pti=on to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... pti=on ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="pti=on"</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -36279,33 +36491,40 @@ If the system is 64 bit then also add the following lines:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3886r375405_fix">Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -42769,33 +42988,40 @@ edits of files involved in storing logon events:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3893r375426_fix">Configure the operating system to generate audit records for privileged activities or other system-level access.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -46147,33 +46373,40 @@ Audit records can be generated from various components within the information sy
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td xml:lang="en-US">To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument <code>audit=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-
-<code>/boot/grub2/grubenv</code>, in the manner below:
-<pre># grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>audit=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>audit=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... audit=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="audit=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records when concurrent logons to the same account occur from different sources. If it does not, this is a finding.</td>
-<td>
-Inspect the form of default GRUB 2 command line for the Linux operating system
-in /boot/grub2/grubenv. If they include audit=1, then auditing
-is enabled at boot time.
-# grep 'kernelopts.*audit=1.*' /boot/grub2/grubenv
-
-To ensure audit=1 is configured on all installed kernels, the
-following command may be used:
-
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"
-
+<td>Inspect the form of default GRUB 2 command line for the Linux operating system
+in /etc/default/grub. If it includes audit=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'audit=1'
+The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3896r375705_fix">Configure the operating system to generate audit records when concurrent logons to the same account occur from different sources.</fixtext></td>
 <td>To ensure all processes can be audited, even those which start
 prior to the audit daemon, add the argument audit=1 to the default
-GRUB 2 command line for the Linux operating system in
-
-/boot/grub2/grubenv, in the manner below:
-# grub2-editenv - set "$(grub2-editenv - list | grep kernelopts) audit=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that audit=1 is added as a kernel command line
+argument to newly installed kernels, ad audit=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... audit=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="audit=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -48310,6 +48543,44 @@ ALL ALL=(ALL:ALL) ALL</td>
 <td>SRG-OS-000480-GPOS-00227</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-86377-9:Ensure sudo only includes the default configuration directory</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">Administrators can configure authorized <code>sudo</code> users via drop-in files, and it is possible to include
+other directories and configuration files from the file currently being parsed.
+
+Make sure that <code>/etc/sudoers</code> only includes drop-in configuration files from <code>/etc/sudoers.d</code>.
+The <code>/etc/sudoers</code> should contain only one <code>#includedir</code> directive pointing to
+<code>/etc/sudoers.d</code>, and no file in <code>/etc/sudoers.d/</code> should include other files or directories.
+Note that the '#' character doesn't denote a comment in the configuration file.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To determine whether sudo command includes configuration files from the appropriate directory,
+run the following command:
+$ sudo grep -rP '^#include(dir)?' /etc/sudoers /etc/sudoers.d
+If only the line /etc/sudoers:#includedir /etc/sudoers.d is returned, then the drop-in include configuration is set correctly.
+Any other line returned is a finding.
+      Is it the case that the /etc/sudoers doesn't include /etc/sudores.d or includes other directories??
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>Administrators can configure authorized sudo users via drop-in files, and it is possible to include
+other directories and configuration files from the file currently being parsed.
+
+Make sure that /etc/sudoers only includes drop-in configuration files from /etc/sudoers.d.
+The /etc/sudoers should contain only one #includedir directive pointing to
+/etc/sudoers.d, and no file in /etc/sudoers.d/ should include other files or directories.
+Note that the '#' character doesn't denote a comment in the configuration file.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SV-70851</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
 <td>CCE-83422-6:Ensure invoking users password for privilege escalation when using sudo</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
@@ -48527,6 +48798,68 @@ settings in
 session     required pam_lastlog.so showfailed
 And make sure that the silent option is not set.</td>
 <td>low</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SV-70851</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-85877-9:Ensure PAM password complexity module is enabled in password-auth</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">To enable PAM password complexity in password-auth file:
+Edit the <code>password</code> section in
+<code>/etc/pam.d/password-auth</code> to show
+<code>password    requisite                                    pam_pwquality.so</code>.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To check if pam_pwhistory.so is enabled in password-auth, run the following command:
+$ grep pam_pwquality /etc/pam.d/password-auth
+The output should be similar to the following:
+password    requisite                                    pam_pwquality.so
+      Is it the case that pam_pwquality.so is not enabled in password-auth?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>To enable PAM password complexity in password-auth file:
+Edit the password section in
+/etc/pam.d/password-auth to show
+password    requisite                                    pam_pwquality.so.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SV-70851</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-85872-0:Ensure PAM password complexity module is enabled in system-auth</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td xml:lang="en-US">To enable PAM password complexity in system-auth file:
+Edit the <code>password</code> section in
+<code>/etc/pam.d/system-auth</code> to show
+<code>password    requisite                                    pam_pwquality.so</code>.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>To check if pam_pwhistory.so is enabled in system-auth, run the following command:
+$ grep pam_pwquality /etc/pam.d/system-auth
+The output should be similar to the following:
+password    requisite                                    pam_pwquality.so
+      Is it the case that pam_pwquality.so is not enabled in system-auth?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>To enable PAM password complexity in system-auth file:
+Edit the password section in
+/etc/pam.d/system-auth to show
+password    requisite                                    pam_pwquality.so.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
@@ -49352,29 +49685,40 @@ in /etc/audit/auditd.conf.</td>
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
 <td xml:lang="en-US">To disable use of virtual syscalls,
 add the argument <code>vsyscall=none</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="vsyscall=none"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>vsyscall=none</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>vsyscall=none</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... vsyscall=none ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="vsyscall=none"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include vsyscall=none,
-then virtyal syscalls are not enabled at boot time.
-
-To ensure vsyscall=none is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="vsyscall=none
-
+in /etc/default/grub. If it includes vsyscall=none,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'vsyscall=none'
+The command should not return any output.
       Is it the case that vsyscalls are enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>To disable use of virtual syscalls,
 add the argument vsyscall=none to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="vsyscall=none"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that vsyscall=none is added as a kernel command line
+argument to newly installed kernels, ad vsyscall=none to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... vsyscall=none ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="vsyscall=none"</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -51357,29 +51701,40 @@ To make sure that the setting is persistent, add the following line to a file in
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
 <td xml:lang="en-US">To enable poisoning of free pages,
 add the argument <code>page_poison=1</code> to the default
-GRUB 2 command line for the Linux operating system in
-<code>/etc/default/grub</code>, in the manner below:
-<pre>GRUB_CMDLINE_LINUX="page_poison=1"</pre>
+GRUB 2 command line for the Linux operating system.
+To ensure that <code>page_poison=1</code> is added as a kernel command line
+argument to newly installed kernels, ad <code>page_poison=1</code> to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+<code>/etc/default/grub</code> as shown below:
+<pre>GRUB_CMDLINE_LINUX="... page_poison=1 ..."</pre>
+Run the following command to update command line for already installed kernels:<pre># grubby --update-kernel=ALL --args="page_poison=1"</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Inspect the form of default GRUB 2 command line for the Linux operating system
-in /etc/default/grub. If they include page_poison=1,
-then page poisoning is enabled at boot time.
-
-To ensure page_poison=1 is configured on all installed kernels, the
-following command may be used:
-
-$ sudo /sbin/grubby --update-kernel=ALL --args="page_poison=1
-
+in /etc/default/grub. If it includes page_poison=1,
+then the parameter will be configured for newly installed kernels.
+First check if the GRUB recovery is enabled:
+$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+If this option is set to true, then check that a line is output by the following command:
+$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
+If the recovery is disabled, check the line with
+$ grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+Run the following command:
+# grubby --info=ALL | grep args | grep -v 'page_poison=1'
+The command should not return any output.
       Is it the case that page allocator poisoning is not enabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>To enable poisoning of free pages,
 add the argument page_poison=1 to the default
-GRUB 2 command line for the Linux operating system in
-/etc/default/grub, in the manner below:
-GRUB_CMDLINE_LINUX="page_poison=1"</td>
+GRUB 2 command line for the Linux operating system.
+To ensure that page_poison=1 is added as a kernel command line
+argument to newly installed kernels, ad page_poison=1 to the
+default Grub2 command line for Linux operating systems.  Modify the line within
+/etc/default/grub as shown below:
+GRUB_CMDLINE_LINUX="... page_poison=1 ..."
+Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args="page_poison=1"</td>
 <td>medium</td>
 <td></td>
 <td></td>

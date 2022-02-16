@@ -1425,6 +1425,42 @@
         - restrict_strategy
         - sudo_remove_nopasswd
 
+    - name: Find out if /etc/sudoers.d/* files contain 'Defaults timestamp_timeout' to
+        be deduplicated
+      find:
+        path: /etc/sudoers.d
+        patterns: '*'
+        contains: ^[\s]*Defaults\s.*\btimestamp_timeout=.*
+      register: sudoers_d_defaults_timestamp_timeout
+      tags:
+        - CCE-87838-9
+        - DISA-STIG-RHEL-08-010384
+        - NIST-800-53-IA-11
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - sudo_require_reauthentication
+
+    - name: Remove found occurrences of 'Defaults timestamp_timeout' from /etc/sudoers.d/*
+        files
+      lineinfile:
+        path: '{{ item.path }}'
+        regexp: ^[\s]*Defaults\s.*\btimestamp_timeout=.*
+        state: absent
+      with_items: '{{ sudoers_d_defaults_timestamp_timeout.files }}'
+      tags:
+        - CCE-87838-9
+        - DISA-STIG-RHEL-08-010384
+        - NIST-800-53-IA-11
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+        - sudo_require_reauthentication
+
     - name: Ensure timestamp_timeout is enabled with the appropriate value in /etc/sudoers
       lineinfile:
         path: /etc/sudoers
@@ -1460,6 +1496,108 @@
         - no_reboot_needed
         - restrict_strategy
         - sudo_require_reauthentication
+
+    - name: Check for duplicate values
+      lineinfile:
+        path: /etc/sudoers
+        create: false
+        regexp: ^#includedir.*$
+        state: absent
+      check_mode: true
+      changed_when: false
+      register: dupes
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
+
+    - name: Deduplicate values from /etc/sudoers
+      lineinfile:
+        path: /etc/sudoers
+        create: false
+        regexp: ^#includedir.*$
+        state: absent
+      when: dupes.found is defined and dupes.found > 1
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
+
+    - name: Insert correct line into /etc/sudoers
+      lineinfile:
+        path: /etc/sudoers
+        create: false
+        regexp: ^#includedir.*$
+        line: '#includedir /etc/sudoers.d'
+        state: present
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
+
+    - name: Ensure sudoers doesn't include other non-default file
+      lineinfile:
+        path: /etc/sudoers
+        create: false
+        regexp: ^#include[\s]+.*$
+        state: absent
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
+
+    - name: Find out if /etc/sudoers.d/* files contain file or directory includes
+      find:
+        path: /etc/sudoers.d
+        patterns: '*'
+        contains: ^#include(dir)?\s.*$
+      register: sudoers_d_includes
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
+
+    - name: Remove found occurrences of file and directory inclues from /etc/sudoers.d/*
+        files
+      lineinfile:
+        path: '{{ item.path }}'
+        regexp: ^#include(dir)?\s.*$
+        state: absent
+      with_items: '{{ sudoers_d_includes.files }}'
+      tags:
+        - CCE-86377-9
+        - DISA-STIG-RHEL-08-010379
+        - configure_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - sudoers_default_includedir
 
     - name: Find out if /etc/sudoers.d/* files contain Defaults !targetpw to be deduplicated
       find:
@@ -5291,16 +5429,13 @@
     - name: Disable service debug-shell
       block:
 
-        - name: Gather the service facts
-          service_facts: null
-
         - name: Disable service debug-shell
           systemd:
             name: debug-shell.service
             enabled: 'no'
             state: stopped
             masked: 'yes'
-          when: '"debug-shell.service" in ansible_facts.services'
+          ignore_errors: 'yes'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80876-6
@@ -7030,69 +7165,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="audit=1"
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
-      tags:
-        - CCE-80825-3
-        - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030601
-        - NIST-800-171-3.3.1
-        - NIST-800-53-AC-17(1)
-        - NIST-800-53-AU-10
-        - NIST-800-53-AU-14(1)
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-IR-5(1)
-        - PCI-DSS-Req-10.3
-        - grub2_audit_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} audit=1"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?audit=1(?:\s.*)?$', multiline=True)
-          is none
-      tags:
-        - CCE-80825-3
-        - CJIS-5.4.1.1
-        - DISA-STIG-RHEL-08-030601
-        - NIST-800-171-3.3.1
-        - NIST-800-53-AC-17(1)
-        - NIST-800-53-AU-10
-        - NIST-800-53-AU-14(1)
-        - NIST-800-53-CM-6(a)
-        - NIST-800-53-IR-5(1)
-        - PCI-DSS-Req-10.3
-        - grub2_audit_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=audit=1"
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc != 0
       tags:
         - CCE-80825-3
         - CJIS-5.4.1.1
@@ -7125,55 +7202,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="audit_backlog_limit=8192"
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
-      tags:
-        - CCE-80943-4
-        - DISA-STIG-RHEL-08-030602
-        - NIST-800-53-CM-6(a)
-        - grub2_audit_backlog_limit_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} audit_backlog_limit=8192"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?audit_backlog_limit=8192(?:\s.*)?$',
-          multiline=True) is none
-      tags:
-        - CCE-80943-4
-        - DISA-STIG-RHEL-08-030602
-        - NIST-800-53-CM-6(a)
-        - grub2_audit_backlog_limit_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=audit_backlog_limit=8192"
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc != 0
       tags:
         - CCE-80943-4
         - DISA-STIG-RHEL-08-030602
@@ -25710,55 +25743,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="pti=on"
       when:
         - '"grub2-common" in ansible_facts.packages'
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-82194-2
-        - DISA-STIG-RHEL-08-040004
-        - NIST-800-53-SI-16
-        - grub2_pti_argument
-        - high_severity
-        - low_disruption
-        - medium_complexity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} pti=on"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - '"grub2-common" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?pti=on(?:\s.*)?$', multiline=True)
-          is none
-      tags:
-        - CCE-82194-2
-        - DISA-STIG-RHEL-08-040004
-        - NIST-800-53-SI-16
-        - grub2_pti_argument
-        - high_severity
-        - low_disruption
-        - medium_complexity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=pti=on"
-      when:
-        - '"grub2-common" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - kernelopts.rc != 0
       tags:
         - CCE-82194-2
         - DISA-STIG-RHEL-08-040004
@@ -25784,55 +25773,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="vsyscall=none"
       when:
         - '"grub2-common" in ansible_facts.packages'
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-80946-7
-        - DISA-STIG-RHEL-08-010422
-        - NIST-800-53-CM-7(a)
-        - grub2_vsyscall_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} vsyscall=none"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - '"grub2-common" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?vsyscall=none(?:\s.*)?$',
-          multiline=True) is none
-      tags:
-        - CCE-80946-7
-        - DISA-STIG-RHEL-08-010422
-        - NIST-800-53-CM-7(a)
-        - grub2_vsyscall_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=vsyscall=none"
-      when:
-        - '"grub2-common" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - kernelopts.rc != 0
       tags:
         - CCE-80946-7
         - DISA-STIG-RHEL-08-010422
@@ -28679,16 +28624,13 @@
     - name: Disable service autofs
       block:
 
-        - name: Gather the service facts
-          service_facts: null
-
         - name: Disable service autofs
           systemd:
             name: autofs.service
             enabled: 'no'
             state: stopped
             masked: 'yes'
-          when: '"autofs.service" in ansible_facts.services'
+          ignore_errors: 'yes'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80873-3
@@ -31577,16 +31519,13 @@
     - name: Disable service systemd-coredump
       block:
 
-        - name: Gather the service facts
-          service_facts: null
-
         - name: Disable service systemd-coredump
           systemd:
             name: systemd-coredump.service
             enabled: 'no'
             state: stopped
             masked: 'yes'
-          when: '"systemd-coredump.service" in ansible_facts.services'
+          ignore_errors: 'yes'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82881-4
@@ -31893,55 +31832,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="page_poison=1"
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
-      tags:
-        - CCE-80944-2
-        - DISA-STIG-RHEL-08-010421
-        - NIST-800-53-CM-6(a)
-        - grub2_page_poison_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} page_poison=1"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?page_poison=1(?:\s.*)?$',
-          multiline=True) is none
-      tags:
-        - CCE-80944-2
-        - DISA-STIG-RHEL-08-010421
-        - NIST-800-53-CM-6(a)
-        - grub2_page_poison_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=page_poison=1"
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc != 0
       tags:
         - CCE-80944-2
         - DISA-STIG-RHEL-08-010421
@@ -31967,55 +31862,11 @@
         - reboot_required
         - restrict_strategy
 
-    - name: Get current kernel parameters
-      ansible.builtin.shell:
-        cmd: /usr/bin/grub2-editenv - list | grep "kernelopts="
-      register: kernelopts
-      ignore_errors: true
-      changed_when: false
+    - name: Update grub defaults and the bootloader menu
+      command: /sbin/grubby --update-kernel=ALL --args="slub_debug=P"
       when:
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         - '"grub2-common" in ansible_facts.packages'
-      tags:
-        - CCE-80945-9
-        - DISA-STIG-RHEL-08-010423
-        - NIST-800-53-CM-6(a)
-        - grub2_slub_debug_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu
-      command: /usr/bin/grub2-editenv - set "{{ item }} slub_debug=P"
-      with_items: '{{ kernelopts.stdout_lines | select(''match'', ''^kernelopts.*'') |
-        list }}'
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc == 0
-        - kernelopts.stdout_lines is defined
-        - kernelopts.stdout_lines | length > 0
-        - kernelopts.stdout | regex_search('^kernelopts=(?:.*\s)?slub_debug=P(?:\s.*)?$',
-          multiline=True) is none
-      tags:
-        - CCE-80945-9
-        - DISA-STIG-RHEL-08-010423
-        - NIST-800-53-CM-6(a)
-        - grub2_slub_debug_argument
-        - low_disruption
-        - medium_complexity
-        - medium_severity
-        - reboot_required
-        - restrict_strategy
-
-    - name: Update the bootloader menu when there are no entries previously set
-      command: /usr/bin/grub2-editenv - set "kernelopts=slub_debug=P"
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - '"grub2-common" in ansible_facts.packages'
-        - kernelopts.rc != 0
       tags:
         - CCE-80945-9
         - DISA-STIG-RHEL-08-010423
@@ -32149,16 +32000,13 @@
     - name: Disable service kdump
       block:
 
-        - name: Gather the service facts
-          service_facts: null
-
         - name: Disable service kdump
           systemd:
             name: kdump.service
             enabled: 'no'
             state: stopped
             masked: 'yes'
-          when: '"kdump.service" in ansible_facts.services'
+          ignore_errors: 'yes'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-80878-2
