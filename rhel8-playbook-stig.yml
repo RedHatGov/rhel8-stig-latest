@@ -38,9 +38,9 @@
    pre_tasks:
      - name: Verify Ansible meets SCAP-Security-Guide version requirements.
        assert:
-         that: "ansible_version.full is version_compare('2.5', '>=')"
+         that: "ansible_version.full is version_compare('2.9', '>=')"
          msg: >
-           "You must update Ansible to at least version 2.5 to use this role."
+           "You must update Ansible to at least version 2.9 to use this role."
 
    vars:
       var_aide_scan_notification_email: !!str root@localhost
