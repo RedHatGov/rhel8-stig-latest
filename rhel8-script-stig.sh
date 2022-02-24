@@ -1501,7 +1501,7 @@ if [ -f /usr/bin/authselect ]; then
         # Include the desired configuration in the custom profile
         CUSTOM_POSTLOGIN="/etc/authselect/$CURRENT_PROFILE/postlogin"
         # The line should be included on the top of postlogin file
-        if [ $(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" $CUSTOM_POSTLOGIN) -eq 0 ]; then
+        if [ "$(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" $CUSTOM_POSTLOGIN)" -eq 0 ]; then
             sed -i --follow-symlinks '0,/^session.*/s/^session.*/session     required                   pam_lastlog.so showfailed\n&/' $CUSTOM_POSTLOGIN
         fi
         if grep -q "^\s*session.*required.*pam_lastlog.so.*silent.*" $CUSTOM_POSTLOGIN; then
@@ -1522,7 +1522,7 @@ else
     
     
 
-    if [ $(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" /etc/pam.d/postlogin) -eq 0 ]; then
+    if [ "$(grep -c "^\s*session.*required.*pam_lastlog.so\s\+showfailed\s*$" /etc/pam.d/postlogin)" -eq 0 ]; then
         sed -i --follow-symlinks '0,/^session.*/s/^session.*/session     required                   pam_lastlog.so showfailed\n&/' /etc/pam.d/postlogin
     fi
     if grep -q "^\s*session.*required.*pam_lastlog.so.*silent.*" /etc/pam.d/postlogin; then
@@ -1569,7 +1569,7 @@ if [ -f /usr/bin/authselect ]; then
         # Include the desired configuration in the custom profile
         CUSTOM_PASSWORD_AUTH="/etc/authselect/$CURRENT_PROFILE/password-auth"
 		if grep -q "^password.*pam_pwhistory.so.*" $CUSTOM_PASSWORD_AUTH; then
-			if ! $(grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_PASSWORD_AUTH); then
+			if ! grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_PASSWORD_AUTH; then
 				sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $CUSTOM_PASSWORD_AUTH
 			else
 				sed -r -i --follow-symlinks "s/(.*pam_pwhistory.so.*)(remember=[[:digit:]]+)\s(.*)/\1remember=$var_password_pam_remember \3/g" $CUSTOM_PASSWORD_AUTH
@@ -1653,7 +1653,7 @@ if [ -f /usr/bin/authselect ]; then
         # Include the desired configuration in the custom profile
         CUSTOM_SYSTEM_AUTH="/etc/authselect/$CURRENT_PROFILE/system-auth"
 		if grep -q "^password.*pam_pwhistory.so.*" $CUSTOM_SYSTEM_AUTH; then
-			if ! $(grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_SYSTEM_AUTH); then
+			if ! grep -q "^[^#].*pam_pwhistory.so.*remember=" $CUSTOM_SYSTEM_AUTH; then
 				sed -i --follow-symlinks "/pam_pwhistory.so/ s/$/ remember=$var_password_pam_remember/" $CUSTOM_SYSTEM_AUTH
 			else
 				sed -r -i --follow-symlinks "s/(.*pam_pwhistory.so.*)(remember=[[:digit:]]+)\s(.*)/\1remember=$var_password_pam_remember \3/g" $CUSTOM_SYSTEM_AUTH
@@ -1732,7 +1732,7 @@ fi
 
 FAILLOCK_CONF="/etc/security/faillock.conf"
 if [ -f $FAILLOCK_CONF ]; then
-    if $(grep -q '^\s*deny\s*=' $FAILLOCK_CONF); then
+    if grep -q '^\s*deny\s*=' $FAILLOCK_CONF; then
         sed -i --follow-symlinks "s/^\s*\(deny\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_deny/g" $FAILLOCK_CONF
     else
         echo "deny = $var_accounts_passwords_pam_faillock_deny" >> $FAILLOCK_CONF
@@ -1808,7 +1808,7 @@ fi
 
 FAILLOCK_CONF="/etc/security/faillock.conf"
 if [ -f $FAILLOCK_CONF ]; then
-    if [ ! $(grep -q '^\s*even_deny_root' $FAILLOCK_CONF) ]; then
+    if ! grep -q '^\s*even_deny_root' $FAILLOCK_CONF; then
         echo "even_deny_root" >> $FAILLOCK_CONF
     fi
 else
@@ -1854,7 +1854,7 @@ fi
 
 FAILLOCK_CONF="/etc/security/faillock.conf"
 if [ -f $FAILLOCK_CONF ]; then
-    if $(grep -q '^\s*fail_interval\s*=' $FAILLOCK_CONF); then
+    if grep -q '^\s*fail_interval\s*=' $FAILLOCK_CONF; then
         sed -i --follow-symlinks "s/^\s*\(fail_interval\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_fail_interval/g" $FAILLOCK_CONF
     else
         echo "fail_interval = $var_accounts_passwords_pam_faillock_fail_interval" >> $FAILLOCK_CONF
@@ -1933,7 +1933,7 @@ fi
 
 FAILLOCK_CONF="/etc/security/faillock.conf"
 if [ -f $FAILLOCK_CONF ]; then
-    if $(grep -q '^\s*unlock_time\s*=' $FAILLOCK_CONF); then
+    if grep -q '^\s*unlock_time\s*=' $FAILLOCK_CONF; then
         sed -i --follow-symlinks "s/^\s*\(unlock_time\s*\)=.*$/\1 = $var_accounts_passwords_pam_faillock_unlock_time/g" $FAILLOCK_CONF
     else
         echo "unlock_time = $var_accounts_passwords_pam_faillock_unlock_time" >> $FAILLOCK_CONF
@@ -2988,11 +2988,9 @@ fi
 var_accounts_maximum_age_login_defs='60'
 
 
-usrs_max_pass_age=( $(awk -v var="$var_accounts_maximum_age_login_defs" -F: '$5 > var || $5 == "" {print $1}' /etc/shadow) )
-for i in ${usrs_max_pass_age[@]};
-do
-  passwd -x $var_accounts_maximum_age_login_defs $i
-done
+while IFS= read -r i; do
+    passwd -x $var_accounts_maximum_age_login_defs $i
+done <   <(awk -v var="$var_accounts_maximum_age_login_defs" -F: '$5 > var || $5 == "" {print $1}' /etc/shadow)
 # END fix for 'accounts_password_set_max_life_existing'
 
 ###############################################################################
@@ -3003,11 +3001,9 @@ done
 var_accounts_minimum_age_login_defs='1'
 
 
-usrs_min_pass_age=( $(awk -v var="$var_accounts_minimum_age_login_defs" -F: '$4 < var || $4 == "" {print $1}' /etc/shadow) )
-for i in ${usrs_min_pass_age[@]};
-do
-  passwd -n $var_accounts_minimum_age_login_defs $i
-done
+while IFS= read -r i; do
+    passwd -n $var_accounts_minimum_age_login_defs $i
+done <   <(awk -v var="$var_accounts_minimum_age_login_defs" -F: '$4 < var || $4 == "" {print $1}' /etc/shadow)
 # END fix for 'accounts_password_set_min_life_existing'
 
 ###############################################################################
@@ -3428,11 +3424,11 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 125/372: 'accounts_umask_interactive_users'")
 
-for dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd); do
-    for file in $(find $dir -maxdepth 1 -type f -name ".*"); do
-        sed -i 's/^\([\s]*umask\s*\)/#\1/g' $file
-    done
-done
+while IFS= read -r dir; do
+    while IFS= read -r -d '' file; do
+        sed -i 's/^\([\s]*umask\s*\)/#\1/g' "$file"
+    done <   <(find $dir -maxdepth 1 -type f -name ".*" -print0)
+done <   <(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd)
 # END fix for 'accounts_umask_interactive_users'
 
 ###############################################################################
@@ -28799,7 +28795,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
-    LC_ALL=C sed -i "/^\s*\\$ActionSendStreamDriverMode /Id" "/etc/rsyslog.d/encrypt.conf"
+    LC_ALL=C sed -i "/^\s*\$ActionSendStreamDriverMode /Id" "/etc/rsyslog.d/encrypt.conf"
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
@@ -28826,7 +28822,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if [ -e "/etc/rsyslog.d/encrypt.conf" ] ; then
     
-    LC_ALL=C sed -i "/^\s*\\$DefaultNetstreamDriver /Id" "/etc/rsyslog.d/encrypt.conf"
+    LC_ALL=C sed -i "/^\s*\$DefaultNetstreamDriver /Id" "/etc/rsyslog.d/encrypt.conf"
 else
     touch "/etc/rsyslog.d/encrypt.conf"
 fi
@@ -28979,7 +28975,6 @@ if ! rpm -q --quiet "firewalld" ; then
     yum install -y "firewalld"
 fi
 
-
 firewalld_sshd_zone='public'
 
 
@@ -28988,19 +28983,19 @@ firewalld_sshd_zone='public'
 
 
 # This assumes that firewalld_sshd_zone is one of the pre-defined zones
-if [ ! -f /etc/firewalld/zones/${firewalld_sshd_zone}.xml ]; then
-    cp /usr/lib/firewalld/zones/${firewalld_sshd_zone}.xml /etc/firewalld/zones/${firewalld_sshd_zone}.xml
+if [ ! -f "/etc/firewalld/zones/${firewalld_sshd_zone}.xml" ]; then
+    cp "/usr/lib/firewalld/zones/${firewalld_sshd_zone}.xml" "/etc/firewalld/zones/${firewalld_sshd_zone}.xml"
 fi
-if ! grep -q 'service name="ssh"' /etc/firewalld/zones/${firewalld_sshd_zone}.xml; then
+if ! grep -q 'service name="ssh"' "/etc/firewalld/zones/${firewalld_sshd_zone}.xml"; then
     sed -i '/<\/description>/a \
-  <service name="ssh"/>' /etc/firewalld/zones/${firewalld_sshd_zone}.xml
+  <service name="ssh"/>' "/etc/firewalld/zones/${firewalld_sshd_zone}.xml"
 fi
 
 # Check if any eth interface is bounded to the zone with SSH service enabled
 nic_bound=false
-eth_interface_list=$(ip link show up | cut -d ' ' -f2 | cut -d ':' -s -f1 | grep -E '^(en|eth)')
-for interface in $eth_interface_list; do
-    if grep -qi "ZONE=$firewalld_sshd_zone" /etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}; then
+readarray -t eth_interface_list < <(ip link show up | cut -d ' ' -f2 | cut -d ':' -s -f1 | grep -E '^(en|eth)')
+for interface in "${eth_interface_list[@]}"; do
+    if grep -qi "ZONE=$firewalld_sshd_zone" "/etc/sysconfig/network-scripts/ifcfg-${interface}"; then
         nic_bound=true
         break;
     fi
@@ -29008,13 +29003,14 @@ done
 
 if [ $nic_bound = false ];then
     # Add first NIC to SSH enabled zone
+    interface="${eth_interface_list[0]}"
 
     if ! firewall-cmd --state -q; then
         
           # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
         # Otherwise, regular sed command will do.
         sed_command=('sed' '-i')
-        if test -L "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
+        if test -L "/etc/sysconfig/network-scripts/ifcfg-${interface}"; then
             sed_command+=('--follow-symlinks')
         fi
 
@@ -29028,20 +29024,20 @@ if [ $nic_bound = false ];then
         # If the key exists, change it. Otherwise, add it to the config_file.
         # We search for the key string followed by a word boundary (matched by \>),
         # so if we search for 'setting', 'setting2' won't match.
-        if LC_ALL=C grep -q -m 1 -i -e "^ZONE=\\>" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"; then
-            "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+        if LC_ALL=C grep -q -m 1 -i -e "^ZONE=\\>" "/etc/sysconfig/network-scripts/ifcfg-${interface}"; then
+            "${sed_command[@]}" "s/^ZONE=\\>.*/$formatted_output/gi" "/etc/sysconfig/network-scripts/ifcfg-${interface}"
         else
             # \n is precaution for case where file ends without trailing newline
             cce="CCE-84300-3"
-            printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
-            printf '%s\n' "$formatted_output" >> "/etc/sysconfig/network-scripts/ifcfg-${eth_interface_list[0]}"
+            printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/sysconfig/network-scripts/ifcfg-${interface}" >> "/etc/sysconfig/network-scripts/ifcfg-${interface}"
+            printf '%s\n' "$formatted_output" >> "/etc/sysconfig/network-scripts/ifcfg-${interface}"
         fi
         
     else
         # If firewalld service is running, we need to do this step with firewall-cmd
         # Otherwise firewalld will communicate with NetworkManage and will revert assigned zone
         # of NetworkManager managed interfaces upon reload
-        firewall-cmd --permanent --zone=$firewalld_sshd_zone --add-interface=${eth_interface_list[0]}
+        firewall-cmd --permanent --zone="$firewalld_sshd_zone" --add-interface="${eth_interface_list[0]}"
         firewall-cmd --reload
     fi
 fi

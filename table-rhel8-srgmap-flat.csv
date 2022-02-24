@@ -22966,11 +22966,9 @@ fips-mode-setup --enable
 
 The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
-Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to FIPSLoading the Dracut fips module
-This rule also ensures that the system policy is set to .
-Furthermore, the system running in FIPS mode should be FIPS certified by NIST.","
+Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module","
                   Applicable - Configurable
-                ","Verify the operating system implements NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that FIPS is enabled properly, run the following command:
+                ","Verify the operating system implements NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that FIPS mode is enabled properly, run the following command:
 fips-mode-setup --check
 The output should contain the following:
 FIPS mode is enabled.
@@ -22984,9 +22982,7 @@ fips-mode-setup --enable
 
 The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
-Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to FIPSLoading the Dracut fips module
-This rule also ensures that the system policy is set to .
-Furthermore, the system running in FIPS mode should be FIPS certified by NIST.",,,,
+Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module",,,,
 SV-71043,SRG-OS-000396-GPOS-00176,TBD - Assigned by DISA after STIG release,"The operating system must implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
 in FIPS mode.
@@ -32593,11 +32589,9 @@ fips-mode-setup --enable
 
 The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
-Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to FIPSLoading the Dracut fips module
-This rule also ensures that the system policy is set to .
-Furthermore, the system running in FIPS mode should be FIPS certified by NIST.","
+Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module","
                   Applicable - Configurable
-                ","Verify the operating system implements NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that FIPS is enabled properly, run the following command:
+                ","Verify the operating system implements NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that FIPS mode is enabled properly, run the following command:
 fips-mode-setup --check
 The output should contain the following:
 FIPS mode is enabled.
@@ -32611,9 +32605,7 @@ fips-mode-setup --enable
 
 The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
-Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to FIPSLoading the Dracut fips module
-This rule also ensures that the system policy is set to .
-Furthermore, the system running in FIPS mode should be FIPS certified by NIST.",,,,
+Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module",,,,
 SV-70861,SRG-OS-000478-GPOS-00223,TBD - Assigned by DISA after STIG release,"The operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
 in FIPS mode.
