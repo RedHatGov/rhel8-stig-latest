@@ -2367,9 +2367,9 @@ if [ -f /usr/bin/authselect ]; then
         CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
         # Standard profiles delivered with authselect should not be modified.
         # If not already in use, a custom profile is created preserving the enabled features.
-        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+        if [[ ! "$CURRENT_PROFILE" == custom/* ]]; then
             ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
-            authselect create-profile hardening -b $CURRENT_PROFILE
+            authselect create-profile hardening -b "$CURRENT_PROFILE"
             CURRENT_PROFILE="custom/hardening"
             # Ensure a backup before changing the profile
             authselect apply-changes -b --backup=before-pwquality-hardening.backup
@@ -2381,8 +2381,8 @@ if [ -f /usr/bin/authselect ]; then
         # Include the desired configuration in the custom profile
         CUSTOM_FILE="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE"
         # The line should be included on the top password section
-		if [ $(grep -c "^\s*password.*requisite.*pam_pwquality.so" $CUSTOM_FILE) -eq 0 ]; then
-  		  sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' $CUSTOM_FILE
+		if [ "$(grep -c "^\s*password.*requisite.*pam_pwquality.so" "$CUSTOM_FILE")" -eq 0 ]; then
+		    sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' "$CUSTOM_FILE"
 		fi
         authselect apply-changes -b --backup=after-pwquality-hardening.backup
     else
@@ -2395,8 +2395,8 @@ In cases where the default authselect profile does not cover a specific demand, 
     fi
 else
     FILE_PATH="/etc/pam.d/$PAM_FILE"
-    if [ $(grep -c "^\s*password.*requisite.*pam_pwquality.so" $FILE_PATH) -eq 0 ]; then
-        sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' $FILE_PATH
+    if [ "$(grep -c "^\s*password.*requisite.*pam_pwquality.so" "$FILE_PATH")" -eq 0 ]; then
+        sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' "$FILE_PATH"
     fi
 fi
 
@@ -2433,7 +2433,7 @@ if [ -f /usr/bin/authselect ]; then
         # Include the desired configuration in the custom profile
         CUSTOM_FILE="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE"
         # The line should be included on the top password section
-		if [ $(grep -c "^\s*password.*requisite.*pam_pwquality.so" $CUSTOM_FILE) -eq 0 ]; then
+		if [ "$(grep -c "^\s*password.*requisite.*pam_pwquality.so" $CUSTOM_FILE)" -eq 0 ]; then
   		  sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' $CUSTOM_FILE
 		fi
         authselect apply-changes -b --backup=after-pwquality-hardening.backup
@@ -2447,7 +2447,7 @@ In cases where the default authselect profile does not cover a specific demand, 
     fi
 else
     FILE_PATH="/etc/pam.d/$PAM_FILE"
-    if [ $(grep -c "^\s*password.*requisite.*pam_pwquality.so" $FILE_PATH) -eq 0 ]; then
+    if [ "$(grep -c "^\s*password.*requisite.*pam_pwquality.so" $FILE_PATH)" -eq 0 ]; then
         sed -i --follow-symlinks '0,/^password.*/s/^password.*/password    requisite                                    pam_pwquality.so\n&/' $FILE_PATH
     fi
 fi
@@ -3041,7 +3041,7 @@ if [ -f /usr/bin/authselect ]; then
         fi
         # Include the desired configuration in the custom profile
         CUSTOM_PASSWORD_AUTH="/etc/authselect/$CURRENT_PROFILE/password-auth"
-		if ! $(grep -q "^\s*password.*pam_unix.so.*rounds=" $CUSTOM_PASSWORD_AUTH); then
+		if ! grep -q "^\s*password.*pam_unix.so.*rounds=" $CUSTOM_PASSWORD_AUTH; then
 			sed -i --follow-symlinks "/^\s*password.*pam_unix.so/ s/$/ rounds=$var_password_pam_unix_rounds/" $CUSTOM_PASSWORD_AUTH
 		else
 			sed -r -i --follow-symlinks "s/(^\s*password.*pam_unix.so.*)(rounds=[[:digit:]]+)(.*)/\1rounds=$var_password_pam_unix_rounds \3/g" $CUSTOM_PASSWORD_AUTH
@@ -3099,7 +3099,7 @@ if [ -f /usr/bin/authselect ]; then
         fi
         # Include the desired configuration in the custom profile
         CUSTOM_SYSTEM_AUTH="/etc/authselect/$CURRENT_PROFILE/system-auth"
-		if ! $(grep -q "^\s*password.*pam_unix.so.*rounds=" $CUSTOM_SYSTEM_AUTH); then
+		if ! grep -q "^\s*password.*pam_unix.so.*rounds=" $CUSTOM_SYSTEM_AUTH; then
 			sed -i --follow-symlinks "/^\s*password.*pam_unix.so/ s/$/ rounds=$var_password_pam_unix_rounds/" $CUSTOM_SYSTEM_AUTH
 		else
 			sed -r -i --follow-symlinks "s/(^\s*password.*pam_unix.so.*)(rounds=[[:digit:]]+)(.*)/\1rounds=$var_password_pam_unix_rounds \3/g" $CUSTOM_SYSTEM_AUTH
@@ -32699,10 +32699,10 @@ config_file="/etc/ntp.conf"
 
 
 # Set maxpoll values to var_time_service_set_maxpoll
-sed -i "s/^\(\(server\|pool\).*maxpoll\) [0-9][0-9]*\(.*\)$/\1 $var_time_service_set_maxpoll \3/" "$config_file"
+sed -i "s/^\(\(server\|pool\|peer\).*maxpoll\) [0-9][0-9]*\(.*\)$/\1 $var_time_service_set_maxpoll \3/" "$config_file"
 
-# Add maxpoll to server or pool entries without maxpoll
-grep "^\(server\|pool\)" "$config_file" | grep -v maxpoll | while read -r line ; do
+# Add maxpoll to server, pool or peer entries without maxpoll
+grep "^\(server\|pool\|peer\)" "$config_file" | grep -v maxpoll | while read -r line ; do
         sed -i "s/$line/& maxpoll $var_time_service_set_maxpoll/" "$config_file"
 done
 
