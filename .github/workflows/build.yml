@@ -14,16 +14,18 @@ jobs:
         run: |
           make clean all
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v1.5.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_MESSAGE: Automated content rebuild
-          COMMIT_AUTHOR_EMAIL: isimluk@fedorapeople.org
-          COMMIT_AUTHOR_NAME: Github Actions Automation
-          PULL_REQUEST_TITLE: 'Automated build of ComplianceAsContent/content rhel8'
-          PULL_REQUEST_BODY: |
+        uses: peter-evans/create-pull-request@v3.14.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Automated content rebuild
+          title: 'Automated build of ComplianceAsContent/content rhel8'
+          body: |
             Automated content re-build.
-          PULL_REQUEST_BRANCH: update-rebuild
-          BRANCH_SUFFIX: short-commit-hash
+          committer: Github Actions Automation <isimluk@fedorapeople.org>
+          author: Github Actions Automation <isimluk@fedorapeople.org>
+          branch: update-rebuild
+          branch-suffix: short-commit-hash
+          reviewers: isimluk
+          base: master
       - name: Check output environment variable
         run: echo "Pull Request Number - $PULL_REQUEST_NUMBER"
