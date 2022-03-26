@@ -6372,37 +6372,6 @@ single, and halt. For certain systems, the need for availability
 outweighs the need to log all actions, and a different setting should be
 determined. Details regarding all possible values for ACTION are described in the
 auditd.conf man page.",,,,
-V-56663,SRG-OS-000047-GPOS-00023,TBD - Assigned by DISA after STIG release,The operating system must shut down by default upon audit failure (unless availability is an overriding concern).,CCE-80682-8:Configure auditd max_log_file_action Upon Reaching Maximum Log Size,"It is critical that when the operating system is at risk of failing to process audit logs as required, it takes action to mitigate the failure. Audit processing failures include: software/hardware errors; failures in the audit capturing mechanisms; and audit storage capacity being reached or exceeded. Responses to audit failure depend upon the nature of the failure mode.
-
-When availability is an overriding concern, other approved actions in response to an audit failure are as follows: 
-
-1) If the failure was caused by the lack of audit record storage capacity, the operating system must continue generating audit records if possible (automatically restarting the audit service if necessary), overwriting the oldest audit records in a first-in-first-out manner.
-
-2) If audit records are sent to a centralized collection server and communication with this server is lost or the server fails, the operating system must queue audit records locally until communication is restored or until the audit records are retrieved manually. Upon restoration of the connection to the centralized collection server, action should be taken to synchronize the local audit data with the collection server.","The default action to take when the logs reach their maximum size
-is to rotate the log files, discarding the oldest one. To configure the action taken
-by auditd, add or correct the line in /etc/audit/auditd.conf:
-max_log_file_action = ACTION
-Possible values for ACTION are described in the auditd.conf man
-page. These include:
-ignoresyslogsuspendrotatekeep_logs
-Set the ACTION to rotate to ensure log rotation
-occurs. This is the default. The setting is case-insensitive.","
-                  Applicable - Configurable
-                ","Verify the operating system shuts down by default upon audit failure (unless availability is an overriding concern). If it does not, this is a finding.","Inspect /etc/audit/auditd.conf and locate the following line to
-determine if the system is configured to rotate logs when they reach their
-maximum size:
-$ sudo grep max_log_file_action /etc/audit/auditd.conf
-max_log_file_action rotate
-      Is it the case that the system has not been properly configured to rotate audit logs?
-      ",Configure the operating system to shut down by default upon audit failure (unless availability is an overriding concern).,"The default action to take when the logs reach their maximum size
-is to rotate the log files, discarding the oldest one. To configure the action taken
-by auditd, add or correct the line in /etc/audit/auditd.conf:
-max_log_file_action = ACTION
-Possible values for ACTION are described in the auditd.conf man
-page. These include:
-ignoresyslogsuspendrotatekeep_logs
-Set the ACTION to rotate to ensure log rotation
-occurs. This is the default. The setting is case-insensitive.",,,,
 V-56665,SRG-OS-000051-GPOS-00024,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to centrally review and analyze audit records from multiple components within the system.,CCE-80872-5:Enable auditd Service,"Successful incident response and auditing relies on timely, accurate system information and analysis in order to allow the organization to identify and respond to potential incidents in a proficient manner. If the operating system does not provide the ability to centrally review the operating system logs, forensic analysis is negatively impacted.
 
 Segregation of logging data to multiple disparate computer systems is counterproductive and makes log analysis and log event alarming difficult to implement and manage, particularly when the system has multiple logging components writing to different locations or systems.
@@ -11516,14 +11485,26 @@ V-56679,SRG-OS-000063-GPOS-00032,TBD - Assigned by DISA after STIG release,The o
 To properly set the permissions of /etc/audit/auditd.conf, run the command:
 $ sudo chmod 0640 /etc/audit/auditd.conf","
                   Applicable - Configurable
-                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.",,Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
+                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.","To check the permissions of /etc/audit/auditd.conf,
+run the command:
+$ ls -l /etc/audit/auditd.conf
+If properly configured, the output should indicate the following permissions:
+-rw-r-----
+      Is it the case that /etc/audit/auditd.conf has unix mode -rw-r-----?
+      ",Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
 To properly set the permissions of /etc/audit/auditd.conf, run the command:
 $ sudo chmod 0640 /etc/audit/auditd.conf",,,,
 V-56679,SRG-OS-000063-GPOS-00032,TBD - Assigned by DISA after STIG release,The operating system must allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,CCE-85875-3:Verify Permissions on /etc/audit/rules.d/*.rules,"Without the capability to restrict which roles and individuals can select which events are audited, unauthorized personnel may be able to prevent the auditing of critical events. Misconfigured audits may degrade the system's performance by overwhelming the audit log. Misconfigured audits may also make it more difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.","
 To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
 $ sudo chmod 0640 /etc/audit/rules.d/*.rules","
                   Applicable - Configurable
-                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.",,Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
+                ","Verify the operating system allows only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited. If it does not, this is a finding.","To check the permissions of /etc/audit/rules.d/*.rules,
+run the command:
+$ ls -l /etc/audit/rules.d/*.rules
+If properly configured, the output should indicate the following permissions:
+-rw-r-----
+      Is it the case that /etc/audit/rules.d/*.rules has unix mode -rw-r-----?
+      ",Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
 To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
 $ sudo chmod 0640 /etc/audit/rules.d/*.rules",,,,
 SV-70941,SRG-OS-000064-GPOS-00033,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful attempts to access privileges occur.,CCE-80685-1:Record Events that Modify the System's Discretionary Access Controls - chmod,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
@@ -12779,6 +12760,25 @@ password    sufficient    pam_unix.so sha512 other arguments...
 This will help ensure when local users change their passwords, hashes for
 the new passwords will be generated using the SHA-512 algorithm. This is
 the default.",,,,
+V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The operating system must store only encrypted representations of passwords.,CCE-89707-4:Set Password Hashing Rounds in /etc/login.defs,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.","In /etc/login.defs, ensure SHA_CRYPT_MIN_ROUNDS and
+SHA_CRYPT_MAX_ROUNDS has the minimum value of 5000.
+For example:
+SHA_CRYPT_MIN_ROUNDS 5000
+SHA_CRYPT_MAX_ROUNDS 5000
+Notice that if neither are set, they already have the default value of 5000.
+If either is set, they must have the minimum value of 5000.","
+                  Applicable - Configurable
+                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","Inspect /etc/login.defs and ensure that if eihter
+SHA_CRYPT_MIN_ROUNDS or SHA_CRYPT_MAX_ROUNDS
+are set, they must have the minimum value of 5000.
+      Is it the case that it does not?
+      ",Configure the operating system to store only encrypted representations of passwords.,"In /etc/login.defs, ensure SHA_CRYPT_MIN_ROUNDS and
+SHA_CRYPT_MAX_ROUNDS has the minimum value of 5000.
+For example:
+SHA_CRYPT_MIN_ROUNDS 5000
+SHA_CRYPT_MAX_ROUNDS 5000
+Notice that if neither are set, they already have the default value of 5000.
+If either is set, they must have the minimum value of 5000.",,,,
 V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The operating system must store only encrypted representations of passwords.,CCE-83484-6:Verify All Account Password Hashes are Shadowed with SHA512,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.","Verify the operating system requires the shadow password suite
 configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
@@ -12815,46 +12815,6 @@ Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
 If any interactive user password hash does not begin with $6,
 this is a finding.",,,,
-V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The operating system must store only encrypted representations of passwords.,CCE-83403-6:Set number of Password Hashing Rounds - password-auth,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.","Configure the number or rounds for the password hashing algorithm. This can be
-accomplished by using the rounds option for the pam_unix PAM module.
-
-In file /etc/pam.d/password-auth append rounds=
-to the pam_unix.so file, as shown below:
-password sufficient pam_unix.so ...existing_options... rounds=
-The system's default number of rounds is 5000.","
-                  Applicable - Configurable
-                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","To verify the number of rounds for the password hashing algorithm is compliant, run the following command:
-$ grep rounds /etc/pam.d/password-auth
-The output should show the following match:
-rounds=
-      Is it the case that it does not set the appropriate number of hashing rounds?
-      ",Configure the operating system to store only encrypted representations of passwords.,"Configure the number or rounds for the password hashing algorithm. This can be
-accomplished by using the rounds option for the pam_unix PAM module.
-
-In file /etc/pam.d/password-auth append rounds=
-to the pam_unix.so file, as shown below:
-password sufficient pam_unix.so ...existing_options... rounds=
-The system's default number of rounds is 5000.",,,,
-V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The operating system must store only encrypted representations of passwords.,CCE-83386-3:Set number of Password Hashing Rounds - system-auth,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.","Configure the number or rounds for the password hashing algorithm. This can be
-accomplished by using the rounds option for the pam_unix PAM module.
-
-In file /etc/pam.d/system-auth append rounds=
-to the pam_unix.so file, as shown below:
-password sufficient pam_unix.so ...existing_options... rounds=
-The system's default number of rounds is 5000.","
-                  Applicable - Configurable
-                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","To verify the number of rounds for the password hashing algorithm is compliant, run the following command:
-$ grep rounds /etc/pam.d/system-auth
-The output should show the following match:
-rounds=
-      Is it the case that it does not set the appropriate number of hashing rounds?
-      ",Configure the operating system to store only encrypted representations of passwords.,"Configure the number or rounds for the password hashing algorithm. This can be
-accomplished by using the rounds option for the pam_unix PAM module.
-
-In file /etc/pam.d/system-auth append rounds=
-to the pam_unix.so file, as shown below:
-password sufficient pam_unix.so ...existing_options... rounds=
-The system's default number of rounds is 5000.",,,,
 SV-70959,SRG-OS-000074-GPOS-00042,TBD - Assigned by DISA after STIG release,The operating system must transmit only encrypted representations of passwords.,CCE-82414-4:Uninstall vsftpd Package,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.",The vsftpd package can be removed with the following command:  $ sudo yum erase vsftpd,"
                   Applicable - Configurable
                 ","Verify the operating system transmits only encrypted representations of passwords. If it does not, this is a finding.","Run the following command to determine if the vsftpd package is installed:
@@ -12917,11 +12877,12 @@ V-56703,SRG-OS-000076-GPOS-00044,TBD - Assigned by DISA after STIG release,Opera
 restriction by running the following command:
 $ sudo chage -M 60 USER","
                   Applicable - Configurable
-                ","Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.","Check whether the maximum time period for existing passwords is restricted
-to 60 days by running the following command for each user:
-$ sudo chage -l USER | grep Maximum
-The output for each user should return something similary to the following:
-Maximum number of days between password change\t\t: 60
+                ","Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.","Check whether the maximum time period for existing passwords is restricted to 60 days with the following commands:
+
+
+$ sudo awk -F: '$5 > 60 {print $1 """" """" $5}' /etc/shadow
+
+$ sudo awk -F: '$5 
       Is it the case that existing passwords are not configured correctly?
       ",Configure operating system to enforce a 60-day maximum password lifetime restriction. ,"Configure non-compliant accounts to enforce a 60-day maximum password lifetime
 restriction by running the following command:
@@ -13295,34 +13256,6 @@ $ rpm -q abrt-cli
       ",Configure the operating system to disable non-essential capabilities.,"The abrt-cli package can be removed with the following command:
 
 $ sudo yum erase abrt-cli",,,,
-SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82913-5:Uninstall abrt-plugin-logger Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
-
-Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
-
-Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The abrt-plugin-logger package can be removed with the following command:
-
-$ sudo yum erase abrt-plugin-logger","
-                  Applicable - Configurable
-                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the abrt-plugin-logger package is installed:
-$ rpm -q abrt-plugin-logger
-      Is it the case that the package is installed?
-      ",Configure the operating system to disable non-essential capabilities.,"The abrt-plugin-logger package can be removed with the following command:
-
-$ sudo yum erase abrt-plugin-logger",,,,
-SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82916-8:Uninstall abrt-plugin-rhtsupport Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
-
-Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
-
-Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The abrt-plugin-rhtsupport package can be removed with the following command:
-
-$ sudo yum erase abrt-plugin-rhtsupport","
-                  Applicable - Configurable
-                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the abrt-plugin-rhtsupport package is installed:
-$ rpm -q abrt-plugin-rhtsupport
-      Is it the case that the package is installed?
-      ",Configure the operating system to disable non-essential capabilities.,"The abrt-plugin-rhtsupport package can be removed with the following command:
-
-$ sudo yum erase abrt-plugin-rhtsupport",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82910-1:Uninstall abrt-plugin-sosreport Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
@@ -13379,6 +13312,34 @@ $ rpm -q krb5-workstation
       ",Configure the operating system to disable non-essential capabilities.,"The krb5-workstation package can be removed with the following command:
 
 $ sudo yum erase krb5-workstation",,,,
+SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-89201-8:Uninstall libreport-plugin-logger Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
+
+Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The libreport-plugin-logger package can be removed with the following command:
+
+$ sudo yum erase libreport-plugin-logger","
+                  Applicable - Configurable
+                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the libreport-plugin-logger package is installed:
+$ rpm -q libreport-plugin-logger
+      Is it the case that the package is installed?
+      ",Configure the operating system to disable non-essential capabilities.,"The libreport-plugin-logger package can be removed with the following command:
+
+$ sudo yum erase libreport-plugin-logger",,,,
+SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-88955-0:Uninstall libreport-plugin-rhtsupport Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
+
+Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
+
+Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","The libreport-plugin-rhtsupport package can be removed with the following command:
+
+$ sudo yum erase libreport-plugin-rhtsupport","
+                  Applicable - Configurable
+                ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","Run the following command to determine if the libreport-plugin-rhtsupport package is installed:
+$ rpm -q libreport-plugin-rhtsupport
+      Is it the case that the package is installed?
+      ",Configure the operating system to disable non-essential capabilities.,"The libreport-plugin-rhtsupport package can be removed with the following command:
+
+$ sudo yum erase libreport-plugin-rhtsupport",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-86084-1:Uninstall python3-abrt-addon Package,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services, provided by default, may not be necessary to support essential organizational operations (e.g., key missions, functions).
@@ -13766,7 +13727,7 @@ Run the following command to determine the current status of the
 firewalld service:
 $ systemctl is-active firewalld
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the service is not enabled?
       ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service",,,,
@@ -14218,7 +14179,7 @@ The output should indicate the INACTIVE configuration option is set
 to an appropriate integer as shown in the example below:
 $ grep ""INACTIVE"" /etc/default/useradd
 INACTIVE=
-      Is it the case that the value of INACTIVE is greater than the expected value?
+      Is it the case that the value of INACTIVE is greater than the expected value or is -1?
       ","Configure the operating system to disable account identifiers (individuals, groups, roles, and devices) after 35 days of inactivity.","To specify the number of days after a password expires (which
 signifies inactivity) until an account is permanently disabled, add or correct
 the following line in /etc/default/useradd:
@@ -14266,6 +14227,29 @@ $ rpm -q krb5-workstation
       ","Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.","The krb5-workstation package can be removed with the following command:
 
 $ sudo yum erase krb5-workstation",,,,
+V-56785,SRG-OS-000120-GPOS-00061,TBD - Assigned by DISA after STIG release,"The operating system must use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.",CCE-89707-4:Set Password Hashing Rounds in /etc/login.defs,"Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised.
+
+Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to cryptographic modules. 
+
+FIPS 140-2 is the current standard for validating that mechanisms used to access cryptographic modules utilize authentication that meets DoD requirements. This allows for Security Levels 1, 2, 3, or 4 for use on a general purpose computing system.","In /etc/login.defs, ensure SHA_CRYPT_MIN_ROUNDS and
+SHA_CRYPT_MAX_ROUNDS has the minimum value of 5000.
+For example:
+SHA_CRYPT_MIN_ROUNDS 5000
+SHA_CRYPT_MAX_ROUNDS 5000
+Notice that if neither are set, they already have the default value of 5000.
+If either is set, they must have the minimum value of 5000.","
+                  Applicable - Configurable
+                ","Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.","Inspect /etc/login.defs and ensure that if eihter
+SHA_CRYPT_MIN_ROUNDS or SHA_CRYPT_MAX_ROUNDS
+are set, they must have the minimum value of 5000.
+      Is it the case that it does not?
+      ","Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.","In /etc/login.defs, ensure SHA_CRYPT_MIN_ROUNDS and
+SHA_CRYPT_MAX_ROUNDS has the minimum value of 5000.
+For example:
+SHA_CRYPT_MIN_ROUNDS 5000
+SHA_CRYPT_MAX_ROUNDS 5000
+Notice that if neither are set, they already have the default value of 5000.
+If either is set, they must have the minimum value of 5000.",,,,
 V-56785,SRG-OS-000120-GPOS-00061,TBD - Assigned by DISA after STIG release,"The operating system must use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.",CCE-83484-6:Verify All Account Password Hashes are Shadowed with SHA512,"Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised.
 
 Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to cryptographic modules. 
@@ -14620,8 +14604,8 @@ Operating system management functionality includes functions necessary to admini
 
 The separation of user functionality from information system management functionality is either physical or logical and is accomplished by using different computers, different central processing units, different instances of the operating system, different network addresses, different TCP/UDP ports, virtualization techniques, combinations of these methods, or other methods, as appropriate.
 
-An example of this type of separation is observed in web administrative interfaces that use separate authentication methods for users of any other information system resources. This may include isolating the administrative interface on a different security domain and with additional access controls.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1","
+An example of this type of separation is observed in web administrative interfaces that use separate authentication methods for users of any other information system resources. This may include isolating the administrative interface on a different security domain and with additional access controls.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ","
                   Applicable - Configurable
                 ","Verify the operating system separates user functionality (including user interface services) from operating system management functionality. If it does not, this is a finding.","The runtime status of the kernel.kptr_restrict kernel parameter can be queried
 by running the following command:
@@ -14644,8 +14628,8 @@ $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
       Is it the case that the correct value is not returned?
-      ",Configure the operating system to separate user functionality (including user interface services) from operating system management functionality.,"To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1",,,,
+      ",Configure the operating system to separate user functionality (including user interface services) from operating system management functionality.,"To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ",,,,
 V-56843,SRG-OS-000134-GPOS-00068,TBD - Assigned by DISA after STIG release,The operating system must isolate security functions from nonsecurity functions.,CCE-80946-7:Disable vsyscalls,"An isolation boundary provides access control and protects the integrity of the hardware, software, and firmware that perform security functions.
 
 Security functions are the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Operating systems implement code separation (i.e., separation of security functions from nonsecurity functions) in a number of ways, including through the provision of security kernels via processor rings or processor modes. For non-kernel code, security function isolation is often achieved through file system protections that serve to protect the code on disk and address space protections that protect executing code.
@@ -14859,13 +14843,15 @@ Managing excess capacity ensures that sufficient capacity is available to counte
                 ","Verify the operating system manages excess capacity, bandwidth, or other redundancy to limit the effects of information flooding types of Denial of Service (DoS) attacks. If it does not, this is a finding.",,"Configure the operating system to manage excess capacity, bandwidth, or other redundancy to limit the effects of information flooding types of Denial of Service (DoS) attacks.","<VulnDiscussion>DoS is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity. 
 
 Managing excess capacity ensures that sufficient capacity is available to counter flooding attacks. Employing increased capacity and service redundancy may reduce the susceptibility to some DoS attacks. Managing excess capacity may include, for example, establishing selected usage priorities, quotas, or partitioning.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
-SV-71125,SRG-OS-000163-GPOS-00072,TBD - Assigned by DISA after STIG release,"The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti","SV-71125:The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inacti","Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
+SV-71125,SRG-OS-000163-GPOS-00072,TBD - Assigned by DISA after STIG release,"The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity; and for user sessions (non-privileged session), the session must be terminated after 15 minutes of inactivity, except to fulfill documented and validated mission requirements.","SV-71125:The operating system must terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity; and for user sessions (non-privileged session), the session must be terminated after 15 minutes of inactivity, except to fulfill documented and validated mission requirements.","Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
 Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.","<VulnDiscussion>Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
 Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
-                ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of ina",,"Configure the operating system to terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes o","<VulnDiscussion>Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
+                ","Verify the operating system terminates all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity; and for user sessions (non-privileged session), the session must be terminated after 15 minutes of inactivity, except to fulfill documented and validated mission requirements. 
+
+If it does not, this is a finding.",,"Configure the operating system to terminate all network connections associated with a communications session at the end of the session, or as follows: for in-band management sessions (privileged sessions), the session must be terminated after 10 minutes of inactivity; and for user sessions (non-privileged session), the session must be terminated after 15 minutes of inactivity, except to fulfill documented and validated mission requirements.","<VulnDiscussion>Terminating an idle session within a short time period reduces the window of opportunity for unauthorized personnel to take control of a management session enabled on the console or console port that has been left unattended. In addition, quickly terminating an idle session will also free up resources committed by the managed network element. 
 
 Terminating network connections associated with communications sessions includes, for example, de-allocating associated TCP/IP address/port pairs at the operating system level, and de-allocating networking assignments at the application level if multiple application sessions are using a single operating system-level network connection. This does not mean that the operating system terminates all sessions or network access; it only ends the inactive session and releases the resources associated with that session.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 V-56869,SRG-OS-000184-GPOS-00078,TBD - Assigned by DISA after STIG release,"The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","V-56869:The operating system must fail to a secure state if system initialization fails, shutdown fails, or aborts fail.","Failure to a known safe state helps prevent systems from failing to a state that may cause loss of data or unauthorized access to system resources. Operating systems that fail suddenly and with no incorporated failure state planning may leave the system available but with a reduced security protection capability. Preserving operating system state information also facilitates system restart and return to the operational mode of the organization with less disruption to mission-essential processes. 
@@ -14950,9 +14936,9 @@ the Red Hat Enterprise Linux 8 Documentation web site:
 
     
     https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.",,,,
-V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not cover",CCE-86260-7:Install McAfee Endpoint Security for Linux (ENSL),"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where Endpoint Security Solution (ESS) is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86260-7:Install McAfee Endpoint Security for Linux (ENSL),"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using ESS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
@@ -14960,26 +14946,30 @@ The mcafeetp package can be installed with the following command:
 
 $ sudo yum install mcafeetp","
                   Applicable - Configurable
-                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not co","Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
+                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.
+
+If it does not, this is a finding.","Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
       Is it the case that the package is not installed?
-      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans n","Install McAfee Endpoint Security for Linux antivirus software
+      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.","Install McAfee Endpoint Security for Linux antivirus software
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
 The mcafeetp package can be installed with the following command:
 
 $ sudo yum install mcafeetp",,,,
-V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not cover",CCE-86261-5:Ensure McAfee Endpoint Security for Linux (ENSL) is running,"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
+V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where Endpoint Security Solution (ESS) is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86261-5:Ensure McAfee Endpoint Security for Linux (ENSL) is running,"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
-To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using HBSS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
+To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using ESS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.","
                   Applicable - Configurable
-                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans not co","To verify that McAfee Endpoint Security for Linux is
+                ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.
+
+If it does not, this is a finding.","To verify that McAfee Endpoint Security for Linux is
 running, run the following command:
 $ sudo ps -ef | grep -i mfetpd
       Is it the case that virus scanning software is not running?
-      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where HBSS is used; 30 days, for any additional internal network scans n","Install McAfee Endpoint Security for Linux antivirus software
+      ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.","Install McAfee Endpoint Security for Linux antivirus software
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.",,,,
 V-56887,SRG-OS-000205-GPOS-00083,TBD - Assigned by DISA after STIG release,The operating system must generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.,V-56887:The operating system must generate error messages that provide information necessary for corrective actions without revealing information that could be exploited by adversaries.," Any operating system providing too much information in error messages risks compromising the data and security of the structure, and content of error messages needs to be carefully considered by the organization.
@@ -16272,7 +16262,23 @@ Editing the Crypto Policy back-end is not recommended.
 
 Check the crypto-policies(7) man page and choose a policy that configures TLS
 protocol to version 1.2 or higher, for example DEFAULT, FUTURE or FIPS policy.
-Or create and apply a custom policy that restricts minimum TLS version to 1.2.","
+Or create and apply a custom policy that restricts minimum TLS version to 1.2.
+
+For example for versions prior to crypto-policies-20210617-1.gitc776d3e.el8.noarch
+this is expected:
+
+$ sudo grep -i MinProtocol /etc/crypto-policies/back-ends/opensslcnf.config
+
+MinProtocol = TLSv1.2
+
+
+Or for version crypto-policies-20210617-1.gitc776d3e.el8.noarch and newer this is
+expected:
+
+$ sudo grep -i MinProtocol /etc/crypto-policies/back-ends/opensslcnf.config
+
+TLS.MinProtocol = TLSv1.2
+DTLS.MinProtocol = DTLSv1.2","
                   Applicable - Configurable
                 ","Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.","To verify if the OpenSSL uses defined TLS Crypto Policy, run:
 $ grep -P '^(TLS\.)?MinProtocol' /etc/crypto-policies/back-ends/opensslcnf.config
@@ -16286,7 +16292,23 @@ Editing the Crypto Policy back-end is not recommended.
 
 Check the crypto-policies(7) man page and choose a policy that configures TLS
 protocol to version 1.2 or higher, for example DEFAULT, FUTURE or FIPS policy.
-Or create and apply a custom policy that restricts minimum TLS version to 1.2.",,,,
+Or create and apply a custom policy that restricts minimum TLS version to 1.2.
+
+For example for versions prior to crypto-policies-20210617-1.gitc776d3e.el8.noarch
+this is expected:
+
+$ sudo grep -i MinProtocol /etc/crypto-policies/back-ends/opensslcnf.config
+
+MinProtocol = TLSv1.2
+
+
+Or for version crypto-policies-20210617-1.gitc776d3e.el8.noarch and newer this is
+expected:
+
+$ sudo grep -i MinProtocol /etc/crypto-policies/back-ends/opensslcnf.config
+
+TLS.MinProtocol = TLSv1.2
+DTLS.MinProtocol = DTLSv1.2",,,,
 V-56935,SRG-OS-000250-GPOS-00093,TBD - Assigned by DISA after STIG release,The operating system must implement cryptography to protect the integrity of remote access sessions.,CCE-80939-2:Configure SSH to use System Crypto Policy,"Without cryptographic integrity protections, information can be altered by unauthorized users without detection.
 
 Remote access (e.g., RDP) is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
@@ -17143,6 +17165,7 @@ audit tools by running the following command:
 /usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512
 /usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512
 
+
 /usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512
 
 If AIDE is configured properly to protect the integrity of the audit tools,
@@ -17217,7 +17240,7 @@ Run the following command to determine the current status of the
 firewalld service:
 $ systemctl is-active firewalld
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the service is not enabled?
       ",Configure the operating system to control remote access methods.,"
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service",,,,
@@ -17277,7 +17300,7 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off","
+$ sudo nmcli radio all off","
                   Applicable - Configurable
                 ","Verify the operating system protects wireless access to and from the system using encryption. If it does not, this is a finding.","Verify that there are no wireless interfaces configured on the system
 with the following command:
@@ -17292,7 +17315,7 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off",,,,
+$ sudo nmcli radio all off",,,,
 V-57219,SRG-OS-000300-GPOS-00118,TBD - Assigned by DISA after STIG release,The operating system must protect wireless access to the system using authentication of users and/or devices.,CCE-80832-9:Disable Bluetooth Kernel Module,"Allowing devices and users to connect to the system without first authenticating them allows untrusted access and can lead to a compromise or attack.
 
 Wireless technologies include, for example, microwave, packet radio (UHF/VHF), 802.11x, and Bluetooth. Wireless networks use authentication protocols (e.g., EAP/TLS, PEAP), which provide credential protection and mutual authentication.
@@ -17325,7 +17348,7 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off","
+$ sudo nmcli radio all off","
                   Applicable - Configurable
                 ","Verify the operating system protects wireless access to the system using authentication of users and/or devices. If it does not, this is a finding.","Verify that there are no wireless interfaces configured on the system
 with the following command:
@@ -17340,7 +17363,7 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off",,,,
+$ sudo nmcli radio all off",,,,
 SV-71481,SRG-OS-000303-GPOS-00120,TBD - Assigned by DISA after STIG release,The operating system must audit all account enabling actions.,CCE-90175-1:Ensure auditd Collects System Administrator Actions - /etc/sudoers,"Once an attacker establishes access to a system, the attacker often attempts to create a persistent method of reestablishing access.  One way to accomplish this is for the attacker to enable a new or disabled account.  Auditing account modification actions provides logging that can be used for forensic purposes. 
 
 To address access requirements, many operating systems can be integrated with enterprise-level authentication/access/auditing mechanisms that meet or exceed access control policy requirements.","At a minimum, the audit system should collect administrator actions
@@ -18059,20 +18082,24 @@ SV-71493,SRG-OS-000326-GPOS-00126,TBD - Assigned by DISA after STIG release,The 
 Some programs and processes are required to operate at a higher privilege level and therefore should be excluded from the organization-defined software list after review.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify that the operating system prevents all software from executing at higher privilege levels than users executing the software. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18081,30 +18108,36 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to prevent all software from executing at higher privilege levels than users executing the software.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
 V-57235,SRG-OS-000327-GPOS-00127,TBD - Assigned by DISA after STIG release,The operating system must audit the execution of privileged functions.,CCE-83556-1:Record Events When Privileged Executables Are Run,"Misuse of privileged functions, either intentionally or unintentionally by authorized users, or by unauthorized external entities that have compromised information system accounts, is a serious and ongoing concern and can have significant adverse impacts on organizations. Auditing the use of privileged functions is one way to detect such misuse and identify the risk from insider threats and the advanced persistent threat.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify that the operating system audits the execution of privileged functions. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18113,10 +18146,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to audit the execution of privileged functions.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18217,7 +18252,7 @@ SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The
 
 This requirement enables organizations to extend or limit auditing as necessary to meet organizational requirements. Auditing that is limited to conserve information system resources may be extended to address certain threat situations. In addition, auditing may be limited to a specific set of events to facilitate audit reduction, analysis, and reporting.",The audit package should be installed.,"
                   Applicable - Configurable
-                ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a fi","Run the following command to determine if the audit package is installed: $ rpm -q audit
+                ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the package is not installed?
       ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",The audit package should be installed.,,,,
 SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The operating system must provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",CCE-83556-1:Record Events When Privileged Executables Are Run,"If authorized individuals do not have the ability to modify auditing parameters in response to a changing threat environment, the organization may not be able to effectively respond, and important forensic information may be lost.
@@ -18225,20 +18260,24 @@ SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The
 This requirement enables organizations to extend or limit auditing as necessary to meet organizational requirements. Auditing that is limited to conserve information system resources may be extended to address certain threat situations. In addition, auditing may be limited to a specific set of events to facilitate audit reduction, analysis, and reporting.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
-                ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a fi","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
+                ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
+
 
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18247,10 +18286,12 @@ The audit daemon must be restarted for the changes to take effect.
       ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18689,20 +18730,24 @@ V-57253,SRG-OS-000348-GPOS-00136,TBD - Assigned by DISA after STIG release,The o
 Audit reduction is a technique used to reduce the volume of audit records in order to facilitate a manual review. Audit reduction does not alter original audit records. The report generation capability provided by the application must support on-demand (i.e., customizable, ad hoc, and as-needed) reports.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18711,10 +18756,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18734,20 +18781,24 @@ Audit reduction capability must support after-the-fact investigations of securit
 This requirement is specific to operating systems with audit reduction capabilities.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18756,10 +18807,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18775,20 +18828,24 @@ SV-71517,SRG-OS-000350-GPOS-00138,TBD - Assigned by DISA after STIG release,The 
 Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18797,10 +18854,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18816,20 +18875,24 @@ V-57259,SRG-OS-000351-GPOS-00139,TBD - Assigned by DISA after STIG release,The o
 Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18838,10 +18901,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18857,20 +18922,24 @@ V-57261,SRG-OS-000352-GPOS-00140,TBD - Assigned by DISA after STIG release,The o
 The report generation capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18879,10 +18948,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18902,20 +18973,24 @@ Audit reduction is a process that manipulates collected audit information and or
 This requirement is specific to operating systems providing audit reduction capabilities. The audit reduction capability can be met either natively or through the use of third-party tools.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18924,10 +18999,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -18947,20 +19024,24 @@ Time ordering refers to the chronological organization of records based on time 
 This requirement is specific to operating systems providing report generation capabilities. The report generation capability can be met either natively or through the use of third-party tools.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -18969,14 +19050,16 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
 
+
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
-V-57267,SRG-OS-000355-GPOS-00143,TBD - Assigned by DISA after STIG release,"The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designat",CCE-84059-5:Configure Time Service Maxpoll Interval,"Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
+V-57267,SRG-OS-000355-GPOS-00143,TBD - Assigned by DISA after STIG release,"The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).",CCE-84059-5:Configure Time Service Maxpoll Interval,"Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
 
 Synchronizing internal information system clocks provides uniformity of time stamps for information systems with multiple system clocks and systems connected over a network.
 
@@ -19006,7 +19089,7 @@ to server directives. If using chrony any pool directives
 should be configured too.
 If no server or pool directives are configured, the rule evaluates
 to pass.",,,,
-V-57267,SRG-OS-000355-GPOS-00143,TBD - Assigned by DISA after STIG release,"The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designat",CCE-86077-5:Ensure Chrony is only configured with the server directive,"Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
+V-57267,SRG-OS-000355-GPOS-00143,TBD - Assigned by DISA after STIG release,"The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).",CCE-86077-5:Ensure Chrony is only configured with the server directive,"Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
 
 Synchronizing internal information system clocks provides uniformity of time stamps for information systems with multiple system clocks and systems connected over a network.
 
@@ -19070,20 +19153,24 @@ SV-71453,SRG-OS-000358-GPOS-00145,TBD - Assigned by DISA after STIG release,The 
 Time stamps generated by the operating system include date and time. Granularity of time measurements refers to the degree of synchronization between information system clocks and reference clocks.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -19092,10 +19179,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -19111,20 +19200,24 @@ V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The o
 Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -19133,10 +19226,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -19346,20 +19441,24 @@ SV-71111,SRG-OS-000365-GPOS-00152,TBD - Assigned by DISA after STIG release,The 
 Enforcement actions are the methods or mechanisms used to prevent unauthorized changes to configuration settings. Enforcement action methods may be as simple as denying access to a file based on the application of file permissions (access restriction). Audit items may consist of lists of actions blocked by access restrictions or changes identified after the fact.","Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
                   Applicable - Configurable
                 ","Verify the operating system audits the enforcement actions used to restrict access associated with changes to the system. If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 The audit daemon must be restarted for the changes to take effect.
 
@@ -19368,10 +19467,12 @@ The audit daemon must be restarted for the changes to take effect.
       ",Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.,"Verify the system generates an audit record when privileged functions are executed.
 # grep -iw execve /etc/audit/audit.rules
 
+
 -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
 -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
 -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+
 
 If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
 If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
@@ -23298,7 +23399,7 @@ If the service is running, it should return the following: active
 
 The sshd service can be enabled with the following command:
 $ sudo systemctl enable sshd.service",,,,
-V-56733,SRG-OS-000424-GPOS-00188,TBD - Assigned by DISA after STIG release,"The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a",CCE-83501-7:Deactivate Wireless Network Interfaces,"Encrypting information for transmission protects information from unauthorized disclosure and modification. Cryptographic mechanisms implemented to protect information integrity include, for example, cryptographic hash functions which have common application in digital signatures, checksums, and message authentication codes. 
+V-56733,SRG-OS-000424-GPOS-00188,TBD - Assigned by DISA after STIG release,"The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).",CCE-83501-7:Deactivate Wireless Network Interfaces,"Encrypting information for transmission protects information from unauthorized disclosure and modification. Cryptographic mechanisms implemented to protect information integrity include, for example, cryptographic hash functions which have common application in digital signatures, checksums, and message authentication codes. 
 
 Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When transmitting data, operating systems need to leverage transmission protection mechanisms such as TLS, SSL VPNs, or IPSec.
 
@@ -23308,23 +23409,25 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off","
+$ sudo nmcli radio all off","
                   Applicable - Configurable
-                ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum","Verify that there are no wireless interfaces configured on the system
+                ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS). 
+
+If it does not, this is a finding.","Verify that there are no wireless interfaces configured on the system
 with the following command:
 
 $ sudo nmcli device
 The output should contain the following:
 wifi disconnected
       Is it the case that it is not?
-      ","Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a mi","Deactivating wireless network interfaces should prevent
+      ","Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).","Deactivating wireless network interfaces should prevent
 normal usage of the wireless capability.
 
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off",,,,
-V-56733,SRG-OS-000424-GPOS-00188,TBD - Assigned by DISA after STIG release,"The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a",CCE-83303-8:Install the OpenSSH Server Package,"Encrypting information for transmission protects information from unauthorized disclosure and modification. Cryptographic mechanisms implemented to protect information integrity include, for example, cryptographic hash functions which have common application in digital signatures, checksums, and message authentication codes. 
+$ sudo nmcli radio all off",,,,
+V-56733,SRG-OS-000424-GPOS-00188,TBD - Assigned by DISA after STIG release,"The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).",CCE-83303-8:Install the OpenSSH Server Package,"Encrypting information for transmission protects information from unauthorized disclosure and modification. Cryptographic mechanisms implemented to protect information integrity include, for example, cryptographic hash functions which have common application in digital signatures, checksums, and message authentication codes. 
 
 Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When transmitting data, operating systems need to leverage transmission protection mechanisms such as TLS, SSL VPNs, or IPSec.
 
@@ -23333,9 +23436,11 @@ The openssh-server package can be installed with the following command:
 
 $ sudo yum install openssh-server","
                   Applicable - Configurable
-                ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum","Run the following command to determine if the openssh-server package is installed: $ rpm -q openssh-server
+                ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS). 
+
+If it does not, this is a finding.","Run the following command to determine if the openssh-server package is installed: $ rpm -q openssh-server
       Is it the case that the package is not installed?
-      ","Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a mi","The openssh-server package should be installed.
+      ","Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).","The openssh-server package should be installed.
 The openssh-server package can be installed with the following command:
 
 $ sudo yum install openssh-server",,,,
@@ -23409,8 +23514,8 @@ The behavior will be derived from the organizational and system requirements and
 The behavior will be derived from the organizational and system requirements and includes, but is not limited to, notification of the appropriate personnel, creating an audit record, and rejecting invalid input.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
 V-56725,SRG-OS-000433-GPOS-00192,TBD - Assigned by DISA after STIG release,The operating system must implement non-executable data to protect its memory from unauthorized code execution.,CCE-80915-2:Restrict Exposed Kernel Pointer Addresses Access,"Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Security safeguards employed to protect memory include, for example, data execution prevention and address space layout randomization. Data execution prevention safeguards can either be hardware-enforced or software-enforced with hardware providing the greater strength of mechanism.
 
-Examples of attacks are buffer overflow attacks.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1","
+Examples of attacks are buffer overflow attacks.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ","
                   Applicable - Configurable
                 ","Verify the operating system implements non-executable data to protect its memory from unauthorized code execution. If it does not, this is a finding.","The runtime status of the kernel.kptr_restrict kernel parameter can be queried
 by running the following command:
@@ -23433,8 +23538,8 @@ $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
       Is it the case that the correct value is not returned?
-      ",Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.,"To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1",,,,
+      ",Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.,"To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ",,,,
 V-56725,SRG-OS-000433-GPOS-00192,TBD - Assigned by DISA after STIG release,The operating system must implement non-executable data to protect its memory from unauthorized code execution.,CCE-83918-3:Enable NX or XD Support in the BIOS,"Some adversaries launch attacks with the intent of executing code in non-executable regions of memory or in memory locations that are prohibited. Security safeguards employed to protect memory include, for example, data execution prevention and address space layout randomization. Data execution prevention safeguards can either be hardware-enforced or software-enforced with hardware providing the greater strength of mechanism.
 
 Examples of attacks are buffer overflow attacks.","Reboot the system and enter the BIOS or Setup configuration menu.
@@ -33394,11 +33499,7 @@ nullok in
 
 /etc/pam.d/system-auth
 
-to prevent logins with empty passwords.
-Note that this rule is not applicable for systems running within a
-container. Having user with empty password within a container is not
-considered a risk, because it should not be possible to directly login into
-a container anyway.","
+to prevent logins with empty passwords.","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify that null passwords cannot be used, run the following command:
 
@@ -33415,11 +33516,7 @@ nullok in
 
 /etc/pam.d/system-auth
 
-to prevent logins with empty passwords.
-Note that this rule is not applicable for systems running within a
-container. Having user with empty password within a container is not
-considered a risk, because it should not be possible to directly login into
-a container anyway.",,,,
+to prevent logins with empty passwords.",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80649-7:Verify Only Root Has UID 0,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","If any account other than root has a UID of 0, this misconfiguration should
@@ -33863,7 +33960,20 @@ To use RELP for log message delivery:
 There must be a resolvable DNS CNAME or Alias record set to """" for logs to be sent correctly to the centralized logging utility.",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-84049-6:Configure Multiple DNS Servers in /etc/resolv.conf,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Multiple Domain Name System (DNS) Servers should be configured
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","
+Determine whether the system is using local or DNS name resolution with the
+following command:
+$ sudo grep hosts /etc/nsswitch.conf
+hosts: files dns
+If the DNS entry is missing from the host's line in the ""/etc/nsswitch.conf""
+file, the ""/etc/resolv.conf"" file must be empty.
+Verify the ""/etc/resolv.conf"" file is empty with the following command:
+$ sudo ls -al /etc/resolv.conf
+-rw-r--r-- 1 root root 0 Aug 19 08:31 resolv.conf
+If the DNS entry is found on the host's line of the ""/etc/nsswitch.conf"" file,
+then verify the following:
+
+Multiple Domain Name System (DNS) Servers should be configured
 in /etc/resolv.conf. This provides redundant name resolution services
 in the event that a domain server crashes. To configure the system to contain
 as least 2 DNS servers, add a corresponding nameserver
@@ -33878,7 +33988,20 @@ nameserver 192.168.0.2","
 $ sudo grep nameserver /etc/resolv.conf
 The output should return more than one nameserver entry.
       Is it the case that it does not exist or is not properly configured or less than 2 'nameserver' entries exist?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Multiple Domain Name System (DNS) Servers should be configured
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","
+Determine whether the system is using local or DNS name resolution with the
+following command:
+$ sudo grep hosts /etc/nsswitch.conf
+hosts: files dns
+If the DNS entry is missing from the host's line in the ""/etc/nsswitch.conf""
+file, the ""/etc/resolv.conf"" file must be empty.
+Verify the ""/etc/resolv.conf"" file is empty with the following command:
+$ sudo ls -al /etc/resolv.conf
+-rw-r--r-- 1 root root 0 Aug 19 08:31 resolv.conf
+If the DNS entry is found on the host's line of the ""/etc/nsswitch.conf"" file,
+then verify the following:
+
+Multiple Domain Name System (DNS) Servers should be configured
 in /etc/resolv.conf. This provides redundant name resolution services
 in the event that a domain server crashes. To configure the system to contain
 as least 2 DNS servers, add a corresponding nameserver
@@ -33930,7 +34053,7 @@ Run the following command to determine the current status of the
 firewalld service:
 $ systemctl is-active firewalld
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the service is not enabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service",,,,
@@ -34906,8 +35029,8 @@ The output should be:
 *     hard   core    0",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80915-2:Restrict Exposed Kernel Pointer Addresses Access,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1","
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","The runtime status of the kernel.kptr_restrict kernel parameter can be queried
 by running the following command:
@@ -34930,8 +35053,8 @@ $ grep -r kernel.kptr_restrict /etc/sysctl.conf /etc/sysctl.d
 is executed.
 
       Is it the case that the correct value is not returned?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=1
-To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = 1",,,,
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To set the runtime status of the kernel.kptr_restrict kernel parameter, run the following command: $ sudo sysctl -w kernel.kptr_restrict=
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: kernel.kptr_restrict = ",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80916-0:Enable Randomized Layout of Virtual Address Space,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To set the runtime status of the kernel.randomize_va_space kernel parameter, run the following command: $ sudo sysctl -w kernel.randomize_va_space=2
@@ -35825,7 +35948,7 @@ Run the following command to determine the current status of the
 firewalld service:
 $ systemctl is-active firewalld
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the service is not enabled?
       ","Ensure the operating system's application firewall is enabled, if available.","
 The firewalld service can be enabled with the following command:
 $ sudo systemctl enable firewalld.service",,,,
@@ -35839,7 +35962,7 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off","
+$ sudo nmcli radio all off","
                   Applicable - Configurable
                 ","Verify the operating system protects the confidentiality and integrity of communications with wireless peripherals. If it does not, this is a finding.","Verify that there are no wireless interfaces configured on the system
 with the following command:
@@ -35854,4 +35977,4 @@ normal usage of the wireless capability.
 
 Configure the system to disable all wireless network interfaces with the
 following command:
-$ sudo nmcli radio wifi off",,,,
+$ sudo nmcli radio all off",,,,
