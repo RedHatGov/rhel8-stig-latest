@@ -12863,8 +12863,7 @@ The profile requirement is .","
                   Applicable - Configurable
                 ","Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.","To check the maximum password age, run the command:
 $ grep PASS_MAX_DAYS /etc/login.defs
-The DoD and FISMA requirement is 60.
-A value of 180 days is sufficient for many environments.
+The profile requirement is .
       Is it the case that PASS_MAX_DAYS is not set equal to or greater than the required value?
       ",Configure operating system to enforce a 60-day maximum password lifetime restriction. ,"To specify password maximum age for new accounts,
 edit the file /etc/login.defs
@@ -12873,20 +12872,19 @@ PASS_MAX_DAYS
 A value of 180 days is sufficient for many environments.
 The DoD requirement is 60.
 The profile requirement is .",,,,
-V-56703,SRG-OS-000076-GPOS-00044,TBD - Assigned by DISA after STIG release,Operating systems must enforce a 60-day maximum password lifetime restriction.,CCE-82473-0:Set Existing Passwords Maximum Age,"Any password, no matter how complex, can eventually be cracked. Therefore, passwords need to be changed periodically. If the operating system does not limit the lifetime of passwords and force users to change their passwords, there is the risk that the operating system passwords could be compromised.","Configure non-compliant accounts to enforce a 60-day maximum password lifetime
+V-56703,SRG-OS-000076-GPOS-00044,TBD - Assigned by DISA after STIG release,Operating systems must enforce a 60-day maximum password lifetime restriction.,CCE-82473-0:Set Existing Passwords Maximum Age,"Any password, no matter how complex, can eventually be cracked. Therefore, passwords need to be changed periodically. If the operating system does not limit the lifetime of passwords and force users to change their passwords, there is the risk that the operating system passwords could be compromised.","Configure non-compliant accounts to enforce a -day maximum password lifetime
 restriction by running the following command:
-$ sudo chage -M 60 USER","
+$ sudo chage -M  USER","
                   Applicable - Configurable
-                ","Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.","Check whether the maximum time period for existing passwords is restricted to 60 days with the following commands:
-
+                ","Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.","Check whether the maximum time period for existing passwords is restricted to  days with the following commands:
 
 $ sudo awk -F: '$5 > 60 {print $1 """" """" $5}' /etc/shadow
 
-$ sudo awk -F: '$5 
-      Is it the case that existing passwords are not configured correctly?
-      ",Configure operating system to enforce a 60-day maximum password lifetime restriction. ,"Configure non-compliant accounts to enforce a 60-day maximum password lifetime
+$ sudo awk -F: '$5 <= 0 {print $1 """" """" $5}' /etc/shadow
+      Is it the case that any results are returned that are not associated with a system account?
+      ",Configure operating system to enforce a 60-day maximum password lifetime restriction. ,"Configure non-compliant accounts to enforce a -day maximum password lifetime
 restriction by running the following command:
-$ sudo chage -M 60 USER",,,,
+$ sudo chage -M  USER",,,,
 SV-70965,SRG-OS-000077-GPOS-00045,TBD - Assigned by DISA after STIG release,The operating system must prohibit password reuse for a minimum of five generations.,CCE-83478-8:Limit Password Reuse: password-auth,"Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.","Do not allow users to reuse recent passwords. This can be
 accomplished by using the remember option for the
 pam_pwhistory PAM modules.
@@ -14738,6 +14736,23 @@ default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""",,,,
+V-56853,SRG-OS-000138-GPOS-00069,TBD - Assigned by DISA after STIG release,Operating systems must prevent unauthorized and unintended information transfer via shared system resources.,CCE-83375-6:Ensure All World-Writable Directories Are Owned by root user,"Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.
+
+This requirement generally applies to the design of an information technology product, but it can also apply to the configuration of particular information system components that are, or use, such products. This can be verified by acceptance/validation processes in DoD or other government agencies.
+
+There may be shared resources with configurable protections (e.g., files in storage) that may be assessed on specific information system components.","All directories in local partitions which are world-writable should be owned
+by root. If any world-writable directories are not owned by root, this
+should be investigated. Following this, the files should be deleted or
+assigned to root user.","
+                  Applicable - Configurable
+                ","Verify operating systems prevents unauthorized and unintended information transfer via shared system resources. If it does not, this is a finding.","The following command will discover and print world-writable directories that
+are not owned by root.  Run it once for each local partition PART:
+$ sudo find PART -xdev -type d -perm -0002 -uid +0 -print
+      Is it the case that there is output?
+      ",Configure operating systems to prevent unauthorized and unintended information transfer via shared system resources.,"All directories in local partitions which are world-writable should be owned
+by root. If any world-writable directories are not owned by root, this
+should be investigated. Following this, the files should be deleted or
+assigned to root user.",,,,
 V-56853,SRG-OS-000138-GPOS-00069,TBD - Assigned by DISA after STIG release,Operating systems must prevent unauthorized and unintended information transfer via shared system resources.,CCE-80783-4:Verify that All World-Writable Directories Have Sticky Bits Set,"Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.
 
 This requirement generally applies to the design of an information technology product, but it can also apply to the configuration of particular information system components that are, or use, such products. This can be verified by acceptance/validation processes in DoD or other government agencies.
@@ -14758,7 +14773,7 @@ following command:
 $ sudo chmod +t DIR","
                   Applicable - Configurable
                 ","Verify operating systems prevents unauthorized and unintended information transfer via shared system resources. If it does not, this is a finding.","To find world-writable directories that lack the sticky bit, run the following command:
-$ sudo find / -xdev -type d -perm 002 ! -perm 1000
+$ sudo find / -type d \( -perm -0002 -a ! -perm -1000 \) -print 2>/dev/null
       Is it the case that any world-writable directories are missing the sticky bit?
       ",Configure operating systems to prevent unauthorized and unintended information transfer via shared system resources.,"When the so-called 'sticky bit' is set on a directory,
 only the owner of a given file may remove that file from the
@@ -23694,7 +23709,7 @@ use cases.","
                   Applicable - Configurable
                 ","Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.","Check the file /etc/selinux/config and ensure the following line appears:
 SELINUXTYPE=
-      Is it the case that it does not?
+      Is it the case that SELINUXTYPE is set to the wrong value?
       ",Configure the operating system to verify correct operation of all security functions.,"The SELinux targeted policy is appropriate for
 general-purpose desktops and servers, as well as systems in many other roles.
 To configure the system to use this policy, add or correct the following line

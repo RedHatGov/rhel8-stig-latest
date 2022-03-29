@@ -17811,8 +17811,7 @@ The profile requirement is <code><xccdf-1.1:sub xmlns:xccdf-1.1="http://checklis
 <td>Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.</td>
 <td>To check the maximum password age, run the command:
 $ grep PASS_MAX_DAYS /etc/login.defs
-The DoD and FISMA requirement is 60.
-A value of 180 days is sufficient for many environments.
+The profile requirement is .
       Is it the case that PASS_MAX_DAYS is not set equal to or greater than the required value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3757r557621_fix">Configure operating system to enforce a 60-day maximum password lifetime restriction. </fixtext></td>
@@ -17835,24 +17834,23 @@ The profile requirement is .</td>
 <td>Operating systems must enforce a 60-day maximum password lifetime restriction.</td>
 <td>CCE-82473-0:Set Existing Passwords Maximum Age</td>
 <td>Any password, no matter how complex, can eventually be cracked. Therefore, passwords need to be changed periodically. If the operating system does not limit the lifetime of passwords and force users to change their passwords, there is the risk that the operating system passwords could be compromised.</td>
-<td xml:lang="en-US">Configure non-compliant accounts to enforce a 60-day maximum password lifetime
+<td xml:lang="en-US">Configure non-compliant accounts to enforce a <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_maximum_age_login_defs"></xccdf-1.1:sub>-day maximum password lifetime
 restriction by running the following command:
-<pre>$ sudo chage -M 60 <i>USER</i></pre>
+<pre>$ sudo chage -M <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_maximum_age_login_defs"></xccdf-1.1:sub> <i>USER</i></pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify operating system enforces a 60-day maximum password lifetime restriction. If it does not, this is a finding.</td>
-<td>Check whether the maximum time period for existing passwords is restricted to 60 days with the following commands:
-
+<td>Check whether the maximum time period for existing passwords is restricted to  days with the following commands:
 
 $ sudo awk -F: '$5 &gt; 60 {print $1 "" "" $5}' /etc/shadow
 
-$ sudo awk -F: '$5 
-      Is it the case that existing passwords are not configured correctly?
+$ sudo awk -F: '$5 &lt;= 0 {print $1 "" "" $5}' /etc/shadow
+      Is it the case that any results are returned that are not associated with a system account?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3757r557621_fix">Configure operating system to enforce a 60-day maximum password lifetime restriction. </fixtext></td>
-<td>Configure non-compliant accounts to enforce a 60-day maximum password lifetime
+<td>Configure non-compliant accounts to enforce a -day maximum password lifetime
 restriction by running the following command:
-$ sudo chage -M 60 USER</td>
+$ sudo chage -M  USER</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -20799,6 +20797,38 @@ Run the following command to update command line for already installed kernels:#
 <td>SRG-OS-000138-GPOS-00069</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>Operating systems must prevent unauthorized and unintended information transfer via shared system resources.</td>
+<td>CCE-83375-6:Ensure All World-Writable Directories Are Owned by root user</td>
+<td>Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.
+
+This requirement generally applies to the design of an information technology product, but it can also apply to the configuration of particular information system components that are, or use, such products. This can be verified by acceptance/validation processes in DoD or other government agencies.
+
+There may be shared resources with configurable protections (e.g., files in storage) that may be assessed on specific information system components.</td>
+<td xml:lang="en-US">All directories in local partitions which are world-writable should be owned
+by root. If any world-writable directories are not owned by root, this
+should be investigated. Following this, the files should be deleted or
+assigned to root user.</td>
+<td>Applicable - Configurable</td>
+<td>Verify operating systems prevents unauthorized and unintended information transfer via shared system resources. If it does not, this is a finding.</td>
+<td>The following command will discover and print world-writable directories that
+are not owned by root.  Run it once for each local partition PART:
+$ sudo find PART -xdev -type d -perm -0002 -uid +0 -print
+      Is it the case that there is output?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3782r557217_fix">Configure operating systems to prevent unauthorized and unintended information transfer via shared system resources.</fixtext></td>
+<td>All directories in local partitions which are world-writable should be owned
+by root. If any world-writable directories are not owned by root, this
+should be investigated. Following this, the files should be deleted or
+assigned to root user.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56853</td>
+<td>SRG-OS-000138-GPOS-00069</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>Operating systems must prevent unauthorized and unintended information transfer via shared system resources.</td>
 <td>CCE-80783-4:Verify that All World-Writable Directories Have Sticky Bits Set</td>
 <td>Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.
 
@@ -20823,7 +20853,7 @@ following command:
 <td>Applicable - Configurable</td>
 <td>Verify operating systems prevents unauthorized and unintended information transfer via shared system resources. If it does not, this is a finding.</td>
 <td>To find world-writable directories that lack the sticky bit, run the following command:
-$ sudo find / -xdev -type d -perm 002 ! -perm 1000
+$ sudo find / -type d \( -perm -0002 -a ! -perm -1000 \) -print 2&gt;/dev/null
       Is it the case that any world-writable directories are missing the sticky bit?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3782r557217_fix">Configure operating systems to prevent unauthorized and unintended information transfer via shared system resources.</fixtext></td>
@@ -34827,7 +34857,7 @@ use cases.</td>
 <td>Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.</td>
 <td>Check the file /etc/selinux/config and ensure the following line appears:
 SELINUXTYPE=
-      Is it the case that it does not?
+      Is it the case that SELINUXTYPE is set to the wrong value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3881r375390_fix">Configure the operating system to verify correct operation of all security functions.</fixtext></td>
 <td>The SELinux targeted policy is appropriate for
