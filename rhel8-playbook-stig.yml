@@ -31991,12 +31991,29 @@
         - no_reboot_needed
         - package_tftp-server_removed
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-82434-2
+        - DISA-STIG-RHEL-08-040350
+        - NIST-800-53-AC-6
+        - NIST-800-53-CM-6(b)
+        - NIST-800-53-CM-7(a)
+        - configure_strategy
+        - high_severity
+        - low_complexity
+        - low_disruption
+        - no_reboot_needed
+        - tftpd_uses_secure_mode
+
     - name: Find out if the file exists and contains the line configuring server arguments
       find:
         path: /etc/xinetd.d
         patterns: tftp
         contains: ^[\s]+server_args.*$
       register: tftpd_secure_config_line
+      when: '"tftp-server" in ansible_facts.packages'
       tags:
         - CCE-82434-2
         - DISA-STIG-RHEL-08-040350
@@ -32017,8 +32034,9 @@
         line: \1 -s {{ var_tftpd_secure_directory }} \3
         state: present
         backrefs: true
-      when: tftpd_secure_config_line is defined and tftpd_secure_config_line.matched >
-        0
+      when:
+        - '"tftp-server" in ansible_facts.packages'
+        - tftpd_secure_config_line is defined and tftpd_secure_config_line.matched > 0
       tags:
         - CCE-82434-2
         - DISA-STIG-RHEL-08-040350
@@ -32038,8 +32056,10 @@
         line: server_args = -s {{ var_tftpd_secure_directory }}
         state: present
         create: true
-      when: tftpd_secure_config_line is defined and tftpd_secure_config_line.matched ==
-        0
+      when:
+        - '"tftp-server" in ansible_facts.packages'
+        - tftpd_secure_config_line is defined and tftpd_secure_config_line.matched ==
+          0
       tags:
         - CCE-82434-2
         - DISA-STIG-RHEL-08-040350

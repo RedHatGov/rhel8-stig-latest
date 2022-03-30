@@ -23670,7 +23670,9 @@ previous software components after updating, set the clean_requirements_on_remov
 
 to 1 in /etc/yum.conf.","
                   Applicable - Configurable
-                ","Verify the operating system removes all software components after updated versions have been installed. If it does not, this is a finding.","
+                ","Verify the operating system removes all software components after updated versions have been installed. If it does not, this is a finding.","Verify Red Hat Enterprise Linux 8 removes all software components after updated versions have been installed.
+
+
 To verify that clean_requirements_on_remove is configured properly, run the
 following command:
 $ grep clean_requirements_on_remove /etc/yum.conf
@@ -23707,7 +23709,9 @@ Other policies, such as mls, provide additional security labeling
 and greater confinement but are not compatible with many general-purpose
 use cases.","
                   Applicable - Configurable
-                ","Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.","Check the file /etc/selinux/config and ensure the following line appears:
+                ","Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.","Ensure that Red Hat Enterprise Linux 8 verifies correct operation of security functions.
+
+Check the file /etc/selinux/config and ensure the following line appears:
 SELINUXTYPE=
       Is it the case that SELINUXTYPE is set to the wrong value?
       ",Configure the operating system to verify correct operation of all security functions.,"The SELinux targeted policy is appropriate for
@@ -23725,8 +23729,12 @@ system boot time.  In the file /etc/selinux/config, add or correct the
 following line to configure the system to boot into enforcing mode:
 SELINUX=","
                   Applicable - Configurable
-                ","Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.","Check the file /etc/selinux/config and ensure the following line appears:
-SELINUX=
+                ","Verify the operating system verifies correct operation of all security functions. If it does not, this is a finding.","Ensure that Red Hat Enterprise Linux 8 verifies correct operation of security functions.
+
+Check if ""SELinux"" is active and in """" mode with the following command:
+
+$ sudo getenforce
+
       Is it the case that SELINUX is not set to enforcing?
       ",Configure the operating system to verify correct operation of all security functions.,"The SELinux state should be set to  at
 system boot time.  In the file /etc/selinux/config, add or correct the
