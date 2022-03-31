@@ -50859,6 +50859,41 @@ assigned to root user.</td>
 <td>SRG-OS-000480-GPOS-00227</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+<td>CCE-85886-0:Ensure All World-Writable Directories Are Group Owned by a System Account</td>
+<td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+<td>All directories in local partitions which are
+world-writable should be group owned by root or another
+system account. If any world-writable directories are not
+group owned by a system account, this should be investigated.
+Following this, the files should be deleted or assigned to an
+appropriate group.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+<td>The following command will discover and print world-writable directories that
+are not group owned by a system account, given the assumption that only system
+accounts have a gid lower than 1000.  Run it once for each local partition PART:
+$ sudo find PART -xdev -type d -perm -0002 -gid +999 -print
+      Is it the case that there is output?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
+<td>All directories in local partitions which are
+world-writable should be group owned by root or another
+system account. If any world-writable directories are not
+group owned by a system account, this should be investigated.
+Following this, the files should be deleted or assigned to an
+appropriate group.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SV-70851</td>
+<td>SRG-OS-000480-GPOS-00227</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
 <td>CCE-83497-8:Ensure All Files Are Owned by a Group</td>
 <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 

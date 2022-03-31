@@ -34515,6 +34515,26 @@ $ sudo find PART -xdev -type d -perm -0002 -uid +0 -print
 by root. If any world-writable directories are not owned by root, this
 should be investigated. Following this, the files should be deleted or
 assigned to root user.",,,,
+SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-85886-0:Ensure All World-Writable Directories Are Group Owned by a System Account,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","All directories in local partitions which are
+world-writable should be group owned by root or another
+system account. If any world-writable directories are not
+group owned by a system account, this should be investigated.
+Following this, the files should be deleted or assigned to an
+appropriate group.","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","The following command will discover and print world-writable directories that
+are not group owned by a system account, given the assumption that only system
+accounts have a gid lower than 1000.  Run it once for each local partition PART:
+$ sudo find PART -xdev -type d -perm -0002 -gid +999 -print
+      Is it the case that there is output?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","All directories in local partitions which are
+world-writable should be group owned by root or another
+system account. If any world-writable directories are not
+group owned by a system account, this should be investigated.
+Following this, the files should be deleted or assigned to an
+appropriate group.",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-83497-8:Ensure All Files Are Owned by a Group,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","If any files are not owned by a group, then the
