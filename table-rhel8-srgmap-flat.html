@@ -1790,6 +1790,54 @@ After the settings have been set, run dconf update.</td>
 <td>SRG-OS-000029-GPOS-00010</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.</td>
+<td>CCE-80776-8:Set GNOME3 Screensaver Lock Delay After Activation Period</td>
+<td>A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+
+The session lock is implemented at the point where session activity can be determined and/or controlled.</td>
+<td>To activate the locking delay of the screensaver in the GNOME3 desktop when
+the screensaver is activated, add or set <code>lock-delay</code> to <code>uint32 <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_screensaver_lock_delay"></xccdf-1.1:sub></code> in
+<code>/etc/dconf/db/local.d/00-security-settings</code>. For example:
+<pre>[org/gnome/desktop/screensaver]
+lock-delay=uint32 <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_screensaver_lock_delay"></xccdf-1.1:sub>
+</pre>
+Once the setting has been added, add a lock to
+<code>/etc/dconf/db/local.d/locks/00-security-settings-lock</code> to prevent user modification.
+For example:
+<pre>/org/gnome/desktop/screensaver/lock-delay</pre>
+After the settings have been set, run <code>dconf update</code>.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.</td>
+<td>To check that the screen locks immediately when activated, run the following command:
+$ gsettings get org.gnome.desktop.screensaver lock-delay
+If properly configured, the output should be 'uint32 '.
+
+To ensure that users cannot change how long until the the screensaver locks, run the following:
+$ grep lock-delay /etc/dconf/db/local.d/locks/*
+If properly configured, the output for lock-delay should be /org/gnome/desktop/screensaver/lock-delay
+      Is it the case that the screensaver lock delay is missing, or is set to a value greater than 5?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3724r557054_fix">Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.</fixtext></td>
+<td>To activate the locking delay of the screensaver in the GNOME3 desktop when
+the screensaver is activated, add or set lock-delay to uint32  in
+/etc/dconf/db/local.d/00-security-settings. For example:
+[org/gnome/desktop/screensaver]
+lock-delay=uint32 
+
+Once the setting has been added, add a lock to
+/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/screensaver/lock-delay
+After the settings have been set, run dconf update.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56633</td>
+<td>SRG-OS-000029-GPOS-00010</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.</td>
 <td>CCE-82199-1:Configure tmux to lock session after inactivity</td>
 <td>A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
 

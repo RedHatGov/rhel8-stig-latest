@@ -1274,6 +1274,39 @@ Once the setting has been added, add a lock to
 For example:
 /org/gnome/desktop/session/idle-delay
 After the settings have been set, run dconf update.",,,,
+V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-80776-8:Set GNOME3 Screensaver Lock Delay After Activation Period,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+
+The session lock is implemented at the point where session activity can be determined and/or controlled.","To activate the locking delay of the screensaver in the GNOME3 desktop when
+the screensaver is activated, add or set lock-delay to uint32  in
+/etc/dconf/db/local.d/00-security-settings. For example:
+[org/gnome/desktop/screensaver]
+lock-delay=uint32 
+
+Once the setting has been added, add a lock to
+/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/screensaver/lock-delay
+After the settings have been set, run dconf update.","
+                  Applicable - Configurable
+                ","Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.","To check that the screen locks immediately when activated, run the following command:
+$ gsettings get org.gnome.desktop.screensaver lock-delay
+If properly configured, the output should be 'uint32 '.
+
+To ensure that users cannot change how long until the the screensaver locks, run the following:
+$ grep lock-delay /etc/dconf/db/local.d/locks/*
+If properly configured, the output for lock-delay should be /org/gnome/desktop/screensaver/lock-delay
+      Is it the case that the screensaver lock delay is missing, or is set to a value greater than 5?
+      ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"To activate the locking delay of the screensaver in the GNOME3 desktop when
+the screensaver is activated, add or set lock-delay to uint32  in
+/etc/dconf/db/local.d/00-security-settings. For example:
+[org/gnome/desktop/screensaver]
+lock-delay=uint32 
+
+Once the setting has been added, add a lock to
+/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/screensaver/lock-delay
+After the settings have been set, run dconf update.",,,,
 V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-82199-1:Configure tmux to lock session after inactivity,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
 
 The session lock is implemented at the point where session activity can be determined and/or controlled.","To enable console screen locking in tmux terminal multiplexer
