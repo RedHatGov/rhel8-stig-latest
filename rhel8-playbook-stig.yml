@@ -578,7 +578,7 @@
       lineinfile:
         dest: /etc/sysconfig/sshd
         state: absent
-        regexp: ^\s*CRYPTO_POLICY.*$
+        regexp: ^\s*(?i)CRYPTO_POLICY.*$
       tags:
         - CCE-80939-2
         - DISA-STIG-RHEL-08-010287
@@ -27080,10 +27080,10 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Ensure permission 0640 on /etc/audit/auditd.conf
+    - name: Ensure permission u-xs,g-xws,o-xwrt on /etc/audit/auditd.conf
       file:
         path: /etc/audit/auditd.conf
-        mode: '0640'
+        mode: u-xs,g-xws,o-xwrt
       when: file_exists.stat is defined and file_exists.stat.exists
       tags:
         - CCE-85871-2
@@ -27097,12 +27097,12 @@
         - no_reboot_needed
 
     - name: Find /etc/audit/rules.d/ file(s)
-      find:
-        paths: /etc/audit/rules.d/
-        patterns: ^.*rules$
-        use_regex: true
-        hidden: true
+      command: find -H /etc/audit/rules.d/ -maxdepth 1 -perm /u+xs,g+xws,o+xwrt -type
+        f -regex "^.*rules$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-85875-3
         - DISA-STIG-RHEL-08-030610
@@ -27116,12 +27116,11 @@
 
     - name: Set permissions for /etc/audit/rules.d/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0640'
+        path: '{{ item }}'
+        mode: u-xs,g-xws,o-xwrt
         state: file
-      when: item.mode != '0640'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-85875-3
         - DISA-STIG-RHEL-08-030610
@@ -27341,7 +27340,7 @@
       file:
         path: /var/log/
         state: directory
-        mode: '0755'
+        mode: u-s,g-ws,o-wt
       tags:
         - CCE-83663-5
         - DISA-STIG-RHEL-08-010240
@@ -27366,10 +27365,10 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Ensure permission 0640 on /var/log/messages
+    - name: Ensure permission u-xs,g-xws,o-xwrt on /var/log/messages
       file:
         path: /var/log/messages
-        mode: '0640'
+        mode: u-xs,g-xws,o-xwrt
       when: file_exists.stat is defined and file_exists.stat.exists
       tags:
         - CCE-83665-0
@@ -27525,43 +27524,81 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Read list of world and group writable subdirectories in libraries directories
-      command: find /lib /lib64 /usr/lib /usr/lib64 -perm /022 -type d
-      register: world_writable_library_dirs
-      changed_when: false
-      failed_when: false
-      check_mode: false
-      tags:
-        - CCE-88692-9
-        - DISA-STIG-RHEL-08-010331
-        - NIST-800-53-CM-5
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - dir_permissions_library_dirs
-        - high_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-        - restrict_strategy
-
-    - name: Disable world/group writability to library files
+    - name: Set permissions for /lib/ recursively
       file:
-        path: '{{ item }}'
-        mode: go-w
-      with_items: '{{ world_writable_library_dirs.stdout_lines }}'
-      when: world_writable_library_dirs.stdout_lines | length > 0
+        path: /lib/
+        state: directory
+        recurse: true
+        mode: u-s,g-ws,o-wt
       tags:
         - CCE-88692-9
         - DISA-STIG-RHEL-08-010331
         - NIST-800-53-CM-5
         - NIST-800-53-CM-5(6)
         - NIST-800-53-CM-5(6).1
+        - configure_strategy
         - dir_permissions_library_dirs
-        - high_complexity
-        - medium_disruption
+        - low_complexity
+        - low_disruption
         - medium_severity
         - no_reboot_needed
-        - restrict_strategy
+
+    - name: Set permissions for /lib64/ recursively
+      file:
+        path: /lib64/
+        state: directory
+        recurse: true
+        mode: u-s,g-ws,o-wt
+      tags:
+        - CCE-88692-9
+        - DISA-STIG-RHEL-08-010331
+        - NIST-800-53-CM-5
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /usr/lib/ recursively
+      file:
+        path: /usr/lib/
+        state: directory
+        recurse: true
+        mode: u-s,g-ws,o-wt
+      tags:
+        - CCE-88692-9
+        - DISA-STIG-RHEL-08-010331
+        - NIST-800-53-CM-5
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Set permissions for /usr/lib64/ recursively
+      file:
+        path: /usr/lib64/
+        state: directory
+        recurse: true
+        mode: u-s,g-ws,o-wt
+      tags:
+        - CCE-88692-9
+        - DISA-STIG-RHEL-08-010331
+        - NIST-800-53-CM-5
+        - NIST-800-53-CM-5(6)
+        - NIST-800-53-CM-5(6).1
+        - configure_strategy
+        - dir_permissions_library_dirs
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
 
     - name: Retrieve the system command files and set their group ownership to root
       command: find -L {{ item }}  ! -group root -type f -exec chgrp root '{}' \;
@@ -27629,13 +27666,11 @@
         - restrict_strategy
 
     - name: Find /lib/ file(s) matching ^.*$ recursively
-      find:
-        paths: /lib/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /lib/  -type f ! -uid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27652,12 +27687,11 @@
 
     - name: Ensure owner on /lib/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         owner: '0'
         state: file
-      when: item.uid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27673,13 +27707,11 @@
         - no_reboot_needed
 
     - name: Find /lib64/ file(s) matching ^.*$ recursively
-      find:
-        paths: /lib64/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /lib64/  -type f ! -uid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27696,12 +27728,11 @@
 
     - name: Ensure owner on /lib64/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         owner: '0'
         state: file
-      when: item.uid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27717,13 +27748,11 @@
         - no_reboot_needed
 
     - name: Find /usr/lib/ file(s) matching ^.*$ recursively
-      find:
-        paths: /usr/lib/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /usr/lib/  -type f ! -uid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27740,12 +27769,11 @@
 
     - name: Ensure owner on /usr/lib/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         owner: '0'
         state: file
-      when: item.uid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27761,13 +27789,11 @@
         - no_reboot_needed
 
     - name: Find /usr/lib64/ file(s) matching ^.*$ recursively
-      find:
-        paths: /usr/lib64/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /usr/lib64/  -type f ! -uid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27784,12 +27810,11 @@
 
     - name: Ensure owner on /usr/lib64/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         owner: '0'
         state: file
-      when: item.uid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80807-1
         - DISA-STIG-RHEL-08-010340
@@ -27846,13 +27871,11 @@
         - restrict_strategy
 
     - name: Find /lib/ file(s) recursively
-      find:
-        paths: /lib/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27869,12 +27892,11 @@
 
     - name: Set permissions for /lib/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0755'
+        path: '{{ item }}'
+        mode: u-s,g-ws,o-wt
         state: file
-      when: item.mode != '0755'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27890,13 +27912,11 @@
         - no_reboot_needed
 
     - name: Find /lib64/ file(s) recursively
-      find:
-        paths: /lib64/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27913,12 +27933,11 @@
 
     - name: Set permissions for /lib64/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0755'
+        path: '{{ item }}'
+        mode: u-s,g-ws,o-wt
         state: file
-      when: item.mode != '0755'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27934,13 +27953,11 @@
         - no_reboot_needed
 
     - name: Find /usr/lib/ file(s) recursively
-      find:
-        paths: /usr/lib/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27957,12 +27974,11 @@
 
     - name: Set permissions for /usr/lib/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0755'
+        path: '{{ item }}'
+        mode: u-s,g-ws,o-wt
         state: file
-      when: item.mode != '0755'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -27978,13 +27994,11 @@
         - no_reboot_needed
 
     - name: Find /usr/lib64/ file(s) recursively
-      find:
-        paths: /usr/lib64/
-        patterns: ^.*$
-        use_regex: true
-        recurse: true
-        hidden: true
+      command: find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -28001,12 +28015,11 @@
 
     - name: Set permissions for /usr/lib64/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0755'
+        path: '{{ item }}'
+        mode: u-s,g-ws,o-wt
         state: file
-      when: item.mode != '0755'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-80815-4
         - DISA-STIG-RHEL-08-010330
@@ -28022,12 +28035,11 @@
         - no_reboot_needed
 
     - name: Find /lib/ file(s) matching ^.*$
-      find:
-        paths: /lib/
-        patterns: ^.*$
-        use_regex: true
-        hidden: true
+      command: find -H /lib/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28042,12 +28054,11 @@
 
     - name: Ensure group owner on /lib/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         group: '0'
         state: file
-      when: item.gid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28061,12 +28072,11 @@
         - root_permissions_syslibrary_files
 
     - name: Find /lib64/ file(s) matching ^.*$
-      find:
-        paths: /lib64/
-        patterns: ^.*$
-        use_regex: true
-        hidden: true
+      command: find -H /lib64/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28081,12 +28091,11 @@
 
     - name: Ensure group owner on /lib64/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         group: '0'
         state: file
-      when: item.gid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28100,12 +28109,11 @@
         - root_permissions_syslibrary_files
 
     - name: Find /usr/lib/ file(s) matching ^.*$
-      find:
-        paths: /usr/lib/
-        patterns: ^.*$
-        use_regex: true
-        hidden: true
+      command: find -H /usr/lib/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28120,12 +28128,11 @@
 
     - name: Ensure group owner on /usr/lib/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         group: '0'
         state: file
-      when: item.gid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28139,12 +28146,11 @@
         - root_permissions_syslibrary_files
 
     - name: Find /usr/lib64/ file(s) matching ^.*$
-      find:
-        paths: /usr/lib64/
-        patterns: ^.*$
-        use_regex: true
-        hidden: true
+      command: find -H /usr/lib64/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28159,12 +28165,11 @@
 
     - name: Ensure group owner on /usr/lib64/ file(s) matching ^.*$
       file:
-        path: '{{ item.path }}'
+        path: '{{ item }}'
         group: '0'
         state: file
-      when: item.gid != 0
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -32235,12 +32240,12 @@
         - service_sshd_enabled
 
     - name: Find /etc/ssh/ file(s)
-      find:
-        paths: /etc/ssh/
-        patterns: ^.*_key$
-        use_regex: true
-        hidden: true
+      command: find -H /etc/ssh/ -maxdepth 1 -perm /u+xs,g+xwrs,o+xwrt -type f -regex
+        "^.*_key$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82424-3
@@ -32259,14 +32264,12 @@
 
     - name: Set permissions for /etc/ssh/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0600'
+        path: '{{ item }}'
+        mode: u-xs,g-xwrs,o-xwrt
         state: file
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - item.mode != '0600'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82424-3
         - DISA-STIG-RHEL-08-010490
@@ -32283,12 +32286,11 @@
         - no_reboot_needed
 
     - name: Find /etc/ssh/ file(s)
-      find:
-        paths: /etc/ssh/
-        patterns: ^.*.pub$
-        use_regex: true
-        hidden: true
+      command: find -H /etc/ssh/ -maxdepth 1 -perm /u+xs,g+xws,o+xwt -type f -regex "^.*.pub$"
       register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82428-4
@@ -32307,14 +32309,12 @@
 
     - name: Set permissions for /etc/ssh/ file(s)
       file:
-        path: '{{ item.path }}'
-        mode: '0644'
+        path: '{{ item }}'
+        mode: u-xs,g-xws,o-xwt
         state: file
-      when:
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-        - item.mode != '0644'
       with_items:
-        - '{{ files_found.files }}'
+        - '{{ files_found.stdout_lines }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-82428-4
         - DISA-STIG-RHEL-08-010480

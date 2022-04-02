@@ -413,7 +413,7 @@ remediate_openssl_crypto_policy
 
 SSH_CONF="/etc/sysconfig/sshd"
 
-sed -i "/^\s*CRYPTO_POLICY.*$/d" $SSH_CONF
+sed -i "/^\s*CRYPTO_POLICY.*$/Id" $SSH_CONF
 # END fix for 'configure_ssh_crypto_policy'
 
 ###############################################################################
@@ -1767,6 +1767,9 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
+var_accounts_passwords_pam_faillock_deny='3'
+
+
 if [ -f /usr/bin/authselect ]; then
     if authselect check; then
     authselect enable-feature with-faillock
@@ -1779,12 +1782,8 @@ It is not recommended to manually edit the PAM files when authselect tool is ava
 In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
     false
 fi
-fi
-
-var_accounts_passwords_pam_faillock_deny='3'
-
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
-
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 for pam_file in "${AUTH_FILES[@]}"
 do
     if ! grep -qE '^\s*auth\s+required\s+pam_faillock\.so\s+(preauth silent|authfail).*$' "$pam_file" ; then
@@ -1792,16 +1791,22 @@ do
         sed -i --follow-symlinks '/^auth.*sufficient.*pam_unix.so.*/a auth        required      pam_faillock.so authfail' "$pam_file"
         sed -i --follow-symlinks '/^account.*required.*pam_unix.so.*/i account     required      pam_faillock.so' "$pam_file"
     fi
-    FAILLOCK_CONF="/etc/security/faillock.conf"
-    if [ -f $FAILLOCK_CONF ]; then
-        regex="^\s*deny\s*="
-        line="deny = $var_accounts_passwords_pam_faillock_deny"
-        if ! grep -q $regex $FAILLOCK_CONF; then
-            echo $line >> $FAILLOCK_CONF
-        else
-            sed -i --follow-symlinks 's/^\s*\(deny\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_deny"'/g' $FAILLOCK_CONF
-        fi
+    sed -Ei 's/(auth.*)(\[default=die\])(.*pam_faillock.so)/\1required     \3/g' "$pam_file"
+done
+fi
+FAILLOCK_CONF="/etc/security/faillock.conf"
+if [ -f $FAILLOCK_CONF ]; then
+    regex="^\s*deny\s*="
+    line="deny = $var_accounts_passwords_pam_faillock_deny"
+    if ! grep -q $regex $FAILLOCK_CONF; then
+        echo $line >> $FAILLOCK_CONF
     else
+        sed -i --follow-symlinks 's/^\s*\(deny\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_deny"'/g' $FAILLOCK_CONF
+    fi
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+    for pam_file in "${AUTH_FILES[@]}"
+    do
         if ! grep -qE '^\s*auth.*pam_faillock.so (preauth|authfail).*deny' "$pam_file"; then
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*preauth.*silent.*/ s/$/ deny='"$var_accounts_passwords_pam_faillock_deny"'/' "$pam_file"
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*authfail.*/ s/$/ deny='"$var_accounts_passwords_pam_faillock_deny"'/' "$pam_file"
@@ -1809,8 +1814,8 @@ do
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*preauth.*silent.*\)\('"deny"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_deny"'\3/' "$pam_file"
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*authfail.*\)\('"deny"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_deny"'\3/' "$pam_file"
         fi
-    fi
-done
+    done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1836,10 +1841,8 @@ It is not recommended to manually edit the PAM files when authselect tool is ava
 In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
     false
 fi
-fi
-
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
-
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 for pam_file in "${AUTH_FILES[@]}"
 do
     if ! grep -qE '^\s*auth\s+required\s+pam_faillock\.so\s+(preauth silent|authfail).*$' "$pam_file" ; then
@@ -1847,20 +1850,26 @@ do
         sed -i --follow-symlinks '/^auth.*sufficient.*pam_unix.so.*/a auth        required      pam_faillock.so authfail' "$pam_file"
         sed -i --follow-symlinks '/^account.*required.*pam_unix.so.*/i account     required      pam_faillock.so' "$pam_file"
     fi
-    FAILLOCK_CONF="/etc/security/faillock.conf"
-    if [ -f $FAILLOCK_CONF ]; then
-        regex="^\s*even_deny_root"
-        line="even_deny_root"
-        if ! grep -q $regex $FAILLOCK_CONF; then
-            echo $line >> $FAILLOCK_CONF
-        fi
-    else
+    sed -Ei 's/(auth.*)(\[default=die\])(.*pam_faillock.so)/\1required     \3/g' "$pam_file"
+done
+fi
+FAILLOCK_CONF="/etc/security/faillock.conf"
+if [ -f $FAILLOCK_CONF ]; then
+    regex="^\s*even_deny_root"
+    line="even_deny_root"
+    if ! grep -q $regex $FAILLOCK_CONF; then
+        echo $line >> $FAILLOCK_CONF
+    fi
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+    for pam_file in "${AUTH_FILES[@]}"
+    do
         if ! grep -qE '^\s*auth.*pam_faillock.so (preauth|authfail).*even_deny_root' "$pam_file"; then
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*preauth.*silent.*/ s/$/ even_deny_root/' "$pam_file"
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*authfail.*/ s/$/ even_deny_root/' "$pam_file"
         fi
-    fi
-done
+    done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1874,6 +1883,9 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
+var_accounts_passwords_pam_faillock_fail_interval='900'
+
+
 if [ -f /usr/bin/authselect ]; then
     if authselect check; then
     authselect enable-feature with-faillock
@@ -1886,12 +1898,8 @@ It is not recommended to manually edit the PAM files when authselect tool is ava
 In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
     false
 fi
-fi
-
-var_accounts_passwords_pam_faillock_fail_interval='900'
-
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
-
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 for pam_file in "${AUTH_FILES[@]}"
 do
     if ! grep -qE '^\s*auth\s+required\s+pam_faillock\.so\s+(preauth silent|authfail).*$' "$pam_file" ; then
@@ -1899,16 +1907,22 @@ do
         sed -i --follow-symlinks '/^auth.*sufficient.*pam_unix.so.*/a auth        required      pam_faillock.so authfail' "$pam_file"
         sed -i --follow-symlinks '/^account.*required.*pam_unix.so.*/i account     required      pam_faillock.so' "$pam_file"
     fi
-    FAILLOCK_CONF="/etc/security/faillock.conf"
-    if [ -f $FAILLOCK_CONF ]; then
-        regex="^\s*fail_interval\s*="
-        line="fail_interval = $var_accounts_passwords_pam_faillock_fail_interval"
-        if ! grep -q $regex $FAILLOCK_CONF; then
-            echo $line >> $FAILLOCK_CONF
-        else
-            sed -i --follow-symlinks 's/^\s*\(fail_interval\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_fail_interval"'/g' $FAILLOCK_CONF
-        fi
+    sed -Ei 's/(auth.*)(\[default=die\])(.*pam_faillock.so)/\1required     \3/g' "$pam_file"
+done
+fi
+FAILLOCK_CONF="/etc/security/faillock.conf"
+if [ -f $FAILLOCK_CONF ]; then
+    regex="^\s*fail_interval\s*="
+    line="fail_interval = $var_accounts_passwords_pam_faillock_fail_interval"
+    if ! grep -q $regex $FAILLOCK_CONF; then
+        echo $line >> $FAILLOCK_CONF
     else
+        sed -i --follow-symlinks 's/^\s*\(fail_interval\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_fail_interval"'/g' $FAILLOCK_CONF
+    fi
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+    for pam_file in "${AUTH_FILES[@]}"
+    do
         if ! grep -qE '^\s*auth.*pam_faillock.so (preauth|authfail).*fail_interval' "$pam_file"; then
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*preauth.*silent.*/ s/$/ fail_interval='"$var_accounts_passwords_pam_faillock_fail_interval"'/' "$pam_file"
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*authfail.*/ s/$/ fail_interval='"$var_accounts_passwords_pam_faillock_fail_interval"'/' "$pam_file"
@@ -1916,8 +1930,8 @@ do
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*preauth.*silent.*\)\('"fail_interval"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_fail_interval"'\3/' "$pam_file"
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*authfail.*\)\('"fail_interval"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_fail_interval"'\3/' "$pam_file"
         fi
-    fi
-done
+    done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -1931,6 +1945,9 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
+var_accounts_passwords_pam_faillock_unlock_time='0'
+
+
 if [ -f /usr/bin/authselect ]; then
     if authselect check; then
     authselect enable-feature with-faillock
@@ -1943,12 +1960,8 @@ It is not recommended to manually edit the PAM files when authselect tool is ava
 In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
     false
 fi
-fi
-
-var_accounts_passwords_pam_faillock_unlock_time='0'
-
-AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
-
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 for pam_file in "${AUTH_FILES[@]}"
 do
     if ! grep -qE '^\s*auth\s+required\s+pam_faillock\.so\s+(preauth silent|authfail).*$' "$pam_file" ; then
@@ -1956,16 +1969,22 @@ do
         sed -i --follow-symlinks '/^auth.*sufficient.*pam_unix.so.*/a auth        required      pam_faillock.so authfail' "$pam_file"
         sed -i --follow-symlinks '/^account.*required.*pam_unix.so.*/i account     required      pam_faillock.so' "$pam_file"
     fi
-    FAILLOCK_CONF="/etc/security/faillock.conf"
-    if [ -f $FAILLOCK_CONF ]; then
-        regex="^\s*unlock_time\s*="
-        line="unlock_time = $var_accounts_passwords_pam_faillock_unlock_time"
-        if ! grep -q $regex $FAILLOCK_CONF; then
-            echo $line >> $FAILLOCK_CONF
-        else
-            sed -i --follow-symlinks 's/^\s*\(unlock_time\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_unlock_time"'/g' $FAILLOCK_CONF
-        fi
+    sed -Ei 's/(auth.*)(\[default=die\])(.*pam_faillock.so)/\1required     \3/g' "$pam_file"
+done
+fi
+FAILLOCK_CONF="/etc/security/faillock.conf"
+if [ -f $FAILLOCK_CONF ]; then
+    regex="^\s*unlock_time\s*="
+    line="unlock_time = $var_accounts_passwords_pam_faillock_unlock_time"
+    if ! grep -q $regex $FAILLOCK_CONF; then
+        echo $line >> $FAILLOCK_CONF
     else
+        sed -i --follow-symlinks 's/^\s*\(unlock_time\s*=\s*\)\([0-9]\+\)/\1'"$var_accounts_passwords_pam_faillock_unlock_time"'/g' $FAILLOCK_CONF
+    fi
+else
+    AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
+    for pam_file in "${AUTH_FILES[@]}"
+    do
         if ! grep -qE '^\s*auth.*pam_faillock.so (preauth|authfail).*unlock_time' "$pam_file"; then
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*preauth.*silent.*/ s/$/ unlock_time='"$var_accounts_passwords_pam_faillock_unlock_time"'/' "$pam_file"
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock.so.*authfail.*/ s/$/ unlock_time='"$var_accounts_passwords_pam_faillock_unlock_time"'/' "$pam_file"
@@ -1973,8 +1992,8 @@ do
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*preauth.*silent.*\)\('"unlock_time"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_unlock_time"'\3/' "$pam_file"
             sed -i --follow-symlinks 's/\(^auth.*required.*pam_faillock.so.*authfail.*\)\('"unlock_time"'=\)[0-9]\+\(.*\)/\1\2'"$var_accounts_passwords_pam_faillock_unlock_time"'\3/' "$pam_file"
         fi
-    fi
-done
+    done
+fi
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -28866,7 +28885,8 @@ df --local -P | awk '{if (NR!=1) print $6}' \
 
 
 
-chmod 0640 /etc/audit/auditd.conf
+
+chmod u-xs,g-xws,o-xwrt /etc/audit/auditd.conf
 # END fix for 'file_permissions_etc_audit_auditd'
 
 ###############################################################################
@@ -28876,12 +28896,8 @@ chmod 0640 /etc/audit/auditd.conf
 
 
 
-readarray -t files < <(find /etc/audit/rules.d/ -maxdepth 1 -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*rules$'; then
-        chmod 0640 "$file"
-    fi    
-done
+
+find -H /etc/audit/rules.d/ -maxdepth 1 -perm /u+xs,g+xws,o+xwrt -type f -regex '^.*rules$' -exec chmod u-xs,g-xws,o-xwrt {} \;
 # END fix for 'file_permissions_etc_audit_rulesd'
 
 ###############################################################################
@@ -29021,7 +29037,7 @@ fi
 
 
 
-find -L /var/log/ -maxdepth 1 -type d -exec chgrp 0 {} \;
+find -H /var/log/ -maxdepth 1 -type d -exec chgrp 0 {} \;
 # END fix for 'file_groupowner_var_log'
 
 ###############################################################################
@@ -29041,7 +29057,7 @@ chgrp 0 /var/log/messages
 
 
 
-find -L /var/log/ -maxdepth 1 -type d -exec chown 0 {} \;
+find -H /var/log/ -maxdepth 1 -type d -exec chown 0 {} \;
 # END fix for 'file_owner_var_log'
 
 ###############################################################################
@@ -29061,7 +29077,8 @@ chown 0 /var/log/messages
 
 
 
-find -L /var/log/ -maxdepth 1 -type d -exec chmod 0755 {} \;
+
+find -H /var/log/ -maxdepth 1 -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,o-wt {} \;
 # END fix for 'file_permissions_var_log'
 
 ###############################################################################
@@ -29071,7 +29088,8 @@ find -L /var/log/ -maxdepth 1 -type d -exec chmod 0755 {} \;
 
 
 
-chmod 0640 /var/log/messages
+
+chmod u-xs,g-xws,o-xwrt /var/log/messages
 # END fix for 'file_permissions_var_log_messages'
 
 ###############################################################################
@@ -29081,13 +29099,13 @@ chmod 0640 /var/log/messages
 
 
 
-find -L /lib/  -type d -exec chgrp 0 {} \;
+find -H /lib/  -type d -exec chgrp 0 {} \;
 
-find -L /lib64/  -type d -exec chgrp 0 {} \;
+find -H /lib64/  -type d -exec chgrp 0 {} \;
 
-find -L /usr/lib/  -type d -exec chgrp 0 {} \;
+find -H /usr/lib/  -type d -exec chgrp 0 {} \;
 
-find -L /usr/lib64/  -type d -exec chgrp 0 {} \;
+find -H /usr/lib64/  -type d -exec chgrp 0 {} \;
 # END fix for 'dir_group_ownership_library_dirs'
 
 ###############################################################################
@@ -29097,23 +29115,30 @@ find -L /usr/lib64/  -type d -exec chgrp 0 {} \;
 
 
 
-find -L /lib/  -type d -exec chown 0 {} \;
+find -H /lib/  -type d -exec chown 0 {} \;
 
-find -L /lib64/  -type d -exec chown 0 {} \;
+find -H /lib64/  -type d -exec chown 0 {} \;
 
-find -L /usr/lib/  -type d -exec chown 0 {} \;
+find -H /usr/lib/  -type d -exec chown 0 {} \;
 
-find -L /usr/lib64/  -type d -exec chown 0 {} \;
+find -H /usr/lib64/  -type d -exec chown 0 {} \;
 # END fix for 'dir_ownership_library_dirs'
 
 ###############################################################################
 # BEGIN fix (270 / 372) for 'dir_permissions_library_dirs'
 ###############################################################################
 (>&2 echo "Remediating rule 270/372: 'dir_permissions_library_dirs'")
-DIRS="/lib /lib64 /usr/lib /usr/lib64"
-for dirPath in $DIRS; do
-	find "$dirPath" -perm /022 -type d -exec chmod go-w '{}' \;
-done
+
+
+
+
+find -H /lib/  -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,o-wt {} \;
+
+find -H /lib64/  -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,o-wt {} \;
+
+find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,o-wt {} \;
+
+find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,o-wt {} \;
 # END fix for 'dir_permissions_library_dirs'
 
 ###############################################################################
@@ -29148,33 +29173,13 @@ find /bin/ \
 
 
 
-readarray -t files < <(find /lib/  -type f ! -uid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chown 0 "$file"
-    fi
-done
+find /lib/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 
-readarray -t files < <(find /lib64/  -type f ! -uid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chown 0 "$file"
-    fi
-done
+find /lib64/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 
-readarray -t files < <(find /usr/lib/  -type f ! -uid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chown 0 "$file"
-    fi
-done
+find /usr/lib/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 
-readarray -t files < <(find /usr/lib64/  -type f ! -uid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chown 0 "$file"
-    fi
-done
+find /usr/lib64/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 # END fix for 'file_ownership_library_dirs'
 
 ###############################################################################
@@ -29194,33 +29199,14 @@ done
 
 
 
-readarray -t files < <(find /lib/  -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chmod 0755 "$file"
-    fi    
-done
 
-readarray -t files < <(find /lib64/  -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chmod 0755 "$file"
-    fi    
-done
+find -H /lib/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
 
-readarray -t files < <(find /usr/lib/  -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chmod 0755 "$file"
-    fi    
-done
+find -H /lib64/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
 
-readarray -t files < <(find /usr/lib64/  -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chmod 0755 "$file"
-    fi    
-done
+find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
+
+find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
 # END fix for 'file_permissions_library_dirs'
 
 ###############################################################################
@@ -29230,36 +29216,16 @@ done
 
 
 
-readarray -t files < <(find /lib/ -maxdepth 1 -type f ! -gid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chgrp 0 "$file"
-    fi
-done
+find /lib/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 
 
-readarray -t files < <(find /lib64/ -maxdepth 1 -type f ! -gid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chgrp 0 "$file"
-    fi
-done
+find /lib64/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 
 
-readarray -t files < <(find /usr/lib/ -maxdepth 1 -type f ! -gid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chgrp 0 "$file"
-    fi
-done
+find /usr/lib/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 
 
-readarray -t files < <(find /usr/lib64/ -maxdepth 1 -type f ! -gid 0)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*$'; then
-        chgrp 0 "$file"
-    fi
-done
+find /usr/lib64/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 # END fix for 'root_permissions_syslibrary_files'
 
 ###############################################################################
@@ -31673,12 +31639,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-readarray -t files < <(find /etc/ssh/ -maxdepth 1 -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*_key$'; then
-        chmod 0600 "$file"
-    fi    
-done
+find -H /etc/ssh/ -maxdepth 1 -perm /u+xs,g+xwrs,o+xwrt -type f -regex '^.*_key$' -exec chmod u-xs,g-xwrs,o-xwrt {} \;
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -31692,12 +31653,7 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-readarray -t files < <(find /etc/ssh/ -maxdepth 1 -type f)
-for file in "${files[@]}"; do
-    if basename "$file" | grep -qE '^.*.pub$'; then
-        chmod 0644 "$file"
-    fi    
-done
+find -H /etc/ssh/ -maxdepth 1 -perm /u+xs,g+xws,o+xwt -type f -regex '^.*.pub$' -exec chmod u-xs,g-xws,o-xwt {} \;
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'

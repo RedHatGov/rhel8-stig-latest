@@ -1564,7 +1564,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish what type of events occurred.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -3934,7 +3934,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish when (date and time) the events occurred.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -3958,7 +3958,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish where the events occurred.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -4001,7 +4001,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the source of the events.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -4023,7 +4023,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the outcome of the events.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -6277,7 +6277,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing the individual identities of group account users.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -6422,7 +6422,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to provide the capability to centrally review and analyze audit records from multiple components within the system.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -6455,7 +6455,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to provide the capability to filter audit records for events of interest based upon all audit fields within audit records.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -7159,7 +7159,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ","Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
 
 DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
@@ -14391,7 +14391,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand reporting requirements.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -16494,7 +16494,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to initiate session audits at system start-up.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -16578,7 +16578,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the identity of any individual or process associated with the event.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -18822,6 +18822,30 @@ This requirement is specific to operating systems with audit reduction capabilit
                 ","Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the package is not installed?
       ",Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.,The audit package should be installed.,,,,
+V-57255,SRG-OS-000349-GPOS-00137,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports after-the-fact investigations of security incidents.,CCE-80872-5:Enable auditd Service,"If the audit reduction capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
+
+Audit reduction capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.
+
+This requirement is specific to operating systems with audit reduction capabilities.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57255,SRG-OS-000349-GPOS-00137,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports after-the-fact investigations of security incidents.,CCE-83556-1:Record Events When Privileged Executables Are Run,"If the audit reduction capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
 
 Audit reduction capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.
@@ -19477,7 +19501,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -20568,7 +20592,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ",Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.,"The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -33827,7 +33851,7 @@ Run the following command to determine the current status of the
 auditd service:
 $ systemctl is-active auditd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that the auditd service is not running?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
