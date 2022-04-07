@@ -4502,7 +4502,9 @@ Audit record content that may be necessary to satisfy this requirement includes,
 Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -4522,7 +4524,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3729r557069_fix">Configure the operating system to produce audit records containing information to establish what type of events occurred.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -4550,12 +4554,14 @@ Associating event types with detected events in the operating system audit logs 
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
@@ -4571,12 +4577,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -4595,7 +4603,9 @@ Audit record content that may be necessary to satisfy this requirement includes,
 Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -4615,7 +4625,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3729r557069_fix">Configure the operating system to produce audit records containing information to establish what type of events occurred.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -7993,7 +8005,9 @@ If the system is 64 bit then also add the following lines:
 At a minimum, the organization must audit the full-text recording of privileged commands. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -8013,7 +8027,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3734r557084_fix">Configure the operating system to generate audit records containing the full-text recording of privileged commands.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -8039,12 +8055,14 @@ At a minimum, the organization must audit the full-text recording of privileged 
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
@@ -8060,12 +8078,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -8082,7 +8102,9 @@ b64 as appropriate for your system:
 At a minimum, the organization must audit the full-text recording of privileged commands. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the cause and impact of compromise.</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -8102,7 +8124,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3734r557084_fix">Configure the operating system to generate audit records containing the full-text recording of privileged commands.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -14015,7 +14039,9 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -14057,7 +14083,9 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -14095,12 +14123,14 @@ DoD has defined the list of events for which the operating system will provide a
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides audit record generation capability for DoD-defined auditable events for all operating system components. 
@@ -14138,12 +14168,14 @@ DoD has defined the list of events for which the operating system will provide a
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -14172,7 +14204,9 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -14214,7 +14248,9 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -20159,6 +20195,46 @@ $ sudo yum install rsyslog-gnutls</pre>
 The rsyslog-gnutls package can be installed with the following command:
 
 $ sudo yum install rsyslog-gnutls</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56785</td>
+<td>SRG-OS-000120-GPOS-00061</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.</td>
+<td>CCE-85887-8:Remove the Kerberos Server Package</td>
+<td>Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised.
+
+Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to cryptographic modules. 
+
+FIPS 140-2 is the current standard for validating that mechanisms used to access cryptographic modules utilize authentication that meets DoD requirements. This allows for Security Levels 1, 2, 3, or 4 for use on a general purpose computing system.</td>
+<td>The <code>krb5-server</code> package should be removed if not in use.
+Is this system the Kerberos server? If not, remove the package.
+The <code>krb5-server</code> package can be removed with the following command:
+<pre>
+$ sudo yum erase krb5-server</pre>
+The krb5-server RPM is not installed by default on a Red Hat Enterprise Linux 8
+system. It is needed only by the Kerberos servers, not by the
+clients which use Kerberos for authentication. If the system is not
+intended for use as a Kerberos Server it should be removed.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.</td>
+<td>Run the following command to determine if the krb5-server package is installed: $ rpm -q krb5-server
+      Is it the case that the package is installed?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3774r557193_fix">Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.</fixtext></td>
+<td>The krb5-server package should be removed if not in use.
+Is this system the Kerberos server? If not, remove the package.
+The krb5-server package can be removed with the following command:
+
+$ sudo yum erase krb5-server
+The krb5-server RPM is not installed by default on a Red Hat Enterprise Linux 8
+system. It is needed only by the Kerberos servers, not by the
+clients which use Kerberos for authentication. If the system is not
+intended for use as a Kerberos Server it should be removed.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -32655,7 +32731,9 @@ Nonlocal maintenance and diagnostic activities are those activities conducted by
 This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system, for example, the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch.</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -32675,7 +32753,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3860r375270_fix">Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -32705,12 +32785,14 @@ This requirement applies to hardware/software diagnostic test equipment or tools
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
@@ -32726,12 +32808,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -32752,7 +32836,9 @@ Nonlocal maintenance and diagnostic activities are those activities conducted by
 This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system, for example, the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch.</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -32772,7 +32858,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3860r375270_fix">Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -38833,7 +38921,9 @@ If the system is 64 bit then also add the following lines:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -38853,7 +38943,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3886r375405_fix">Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -38879,12 +38971,14 @@ Audit records can be generated from various components within the information sy
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
@@ -38900,12 +38994,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -38922,7 +39018,9 @@ b64 as appropriate for your system:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -38942,7 +39040,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3886r375405_fix">Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -45330,7 +45430,9 @@ If the system is 64 bit then also add the following lines:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -45350,7 +45452,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3893r375426_fix">Configure the operating system to generate audit records for privileged activities or other system-level access.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -45376,12 +45480,14 @@ Audit records can be generated from various components within the information sy
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
@@ -45397,12 +45503,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -45419,7 +45527,9 @@ b64 as appropriate for your system:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -45439,7 +45549,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3893r375426_fix">Configure the operating system to generate audit records for privileged activities or other system-level access.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -46354,7 +46466,9 @@ form to /etc/audit/audit.rules:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -46374,7 +46488,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3894r375429_fix">Configure the audit system to audit the loading and unloading of dynamic kernel modules.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -46400,12 +46516,14 @@ Audit records can be generated from various components within the information sy
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the audit system is configured to audit the loading and unloading of dynamic kernel modules. If it does not, this is a finding.</td>
@@ -46421,12 +46539,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -46443,7 +46563,9 @@ b64 as appropriate for your system:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -46463,7 +46585,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3894r375429_fix">Configure the audit system to audit the loading and unloading of dynamic kernel modules.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -47665,7 +47789,9 @@ account changes:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -47685,7 +47811,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3900r375717_fix">Configure the operating system to generate audit records for all kernel module load, unload, and restart actions, and also for all program initiations.</fixtext></td>
 <td>To capture kernel module unloading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S delete_module -F key=modules
+
+-a always,exit -F arch=ARCH -S delete_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix
@@ -47711,12 +47839,14 @@ Audit records can be generated from various components within the information sy
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix <code>.rules</code> in the directory <code>/etc/audit/rules.d</code> to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
-If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+    If the <code>auditd</code> daemon is configured to use the <code>auditctl</code> utility to read audit
 rules during daemon startup, add the following lines to <code>/etc/audit/audit.rules</code> file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records for all kernel module load, unload, and restart actions, and also for all program initiations. If it does not, this is a finding.</td>
@@ -47732,12 +47862,14 @@ If the system is configured to audit this activity, it will return a line.
 to read audit rules during daemon startup (the default), add the following lines to a file
 with suffix .rules in the directory /etc/audit/rules.d to capture kernel module
 loading and unloading events, setting ARCH to either b32 or b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules
-If the auditd daemon is configured to use the auditctl utility to read audit
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+    If the auditd daemon is configured to use the auditctl utility to read audit
 rules during daemon startup, add the following lines to /etc/audit/audit.rules file
 in order to capture kernel module loading and unloading events, setting ARCH to either b32 or
 b64 as appropriate for your system:
--a always,exit -F arch=ARCH -S finit_module -F key=modules</td>
+
+-a always,exit -F arch=ARCH -S finit_module -F auid&gt;=1000 -F auid!=unset -F key=modules</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -47754,7 +47886,9 @@ b64 as appropriate for your system:
 Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
-<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F key=modules</pre>
+
+<pre>-a always,exit -F arch=<i>ARCH</i> -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules</pre>
+
 
 Place to add the line depends on a way <code>auditd</code> daemon is configured. If it is configured
 to use the <code>augenrules</code> program (the default), add the line to a file with suffix
@@ -47774,7 +47908,9 @@ If the system is configured to audit this activity, it will return a line.
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3900r375717_fix">Configure the operating system to generate audit records for all kernel module load, unload, and restart actions, and also for all program initiations.</fixtext></td>
 <td>To capture kernel module loading events, use following line, setting ARCH to
 either b32 for 32-bit system, or having two lines for both b32 and b64 in case your system is 64-bit:
--a always,exit -F arch=ARCH -S init_module -F key=modules
+
+-a always,exit -F arch=ARCH -S init_module -F auid&gt;=1000 -F auid!=unset -F key=modules
+
 
 Place to add the line depends on a way auditd daemon is configured. If it is configured
 to use the augenrules program (the default), add the line to a file with suffix

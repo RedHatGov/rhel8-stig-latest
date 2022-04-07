@@ -20761,7 +20761,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -20806,7 +20806,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -20815,7 +20816,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -20831,7 +20833,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -20850,7 +20852,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -20859,7 +20862,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -20894,7 +20898,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -20939,7 +20943,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -20948,7 +20953,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -20964,7 +20970,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -20983,7 +20989,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -20992,7 +20999,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21070,7 +21078,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21115,7 +21123,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21124,7 +21133,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21142,7 +21152,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21161,7 +21171,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21170,7 +21181,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21207,7 +21219,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21252,7 +21264,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21261,7 +21274,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21279,7 +21293,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21298,7 +21312,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21307,7 +21322,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21385,7 +21401,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21430,7 +21446,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21439,7 +21456,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21457,7 +21475,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b32(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21476,7 +21494,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b32)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21485,7 +21504,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b32 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21522,7 +21542,7 @@
           find:
             paths: /etc/audit/rules.d
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: '*.rules'
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21567,7 +21587,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21576,7 +21597,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -21594,7 +21616,7 @@
           find:
             paths: /etc/audit
             contains: -a always,exit -F arch=b64(( -S |,)\w+)*(( -S |,){{ item }})+((
-              -S |,)\w+)* (-k\s+|-F\s+key=)\S+\s*$
+              -S |,)\w+)* -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
             patterns: audit.rules
           register: find_command
           loop: '{{ (syscall_grouping + syscalls) | unique }}'
@@ -21613,7 +21635,8 @@
           lineinfile:
             path: '{{ audit_file }}'
             regexp: (-a always,exit -F arch=b64)(?=.*(?:(?:-S |,)(?:{{ syscalls_found
-              | join("|") }}))\b)((?:( -S |,)\w+)+)( (?:-k |-F key=)\w+)
+              | join("|") }}))\b)((?:( -S |,)\w+)+)( -F auid>=1000 -F auid!=unset (?:-k
+              |-F key=)\w+)
             line: \1\2\3{{ missing_syscalls | join("\3") }}\4
             backrefs: true
             state: present
@@ -21622,7 +21645,8 @@
         - name: Add the audit rule to {{ audit_file }}
           lineinfile:
             path: '{{ audit_file }}'
-            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F key=module-change
+            line: -a always,exit -F arch=b64 -S {{ syscalls | join(',') }} -F auid>=1000
+              -F auid!=unset -F key=module-change
             create: true
             mode: o-rwx
             state: present
@@ -31721,6 +31745,23 @@
         - low_disruption
         - no_reboot_needed
         - package_vsftpd_removed
+
+    - name: Ensure krb5-server is removed
+      package:
+        name: krb5-server
+        state: absent
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-85887-8
+        - DISA-STIG-RHEL-08-010163
+        - NIST-800-53-IA-7
+        - NIST-800-53-IA-7.1
+        - disable_strategy
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - package_krb5-server_removed
 
     - name: Ensure sendmail is removed
       package:
