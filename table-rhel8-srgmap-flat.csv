@@ -1479,7 +1479,7 @@ fips-mode-setup --enable","
                 ","Verify the operating system implements DoD-approved encryption to protect the confidentiality of remote access sessions. If it does not, this is a finding.","To verify that kernel parameter 'crypto.fips_enabled' is set properly, run the following command:
 sysctl crypto.fips_enabled
 The output should contain the following:
-crypto.fips_enabled =  1
+crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.,"System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
@@ -14267,11 +14267,11 @@ Kerberos is supported by crypto policy, but it's configuration may be
 set up to ignore it.
 To check that Crypto Policies settings for Kerberos are configured correctly, examine that there is a symlink at
 /etc/krb5.conf.d/crypto-policies targeting /etc/cypto-policies/back-ends/krb5.config.
-If the symlink exists, kerberos is configured to use the system-wide crypto policy settings.","
+If the symlink exists, Kerberos is configured to use the system-wide crypto policy settings.","
                   Applicable - Configurable
-                ","Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.","Check that the symlink exists and target the correct kerberos crypto policy, with the following command:
+                ","Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.","Check that the symlink exists and target the correct Kerberos crypto policy, with the following command:
 file /etc/krb5.conf.d/crypto-policies
-If command ouput shows the following line, kerberos is configured to use the system-wide crypto policy.
+If command ouput shows the following line, Kerberos is configured to use the system-wide crypto policy.
 /etc/krb5.conf.d/crypto-policies: symbolic link to /etc/crypto-policies/back-ends/krb5.config
       Is it the case that the symlink does not exist or points to a different target?
       ","Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.","Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
@@ -14279,7 +14279,7 @@ Kerberos is supported by crypto policy, but it's configuration may be
 set up to ignore it.
 To check that Crypto Policies settings for Kerberos are configured correctly, examine that there is a symlink at
 /etc/krb5.conf.d/crypto-policies targeting /etc/cypto-policies/back-ends/krb5.config.
-If the symlink exists, kerberos is configured to use the system-wide crypto policy settings.",,,,
+If the symlink exists, Kerberos is configured to use the system-wide crypto policy settings.",,,,
 V-56785,SRG-OS-000120-GPOS-00061,TBD - Assigned by DISA after STIG release,"The operating system must use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.",CCE-82931-7:Uninstall krb5-workstation Package,"Unapproved mechanisms that are used for authentication to the cryptographic module are not verified and therefore cannot be relied upon to provide confidentiality or integrity, and DoD data may be compromised.
 
 Operating systems utilizing encryption are required to use FIPS-compliant mechanisms for authenticating to cryptographic modules. 
@@ -14411,7 +14411,7 @@ that would potentially allow the use of Kerberos by system daemons.
 $ ls -la /etc/*.keytab
 The expected result is
 ls: cannot access '/etc/*.keytab': No such file or directory
-      Is it the case that it is present on the system?
+      Is it the case that a keytab file is present on the system?
       ","Configure the operating system to use mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module.","Kerberos is not an approved key distribution method for
 Common Criteria. To prevent using Kerberos by system daemons,
 remove the Kerberos keytab files, especially
@@ -14540,7 +14540,7 @@ fips-mode-setup --enable","
                 ","Verify the operating system employs strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","To verify that kernel parameter 'crypto.fips_enabled' is set properly, run the following command:
 sysctl crypto.fips_enabled
 The output should contain the following:
-crypto.fips_enabled =  1
+crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to employ strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions.,"System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
@@ -23238,7 +23238,7 @@ fips-mode-setup --enable","
                 ","Verify the operating system implements NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that kernel parameter 'crypto.fips_enabled' is set properly, run the following command:
 sysctl crypto.fips_enabled
 The output should contain the following:
-crypto.fips_enabled =  1
+crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ","Configure the operating system to implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.","System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
@@ -23447,7 +23447,7 @@ fips-mode-setup --enable","
                 ","Verify the operating system protects the confidentiality and integrity of transmitted information. If it does not, this is a finding.","To verify that kernel parameter 'crypto.fips_enabled' is set properly, run the following command:
 sysctl crypto.fips_enabled
 The output should contain the following:
-crypto.fips_enabled =  1
+crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to protect the confidentiality and integrity of transmitted information.,"System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1
@@ -32921,7 +32921,7 @@ fips-mode-setup --enable","
                 ","Verify the operating system implements NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that kernel parameter 'crypto.fips_enabled' is set properly, run the following command:
 sysctl crypto.fips_enabled
 The output should contain the following:
-crypto.fips_enabled =  1
+crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ","Configure the operating system to implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.","System running in FIPS mode is indicated by kernel parameter
 'crypto.fips_enabled'. This parameter should be set to 1

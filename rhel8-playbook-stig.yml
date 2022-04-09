@@ -31763,6 +31763,38 @@
         - no_reboot_needed
         - package_krb5-server_removed
 
+    - name: Find keytab files
+      find:
+        paths: /etc/
+        patterns: '*.keytab'
+      register: keytab_files
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82175-1
+        - DISA-STIG-RHEL-08-010161
+        - disable_strategy
+        - kerberos_disable_no_keytab
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
+    - name: Remove keytab files
+      file:
+        path: '{{ item.path }}'
+        state: absent
+      with_items: '{{ keytab_files.files }}'
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82175-1
+        - DISA-STIG-RHEL-08-010161
+        - disable_strategy
+        - kerberos_disable_no_keytab
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+
     - name: Ensure sendmail is removed
       package:
         name: sendmail
