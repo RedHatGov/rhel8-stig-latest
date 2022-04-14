@@ -1579,7 +1579,7 @@ Associating event types with detected events in the operating system audit logs 
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -1602,7 +1602,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -4060,7 +4060,7 @@ At a minimum, the organization must audit the full-text recording of privileged 
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -4083,7 +4083,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -7218,7 +7218,7 @@ DoD has defined the list of events for which the operating system will provide a
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -7263,7 +7263,7 @@ DoD has defined the list of events for which the operating system will provide a
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -13443,7 +13443,7 @@ Examples of non-essential capabilities include, but are not limited to, games, s
 add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
-argument to newly installed kernels, ad pti=on to the
+argument to newly installed kernels, add pti=on to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
@@ -13466,7 +13466,7 @@ The command should not return any output.
 add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
-argument to newly installed kernels, ad pti=on to the
+argument to newly installed kernels, add pti=on to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
@@ -14730,7 +14730,7 @@ Developers and implementers can increase the assurance in security functions by 
 add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
-argument to newly installed kernels, ad vsyscall=none to the
+argument to newly installed kernels, add vsyscall=none to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
@@ -14753,7 +14753,7 @@ The command should not return any output.
 add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
-argument to newly installed kernels, ad vsyscall=none to the
+argument to newly installed kernels, add vsyscall=none to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
@@ -14766,7 +14766,7 @@ Developers and implementers can increase the assurance in security functions by 
 add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
-argument to newly installed kernels, ad page_poison=1 to the
+argument to newly installed kernels, add page_poison=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
@@ -14789,7 +14789,7 @@ The command should not return any output.
 add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
-argument to newly installed kernels, ad page_poison=1 to the
+argument to newly installed kernels, add page_poison=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
@@ -14802,7 +14802,7 @@ Developers and implementers can increase the assurance in security functions by 
 add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
-argument to newly installed kernels, ad slub_debug=P to the
+argument to newly installed kernels, add slub_debug=P to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
@@ -14825,11 +14825,44 @@ The command should not return any output.
 add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
-argument to newly installed kernels, ad slub_debug=P to the
+argument to newly installed kernels, add slub_debug=P to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""",,,,
+V-56843,SRG-OS-000134-GPOS-00068,TBD - Assigned by DISA after STIG release,The operating system must isolate security functions from nonsecurity functions.,CCE-82976-2:Install policycoreutils Package,"An isolation boundary provides access control and protects the integrity of the hardware, software, and firmware that perform security functions.
+
+Security functions are the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Operating systems implement code separation (i.e., separation of security functions from nonsecurity functions) in a number of ways, including through the provision of security kernels via processor rings or processor modes. For non-kernel code, security function isolation is often achieved through file system protections that serve to protect the code on disk and address space protections that protect executing code.
+
+Developers and implementers can increase the assurance in security functions by employing well-defined security policy models; structured, disciplined, and rigorous hardware and software development techniques; and sound system/security engineering principles. Implementation may include isolation of memory space and libraries. Operating systems restrict access to security functions through the use of access control mechanisms and by implementing least privilege capabilities.","The policycoreutils package can be installed with the following command:
+
+$ sudo yum install policycoreutils","
+                  Applicable - Configurable
+                ","Verify the operating system isolates security functions from nonsecurity functions. If it does not, this is a finding.","Run the following command to determine if the policycoreutils package is installed: $ rpm -q policycoreutils
+      Is it the case that the package is not installed?
+      ",Configure the operating system to isolate security functions from nonsecurity functions.,"The policycoreutils package can be installed with the following command:
+
+$ sudo yum install policycoreutils",,,,
+V-56843,SRG-OS-000134-GPOS-00068,TBD - Assigned by DISA after STIG release,The operating system must isolate security functions from nonsecurity functions.,CCE-80869-1:Ensure SELinux State is Enforcing,"An isolation boundary provides access control and protects the integrity of the hardware, software, and firmware that perform security functions.
+
+Security functions are the hardware, software, and/or firmware of the information system responsible for enforcing the system security policy and supporting the isolation of code and data on which the protection is based. Operating systems implement code separation (i.e., separation of security functions from nonsecurity functions) in a number of ways, including through the provision of security kernels via processor rings or processor modes. For non-kernel code, security function isolation is often achieved through file system protections that serve to protect the code on disk and address space protections that protect executing code.
+
+Developers and implementers can increase the assurance in security functions by employing well-defined security policy models; structured, disciplined, and rigorous hardware and software development techniques; and sound system/security engineering principles. Implementation may include isolation of memory space and libraries. Operating systems restrict access to security functions through the use of access control mechanisms and by implementing least privilege capabilities.","The SELinux state should be set to  at
+system boot time.  In the file /etc/selinux/config, add or correct the
+following line to configure the system to boot into enforcing mode:
+SELINUX=","
+                  Applicable - Configurable
+                ","Verify the operating system isolates security functions from nonsecurity functions. If it does not, this is a finding.","Ensure that Red Hat Enterprise Linux 8 verifies correct operation of security functions.
+
+Check if ""SELinux"" is active and in """" mode with the following command:
+
+$ sudo getenforce
+
+      Is it the case that SELINUX is not set to enforcing?
+      ",Configure the operating system to isolate security functions from nonsecurity functions.,"The SELinux state should be set to  at
+system boot time.  In the file /etc/selinux/config, add or correct the
+following line to configure the system to boot into enforcing mode:
+SELINUX=",,,,
 V-56853,SRG-OS-000138-GPOS-00069,TBD - Assigned by DISA after STIG release,Operating systems must prevent unauthorized and unintended information transfer via shared system resources.,CCE-83375-6:Ensure All World-Writable Directories Are Owned by root user,"Preventing unauthorized information transfers mitigates the risk of information, including encrypted representations of information, produced by the actions of prior users/roles (or the actions of processes acting on behalf of prior users/roles) from being available to any current users/roles (or current processes) that obtain access to shared system resources (e.g., registers, main memory, hard disks) after those resources have been released back to information systems. The control of information in shared resources is also commonly referred to as object reuse and residual information protection.
 
 This requirement generally applies to the design of an information technology product, but it can also apply to the configuration of particular information system components that are, or use, such products. This can be verified by acceptance/validation processes in DoD or other government agencies.
@@ -16566,7 +16599,7 @@ SV-71199,SRG-OS-000254-GPOS-00095,TBD - Assigned by DISA after STIG release,The 
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -16589,7 +16622,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -16598,7 +16631,7 @@ SV-71199,SRG-OS-000254-GPOS-00095,TBD - Assigned by DISA after STIG release,The 
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
-argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+argument to newly installed kernels, add audit_backlog_limit=8192 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
@@ -16621,7 +16654,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
-argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+argument to newly installed kernels, add audit_backlog_limit=8192 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
@@ -18431,7 +18464,7 @@ The task of allocating audit record storage capacity is usually performed during
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
-argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+argument to newly installed kernels, add audit_backlog_limit=8192 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
@@ -18454,7 +18487,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit_backlog_limit=8192 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
-argument to newly installed kernels, ad audit_backlog_limit=8192 to the
+argument to newly installed kernels, add audit_backlog_limit=8192 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
@@ -20670,7 +20703,7 @@ This requirement applies to hardware/software diagnostic test equipment or tools
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -20693,7 +20726,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -23702,7 +23735,7 @@ Examples of attacks are buffer overflow attacks.","To enable poisoning of SLUB/S
 add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
-argument to newly installed kernels, ad slub_debug=P to the
+argument to newly installed kernels, add slub_debug=P to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
@@ -23725,7 +23758,7 @@ The command should not return any output.
 add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
-argument to newly installed kernels, ad slub_debug=P to the
+argument to newly installed kernels, add slub_debug=P to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
@@ -23736,7 +23769,7 @@ Examples of attacks are buffer overflow attacks.","To enable Kernel page-table i
 add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
-argument to newly installed kernels, ad pti=on to the
+argument to newly installed kernels, add pti=on to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
@@ -23759,7 +23792,7 @@ The command should not return any output.
 add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
-argument to newly installed kernels, ad pti=on to the
+argument to newly installed kernels, add pti=on to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
@@ -25118,7 +25151,7 @@ Audit records can be generated from various components within the information sy
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -25141,7 +25174,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -29629,7 +29662,7 @@ Audit records can be generated from various components within the information sy
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -29652,7 +29685,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -31974,7 +32007,7 @@ Audit records can be generated from various components within the information sy
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -31997,7 +32030,7 @@ The command should not return any output.
 prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
-argument to newly installed kernels, ad audit=1 to the
+argument to newly installed kernels, add audit=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
@@ -34018,7 +34051,7 @@ Configuration settings are the set of parameters that can be changed in hardware
 add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
-argument to newly installed kernels, ad vsyscall=none to the
+argument to newly installed kernels, add vsyscall=none to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
@@ -34041,7 +34074,7 @@ The command should not return any output.
 add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
-argument to newly installed kernels, ad vsyscall=none to the
+argument to newly installed kernels, add vsyscall=none to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
@@ -35310,7 +35343,7 @@ Configuration settings are the set of parameters that can be changed in hardware
 add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
-argument to newly installed kernels, ad page_poison=1 to the
+argument to newly installed kernels, add page_poison=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
@@ -35333,7 +35366,7 @@ The command should not return any output.
 add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
-argument to newly installed kernels, ad page_poison=1 to the
+argument to newly installed kernels, add page_poison=1 to the
 default Grub2 command line for Linux operating systems.  Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
