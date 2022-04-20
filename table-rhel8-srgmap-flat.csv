@@ -15035,7 +15035,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.","
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.","
                   Applicable - Configurable
                 ","Verify the operating system protects the confidentiality and integrity of all information at rest. If it does not, this is a finding.","Check the system partitions to determine if they are encrypted with the following command:
 blkid
@@ -15077,7 +15078,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.",,,,
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.",,,,
 V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where Endpoint Security Solution (ESS) is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86260-7:Install McAfee Endpoint Security for Linux (ENSL),"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
 To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using ESS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
@@ -23342,7 +23344,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.","
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.","
                   Applicable - Configurable
                 ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized modification of all information at rest on all operating system components. If it does not, this is a finding.","Check the system partitions to determine if they are encrypted with the following command:
 blkid
@@ -23384,7 +23387,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.",,,,
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.",,,,
 SV-70999,SRG-OS-000405-GPOS-00184,TBD - Assigned by DISA after STIG release,The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of all information at rest on all operating system components.,CCE-80789-1:Encrypt Partitions,"Operating systems handling data requiring ""data at rest"" protections must employ cryptographic mechanisms to prevent unauthorized disclosure and modification of the information at rest.
 
 Selection of a cryptographic mechanism is based on the need to protect the integrity of organizational information. The strength of the mechanism is commensurate with the security category and/or classification of the information. Organizations have the flexibility to either encrypt all information on storage devices (i.e., full disk encryption) or encrypt specific data structures (e.g., files, records, or fields).","Red Hat Enterprise Linux 8 natively supports partition encryption through the
@@ -23415,7 +23419,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.","
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.","
                   Applicable - Configurable
                 ","Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of all information at rest on all operating system components. If it does not, this is a finding.","Check the system partitions to determine if they are encrypted with the following command:
 blkid
@@ -23457,7 +23462,8 @@ Detailed information on encrypting partitions using LUKS or LUKS ciphers can be 
 the Red Hat Enterprise Linux 8 Documentation web site:
 
     
-    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening.",,,,
+    https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/encrypting-block-devices-using-luks_security-hardening
+.",,,,
 V-56737,SRG-OS-000420-GPOS-00186,TBD - Assigned by DISA after STIG release,The operating system must protect against or limit the effects of Denial of Service (DoS) attacks by ensuring the operating system is implementing rate-limiting measures on impacted network interfaces.,V-56737:The operating system must protect against or limit the effects of Denial of Service (DoS) attacks by ensuring the operating system is implementing rate-limiting measures on impacted network interfaces.,"DoS is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity.
 
 This requirement addresses the configuration of the operating system to mitigate the impact of DoS attacks that have occurred or are ongoing on system availability. For each system, known and potential DoS attacks must be identified and solutions for each type implemented. A variety of technologies exist to limit or, in some cases, eliminate the effects of DoS attacks (e.g., limiting processes or establishing memory partitions). Employing increased capacity and bandwidth, combined with service redundancy, may reduce the susceptibility to some DoS attacks.","<VulnDiscussion>DoS is a condition when a resource is not available for legitimate users. When this occurs, the organization either cannot accomplish its mission or must operate at degraded capacity.
