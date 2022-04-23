@@ -1205,246 +1205,21 @@ appropriate system-wide warning banner.</td>
 <td>SRG-OS-000024-GPOS-00007</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</td>
-<td>CCE-80763-6:Modify the System Login Banner</td>
+<td></td>
 <td>The banner must be acknowledged by the user prior to allowing the user access to the operating system. This provides assurance that the user has seen the message and accepted the conditions for access. If the consent banner is not acknowledged by the user, DoD will not be in compliance with system use notifications required by law.
 
 To establish acceptance of the application usage policy, a click-through banner at system logon is required. The system must prevent further activity until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".</td>
 <td>
-To configure the system login banner edit <code>/etc/issue</code>. Replace the
-default text with a message compliant with the local site policy or a legal
-disclaimer.
-
-
-The DoD required text is either:
-<br><br>
-<code>You are accessing a U.S. Government (USG) Information System (IS) that
-is provided for USG-authorized use only. By using this IS (which includes
-any device attached to this IS), you consent to the following conditions:
-<br>-The USG routinely intercepts and monitors communications on this IS
-for purposes including, but not limited to, penetration testing, COMSEC
-monitoring, network operations and defense, personnel misconduct (PM), law
-enforcement (LE), and counterintelligence (CI) investigations.
-<br>-At any time, the USG may inspect and seize data stored on this IS.
-<br>-Communications using, or data stored on, this IS are not private,
-are subject to routine monitoring, interception, and search, and may be
-disclosed or used for any USG-authorized purpose.
-<br>-This IS includes security measures (e.g., authentication and access
-controls) to protect USG interests -- not for your personal benefit or
-privacy.
-<br>-Notwithstanding the above, using this IS does not constitute consent
-to PM, LE or CI investigative searching or monitoring of the content of
-privileged communications, or work product, related to personal
-representation or services by attorneys, psychotherapists, or clergy, and
-their assistants. Such communications and work product are private and
-confidential. See User Agreement for details.</code>
-<br><br>
-OR:
-<br><br>
-<code>I've read &amp; consent to terms in IS user agreem't.</code>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.</td>
-<td>To check if the system login banner is compliant,
-run the following command:
-$ cat /etc/issue
-      Is it the case that it does not display the required banner?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3721r557045_fix">Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</fixtext></td>
-<td>
-To configure the system login banner edit /etc/issue. Replace the
-default text with a message compliant with the local site policy or a legal
-disclaimer.
-
-
-The DoD required text is either:
-
-You are accessing a U.S. Government (USG) Information System (IS) that
-is provided for USG-authorized use only. By using this IS (which includes
-any device attached to this IS), you consent to the following conditions:
--The USG routinely intercepts and monitors communications on this IS
-for purposes including, but not limited to, penetration testing, COMSEC
-monitoring, network operations and defense, personnel misconduct (PM), law
-enforcement (LE), and counterintelligence (CI) investigations.
--At any time, the USG may inspect and seize data stored on this IS.
--Communications using, or data stored on, this IS are not private,
-are subject to routine monitoring, interception, and search, and may be
-disclosed or used for any USG-authorized purpose.
--This IS includes security measures (e.g., authentication and access
-controls) to protect USG interests -- not for your personal benefit or
-privacy.
--Notwithstanding the above, using this IS does not constitute consent
-to PM, LE or CI investigative searching or monitoring of the content of
-privileged communications, or work product, related to personal
-representation or services by attorneys, psychotherapists, or clergy, and
-their assistants. Such communications and work product are private and
-confidential. See User Agreement for details.
-
-OR:
-
-I've read &amp; consent to terms in IS user agreem't.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>V-56593</td>
-<td>SRG-OS-000024-GPOS-00007</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</td>
-<td>CCE-80768-5:Enable GNOME3 Login Warning Banner</td>
-<td>The banner must be acknowledged by the user prior to allowing the user access to the operating system. This provides assurance that the user has seen the message and accepted the conditions for access. If the consent banner is not acknowledged by the user, DoD will not be in compliance with system use notifications required by law.
-
-To establish acceptance of the application usage policy, a click-through banner at system logon is required. The system must prevent further activity until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".</td>
-<td>In the default graphical environment, displaying a login warning banner
-in the GNOME Display Manager's login screen can be enabled on the login
-screen by setting <code>banner-message-enable</code> to <code>true</code>.
-<br><br>
-To enable, add or edit <code>banner-message-enable</code> to
-<code>/etc/dconf/db/gdm.d/00-security-settings</code>. For example:
-<pre>[org/gnome/login-screen]
-banner-message-enable=true</pre>
-Once the setting has been added, add a lock to
-<code>/etc/dconf/db/gdm.d/locks/00-security-settings-lock</code> to prevent user modification.
-For example:
-<pre>/org/gnome/login-screen/banner-message-enable</pre>
-After the settings have been set, run <code>dconf update</code>.
-The banner text must also be set.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.</td>
-<td>To ensure a login warning banner is enabled, run the following:
-$ grep banner-message-enable /etc/dconf/db/gdm.d/*
-If properly configured, the output should be true.
-To ensure a login warning banner is locked and cannot be changed by a user, run the following:
-$ grep banner-message-enable /etc/dconf/db/gdm.d/locks/*
-If properly configured, the output should be /org/gnome/login-screen/banner-message-enable.
-      Is it the case that it is not?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3721r557045_fix">Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</fixtext></td>
-<td>In the default graphical environment, displaying a login warning banner
-in the GNOME Display Manager's login screen can be enabled on the login
-screen by setting banner-message-enable to true.
-
-To enable, add or edit banner-message-enable to
-/etc/dconf/db/gdm.d/00-security-settings. For example:
-[org/gnome/login-screen]
-banner-message-enable=true
-Once the setting has been added, add a lock to
-/etc/dconf/db/gdm.d/locks/00-security-settings-lock to prevent user modification.
-For example:
-/org/gnome/login-screen/banner-message-enable
-After the settings have been set, run dconf update.
-The banner text must also be set.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>V-56593</td>
-<td>SRG-OS-000024-GPOS-00007</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</td>
-<td>CCE-80770-1:Set the GNOME3 Login Warning Banner Text</td>
-<td>The banner must be acknowledged by the user prior to allowing the user access to the operating system. This provides assurance that the user has seen the message and accepted the conditions for access. If the consent banner is not acknowledged by the user, DoD will not be in compliance with system use notifications required by law.
-
-To establish acceptance of the application usage policy, a click-through banner at system logon is required. The system must prevent further activity until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".</td>
-<td>In the default graphical environment, configuring the login warning banner text
-in the GNOME Display Manager's login screen can be configured on the login
-screen by setting <code>banner-message-text</code> to <code>'<i>APPROVED_BANNER</i>'</code>
-where <i>APPROVED_BANNER</i> is the approved banner for your environment.
-<br><br>
-To enable, add or edit <code>banner-message-text</code> to
-
-<code>/etc/dconf/db/gdm.d/00-security-settings</code>. For example:
-<pre>[org/gnome/login-screen]
-banner-message-text='<i>APPROVED_BANNER</i>'</pre>
-Once the setting has been added, add a lock to
-<code>/etc/dconf/db/gdm.d/locks/00-security-settings-lock</code> to prevent user modification.
-For example:
-<pre>/org/gnome/login-screen/banner-message-text</pre>
-
-After the settings have been set, run <code>dconf update</code>.
-When entering a warning banner that spans several lines, remember
-to begin and end the string with <code>'</code> and use <code>\n</code> for new lines.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.</td>
-<td>
-To ensure the login warning banner text is properly set, run the following:
-$ grep banner-message-text /etc/dconf/db/gdm.d/*
-If properly configured, the proper banner text will appear.
-To ensure the login warning banner text is locked and cannot be changed by a user, run the following:
-$ grep banner-message-text /etc/dconf/db/gdm.d/locks/*
-If properly configured, the output should be /org/gnome/login-screen/banner-message-text.
-      Is it the case that it does not?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3721r557045_fix">Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</fixtext></td>
-<td>In the default graphical environment, configuring the login warning banner text
-in the GNOME Display Manager's login screen can be configured on the login
-screen by setting banner-message-text to 'APPROVED_BANNER'
-where APPROVED_BANNER is the approved banner for your environment.
-
-To enable, add or edit banner-message-text to
-
-/etc/dconf/db/gdm.d/00-security-settings. For example:
-[org/gnome/login-screen]
-banner-message-text='APPROVED_BANNER'
-Once the setting has been added, add a lock to
-/etc/dconf/db/gdm.d/locks/00-security-settings-lock to prevent user modification.
-For example:
-/org/gnome/login-screen/banner-message-text
-
-After the settings have been set, run dconf update.
-When entering a warning banner that spans several lines, remember
-to begin and end the string with ' and use \n for new lines.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>V-56593</td>
-<td>SRG-OS-000024-GPOS-00007</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</td>
-<td>CCE-80905-3:Enable SSH Warning Banner</td>
-<td>The banner must be acknowledged by the user prior to allowing the user access to the operating system. This provides assurance that the user has seen the message and accepted the conditions for access. If the consent banner is not acknowledged by the user, DoD will not be in compliance with system use notifications required by law.
-
-To establish acceptance of the application usage policy, a click-through banner at system logon is required. The system must prevent further activity until the user executes a positive action to manifest agreement by clicking on a box indicating "OK".</td>
-<td>To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in
-
-
-<code>/etc/ssh/sshd_config</code>:
-
-<pre>Banner /etc/issue</pre>
-Another section contains information on how to create an
-appropriate system-wide warning banner.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system displays the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access. If it does not, this is a finding.</td>
-<td>To determine how the SSH daemon's Banner option is set, run the following command:
-
-$ sudo grep -i Banner /etc/ssh/sshd_config
-
-
-If a line indicating /etc/issue is returned, then the required value is set.
-
-      Is it the case that the required value is not set?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3721r557045_fix">Configure the operating system to display the Standard Mandatory DoD Notice and Consent Banner until users acknowledge the usage conditions and take explicit actions to log on for further access.</fixtext></td>
-<td>To enable the warning banner and ensure it is consistent
-across the system, add or correct the following line in
-
-
-/etc/ssh/sshd_config:
-
-Banner /etc/issue
-Another section contains information on how to create an
-appropriate system-wide warning banner.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td>V-56629</td>
@@ -1466,7 +1241,7 @@ a file under <code>/etc/security/limits.d/</code>:
 <td>Verify the operating system limits the number of concurrent sessions to ten for all accounts and/or account types. If it does not, this is a finding.</td>
 <td>Run the following command to ensure the maxlogins value is
 configured for all users on the system:
-# grep "maxlogins" /etc/security/limits.conf
+# grep "maxlogins" /etc/security/limits.conf /etc/security/limits.d/*.conf
 You should receive output similar to the following:
 *\t\thard\tmaxlogins\t
       Is it the case that maxlogins is not equal to or less than the expected value?
@@ -21755,6 +21530,155 @@ $ sudo chmod 0640 /var/log/messages</td>
 <td>SRG-OS-000228-GPOS-00088</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>Any publically accessible connection to the operating system must display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system.</td>
+<td>CCE-80763-6:Modify the System Login Banner</td>
+<td>Display of a standardized and approved use notification before granting access to the publicly accessible operating system ensures privacy and security notification verbiage used is consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
+
+System use notifications are required only for access via logon interfaces with human users and are not required when such human interfaces do not exist.
+
+The banner must be formatted in accordance with applicable DoD policy. Use the following verbiage for operating systems that can accommodate banners of 1300 characters:
+
+"You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+
+Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
+
+"I've read &amp; consent to terms in IS user agreem't."</td>
+<td>
+To configure the system login banner edit <code>/etc/issue</code>. Replace the
+default text with a message compliant with the local site policy or a legal
+disclaimer.
+
+
+The DoD required text is either:
+<br><br>
+<code>You are accessing a U.S. Government (USG) Information System (IS) that
+is provided for USG-authorized use only. By using this IS (which includes
+any device attached to this IS), you consent to the following conditions:
+<br>-The USG routinely intercepts and monitors communications on this IS
+for purposes including, but not limited to, penetration testing, COMSEC
+monitoring, network operations and defense, personnel misconduct (PM), law
+enforcement (LE), and counterintelligence (CI) investigations.
+<br>-At any time, the USG may inspect and seize data stored on this IS.
+<br>-Communications using, or data stored on, this IS are not private,
+are subject to routine monitoring, interception, and search, and may be
+disclosed or used for any USG-authorized purpose.
+<br>-This IS includes security measures (e.g., authentication and access
+controls) to protect USG interests -- not for your personal benefit or
+privacy.
+<br>-Notwithstanding the above, using this IS does not constitute consent
+to PM, LE or CI investigative searching or monitoring of the content of
+privileged communications, or work product, related to personal
+representation or services by attorneys, psychotherapists, or clergy, and
+their assistants. Such communications and work product are private and
+confidential. See User Agreement for details.</code>
+<br><br>
+OR:
+<br><br>
+<code>I've read &amp; consent to terms in IS user agreem't.</code>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify any publically accessible connection to the operating system displays the Standard Mandatory DoD Notice and Consent Banner before granting access to the system. 
+
+The banner must be formatted in accordance with applicable DoD policy. Use the following verbiage for operating systems that can accommodate banners of 1300 characters:
+
+"You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+
+Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
+
+"I've read &amp; consent to terms in IS user agreem't."
+
+If it does not, this is a finding.</td>
+<td>To check if the system login banner is compliant,
+run the following command:
+$ cat /etc/issue
+      Is it the case that it does not display the required banner?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3790r755179_fix">Configure any publically accessible connection to the operating system to display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system.
+
+The banner must be formatted in accordance with applicable DoD policy. Use the following verbiage for operating systems that can accommodate banners of 1300 characters:
+
+"You are accessing a U.S. Government (USG) Information System (IS) that is provided for USG-authorized use only.
+
+By using this IS (which includes any device attached to this IS), you consent to the following conditions:
+
+-The USG routinely intercepts and monitors communications on this IS for purposes including, but not limited to, penetration testing, COMSEC monitoring, network operations and defense, personnel misconduct (PM), law enforcement (LE), and counterintelligence (CI) investigations.
+
+-At any time, the USG may inspect and seize data stored on this IS.
+
+-Communications using, or data stored on, this IS are not private, are subject to routine monitoring, interception, and search, and may be disclosed or used for any USG-authorized purpose.
+
+-This IS includes security measures (e.g., authentication and access controls) to protect USG interests--not for your personal benefit or privacy.
+
+-Notwithstanding the above, using this IS does not constitute consent to PM, LE or CI investigative searching or monitoring of the content of privileged communications, or work product, related to personal representation or services by attorneys, psychotherapists, or clergy, and their assistants. Such communications and work product are private and confidential. See User Agreement for details."
+
+Use the following verbiage for operating systems that have severe limitations on the number of characters that can be displayed in the banner:
+
+"I've read &amp; consent to terms in IS user agreem't."</fixtext></td>
+<td>
+To configure the system login banner edit /etc/issue. Replace the
+default text with a message compliant with the local site policy or a legal
+disclaimer.
+
+
+The DoD required text is either:
+
+You are accessing a U.S. Government (USG) Information System (IS) that
+is provided for USG-authorized use only. By using this IS (which includes
+any device attached to this IS), you consent to the following conditions:
+-The USG routinely intercepts and monitors communications on this IS
+for purposes including, but not limited to, penetration testing, COMSEC
+monitoring, network operations and defense, personnel misconduct (PM), law
+enforcement (LE), and counterintelligence (CI) investigations.
+-At any time, the USG may inspect and seize data stored on this IS.
+-Communications using, or data stored on, this IS are not private,
+are subject to routine monitoring, interception, and search, and may be
+disclosed or used for any USG-authorized purpose.
+-This IS includes security measures (e.g., authentication and access
+controls) to protect USG interests -- not for your personal benefit or
+privacy.
+-Notwithstanding the above, using this IS does not constitute consent
+to PM, LE or CI investigative searching or monitoring of the content of
+privileged communications, or work product, related to personal
+representation or services by attorneys, psychotherapists, or clergy, and
+their assistants. Such communications and work product are private and
+confidential. See User Agreement for details.
+
+OR:
+
+I've read &amp; consent to terms in IS user agreem't.</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56909</td>
+<td>SRG-OS-000228-GPOS-00088</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>Any publically accessible connection to the operating system must display the Standard Mandatory DoD Notice and Consent Banner before granting access to the system.</td>
 <td>CCE-80768-5:Enable GNOME3 Login Warning Banner</td>
 <td>Display of a standardized and approved use notification before granting access to the publicly accessible operating system ensures privacy and security notification verbiage used is consistent with applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance.
 
@@ -24844,12 +24768,11 @@ $ sudo yum install firewalld</td>
 Wireless technologies include, for example, microwave, packet radio (UHF/VHF), 802.11x, and Bluetooth. Wireless networks use authentication protocols (e.g., EAP/TLS, PEAP), which provide credential protection and mutual authentication.
 
 This requirement applies to those operating systems that control wireless devices.</td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 <br><br>
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 <pre>$ sudo nmcli radio all off</pre>
 </td>
 <td>Applicable - Configurable</td>
@@ -24858,17 +24781,17 @@ following command:
 with the following command:
 
 $ sudo nmcli device
-The output should contain the following:
-wifi disconnected
-      Is it the case that it is not?
+The output should only contain wireless devices in unavailable state, like in the
+following example:
+wlp0s20f3          wifi      unavailable             -- 
+      Is it the case that wireless interfaces are not active?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3813r374952_fix">Configure the operating system to protect wireless access to and from the system using encryption.</fixtext></td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 $ sudo nmcli radio all off</td>
 <td>medium</td>
 <td></td>
@@ -24924,12 +24847,11 @@ install bluetooth /bin/true</td>
 Wireless technologies include, for example, microwave, packet radio (UHF/VHF), 802.11x, and Bluetooth. Wireless networks use authentication protocols (e.g., EAP/TLS, PEAP), which provide credential protection and mutual authentication.
 
 This requirement applies to those operating systems that control wireless devices.</td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 <br><br>
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 <pre>$ sudo nmcli radio all off</pre>
 </td>
 <td>Applicable - Configurable</td>
@@ -24938,17 +24860,17 @@ following command:
 with the following command:
 
 $ sudo nmcli device
-The output should contain the following:
-wifi disconnected
-      Is it the case that it is not?
+The output should only contain wireless devices in unavailable state, like in the
+following example:
+wlp0s20f3          wifi      unavailable             -- 
+      Is it the case that wireless interfaces are not active?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3814r374955_fix">Configure the operating system to protect wireless access to the system using authentication of users and/or devices.</fixtext></td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 $ sudo nmcli radio all off</td>
 <td>medium</td>
 <td></td>
@@ -27994,11 +27916,13 @@ If no <code>server</code> or <code>pool</code> directives are configured, the ru
 to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system, for networked systems, compares internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS). If it does not, this is a finding.</td>
-<td>To verify that maxpoll has been set properly, perform the following:
+<td>Verify Red Hat Enterprise Linux 8 is securely comparing internal information system clocks at a regular interval with an NTP server with the following commands:
+
+To verify that maxpoll has been set properly, perform the following:
 $ sudo grep maxpoll /etc/ntp.conf /etc/chrony.conf
 The output should return:
 maxpoll .
-      Is it the case that it does not exist or maxpoll has not been set to the expected value?
+      Is it the case that maxpoll does not exist or maxpoll has not been set to the expected value of &lt;sub idref="var_time_service_set_maxpoll" /&gt;?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3836r375141_fix">Configure the operating system to, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).</fixtext></td>
 <td>The maxpoll should be configured to
@@ -28065,11 +27989,13 @@ If no <code>server</code> or <code>pool</code> directives are configured, the ru
 to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system synchronizes internal information system clocks to the authoritative time source when the time difference is greater than one second. If it does not, this is a finding.</td>
-<td>To verify that maxpoll has been set properly, perform the following:
+<td>Verify Red Hat Enterprise Linux 8 is securely comparing internal information system clocks at a regular interval with an NTP server with the following commands:
+
+To verify that maxpoll has been set properly, perform the following:
 $ sudo grep maxpoll /etc/ntp.conf /etc/chrony.conf
 The output should return:
 maxpoll .
-      Is it the case that it does not exist or maxpoll has not been set to the expected value?
+      Is it the case that maxpoll does not exist or maxpoll has not been set to the expected value of &lt;sub idref="var_time_service_set_maxpoll" /&gt;?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3837r375144_fix">Configure the operating system to synchronize internal information system clocks to the authoritative time source when the time difference is greater than the organization-defined time period.</fixtext></td>
 <td>The maxpoll should be configured to
@@ -28288,11 +28214,13 @@ If no <code>server</code> or <code>pool</code> directives are configured, the ru
 to pass.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.</td>
-<td>To verify that maxpoll has been set properly, perform the following:
+<td>Verify Red Hat Enterprise Linux 8 is securely comparing internal information system clocks at a regular interval with an NTP server with the following commands:
+
+To verify that maxpoll has been set properly, perform the following:
 $ sudo grep maxpoll /etc/ntp.conf /etc/chrony.conf
 The output should return:
 maxpoll .
-      Is it the case that it does not exist or maxpoll has not been set to the expected value?
+      Is it the case that maxpoll does not exist or maxpoll has not been set to the expected value of &lt;sub idref="var_time_service_set_maxpoll" /&gt;?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3839r375150_fix">Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</fixtext></td>
 <td>The maxpoll should be configured to
@@ -34609,12 +34537,11 @@ $ sudo systemctl enable sshd.service</td>
 Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When transmitting data, operating systems need to leverage transmission protection mechanisms such as TLS, SSL VPNs, or IPSec.
 
 Alternative physical protection measures include PDS. PDSs are used to transmit unencrypted classified National Security Information (NSI) through an area of lesser classification or control. Since the classified NSI is unencrypted, the PDS must provide adequate electrical, electromagnetic, and physical safeguards to deter exploitation.</td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 <br><br>
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 <pre>$ sudo nmcli radio all off</pre>
 </td>
 <td>Applicable - Configurable</td>
@@ -34625,17 +34552,17 @@ If it does not, this is a finding.</td>
 with the following command:
 
 $ sudo nmcli device
-The output should contain the following:
-wifi disconnected
-      Is it the case that it is not?
+The output should only contain wireless devices in unavailable state, like in the
+following example:
+wlp0s20f3          wifi      unavailable             -- 
+      Is it the case that wireless interfaces are not active?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3874r793158_fix">Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).</fixtext></td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 $ sudo nmcli radio all off</td>
 <td>medium</td>
 <td></td>
@@ -53646,12 +53573,11 @@ $ sudo systemctl enable firewalld.service</td>
 This requirement applies to wireless peripheral technologies (e.g., wireless mice, keyboards, displays, etc.) used with an operating system. Wireless peripherals (e.g., Wi-Fi/Bluetooth/IR Keyboards, Mice, and Pointing Devices and Near Field Communications [NFC]) present a unique challenge by creating an open, unsecured port on a computer. Wireless peripherals must meet DoD requirements for wireless data transmission and be approved for use by the AO. Even though some wireless peripherals, such as mice and pointing devices, do not ordinarily carry information that need to be protected, modification of communications with these wireless peripherals may be used to compromise the operating system. Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of interception and modification.
 
 Protecting the confidentiality and integrity of communications with wireless peripherals can be accomplished by physical means (e.g., employing physical barriers to wireless radio frequencies) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are employed, then logical means (cryptography) do not have to be employed, and vice versa. If the wireless peripheral is only passing telemetry data, encryption of the data may not be required.</td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 <br><br>
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 <pre>$ sudo nmcli radio all off</pre>
 </td>
 <td>Applicable - Configurable</td>
@@ -53660,17 +53586,17 @@ following command:
 with the following command:
 
 $ sudo nmcli device
-The output should contain the following:
-wifi disconnected
-      Is it the case that it is not?
+The output should only contain wireless devices in unavailable state, like in the
+following example:
+wlp0s20f3          wifi      unavailable             -- 
+      Is it the case that wireless interfaces are not active?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3910r375747_fix">Configure the operating system to protect the confidentiality and integrity of communications with wireless peripherals.</fixtext></td>
-<td>Deactivating wireless network interfaces should prevent
-normal usage of the wireless capability.
+<td>Deactivating wireless network interfaces should prevent normal usage of the wireless
+capability.
 
 
-Configure the system to disable all wireless network interfaces with the
-following command:
+Configure the system to disable all wireless network interfaces with the following command:
 $ sudo nmcli radio all off</td>
 <td>medium</td>
 <td></td>
