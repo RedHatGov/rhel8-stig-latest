@@ -23659,23 +23659,88 @@ in /etc/audit/auditd.conf.</td>
 <td>SRG-OS-000256-GPOS-00097</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must protect audit tools from unauthorized access.</td>
-<td></td>
+<td>CCE-86239-1:Audit Tools Must Be Group-owned by Root</td>
 <td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
 
 Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user enjoys in order to make access decisions regarding the access to audit tools.
 
 Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
-<td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized access. If it does not, this is a finding.</td>
+<td>Verify the audit tools are group-owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the group-owner of each audit tool by running the following command:
+
+$ sudo stat -c "%G %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not group-owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3797r374904_fix">Configure the operating system to protect audit tools from unauthorized access.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>V-57173</td>
+<td>SRG-OS-000256-GPOS-00097</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must protect audit tools from unauthorized access.</td>
+<td>CCE-86259-9:Audit Tools Must Be Owned by Root</td>
+<td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
+
+Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user enjoys in order to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized access. If it does not, this is a finding.</td>
+<td>Verify the audit tools are owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the owner of each audit tool by running the following command:
+
+$ sudo stat -c "%U %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3797r374904_fix">Configure the operating system to protect audit tools from unauthorized access.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-</td>
 </tr>
 <tr>
 <td>SV-71435</td>
@@ -24528,13 +24593,21 @@ audit tools by running the following command:
 # sudo cat /etc/aide.conf | grep /usr/sbin/au
 
 /usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512
+
 /usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512
+
 /usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512
+
 /usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512
+
 /usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512
 
 
+
+
 /usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512
+
+
 
 If AIDE is configured properly to protect the integrity of the audit tools,
 all lines listed above will be returned from the command.
