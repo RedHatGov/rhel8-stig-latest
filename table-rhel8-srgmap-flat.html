@@ -9255,10 +9255,17 @@ If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a gro
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.</td>
-<td>
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+<td>Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf "%p %g\n"
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3741r557573_fix">Configure the operating system to protect audit information from unauthorized read access.</fixtext></td>
 <td>All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -9291,7 +9298,7 @@ To properly set the owner of <code>/var/log/audit</code>, run the command:
 <td>
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3741r557573_fix">Configure the operating system to protect audit information from unauthorized read access.</fixtext></td>
 <td>All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -9358,12 +9365,26 @@ than the <code>root</code> group account, change the group ownership of the audi
 to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c "%n %G" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3741r557573_fix">Configure the operating system to protect audit information from unauthorized read access.</fixtext></td>
 <td>All audit logs must be group owned by root user. The path for audit log can
@@ -9398,12 +9419,14 @@ To properly set the owner of <code>/var/log/audit/*</code>, run the command:
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Verify the audit logs are owned by "root". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c "%n %U" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by "root" using the following command:
+$ sudo stat -c "%n %U" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3741r557573_fix">Configure the operating system to protect audit information from unauthorized read access.</fixtext></td>
 <td>All audit logs must be owned by root user. The path for audit log can be
@@ -9441,7 +9464,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c "%n %a" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3741r557573_fix">Configure the operating system to protect audit information from unauthorized read access.</fixtext></td>
 <td>If log_group in /etc/audit/auditd.conf is set to a group other than the root
@@ -9576,10 +9599,17 @@ If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a gro
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.</td>
-<td>
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+<td>Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf "%p %g\n"
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3742r557576_fix">Configure the operating system to protect audit information from unauthorized modification.</fixtext></td>
 <td>All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -9614,7 +9644,7 @@ To properly set the owner of <code>/var/log/audit</code>, run the command:
 <td>
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3742r557576_fix">Configure the operating system to protect audit information from unauthorized modification.</fixtext></td>
 <td>All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -9685,12 +9715,26 @@ than the <code>root</code> group account, change the group ownership of the audi
 to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c "%n %G" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3742r557576_fix">Configure the operating system to protect audit information from unauthorized modification.</fixtext></td>
 <td>All audit logs must be group owned by root user. The path for audit log can
@@ -9727,12 +9771,14 @@ To properly set the owner of <code>/var/log/audit/*</code>, run the command:
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Verify the audit logs are owned by "root". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c "%n %U" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by "root" using the following command:
+$ sudo stat -c "%n %U" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3742r557576_fix">Configure the operating system to protect audit information from unauthorized modification.</fixtext></td>
 <td>All audit logs must be owned by root user. The path for audit log can be
@@ -9772,7 +9818,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c "%n %a" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3742r557576_fix">Configure the operating system to protect audit information from unauthorized modification.</fixtext></td>
 <td>If log_group in /etc/audit/auditd.conf is set to a group other than the root
@@ -9909,10 +9955,17 @@ If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a gro
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.</td>
-<td>
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+<td>Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf "%p %g\n"
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3743r557579_fix">Configure the operating system to protect audit information from unauthorized deletion.</fixtext></td>
 <td>All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -9947,7 +10000,7 @@ To properly set the owner of <code>/var/log/audit</code>, run the command:
 <td>
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3743r557579_fix">Configure the operating system to protect audit information from unauthorized deletion.</fixtext></td>
 <td>All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -10018,12 +10071,26 @@ than the <code>root</code> group account, change the group ownership of the audi
 to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c "%n %G" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3743r557579_fix">Configure the operating system to protect audit information from unauthorized deletion.</fixtext></td>
 <td>All audit logs must be group owned by root user. The path for audit log can
@@ -10060,12 +10127,14 @@ To properly set the owner of <code>/var/log/audit/*</code>, run the command:
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Verify the audit logs are owned by "root". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c "%n %U" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by "root" using the following command:
+$ sudo stat -c "%n %U" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3743r557579_fix">Configure the operating system to protect audit information from unauthorized deletion.</fixtext></td>
 <td>All audit logs must be owned by root user. The path for audit log can be
@@ -10105,7 +10174,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c "%n %a" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3743r557579_fix">Configure the operating system to protect audit information from unauthorized deletion.</fixtext></td>
 <td>If log_group in /etc/audit/auditd.conf is set to a group other than the root
@@ -10216,7 +10285,7 @@ DoD has defined the list of events for which the operating system will provide a
 
 If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3744r557582_fix">Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
 
@@ -20091,7 +20160,7 @@ Audit reduction is a process that manipulates collected audit information and or
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides an audit reduction capability that supports on-demand reporting requirements. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3776r557199_fix">Configure the operating system to provide an audit reduction capability that supports on-demand reporting requirements.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -21098,15 +21167,15 @@ To support this requirement, the operating system may have an integrated solutio
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
-The <code>mcafeetp</code> package can be installed with the following command:
+The <code>McAfeeTP</code> package can be installed with the following command:
 <pre>
-$ sudo yum install mcafeetp</pre>
+$ sudo yum install McAfeeTP</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.
 
 If it does not, this is a finding.</td>
-<td>Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
+<td>Run the following command to determine if the McAfeeTP package is installed: $ rpm -q McAfeeTP
       Is it the case that the package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3787r804655_fix">Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.</fixtext></td>
@@ -21114,9 +21183,9 @@ If it does not, this is a finding.</td>
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
-The mcafeetp package can be installed with the following command:
+The McAfeeTP package can be installed with the following command:
 
-$ sudo yum install mcafeetp</td>
+$ sudo yum install McAfeeTP</td>
 <td>high</td>
 <td></td>
 <td></td>
@@ -21190,10 +21259,17 @@ If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a gro
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.</td>
-<td>
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+<td>Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf "%p %g\n"
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -21226,7 +21302,7 @@ To properly set the owner of <code>/var/log/audit</code>, run the command:
 <td>
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
@@ -21258,12 +21334,26 @@ than the <code>root</code> group account, change the group ownership of the audi
 to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c "%n %G" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>All audit logs must be group owned by root user. The path for audit log can
@@ -21298,12 +21388,14 @@ To properly set the owner of <code>/var/log/audit/*</code>, run the command:
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.</td>
-<td>Run the following commands to check who owns the system audit logs:
+<td>Verify the audit logs are owned by "root". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c "%n %U" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by "root" using the following command:
+$ sudo stat -c "%n %U" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>All audit logs must be owned by root user. The path for audit log can be
@@ -21341,7 +21433,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c "%n %a" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>If log_group in /etc/audit/auditd.conf is set to a group other than the root
@@ -21373,7 +21465,7 @@ run the command:
 $ ls -lL /var/log
 If properly configured, the output should indicate the following group-owner:
 root
-      Is it the case that /var/log has group owner root?
+      Is it the case that /var/log does not have a group owner of root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td> To properly set the group owner of /var/log, run the command: $ sudo chgrp root /var/log</td>
@@ -21400,7 +21492,7 @@ run the command:
 $ ls -lL /var/log/messages
 If properly configured, the output should indicate the following group-owner:
 root
-      Is it the case that /var/log/messages has group owner root?
+      Is it the case that /var/log/messages does not have a group owner of root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td> To properly set the group owner of /var/log/messages, run the command: $ sudo chgrp root /var/log/messages</td>
@@ -21427,7 +21519,7 @@ run the command:
 $ ls -lL /var/log
 If properly configured, the output should indicate the following owner:
 root
-      Is it the case that /var/log has owner root?
+      Is it the case that /var/log does not have an owner of root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td> To properly set the owner of /var/log, run the command: $ sudo chown root /var/log </td>
@@ -21454,7 +21546,7 @@ run the command:
 $ ls -lL /var/log/messages
 If properly configured, the output should indicate the following owner:
 root
-      Is it the case that /var/log/messages has owner root?
+      Is it the case that /var/log/messages does not have an owner of root?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td> To properly set the owner of /var/log/messages, run the command: $ sudo chown root /var/log/messages </td>
@@ -26670,7 +26762,7 @@ This requirement enables organizations to extend or limit auditing as necessary 
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3824r375045_fix">Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27388,7 +27480,7 @@ Audit reduction is a technique used to reduce the volume of audit records in ord
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3829r375060_fix">Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27467,7 +27559,7 @@ This requirement is specific to operating systems with audit reduction capabilit
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3830r375063_fix">Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27586,7 +27678,7 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3831r375066_fix">Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27663,7 +27755,7 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3832r375069_fix">Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27740,7 +27832,7 @@ The report generation capability must support after-the-fact investigations of s
 <td>Applicable - Configurable</td>
 <td>Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3833r375072_fix">Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27819,7 +27911,7 @@ This requirement is specific to operating systems providing audit reduction capa
 <td>Applicable - Configurable</td>
 <td>Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3834r375075_fix">Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -27900,7 +27992,7 @@ This requirement is specific to operating systems providing report generation ca
 <td>Applicable - Configurable</td>
 <td>Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3835r375078_fix">Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -28125,7 +28217,7 @@ Time stamps generated by the operating system include date and time. Granularity
 <td>Applicable - Configurable</td>
 <td>Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3838r375147_fix">Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -28202,65 +28294,10 @@ Time stamps generated by the operating system include date and time. Time is com
 <td>Applicable - Configurable</td>
 <td>Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3839r375150_fix">Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>V-57189</td>
-<td>SRG-OS-000359-GPOS-00146</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
-
-Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3839r375150_fix">Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -28566,7 +28603,7 @@ Enforcement actions are the methods or mechanisms used to prevent unauthorized c
 <td>Applicable - Configurable</td>
 <td>Verify the operating system audits the enforcement actions used to restrict access associated with changes to the system. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3844r375165_fix">Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -46850,7 +46887,7 @@ Audit records can be generated from various components within the information sy
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3897r375708_fix">Configure the operating system to generate audit records when successful/unsuccessful accesses to objects occur.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -47423,7 +47460,7 @@ Audit records can be generated from various components within the information sy
 <td>Applicable - Configurable</td>
 <td>Verify the operating system generates audit records for all direct access to the information system. If it does not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3898r375711_fix">Configure the operating system to generate audit records for all direct access to the information system.</fixtext></td>
 <td>The audit package should be installed.</td>
@@ -49944,7 +49981,7 @@ Configuration settings are the set of parameters that can be changed in hardware
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>The audit package should be installed.</td>

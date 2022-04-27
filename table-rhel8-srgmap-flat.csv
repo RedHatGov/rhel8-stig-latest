@@ -6355,10 +6355,17 @@ $ sudo chgrp root /var/log/audit
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf ""%p %g\n""
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       ",Configure the operating system to protect audit information from unauthorized read access.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the group owner of /var/log/audit, run the command:
@@ -6375,7 +6382,7 @@ $ sudo chown root /var/log/audit ","
                 ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized read access.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit, run the command:
@@ -6411,12 +6418,26 @@ If log_group in /etc/audit/auditd.conf is set to a group other
 than the root group account, change the group ownership of the audit logs
 to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c ""%n %G"" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       ",Configure the operating system to protect audit information from unauthorized read access.,"All audit logs must be group owned by root user. The path for audit log can
 be configured via log_file parameter in /etc/audit/auditd.conf
 or, by default, the path for audit log is /var/log/audit/.
@@ -6435,12 +6456,14 @@ or by default, the path for audit log is /var/log/audit/.
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Verify the audit logs are owned by ""root"". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c ""%n %U"" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by ""root"" using the following command:
+$ sudo stat -c ""%n %U"" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized read access.,"All audit logs must be owned by root user. The path for audit log can be
 configured via log_file parameter in /etc/audit/auditd.conf
 or by default, the path for audit log is /var/log/audit/.
@@ -6462,7 +6485,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c ""%n %a"" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       ",Configure the operating system to protect audit information from unauthorized read access.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0640 audit_file
@@ -6551,10 +6574,17 @@ $ sudo chgrp root /var/log/audit
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf ""%p %g\n""
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       ",Configure the operating system to protect audit information from unauthorized modification.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the group owner of /var/log/audit, run the command:
@@ -6573,7 +6603,7 @@ $ sudo chown root /var/log/audit ","
                 ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized modification.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit, run the command:
@@ -6613,12 +6643,26 @@ If log_group in /etc/audit/auditd.conf is set to a group other
 than the root group account, change the group ownership of the audit logs
 to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c ""%n %G"" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       ",Configure the operating system to protect audit information from unauthorized modification.,"All audit logs must be group owned by root user. The path for audit log can
 be configured via log_file parameter in /etc/audit/auditd.conf
 or, by default, the path for audit log is /var/log/audit/.
@@ -6639,12 +6683,14 @@ or by default, the path for audit log is /var/log/audit/.
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Verify the audit logs are owned by ""root"". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c ""%n %U"" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by ""root"" using the following command:
+$ sudo stat -c ""%n %U"" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized modification.,"All audit logs must be owned by root user. The path for audit log can be
 configured via log_file parameter in /etc/audit/auditd.conf
 or by default, the path for audit log is /var/log/audit/.
@@ -6668,7 +6714,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c ""%n %a"" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       ",Configure the operating system to protect audit information from unauthorized modification.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0640 audit_file
@@ -6759,10 +6805,17 @@ $ sudo chgrp root /var/log/audit
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf ""%p %g\n""
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the group owner of /var/log/audit, run the command:
@@ -6781,7 +6834,7 @@ $ sudo chown root /var/log/audit ","
                 ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit, run the command:
@@ -6821,12 +6874,26 @@ If log_group in /etc/audit/auditd.conf is set to a group other
 than the root group account, change the group ownership of the audit logs
 to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c ""%n %G"" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit logs must be group owned by root user. The path for audit log can
 be configured via log_file parameter in /etc/audit/auditd.conf
 or, by default, the path for audit log is /var/log/audit/.
@@ -6847,12 +6914,14 @@ or by default, the path for audit log is /var/log/audit/.
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Verify the audit logs are owned by ""root"". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c ""%n %U"" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by ""root"" using the following command:
+$ sudo stat -c ""%n %U"" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"All audit logs must be owned by root user. The path for audit log can be
 configured via log_file parameter in /etc/audit/auditd.conf
 or by default, the path for audit log is /var/log/audit/.
@@ -6876,7 +6945,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c ""%n %a"" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0640 audit_file
@@ -6956,7 +7025,7 @@ DoD has defined the list of events for which the operating system will provide a
 4) All kernel module load, unload, and restart actions.
 
 If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ","Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
 
 DoD has defined the list of events for which the operating system will provide an audit record generation capability as the following: 
@@ -14259,7 +14328,7 @@ V-56799,SRG-OS-000122-GPOS-00063,TBD - Assigned by DISA after STIG release,The o
 Audit reduction is a process that manipulates collected audit information and organizes such information in a summary format that is more meaningful to analysts. The report generation capability provided by the application must support on-demand (i.e., customizable, ad hoc, and as-needed) reports.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides an audit reduction capability that supports on-demand reporting requirements. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand reporting requirements.,The audit package should be installed.,,,,
 V-56799,SRG-OS-000122-GPOS-00063,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports on-demand reporting requirements.,CCE-80872-5:Enable auditd Service,"The ability to generate on-demand reports, including after the audit data has been subjected to audit reduction, greatly facilitates the organization's ability to generate incident reports as needed to better handle larger-scale or more complex security incidents.
 
@@ -14910,21 +14979,21 @@ To support this requirement, the operating system may have an integrated solutio
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
-The mcafeetp package can be installed with the following command:
+The McAfeeTP package can be installed with the following command:
 
-$ sudo yum install mcafeetp","
+$ sudo yum install McAfeeTP","
                   Applicable - Configurable
                 ","Verify the operating system employs automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.
 
-If it does not, this is a finding.","Run the following command to determine if the mcafeetp package is installed: $ rpm -q mcafeetp
+If it does not, this is a finding.","Run the following command to determine if the McAfeeTP package is installed: $ rpm -q McAfeeTP
       Is it the case that the package is not installed?
       ","Configure the operating system to employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where ESS is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by CNDSP.","Install McAfee Endpoint Security for Linux antivirus software
 which is provided for DoD systems and uses signatures to search for the
 presence of viruses on the filesystem.
 
-The mcafeetp package can be installed with the following command:
+The McAfeeTP package can be installed with the following command:
 
-$ sudo yum install mcafeetp",,,,
+$ sudo yum install McAfeeTP",,,,
 V-56883,SRG-OS-000191-GPOS-00080,TBD - Assigned by DISA after STIG release,"The operating system must employ automated mechanisms to determine the state of system components with regard to flaw remediation using the following frequency: continuously, where Endpoint Security Solution (ESS) is used; 30 days, for any additional internal network scans not covered by ESS; and annually, for external scans by Computer Network Defense Service Provider (CNDSP).",CCE-86261-5:Ensure McAfee Endpoint Security for Linux (ENSL) is running,"Without the use of automated mechanisms to scan for security flaws on a continuous and/or periodic basis, the operating system or other system components may remain vulnerable to the exploits presented by undetected software flaws.
 
 To support this requirement, the operating system may have an integrated solution incorporating continuous scanning using ESS and periodic scanning using other tools, as specified in the requirement.","Install McAfee Endpoint Security for Linux antivirus software
@@ -14958,10 +15027,17 @@ $ sudo chgrp root /var/log/audit
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
-To properly set the group owner of /var/log/audit, run the command:
-$ sudo chgrp root /var/log/audit
-      Is it the case that ?
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Determine the audit log group by running the following command:
+
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that all directories within the /var/log/audit directory are owned by the group specified as log_group or by root if the log_group is not specified.
+Run the following command:
+
+$ sudo find /var/log/audit -type d -printf ""%p %g\n""
+
+All listed directories must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that there is a directory owned by different group?
       ",Configure the operating system to reveal error messages only to authorized users.,"All audit directories must be group owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the group owner of /var/log/audit, run the command:
@@ -14978,7 +15054,7 @@ $ sudo chown root /var/log/audit ","
                 ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
 To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit 
-      Is it the case that ?
+      Is it the case that the directory is not owned by root?
       ",Configure the operating system to reveal error messages only to authorized users.,"All audit directories must be owned by root user. By default, the path for audit log is /var/log/audit/.
 
 To properly set the owner of /var/log/audit, run the command:
@@ -14995,12 +15071,26 @@ If log_group in /etc/audit/auditd.conf is set to a group other
 than the root group account, change the group ownership of the audit logs
 to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Check group owners of the system audit logs.
+
+First, determine where the audit log file is located.
+
 $ sudo grep -iw ^log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
+
+The log_file option specifies the audit log file path.
+If the log_file option isn't defined, check all files within /var/log/audit directory.
+
+Then, determine the audit log group by running the following command:
+$ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
+
+Then, check that the audit log file is owned by the correct group.
+Run the following command to display the owner of the audit log file:
+
 $ sudo stat -c ""%n %G"" log_file
-Audit logs must be owned by group root or adm.
-      Is it the case that ?
+
+The audit log file must be owned by the log_group or by root if the log_group is not specified.
+      Is it the case that audit log files are owned by incorrect group?
       ",Configure the operating system to reveal error messages only to authorized users.,"All audit logs must be group owned by root user. The path for audit log can
 be configured via log_file parameter in /etc/audit/auditd.conf
 or, by default, the path for audit log is /var/log/audit/.
@@ -15019,12 +15109,14 @@ or by default, the path for audit log is /var/log/audit/.
 To properly set the owner of /var/log/audit/*, run the command:
 $ sudo chown root /var/log/audit/* ","
                   Applicable - Configurable
-                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Run the following commands to check who owns the system audit logs:
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Verify the audit logs are owned by ""root"". First, determine where the audit logs are stored with the following command:
 $ sudo grep -iw log_file /etc/audit/auditd.conf
 log_file = /var/log/audit/audit.log
-sudo stat -c ""%n %U"" /var/log/audit/*
+Using the location of the audit log file, determine if the audit log is owned by ""root"" using the following command:
+$ sudo stat -c ""%n %U"" /var/log/audit/audit.log
 Audit logs must be owned by user root.
-      Is it the case that ?
+If the log_file isn't defined in /etc/audit/auditd.conf, check all files in /var/log/audit/ directory instead.
+      Is it the case that the audit log is not owned by root?
       ",Configure the operating system to reveal error messages only to authorized users.,"All audit logs must be owned by root user. The path for audit log can be
 configured via log_file parameter in /etc/audit/auditd.conf
 or by default, the path for audit log is /var/log/audit/.
@@ -15046,7 +15138,7 @@ log_file=/var/log/audit/audit.log
 $ sudo stat -c ""%n %a"" /var/log/audit/*
 $ sudo ls -l /var/log/audit
 Audit logs must be mode 0640 or less permissive.
-      Is it the case that any are more permissive?
+      Is it the case that any permissions are more permissive?
       ",Configure the operating system to reveal error messages only to authorized users.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0640 audit_file
@@ -15062,7 +15154,7 @@ run the command:
 $ ls -lL /var/log
 If properly configured, the output should indicate the following group-owner:
 root
-      Is it the case that /var/log has group owner root?
+      Is it the case that /var/log does not have a group owner of root?
       ",Configure the operating system to reveal error messages only to authorized users.," To properly set the group owner of /var/log, run the command: $ sudo chgrp root /var/log",,,,
 SV-71163,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-83660-1:Verify Group Who Owns /var/log/messages File,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
 
@@ -15073,7 +15165,7 @@ run the command:
 $ ls -lL /var/log/messages
 If properly configured, the output should indicate the following group-owner:
 root
-      Is it the case that /var/log/messages has group owner root?
+      Is it the case that /var/log/messages does not have a group owner of root?
       ",Configure the operating system to reveal error messages only to authorized users.," To properly set the group owner of /var/log/messages, run the command: $ sudo chgrp root /var/log/messages",,,,
 SV-71163,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-83661-9:Verify User Who Owns /var/log Directory,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
 
@@ -15084,7 +15176,7 @@ run the command:
 $ ls -lL /var/log
 If properly configured, the output should indicate the following owner:
 root
-      Is it the case that /var/log has owner root?
+      Is it the case that /var/log does not have an owner of root?
       ",Configure the operating system to reveal error messages only to authorized users.," To properly set the owner of /var/log, run the command: $ sudo chown root /var/log ",,,,
 SV-71163,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-83662-7:Verify User Who Owns /var/log/messages File,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
 
@@ -15095,7 +15187,7 @@ run the command:
 $ ls -lL /var/log/messages
 If properly configured, the output should indicate the following owner:
 root
-      Is it the case that /var/log/messages has owner root?
+      Is it the case that /var/log/messages does not have an owner of root?
       ",Configure the operating system to reveal error messages only to authorized users.," To properly set the owner of /var/log/messages, run the command: $ sudo chown root /var/log/messages ",,,,
 SV-71163,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-83663-5:Verify Permissions on /var/log Directory,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
 
@@ -18403,7 +18495,7 @@ SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The
 This requirement enables organizations to extend or limit auditing as necessary to meet organizational requirements. Auditing that is limited to conserve information system resources may be extended to address certain threat situations. In addition, auditing may be limited to a specific set of events to facilitate audit reduction, analysis, and reporting.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",The audit package should be installed.,,,,
 SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The operating system must provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",CCE-83556-1:Record Events When Privileged Executables Are Run,"If authorized individuals do not have the ability to modify auditing parameters in response to a changing threat environment, the organization may not be able to effectively respond, and important forensic information may be lost.
 
@@ -18873,7 +18965,7 @@ V-57253,SRG-OS-000348-GPOS-00136,TBD - Assigned by DISA after STIG release,The o
 Audit reduction is a technique used to reduce the volume of audit records in order to facilitate a manual review. Audit reduction does not alter original audit records. The report generation capability provided by the application must support on-demand (i.e., customizable, ad hoc, and as-needed) reports.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.,The audit package should be installed.,,,,
 V-57253,SRG-OS-000348-GPOS-00136,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports on-demand audit review and analysis.,CCE-83556-1:Record Events When Privileged Executables Are Run,"The ability to perform on-demand audit review and analysis, including after the audit data has been subjected to audit reduction, greatly facilitates the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
 
@@ -18922,7 +19014,7 @@ Audit reduction capability must support after-the-fact investigations of securit
 This requirement is specific to operating systems with audit reduction capabilities.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.,The audit package should be installed.,,,,
 V-57255,SRG-OS-000349-GPOS-00137,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports after-the-fact investigations of security incidents.,CCE-80872-5:Enable auditd Service,"If the audit reduction capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
 
@@ -18995,7 +19087,7 @@ SV-71517,SRG-OS-000350-GPOS-00138,TBD - Assigned by DISA after STIG release,The 
 Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.,The audit package should be installed.,,,,
 SV-71517,SRG-OS-000350-GPOS-00138,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports on-demand audit review and analysis.,CCE-83556-1:Record Events When Privileged Executables Are Run,"The report generation capability must support on-demand review and analysis in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
 
@@ -19042,7 +19134,7 @@ V-57259,SRG-OS-000351-GPOS-00139,TBD - Assigned by DISA after STIG release,The o
 Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.,The audit package should be installed.,,,,
 V-57259,SRG-OS-000351-GPOS-00139,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports on-demand reporting requirements.,CCE-83556-1:Record Events When Privileged Executables Are Run,"The report generation capability must support on-demand reporting in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
 
@@ -19089,7 +19181,7 @@ V-57261,SRG-OS-000352-GPOS-00140,TBD - Assigned by DISA after STIG release,The o
 The report generation capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.,The audit package should be installed.,,,,
 V-57261,SRG-OS-000352-GPOS-00140,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports after-the-fact investigations of security incidents.,CCE-83556-1:Record Events When Privileged Executables Are Run,"If the report generation capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
 
@@ -19138,7 +19230,7 @@ Audit reduction is a process that manipulates collected audit information and or
 This requirement is specific to operating systems providing audit reduction capabilities. The audit reduction capability can be met either natively or through the use of third-party tools.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.,The audit package should be installed.,,,,
 V-57263,SRG-OS-000353-GPOS-00141,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides an audit reduction capability.,CCE-83556-1:Record Events When Privileged Executables Are Run,"If the audit reduction capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
 
@@ -19189,7 +19281,7 @@ Time ordering refers to the chronological organization of records based on time 
 This requirement is specific to operating systems providing report generation capabilities. The report generation capability can be met either natively or through the use of third-party tools.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.,The audit package should be installed.,,,,
 SV-71525,SRG-OS-000354-GPOS-00142,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides a report generation capability.,CCE-83556-1:Record Events When Privileged Executables Are Run,"If the report generation capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
 
@@ -19324,7 +19416,7 @@ SV-71453,SRG-OS-000358-GPOS-00145,TBD - Assigned by DISA after STIG release,The 
 Time stamps generated by the operating system include date and time. Granularity of time measurements refers to the degree of synchronization between information system clocks and reference clocks.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,The audit package should be installed.,,,,
 SV-71453,SRG-OS-000358-GPOS-00145,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,CCE-83556-1:Record Events When Privileged Executables Are Run,"Without sufficient granularity of time stamps, it is not possible to adequately determine the chronological order of records.
 
@@ -19371,48 +19463,8 @@ V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The o
 Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,The audit package should be installed.,,,,
-V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,CCE-83556-1:Record Events When Privileged Executables Are Run,"If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
-
-Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.","Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
-If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.","
-                  Applicable - Configurable
-                ","Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.","Add or update the following rules in ""/etc/audit/rules.d/audit.rules"":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      ",Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,"Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the ""b32"" and ""b64"" audit rules for ""SUID"" files are not defined, this is a finding.
-If both the ""b32"" and ""b64"" audit rules for ""SGID"" files are not defined, this is a finding.",,,,
 V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,CCE-84059-5:Configure Time Service Maxpoll Interval,"If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
 
 Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.","The maxpoll should be configured to
@@ -19592,7 +19644,7 @@ SV-71111,SRG-OS-000365-GPOS-00152,TBD - Assigned by DISA after STIG release,The 
 Enforcement actions are the methods or mechanisms used to prevent unauthorized changes to configuration settings. Enforcement action methods may be as simple as denying access to a file based on the application of file permissions (access restriction). Audit items may consist of lists of actions blocked by access restrictions or changes identified after the fact.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system audits the enforcement actions used to restrict access associated with changes to the system. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.,The audit package should be installed.,,,,
 SV-71111,SRG-OS-000365-GPOS-00152,TBD - Assigned by DISA after STIG release,The operating system must audit the enforcement actions used to restrict access associated with changes to the system.,CCE-80872-5:Enable auditd Service,"Without auditing the enforcement of access restrictions against changes to the application configuration, it will be difficult to identify attempted attacks and an audit trail will not be available for forensic investigation for after-the-fact actions.
 
@@ -32087,7 +32139,7 @@ V-56609,SRG-OS-000474-GPOS-00219,TBD - Assigned by DISA after STIG release,The o
 Audit records can be generated from various components within the information system (e.g., module or policy filter).",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to generate audit records when successful/unsuccessful accesses to objects occur.,The audit package should be installed.,,,,
 V-56609,SRG-OS-000474-GPOS-00219,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful accesses to objects occur.,CCE-80686-9:Record Events that Modify the System's Discretionary Access Controls - chown,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
@@ -32501,7 +32553,7 @@ SV-70867,SRG-OS-000475-GPOS-00220,TBD - Assigned by DISA after STIG release,The 
 Audit records can be generated from various components within the information system (e.g., module or policy filter).",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system generates audit records for all direct access to the information system. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ",Configure the operating system to generate audit records for all direct access to the information system.,The audit package should be installed.,,,,
 SV-70867,SRG-OS-000475-GPOS-00220,TBD - Assigned by DISA after STIG release,The operating system must generate audit records for all direct access to the information system.,CCE-82828-5:Configure immutable Audit login UIDs,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
@@ -34005,7 +34057,7 @@ SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.",The audit package should be installed.,"
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the package is not installed?
+      Is it the case that the audit package is not installed?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",The audit package should be installed.,,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80872-5:Enable auditd Service,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
