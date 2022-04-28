@@ -29666,7 +29666,7 @@ any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if !authenticate has not been configured for sudo, run the following command:
 $ sudo grep -r \!authenticate /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that !authenticate is enabled in sudo?
+      Is it the case that !authenticate is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3848r375177_fix">Configure the operating system to require users to re-authenticate for privilege escalation.</fixtext></td>
 <td>The sudo !authenticate option, when specified, allows a user to execute commands using
@@ -29697,7 +29697,7 @@ in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if NOPASSWD has been configured for sudo, run the following command:
 $ sudo grep -ri nopasswd /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that nopasswd is enabled in sudo?
+      Is it the case that nopasswd is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3848r375177_fix">Configure the operating system to require users to re-authenticate for privilege escalation.</fixtext></td>
 <td>The sudo NOPASSWD tag, when specified, allows a user to execute
@@ -29769,7 +29769,7 @@ any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if !authenticate has not been configured for sudo, run the following command:
 $ sudo grep -r \!authenticate /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that !authenticate is enabled in sudo?
+      Is it the case that !authenticate is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3849r375180_fix">Configure the operating system to require users to re-authenticate when changing roles.</fixtext></td>
 <td>The sudo !authenticate option, when specified, allows a user to execute commands using
@@ -29800,7 +29800,7 @@ in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if NOPASSWD has been configured for sudo, run the following command:
 $ sudo grep -ri nopasswd /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that nopasswd is enabled in sudo?
+      Is it the case that nopasswd is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3849r375180_fix">Configure the operating system to require users to re-authenticate when changing roles.</fixtext></td>
 <td>The sudo NOPASSWD tag, when specified, allows a user to execute
@@ -29831,7 +29831,7 @@ any sudo configuration snippets in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if !authenticate has not been configured for sudo, run the following command:
 $ sudo grep -r \!authenticate /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that !authenticate is enabled in sudo?
+      Is it the case that !authenticate is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3850r375183_fix">Configure the operating system to require users to re-authenticate when changing authenticators.</fixtext></td>
 <td>The sudo !authenticate option, when specified, allows a user to execute commands using
@@ -29862,7 +29862,7 @@ in <code>/etc/sudoers.d/</code>.</td>
 <td>To determine if NOPASSWD has been configured for sudo, run the following command:
 $ sudo grep -ri nopasswd /etc/sudoers /etc/sudoers.d/
 The command should return no output.
-      Is it the case that nopasswd is enabled in sudo?
+      Is it the case that nopasswd is specified in the sudo config files?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3850r375183_fix">Configure the operating system to require users to re-authenticate when changing authenticators.</fixtext></td>
 <td>The sudo NOPASSWD tag, when specified, allows a user to execute
@@ -29981,7 +29981,7 @@ $ sudo yum install openssl-pkcs11</td>
 <td>SRG-OS-000375-GPOS-00160</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</td>
-<td>CCE-86120-3:Certificate certificate status checking in SSSD</td>
+<td>CCE-86120-3:Certificate status checking in SSSD</td>
 <td>Using an authentication device, such as a CAC or token that is separate from the information system, ensures that even if the information system is compromised, that compromise will not affect credentials stored on the authentication device.
 
 Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD Common Access Card.
@@ -29995,7 +29995,7 @@ This requirement only applies to components where this is specific to the functi
 Requires further clarification from NIST.</td>
 <td>Multifactor solutions that require devices separate from information systems gaining access include,
 for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
-By configuring <code>certificate_verification</code> to <code>ocsp_dgst=sha1</code> sures that certificates for
+Configuring <code>certificate_verification</code> to <code>ocsp_dgst=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_sssd_certificate_verification_digest_function"></xccdf-1.1:sub></code> ensures that certificates for
 multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.</td>
@@ -30004,16 +30004,14 @@ is enabled and using the proper digest value on the system with the following co
 $ sudo grep certificate_verification /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf | grep -v "^#"
 If configured properly, output should look like
 
-    certificate_verification = ocsp_dgst=sha1
+    certificate_verification = ocsp_dgst=
 
-The "sssd" service must be restarted for the changes to take effect. To restart the "sssd" service, run the following command:
-$ sudo systemctl restart sssd.service
       Is it the case that certificate_verification in sssd is not configured?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3852r375189_fix">Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</fixtext></td>
 <td>Multifactor solutions that require devices separate from information systems gaining access include,
 for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
-By configuring certificate_verification to ocsp_dgst=sha1 sures that certificates for
+Configuring certificate_verification to ocsp_dgst= ensures that certificates for
 multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
 <td>medium</td>
 <td></td>
@@ -30135,13 +30133,13 @@ $ sudo yum install openssl-pkcs11</td>
 <td>SRG-OS-000377-GPOS-00162</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must electronically verify Personal Identity Verification (PIV) credentials.</td>
-<td>CCE-86120-3:Certificate certificate status checking in SSSD</td>
+<td>CCE-86120-3:Certificate status checking in SSSD</td>
 <td>The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.
 
 DoD has mandated the use of the CAC to support identity management and personal authentication for systems covered under Homeland Security Presidential Directive (HSPD) 12, as well as making the CAC a primary component of layered protection for national security systems.</td>
 <td>Multifactor solutions that require devices separate from information systems gaining access include,
 for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
-By configuring <code>certificate_verification</code> to <code>ocsp_dgst=sha1</code> sures that certificates for
+Configuring <code>certificate_verification</code> to <code>ocsp_dgst=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_sssd_certificate_verification_digest_function"></xccdf-1.1:sub></code> ensures that certificates for
 multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system electronically verifies Personal Identity Verification (PIV) credentials. If it does not, this is a finding.</td>
@@ -30150,16 +30148,14 @@ is enabled and using the proper digest value on the system with the following co
 $ sudo grep certificate_verification /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf | grep -v "^#"
 If configured properly, output should look like
 
-    certificate_verification = ocsp_dgst=sha1
+    certificate_verification = ocsp_dgst=
 
-The "sssd" service must be restarted for the changes to take effect. To restart the "sssd" service, run the following command:
-$ sudo systemctl restart sssd.service
       Is it the case that certificate_verification in sssd is not configured?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3854r375195_fix">Configure the operating system to electronically verify Personal Identity Verification (PIV) credentials.</fixtext></td>
 <td>Multifactor solutions that require devices separate from information systems gaining access include,
 for example, hardware tokens providing time-based or challenge-response authenticators and smart cards.
-By configuring certificate_verification to ocsp_dgst=sha1 sures that certificates for
+Configuring certificate_verification to ocsp_dgst= ensures that certificates for
 multifactor solutions are checked via Online Certificate Status Protocol (OCSP).</td>
 <td>medium</td>
 <td></td>
@@ -34507,8 +34503,9 @@ is not commented out or superseded by later includes:
 <td>Verify the operating system protects the confidentiality and integrity of transmitted information. If it does not, this is a finding.</td>
 <td>To verify that BIND uses the system crypto policy, check out that the BIND config file
 /etc/named.conf contains the include "/etc/crypto-policies/back-ends/bind.config";
-directive: grep 'include "/etc/crypto-policies/back-ends/bind.config";' /etc/named.conf,
-and verify that the directive is at the bottom of the options section of the config file.
+directive:
+$ sudo grep 'include "/etc/crypto-policies/back-ends/bind.config";' /etc/named.conf
+Verify that the directive is at the bottom of the options section of the config file.
       Is it the case that BIND is installed and the BIND config file doesn't contain the
 &lt;pre&gt;include "/etc/crypto-policies/back-ends/bind.config";&lt;/pre&gt; directive?
       </td>
@@ -34624,7 +34621,7 @@ Run the following command to determine the current status of the
 sshd service:
 $ systemctl is-active sshd
 If the service is running, it should return the following: active
-      Is it the case that ?
+      Is it the case that sshd service is disabled?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3873r375309_fix">Configure the operating system to protect the confidentiality and integrity of transmitted information.</fixtext></td>
 <td>The SSH server service, sshd, is commonly needed.
@@ -34713,6 +34710,44 @@ $ sudo yum install openssh-server</td>
 <td></td>
 </tr>
 <tr>
+<td>V-56733</td>
+<td>SRG-OS-000424-GPOS-00188</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).</td>
+<td>CCE-82426-8:Enable the OpenSSH Service</td>
+<td>Encrypting information for transmission protects information from unauthorized disclosure and modification. Cryptographic mechanisms implemented to protect information integrity include, for example, cryptographic hash functions which have common application in digital signatures, checksums, and message authentication codes. 
+
+Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When transmitting data, operating systems need to leverage transmission protection mechanisms such as TLS, SSL VPNs, or IPSec.
+
+Alternative physical protection measures include PDS. PDSs are used to transmit unencrypted classified National Security Information (NSI) through an area of lesser classification or control. Since the classified NSI is unencrypted, the PDS must provide adequate electrical, electromagnetic, and physical safeguards to deter exploitation.</td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The <code>sshd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable sshd.service</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system implements cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS). 
+
+If it does not, this is a finding.</td>
+<td>
+
+Run the following command to determine the current status of the
+sshd service:
+$ systemctl is-active sshd
+If the service is running, it should return the following: active
+      Is it the case that sshd service is disabled?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3874r793158_fix">Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).</fixtext></td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The sshd service can be enabled with the following command:
+$ sudo systemctl enable sshd.service</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>V-56731</td>
 <td>SRG-OS-000425-GPOS-00189</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -34744,6 +34779,42 @@ $ sudo yum install openssh-server</td>
 <td></td>
 </tr>
 <tr>
+<td>V-56731</td>
+<td>SRG-OS-000425-GPOS-00189</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must maintain the confidentiality and integrity of information during preparation for transmission.</td>
+<td>CCE-82426-8:Enable the OpenSSH Service</td>
+<td>Information can be either unintentionally or maliciously disclosed or modified during preparation for transmission, for example, during aggregation, at protocol transformation points, and during packing/unpacking. These unauthorized disclosures or modifications compromise the confidentiality or integrity of the information.
+
+Ensuring the confidentiality of transmitted information requires the operating system to take measures in preparing information for transmission. This can be accomplished via access control and encryption.
+
+Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When transmitting data, operating systems need to support transmission protection mechanisms such as TLS, SSL VPNs, or IPSec.</td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The <code>sshd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable sshd.service</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system maintains the confidentiality and integrity of information during preparation for transmission. If it does not, this is a finding.</td>
+<td>
+
+Run the following command to determine the current status of the
+sshd service:
+$ systemctl is-active sshd
+If the service is running, it should return the following: active
+      Is it the case that sshd service is disabled?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3875r375750_fix">Configure the operating system to maintain the confidentiality and integrity of information during preparation for transmission.</fixtext></td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The sshd service can be enabled with the following command:
+$ sudo systemctl enable sshd.service</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td>V-56729</td>
 <td>SRG-OS-000426-GPOS-00190</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -34768,8 +34839,9 @@ is not commented out or superseded by later includes:
 <td>Verify the operating system maintains the confidentiality and integrity of information during reception. If it does not, this is a finding.</td>
 <td>To verify that BIND uses the system crypto policy, check out that the BIND config file
 /etc/named.conf contains the include "/etc/crypto-policies/back-ends/bind.config";
-directive: grep 'include "/etc/crypto-policies/back-ends/bind.config";' /etc/named.conf,
-and verify that the directive is at the bottom of the options section of the config file.
+directive:
+$ sudo grep 'include "/etc/crypto-policies/back-ends/bind.config";' /etc/named.conf
+Verify that the directive is at the bottom of the options section of the config file.
       Is it the case that BIND is installed and the BIND config file doesn't contain the
 &lt;pre&gt;include "/etc/crypto-policies/back-ends/bind.config";&lt;/pre&gt; directive?
       </td>
@@ -34814,6 +34886,42 @@ $ sudo yum install openssh-server</pre>
 The openssh-server package can be installed with the following command:
 
 $ sudo yum install openssh-server</td>
+<td>medium</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>V-56729</td>
+<td>SRG-OS-000426-GPOS-00190</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must maintain the confidentiality and integrity of information during reception.</td>
+<td>CCE-82426-8:Enable the OpenSSH Service</td>
+<td>Information can be either unintentionally or maliciously disclosed or modified during reception, including, for example, during aggregation, at protocol transformation points, and during packing/unpacking. These unauthorized disclosures or modifications compromise the confidentiality or integrity of the information.
+
+Ensuring the confidentiality of transmitted information requires the operating system to take measures in preparing information for transmission. This can be accomplished via access control and encryption.
+
+Use of this requirement will be limited to situations where the data owner has a strict requirement for ensuring data integrity and confidentiality is maintained at every step of the data transfer and handling process. When receiving data, operating systems need to leverage protection mechanisms such as TLS, SSL VPNs, or IPSec.</td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The <code>sshd</code> service can be enabled with the following command:
+<pre>$ sudo systemctl enable sshd.service</pre>
+</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system maintains the confidentiality and integrity of information during reception. If it does not, this is a finding.</td>
+<td>
+
+Run the following command to determine the current status of the
+sshd service:
+$ systemctl is-active sshd
+If the service is running, it should return the following: active
+      Is it the case that sshd service is disabled?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3876r375375_fix">Configure the operating system to maintain the confidentiality and integrity of information during reception.</fixtext></td>
+<td>The SSH server service, sshd, is commonly needed.
+
+The sshd service can be enabled with the following command:
+$ sudo systemctl enable sshd.service</td>
 <td>medium</td>
 <td></td>
 <td></td>
