@@ -423,7 +423,7 @@ depending on the OS version.","
 $ grep fail_interval /etc/security/faillock.conf
 The output should show unlock_time = <interval-in-seconds> where interval-in-seconds is  or greater.
 
-It can also be 0 for never.
+It can also be 0 or never.
       Is it the case that unlock_time is less than the expected value?
       ",Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.,"This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using pam_faillock.so.
@@ -17206,10 +17206,11 @@ to require use of a special character in passwords.","
                   Applicable - Configurable
                 ","Verify the operating system enforces password complexity by requiring that at least one special character be used. If it does not, this is a finding.","To check how many special characters are required in a password, run the following command:
 $ grep ocredit /etc/security/pwquality.conf
-The ocredit parameter (as a negative number) will indicate how many special characters are required.
+The ocredit parameter (as a negative number) will indicate how many special
+characters are required.
 The DoD and FISMA require at least one special character in a password.
 This would appear as ocredit = -1.
-      Is it the case that ocredit is not found or not equal to or less than the required value?
+      Is it the case that value of ""ocredit"" is a positive number or is commented out?
       ",Configure the operating system to enforce password complexity by requiring that at least one special character be used.,"The pam_pwquality module's ocredit= parameter controls requirements for
 usage of special (or ""other"") characters in a password. When set to a negative number,
 any password will be required to contain that many special characters.
@@ -18481,7 +18482,7 @@ depending on the OS version.","
 $ grep fail_interval /etc/security/faillock.conf
 The output should show unlock_time = <interval-in-seconds> where interval-in-seconds is  or greater.
 
-It can also be 0 for never.
+It can also be 0 or never.
       Is it the case that unlock_time is less than the expected value?
       ",Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.,"This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using pam_faillock.so.

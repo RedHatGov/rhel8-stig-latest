@@ -682,7 +682,7 @@ depending on the OS version.</td>
 $ grep fail_interval /etc/security/faillock.conf
 The output should show unlock_time = &lt;interval-in-seconds&gt; where interval-in-seconds is  or greater.
 
-It can also be 0 for never.
+It can also be 0 or never.
       Is it the case that unlock_time is less than the expected value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3719r557039_fix">Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.</fixtext></td>
@@ -24404,10 +24404,11 @@ to require use of a special character in passwords.</td>
 <td>Verify the operating system enforces password complexity by requiring that at least one special character be used. If it does not, this is a finding.</td>
 <td>To check how many special characters are required in a password, run the following command:
 $ grep ocredit /etc/security/pwquality.conf
-The ocredit parameter (as a negative number) will indicate how many special characters are required.
+The ocredit parameter (as a negative number) will indicate how many special
+characters are required.
 The DoD and FISMA require at least one special character in a password.
 This would appear as ocredit = -1.
-      Is it the case that ocredit is not found or not equal to or less than the required value?
+      Is it the case that value of "ocredit" is a positive number or is commented out?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3801r374916_fix">Configure the operating system to enforce password complexity by requiring that at least one special character be used.</fixtext></td>
 <td>The pam_pwquality module's ocredit= parameter controls requirements for
@@ -26733,7 +26734,7 @@ depending on the OS version.</td>
 $ grep fail_interval /etc/security/faillock.conf
 The output should show unlock_time = &lt;interval-in-seconds&gt; where interval-in-seconds is  or greater.
 
-It can also be 0 for never.
+It can also be 0 or never.
       Is it the case that unlock_time is less than the expected value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3823r375042_fix">Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.</fixtext></td>
