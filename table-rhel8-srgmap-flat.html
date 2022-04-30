@@ -17136,7 +17136,7 @@ $ grep retry /etc/security/pwquality.conf
 
 The retry parameter will indicate how many attempts are permitted.
 The DoD required value is less than or equal to 3.
-This would appear as retry=3, or a lower value.
+This would appear as retry=, or a lower value.
       Is it the case that it is not the required value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3750r557600_fix">Configure the operating system to enforce password complexity by requiring that at least one upper-case character be used.</fixtext></td>
@@ -23211,7 +23211,7 @@ line and is not commented out:
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
 <td>To verify if GnuTLS uses defined DoD-approved TLS Crypto Policy, run:
-$ grep
+$ sudo grep
 '+VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0'
 /etc/crypto-policies/back-ends/gnutls.config and verify that a match exists.
       Is it the case that cryptographic policy for gnutls is not configured or is configured incorrectly?
@@ -26518,7 +26518,7 @@ If both the "b32" and "b64" audit rules for "SGID" files are not defined, this i
 The audit daemon must be restarted for the changes to take effect.
 
 # sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
+      Is it the case that the lines are commented out or do not exist?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3821r375036_fix">Configure the operating system to prevent all software from executing at higher privilege levels than users executing the software.</fixtext></td>
 <td>Verify the system generates an audit record when privileged functions are executed.
@@ -26571,7 +26571,7 @@ If both the "b32" and "b64" audit rules for "SGID" files are not defined, this i
 The audit daemon must be restarted for the changes to take effect.
 
 # sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
+      Is it the case that the lines are commented out or do not exist?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3822r375039_fix">Configure the operating system to audit the execution of privileged functions.</fixtext></td>
 <td>Verify the system generates an audit record when privileged functions are executed.
@@ -26767,61 +26767,6 @@ This requirement enables organizations to extend or limit auditing as necessary 
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3824r375045_fix">Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SV-71499</td>
-<td>SRG-OS-000337-GPOS-00129</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If authorized individuals do not have the ability to modify auditing parameters in response to a changing threat environment, the organization may not be able to effectively respond, and important forensic information may be lost.
-
-This requirement enables organizations to extend or limit auditing as necessary to meet organizational requirements. Auditing that is limited to conserve information system resources may be extended to address certain threat situations. In addition, auditing may be limited to a specific set of events to facilitate audit reduction, analysis, and reporting.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3824r375045_fix">Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27491,61 +27436,6 @@ Audit reduction is a technique used to reduce the volume of audit records in ord
 <td></td>
 </tr>
 <tr>
-<td>V-57253</td>
-<td>SRG-OS-000348-GPOS-00136</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide an audit reduction capability that supports on-demand audit review and analysis.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>The ability to perform on-demand audit review and analysis, including after the audit data has been subjected to audit reduction, greatly facilitates the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
-
-Audit reduction is a technique used to reduce the volume of audit records in order to facilitate a manual review. Audit reduction does not alter original audit records. The report generation capability provided by the application must support on-demand (i.e., customizable, ad hoc, and as-needed) reports.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3829r375060_fix">Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>V-57255</td>
 <td>SRG-OS-000349-GPOS-00137</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -27610,63 +27500,6 @@ $ sudo systemctl enable auditd.service</td>
 <td></td>
 </tr>
 <tr>
-<td>V-57255</td>
-<td>SRG-OS-000349-GPOS-00137</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide an audit reduction capability that supports after-the-fact investigations of security incidents.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If the audit reduction capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
-
-Audit reduction capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.
-
-This requirement is specific to operating systems with audit reduction capabilities.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides an audit reduction capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3830r375063_fix">Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>SV-71517</td>
 <td>SRG-OS-000350-GPOS-00138</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -27683,61 +27516,6 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3831r375066_fix">Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SV-71517</td>
-<td>SRG-OS-000350-GPOS-00138</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide a report generation capability that supports on-demand audit review and analysis.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>The report generation capability must support on-demand review and analysis in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
-
-Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3831r375066_fix">Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27766,61 +27544,6 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
 <td></td>
 </tr>
 <tr>
-<td>V-57259</td>
-<td>SRG-OS-000351-GPOS-00139</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide a report generation capability that supports on-demand reporting requirements.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>The report generation capability must support on-demand reporting in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
-
-Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3832r375069_fix">Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>V-57261</td>
 <td>SRG-OS-000352-GPOS-00140</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -27837,61 +27560,6 @@ The report generation capability must support after-the-fact investigations of s
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3833r375072_fix">Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>V-57261</td>
-<td>SRG-OS-000352-GPOS-00140</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must provide a report generation capability that supports after-the-fact investigations of security incidents.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If the report generation capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
-
-The report generation capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3833r375072_fix">Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27922,63 +27590,6 @@ This requirement is specific to operating systems providing audit reduction capa
 <td></td>
 </tr>
 <tr>
-<td>V-57263</td>
-<td>SRG-OS-000353-GPOS-00141</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must not alter original content or time ordering of audit records when it provides an audit reduction capability.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If the audit reduction capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
-
-Audit reduction is a process that manipulates collected audit information and organizes such information in a summary format that is more meaningful to analysts. Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
-
-This requirement is specific to operating systems providing audit reduction capabilities. The audit reduction capability can be met either natively or through the use of third-party tools.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3834r375075_fix">Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>SV-71525</td>
 <td>SRG-OS-000354-GPOS-00142</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -27997,63 +27608,6 @@ This requirement is specific to operating systems providing report generation ca
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3835r375078_fix">Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SV-71525</td>
-<td>SRG-OS-000354-GPOS-00142</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must not alter original content or time ordering of audit records when it provides a report generation capability.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>If the report generation capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
-
-Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
-
-This requirement is specific to operating systems providing report generation capabilities. The report generation capability can be met either natively or through the use of third-party tools.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3835r375078_fix">Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -28222,61 +27776,6 @@ Time stamps generated by the operating system include date and time. Granularity
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3838r375147_fix">Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.</fixtext></td>
 <td>The audit package should be installed.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SV-71453</td>
-<td>SRG-OS-000358-GPOS-00145</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>Without sufficient granularity of time stamps, it is not possible to adequately determine the chronological order of records.
-
-Time stamps generated by the operating system include date and time. Granularity of time measurements refers to the degree of synchronization between information system clocks and reference clocks.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3838r375147_fix">Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -28646,61 +28145,6 @@ disk.
 
 The auditd service can be enabled with the following command:
 $ sudo systemctl enable auditd.service</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SV-71111</td>
-<td>SRG-OS-000365-GPOS-00152</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must audit the enforcement actions used to restrict access associated with changes to the system.</td>
-<td>CCE-83556-1:Record Events When Privileged Executables Are Run</td>
-<td>Without auditing the enforcement of access restrictions against changes to the application configuration, it will be difficult to identify attempted attacks and an audit trail will not be available for forensic investigation for after-the-fact actions.
-
-Enforcement actions are the methods or mechanisms used to prevent unauthorized changes to configuration settings. Enforcement action methods may be as simple as denying access to a file based on the application of file permissions (access restriction). Audit items may consist of lists of actions blocked by access restrictions or changes identified after the fact.</td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-<pre># grep -iw execve <code>/etc/audit/audit.rules</code></pre>
-
-
-<pre>-a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid</pre>
-<pre>-a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-<pre>-a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid</pre>
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system audits the enforcement actions used to restrict access associated with changes to the system. If it does not, this is a finding.</td>
-<td>Add or update the following rules in "/etc/audit/rules.d/audit.rules":
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-The audit daemon must be restarted for the changes to take effect.
-
-# sudo systemctl restart auditd.service
-      Is it the case that it is not the case?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3844r375165_fix">Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.</fixtext></td>
-<td>Verify the system generates an audit record when privileged functions are executed.
-# grep -iw execve /etc/audit/audit.rules
-
-
--a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
--a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
--a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-
-
-If both the "b32" and "b64" audit rules for "SUID" files are not defined, this is a finding.
-If both the "b32" and "b64" audit rules for "SGID" files are not defined, this is a finding.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -34548,7 +33992,7 @@ line and is not commented out:
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects the confidentiality and integrity of transmitted information. If it does not, this is a finding.</td>
 <td>To verify if GnuTLS uses defined DoD-approved TLS Crypto Policy, run:
-$ grep
+$ sudo grep
 '+VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0'
 /etc/crypto-policies/back-ends/gnutls.config and verify that a match exists.
       Is it the case that cryptographic policy for gnutls is not configured or is configured incorrectly?
@@ -48600,44 +48044,6 @@ dictcheck is set to 1 passwords will be checked for dictionary words.</td>
 <td></td>
 </tr>
 <tr>
-<td>SV-70857</td>
-<td>SRG-OS-000480-GPOS-00225</td>
-<td><i>TBD - Assigned by DISA after STIG release</i></td>
-<td>The operating system must prevent the use of dictionary words for passwords.</td>
-<td>CCE-80664-6:Ensure PAM Enforces Password Requirements - Authentication Retry Prompts Permitted Per-Session</td>
-<td>If the operating system allows the user to select passwords based on dictionary words, then this increases the chances of password compromise by increasing the opportunity for successful guesses and brute-force attacks.</td>
-<td>To configure the number of retry prompts that are permitted per-session:
-
-Edit the <code>/etc/security/pwquality.conf</code> to include
-
-<code>retry=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_retry"></xccdf-1.1:sub></code>, or a lower value if site
-policy is more restrictive. The DoD requirement is a maximum of 3 prompts
-per session.</td>
-<td>Applicable - Configurable</td>
-<td>Verify the operating system prevents the use of dictionary words for passwords. If it does not, this is a finding.</td>
-<td>To check how many retry attempts are permitted on a per-session basis, run the following command:
-
-$ grep retry /etc/security/pwquality.conf
-
-The retry parameter will indicate how many attempts are permitted.
-The DoD required value is less than or equal to 3.
-This would appear as retry=3, or a lower value.
-      Is it the case that it is not the required value?
-      </td>
-<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3903r375726_fix">Configure the operating system to prevent the use of dictionary words for passwords.</fixtext></td>
-<td>To configure the number of retry prompts that are permitted per-session:
-
-Edit the /etc/security/pwquality.conf to include
-
-retry=, or a lower value if site
-policy is more restrictive. The DoD requirement is a maximum of 3 prompts
-per session.</td>
-<td>medium</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
 <td>SV-70855</td>
 <td>SRG-OS-000480-GPOS-00226</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
@@ -49971,12 +49377,10 @@ as follows:
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/bashrc file by
 running the following command:
-# grep "umask" /etc/bashrc
+$ sudo grep "umask" /etc/bashrc
 All output must show the value of umask set as shown below:
-# grep "umask" /etc/bashrc
 umask 
-umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>To ensure the default umask for users of the Bash shell is set properly,
@@ -50005,11 +49409,10 @@ add or correct the <code>umask</code> setting in <code>/etc/csh.cshrc</code> to 
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/csh.cshrc file by
 running the following command:
-# grep "umask" /etc/csh.cshrc
+$ sudo grep "umask" /etc/csh.cshrc
 All output must show the value of umask set as shown in the below:
-# grep "umask" /etc/csh.cshrc
 umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>To ensure the default umask for users of the C shell is set properly,
@@ -50037,11 +49440,10 @@ add or correct the <code>umask</code> setting in <code>/etc/profile</code> to re
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/profile file by
 running the following command:
-# grep "umask" /etc/profile
+$ sudo grep "umask" /etc/profile
 All output must show the value of umask set as shown in the below:
-# grep "umask" /etc/profile
 umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>To ensure the default umask controlled by /etc/profile is set properly,
@@ -53466,12 +52868,10 @@ as follows:
 <td>Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/bashrc file by
 running the following command:
-# grep "umask" /etc/bashrc
+$ sudo grep "umask" /etc/bashrc
 All output must show the value of umask set as shown below:
-# grep "umask" /etc/bashrc
 umask 
-umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3906r375735_fix">Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</fixtext></td>
 <td>To ensure the default umask for users of the Bash shell is set properly,
@@ -53498,11 +52898,10 @@ add or correct the <code>umask</code> setting in <code>/etc/csh.cshrc</code> to 
 <td>Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/csh.cshrc file by
 running the following command:
-# grep "umask" /etc/csh.cshrc
+$ sudo grep "umask" /etc/csh.cshrc
 All output must show the value of umask set as shown in the below:
-# grep "umask" /etc/csh.cshrc
 umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3906r375735_fix">Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</fixtext></td>
 <td>To ensure the default umask for users of the C shell is set properly,
@@ -53528,11 +52927,10 @@ add or correct the <code>UMASK</code> setting in <code>/etc/login.defs</code> to
 <td>Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.</td>
 <td>Verify the UMASK setting is configured correctly in the /etc/login.defs file by
 running the following command:
-# grep -i "UMASK" /etc/login.defs
-All output must show the value of umask set as shown in the below:
-# grep -i "UMASK" /etc/login.defs
-umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+$ sudo grep "UMASK" /etc/login.defs
+All output must show the value of UMASK set as shown in the below:
+UMASK 
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3906r375735_fix">Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</fixtext></td>
 <td>To ensure the default umask controlled by /etc/login.defs is set properly,
@@ -53558,11 +52956,10 @@ add or correct the <code>umask</code> setting in <code>/etc/profile</code> to re
 <td>Verify the operating system defines default permissions for all authenticated users in such a way that the user can only read and modify their own files. If it does not, this is a finding.</td>
 <td>Verify the umask setting is configured correctly in the /etc/profile file by
 running the following command:
-# grep "umask" /etc/profile
+$ sudo grep "umask" /etc/profile
 All output must show the value of umask set as shown in the below:
-# grep "umask" /etc/profile
 umask 
-      Is it the case that the above command returns no output, or if the umask is configured incorrectly?
+      Is it the case that the above command returns no output, or the umask is configured incorrectly?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3906r375735_fix">Configure the operating system to define default permissions for all authenticated users in such a way that the user can only read and modify their own files.</fixtext></td>
 <td>To ensure the default umask controlled by /etc/profile is set properly,
