@@ -32446,6 +32446,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32465,6 +32466,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32484,6 +32486,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32505,6 +32508,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32526,6 +32530,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32547,6 +32552,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
@@ -32568,6 +32574,7 @@
       tags:
         - CCE-84059-5
         - DISA-STIG-RHEL-08-030740
+        - NIST-800-53-AU-12(1)
         - NIST-800-53-AU-8(1)(b)
         - NIST-800-53-CM-6(a)
         - chronyd_or_ntpd_set_maxpoll
