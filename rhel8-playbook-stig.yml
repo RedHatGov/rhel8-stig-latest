@@ -5,7 +5,7 @@
 # Profile Title:  DISA STIG for Red Hat Enterprise Linux 8
 # Profile Description:
 # This profile contains configuration checks that align to the
-# DISA STIG for Red Hat Enterprise Linux 8 V1R5.
+# DISA STIG for Red Hat Enterprise Linux 8 V1R6.
 #
 # In addition to being applicable to Red Hat Enterprise Linux 8, DISA recognizes this
 # configuration baseline as applicable to the operating system tier of
@@ -51,6 +51,7 @@
       sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256
       sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256
       inactivity_timeout_value: !!str 900
+      var_screensaver_lock_delay: !!str 5
       var_sudo_timestamp_timeout: !!str 0
       login_banner_text: !!str ^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Government[\s\n]+\(USG\)[\s\n]+Information[\s\n]+System[\s\n]+\(IS\)[\s\n]+that[\s\n]+is[\s\n]+provided[\s\n]+for[\s\n]+USG\-authorized[\s\n]+use[\s\n]+only\.[\s\n]+By[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+\(which[\s\n]+includes[\s\n]+any[\s\n]+device[\s\n]+attached[\s\n]+to[\s\n]+this[\s\n]+IS\)\,[\s\n]+you[\s\n]+consent[\s\n]+to[\s\n]+the[\s\n]+following[\s\n]+conditions\:(?:[\n]+|(?:\\n)+)\-The[\s\n]+USG[\s\n]+routinely[\s\n]+intercepts[\s\n]+and[\s\n]+monitors[\s\n]+communications[\s\n]+on[\s\n]+this[\s\n]+IS[\s\n]+for[\s\n]+purposes[\s\n]+including\,[\s\n]+but[\s\n]+not[\s\n]+limited[\s\n]+to\,[\s\n]+penetration[\s\n]+testing\,[\s\n]+COMSEC[\s\n]+monitoring\,[\s\n]+network[\s\n]+operations[\s\n]+and[\s\n]+defense\,[\s\n]+personnel[\s\n]+misconduct[\s\n]+\(PM\)\,[\s\n]+law[\s\n]+enforcement[\s\n]+\(LE\)\,[\s\n]+and[\s\n]+counterintelligence[\s\n]+\(CI\)[\s\n]+investigations\.(?:[\n]+|(?:\\n)+)\-At[\s\n]+any[\s\n]+time\,[\s\n]+the[\s\n]+USG[\s\n]+may[\s\n]+inspect[\s\n]+and[\s\n]+seize[\s\n]+data[\s\n]+stored[\s\n]+on[\s\n]+this[\s\n]+IS\.(?:[\n]+|(?:\\n)+)\-Communications[\s\n]+using\,[\s\n]+or[\s\n]+data[\s\n]+stored[\s\n]+on\,[\s\n]+this[\s\n]+IS[\s\n]+are[\s\n]+not[\s\n]+private\,[\s\n]+are[\s\n]+subject[\s\n]+to[\s\n]+routine[\s\n]+monitoring\,[\s\n]+interception\,[\s\n]+and[\s\n]+search\,[\s\n]+and[\s\n]+may[\s\n]+be[\s\n]+disclosed[\s\n]+or[\s\n]+used[\s\n]+for[\s\n]+any[\s\n]+USG\-authorized[\s\n]+purpose\.(?:[\n]+|(?:\\n)+)\-This[\s\n]+IS[\s\n]+includes[\s\n]+security[\s\n]+measures[\s\n]+\(e\.g\.\,[\s\n]+authentication[\s\n]+and[\s\n]+access[\s\n]+controls\)[\s\n]+to[\s\n]+protect[\s\n]+USG[\s\n]+interests\-\-not[\s\n]+for[\s\n]+your[\s\n]+personal[\s\n]+benefit[\s\n]+or[\s\n]+privacy\.(?:[\n]+|(?:\\n)+)\-Notwithstanding[\s\n]+the[\s\n]+above\,[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+does[\s\n]+not[\s\n]+constitute[\s\n]+consent[\s\n]+to[\s\n]+PM\,[\s\n]+LE[\s\n]+or[\s\n]+CI[\s\n]+investigative[\s\n]+searching[\s\n]+or[\s\n]+monitoring[\s\n]+of[\s\n]+the[\s\n]+content[\s\n]+of[\s\n]+privileged[\s\n]+communications\,[\s\n]+or[\s\n]+work[\s\n]+product\,[\s\n]+related[\s\n]+to[\s\n]+personal[\s\n]+representation[\s\n]+or[\s\n]+services[\s\n]+by[\s\n]+attorneys\,[\s\n]+psychotherapists\,[\s\n]+or[\s\n]+clergy\,[\s\n]+and[\s\n]+their[\s\n]+assistants\.[\s\n]+Such[\s\n]+communications[\s\n]+and[\s\n]+work[\s\n]+product[\s\n]+are[\s\n]+private[\s\n]+and[\s\n]+confidential\.[\s\n]+See[\s\n]+User[\s\n]+Agreement[\s\n]+for[\s\n]+details\.|I've[\s\n]+read[\s\n]+\&[\s\n]+consent[\s\n]+to[\s\n]+terms[\s\n]+in[\s\n]+IS[\s\n]+user[\s\n]+agreem't\.)$
       login_banner_text: !!str ^(You[\s\n]+are[\s\n]+accessing[\s\n]+a[\s\n]+U\.S\.[\s\n]+Government[\s\n]+\(USG\)[\s\n]+Information[\s\n]+System[\s\n]+\(IS\)[\s\n]+that[\s\n]+is[\s\n]+provided[\s\n]+for[\s\n]+USG\-authorized[\s\n]+use[\s\n]+only\.[\s\n]+By[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+\(which[\s\n]+includes[\s\n]+any[\s\n]+device[\s\n]+attached[\s\n]+to[\s\n]+this[\s\n]+IS\)\,[\s\n]+you[\s\n]+consent[\s\n]+to[\s\n]+the[\s\n]+following[\s\n]+conditions\:(?:[\n]+|(?:\\n)+)\-The[\s\n]+USG[\s\n]+routinely[\s\n]+intercepts[\s\n]+and[\s\n]+monitors[\s\n]+communications[\s\n]+on[\s\n]+this[\s\n]+IS[\s\n]+for[\s\n]+purposes[\s\n]+including\,[\s\n]+but[\s\n]+not[\s\n]+limited[\s\n]+to\,[\s\n]+penetration[\s\n]+testing\,[\s\n]+COMSEC[\s\n]+monitoring\,[\s\n]+network[\s\n]+operations[\s\n]+and[\s\n]+defense\,[\s\n]+personnel[\s\n]+misconduct[\s\n]+\(PM\)\,[\s\n]+law[\s\n]+enforcement[\s\n]+\(LE\)\,[\s\n]+and[\s\n]+counterintelligence[\s\n]+\(CI\)[\s\n]+investigations\.(?:[\n]+|(?:\\n)+)\-At[\s\n]+any[\s\n]+time\,[\s\n]+the[\s\n]+USG[\s\n]+may[\s\n]+inspect[\s\n]+and[\s\n]+seize[\s\n]+data[\s\n]+stored[\s\n]+on[\s\n]+this[\s\n]+IS\.(?:[\n]+|(?:\\n)+)\-Communications[\s\n]+using\,[\s\n]+or[\s\n]+data[\s\n]+stored[\s\n]+on\,[\s\n]+this[\s\n]+IS[\s\n]+are[\s\n]+not[\s\n]+private\,[\s\n]+are[\s\n]+subject[\s\n]+to[\s\n]+routine[\s\n]+monitoring\,[\s\n]+interception\,[\s\n]+and[\s\n]+search\,[\s\n]+and[\s\n]+may[\s\n]+be[\s\n]+disclosed[\s\n]+or[\s\n]+used[\s\n]+for[\s\n]+any[\s\n]+USG\-authorized[\s\n]+purpose\.(?:[\n]+|(?:\\n)+)\-This[\s\n]+IS[\s\n]+includes[\s\n]+security[\s\n]+measures[\s\n]+\(e\.g\.\,[\s\n]+authentication[\s\n]+and[\s\n]+access[\s\n]+controls\)[\s\n]+to[\s\n]+protect[\s\n]+USG[\s\n]+interests\-\-not[\s\n]+for[\s\n]+your[\s\n]+personal[\s\n]+benefit[\s\n]+or[\s\n]+privacy\.(?:[\n]+|(?:\\n)+)\-Notwithstanding[\s\n]+the[\s\n]+above\,[\s\n]+using[\s\n]+this[\s\n]+IS[\s\n]+does[\s\n]+not[\s\n]+constitute[\s\n]+consent[\s\n]+to[\s\n]+PM\,[\s\n]+LE[\s\n]+or[\s\n]+CI[\s\n]+investigative[\s\n]+searching[\s\n]+or[\s\n]+monitoring[\s\n]+of[\s\n]+the[\s\n]+content[\s\n]+of[\s\n]+privileged[\s\n]+communications\,[\s\n]+or[\s\n]+work[\s\n]+product\,[\s\n]+related[\s\n]+to[\s\n]+personal[\s\n]+representation[\s\n]+or[\s\n]+services[\s\n]+by[\s\n]+attorneys\,[\s\n]+psychotherapists\,[\s\n]+or[\s\n]+clergy\,[\s\n]+and[\s\n]+their[\s\n]+assistants\.[\s\n]+Such[\s\n]+communications[\s\n]+and[\s\n]+work[\s\n]+product[\s\n]+are[\s\n]+private[\s\n]+and[\s\n]+confidential\.[\s\n]+See[\s\n]+User[\s\n]+Agreement[\s\n]+for[\s\n]+details\.|I've[\s\n]+read[\s\n]+\&[\s\n]+consent[\s\n]+to[\s\n]+terms[\s\n]+in[\s\n]+IS[\s\n]+user[\s\n]+agreem't\.)$
@@ -736,6 +737,7 @@
       tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-3(6)
         - NIST-800-53-CM-6(a)
         - NIST-800-53-IA-7
         - NIST-800-53-SC-12
@@ -757,6 +759,7 @@
       tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-3(6)
         - NIST-800-53-CM-6(a)
         - NIST-800-53-IA-7
         - NIST-800-53-SC-12
@@ -780,6 +783,7 @@
       tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-3(6)
         - NIST-800-53-CM-6(a)
         - NIST-800-53-IA-7
         - NIST-800-53-SC-12
@@ -799,6 +803,7 @@
       tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-3(6)
         - NIST-800-53-CM-6(a)
         - NIST-800-53-IA-7
         - NIST-800-53-SC-12
@@ -1551,30 +1556,6 @@
         - no_reboot_needed
         - unknown_strategy
 
-    - name: Prevent user modification of GNOME idle-delay
-      lineinfile:
-        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
-        regexp: ^/org/gnome/desktop/session/idle-delay$
-        line: /org/gnome/desktop/session/idle-delay
-        create: true
-      when:
-        - '"gdm" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-80775-0
-        - CJIS-5.5.5
-        - DISA-STIG-RHEL-08-020060
-        - NIST-800-171-3.1.10
-        - NIST-800-53-AC-11(a)
-        - NIST-800-53-CM-6(a)
-        - PCI-DSS-Req-8.1.8
-        - dconf_gnome_screensaver_idle_delay
-        - low_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-        - unknown_strategy
-
     - name: Dconf Update
       command: dconf update
       when:
@@ -1617,32 +1598,9 @@
         dest: /etc/dconf/db/local.d/00-security-settings
         section: org/gnome/desktop/screensaver
         option: lock-delay
-        value: uint32 5
+        value: uint32 {{ var_screensaver_lock_delay }}
         create: true
         no_extra_spaces: true
-      when:
-        - '"gdm" in ansible_facts.packages'
-        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-        - CCE-80776-8
-        - DISA-STIG-RHEL-08-020031
-        - NIST-800-171-3.1.10
-        - NIST-800-53-AC-11(a)
-        - NIST-800-53-CM-6(a)
-        - PCI-DSS-Req-8.1.8
-        - dconf_gnome_screensaver_lock_delay
-        - low_complexity
-        - medium_disruption
-        - medium_severity
-        - no_reboot_needed
-        - unknown_strategy
-
-    - name: Prevent user modification of GNOME lock-delay
-      lineinfile:
-        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
-        regexp: ^/org/gnome/desktop/screensaver/lock-delay$
-        line: /org/gnome/desktop/screensaver/lock-delay
-        create: true
       when:
         - '"gdm" in ansible_facts.packages'
         - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -1818,6 +1776,112 @@
         - NIST-800-53-CM-6(a)
         - PCI-DSS-Req-8.1.8
         - dconf_gnome_screensaver_lock_enabled
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-80780-0
+        - DISA-STIG-RHEL-08-020080
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_screensaver_user_locks
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Prevent user modification of GNOME lock-delay
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/screensaver/lock-delay$
+        line: /org/gnome/desktop/screensaver/lock-delay
+        create: true
+      when:
+        - '"gdm" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80780-0
+        - DISA-STIG-RHEL-08-020080
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_screensaver_user_locks
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Dconf Update
+      command: dconf update
+      when:
+        - '"gdm" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80780-0
+        - DISA-STIG-RHEL-08-020080
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_screensaver_user_locks
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+        - CCE-80781-8
+        - DISA-STIG-RHEL-08-020081
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_session_idle_user_locks
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Prevent user modification of GNOME Session idle-delay
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/session/idle-delay$
+        line: /org/gnome/desktop/session/idle-delay
+        create: true
+      when:
+        - '"gdm" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80781-8
+        - DISA-STIG-RHEL-08-020081
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_session_idle_user_locks
+        - low_complexity
+        - medium_disruption
+        - medium_severity
+        - no_reboot_needed
+        - unknown_strategy
+
+    - name: Dconf Update
+      command: dconf update
+      when:
+        - '"gdm" in ansible_facts.packages'
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-80781-8
+        - DISA-STIG-RHEL-08-020081
+        - NIST-800-171-3.1.10
+        - NIST-800-53-CM-6(a)
+        - dconf_gnome_session_idle_user_locks
         - low_complexity
         - medium_disruption
         - medium_severity
@@ -32440,6 +32504,87 @@
         - mount_option_nosuid_remote_filesystems
         - no_reboot_needed
 
+    - name: Disable chrony daemon from acting as server
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/chrony.conf
+            create: false
+            regexp: ^\s*port\s+
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/chrony.conf
+          lineinfile:
+            path: /etc/chrony.conf
+            create: false
+            regexp: ^\s*port\s+
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/chrony.conf
+          lineinfile:
+            path: /etc/chrony.conf
+            create: true
+            regexp: ^\s*port\s+
+            line: port 0
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82988-7
+        - DISA-STIG-RHEL-08-030741
+        - NIST-800-53-AU-12(1)
+        - NIST-800-53-AU-8(1)
+        - chronyd_client_only
+        - low_complexity
+        - low_disruption
+        - low_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Disable network management of chrony daemon
+      block:
+
+        - name: Check for duplicate values
+          lineinfile:
+            path: /etc/chrony.conf
+            create: false
+            regexp: ^\s*cmdport\s+
+            state: absent
+          check_mode: true
+          changed_when: false
+          register: dupes
+
+        - name: Deduplicate values from /etc/chrony.conf
+          lineinfile:
+            path: /etc/chrony.conf
+            create: false
+            regexp: ^\s*cmdport\s+
+            state: absent
+          when: dupes.found is defined and dupes.found > 1
+
+        - name: Insert correct line to /etc/chrony.conf
+          lineinfile:
+            path: /etc/chrony.conf
+            create: true
+            regexp: ^\s*cmdport\s+
+            line: cmdport 0
+            state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82840-0
+        - DISA-STIG-RHEL-08-030742
+        - NIST-800-53-CM-7(1)
+        - chronyd_no_chronyc_network
+        - low_complexity
+        - low_disruption
+        - low_severity
+        - no_reboot_needed
+        - restrict_strategy
+
     - name: Gather the package facts
       package_facts:
         manager: auto
@@ -33897,6 +34042,7 @@
         dest: /etc/systemd/system/default.target
         state: link
         force: true
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
         - CCE-83380-6
         - DISA-STIG-RHEL-08-040321

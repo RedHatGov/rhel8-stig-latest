@@ -838,7 +838,6 @@ If it does not, this is a finding.","To determine how the SSH daemon's Banner op
 
 $ sudo grep -i Banner /etc/ssh/sshd_config
 
-
 If a line indicating /etc/issue is returned, then the required value is set.
 
       Is it the case that the required value is not set?
@@ -962,7 +961,7 @@ After the settings have been set, run dconf update.","
 
 $ gsettings get org.gnome.desktop.screensaver lock-enabled
 If properly configured, the output should be true.
-To ensure that users cannot change how long until the the screensaver locks, run the following:
+To ensure that users cannot change how long until the screensaver locks, run the following:
 $ grep lock-enabled /etc/dconf/db/local.d/locks/*
 If properly configured, the output for lock-enabled should be /org/gnome/desktop/screensaver/lock-enabled
       Is it the case that screensaver locking is not enabled and/or has not been set or configured correctly?
@@ -1071,12 +1070,7 @@ and locked in /etc/dconf/db/local.d/locks directory to prevent user modification
 For example, to configure the system for a 15 minute delay, add the following to
 /etc/dconf/db/local.d/00-security-settings:
 [org/gnome/desktop/session]
-idle-delay=uint32 900
-Once the setting has been added, add a lock to
-/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
-For example:
-/org/gnome/desktop/session/idle-delay
-After the settings have been set, run dconf update.","
+idle-delay=uint32 900","
                   Applicable - Configurable
                 ","Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.","To check the current idle time-out value, run the following command:
 $ gsettings get org.gnome.desktop.session idle-delay
@@ -1084,7 +1078,7 @@ If properly configured, the output should be 'uint32 '.
 To ensure that users cannot change the screensaver inactivity timeout setting, run the following:
 $ grep idle-delay /etc/dconf/db/local.d/locks/*
 If properly configured, the output should be /org/gnome/desktop/session/idle-delay
-      Is it the case that idle-delay is not equal to or less than the expected value?
+      Is it the case that idle-delay is set to 0 or a value greater than <sub idref=""inactivity_timeout_value"" />?
       ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"The idle time-out value for inactivity in the GNOME3 desktop is configured via the idle-delay
 setting must be set under an appropriate configuration file(s) in the /etc/dconf/db/local.d directory
 and locked in /etc/dconf/db/local.d/locks directory to prevent user modification.
@@ -1092,12 +1086,7 @@ and locked in /etc/dconf/db/local.d/locks directory to prevent user modification
 For example, to configure the system for a 15 minute delay, add the following to
 /etc/dconf/db/local.d/00-security-settings:
 [org/gnome/desktop/session]
-idle-delay=uint32 900
-Once the setting has been added, add a lock to
-/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
-For example:
-/org/gnome/desktop/session/idle-delay
-After the settings have been set, run dconf update.",,,,
+idle-delay=uint32 900",,,,
 V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-80776-8:Set GNOME3 Screensaver Lock Delay After Activation Period,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
 
 The session lock is implemented at the point where session activity can be determined and/or controlled.","To activate the locking delay of the screensaver in the GNOME3 desktop when
@@ -1106,30 +1095,58 @@ the screensaver is activated, add or set lock-delay to uint32  in
 [org/gnome/desktop/screensaver]
 lock-delay=uint32 
 
-Once the setting has been added, add a lock to
-/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
-For example:
-/org/gnome/desktop/screensaver/lock-delay
 After the settings have been set, run dconf update.","
                   Applicable - Configurable
                 ","Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.","To check that the screen locks immediately when activated, run the following command:
 $ gsettings get org.gnome.desktop.screensaver lock-delay
 If properly configured, the output should be 'uint32 '.
-
-To ensure that users cannot change how long until the the screensaver locks, run the following:
-$ grep lock-delay /etc/dconf/db/local.d/locks/*
-If properly configured, the output for lock-delay should be /org/gnome/desktop/screensaver/lock-delay
-      Is it the case that the screensaver lock delay is missing, or is set to a value greater than 5?
+      Is it the case that the screensaver lock delay is missing, or is set to a value greater than <sub idref=""var_screensaver_lock_delay"" />?
       ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"To activate the locking delay of the screensaver in the GNOME3 desktop when
 the screensaver is activated, add or set lock-delay to uint32  in
 /etc/dconf/db/local.d/00-security-settings. For example:
 [org/gnome/desktop/screensaver]
 lock-delay=uint32 
 
-Once the setting has been added, add a lock to
-/etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+After the settings have been set, run dconf update.",,,,
+V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-80780-0:Ensure Users Cannot Change GNOME3 Screensaver Settings,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+
+The session lock is implemented at the point where session activity can be determined and/or controlled.","If not already configured, ensure that users cannot change GNOME3 screensaver lock settings
+by adding /org/gnome/desktop/screensaver/lock-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
 For example:
 /org/gnome/desktop/screensaver/lock-delay
+After the settings have been set, run dconf update.","
+                  Applicable - Configurable
+                ","Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.","To ensure that users cannot change session idle and lock settings, run the following:
+$ grep 'lock-delay' /etc/dconf/db/local.d/locks/*
+If properly configured, the output should return:
+/org/gnome/desktop/screensaver/lock-delay
+      Is it the case that GNOME3 session settings are not locked or configured properly?
+      ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"If not already configured, ensure that users cannot change GNOME3 screensaver lock settings
+by adding /org/gnome/desktop/screensaver/lock-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/screensaver/lock-delay
+After the settings have been set, run dconf update.",,,,
+V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-80781-8:Ensure Users Cannot Change GNOME3 Session Idle Settings,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
+
+The session lock is implemented at the point where session activity can be determined and/or controlled.","If not already configured, ensure that users cannot change GNOME3 session idle settings
+by adding /org/gnome/desktop/session/idle-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/session/idle-delay
+After the settings have been set, run dconf update.","
+                  Applicable - Configurable
+                ","Verify the operating system initiates a session lock after a 15-minute period of inactivity for all connection types. If it does not, this is a finding.","To ensure that users cannot change session idle and lock settings, run the following:
+$ grep 'idle-delay' /etc/dconf/db/local.d/locks/*
+If properly configured, the output should return:
+/org/gnome/desktop/session/idle-delay
+      Is it the case that idle-delay is not locked?
+      ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"If not already configured, ensure that users cannot change GNOME3 session idle settings
+by adding /org/gnome/desktop/session/idle-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/session/idle-delay
 After the settings have been set, run dconf update.",,,,
 V-56633,SRG-OS-000029-GPOS-00010,TBD - Assigned by DISA after STIG release,The operating system must initiate a session lock after a 15-minute period of inactivity for all connection types.,CCE-82199-1:Configure tmux to lock session after inactivity,"A session time-out lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence. Rather than relying on the user to manually lock their operating system session prior to vacating the vicinity, operating systems need to be able to identify when a user's session has idled and take action to initiate the session lock.
 
@@ -1143,7 +1160,7 @@ run the following command:
 $ grep lock-after-time /etc/tmux.conf
 The output should return the following:
 set -g lock-after-time 900
-      Is it the case that lock-after-time is not set or set to zero?
+      Is it the case that lock-after-time is not set to 900 or set to zero?
       ",Configure the operating system to initiate a session lock after a 15-minute period of inactivity for all connection types.,"To enable console screen locking in tmux terminal multiplexer
 after a period of inactivity,
 the lock-after-time option has to be set to nonzero value in
@@ -1203,7 +1220,7 @@ After the settings have been set, run dconf update.","
 
 $ gsettings get org.gnome.desktop.screensaver lock-enabled
 If properly configured, the output should be true.
-To ensure that users cannot change how long until the the screensaver locks, run the following:
+To ensure that users cannot change how long until the screensaver locks, run the following:
 $ grep lock-enabled /etc/dconf/db/local.d/locks/*
 If properly configured, the output for lock-enabled should be /org/gnome/desktop/screensaver/lock-enabled
       Is it the case that screensaver locking is not enabled and/or has not been set or configured correctly?
@@ -1240,6 +1257,56 @@ Instruct users to begin new terminal sessions with the following command:
 $ tmux
 The console can now be locked with the following key combination:
 ctrl+b :lock-session",,,,
+SV-70897,SRG-OS-000031-GPOS-00012,TBD - Assigned by DISA after STIG release,"The operating system must conceal, via the session lock, information previously visible on the display with a publicly viewable image.",CCE-80775-0:Set GNOME3 Screensaver Inactivity Timeout,"A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence.
+
+The session lock is implemented at the point where session activity can be determined. The operating system session lock event must include an obfuscation of the display screen so as to prevent other users from reading what was previously displayed.
+
+Publicly viewable images can include static or dynamic images, for example, patterns used with screen savers, photographic images, solid colors, a clock, a battery life indicator, or a blank screen, with the additional caveat that none of the images convey sensitive information.","The idle time-out value for inactivity in the GNOME3 desktop is configured via the idle-delay
+setting must be set under an appropriate configuration file(s) in the /etc/dconf/db/local.d directory
+and locked in /etc/dconf/db/local.d/locks directory to prevent user modification.
+
+For example, to configure the system for a 15 minute delay, add the following to
+/etc/dconf/db/local.d/00-security-settings:
+[org/gnome/desktop/session]
+idle-delay=uint32 900","
+                  Applicable - Configurable
+                ","Verify the operating system conceals, via the session lock, information previously visible on the display with a publicly viewable image. If it does not, this is a finding.","To check the current idle time-out value, run the following command:
+$ gsettings get org.gnome.desktop.session idle-delay
+If properly configured, the output should be 'uint32 '.
+To ensure that users cannot change the screensaver inactivity timeout setting, run the following:
+$ grep idle-delay /etc/dconf/db/local.d/locks/*
+If properly configured, the output should be /org/gnome/desktop/session/idle-delay
+      Is it the case that idle-delay is set to 0 or a value greater than <sub idref=""inactivity_timeout_value"" />?
+      ","Configure the operating system to conceal, via the session lock, information previously visible on the display with a publicly viewable image.","The idle time-out value for inactivity in the GNOME3 desktop is configured via the idle-delay
+setting must be set under an appropriate configuration file(s) in the /etc/dconf/db/local.d directory
+and locked in /etc/dconf/db/local.d/locks directory to prevent user modification.
+
+For example, to configure the system for a 15 minute delay, add the following to
+/etc/dconf/db/local.d/00-security-settings:
+[org/gnome/desktop/session]
+idle-delay=uint32 900",,,,
+SV-70897,SRG-OS-000031-GPOS-00012,TBD - Assigned by DISA after STIG release,"The operating system must conceal, via the session lock, information previously visible on the display with a publicly viewable image.",CCE-80781-8:Ensure Users Cannot Change GNOME3 Session Idle Settings,"A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence.
+
+The session lock is implemented at the point where session activity can be determined. The operating system session lock event must include an obfuscation of the display screen so as to prevent other users from reading what was previously displayed.
+
+Publicly viewable images can include static or dynamic images, for example, patterns used with screen savers, photographic images, solid colors, a clock, a battery life indicator, or a blank screen, with the additional caveat that none of the images convey sensitive information.","If not already configured, ensure that users cannot change GNOME3 session idle settings
+by adding /org/gnome/desktop/session/idle-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/session/idle-delay
+After the settings have been set, run dconf update.","
+                  Applicable - Configurable
+                ","Verify the operating system conceals, via the session lock, information previously visible on the display with a publicly viewable image. If it does not, this is a finding.","To ensure that users cannot change session idle and lock settings, run the following:
+$ grep 'idle-delay' /etc/dconf/db/local.d/locks/*
+If properly configured, the output should return:
+/org/gnome/desktop/session/idle-delay
+      Is it the case that idle-delay is not locked?
+      ","Configure the operating system to conceal, via the session lock, information previously visible on the display with a publicly viewable image.","If not already configured, ensure that users cannot change GNOME3 session idle settings
+by adding /org/gnome/desktop/session/idle-delay
+to /etc/dconf/db/local.d/locks/00-security-settings-lock to prevent user modification.
+For example:
+/org/gnome/desktop/session/idle-delay
+After the settings have been set, run dconf update.",,,,
 SV-70897,SRG-OS-000031-GPOS-00012,TBD - Assigned by DISA after STIG release,"The operating system must conceal, via the session lock, information previously visible on the display with a publicly viewable image.",CCE-82266-8:Support session locking with tmux,"A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence.
 
 The session lock is implemented at the point where session activity can be determined. The operating system session lock event must include an obfuscation of the display screen so as to prevent other users from reading what was previously displayed.
@@ -1261,6 +1328,25 @@ fi
       ","Configure the operating system to conceal, via the session lock, information previously visible on the display with a publicly viewable image.","The tmux terminal multiplexer is used to implement
 automatic session locking. It should be started from
 /etc/bashrc or drop-in files within /etc/profile.d/.",,,,
+SV-70897,SRG-OS-000031-GPOS-00012,TBD - Assigned by DISA after STIG release,"The operating system must conceal, via the session lock, information previously visible on the display with a publicly viewable image.",CCE-82199-1:Configure tmux to lock session after inactivity,"A session lock is a temporary action taken when a user stops work and moves away from the immediate physical vicinity of the information system but does not log out because of the temporary nature of the absence.
+
+The session lock is implemented at the point where session activity can be determined. The operating system session lock event must include an obfuscation of the display screen so as to prevent other users from reading what was previously displayed.
+
+Publicly viewable images can include static or dynamic images, for example, patterns used with screen savers, photographic images, solid colors, a clock, a battery life indicator, or a blank screen, with the additional caveat that none of the images convey sensitive information.","To enable console screen locking in tmux terminal multiplexer
+after a period of inactivity,
+the lock-after-time option has to be set to nonzero value in
+/etc/tmux.conf.","
+                  Applicable - Configurable
+                ","Verify the operating system conceals, via the session lock, information previously visible on the display with a publicly viewable image. If it does not, this is a finding.","To verify that session locking after period of inactivity is configured in tmux,
+run the following command:
+$ grep lock-after-time /etc/tmux.conf
+The output should return the following:
+set -g lock-after-time 900
+      Is it the case that lock-after-time is not set to 900 or set to zero?
+      ","Configure the operating system to conceal, via the session lock, information previously visible on the display with a publicly viewable image.","To enable console screen locking in tmux terminal multiplexer
+after a period of inactivity,
+the lock-after-time option has to be set to nonzero value in
+/etc/tmux.conf.",,,,
 V-56639,SRG-OS-000032-GPOS-00013,TBD - Assigned by DISA after STIG release,The operating system must monitor remote access methods.,CCE-83426-7:Ensure remote access methods are monitored in Rsyslog,"Remote access services, such as those providing remote access to network devices and information systems, which lack automated monitoring capabilities, increase risk and make remote user access management difficult at best.
 
 Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
@@ -1413,13 +1499,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to produce audit records containing information to establish what type of events occurred.,"To ensure all processes can be audited, even those which start
@@ -3894,13 +3980,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to generate audit records containing the full-text recording of privileged commands.,"To ensure all processes can be audited, even those which start
@@ -7133,13 +7219,13 @@ If it does not, this is a finding.","Inspect the form of default GRUB 2 command 
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ","Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -13346,13 +13432,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes pti=on,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'pti=on'
+$ sudo grubby --info=ALL | grep args | grep -v 'pti=on'
 The command should not return any output.
       Is it the case that Kernel page-table isolation is not enabled?
       ",Configure the operating system to disable non-essential capabilities.,"To enable Kernel page-table isolation,
@@ -13373,7 +13459,7 @@ network, data link, and physical layers, based on virtual circuits
 and virtual paths.
 
 To configure the system to prevent the atm
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/atm.conf:
 install atm /bin/true","
                   Applicable - Configurable
                 ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","
@@ -13388,7 +13474,7 @@ network, data link, and physical layers, based on virtual circuits
 and virtual paths.
 
 To configure the system to prevent the atm
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/atm.conf:
 install atm /bin/true",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82059-7:Disable CAN Support,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
@@ -13399,7 +13485,7 @@ protocol which was initially developed for automotive and
 is now also used in marine, industrial, and medical applications.
 
 To configure the system to prevent the can
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/can.conf:
 install can /bin/true","
                   Applicable - Configurable
                 ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","
@@ -13414,7 +13500,7 @@ protocol which was initially developed for automotive and
 is now also used in marine, industrial, and medical applications.
 
 To configure the system to prevent the can
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/can.conf:
 install can /bin/true",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82005-0:Disable IEEE 1394 (FireWire) Support,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
@@ -13424,7 +13510,7 @@ Examples of non-essential capabilities include, but are not limited to, games, s
 high-speed real-time communication.
 
 To configure the system to prevent the firewire-core
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/firewire-core.conf:
 install firewire-core /bin/true","
                   Applicable - Configurable
                 ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","
@@ -13438,7 +13524,7 @@ $ grep -r firewire-core /etc/modprobe.conf /etc/modprobe.d
 high-speed real-time communication.
 
 To configure the system to prevent the firewire-core
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/firewire-core.conf:
 install firewire-core /bin/true",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-80834-5:Disable SCTP Support,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
@@ -13450,7 +13536,7 @@ message-oriented communication, with several streams of messages
 within one connection.
 
 To configure the system to prevent the sctp
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/sctp.conf:
 install sctp /bin/true","
                   Applicable - Configurable
                 ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","
@@ -13466,7 +13552,7 @@ message-oriented communication, with several streams of messages
 within one connection.
 
 To configure the system to prevent the sctp
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/sctp.conf:
 install sctp /bin/true",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-82297-3:Disable TIPC Support,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
@@ -13477,7 +13563,7 @@ is designed to provide communications between nodes in a
 cluster.
 
 To configure the system to prevent the tipc
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/tipc.conf:
 install tipc /bin/true","
                   Applicable - Configurable
                 ","Verify the operating system is configured to disable non-essential capabilities. If it does not, this is a finding.","
@@ -13492,7 +13578,7 @@ is designed to provide communications between nodes in a
 cluster.
 
 To configure the system to prevent the tipc
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/tipc.conf:
 install tipc /bin/true",,,,
 SV-71009,SRG-OS-000095-GPOS-00049,TBD - Assigned by DISA after STIG release,The operating system must be configured to disable non-essential capabilities.,CCE-80832-9:Disable Bluetooth Kernel Module,"It is detrimental for operating systems to provide, or install by default, functionality exceeding requirements or mission objectives. These unnecessary capabilities or services are often overlooked and therefore may remain unsecured. They increase the risk to the platform by providing additional attack vectors.
 
@@ -13522,7 +13608,7 @@ Operating systems are capable of providing a wide variety of functions and servi
 
 Examples of non-essential capabilities include, but are not limited to, games, software packages, tools, and demonstration software, not related to requirements or providing a wide array of functionality not required for every mission, but which cannot be disabled.","
 To configure the system to prevent the cramfs
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/cramfs.conf:
 install cramfs /bin/true
 This effectively prevents usage of this uncommon filesystem.
 
@@ -13540,7 +13626,7 @@ $ grep -r cramfs /etc/modprobe.conf /etc/modprobe.d
       Is it the case that no line is returned?
       ",Configure the operating system to disable non-essential capabilities.,"
 To configure the system to prevent the cramfs
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/cramfs.conf:
 install cramfs /bin/true
 This effectively prevents usage of this uncommon filesystem.
 
@@ -13612,7 +13698,7 @@ for server operation and to operate strictly in a client-only mode.","
 $ grep '\bport\b' /etc/chrony.conf
 The output should return
 port 0
-      Is it the case that it does not exist or port is set to non-zero value?
+      Is it the case that port is not set or port is set to non-zero value?
       ",Configure the operating system to disable non-essential capabilities.,"The port option in /etc/chrony.conf can be set to
 0 to make chrony daemon to never open any listening port
 for server operation and to operate strictly in a client-only mode.",,,,
@@ -13628,7 +13714,7 @@ for management connections made by chronyc.","
 $ grep '\bcmdport\b' /etc/chrony.conf
 The output should return
 cmdport 0
-      Is it the case that it does not exist or port is set to non-zero value?
+      Is it the case that cmdport is not set or cmdport is set to non-zero value?
       ",Configure the operating system to disable non-essential capabilities.,"The cmdport option in /etc/chrony.conf can be set to
 0 to stop chrony daemon from listening on the UDP port 323
 for management connections made by chronyc.",,,,
@@ -13700,13 +13786,7 @@ services to have access to the system. To configure firewalld
 to open ports, run the following command:
 $ sudo firewall-cmd --permanent --add-port=port_number/tcp
 or
-$ sudo firewall-cmd --permanent --add-port=service_name
-Run the command list above for each of the ports listed below:
-
-To configure firewalld to allow access, run the following command(s):
-
-
-firewall-cmd --permanent --add-service=ssh","
+$ sudo firewall-cmd --permanent --add-port=service_name","
                   Applicable - Configurable
                 ","Verify the operating system is configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured
 correctly by running the following command:
@@ -13717,13 +13797,7 @@ services to have access to the system. To configure firewalld
 to open ports, run the following command:
 $ sudo firewall-cmd --permanent --add-port=port_number/tcp
 or
-$ sudo firewall-cmd --permanent --add-port=service_name
-Run the command list above for each of the ports listed below:
-
-To configure firewalld to allow access, run the following command(s):
-
-
-firewall-cmd --permanent --add-service=ssh",,,,
+$ sudo firewall-cmd --permanent --add-port=service_name",,,,
 V-56751,SRG-OS-000096-GPOS-00050,TBD - Assigned by DISA after STIG release,"The operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.",CCE-82988-7:Disable chrony daemon from acting as server,"In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
@@ -13736,7 +13810,7 @@ for server operation and to operate strictly in a client-only mode.","
 $ grep '\bport\b' /etc/chrony.conf
 The output should return
 port 0
-      Is it the case that it does not exist or port is set to non-zero value?
+      Is it the case that port is not set or port is set to non-zero value?
       ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","The port option in /etc/chrony.conf can be set to
 0 to make chrony daemon to never open any listening port
 for server operation and to operate strictly in a client-only mode.",,,,
@@ -13752,7 +13826,7 @@ for management connections made by chronyc.","
 $ grep '\bcmdport\b' /etc/chrony.conf
 The output should return
 cmdport 0
-      Is it the case that it does not exist or port is set to non-zero value?
+      Is it the case that cmdport is not set or cmdport is set to non-zero value?
       ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","The cmdport option in /etc/chrony.conf can be set to
 0 to stop chrony daemon from listening on the UDP port 323
 for management connections made by chronyc.",,,,
@@ -13867,7 +13941,7 @@ should prevent users from being able to assign themselves empty passwords.","
 
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ",Configure the operating system to use multifactor authentication for network access to non-privileged accounts.,"Disallow SSH login with empty passwords.
@@ -13989,7 +14063,6 @@ PermitRootLogin no","
 
 $ sudo grep -i PermitRootLogin /etc/ssh/sshd_config
 
-
 If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
@@ -14079,7 +14152,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the autofs service is not disabled?
       ",Configure the operating system to uniquely identify peripherals before establishing a connection.,"The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -14097,7 +14170,7 @@ Peripherals include, but are not limited to, such devices as flash drives, exter
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -14114,7 +14187,7 @@ $ grep -r usb-storage /etc/modprobe.conf /etc/modprobe.d
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -14633,13 +14706,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes vsyscall=none,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'vsyscall=none'
+$ sudo grubby --info=ALL | grep args | grep -v 'vsyscall=none'
 The command should not return any output.
       Is it the case that vsyscalls are enabled?
       ",Configure the operating system to isolate security functions from nonsecurity functions.,"To disable use of virtual syscalls,
@@ -14669,13 +14742,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes page_poison=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'page_poison=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'page_poison=1'
 The command should not return any output.
       Is it the case that page allocator poisoning is not enabled?
       ",Configure the operating system to isolate security functions from nonsecurity functions.,"To enable poisoning of free pages,
@@ -14705,13 +14778,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes slub_debug=P,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'slub_debug=P'
+$ sudo grubby --info=ALL | grep args | grep -v 'slub_debug=P'
 The command should not return any output.
       Is it the case that SLUB/SLAB poisoning is not enabled?
       ",Configure the operating system to isolate security functions from nonsecurity functions.,"To enable poisoning of SLUB/SLAB objects,
@@ -15618,7 +15691,6 @@ Use the following verbiage for operating systems that have severe limitations on
 If it does not, this is a finding.","To determine how the SSH daemon's Banner option is set, run the following command:
 
 $ sudo grep -i Banner /etc/ssh/sshd_config
-
 
 If a line indicating /etc/issue is returned, then the required value is set.
 
@@ -16660,13 +16732,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to initiate session audits at system start-up.,"To ensure all processes can be audited, even those which start
@@ -16692,13 +16764,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit_backlog_limit=8192,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
 The command should not return any output.
       Is it the case that audit backlog limit is not configured?
       ",Configure the operating system to initiate session audits at system start-up.,"To improve the kernel capacity to queue all log events, even those which occurred
@@ -17498,13 +17570,7 @@ services to have access to the system. To configure firewalld
 to open ports, run the following command:
 $ sudo firewall-cmd --permanent --add-port=port_number/tcp
 or
-$ sudo firewall-cmd --permanent --add-port=service_name
-Run the command list above for each of the ports listed below:
-
-To configure firewalld to allow access, run the following command(s):
-
-
-firewall-cmd --permanent --add-service=ssh","
+$ sudo firewall-cmd --permanent --add-port=service_name","
                   Applicable - Configurable
                 ","Verify the operating system controls remote access methods. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured
 correctly by running the following command:
@@ -17515,13 +17581,7 @@ services to have access to the system. To configure firewalld
 to open ports, run the following command:
 $ sudo firewall-cmd --permanent --add-port=port_number/tcp
 or
-$ sudo firewall-cmd --permanent --add-port=service_name
-Run the command list above for each of the ports listed below:
-
-To configure firewalld to allow access, run the following command(s):
-
-
-firewall-cmd --permanent --add-service=ssh",,,,
+$ sudo firewall-cmd --permanent --add-port=service_name",,,,
 V-57215,SRG-OS-000298-GPOS-00116,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to immediately disconnect or disable remote access to the operating system.,CCE-82998-6:Install firewalld Package,"Without the ability to immediately disconnect or disable remote access, an attack or other compromise taking place would not be immediately stopped.
 
 Operating system remote access functionality must have the capability to immediately disconnect current users remotely accessing the information system and/or disable further remote access. The speed of disconnect or disablement varies based on the criticality of missions functions and the need to eliminate immediate or future remote access to organizational information systems.
@@ -18124,15 +18184,62 @@ When discretionary access control policies are implemented, subjects are not con
                 ","Verify the operating system allows operating system admins to pass information to any other operating system admin or user. If it does not, this is a finding.",,Configure the operating system to allow operating system admins to pass information to any other operating system admin or user.,"<VulnDiscussion>Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
 
 When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
-SV-71487,SRG-OS-000312-GPOS-00123,TBD - Assigned by DISA after STIG release,The operating system must allow operating system admins to grant their privileges to other operating system admins.,SV-71487:The operating system must allow operating system admins to grant their privileges to other operating system admins.,"Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
+SV-71487,SRG-OS-000312-GPOS-00123,TBD - Assigned by DISA after STIG release,The operating system must allow operating system admins to grant their privileges to other operating system admins.,CCE-81027-5:Enable Kernel Parameter to Enforce DAC on Hardlinks,"Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
 
-When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.","<VulnDiscussion>Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
-
-When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
+When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.","To set the runtime status of the fs.protected_hardlinks kernel parameter, run the following command: $ sudo sysctl -w fs.protected_hardlinks=1
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: fs.protected_hardlinks = 1","
                   Applicable - Configurable
-                ","Verify the operating system allows operating system admins to grant their privileges to other operating system admins. If it does not, this is a finding.",,Configure the operating system to allow operating system admins to grant their privileges to other operating system admins.,"<VulnDiscussion>Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
+                ","Verify the operating system allows operating system admins to grant their privileges to other operating system admins. If it does not, this is a finding.","The runtime status of the fs.protected_hardlinks kernel parameter can be queried
+by running the following command:
+$ sysctl fs.protected_hardlinks
+The output of the command should indicate a value of 1.
+The preferable way how to assure the runtime compliance is to have
+correct persistent configuration, and rebooting the system.
 
-When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
+The persistent kernel parameter configuration is performed by specifying the appropriate
+assignment in any file located in the /etc/sysctl.d directory.
+Verify that there is not any existing incorrect configuration by executing the following command:
+$ grep -r '^\s*fs.protected_hardlinks\s*=' /etc/sysctl.conf /etc/sysctl.d
+If any assignments other than
+fs.protected_hardlinks = 1
+are found, or the correct assignment is duplicated, remove those offending lines from respective files,
+and make sure that exactly one file in
+/etc/sysctl.d contains fs.protected_hardlinks = 1, and that one assignment
+is returned when
+$ grep -r fs.protected_hardlinks /etc/sysctl.conf /etc/sysctl.d
+is executed.
+
+      Is it the case that the correct value is not returned?
+      ",Configure the operating system to allow operating system admins to grant their privileges to other operating system admins.,"To set the runtime status of the fs.protected_hardlinks kernel parameter, run the following command: $ sudo sysctl -w fs.protected_hardlinks=1
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: fs.protected_hardlinks = 1",,,,
+SV-71487,SRG-OS-000312-GPOS-00123,TBD - Assigned by DISA after STIG release,The operating system must allow operating system admins to grant their privileges to other operating system admins.,CCE-81030-9:Enable Kernel Parameter to Enforce DAC on Symlinks,"Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
+
+When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.","To set the runtime status of the fs.protected_symlinks kernel parameter, run the following command: $ sudo sysctl -w fs.protected_symlinks=1
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: fs.protected_symlinks = 1","
+                  Applicable - Configurable
+                ","Verify the operating system allows operating system admins to grant their privileges to other operating system admins. If it does not, this is a finding.","The runtime status of the fs.protected_symlinks kernel parameter can be queried
+by running the following command:
+$ sysctl fs.protected_symlinks
+The output of the command should indicate a value of 1.
+The preferable way how to assure the runtime compliance is to have
+correct persistent configuration, and rebooting the system.
+
+The persistent kernel parameter configuration is performed by specifying the appropriate
+assignment in any file located in the /etc/sysctl.d directory.
+Verify that there is not any existing incorrect configuration by executing the following command:
+$ grep -r '^\s*fs.protected_symlinks\s*=' /etc/sysctl.conf /etc/sysctl.d
+If any assignments other than
+fs.protected_symlinks = 1
+are found, or the correct assignment is duplicated, remove those offending lines from respective files,
+and make sure that exactly one file in
+/etc/sysctl.d contains fs.protected_symlinks = 1, and that one assignment
+is returned when
+$ grep -r fs.protected_symlinks /etc/sysctl.conf /etc/sysctl.d
+is executed.
+
+      Is it the case that the correct value is not returned?
+      ",Configure the operating system to allow operating system admins to grant their privileges to other operating system admins.,"To set the runtime status of the fs.protected_symlinks kernel parameter, run the following command: $ sudo sysctl -w fs.protected_symlinks=1
+To make sure that the setting is persistent, add the following line to a file in the directory /etc/sysctl.d: fs.protected_symlinks = 1",,,,
 V-57229,SRG-OS-000312-GPOS-00124,TBD - Assigned by DISA after STIG release,"The operating system must allow operating system admins to change security attributes on users, the operating system, or the operating systems components.","V-57229:The operating system must allow operating system admins to change security attributes on users, the operating system, or the operating systems components.","Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
 
 When discretionary access control policies are implemented, subjects are not constrained with regard to what actions they can take with information for which they have already been granted access. Thus, subjects that have been granted access to information are not prevented from passing (i.e., the subjects have the discretion to pass) the information to other subjects or objects. A subject that is constrained in its operation by Mandatory Access Control policies is still able to operate under the less rigorous constraints of this requirement. Thus, while Mandatory Access Control imposes constraints preventing a subject from passing information to another subject operating at a different sensitivity level, this requirement permits the subject to pass the information to any subject at the same sensitivity level. The policy is bounded by the information system boundary. Once the information is passed outside the control of the information system, additional means may be required to ensure the constraints remain in effect. While the older, more traditional definitions of discretionary access control require identity-based access control, that limitation is not required for this use of discretionary access control.","<VulnDiscussion>Discretionary Access Control (DAC) is based on the notion that individual users are ""owners"" of objects and therefore have discretion over who should be authorized to access the object and in which mode (e.g., read or write). Ownership is usually acquired as a consequence of creating the object or via specified ownership assignment. DAC allows the owner to determine who will have access to objects they control. An example of DAC includes user-controlled file permissions.
@@ -18535,13 +18642,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit_backlog_limit=8192,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit_backlog_limit=8192.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit_backlog_limit=8192.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit_backlog_limit=8192'
 The command should not return any output.
       Is it the case that audit backlog limit is not configured?
       ","Configure the operating system to allocate audit record storage capacity to store at least one week's worth of audit records, when audit records are not immediately sent to a central audit record storage facility.","To improve the kernel capacity to queue all log events, even those which occurred
@@ -19221,7 +19328,7 @@ GSSAPIAuthentication no","
 
 $ sudo grep -i GSSAPIAuthentication /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ",Configure the operating system to enforce access restrictions.,"Unless needed, SSH should not permit extraneous or unnecessary
@@ -19259,7 +19366,7 @@ KerberosAuthentication no","
 
 $ sudo grep -i KerberosAuthentication /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ",Configure the operating system to enforce access restrictions.,"Unless needed, SSH should not permit extraneous or unnecessary
@@ -20187,7 +20294,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the autofs service is not disabled?
       ",Configure the operating system to authenticate peripherals before establishing a connection.,"The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -20205,7 +20312,7 @@ Peripherals include, but are not limited to, such devices as flash drives, exter
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -20222,7 +20329,7 @@ $ grep -r usb-storage /etc/modprobe.conf /etc/modprobe.d
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -20370,13 +20477,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.,"To ensure all processes can be audited, even those which start
@@ -23449,7 +23556,30 @@ Navigate the BIOS configuration menu and make sure that the option is enabled. T
 under a Security section. Look for Execute Disable (XD) on Intel-based systems and No Execute (NX)
 on AMD-based systems.","
                   Applicable - Configurable
-                ","Verify the operating system implements non-executable data to protect its memory from unauthorized code execution. If it does not, this is a finding.",,Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.,"Reboot the system and enter the BIOS or Setup configuration menu.
+                ","Verify the operating system implements non-executable data to protect its memory from unauthorized code execution. If it does not, this is a finding.","Verify the NX (no-execution) bit flag is set on the system.
+
+Check that the no-execution bit flag is set with the following commands:
+
+$ sudo dmesg | grep NX
+
+[ 0.000000] NX (Execute Disable) protection: active
+
+If ""dmesg"" does not show ""NX (Execute Disable) protection"" active, check the cpuinfo settings with the following command:
+
+$ sudo grep flags /proc/cpuinfo
+flags : fpu vme de pse tsc ms nx rdtscp lm constant_ts
+
+The output should contain the ""nx"" flag.
+
+Then, verify that there are no log messsages stating that NX is disabled in the system log. Run the following command:
+$ sudo grep -P ""^.+protection: disabled.+"" /var/log/dmesg
+The output should be empty.
+
+Then, check that NX is not disabled in the kernel command line.
+$ sudo grep -P "".+noexec[0-9]*=off.+"" /proc/cmdline
+The output should be empty.
+      Is it the case that NX is disabled?
+      ",Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.,"Reboot the system and enter the BIOS or Setup configuration menu.
 Navigate the BIOS configuration menu and make sure that the option is enabled. The setting may be located
 under a Security section. Look for Execute Disable (XD) on Intel-based systems and No Execute (NX)
 on AMD-based systems.",,,,
@@ -23469,13 +23599,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes slub_debug=P,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*slub_debug=P.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*slub_debug=P.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'slub_debug=P'
+$ sudo grubby --info=ALL | grep args | grep -v 'slub_debug=P'
 The command should not return any output.
       Is it the case that SLUB/SLAB poisoning is not enabled?
       ",Configure the operating system to implement non-executable data to protect its memory from unauthorized code execution.,"To enable poisoning of SLUB/SLAB objects,
@@ -23503,13 +23633,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes pti=on,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*pti=on.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*pti=on.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'pti=on'
+$ sudo grubby --info=ALL | grep args | grep -v 'pti=on'
 The command should not return any output.
       Is it the case that Kernel page-table isolation is not enabled?
       ",Configure the operating system to implement address space layout randomization to protect its memory from unauthorized code execution.,"To enable Kernel page-table isolation,
@@ -24885,13 +25015,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.,"To ensure all processes can be audited, even those which start
@@ -29396,13 +29526,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to generate audit records for privileged activities or other system-level access.,"To ensure all processes can be audited, even those which start
@@ -31741,13 +31871,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes audit=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*audit=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*audit=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'audit=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'audit=1'
 The command should not return any output.
       Is it the case that auditing is not enabled at boot time?
       ",Configure the operating system to generate audit records when concurrent logons to the same account occur from different sources.,"To ensure all processes can be audited, even those which start
@@ -33758,13 +33888,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes vsyscall=none,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*vsyscall=none.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*vsyscall=none.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'vsyscall=none'
+$ sudo grubby --info=ALL | grep args | grep -v 'vsyscall=none'
 The command should not return any output.
       Is it the case that vsyscalls are enabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To disable use of virtual syscalls,
@@ -34538,7 +34668,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the autofs service is not disabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -34556,7 +34686,7 @@ Configuration settings are the set of parameters that can be changed in hardware
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -34573,7 +34703,7 @@ $ grep -r usb-storage /etc/modprobe.conf /etc/modprobe.d
 to prevent automatic loading of the USB storage driver.
 
 To configure the system to prevent the usb-storage
-kernel module from being loaded, add the following line to a file in the directory /etc/modprobe.d:
+kernel module from being loaded, add the following line to the file /etc/modprobe.d/usb-storage.conf:
 install usb-storage /bin/true
 This will prevent the modprobe program from loading the usb-storage
 module, but will not prevent an administrator (or another program) from using the
@@ -35050,13 +35180,13 @@ Run the following command to update command line for already installed kernels:#
 in /etc/default/grub. If it includes page_poison=1,
 then the parameter will be configured for newly installed kernels.
 First check if the GRUB recovery is enabled:
-$ grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
+$ sudo grep 'GRUB_DISABLE_RECOVERY' /etc/default/grub
 If this option is set to true, then check that a line is output by the following command:
-$ grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
+$ sudo grep 'GRUB_CMDLINE_LINUX_DEFAULT.*page_poison=1.*' /etc/default/grub
 If the recovery is disabled, check the line with
-$ grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
+$ sudo grep 'GRUB_CMDLINE_LINUX.*page_poison=1.*' /etc/default/grub.Moreover, command line parameters for currently installed kernels should be checked as well.
 Run the following command:
-# grubby --info=ALL | grep args | grep -v 'page_poison=1'
+$ sudo grubby --info=ALL | grep args | grep -v 'page_poison=1'
 The command should not return any output.
       Is it the case that page allocator poisoning is not enabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To enable poisoning of free pages,
@@ -35350,7 +35480,7 @@ should prevent users from being able to assign themselves empty passwords.","
 
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Disallow SSH login with empty passwords.
@@ -35386,7 +35516,7 @@ GSSAPIAuthentication no","
 
 $ sudo grep -i GSSAPIAuthentication /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Unless needed, SSH should not permit extraneous or unnecessary
@@ -35420,7 +35550,7 @@ KerberosAuthentication no","
 
 $ sudo grep -i KerberosAuthentication /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Unless needed, SSH should not permit extraneous or unnecessary
@@ -35450,7 +35580,6 @@ PermitRootLogin no","
 
 $ sudo grep -i PermitRootLogin /etc/ssh/sshd_config
 
-
 If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
@@ -35477,7 +35606,6 @@ IgnoreUserKnownHosts yes","
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To determine how the SSH daemon's IgnoreUserKnownHosts option is set, run the following command:
 
 $ sudo grep -i IgnoreUserKnownHosts /etc/ssh/sshd_config
-
 
 If a line indicating yes is returned, then the required value is set.
 
@@ -35512,7 +35640,7 @@ X11Forwarding no","
 
 $ sudo grep -i X11Forwarding /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The X11Forwarding parameter provides the ability to tunnel X11 traffic
@@ -35549,7 +35677,7 @@ StrictModes yes","
 
 $ sudo grep -i StrictModes /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
+If a line indicating yes is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","SSHs StrictModes option checks file and ownership permissions in
@@ -35583,7 +35711,7 @@ PrintLastLog yes","
 
 $ sudo grep -i PrintLastLog /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
+If a line indicating yes is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Ensure that SSH will display the date and time of the last successful account logon.
@@ -35664,7 +35792,7 @@ X11UseLocalhost yes","
 
 $ sudo grep -i X11UseLocalhost /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value yes is returned, then the required value is set.
+If a line indicating yes is returned, then the required value is set.
       Is it the case that the display proxy is listening on wildcard address?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The SSH daemon should prevent remote hosts from connecting to the proxy
 display.
@@ -35825,7 +35953,7 @@ should prevent users from being able to assign themselves empty passwords.","
 
 $ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","Disallow SSH login with empty passwords.
@@ -35858,7 +35986,7 @@ PermitUserEnvironment no","
 
 $ sudo grep -i PermitUserEnvironment /etc/ssh/sshd_config
 
-If no line, a commented line, or a line indicating the value no is returned, then the required value is set.
+If a line indicating no is returned, then the required value is set.
 
       Is it the case that the required value is not set?
       ","If the operating system provides a public access service, such as a kiosk, this is not applicable. Configure the operating system to not allow an unattended or automatic logon to the system. Automatic logon as an authorized user allows access to any user with physical access to the operating system.","Ensure that users are not able to override environment variables of the SSH daemon.
