@@ -6420,7 +6420,13 @@ immutable:
 -e 2
 With this setting, a reboot will be required to change any audit rules.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.",,Configure the operating system to protect audit information from unauthorized read access.,"If the auditd daemon is configured to use the
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Verify the audit system prevents unauthorized changes with the following command:
+
+$ sudo grep ""^\s*[^#]"" /etc/audit/audit.rules | tail -1
+
+-e 2
+      Is it the case that the audit system is not set to be immutable by adding the ""-e 2"" option to the ""/etc/audit/audit.rules""?
+      ",Configure the operating system to protect audit information from unauthorized read access.,"If the auditd daemon is configured to use the
 augenrules program to read audit rules during daemon startup (the
 default), add the following line to a file with suffix .rules in the
 directory /etc/audit/rules.d in order to make the auditd configuration
@@ -6482,10 +6488,24 @@ $ sudo chmod 0750 /var/log/audit
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Run the following command to check the mode of the system audit logs:
-$ sudo ls -ld /var/log/audit
-Audit log directories must be mode 0700 or less permissive.
-      Is it the case that any are more permissive?
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
+
+Find the location of the audit logs:
+
+$ sudo grep ""^log_file"" /etc/audit/auditd.conf
+
+Find the group that owns audit logs:
+
+$ sudo grep ""^log_group"" /etc/audit/auditd.conf
+
+Run the following command to check the mode of the system audit logs:
+
+$ sudo stat -c ""%a %n"" [audit_log_directory]
+
+Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
+
+If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
+      Is it the case that audit logs has more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized read access.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -6637,7 +6657,13 @@ immutable:
 -e 2
 With this setting, a reboot will be required to change any audit rules.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.",,Configure the operating system to protect audit information from unauthorized modification.,"If the auditd daemon is configured to use the
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Verify the audit system prevents unauthorized changes with the following command:
+
+$ sudo grep ""^\s*[^#]"" /etc/audit/audit.rules | tail -1
+
+-e 2
+      Is it the case that the audit system is not set to be immutable by adding the ""-e 2"" option to the ""/etc/audit/audit.rules""?
+      ",Configure the operating system to protect audit information from unauthorized modification.,"If the auditd daemon is configured to use the
 augenrules program to read audit rules during daemon startup (the
 default), add the following line to a file with suffix .rules in the
 directory /etc/audit/rules.d in order to make the auditd configuration
@@ -6705,10 +6731,24 @@ $ sudo chmod 0750 /var/log/audit
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Run the following command to check the mode of the system audit logs:
-$ sudo ls -ld /var/log/audit
-Audit log directories must be mode 0700 or less permissive.
-      Is it the case that any are more permissive?
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
+
+Find the location of the audit logs:
+
+$ sudo grep ""^log_file"" /etc/audit/auditd.conf
+
+Find the group that owns audit logs:
+
+$ sudo grep ""^log_group"" /etc/audit/auditd.conf
+
+Run the following command to check the mode of the system audit logs:
+
+$ sudo stat -c ""%a %n"" [audit_log_directory]
+
+Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
+
+If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
+      Is it the case that audit logs has more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized modification.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -6868,7 +6908,13 @@ immutable:
 -e 2
 With this setting, a reboot will be required to change any audit rules.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.",,Configure the operating system to protect audit information from unauthorized deletion.,"If the auditd daemon is configured to use the
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Verify the audit system prevents unauthorized changes with the following command:
+
+$ sudo grep ""^\s*[^#]"" /etc/audit/audit.rules | tail -1
+
+-e 2
+      Is it the case that the audit system is not set to be immutable by adding the ""-e 2"" option to the ""/etc/audit/audit.rules""?
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"If the auditd daemon is configured to use the
 augenrules program to read audit rules during daemon startup (the
 default), add the following line to a file with suffix .rules in the
 directory /etc/audit/rules.d in order to make the auditd configuration
@@ -6936,10 +6982,24 @@ $ sudo chmod 0750 /var/log/audit
 Otherwise, change the mode of the audit log files with the following command:
 $ sudo chmod 0700 /var/log/audit","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Run the following command to check the mode of the system audit logs:
-$ sudo ls -ld /var/log/audit
-Audit log directories must be mode 0700 or less permissive.
-      Is it the case that any are more permissive?
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
+
+Find the location of the audit logs:
+
+$ sudo grep ""^log_file"" /etc/audit/auditd.conf
+
+Find the group that owns audit logs:
+
+$ sudo grep ""^log_group"" /etc/audit/auditd.conf
+
+Run the following command to check the mode of the system audit logs:
+
+$ sudo stat -c ""%a %n"" [audit_log_directory]
+
+Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
+
+If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
+      Is it the case that audit logs has more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -14152,7 +14212,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that the autofs service is not disabled?
+      Is it the case that the ""autofs"" is loaded and not masked?
       ",Configure the operating system to uniquely identify peripherals before establishing a connection.,"The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -18285,7 +18345,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the ""debug-shell"" is loaded and not masked?
       ","Configure the operating system to prevent non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures.","SystemD's debug-shell service is intended to
 diagnose SystemD related boot issues with various systemctl
 commands. Once enabled and following a system reboot, the root shell
@@ -18931,7 +18991,7 @@ If using TCP, a line similar to the following should be present:
  *.* @@
 If using RELP, a line similar to the following should be present:
  *.* :omrelp:
-      Is it the case that none of these are present?
+      Is it the case that no evidence that the audit logs are being off-loaded to another system or media?
       ",Configure the operating system to off-load audit records onto a different system or media from the system being audited.,"To configure rsyslog to send logs to a remote log server,
 open /etc/rsyslog.conf and read and understand the last section of the file,
 which describes the multiple directives necessary to activate remote
@@ -20294,7 +20354,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that the autofs service is not disabled?
+      Is it the case that the ""autofs"" is loaded and not masked?
       ",Configure the operating system to authenticate peripherals before establishing a connection.,"The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -32961,7 +33021,7 @@ If using TCP, a line similar to the following should be present:
  *.* @@
 If using RELP, a line similar to the following should be present:
  *.* :omrelp:
-      Is it the case that none of these are present?
+      Is it the case that no evidence that the audit logs are being off-loaded to another system or media?
       ","Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.","To configure rsyslog to send logs to a remote log server,
 open /etc/rsyslog.conf and read and understand the last section of the file,
 which describes the multiple directives necessary to activate remote
@@ -33452,7 +33512,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the ""debug-shell"" is loaded and not masked?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","SystemD's debug-shell service is intended to
 diagnose SystemD related boot issues with various systemctl
 commands. Once enabled and following a system reboot, the root shell
@@ -33996,7 +34056,7 @@ If using TCP, a line similar to the following should be present:
  *.* @@
 If using RELP, a line similar to the following should be present:
  *.* :omrelp:
-      Is it the case that none of these are present?
+      Is it the case that no evidence that the audit logs are being off-loaded to another system or media?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","To configure rsyslog to send logs to a remote log server,
 open /etc/rsyslog.conf and read and understand the last section of the file,
 which describes the multiple directives necessary to activate remote
@@ -34668,7 +34728,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that the autofs service is not disabled?
+      Is it the case that the ""autofs"" is loaded and not masked?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The autofs daemon mounts and unmounts filesystems, such as user
 home directories shared via NFS, on demand. In addition, autofs can be used to handle
 removable media, and the default configuration provides the cdrom device as /misc/cd.
@@ -35240,7 +35300,7 @@ If the service is masked the command will return the following outputs:
 LoadState=masked
 
 UnitFileState=masked
-      Is it the case that ?
+      Is it the case that the ""kdump"" is loaded and not masked?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The kdump service provides a kernel crash dump analyzer. It uses the kexec
 system call to boot a secondary kernel (""capture"" kernel) following a system
 crash, which can load information from the crashed kernel for analysis.
