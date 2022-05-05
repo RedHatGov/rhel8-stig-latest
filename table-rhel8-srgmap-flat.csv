@@ -75,11 +75,11 @@ account. For U.S. Government systems, the operating system must be
 configured to automatically terminate these types of accounts after a
 period of 72 hours.","
                   Applicable - Configurable
-                ","Verify the operating system automatically removes or disables local temporary user accounts after 72 hours. If it does not, this is a finding.","For every temporary and emergency account, run the following command
+                ","Verify the operating system automatically removes or disables local temporary user accounts after 72 hours. If it does not, this is a finding.","For every temporary account, run the following command
 to obtain its account aging and expiration information:
 $ sudo chage -l USER
 Verify each of these accounts has an expiration date set as documented.
-      Is it the case that any temporary or emergency accounts have no expiration date set or do not expire within a documented time frame?
+      Is it the case that any temporary accounts have no expiration date set or do not expire within a documented time frame?
       ",Configure the operating system to automatically remove or disable local temporary user accounts after 72 hours.,"Temporary accounts are established as part of normal account activation
 procedures when there is a need for short-term accounts. In the event
 temporary or emergency accounts are required, configure the system to
@@ -1457,6 +1457,15 @@ To decrease the default limits, add or correct the following line in
 /etc/ssh/sshd_config:
 
 RekeyLimit  ",,,,
+SV-70907,SRG-OS-000037-GPOS-00015,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish what type of events occurred.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without establishing what type of events occurred, it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.
+
+Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked.
+
+Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish what type of events occurred.,The audit package should be installed.,,,,
 SV-70907,SRG-OS-000037-GPOS-00015,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish what type of events occurred.,CCE-80872-5:Enable auditd Service,"Without establishing what type of events occurred, it would be difficult to establish, correlate, and investigate the events leading up to an outage or attack.
 
 Audit record content that may be necessary to satisfy this requirement includes, for example, time stamps, source and destination addresses, user/process identifiers, event descriptions, success/fail indications, filenames involved, and access control or flow control rules invoked.
@@ -1490,7 +1499,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -1513,7 +1522,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -3839,6 +3848,15 @@ If the auditd daemon is configured to use the auditctl
 utility to read audit rules during daemon startup, add a line of the following
 form to /etc/audit/audit.rules:
 -a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged",,,,
+V-56649,SRG-OS-000038-GPOS-00016,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish when (date and time) the events occurred.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without establishing when events occurred, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
+
+In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know when events occurred (date and time).
+
+Associating event types with detected events in the operating system audit logs provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish when (date and time) the events occurred. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish when (date and time) the events occurred.,The audit package should be installed.,,,,
 V-56649,SRG-OS-000038-GPOS-00016,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish when (date and time) the events occurred.,CCE-80872-5:Enable auditd Service,"Without establishing when events occurred, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
 
 In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know when events occurred (date and time).
@@ -3863,6 +3881,15 @@ disk.
 
 The auditd service can be enabled with the following command:
 $ sudo systemctl enable auditd.service",,,,
+V-56651,SRG-OS-000039-GPOS-00017,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish where the events occurred.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without establishing where events occurred, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
+
+In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know where events occurred, such as operating system components, modules, device identifiers, node names, file names, and functionality.
+
+Associating information about where the event occurred within the operating system provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish where the events occurred. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish where the events occurred.,The audit package should be installed.,,,,
 V-56651,SRG-OS-000039-GPOS-00017,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish where the events occurred.,CCE-80872-5:Enable auditd Service,"Without establishing where events occurred, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
 
 In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know where events occurred, such as operating system components, modules, device identifiers, node names, file names, and functionality.
@@ -3906,6 +3933,15 @@ name_format = hostname
 syscall as computer node name in the audit events,
 set name_format to hostname
 in /etc/audit/auditd.conf.",,,,
+V-56653,SRG-OS-000040-GPOS-00018,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the source of the events.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without establishing the source of the event, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
+
+In addition to logging where events occur within the operating system, the operating system must also generate audit records that identify sources of events. Sources of operating system events include, but are not limited to, processes and services.
+
+In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know the source of the event.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish the source of the events. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish the source of the events.,The audit package should be installed.,,,,
 V-56653,SRG-OS-000040-GPOS-00018,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the source of the events.,CCE-80872-5:Enable auditd Service,"Without establishing the source of the event, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
 
 In addition to logging where events occur within the operating system, the operating system must also generate audit records that identify sources of events. Sources of operating system events include, but are not limited to, processes and services.
@@ -3930,6 +3966,13 @@ disk.
 
 The auditd service can be enabled with the following command:
 $ sudo systemctl enable auditd.service",,,,
+V-56655,SRG-OS-000041-GPOS-00019,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the outcome of the events.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without information about the outcome of events, security personnel cannot make an accurate assessment as to whether an attack was successful or if changes were made to the security state of the system.
+
+Event outcomes can include indicators of event success or failure and event-specific results (e.g., the security state of the information system after the event occurred). As such, they also provide a means to measure the impact of an event and help authorized personnel to determine the appropriate response.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish the outcome of the events. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish the outcome of the events.,The audit package should be installed.,,,,
 V-56655,SRG-OS-000041-GPOS-00019,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the outcome of the events.,CCE-80872-5:Enable auditd Service,"Without information about the outcome of events, security personnel cannot make an accurate assessment as to whether an attack was successful or if changes were made to the security state of the system.
 
 Event outcomes can include indicators of event success or failure and event-specific results (e.g., the security state of the information system after the event occurred). As such, they also provide a means to measure the impact of an event and help authorized personnel to determine the appropriate response.","The auditd service is an essential userspace component of
@@ -3971,7 +4014,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -3994,7 +4037,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -6196,6 +6239,13 @@ If the auditd daemon is configured to use the auditctl
 utility to read audit rules during daemon startup, add a line of the following
 form to /etc/audit/audit.rules:
 -a always,exit -F path=/usr/sbin/usermod -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged",,,,
+V-56659,SRG-OS-000042-GPOS-00021,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing the individual identities of group account users.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Reconstruction of harmful events or forensic analysis is not possible if audit records do not contain enough information.
+
+At a minimum, the organization must audit the individual identities of group users. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the actual account involved in the activity.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing the individual identities of group account users. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing the individual identities of group account users.,The audit package should be installed.,,,,
 V-56659,SRG-OS-000042-GPOS-00021,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing the individual identities of group account users.,CCE-80872-5:Enable auditd Service,"Reconstruction of harmful events or forensic analysis is not possible if audit records do not contain enough information.
 
 At a minimum, the organization must audit the individual identities of group users. The organization must maintain audit trails in sufficient detail to reconstruct events to determine the actual account involved in the activity.","The auditd service is an essential userspace component of
@@ -6255,7 +6305,7 @@ $ sudo postconf alias_maps
 Query the Postfix alias maps for an alias for the root user:
 $ sudo postmap -q root hash:/etc/aliases
 The output should return an alias.
-      Is it the case that it is not?
+      Is it the case that the alias is not set?
       ",Configure the operating system to alert the ISSO and SA (at a minimum) in the event of an audit processing failure.,"Make sure that mails delivered to root user are forwarded to a monitored
 email address. Make sure that the address
  is a valid email address
@@ -6339,6 +6389,15 @@ single, and halt. For certain systems, the need for availability
 outweighs the need to log all actions, and a different setting should be
 determined. Details regarding all possible values for ACTION are described in the
 auditd.conf man page.",,,,
+V-56665,SRG-OS-000051-GPOS-00024,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to centrally review and analyze audit records from multiple components within the system.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Successful incident response and auditing relies on timely, accurate system information and analysis in order to allow the organization to identify and respond to potential incidents in a proficient manner. If the operating system does not provide the ability to centrally review the operating system logs, forensic analysis is negatively impacted.
+
+Segregation of logging data to multiple disparate computer systems is counterproductive and makes log analysis and log event alarming difficult to implement and manage, particularly when the system has multiple logging components writing to different locations or systems.
+
+To support the centralized capability, the operating system must be able to provide the information in a format that can be extracted and used, allowing the application performing the centralization of the log records to meet this requirement.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system provides the capability to centrally review and analyze audit records from multiple components within the system. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to provide the capability to centrally review and analyze audit records from multiple components within the system.,The audit package should be installed.,,,,
 V-56665,SRG-OS-000051-GPOS-00024,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to centrally review and analyze audit records from multiple components within the system.,CCE-80872-5:Enable auditd Service,"Successful incident response and auditing relies on timely, accurate system information and analysis in order to allow the organization to identify and respond to potential incidents in a proficient manner. If the operating system does not provide the ability to centrally review the operating system logs, forensic analysis is negatively impacted.
 
 Segregation of logging data to multiple disparate computer systems is counterproductive and makes log analysis and log event alarming difficult to implement and manage, particularly when the system has multiple logging components writing to different locations or systems.
@@ -6372,6 +6431,15 @@ To support the centralized capability, the operating system must be able to prov
                 ","Verify the operating system provides the capability to centrally review and analyze audit records from multiple components within the system. If it does not, this is a finding.","Run the following command to determine if the rsyslog package is installed: $ rpm -q rsyslog
       Is it the case that the package is not installed?
       ",Configure the operating system to provide the capability to centrally review and analyze audit records from multiple components within the system.,Rsyslog is installed by default. The rsyslog package can be installed with the following command:  $ sudo yum install rsyslog,,,,
+V-56667,SRG-OS-000054-GPOS-00025,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to filter audit records for events of interest based upon all audit fields within audit records.,CCE-81043-2:Ensure the audit Subsystem is Installed,"The ability to specify the event criteria that are of interest provides the individuals reviewing the logs with the ability to quickly isolate and identify these events without having to review entries that are of little or no consequence to the investigation. Without this capability, forensic investigations are impeded.
+
+Events of interest can be identified by the content of specific audit record fields, including, for example, identities of individuals, event types, event locations, event times, event dates, system resources involved, IP addresses involved, or information objects accessed. Organizations may define audit event criteria to any degree of granularity required, for example, locations selectable by general networking location (e.g., by network or subnetwork) or selectable by specific information system component.
+
+This requires operating systems to provide the capability to customize audit record reports based on all available criteria.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system provides the capability to filter audit records for events of interest based upon all audit fields within audit records. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to provide the capability to filter audit records for events of interest based upon all audit fields within audit records.,The audit package should be installed.,,,,
 V-56667,SRG-OS-000054-GPOS-00025,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to filter audit records for events of interest based upon all audit fields within audit records.,CCE-80872-5:Enable auditd Service,"The ability to specify the event criteria that are of interest provides the individuals reviewing the logs with the ability to quickly isolate and identify these events without having to review entries that are of little or no consequence to the investigation. Without this capability, forensic investigations are impeded.
 
 Events of interest can be identified by the content of specific audit record fields, including, for example, identities of individuals, event types, event locations, event times, event dates, system resources involved, IP addresses involved, or information objects accessed. Organizations may define audit event criteria to any degree of granularity required, for example, locations selectable by general networking location (e.g., by network or subnetwork) or selectable by specific information system component.
@@ -7258,7 +7326,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -7303,7 +7371,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -12631,9 +12699,8 @@ length credit for each uppercase character. Modify the ucredit setting in
                 ","Verify the operating system enforces password complexity by requiring that at least one upper-case character be used. If it does not, this is a finding.","To check how many uppercase characters are required in a password, run the following command:
 $ grep ucredit /etc/security/pwquality.conf
 The ucredit parameter (as a negative number) will indicate how many uppercase characters are required.
-The DoD and FISMA require at least one uppercase character in a password.
 This would appear as ucredit = -1.
-      Is it the case that ucredit is not found or not set less than or equal to the required value?
+      Is it the case that ucredit is not found or not set to the required value?
       ",Configure the operating system to enforce password complexity by requiring that at least one upper-case character be used.,"The pam_pwquality module's ucredit= parameter controls requirements for
 usage of uppercase letters in a password. When set to a negative number, any password will be required to
 contain that many uppercase characters. When set to a positive number, pam_pwquality will grant +1 additional
@@ -13483,7 +13550,7 @@ add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
 argument to newly installed kernels, add pti=on to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""pti=on""","
@@ -13506,7 +13573,7 @@ add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
 argument to newly installed kernels, add pti=on to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""pti=on""",,,,
@@ -14536,11 +14603,11 @@ account. For U.S. Government systems, the operating system must be
 configured to automatically terminate these types of accounts after a
 period of 72 hours.","
                   Applicable - Configurable
-                ","Verify the operating system is configured such that emergency administrator accounts are automatically removed or disabled within 72 hours. If it is not, this is a finding.","For every temporary and emergency account, run the following command
+                ","Verify the operating system is configured such that emergency administrator accounts are automatically removed or disabled within 72 hours. If it is not, this is a finding.","For every temporary account, run the following command
 to obtain its account aging and expiration information:
 $ sudo chage -l USER
 Verify each of these accounts has an expiration date set as documented.
-      Is it the case that any temporary or emergency accounts have no expiration date set or do not expire within a documented time frame?
+      Is it the case that any temporary accounts have no expiration date set or do not expire within a documented time frame?
       ",Configure the operating system such that emergency administrator accounts are automatically removed or disabled within 72 hours.,"Temporary accounts are established as part of normal account activation
 procedures when there is a need for short-term accounts. In the event
 temporary or emergency accounts are required, configure the system to
@@ -14757,7 +14824,7 @@ add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
 argument to newly installed kernels, add vsyscall=none to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""vsyscall=none""","
@@ -14780,7 +14847,7 @@ add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
 argument to newly installed kernels, add vsyscall=none to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""vsyscall=none""",,,,
@@ -14793,7 +14860,7 @@ add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
 argument to newly installed kernels, add page_poison=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""page_poison=1""","
@@ -14816,7 +14883,7 @@ add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
 argument to newly installed kernels, add page_poison=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""page_poison=1""",,,,
@@ -14829,7 +14896,7 @@ add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
 argument to newly installed kernels, add slub_debug=P to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""","
@@ -14852,7 +14919,7 @@ add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
 argument to newly installed kernels, add slub_debug=P to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""",,,,
@@ -16758,6 +16825,11 @@ To check that Crypto Policies settings are configured correctly, ensure that
 /etc/crypto-policies/back-ends/opensshserver.config contains the following
 text and is not commented out:
 -oMACS=hmac-sha2-512,hmac-sha2-256",,,,
+SV-71199,SRG-OS-000254-GPOS-00095,TBD - Assigned by DISA after STIG release,The operating system must initiate session audits at system start-up.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If auditing is enabled late in the start-up process, the actions of some start-up processes may not be audited. Some audit systems also maintain state information only available if auditing is enabled before a given process is created.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system initiates session audits at system start-up. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to initiate session audits at system start-up.,The audit package should be installed.,,,,
 SV-71199,SRG-OS-000254-GPOS-00095,TBD - Assigned by DISA after STIG release,The operating system must initiate session audits at system start-up.,CCE-80872-5:Enable auditd Service,"If auditing is enabled late in the start-up process, the actions of some start-up processes may not be audited. Some audit systems also maintain state information only available if auditing is enabled before a given process is created.","The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -16783,7 +16855,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -16806,7 +16878,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -16815,7 +16887,7 @@ prior to the audit daemon, add the argument audit_backlog_limit=8192 to the defa
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
 argument to newly installed kernels, add audit_backlog_limit=8192 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit_backlog_limit=8192""","
@@ -16838,10 +16910,15 @@ prior to the audit daemon, add the argument audit_backlog_limit=8192 to the defa
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
 argument to newly installed kernels, add audit_backlog_limit=8192 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit_backlog_limit=8192""",,,,
+V-57171,SRG-OS-000255-GPOS-00096,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the identity of any individual or process associated with the event.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without information that establishes the identity of the subjects (i.e., users or processes acting on behalf of users) associated with the events, security personnel cannot determine responsibility for the potentially harmful event.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system produces audit records containing information to establish the identity of any individual or process associated with the event. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to produce audit records containing information to establish the identity of any individual or process associated with the event.,The audit package should be installed.,,,,
 V-57171,SRG-OS-000255-GPOS-00096,TBD - Assigned by DISA after STIG release,The operating system must produce audit records containing information to establish the identity of any individual or process associated with the event.,CCE-80872-5:Enable auditd Service,"Without information that establishes the identity of the subjects (i.e., users or processes acting on behalf of users) associated with the events, security personnel cannot determine responsibility for the potentially harmful event.","The auditd service is an essential userspace component of
 the Linux Auditing System, as it is responsible for writing audit records to
 disk.
@@ -16983,15 +17060,12 @@ by a user other than root correct its
 ownership with the following command:
 $ sudo chgrp root DIR","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Shared libraries are stored in the following directories:
-/lib
-/lib64
-/usr/lib
-/usr/lib64
-For each of these directories, run the following command to find files not
-owned by root:
-$ sudo find -L $DIR ! -user root -type d -exec chgrp root {} \;
-      Is it the case that any of these directories are not group-owned by root?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system-wide shared library directories are group-owned by ""root"" with the following command:
+
+$ sudo find /lib /lib64 /usr/lib /usr/lib64 ! -group root -type d -exec stat -c ""%n %G"" '{}' \;
+
+If any system-wide shared library directory is returned and is not group-owned by a required system account, this is a finding.
+      Is it the case that any system-wide shared library directory is returned and is not group-owned by a required system account?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System-wide shared library files, which are linked to executables
 during process load time or run time, are stored in the following directories
 by default:
@@ -17023,15 +17097,10 @@ by a user other than root correct its
 ownership with the following command:
 $ sudo chown root DIR","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Shared libraries are stored in the following directories:
-/lib
-/lib64
-/usr/lib
-/usr/lib64
-For each of these directories, run the following command to find files not
-owned by root:
-$ sudo find -L $DIR ! -user root -type d -exec chown root {} \;
-      Is it the case that any of these directories are not owned by root?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system-wide shared library directories are owned by ""root"" with the following command:
+
+$ sudo find /lib /lib64 /usr/lib /usr/lib64 ! -user root -type d -exec stat -c ""%n %U"" '{}' \;
+      Is it the case that any system-wide shared library directory is not owned by root?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System-wide shared library files, which are linked to executables
 during process load time or run time, are stored in the following directories
 by default:
@@ -17087,7 +17156,7 @@ should not be group-writable or world-writable. If any file in these
 directories is found to be group-writable or world-writable, correct
 its permission with the following command:
 $ sudo chmod go-w DIR",,,,
-V-57183,SRG-OS-000259-GPOS-00100,TBD - Assigned by DISA after STIG release,The operating system must limit privileges to change software resident within software libraries.,CCE-86519-6:Verify that system commands files are group owned by root ," If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
+V-57183,SRG-OS-000259-GPOS-00100,TBD - Assigned by DISA after STIG release,The operating system must limit privileges to change software resident within software libraries.,CCE-86519-6:Verify that system commands files are group owned by root," If the operating system were to allow any user to make changes to software libraries, then those changes might be implemented without undergoing the appropriate testing and approvals that are part of a robust change management process.
 
 This requirement applies to operating systems with software libraries that are accessible and configurable, as in the case of interpreted languages. Software libraries also include privileged programs which execute with escalated privileges. Only qualified and authorized individuals shall be allowed to obtain access to information system components for purposes of initiating changes, including upgrades and modifications.","System commands files are stored in the following directories by default:
 /bin
@@ -17102,17 +17171,10 @@ If the directory, or any file in these directories, is found to be owned
 by a group other than root correct its ownership with the following command:
 $ sudo chgrp root FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","System commands are stored in the following directories:
-/bin
-/sbin
-/usr/bin
-/usr/sbin
-/usr/local/bin
-/usr/local/sbin
-For each of these directories, run the following command to find files not
-owned by root group:
-$ sudo find -L $DIR ! -group root -type f \;
-      Is it the case that any of these files are not owned by root group?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system commands contained in the following directories are group-owned by ""root"", or a required system account, with the following command:
+
+$ sudo find -L /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin ! -group root -exec ls -l {} \;
+      Is it the case that any system commands are returned and is not group-owned by a required system account?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System commands files are stored in the following directories by default:
 /bin
 /sbin
@@ -17141,18 +17203,10 @@ to be owned by a user other than root, correct its ownership with the
 following command:
 $ sudo chown root FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","System executables are stored in the following directories by default:
-/bin
-/sbin
-/usr/bin
-/usr/libexec
-/usr/local/bin
-/usr/local/sbin
-/usr/sbin
-To find system executables that are not owned by root,
-run the following command for each directory DIR which contains system executables:
-$ sudo find DIR/ \! -user root
-      Is it the case that any system executables are found to not be owned by root?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system commands contained in the following directories are owned by ""root"" with the following command:
+
+$ sudo find -L /bin /sbin /usr/bin /usr/sbin /usr/libexec /usr/local/bin /usr/local/sbin ! -user root -exec ls -l {} \;
+      Is it the case that any system commands are found to not be owned by root?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System executables are stored in the following directories by default:
 /bin
 /sbin
@@ -17183,15 +17237,10 @@ directories, is found to be owned by a user other than root correct its
 ownership with the following command:
 $ sudo chown root FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Shared libraries are stored in the following directories:
-/lib
-/lib64
-/usr/lib
-/usr/lib64
-For each of these directories, run the following command to find files not
-owned by root:
-$ sudo find -L $DIR ! -user root -exec chown root {} \;
-      Is it the case that any of these files are not owned by root?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system-wide shared library files are owned by ""root"" with the following command:
+
+$ sudo find -L /lib /lib64 /usr/lib /usr/lib64 ! -user root -exec ls -l {} \;
+      Is it the case that any system wide shared library file is not owned by root?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System-wide shared library files, which are linked to executables
 during process load time or run time, are stored in the following directories
 by default:
@@ -17222,18 +17271,10 @@ to be group-writable or world-writable, correct its permission with the
 following command:
 $ sudo chmod go-w FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","System executables are stored in the following directories by default:
-/bin
-/sbin
-/usr/bin
-/usr/libexec
-/usr/local/bin
-/usr/local/sbin
-/usr/sbin
-To find system executables that are group-writable or world-writable,
-run the following command for each directory DIR which contains system executables:
-$ sudo find -L DIR -perm /022 -type f
-      Is it the case that any system executables are found to be group or world writable?
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system commands contained in the following directories have mode ""755"" or less permissive with the following command:
+
+$ sudo find -L /bin /sbin /usr/bin /usr/sbin /usr/libexec /usr/local/bin /usr/local/sbin -perm /022 -exec ls -l {} \;
+      Is it the case that any system commands are found to be group-writable or world-writable?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System executables are stored in the following directories by default:
 /bin
 /sbin
@@ -17264,16 +17305,10 @@ directories is found to be group-writable or world-writable, correct
 its permission with the following command:
 $ sudo chmod go-w FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Shared libraries are stored in the following directories:
-/lib
-/lib64
-/usr/lib
-/usr/lib64
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system-wide shared library files contained in the following directories have mode ""755"" or less permissive with the following command:
 
-To find shared libraries that are group-writable or world-writable,
-run the following command for each directory DIR which contains shared libraries:
-$ sudo find -L DIR -perm /022 -type f
-      Is it the case that any of these files are group-writable or world-writable?
+$ sudo find -L /lib /lib64 /usr/lib /usr/lib64 -perm /022 -type f -exec ls -l {} \;
+      Is it the case that any system-wide shared library file is found to be group-writable or world-writable?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System-wide shared library files, which are linked to executables
 during process load time or run time, are stored in the following directories
 by default:
@@ -17303,16 +17338,10 @@ access. If any of these files is not group-owned by root, correct its group-owne
 the following command:
 $ sudo chgrp root FILE","
                   Applicable - Configurable
-                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","System-wide library files are stored in the following directories:
-/lib
-/lib64
-/usr/lib
-/usr/lib64
+                ","Verify the operating system limits privileges to change software resident within software libraries. If it does not, this is a finding.","Verify the system-wide shared library files are group-owned by ""root"" with the following command:
 
-To find if system-wide library files stored in these directories are not group-owned by
-root run the following command for each directory DIR:
-$ sudo find -L DIR ! -group root -type f 
-      Is it the case that system wide library files are not group-owned by root?
+$ sudo find -L /lib /lib64 /usr/lib /usr/lib64 ! -group root -exec ls -l {} \;
+      Is it the case that any system wide shared library file is returned and is not group-owned by a required system account?
       ",Configure the operating system to limit privileges to change software resident within software libraries.,"System-wide library files are stored in the following directories
 by default:
 /lib
@@ -18665,6 +18694,28 @@ This requirement enables organizations to extend or limit auditing as necessary 
                 ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",The audit package should be installed.,,,,
+SV-71499,SRG-OS-000337-GPOS-00129,TBD - Assigned by DISA after STIG release,"The operating system must provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.",CCE-80872-5:Enable auditd Service,"If authorized individuals do not have the ability to modify auditing parameters in response to a changing threat environment, the organization may not be able to effectively respond, and important forensic information may be lost.
+
+This requirement enables organizations to extend or limit auditing as necessary to meet organizational requirements. Auditing that is limited to conserve information system resources may be extended to address certain threat situations. In addition, auditing may be limited to a specific set of events to facilitate audit reduction, analysis, and reporting.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 SV-71505,SRG-OS-000341-GPOS-00132,TBD - Assigned by DISA after STIG release,"The operating system must allocate audit record storage capacity to store at least one weeks worth of audit records, when audit records are not immediately sent to a central audit record storage facility.",CCE-80854-3:Ensure /var/log/audit Located On Separate Partition,"In order to ensure operating systems have a sufficient storage capacity in which to write the audit logs, operating systems need to be able to allocate audit record storage capacity.
 
 The task of allocating audit record storage capacity is usually performed during initial installation of the operating system.","Audit logs are stored in the /var/log/audit directory.
@@ -18693,7 +18744,7 @@ prior to the audit daemon, add the argument audit_backlog_limit=8192 to the defa
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
 argument to newly installed kernels, add audit_backlog_limit=8192 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit_backlog_limit=8192""","
@@ -18716,7 +18767,7 @@ prior to the audit daemon, add the argument audit_backlog_limit=8192 to the defa
 GRUB 2 command line for the Linux operating system.
 To ensure that audit_backlog_limit=8192 is added as a kernel command line
 argument to newly installed kernels, add audit_backlog_limit=8192 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit_backlog_limit=8192 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit_backlog_limit=8192""",,,,
@@ -19095,6 +19146,28 @@ Audit reduction is a technique used to reduce the volume of audit records in ord
                 ","Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.,The audit package should be installed.,,,,
+V-57253,SRG-OS-000348-GPOS-00136,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports on-demand audit review and analysis.,CCE-80872-5:Enable auditd Service,"The ability to perform on-demand audit review and analysis, including after the audit data has been subjected to audit reduction, greatly facilitates the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
+
+Audit reduction is a technique used to reduce the volume of audit records in order to facilitate a manual review. Audit reduction does not alter original audit records. The report generation capability provided by the application must support on-demand (i.e., customizable, ad hoc, and as-needed) reports.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides an audit reduction capability that supports on-demand audit review and analysis. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57255,SRG-OS-000349-GPOS-00137,TBD - Assigned by DISA after STIG release,The operating system must provide an audit reduction capability that supports after-the-fact investigations of security incidents.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If the audit reduction capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
 
 Audit reduction capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.
@@ -19135,6 +19208,28 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
                 ","Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.,The audit package should be installed.,,,,
+SV-71517,SRG-OS-000350-GPOS-00138,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports on-demand audit review and analysis.,CCE-80872-5:Enable auditd Service,"The report generation capability must support on-demand review and analysis in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
+
+Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides a report generation capability that supports on-demand audit review and analysis. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57259,SRG-OS-000351-GPOS-00139,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports on-demand reporting requirements.,CCE-81043-2:Ensure the audit Subsystem is Installed,"The report generation capability must support on-demand reporting in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
 
 Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.",The audit package should be installed.,"
@@ -19142,6 +19237,28 @@ Report generation must be capable of generating on-demand (i.e., customizable, a
                 ","Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.,The audit package should be installed.,,,,
+V-57259,SRG-OS-000351-GPOS-00139,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports on-demand reporting requirements.,CCE-80872-5:Enable auditd Service,"The report generation capability must support on-demand reporting in order to facilitate the organization's ability to generate incident reports, as needed, to better handle larger-scale or more complex security incidents.
+
+Report generation must be capable of generating on-demand (i.e., customizable, ad hoc, and as-needed) reports. On-demand reporting allows personnel to report issues more rapidly to more effectively meet reporting requirements. Collecting log data and aggregating it to present the data in a single, consolidated report achieves this objective.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides a report generation capability that supports on-demand reporting requirements. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57261,SRG-OS-000352-GPOS-00140,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports after-the-fact investigations of security incidents.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If the report generation capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
 
 The report generation capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.",The audit package should be installed.,"
@@ -19149,6 +19266,28 @@ The report generation capability must support after-the-fact investigations of s
                 ","Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.,The audit package should be installed.,,,,
+V-57261,SRG-OS-000352-GPOS-00140,TBD - Assigned by DISA after STIG release,The operating system must provide a report generation capability that supports after-the-fact investigations of security incidents.,CCE-80872-5:Enable auditd Service,"If the report generation capability does not support after-the-fact investigations, it is difficult to establish, correlate, and investigate the events leading up to an outage or attack or identify those responses for one. This capability is also required to comply with applicable Federal laws and DoD policies.
+
+The report generation capability must support after-the-fact investigations of security incidents either natively or through the use of third-party tools.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system provides a report generation capability that supports after-the-fact investigations of security incidents. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57263,SRG-OS-000353-GPOS-00141,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides an audit reduction capability.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If the audit reduction capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
 
 Audit reduction is a process that manipulates collected audit information and organizes such information in a summary format that is more meaningful to analysts. Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
@@ -19158,6 +19297,30 @@ This requirement is specific to operating systems providing audit reduction capa
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.,The audit package should be installed.,,,,
+V-57263,SRG-OS-000353-GPOS-00141,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides an audit reduction capability.,CCE-80872-5:Enable auditd Service,"If the audit reduction capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
+
+Audit reduction is a process that manipulates collected audit information and organizes such information in a summary format that is more meaningful to analysts. Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
+
+This requirement is specific to operating systems providing audit reduction capabilities. The audit reduction capability can be met either natively or through the use of third-party tools.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system does not alter original content or time ordering of audit records when it provides an audit reduction capability. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 SV-71525,SRG-OS-000354-GPOS-00142,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides a report generation capability.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If the report generation capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
 
 Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
@@ -19167,6 +19330,30 @@ This requirement is specific to operating systems providing report generation ca
                 ","Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.,The audit package should be installed.,,,,
+SV-71525,SRG-OS-000354-GPOS-00142,TBD - Assigned by DISA after STIG release,The operating system must not alter original content or time ordering of audit records when it provides a report generation capability.,CCE-80872-5:Enable auditd Service,"If the report generation capability alters the content or time ordering of audit records, the integrity of the audit records is compromised, and the records are no longer usable for forensic analysis.
+
+Time ordering refers to the chronological organization of records based on time stamps. The degree of time stamp precision can affect this.
+
+This requirement is specific to operating systems providing report generation capabilities. The report generation capability can be met either natively or through the use of third-party tools.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system does not alter original content or time ordering of audit records when it provides a report generation capability. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57267,SRG-OS-000355-GPOS-00143,TBD - Assigned by DISA after STIG release,"The operating system must, for networked systems, compare internal information system clocks at least every 24 hours with a server which is synchronized to one of the redundant United States Naval Observatory (USNO) time servers, or a time server designated for the appropriate DoD network (NIPRNet/SIPRNet), and/or the Global Positioning System (GPS).",CCE-84059-5:Configure Time Service Maxpoll Interval,"Inaccurate time stamps make it more difficult to correlate events and can lead to an inaccurate analysis. Determining the correct time a particular event occurred on a system is critical when conducting forensic analysis and investigating system events. Sources outside the configured acceptable allowance (drift) may be inaccurate.
 
 Synchronizing internal information system clocks provides uniformity of time stamps for information systems with multiple system clocks and systems connected over a network.
@@ -19260,13 +19447,28 @@ Time stamps generated by the operating system include date and time. Granularity
                 ","Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,The audit package should be installed.,,,,
-V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,CCE-81043-2:Ensure the audit Subsystem is Installed,"If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
+SV-71453,SRG-OS-000358-GPOS-00145,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,CCE-80872-5:Enable auditd Service,"Without sufficient granularity of time stamps, it is not possible to adequately determine the chronological order of records.
 
-Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.",The audit package should be installed.,"
+Time stamps generated by the operating system include date and time. Granularity of time measurements refers to the degree of synchronization between information system clocks and reference clocks.","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
                   Applicable - Configurable
-                ","Verify the operating system records time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT). If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the audit package is not installed?
-      ",Configure the operating system to record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,The audit package should be installed.,,,,
+                ","Verify the operating system records time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 V-57189,SRG-OS-000359-GPOS-00146,TBD - Assigned by DISA after STIG release,The operating system must record time stamps for audit records that can be mapped to Coordinated Universal Time (UTC) or Greenwich Mean Time (GMT).,CCE-84059-5:Configure Time Service Maxpoll Interval,"If time stamps are not consistently applied and there is no common time reference, it is difficult to perform forensic analysis.
 
 Time stamps generated by the operating system include date and time. Time is commonly expressed in Coordinated Universal Time (UTC), a modern continuation of Greenwich Mean Time (GMT), or local time with an offset from UTC.","The maxpoll should be configured to
@@ -20491,6 +20693,17 @@ offline_credentials_expiration = 1
 V-56797,SRG-OS-000384-GPOS-00167,TBD - Assigned by DISA after STIG release,"The operating system, for PKI-based authentication, must implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.","V-56797:The operating system, for PKI-based authentication, must implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.","Without configuring a local cache of revocation data, there is the potential to allow access to users who are no longer authorized (users with revoked certificates).","<VulnDiscussion>Without configuring a local cache of revocation data, there is the potential to allow access to users who are no longer authorized (users with revoked certificates).</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>","
                   Applicable - Configurable
                 ","Verify the operating system, for PKI-based authentication, implements a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network. If it does not, this is a finding.",,"Configure the operating system, for PKI-based authentication, to implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.","<VulnDiscussion>Without configuring a local cache of revocation data, there is the potential to allow access to users who are no longer authorized (users with revoked certificates).</VulnDiscussion><FalsePositives></FalsePositives><FalseNegatives></FalseNegatives><Documentable>false</Documentable><Mitigations></Mitigations><SeverityOverrideGuidance></SeverityOverrideGuidance><PotentialImpacts></PotentialImpacts><ThirdPartyTools></ThirdPartyTools><MitigationControl></MitigationControl><Responsibility></Responsibility><IAControls></IAControls>",,,,
+V-56795,SRG-OS-000392-GPOS-00172,TBD - Assigned by DISA after STIG release,The operating system must audit all activities performed during nonlocal maintenance and diagnostic sessions.,CCE-81043-2:Ensure the audit Subsystem is Installed,"If events associated with nonlocal administrative access or diagnostic sessions are not logged, a major tool for assessing and investigating attacks would not be available.
+
+This requirement addresses auditing-related issues associated with maintenance tools used specifically for diagnostic and repair actions on organizational information systems.
+
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.
+
+This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system, for example, the software implementing ""ping,"" ""ls,"" ""ipconfig,"" or the hardware and software implementing the monitoring port of an Ethernet switch.",The audit package should be installed.,"
+                  Applicable - Configurable
+                ","Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
+      Is it the case that the audit package is not installed?
+      ",Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.,The audit package should be installed.,,,,
 V-56795,SRG-OS-000392-GPOS-00172,TBD - Assigned by DISA after STIG release,The operating system must audit all activities performed during nonlocal maintenance and diagnostic sessions.,CCE-80872-5:Enable auditd Service,"If events associated with nonlocal administrative access or diagnostic sessions are not logged, a major tool for assessing and investigating attacks would not be available.
 
 This requirement addresses auditing-related issues associated with maintenance tools used specifically for diagnostic and repair actions on organizational information systems.
@@ -20528,7 +20741,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -20551,7 +20764,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -23650,7 +23863,7 @@ add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
 argument to newly installed kernels, add slub_debug=P to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""","
@@ -23673,7 +23886,7 @@ add the argument slub_debug=P to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that slub_debug=P is added as a kernel command line
 argument to newly installed kernels, add slub_debug=P to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... slub_debug=P ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""slub_debug=P""",,,,
@@ -23684,7 +23897,7 @@ add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
 argument to newly installed kernels, add pti=on to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""pti=on""","
@@ -23707,7 +23920,7 @@ add the argument pti=on to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that pti=on is added as a kernel command line
 argument to newly installed kernels, add pti=on to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... pti=on ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""pti=on""",,,,
@@ -25066,7 +25279,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -25089,7 +25302,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -29577,7 +29790,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -29600,7 +29813,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -31922,7 +32135,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""","
@@ -31945,7 +32158,7 @@ prior to the audit daemon, add the argument audit=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that audit=1 is added as a kernel command line
 argument to newly installed kernels, add audit=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... audit=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""audit=1""",,,,
@@ -31979,13 +32192,6 @@ utility to read audit rules during daemon startup, add the following lines to
 /etc/audit/audit.rules file in order to watch for unattempted manual
 edits of files involved in storing logon events:
 -w /var/log/lastlog -p wa -k logins",,,,
-V-56609,SRG-OS-000474-GPOS-00219,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful accesses to objects occur.,CCE-81043-2:Ensure the audit Subsystem is Installed,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
-
-Audit records can be generated from various components within the information system (e.g., module or policy filter).",The audit package should be installed.,"
-                  Applicable - Configurable
-                ","Verify the operating system generates audit records when successful/unsuccessful accesses to objects occur. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the audit package is not installed?
-      ",Configure the operating system to generate audit records when successful/unsuccessful accesses to objects occur.,The audit package should be installed.,,,,
 V-56609,SRG-OS-000474-GPOS-00219,TBD - Assigned by DISA after STIG release,The operating system must generate audit records when successful/unsuccessful accesses to objects occur.,CCE-80686-9:Record Events that Modify the System's Discretionary Access Controls - chown,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
 Audit records can be generated from various components within the information system (e.g., module or policy filter).","At a minimum, the audit system should collect file permission
@@ -32400,6 +32606,28 @@ Audit records can be generated from various components within the information sy
                 ","Verify the operating system generates audit records for all direct access to the information system. If it does not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
       Is it the case that the audit package is not installed?
       ",Configure the operating system to generate audit records for all direct access to the information system.,The audit package should be installed.,,,,
+SV-70867,SRG-OS-000475-GPOS-00220,TBD - Assigned by DISA after STIG release,The operating system must generate audit records for all direct access to the information system.,CCE-80872-5:Enable auditd Service,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).","The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service","
+                  Applicable - Configurable
+                ","Verify the operating system generates audit records for all direct access to the information system. If it does not, this is a finding.","
+
+Run the following command to determine the current status of the
+auditd service:
+$ systemctl is-active auditd
+If the service is running, it should return the following: active
+      Is it the case that the auditd service is not running?
+      ",Configure the operating system to generate audit records for all direct access to the information system.,"The auditd service is an essential userspace component of
+the Linux Auditing System, as it is responsible for writing audit records to
+disk.
+
+The auditd service can be enabled with the following command:
+$ sudo systemctl enable auditd.service",,,,
 SV-70867,SRG-OS-000475-GPOS-00220,TBD - Assigned by DISA after STIG release,The operating system must generate audit records for all direct access to the information system.,CCE-82828-5:Configure immutable Audit login UIDs,"Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
 
 Audit records can be generated from various components within the information system (e.g., module or policy filter).","Configure kernel to prevent modification of login UIDs once they are set.
@@ -33870,35 +34098,6 @@ $ sudo grep -ri ""UMASK"" /home
 There should be no output.
       Is it the case that the above command returns no output, or if the umask is configured incorrectly?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",Remove the UMASK environment variable from all interactive users initialization files.,,,,
-SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-81043-2:Ensure the audit Subsystem is Installed,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
-
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.",The audit package should be installed.,"
-                  Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","Run the following command to determine if the audit package is installed: $ rpm -q audit
-      Is it the case that the audit package is not installed?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",The audit package should be installed.,,,,
-SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80872-5:Enable auditd Service,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
-
-Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","The auditd service is an essential userspace component of
-the Linux Auditing System, as it is responsible for writing audit records to
-disk.
-
-The auditd service can be enabled with the following command:
-$ sudo systemctl enable auditd.service","
-                  Applicable - Configurable
-                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","
-
-Run the following command to determine the current status of the
-auditd service:
-$ systemctl is-active auditd
-If the service is running, it should return the following: active
-      Is it the case that the auditd service is not running?
-      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The auditd service is an essential userspace component of
-the Linux Auditing System, as it is responsible for writing audit records to
-disk.
-
-The auditd service can be enabled with the following command:
-$ sudo systemctl enable auditd.service",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-82233-8:Include Local Events in Audit Logs,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","To configure Audit daemon to include local events in Audit logs, set
@@ -33939,7 +34138,7 @@ add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
 argument to newly installed kernels, add vsyscall=none to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""vsyscall=none""","
@@ -33962,7 +34161,7 @@ add the argument vsyscall=none to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that vsyscall=none is added as a kernel command line
 argument to newly installed kernels, add vsyscall=none to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... vsyscall=none ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""vsyscall=none""",,,,
@@ -35231,7 +35430,7 @@ add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
 argument to newly installed kernels, add page_poison=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""page_poison=1""","
@@ -35254,7 +35453,7 @@ add the argument page_poison=1 to the default
 GRUB 2 command line for the Linux operating system.
 To ensure that page_poison=1 is added as a kernel command line
 argument to newly installed kernels, add page_poison=1 to the
-default Grub2 command line for Linux operating systems.  Modify the line within
+default Grub2 command line for Linux operating systems. Modify the line within
 /etc/default/grub as shown below:
 GRUB_CMDLINE_LINUX=""... page_poison=1 ...""
 Run the following command to update command line for already installed kernels:# grubby --update-kernel=ALL --args=""page_poison=1""",,,,
