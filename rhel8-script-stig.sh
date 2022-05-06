@@ -3325,7 +3325,7 @@ for home_dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6 }' /etc/p
     # Only update the permissions when necessary. This will avoid changing the inode timestamp when
     # the permission is already defined as expected, therefore not impacting in possible integrity
     # check systems that also check inodes timestamps.
-    find $home_dir -perm /7027 -exec chmod u-s,g-w-s,o=- {} \;
+    find "$home_dir" -maxdepth 0 -perm /7027 -exec chmod u-s,g-w-s,o=- {} \;
 done
 # END fix for 'file_permissions_home_directories'
 

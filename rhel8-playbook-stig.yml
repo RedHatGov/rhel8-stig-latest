@@ -6985,15 +6985,14 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: Test for existence home directories to avoid creating them, but only fixing
-        group ownership
+    - name: Test for existence home directories to avoid creating them.
       ansible.builtin.stat:
         path: '{{ item.value[4] }}'
       register: path_exists
       loop: '{{ local_users }}'
       when:
-        - item.value[2]|int >= 1000
-        - item.value[2]|int != 65534
+        - item.value[1]|int >= 1000
+        - item.value[1]|int != 65534
       tags:
         - CCE-84038-9
         - DISA-STIG-RHEL-08-010730
@@ -7004,11 +7003,13 @@
         - no_reboot_needed
         - restrict_strategy
 
-    - name: Ensure interactive local users are the group-owners of their respective home
-        directories
+    - name: Ensure interactive local users have proper permissions on their respective
+        home directories
       ansible.builtin.file:
         path: '{{ item.0.value[4] }}'
         mode: u-s,g-w-s,o=-
+        follow: false
+        recurse: false
       loop: '{{ local_users|zip(path_exists.results)|list }}'
       when: item.1.stat is defined and item.1.stat.exists
       tags:

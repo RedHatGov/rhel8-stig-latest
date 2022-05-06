@@ -1481,7 +1481,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish what type of events occurred.,"The auditd service is an essential userspace component of
@@ -3872,7 +3872,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish when (date and time) the events occurred.,"The auditd service is an essential userspace component of
@@ -3905,7 +3905,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish where the events occurred.,"The auditd service is an essential userspace component of
@@ -3957,7 +3957,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the source of the events.,"The auditd service is an essential userspace component of
@@ -3986,7 +3986,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the outcome of the events.,"The auditd service is an essential userspace component of
@@ -6259,7 +6259,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing the individual identities of group account users.,"The auditd service is an essential userspace component of
@@ -6413,7 +6413,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide the capability to centrally review and analyze audit records from multiple components within the system.,"The auditd service is an essential userspace component of
@@ -6455,7 +6455,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide the capability to filter audit records for events of interest based upon all audit fields within audit records.,"The auditd service is an essential userspace component of
@@ -6573,7 +6573,7 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
 If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs has more permissive mode?
+      Is it the case that audit logs have a more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized read access.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -6816,7 +6816,7 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
 If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs has more permissive mode?
+      Is it the case that audit logs have a more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized modification.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -7067,7 +7067,7 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
 If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs has more permissive mode?
+      Is it the case that audit logs have a more permissive mode?
       ",Configure the operating system to protect audit information from unauthorized deletion.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the mode of the audit log files with the following command:
 $ sudo chmod 0750 /var/log/audit
@@ -7288,7 +7288,7 @@ If it does not, this is a finding.","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ","Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -12717,7 +12717,6 @@ length credit for each lowercase character. Modify the lcredit setting in
                 ","Verify the operating system enforces password complexity by requiring that at least one lower-case character be used. If it does not, this is a finding.","To check how many lowercase characters are required in a password, run the following command:
 $ grep lcredit /etc/security/pwquality.conf
 The lcredit parameter (as a negative number) will indicate how many special characters are required.
-The DoD and FISMA require at least one lowercase character in a password. This would appear as lcredit = -1.
       Is it the case that lcredit is not found or not less than or equal to the required value?
       ",Configure the operating system to enforce password complexity by requiring that at least one lower-case character be used.,"The pam_pwquality module's lcredit parameter controls requirements for
 usage of lowercase letters in a password. When set to a negative number, any password will be required to
@@ -12735,7 +12734,6 @@ length credit for each digit. Modify the dcredit setting in
                 ","Verify the operating system enforces password complexity by requiring that at least one numeric character be used. If it does not, this is a finding.","To check how many digits are required in a password, run the following command:
 $ grep dcredit /etc/security/pwquality.conf
 The dcredit parameter (as a negative number) will indicate how many digits are required.
-The DoD requires at least one digit in a password. This would appear as dcredit = -1.
       Is it the case that dcredit is not found or not equal to or less than the required value?
       ",Configure the operating system to enforce password complexity by requiring that at least one numeric character be used.,"The pam_pwquality module's dcredit parameter controls requirements for
 usage of digits in a password. When set to a negative number, any password will be required to
@@ -13018,13 +13016,10 @@ V-56701,SRG-OS-000075-GPOS-00043,TBD - Assigned by DISA after STIG release,Opera
 lifetime by running the following command:
 $ sudo chage -m 1 USER","
                   Applicable - Configurable
-                ","Verify operating system enforces 24 hours/1 day as the minimum password lifetime. If it does not, this is a finding.","Check whether the minimum time period between password changes for each
-user account is one day or greater by running the following command for
-each user:
-$ sudo chage -l USER | grep Minimum
-The output for each user should return something similary to the following:
-Minimum number of days between password change\t\t: 1
-      Is it the case that existing passwords are not configured correctly?
+                ","Verify operating system enforces 24 hours/1 day as the minimum password lifetime. If it does not, this is a finding.","Check whether the minimum time period between password changes for each user account is one day or greater.
+
+$ sudo awk -F: '$4 < 1 {print $1 """" """" $4}' /etc/shadow
+      Is it the case that any results are returned that are not associated with a system account?
       ",Configure operating system to enforce 24 hours/1 day as the minimum password lifetime.,"Configure non-compliant accounts to enforce a 24 hours/1 day minimum password
 lifetime by running the following command:
 $ sudo chage -m 1 USER",,,,
@@ -13898,7 +13893,7 @@ $ sudo systemctl enable firewalld.service","
 
 Run the following command to determine the current status of the
 firewalld service:
-$ systemctl is-active firewalld
+$ sudo systemctl is-active firewalld
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","
@@ -13908,23 +13903,23 @@ V-56751,SRG-OS-000096-GPOS-00050,TBD - Assigned by DISA after STIG release,"The 
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
 
-To support the requirements and principles of least functionality, the operating system must support the organizational requirements, providing only essential capabilities and limiting the use of ports, protocols, and/or services to only those required, authorized, and approved to conduct official business or to address authorized quality of life issues.","Configure the firewalld ports to allow approved
-services to have access to the system. To configure firewalld
-to open ports, run the following command:
-$ sudo firewall-cmd --permanent --add-port=port_number/tcp
-or
-$ sudo firewall-cmd --permanent --add-port=service_name","
+To support the requirements and principles of least functionality, the operating system must support the organizational requirements, providing only essential capabilities and limiting the use of ports, protocols, and/or services to only those required, authorized, and approved to conduct official business or to address authorized quality of life issues.","Configure the firewalld ports to allow approved services to have access to the system.
+To configure firewalld to open ports, run the following command:
+firewall-cmd --permanent --add-port=port_number/tcp
+To configure firewalld to allow access for pre-defined services, run the following
+command:
+firewall-cmd --permanent --add-service=service_name","
                   Applicable - Configurable
-                ","Verify the operating system is configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured
-correctly by running the following command:
+                ","Verify the operating system is configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured correctly by running
+the following command:
 $ sudo firewall-cmd --list-all
-      Is it the case that the default rules are not configured?
-      ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","Configure the firewalld ports to allow approved
-services to have access to the system. To configure firewalld
-to open ports, run the following command:
-$ sudo firewall-cmd --permanent --add-port=port_number/tcp
-or
-$ sudo firewall-cmd --permanent --add-port=service_name",,,,
+      Is it the case that the firewalld rules are not configured?
+      ","Configure the operating system to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.","Configure the firewalld ports to allow approved services to have access to the system.
+To configure firewalld to open ports, run the following command:
+firewall-cmd --permanent --add-port=port_number/tcp
+To configure firewalld to allow access for pre-defined services, run the following
+command:
+firewall-cmd --permanent --add-service=service_name",,,,
 V-56751,SRG-OS-000096-GPOS-00050,TBD - Assigned by DISA after STIG release,"The operating system must be configured to prohibit or restrict the use of functions, ports, protocols, and/or services, as defined in the PPSM CAL and vulnerability assessments.",CCE-82988-7:Disable chrony daemon from acting as server,"In order to prevent unauthorized connection of devices, unauthorized transfer of information, or unauthorized tunneling (i.e., embedding of data types within data types), organizations must disable or restrict unused or unnecessary physical and logical ports/protocols on information systems.
 
 Operating systems are capable of providing a wide variety of functions and services. Some of the functions and services provided by default may not be necessary to support essential organizational operations. Additionally, it is sometimes convenient to provide multiple services from a single component (e.g., VPN and IPS); however, doing so increases risk over limiting the services provided by any one component.
@@ -14260,19 +14255,19 @@ $ sudo systemctl mask --now autofs.service","
                 ","Verify the operating system uniquely identifies peripherals before establishing a connection. If it does not, this is a finding.","
 To check that the autofs service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled autofs
+$ sudo systemctl is-enabled autofs
 Output should indicate the autofs service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled autofs disabled
+$ sudo systemctl is-enabled autofs disabled
 
 Run the following command to verify autofs is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active autofs
+$ sudo systemctl is-active autofs
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the autofs is masked, run the following command:
-$ systemctl show autofs | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show autofs | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -14543,7 +14538,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand reporting requirements.,"The auditd service is an essential userspace component of
@@ -16841,7 +16836,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to initiate session audits at system start-up.,"The auditd service is an essential userspace component of
@@ -16930,7 +16925,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to produce audit records containing information to establish the identity of any individual or process associated with the event.,"The auditd service is an essential userspace component of
@@ -17369,8 +17364,6 @@ to require use of a special character in passwords.","
 $ grep ocredit /etc/security/pwquality.conf
 The ocredit parameter (as a negative number) will indicate how many special
 characters are required.
-The DoD and FISMA require at least one special character in a password.
-This would appear as ocredit = -1.
       Is it the case that value of ""ocredit"" is a positive number or is commented out?
       ",Configure the operating system to enforce password complexity by requiring that at least one special character be used.,"The pam_pwquality module's ocredit= parameter controls requirements for
 usage of special (or ""other"") characters in a password. When set to a negative number,
@@ -17644,7 +17637,7 @@ $ sudo systemctl enable firewalld.service","
 
 Run the following command to determine the current status of the
 firewalld service:
-$ systemctl is-active firewalld
+$ sudo systemctl is-active firewalld
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ",Configure the operating system to control remote access methods.,"
@@ -17654,23 +17647,23 @@ SV-71473,SRG-OS-000297-GPOS-00115,TBD - Assigned by DISA after STIG release,The 
 
 Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
 
-Operating system functionality (e.g., RDP) must be capable of taking enforcement action if the audit reveals unauthorized activity. Automated control of remote access sessions allows organizations to ensure ongoing compliance with remote access policies by enforcing connection rules of remote access applications on a variety of information system components (e.g., servers, workstations, notebook computers, smartphones, and tablets).","Configure the firewalld ports to allow approved
-services to have access to the system. To configure firewalld
-to open ports, run the following command:
-$ sudo firewall-cmd --permanent --add-port=port_number/tcp
-or
-$ sudo firewall-cmd --permanent --add-port=service_name","
+Operating system functionality (e.g., RDP) must be capable of taking enforcement action if the audit reveals unauthorized activity. Automated control of remote access sessions allows organizations to ensure ongoing compliance with remote access policies by enforcing connection rules of remote access applications on a variety of information system components (e.g., servers, workstations, notebook computers, smartphones, and tablets).","Configure the firewalld ports to allow approved services to have access to the system.
+To configure firewalld to open ports, run the following command:
+firewall-cmd --permanent --add-port=port_number/tcp
+To configure firewalld to allow access for pre-defined services, run the following
+command:
+firewall-cmd --permanent --add-service=service_name","
                   Applicable - Configurable
-                ","Verify the operating system controls remote access methods. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured
-correctly by running the following command:
+                ","Verify the operating system controls remote access methods. If it does not, this is a finding.","Inspect the list of enabled firewall ports and verify they are configured correctly by running
+the following command:
 $ sudo firewall-cmd --list-all
-      Is it the case that the default rules are not configured?
-      ",Configure the operating system to control remote access methods.,"Configure the firewalld ports to allow approved
-services to have access to the system. To configure firewalld
-to open ports, run the following command:
-$ sudo firewall-cmd --permanent --add-port=port_number/tcp
-or
-$ sudo firewall-cmd --permanent --add-port=service_name",,,,
+      Is it the case that the firewalld rules are not configured?
+      ",Configure the operating system to control remote access methods.,"Configure the firewalld ports to allow approved services to have access to the system.
+To configure firewalld to open ports, run the following command:
+firewall-cmd --permanent --add-port=port_number/tcp
+To configure firewalld to allow access for pre-defined services, run the following
+command:
+firewall-cmd --permanent --add-service=service_name",,,,
 V-57215,SRG-OS-000298-GPOS-00116,TBD - Assigned by DISA after STIG release,The operating system must provide the capability to immediately disconnect or disable remote access to the operating system.,CCE-82998-6:Install firewalld Package,"Without the ability to immediately disconnect or disable remote access, an attack or other compromise taking place would not be immediately stopped.
 
 Operating system remote access functionality must have the capability to immediately disconnect current users remotely accessing the information system and/or disable further remote access. The speed of disconnect or disablement varies based on the criticality of missions functions and the need to eliminate immediate or future remote access to organizational information systems.
@@ -18355,19 +18348,19 @@ $ sudo systemctl mask --now debug-shell.service","
                 ","Verify that the operating system prevents non-privileged users from executing privileged functions to include disabling, circumventing, or altering implemented security safeguards/countermeasures. If it does not, this is a finding.","
 To check that the debug-shell service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled debug-shell
+$ sudo systemctl is-enabled debug-shell
 Output should indicate the debug-shell service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled debug-shell disabled
+$ sudo systemctl is-enabled debug-shell disabled
 
 Run the following command to verify debug-shell is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active debug-shell
+$ sudo systemctl is-active debug-shell
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the debug-shell is masked, run the following command:
-$ systemctl show debug-shell | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show debug-shell | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -18707,7 +18700,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ","Configure the operating system to provide the capability for assigned IMOs/ISSOs or designated SAs to change the auditing to be performed on all operating system components, based on all selectable event criteria in near real time.","The auditd service is an essential userspace component of
@@ -19159,7 +19152,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide an audit reduction capability that supports on-demand audit review and analysis.,"The auditd service is an essential userspace component of
@@ -19192,7 +19185,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide an audit reduction capability that supports after-the-fact investigations of security incidents.,"The auditd service is an essential userspace component of
@@ -19221,7 +19214,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to provide a report generation capability that supports on-demand audit review and analysis.,"The auditd service is an essential userspace component of
@@ -19250,7 +19243,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Ensure the operating system provides a report generation capability that supports on-demand reporting requirements.,"The auditd service is an essential userspace component of
@@ -19279,7 +19272,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Ensure the operating system provides a report generation capability that supports after-the-fact investigations of security incidents.,"The auditd service is an essential userspace component of
@@ -19312,7 +19305,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides an audit reduction capability.,"The auditd service is an essential userspace component of
@@ -19345,7 +19338,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to not alter original content or time ordering of audit records when it provides a report generation capability.,"The auditd service is an essential userspace component of
@@ -19460,7 +19453,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to record time stamps for audit records that meet a minimum granularity of one second for a minimum degree of precision.,"The auditd service is an essential userspace component of
@@ -19663,7 +19656,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to audit the enforcement actions used to restrict access associated with changes to the system.,"The auditd service is an essential userspace component of
@@ -20189,7 +20182,7 @@ $ sudo systemctl enable fapolicyd.service","
 
 Run the following command to determine the current status of the
 fapolicyd service:
-$ systemctl is-active fapolicyd
+$ sudo systemctl is-active fapolicyd
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The File Access Policy service should be enabled.
@@ -20226,7 +20219,7 @@ $ sudo systemctl enable fapolicyd.service","
 
 Run the following command to determine the current status of the
 fapolicyd service:
-$ systemctl is-active fapolicyd
+$ sudo systemctl is-active fapolicyd
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ","Configure the operating system to employ a deny-all, permit-by-exception policy to allow the execution of authorized software programs.","The File Access Policy service should be enabled.
@@ -20537,19 +20530,19 @@ $ sudo systemctl mask --now autofs.service","
                 ","Verify the operating system authenticates peripherals before establishing a connection. If it does not, this is a finding.","
 To check that the autofs service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled autofs
+$ sudo systemctl is-enabled autofs
 Output should indicate the autofs service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled autofs disabled
+$ sudo systemctl is-enabled autofs disabled
 
 Run the following command to verify autofs is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active autofs
+$ sudo systemctl is-active autofs
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the autofs is masked, run the following command:
-$ systemctl show autofs | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show autofs | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -20620,7 +20613,7 @@ $ sudo systemctl enable usbguard.service","
 
 Run the following command to determine the current status of the
 usbguard service:
-$ systemctl is-active usbguard
+$ sudo systemctl is-active usbguard
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ",Configure the operating system to authenticate peripherals before establishing a connection.,"The USBGuard service should be enabled.
@@ -20721,7 +20714,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.,"The auditd service is an essential userspace component of
@@ -23612,7 +23605,7 @@ $ sudo systemctl enable sshd.service","
 
 Run the following command to determine the current status of the
 sshd service:
-$ systemctl is-active sshd
+$ sudo systemctl is-active sshd
 If the service is running, it should return the following: active
       Is it the case that sshd service is disabled?
       ",Configure the operating system to protect the confidentiality and integrity of transmitted information.,"The SSH server service, sshd, is commonly needed.
@@ -23678,7 +23671,7 @@ If it does not, this is a finding.","
 
 Run the following command to determine the current status of the
 sshd service:
-$ systemctl is-active sshd
+$ sudo systemctl is-active sshd
 If the service is running, it should return the following: active
       Is it the case that sshd service is disabled?
       ","Configure the operating system to implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect changes to information during transmission unless otherwise protected by alternative physical safeguards, such as, at a minimum, a Protected Distribution System (PDS).","The SSH server service, sshd, is commonly needed.
@@ -23713,7 +23706,7 @@ $ sudo systemctl enable sshd.service","
 
 Run the following command to determine the current status of the
 sshd service:
-$ systemctl is-active sshd
+$ sudo systemctl is-active sshd
 If the service is running, it should return the following: active
       Is it the case that sshd service is disabled?
       ",Configure the operating system to maintain the confidentiality and integrity of information during preparation for transmission.,"The SSH server service, sshd, is commonly needed.
@@ -23778,7 +23771,7 @@ $ sudo systemctl enable sshd.service","
 
 Run the following command to determine the current status of the
 sshd service:
-$ systemctl is-active sshd
+$ sudo systemctl is-active sshd
 If the service is running, it should return the following: active
       Is it the case that sshd service is disabled?
       ",Configure the operating system to maintain the confidentiality and integrity of information during reception.,"The SSH server service, sshd, is commonly needed.
@@ -32619,7 +32612,7 @@ $ sudo systemctl enable auditd.service","
 
 Run the following command to determine the current status of the
 auditd service:
-$ systemctl is-active auditd
+$ sudo systemctl is-active auditd
 If the service is running, it should return the following: active
       Is it the case that the auditd service is not running?
       ",Configure the operating system to generate audit records for all direct access to the information system.,"The auditd service is an essential userspace component of
@@ -33721,19 +33714,19 @@ $ sudo systemctl mask --now debug-shell.service","
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","
 To check that the debug-shell service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled debug-shell
+$ sudo systemctl is-enabled debug-shell
 Output should indicate the debug-shell service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled debug-shell disabled
+$ sudo systemctl is-enabled debug-shell disabled
 
 Run the following command to verify debug-shell is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active debug-shell
+$ sudo systemctl is-active debug-shell
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the debug-shell is masked, run the following command:
-$ systemctl show debug-shell | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show debug-shell | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -34196,7 +34189,7 @@ $ sudo systemctl enable rsyslog.service","
 
 Run the following command to determine the current status of the
 rsyslog service:
-$ systemctl is-active rsyslog
+$ sudo systemctl is-active rsyslog
 If the service is running, it should return the following: active
       Is it the case that ?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The rsyslog service provides syslog-style logging by default on Red Hat Enterprise Linux 8.
@@ -34371,7 +34364,7 @@ $ sudo systemctl enable firewalld.service","
 
 Run the following command to determine the current status of the
 firewalld service:
-$ systemctl is-active firewalld
+$ sudo systemctl is-active firewalld
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","
@@ -34908,19 +34901,19 @@ $ sudo systemctl mask --now autofs.service","
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","
 To check that the autofs service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled autofs
+$ sudo systemctl is-enabled autofs
 Output should indicate the autofs service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled autofs disabled
+$ sudo systemctl is-enabled autofs disabled
 
 Run the following command to verify autofs is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active autofs
+$ sudo systemctl is-active autofs
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the autofs is masked, run the following command:
-$ systemctl show autofs | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show autofs | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -35480,19 +35473,19 @@ $ sudo systemctl mask --now kdump.service","
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","
 To check that the kdump service is disabled in system boot configuration,
 run the following command:
-$ systemctl is-enabled kdump
+$ sudo systemctl is-enabled kdump
 Output should indicate the kdump service has either not been installed,
 or has been disabled at all runlevels, as shown in the example below:
-$ systemctl is-enabled kdump disabled
+$ sudo systemctl is-enabled kdump disabled
 
 Run the following command to verify kdump is not active (i.e. not running) through current runtime configuration:
-$ systemctl is-active kdump
+$ sudo systemctl is-active kdump
 
 If the service is not running the command will return the following output:
 inactive
 
 The service will also be masked, to check that the kdump is masked, run the following command:
-$ systemctl show kdump | grep ""LoadState\|UnitFileState""
+$ sudo systemctl show kdump | grep ""LoadState\|UnitFileState""
 
 If the service is masked the command will return the following outputs:
 
@@ -35663,7 +35656,7 @@ $ sudo systemctl enable rngd.service","
 
 Run the following command to determine the current status of the
 rngd service:
-$ systemctl is-active rngd
+$ sudo systemctl is-active rngd
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The Hardware RNG Entropy Gatherer service should be enabled.
@@ -36279,7 +36272,7 @@ $ sudo systemctl enable firewalld.service","
 
 Run the following command to determine the current status of the
 firewalld service:
-$ systemctl is-active firewalld
+$ sudo systemctl is-active firewalld
 If the service is running, it should return the following: active
       Is it the case that the service is not enabled?
       ","Ensure the operating system's application firewall is enabled, if available.","
