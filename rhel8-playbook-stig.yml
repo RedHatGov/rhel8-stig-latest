@@ -735,6 +735,69 @@
       changed_when: false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
+        - CCE-82155-3
+        - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-7
+        - NIST-800-53-SC-12
+        - NIST-800-53-SC-12(2)
+        - NIST-800-53-SC-12(3)
+        - NIST-800-53-SC-13
+        - enable_dracut_fips_module
+        - high_severity
+        - medium_complexity
+        - medium_disruption
+        - reboot_required
+        - restrict_strategy
+
+    - name: Enable FIPS mode
+      command: /usr/bin/fips-mode-setup --enable
+      when:
+        - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        - is_fips_enabled.stdout.find('FIPS mode is enabled.') == -1
+      tags:
+        - CCE-82155-3
+        - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-7
+        - NIST-800-53-SC-12
+        - NIST-800-53-SC-12(2)
+        - NIST-800-53-SC-12(3)
+        - NIST-800-53-SC-13
+        - enable_dracut_fips_module
+        - high_severity
+        - medium_complexity
+        - medium_disruption
+        - reboot_required
+        - restrict_strategy
+
+    - name: Enable Dracut FIPS Module
+      lineinfile:
+        path: /etc/dracut.conf.d/40-fips.conf
+        line: add_dracutmodules+=" fips "
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+        - CCE-82155-3
+        - DISA-STIG-RHEL-08-010020
+        - NIST-800-53-CM-6(a)
+        - NIST-800-53-IA-7
+        - NIST-800-53-SC-12
+        - NIST-800-53-SC-12(2)
+        - NIST-800-53-SC-12(3)
+        - NIST-800-53-SC-13
+        - enable_dracut_fips_module
+        - high_severity
+        - medium_complexity
+        - medium_disruption
+        - reboot_required
+        - restrict_strategy
+
+    - name: Check to see the current status of FIPS mode
+      command: /usr/bin/fips-mode-setup --check
+      register: is_fips_enabled
+      changed_when: false
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
         - CCE-80942-6
         - DISA-STIG-RHEL-08-010020
         - NIST-800-53-CM-3(6)
@@ -26327,6 +26390,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_ra.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26391,6 +26455,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26461,6 +26526,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_source_route.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26525,6 +26591,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_ra.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26589,6 +26656,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26653,6 +26721,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_source_route.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26723,6 +26792,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.accept_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26793,6 +26863,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.accept_source_route.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26863,6 +26934,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.rp_filter.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -26930,6 +27002,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.accept_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27000,6 +27073,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.accept_source_route.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27070,6 +27144,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.icmp_echo_ignore_broadcasts.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27137,6 +27212,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.send_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27210,6 +27286,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.send_redirects.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27283,6 +27360,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.ipv4.ip_forward.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27702,6 +27780,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*fs.protected_hardlinks.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -27760,6 +27839,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*fs.protected_symlinks.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31221,6 +31301,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.core_pattern.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31276,6 +31357,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.dmesg_restrict.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31337,6 +31419,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.kexec_load_disabled.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31392,6 +31475,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.perf_event_paranoid.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31447,6 +31531,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.unprivileged_bpf_disabled.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31505,6 +31590,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.yama.ptrace_scope.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31560,6 +31646,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*net.core.bpf_jit_harden.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31618,6 +31705,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*user.max_user_namespaces.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31850,6 +31938,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.kptr_restrict.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -31914,6 +32003,7 @@
         paths: /etc/sysctl.d/
         contains: ^[\s]*kernel.randomize_va_space.*$
         patterns: '*.conf'
+        file_type: any
       register: find_sysctl_d
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:

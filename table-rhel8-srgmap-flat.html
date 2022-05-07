@@ -2034,8 +2034,7 @@ Remote access is access to DoD nonpublic information systems by an authorized us
 
 Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.</td>
 <td>System running in FIPS mode is indicated by kernel parameter
-<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code>
-in FIPS mode.
+<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code> in FIPS mode.
 To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
 </td>
@@ -2049,8 +2048,7 @@ crypto.fips_enabled = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3728r557066_fix">Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.</fixtext></td>
 <td>System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable</td>
 <td>high</td>
@@ -16159,7 +16157,7 @@ run the command:
 $ ls -l /etc/audit/auditd.conf
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /etc/audit/auditd.conf has unix mode -rw-r-----?
+      Is it the case that /etc/audit/auditd.conf does not have unix mode -rw-r-----?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3745r557585_fix">Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</fixtext></td>
 <td>
@@ -16188,7 +16186,7 @@ run the command:
 $ ls -l /etc/audit/rules.d/*.rules
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /etc/audit/rules.d/*.rules has unix mode -rw-r-----?
+      Is it the case that /etc/audit/rules.d/*.rules does not have unix mode -rw-r-----?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3745r557585_fix">Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.</fixtext></td>
 <td>
@@ -17680,9 +17678,11 @@ when changing passwords.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.</td>
 <td>To check how many characters must differ during a password change, run the following command:
-$ grep difok /etc/security/pwquality.conf
+$ sudo grep difok /etc/security/pwquality.conf
+difok = 
+
 The difok parameter will indicate how many characters must differ.
-      Is it the case that difok is not found or not equal to or greater than the required value?
+      Is it the case that difok is not found or set to less than the required value?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3753r557609_fix"> Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.</fixtext></td>
 <td>The pam_pwquality module's difok parameter sets the number of characters
@@ -17715,9 +17715,8 @@ to prevent a run of (<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/
 <td>Applicable - Configurable</td>
 <td>Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.</td>
 <td>To check the value for maximum consecutive repeating characters, run the following command:
-$ grep maxclassrepeat /etc/security/pwquality.conf
-For DoD systems, the output should show maxclassrepeat=4 or less but greater than zero.
-      Is it the case that that is not the case?
+$ sudo grep maxclassrepeat /etc/security/pwquality.conf
+      Is it the case that the value of "maxclassrepeat" is set to "0", more than "&lt;sub idref="var_password_pam_maxclassrepeat" /&gt;" or is commented out?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3753r557609_fix"> Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.</fixtext></td>
 <td>The pam_pwquality module's maxclassrepeat parameter controls requirements for
@@ -17749,10 +17748,8 @@ run of (<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" id
 <td>Applicable - Configurable</td>
 <td>Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.</td>
 <td>To check the maximum value for consecutive repeating characters, run the following command:
-$ grep maxrepeat /etc/security/pwquality.conf
-Look for the value of the maxrepeat parameter. The DoD requirement is 3, which would appear as
-maxrepeat=3.
-      Is it the case that maxrepeat is not found or not greater than or equal to the required value?
+$ sudo grep maxrepeat /etc/security/pwquality.conf
+      Is it the case that the value of "maxrepeat" is set to more than "&lt;sub idref="var_password_pam_maxrepeat" /&gt;" or is commented out?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3753r557609_fix"> Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.</fixtext></td>
 <td>The pam_pwquality module's maxrepeat parameter controls requirements for
@@ -17796,11 +17793,11 @@ differing categories of characters when changing passwords.</td>
 <td>Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.</td>
 <td>To check how many categories of characters must be used in password during a password change,
 run the following command:
-$ grep minclass /etc/security/pwquality.conf
+$ sudo grep minclass /etc/security/pwquality.conf
 The minclass parameter will indicate how many character classes must be used. If
-the requirement was for the password to contain characters from three different categories,
-then this would appear as minclass = 3.
-      Is it the case that minclass is not found or not set equal to or greater than the required value?
+the requirement was for the password to contain characters from  different categories,
+then this would appear as minclass = .
+      Is it the case that the value of "minclass" is set to less than "&lt;sub idref="var_password_pam_minclass" /&gt;" or is commented out?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3753r557609_fix"> Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.</fixtext></td>
 <td>The pam_pwquality module's minclass parameter controls
@@ -17837,9 +17834,14 @@ the system will use SHA-512 as the hashing algorithm:
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.</td>
-<td>Inspect /etc/login.defs and ensure the following line appears:
+<td>Verify that the shadow password suite configuration is set to encrypt password with a FIPS 140-2 approved cryptographic hashing algorithm.
+
+Check the hashing algorithm that is being used to hash passwords with the following command:
+
+$ sudo grep -i ENCRYPT_METHOD /etc/login.defs
+
 ENCRYPT_METHOD SHA512
-      Is it the case that it does not?
+      Is it the case that ENCRYPT_METHOD is not set to SHA512?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3754r557612_fix">Configure the operating system to store only encrypted representations of passwords.</fixtext></td>
 <td>In /etc/login.defs, add or correct the following line to ensure
@@ -17907,11 +17909,7 @@ the default.</td>
 <td>CCE-80893-1:Set PAM's Password Hashing Algorithm</td>
 <td>Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.</td>
 <td>The PAM system service can be configured to only store encrypted
-representations of passwords. In
-
-<code>/etc/pam.d/system-auth</code>,
-
-the
+representations of passwords. In "/etc/pam.d/password-auth", the
 <code>password</code> section of the file controls which PAM modules execute
 during a password change. Set the <code>pam_unix.so</code> module in the
 <code>password</code> section to include the argument <code>sha512</code>, as shown
@@ -17926,22 +17924,18 @@ the new passwords will be generated using the SHA-512 algorithm. This is
 the default.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.</td>
-<td>
-Inspect the password section of /etc/pam.d/system-auth
-
-and ensure that the pam_unix.so module includes the argument
+<td>Inspect the password section of /etc/pam.d/password-auth
+and ensure that the pam_unix.so module  is configured to use the argument
 sha512:
 
-$ grep sha512 /etc/pam.d/system-auth
-      Is it the case that it does not?
+$ sudo grep "^password.*pam_unix.so.*sha512" /etc/pam.d/password-auth
+
+password sufficient pam_unix.so sha512
+      Is it the case that "sha512" is missing, or is commented out?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3754r557612_fix">Configure the operating system to store only encrypted representations of passwords.</fixtext></td>
 <td>The PAM system service can be configured to only store encrypted
-representations of passwords. In
-
-/etc/pam.d/system-auth,
-
-the
+representations of passwords. In "/etc/pam.d/password-auth", the
 password section of the file controls which PAM modules execute
 during a password change. Set the pam_unix.so module in the
 password section to include the argument sha512, as shown
@@ -18005,7 +17999,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-<pre># sudo cut -d: -f2 /etc/shadow
+<pre>$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/</pre>
 Password hashes <code>!</code> or <code>*</code> indicate inactive accounts not
 available for logon and are not evaluated.
@@ -18016,7 +18010,7 @@ this is a finding.</td>
 <td>Check that the interactive user account passwords are using a strong
 password hash with the following command:
 
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 
@@ -18033,7 +18027,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -18196,15 +18190,8 @@ $ sudo chage -M  USER</td>
 <td>The operating system must prohibit password reuse for a minimum of five generations.</td>
 <td>CCE-83478-8:Limit Password Reuse: password-auth</td>
 <td>Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.</td>
-<td>Do not allow users to reuse recent passwords. This can be
-accomplished by using the <code>remember</code> option for the
-<code>pam_pwhistory</code> PAM modules.
-<br><br>
-In the file <code>/etc/pam.d/password-auth</code>, make sure the parameter
-<code>remember</code> is present, and that the value
-for the <code>remember</code> parameter is <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember"></xccdf-1.1:sub> or greater. For example:
-<pre>password <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember_control_flag"></xccdf-1.1:sub> pam_pwhistory.so <i>...existing_options...</i> remember=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember"></xccdf-1.1:sub> use_authtok</pre>
-The DoD STIG requirement is 5 passwords.</td>
+<td>Do not allow users to reuse recent passwords. This can be accomplished by using the
+<code>remember</code> option for the <code>pam_pwhistory</code> PAM module.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prohibits password reuse for a minimum of five generations. If it does not, this is a finding.</td>
 <td>Check that the operating system prohibits the reuse of a password for
@@ -18218,15 +18205,8 @@ out, has a second column value different from , does not contain
       Is it the case that the value of remember is not set equal to or greater than &lt;sub idref="var_password_pam_remember" /&gt;?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3758r557624_fix">Configure the operating system to prohibit password reuse for a minimum of five generations.</fixtext></td>
-<td>Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/password-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.</td>
+<td>Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -18239,37 +18219,23 @@ The DoD STIG requirement is 5 passwords.</td>
 <td>The operating system must prohibit password reuse for a minimum of five generations.</td>
 <td>CCE-83480-4:Limit Password Reuse: system-auth</td>
 <td>Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.</td>
-<td>Do not allow users to reuse recent passwords. This can be
-accomplished by using the <code>remember</code> option for the
-<code>pam_pwhistory</code> PAM modules.
-<br><br>
-In the file <code>/etc/pam.d/system-auth</code>, make sure the parameter
-<code>remember</code> is present, and that the value
-for the <code>remember</code> parameter is <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember"></xccdf-1.1:sub> or greater. For example:
-<pre>password <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember_control_flag"></xccdf-1.1:sub> pam_pwhistory.so <i>...existing_options...</i> remember=<xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_password_pam_remember"></xccdf-1.1:sub> use_authtok</pre>
-The DoD STIG requirement is 5 passwords.</td>
+<td>Do not allow users to reuse recent passwords. This can be accomplished by using the
+<code>remember</code> option for the <code>pam_pwhistory</code> PAM module.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prohibits password reuse for a minimum of five generations. If it does not, this is a finding.</td>
-<td>Check that the operating system prohibits the reuse of a password for
-a minimum of  generations with the following command:
+<td>Check that the operating system prohibits the reuse of a password for a minimum of
+ generations with the following command:
 # grep pam_pwhistory.so /etc/pam.d/system-auth
 password  pam_pwhistory.so remember= use_authtok
-If the command does not return a result, or the returned line is commented
-out, has a second column value different from , does not contain
-"remember" value, or the value is less than
-, this is a finding.
+If the command does not return a result, or the returned line is commented out, has a second
+column value different from ,
+does not contain "remember" value, or the value is less than ,
+this is a finding.
       Is it the case that the value of remember is not set equal to or greater than &lt;sub idref="var_password_pam_remember" /&gt;?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3758r557624_fix">Configure the operating system to prohibit password reuse for a minimum of five generations.</fixtext></td>
-<td>Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/system-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.</td>
+<td>Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -19799,9 +19765,10 @@ $ sudo yum install openssl-pkcs11</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system uses multifactor authentication for network access to privileged accounts. If it does not, this is a finding.</td>
-<td>
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+<td>Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3765r557647_fix">Configure the operating system to use multifactor authentication for network access to privileged accounts.</fixtext></td>
@@ -20366,7 +20333,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-<pre># sudo cut -d: -f2 /etc/shadow
+<pre>$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/</pre>
 Password hashes <code>!</code> or <code>*</code> indicate inactive accounts not
 available for logon and are not evaluated.
@@ -20377,7 +20344,7 @@ this is a finding.</td>
 <td>Check that the interactive user account passwords are using a strong
 password hash with the following command:
 
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 
@@ -20394,7 +20361,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -20709,8 +20676,7 @@ Some maintenance and test tools are either standalone devices with their own ope
 
 Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection. Typically, strong authentication requires authenticators that are resistant to replay attacks and employ multifactor authentication. Strong authenticators include, for example, PKI where certificates are stored on a token protected by a password, passphrase, or biometric.</td>
 <td>System running in FIPS mode is indicated by kernel parameter
-<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code>
-in FIPS mode.
+<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code> in FIPS mode.
 To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
 </td>
@@ -20724,8 +20690,7 @@ crypto.fips_enabled = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3778r557205_fix">Configure the operating system to employ strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions.</fixtext></td>
 <td>System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable</td>
 <td>high</td>
@@ -21967,7 +21932,7 @@ run the command:
 $ ls -l /var/log
 If properly configured, the output should indicate the following permissions:
 drwxr-xr-x
-      Is it the case that /var/log has unix mode drwxr-xr-x?
+      Is it the case that /var/log does not have unix mode drwxr-xr-x?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>
@@ -21998,7 +21963,7 @@ run the command:
 $ ls -l /var/log/messages
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /var/log/messages has unix mode -rw-r-----?
+      Is it the case that /var/log/messages does not have unix mode -rw-r-----?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3789r557238_fix">Configure the operating system to reveal error messages only to authorized users.</fixtext></td>
 <td>
@@ -29013,10 +28978,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /boot mount point,
     run the following command:
-    $ mount | grep '\s/boot\s'
+    $ sudo mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/boot" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -29051,10 +29016,10 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/dev/shm" file system does not have the "nodev" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nodev mount option can be used to prevent creation of device
@@ -29090,10 +29055,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/dev/shm" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries
@@ -29129,10 +29094,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/dev/shm" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent execution
@@ -29167,10 +29132,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/home" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -29206,7 +29171,7 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for non-root local partitions, run the following command:
-$ mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
+$ sudo mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
 The output shows local non-root partitions mounted without the nodev option, and there should be no output at all.
 
       Is it the case that some mounts appear among output lines?
@@ -29246,10 +29211,10 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/tmp" file system does not have the "nodev" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nodev mount option can be used to prevent device files from
@@ -29283,10 +29248,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/tmp" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries
@@ -29320,10 +29285,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/tmp" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -29360,10 +29325,10 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log/audit" file system does not have the "nodev" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nodev mount option can be used to prevent device files from
@@ -29399,10 +29364,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log/audit" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries
@@ -29436,10 +29401,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log/audit" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -29476,10 +29441,10 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log" file system does not have the "nodev" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nodev mount option can be used to prevent device files from
@@ -29515,10 +29480,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries
@@ -29552,10 +29517,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/log" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -29590,10 +29555,10 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nodev option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/tmp" file system does not have the "nodev" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nodev mount option can be used to prevent device files from
@@ -29627,10 +29592,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/tmp" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries
@@ -29664,10 +29629,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/var/tmp" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3846r375171_fix">Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -30126,9 +30091,10 @@ $ sudo yum install openssl-pkcs11</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.</td>
-<td>
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+<td>Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3852r375189_fix">Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</fixtext></td>
@@ -30278,9 +30244,10 @@ $ sudo yum install openssl-pkcs11</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system electronically verifies Personal Identity Verification (PIV) credentials. If it does not, this is a finding.</td>
-<td>
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+<td>Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3854r375195_fix">Configure the operating system to electronically verify Personal Identity Verification (PIV) credentials.</fixtext></td>
@@ -34349,8 +34316,7 @@ Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /
 <td>CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1</td>
 <td>Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.</td>
 <td>System running in FIPS mode is indicated by kernel parameter
-<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code>
-in FIPS mode.
+<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code> in FIPS mode.
 To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
 </td>
@@ -34364,8 +34330,7 @@ crypto.fips_enabled = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3864r375282_fix">Configure the operating system to implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</fixtext></td>
 <td>System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable</td>
 <td>high</td>
@@ -34647,8 +34612,7 @@ This requirement applies to both internal and external networks and all types of
 
 Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are employed, then logical means (cryptography) do not have to be employed, and vice versa.</td>
 <td>System running in FIPS mode is indicated by kernel parameter
-<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code>
-in FIPS mode.
+<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code> in FIPS mode.
 To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
 </td>
@@ -34662,8 +34626,7 @@ crypto.fips_enabled = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3873r375309_fix">Configure the operating system to protect the confidentiality and integrity of transmitted information.</fixtext></td>
 <td>System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable</td>
 <td>high</td>
@@ -48429,8 +48392,7 @@ form to /etc/audit/audit.rules:
 <td>Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.</td>
 <td>To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
-To enable FIPS, the system requires that the <code>fips</code> module is added in
-<code>dracut</code> configuration.
+To enable FIPS, the system requires that the <code>fips</code> module is added in <code>dracut</code> configuration.
 Check if <code>/etc/dracut.conf.d/40-fips.conf</code> contain <code>add_dracutmodules+=" fips "</code>
 </td>
 <td>Applicable - Configurable</td>
@@ -48444,8 +48406,7 @@ add_dracutmodules+=" fips "
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3901r375720_fix">Configure the operating system to implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</fixtext></td>
 <td>To enable FIPS mode, run the following command:
 fips-mode-setup --enable
-To enable FIPS, the system requires that the fips module is added in
-dracut configuration.
+To enable FIPS, the system requires that the fips module is added in dracut configuration.
 Check if /etc/dracut.conf.d/40-fips.conf contain add_dracutmodules+=" fips "</td>
 <td>high</td>
 <td></td>
@@ -48506,8 +48467,7 @@ Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /
 <td>CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1</td>
 <td>Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.</td>
 <td>System running in FIPS mode is indicated by kernel parameter
-<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code>
-in FIPS mode.
+<code>'crypto.fips_enabled'</code>. This parameter should be set to <code>1</code> in FIPS mode.
 To enable FIPS mode, run the following command:
 <pre>fips-mode-setup --enable</pre>
 </td>
@@ -48521,8 +48481,7 @@ crypto.fips_enabled = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3901r375720_fix">Configure the operating system to implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.</fixtext></td>
 <td>System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable</td>
 <td>high</td>
@@ -51676,10 +51635,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /boot mount point,
     run the following command:
-    $ mount | grep '\s/boot\s'
+    $ sudo mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/boot" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -51711,10 +51670,10 @@ Add the <code>noexec</code> option to the fourth column of
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To verify the noexec option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/home" file system does not have the "noexec" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>The noexec mount option can be used to prevent binaries from being
@@ -51746,10 +51705,10 @@ Add the <code>nosuid</code> option to the fourth column of
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To verify the nosuid option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the "/home" file system does not have the "nosuid" option set?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>The nosuid mount option can be used to prevent
@@ -51783,7 +51742,7 @@ Add the <code>nodev</code> option to the fourth column of
 <td>Applicable - Configurable</td>
 <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
 <td>To verify the nodev option is configured for non-root local partitions, run the following command:
-$ mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
+$ sudo mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
 The output shows local non-root partitions mounted without the nodev option, and there should be no output at all.
 
       Is it the case that some mounts appear among output lines?
@@ -52894,7 +52853,7 @@ run the command:
 $ ls -l /etc/ssh/*_key
 If properly configured, the output should indicate the following permissions:
 -rw-------
-      Is it the case that /etc/ssh/*_key has unix mode -rw-------?
+      Is it the case that /etc/ssh/*_key does not have unix mode -rw-------?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td>
@@ -52923,7 +52882,7 @@ run the command:
 $ ls -l /etc/ssh/*.pub
 If properly configured, the output should indicate the following permissions:
 -rw-r--r--
-      Is it the case that /etc/ssh/*.pub has unix mode -rw-r--r--?
+      Is it the case that /etc/ssh/*.pub does not have unix mode -rw-r--r--?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3905r375732_fix">Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</fixtext></td>
 <td> To properly set the permissions of /etc/ssh/*.pub, run the command: $ sudo chmod 0644 /etc/ssh/*.pub</td>

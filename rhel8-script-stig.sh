@@ -292,7 +292,18 @@ fi
 # BEGIN fix (8 / 377) for 'enable_dracut_fips_module'
 ###############################################################################
 (>&2 echo "Remediating rule 8/377: 'enable_dracut_fips_module'")
-# FIX FOR THIS RULE IS MISSING
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+fips-mode-setup --enable
+FIPS_CONF="/etc/dracut.conf.d/40-fips.conf"
+if ! grep "^add_dracutmodules+=\" fips \"" $FIPS_CONF; then
+    echo "add_dracutmodules+=\" fips \"" >> $FIPS_CONF
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'enable_dracut_fips_module'
 
 ###############################################################################

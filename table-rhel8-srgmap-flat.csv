@@ -1381,8 +1381,7 @@ V-56641,SRG-OS-000033-GPOS-00014,TBD - Assigned by DISA after STIG release,The o
 Remote access is access to DoD nonpublic information systems by an authorized user (or an information system) communicating through an external, non-organization-controlled network. Remote access methods include, for example, dial-up, broadband, and wireless.
 
 Encryption provides a means to secure the remote connection to prevent unauthorized access to the data traversing the remote access connection (e.g., RDP), thereby providing a degree of confidentiality. The encryption strength of a mechanism is selected based on the security categorization of the information.","System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable","
                   Applicable - Configurable
@@ -1392,8 +1391,7 @@ The output should contain the following:
 crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to implement DoD-approved encryption to protect the confidentiality of remote access sessions.,"System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
 V-56641,SRG-OS-000033-GPOS-00014,TBD - Assigned by DISA after STIG release,The operating system must implement DoD-approved encryption to protect the confidentiality of remote access sessions.,CCE-80937-6:Configure Libreswan to use System Crypto Policy,"Without confidentiality protection mechanisms, unauthorized individuals may gain access to sensitive information via a remote access session.
@@ -11666,7 +11664,7 @@ run the command:
 $ ls -l /etc/audit/auditd.conf
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /etc/audit/auditd.conf has unix mode -rw-r-----?
+      Is it the case that /etc/audit/auditd.conf does not have unix mode -rw-r-----?
       ",Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
 To properly set the permissions of /etc/audit/auditd.conf, run the command:
 $ sudo chmod 0640 /etc/audit/auditd.conf",,,,
@@ -11679,7 +11677,7 @@ run the command:
 $ ls -l /etc/audit/rules.d/*.rules
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /etc/audit/rules.d/*.rules has unix mode -rw-r-----?
+      Is it the case that /etc/audit/rules.d/*.rules does not have unix mode -rw-r-----?
       ",Configure the operating system to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which auditable events are to be audited.,"
 To properly set the permissions of /etc/audit/rules.d/*.rules, run the command:
 $ sudo chmod 0640 /etc/audit/rules.d/*.rules",,,,
@@ -12752,9 +12750,11 @@ to equal  to require differing characters
 when changing passwords.","
                   Applicable - Configurable
                 ","Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.","To check how many characters must differ during a password change, run the following command:
-$ grep difok /etc/security/pwquality.conf
+$ sudo grep difok /etc/security/pwquality.conf
+difok = 
+
 The difok parameter will indicate how many characters must differ.
-      Is it the case that difok is not found or not equal to or greater than the required value?
+      Is it the case that difok is not found or set to less than the required value?
       ", Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.,"The pam_pwquality module's difok parameter sets the number of characters
 in a password that must not be present in and old password during a password change.
 
@@ -12772,9 +12772,8 @@ maxclassrepeat setting in /etc/security/pwquality.conf to equal
 to prevent a run of ( + 1) or more identical characters.","
                   Applicable - Configurable
                 ","Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.","To check the value for maximum consecutive repeating characters, run the following command:
-$ grep maxclassrepeat /etc/security/pwquality.conf
-For DoD systems, the output should show maxclassrepeat=4 or less but greater than zero.
-      Is it the case that that is not the case?
+$ sudo grep maxclassrepeat /etc/security/pwquality.conf
+      Is it the case that the value of ""maxclassrepeat"" is set to ""0"", more than ""<sub idref=""var_password_pam_maxclassrepeat"" />"" or is commented out?
       ", Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.,"The pam_pwquality module's maxclassrepeat parameter controls requirements for
 consecutive repeating characters from the same character class. When set to a positive number, it will reject passwords
 which contain more than that number of consecutive characters from the same character class. Modify the
@@ -12791,10 +12790,8 @@ in /etc/security/pwquality.conf to equal  to prevent a
 run of ( + 1) or more identical characters.","
                   Applicable - Configurable
                 ","Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.","To check the maximum value for consecutive repeating characters, run the following command:
-$ grep maxrepeat /etc/security/pwquality.conf
-Look for the value of the maxrepeat parameter. The DoD requirement is 3, which would appear as
-maxrepeat=3.
-      Is it the case that maxrepeat is not found or not greater than or equal to the required value?
+$ sudo grep maxrepeat /etc/security/pwquality.conf
+      Is it the case that the value of ""maxrepeat"" is set to more than ""<sub idref=""var_password_pam_maxrepeat"" />"" or is commented out?
       ", Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.,"The pam_pwquality module's maxrepeat parameter controls requirements for
 consecutive repeating characters. When set to a positive number, it will reject passwords
 which contain more than that number of consecutive characters. Modify the maxrepeat setting
@@ -12823,11 +12820,11 @@ differing categories of characters when changing passwords.","
                   Applicable - Configurable
                 ","Verify the operating system requires the change of at least eight of the total number of characters when passwords are changed. If it does not, this is a finding.","To check how many categories of characters must be used in password during a password change,
 run the following command:
-$ grep minclass /etc/security/pwquality.conf
+$ sudo grep minclass /etc/security/pwquality.conf
 The minclass parameter will indicate how many character classes must be used. If
-the requirement was for the password to contain characters from three different categories,
-then this would appear as minclass = 3.
-      Is it the case that minclass is not found or not set equal to or greater than the required value?
+the requirement was for the password to contain characters from  different categories,
+then this would appear as minclass = .
+      Is it the case that the value of ""minclass"" is set to less than ""<sub idref=""var_password_pam_minclass"" />"" or is commented out?
       ", Configure the operating system to require the change of at least eight of the total number of characters when passwords are changed.,"The pam_pwquality module's minclass parameter controls
 requirements for usage of different character classes, or types, of character
 that must exist in a password before it is considered valid. For example,
@@ -12848,9 +12845,14 @@ V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The o
 the system will use SHA-512 as the hashing algorithm:
 ENCRYPT_METHOD SHA512","
                   Applicable - Configurable
-                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","Inspect /etc/login.defs and ensure the following line appears:
+                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","Verify that the shadow password suite configuration is set to encrypt password with a FIPS 140-2 approved cryptographic hashing algorithm.
+
+Check the hashing algorithm that is being used to hash passwords with the following command:
+
+$ sudo grep -i ENCRYPT_METHOD /etc/login.defs
+
 ENCRYPT_METHOD SHA512
-      Is it the case that it does not?
+      Is it the case that ENCRYPT_METHOD is not set to SHA512?
       ",Configure the operating system to store only encrypted representations of passwords.,"In /etc/login.defs, add or correct the following line to ensure
 the system will use SHA-512 as the hashing algorithm:
 ENCRYPT_METHOD SHA512",,,,
@@ -12889,11 +12891,7 @@ This will help ensure when local users change their passwords, hashes for
 the new passwords will be generated using the SHA-512 algorithm. This is
 the default.",,,,
 V-56697,SRG-OS-000073-GPOS-00041,TBD - Assigned by DISA after STIG release,The operating system must store only encrypted representations of passwords.,CCE-80893-1:Set PAM's Password Hashing Algorithm,"Passwords need to be protected at all times, and encryption is the standard method for protecting passwords. If passwords are not encrypted, they can be plainly read (i.e., clear text) and easily compromised.","The PAM system service can be configured to only store encrypted
-representations of passwords. In
-
-/etc/pam.d/system-auth,
-
-the
+representations of passwords. In ""/etc/pam.d/password-auth"", the
 password section of the file controls which PAM modules execute
 during a password change. Set the pam_unix.so module in the
 password section to include the argument sha512, as shown
@@ -12907,20 +12905,16 @@ This will help ensure when local users change their passwords, hashes for
 the new passwords will be generated using the SHA-512 algorithm. This is
 the default.","
                   Applicable - Configurable
-                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","
-Inspect the password section of /etc/pam.d/system-auth
-
-and ensure that the pam_unix.so module includes the argument
+                ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","Inspect the password section of /etc/pam.d/password-auth
+and ensure that the pam_unix.so module  is configured to use the argument
 sha512:
 
-$ grep sha512 /etc/pam.d/system-auth
-      Is it the case that it does not?
+$ sudo grep ""^password.*pam_unix.so.*sha512"" /etc/pam.d/password-auth
+
+password sufficient pam_unix.so sha512
+      Is it the case that ""sha512"" is missing, or is commented out?
       ",Configure the operating system to store only encrypted representations of passwords.,"The PAM system service can be configured to only store encrypted
-representations of passwords. In
-
-/etc/pam.d/system-auth,
-
-the
+representations of passwords. In ""/etc/pam.d/password-auth"", the
 password section of the file controls which PAM modules execute
 during a password change. Set the pam_unix.so module in the
 password section to include the argument sha512, as shown
@@ -12957,7 +12951,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -12967,7 +12961,7 @@ this is a finding.","
                 ","Verify the operating system stores only encrypted representations of passwords. If it does not, this is a finding.","Check that the interactive user account passwords are using a strong
 password hash with the following command:
 
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 
@@ -12982,7 +12976,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -13055,15 +13049,8 @@ $ sudo awk -F: '$5 <= 0 {print $1 """" """" $5}' /etc/shadow
       ",Configure operating system to enforce a 60-day maximum password lifetime restriction. ,"Configure non-compliant accounts to enforce a -day maximum password lifetime
 restriction by running the following command:
 $ sudo chage -M  USER",,,,
-SV-70965,SRG-OS-000077-GPOS-00045,TBD - Assigned by DISA after STIG release,The operating system must prohibit password reuse for a minimum of five generations.,CCE-83478-8:Limit Password Reuse: password-auth,"Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.","Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/password-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.","
+SV-70965,SRG-OS-000077-GPOS-00045,TBD - Assigned by DISA after STIG release,The operating system must prohibit password reuse for a minimum of five generations.,CCE-83478-8:Limit Password Reuse: password-auth,"Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.","Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.","
                   Applicable - Configurable
                 ","Verify the operating system prohibits password reuse for a minimum of five generations. If it does not, this is a finding.","Check that the operating system prohibits the reuse of a password for
 a minimum of  generations with the following command:
@@ -13074,43 +13061,22 @@ out, has a second column value different from , does not contain
 ""remember"" value, or the value is less than
 , this is a finding.
       Is it the case that the value of remember is not set equal to or greater than <sub idref=""var_password_pam_remember"" />?
-      ",Configure the operating system to prohibit password reuse for a minimum of five generations.,"Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/password-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.",,,,
-SV-70965,SRG-OS-000077-GPOS-00045,TBD - Assigned by DISA after STIG release,The operating system must prohibit password reuse for a minimum of five generations.,CCE-83480-4:Limit Password Reuse: system-auth,"Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.","Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/system-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.","
+      ",Configure the operating system to prohibit password reuse for a minimum of five generations.,"Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.",,,,
+SV-70965,SRG-OS-000077-GPOS-00045,TBD - Assigned by DISA after STIG release,The operating system must prohibit password reuse for a minimum of five generations.,CCE-83480-4:Limit Password Reuse: system-auth,"Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. If the information system or application allows the user to consecutively reuse their password when that password has exceeded its defined lifetime, the end result is a password that is not changed as per policy requirements.","Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.","
                   Applicable - Configurable
-                ","Verify the operating system prohibits password reuse for a minimum of five generations. If it does not, this is a finding.","Check that the operating system prohibits the reuse of a password for
-a minimum of  generations with the following command:
+                ","Verify the operating system prohibits password reuse for a minimum of five generations. If it does not, this is a finding.","Check that the operating system prohibits the reuse of a password for a minimum of
+ generations with the following command:
 # grep pam_pwhistory.so /etc/pam.d/system-auth
 password  pam_pwhistory.so remember= use_authtok
-If the command does not return a result, or the returned line is commented
-out, has a second column value different from , does not contain
-""remember"" value, or the value is less than
-, this is a finding.
+If the command does not return a result, or the returned line is commented out, has a second
+column value different from ,
+does not contain ""remember"" value, or the value is less than ,
+this is a finding.
       Is it the case that the value of remember is not set equal to or greater than <sub idref=""var_password_pam_remember"" />?
-      ",Configure the operating system to prohibit password reuse for a minimum of five generations.,"Do not allow users to reuse recent passwords. This can be
-accomplished by using the remember option for the
-pam_pwhistory PAM modules.
-
-In the file /etc/pam.d/system-auth, make sure the parameter
-remember is present, and that the value
-for the remember parameter is  or greater. For example:
-password  pam_pwhistory.so ...existing_options... remember= use_authtok
-The DoD STIG requirement is 5 passwords.",,,,
+      ",Configure the operating system to prohibit password reuse for a minimum of five generations.,"Do not allow users to reuse recent passwords. This can be accomplished by using the
+remember option for the pam_pwhistory PAM module.",,,,
 V-56743,SRG-OS-000078-GPOS-00046,TBD - Assigned by DISA after STIG release,The operating system must enforce a minimum 15-character password length.,CCE-80656-2:Ensure PAM Enforces Password Requirements - Minimum Length,"The shorter the password, the lower the number of possible combinations that need to be tested before the password is compromised.
 
 Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. Password length is one factor of several that helps to determine strength and how long it takes to crack a password. Use of more characters in a password helps to exponentially increase the time and/or resources required to compromise the password.","The pam_pwquality module's minlen parameter controls requirements for
@@ -13988,9 +13954,10 @@ The openssl-pkcs11 package can be installed with the following command:
 
 $ sudo yum install openssl-pkcs11","
                   Applicable - Configurable
-                ","Verify the operating system uses multifactor authentication for network access to privileged accounts. If it does not, this is a finding.","
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+                ","Verify the operating system uses multifactor authentication for network access to privileged accounts. If it does not, this is a finding.","Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       ",Configure the operating system to use multifactor authentication for network access to privileged accounts.,"Configure the operating system to implement multifactor authentication by
 installing the required package with the following command:
@@ -14414,7 +14381,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -14424,7 +14391,7 @@ this is a finding.","
                 ","Verify the operating system uses mechanisms meeting the requirements of applicable federal laws, Executive orders, directives, policies, regulations, standards, and guidance for authentication to a cryptographic module. If it does not, this is a finding.","Check that the interactive user account passwords are using a strong
 password hash with the following command:
 
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 
@@ -14439,7 +14406,7 @@ configuration be set to encrypt interactive user passwords using a strong
 cryptographic hash.
 Check that the interactive user account passwords are using a strong
 password hash with the following command:
-# sudo cut -d: -f2 /etc/shadow
+$ sudo cut -d: -f2 /etc/shadow
 $6$kcOnRq/5$NUEYPuyL.wghQwWssXRcLRFiiru7f5JPV6GaJhNC2aK5F3PZpE/BCCtwrxRc/AInKMNX3CdMw11m9STiql12f/
 Password hashes ! or * indicate inactive accounts not
 available for logon and are not evaluated.
@@ -14620,8 +14587,7 @@ SV-71071,SRG-OS-000125-GPOS-00065,TBD - Assigned by DISA after STIG release,The 
 Some maintenance and test tools are either standalone devices with their own operating systems or are applications bundled with an operating system.
 
 Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection. Typically, strong authentication requires authenticators that are resistant to replay attacks and employ multifactor authentication. Strong authenticators include, for example, PKI where certificates are stored on a token protected by a password, passphrase, or biometric.","System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable","
                   Applicable - Configurable
@@ -14631,8 +14597,7 @@ The output should contain the following:
 crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to employ strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions.,"System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
 SV-71089,SRG-OS-000126-GPOS-00066,TBD - Assigned by DISA after STIG release,The operating system must terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.,SV-71089:The operating system must terminate all sessions and network connections related to nonlocal maintenance when nonlocal maintenance is completed.," If a maintenance session or connection remains open after maintenance is completed, it may be hijacked by an attacker and used to compromise or damage the system.
@@ -15395,7 +15360,7 @@ run the command:
 $ ls -l /var/log
 If properly configured, the output should indicate the following permissions:
 drwxr-xr-x
-      Is it the case that /var/log has unix mode drwxr-xr-x?
+      Is it the case that /var/log does not have unix mode drwxr-xr-x?
       ",Configure the operating system to reveal error messages only to authorized users.,"
 To properly set the permissions of /var/log, run the command:
 $ sudo chmod 0755 /var/log",,,,
@@ -15410,7 +15375,7 @@ run the command:
 $ ls -l /var/log/messages
 If properly configured, the output should indicate the following permissions:
 -rw-r-----
-      Is it the case that /var/log/messages has unix mode -rw-r-----?
+      Is it the case that /var/log/messages does not have unix mode -rw-r-----?
       ",Configure the operating system to reveal error messages only to authorized users.,"
 To properly set the permissions of /var/log/messages, run the command:
 $ sudo chmod 0640 /var/log/messages",,,,
@@ -19750,10 +19715,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /boot mount point,
     run the following command:
-    $ mount | grep '\s/boot\s'
+    $ sudo mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/boot"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /boot. The SUID and SGID permissions
 should not be required on the boot partition.
@@ -19773,10 +19738,10 @@ Add the nodev option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/dev/shm"" file system does not have the ""nodev"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nodev mount option can be used to prevent creation of device
 files in /dev/shm. Legitimate character and block devices should
 not exist within temporary directories like /dev/shm.
@@ -19797,10 +19762,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the noexec option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/dev/shm"" file system does not have the ""noexec"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The noexec mount option can be used to prevent binaries
 from being executed out of /dev/shm.
 It can be dangerous to allow the execution of binaries
@@ -19821,10 +19786,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /dev/shm mount point,
     run the following command:
-    $ mount | grep '\s/dev/shm\s'
+    $ sudo mount | grep '\s/dev/shm\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/dev/shm"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent execution
 of setuid programs in /dev/shm.  The SUID and SGID permissions should not
 be required in these world-writable directories.
@@ -19844,10 +19809,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/home"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /home. The SUID and SGID permissions
 should not be required in these user data directories.
@@ -19868,7 +19833,7 @@ Add the nodev option to the fourth column of
     any non-root local partitions.","
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for non-root local partitions, run the following command:
-$ mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
+$ sudo mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
 The output shows local non-root partitions mounted without the nodev option, and there should be no output at all.
 
       Is it the case that some mounts appear among output lines?
@@ -19893,10 +19858,10 @@ Add the nodev option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/tmp"" file system does not have the ""nodev"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nodev mount option can be used to prevent device files from
 being created in /tmp. Legitimate character and block devices
 should not exist within temporary directories like /tmp.
@@ -19915,10 +19880,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the noexec option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/tmp"" file system does not have the ""noexec"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The noexec mount option can be used to prevent binaries
 from being executed out of /tmp.
 Add the noexec option to the fourth column of
@@ -19937,10 +19902,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /tmp mount point,
     run the following command:
-    $ mount | grep '\s/tmp\s'
+    $ sudo mount | grep '\s/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/tmp"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /tmp. The SUID and SGID permissions
 should not be required in these world-writable directories.
@@ -19962,10 +19927,10 @@ Add the nodev option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log/audit"" file system does not have the ""nodev"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nodev mount option can be used to prevent device files from
 being created in /var/log/audit.
 Legitimate character and block devices should exist only in
@@ -19986,10 +19951,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the noexec option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log/audit"" file system does not have the ""noexec"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The noexec mount option can be used to prevent binaries
 from being executed out of /var/log/audit.
 Add the noexec option to the fourth column of
@@ -20008,10 +19973,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /var/log/audit mount point,
     run the following command:
-    $ mount | grep '\s/var/log/audit\s'
+    $ sudo mount | grep '\s/var/log/audit\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log/audit"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /var/log/audit. The SUID and SGID permissions
 should not be required in directories containing audit log files.
@@ -20033,10 +19998,10 @@ Add the nodev option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log"" file system does not have the ""nodev"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nodev mount option can be used to prevent device files from
 being created in /var/log.
 Legitimate character and block devices should exist only in
@@ -20057,10 +20022,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the noexec option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log"" file system does not have the ""noexec"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The noexec mount option can be used to prevent binaries
 from being executed out of /var/log.
 Add the noexec option to the fourth column of
@@ -20079,10 +20044,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /var/log mount point,
     run the following command:
-    $ mount | grep '\s/var/log\s'
+    $ sudo mount | grep '\s/var/log\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/log"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /var/log. The SUID and SGID permissions
 should not be required in directories containing log files.
@@ -20102,10 +20067,10 @@ Add the nodev option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nodev option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nodev setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/tmp"" file system does not have the ""nodev"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nodev mount option can be used to prevent device files from
 being created in /var/tmp. Legitimate character and block devices
 should not exist within temporary directories like /var/tmp.
@@ -20124,10 +20089,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the noexec option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/tmp"" file system does not have the ""noexec"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The noexec mount option can be used to prevent binaries
 from being executed out of /var/tmp.
 Add the noexec option to the fourth column of
@@ -20146,10 +20111,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system prevents program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage. If it does not, this is a finding.","To verify the nosuid option is configured for the /var/tmp mount point,
     run the following command:
-    $ mount | grep '\s/var/tmp\s'
+    $ sudo mount | grep '\s/var/tmp\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/var/tmp"" file system does not have the ""nosuid"" option set?
       ",Configure the operating system to prevent program execution in accordance with local policies regarding software program usage and restrictions and/or rules authorizing the terms and conditions of software program usage.,"The nosuid mount option can be used to prevent
 execution of setuid programs in /var/tmp. The SUID and SGID permissions
 should not be required in these world-writable directories.
@@ -20395,9 +20360,10 @@ The openssl-pkcs11 package can be installed with the following command:
 
 $ sudo yum install openssl-pkcs11","
                   Applicable - Configurable
-                ","Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.","
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+                ","Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.","Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       ",Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.,"Configure the operating system to implement multifactor authentication by
 installing the required package with the following command:
@@ -20484,9 +20450,10 @@ The openssl-pkcs11 package can be installed with the following command:
 
 $ sudo yum install openssl-pkcs11","
                   Applicable - Configurable
-                ","Verify the operating system electronically verifies Personal Identity Verification (PIV) credentials. If it does not, this is a finding.","
-'Run the following command to determine if the openssl-pkcs11 package is installed:
-$ rpm -q openssl-pkcs11'
+                ","Verify the operating system electronically verifies Personal Identity Verification (PIV) credentials. If it does not, this is a finding.","Check that Red Hat Enterprise Linux 8 has the packages for smart card support installed.
+
+Run the following command to determine if the openssl-pkcs11 package is installed:
+$ rpm -q openssl-pkcs11
       Is it the case that smartcard software is not installed?
       ",Configure the operating system to electronically verify Personal Identity Verification (PIV) credentials.,"Configure the operating system to implement multifactor authentication by
 installing the required package with the following command:
@@ -23293,8 +23260,7 @@ The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
 Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module",,,,
 SV-71043,SRG-OS-000396-GPOS-00176,TBD - Assigned by DISA after STIG release,"The operating system must implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable","
                   Applicable - Configurable
@@ -23304,8 +23270,7 @@ The output should contain the following:
 crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ","Configure the operating system to implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.","System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
 SV-71043,SRG-OS-000396-GPOS-00176,TBD - Assigned by DISA after STIG release,"The operating system must implement NSA-approved cryptography to protect classified information in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-80935-0:Configure System Cryptography Policy,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"To configure the system cryptography policy to use ciphers only from the 
@@ -23506,8 +23471,7 @@ V-56735,SRG-OS-000423-GPOS-00187,TBD - Assigned by DISA after STIG release,The o
 This requirement applies to both internal and external networks and all types of information system components from which information can be transmitted (e.g., servers, mobile devices, notebook computers, printers, copiers, scanners, and facsimile machines). Communication paths outside the physical protection of a controlled boundary are exposed to the possibility of interception and modification. 
 
 Protecting the confidentiality and integrity of organizational information can be accomplished by physical means (e.g., employing physical distribution systems) or by logical means (e.g., employing cryptographic techniques). If physical means of protection are employed, then logical means (cryptography) do not have to be employed, and vice versa.","System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable","
                   Applicable - Configurable
@@ -23517,8 +23481,7 @@ The output should contain the following:
 crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ",Configure the operating system to protect the confidentiality and integrity of transmitted information.,"System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
 V-56735,SRG-OS-000423-GPOS-00187,TBD - Assigned by DISA after STIG release,The operating system must protect the confidentiality and integrity of transmitted information.,CCE-80934-3:Configure BIND to use System Crypto Policy,"Without protection of the transmitted information, confidentiality and integrity may be compromised because unprotected communications can be intercepted and either read or altered. 
@@ -33044,8 +33007,7 @@ form to /etc/audit/audit.rules:
 -a always,exit -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset -F key=privileged",,,,
 SV-70861,SRG-OS-000478-GPOS-00223,TBD - Assigned by DISA after STIG release,"The operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-82155-3:Enable Dracut FIPS Module,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"To enable FIPS mode, run the following command:
 fips-mode-setup --enable
-To enable FIPS, the system requires that the fips module is added in
-dracut configuration.
+To enable FIPS, the system requires that the fips module is added in dracut configuration.
 Check if /etc/dracut.conf.d/40-fips.conf contain add_dracutmodules+="" fips ""","
                   Applicable - Configurable
                 ","Verify the operating system implements NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. If it does not, this is a finding.","To verify that the Dracut FIPS module is enabled, run the following command:
@@ -33055,8 +33017,7 @@ add_dracutmodules+="" fips ""
       Is it the case that the Dracut FIPS module is not enabled?
       ","Configure the operating system to implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.","To enable FIPS mode, run the following command:
 fips-mode-setup --enable
-To enable FIPS, the system requires that the fips module is added in
-dracut configuration.
+To enable FIPS, the system requires that the fips module is added in dracut configuration.
 Check if /etc/dracut.conf.d/40-fips.conf contain add_dracutmodules+="" fips """,,,,
 SV-70861,SRG-OS-000478-GPOS-00223,TBD - Assigned by DISA after STIG release,"The operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-80942-6:Enable FIPS Mode,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"To enable FIPS mode, run the following command:
 fips-mode-setup --enable
@@ -33081,8 +33042,7 @@ The fips-mode-setup command will configure the system in
 FIPS mode by automatically configuring the following:
 Setting the kernel FIPS mode flag (/proc/sys/crypto/fips_enabled) to 1Creating /etc/system-fipsSetting the system crypto policy in /etc/crypto-policies/config to Loading the Dracut fips module",,,,
 SV-70861,SRG-OS-000478-GPOS-00223,TBD - Assigned by DISA after STIG release,"The operating system must implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.",CCE-84027-2:Set kernel parameter 'crypto.fips_enabled' to 1,Use of weak or untested encryption algorithms undermines the purposes of utilizing encryption to protect data. The operating system must implement cryptographic modules adhering to the higher standards approved by the federal government since this provides assurance they have been tested and validated.,"System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable","
                   Applicable - Configurable
@@ -33092,8 +33052,7 @@ The output should contain the following:
 crypto.fips_enabled = 1
       Is it the case that crypto.fips_enabled is not 1?
       ","Configure the operating system to implement NIST FIPS-validated cryptography for the following: to provision digital signatures, to generate cryptographic hashes, and to protect unclassified information requiring confidentiality and cryptographic protection in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.","System running in FIPS mode is indicated by kernel parameter
-'crypto.fips_enabled'. This parameter should be set to 1
-in FIPS mode.
+'crypto.fips_enabled'. This parameter should be set to 1 in FIPS mode.
 To enable FIPS mode, run the following command:
 fips-mode-setup --enable",,,,
 SV-70859,SRG-OS-000479-GPOS-00224,TBD - Assigned by DISA after STIG release,"The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.",CCE-82897-0:Set hostname as computer node name in audit logs,"Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
@@ -34971,10 +34930,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the nosuid option is configured for the /boot mount point,
     run the following command:
-    $ mount | grep '\s/boot\s'
+    $ sudo mount | grep '\s/boot\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/boot"" file system does not have the ""nosuid"" option set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The nosuid mount option can be used to prevent
 execution of setuid programs in /boot. The SUID and SGID permissions
 should not be required on the boot partition.
@@ -34991,10 +34950,10 @@ Add the noexec option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the noexec option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the noexec setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/home"" file system does not have the ""noexec"" option set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The noexec mount option can be used to prevent binaries from being
 executed out of /home. 
 Add the noexec option to the fourth column of
@@ -35011,10 +34970,10 @@ Add the nosuid option to the fourth column of
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the nosuid option is configured for the /home mount point,
     run the following command:
-    $ mount | grep '\s/home\s'
+    $ sudo mount | grep '\s/home\s'
     The output should show the corresponding mount point along with the nosuid setting in parentheses.
 
-      Is it the case that the  is not present in the output line, or there is no output line at all?
+      Is it the case that the ""/home"" file system does not have the ""nosuid"" option set?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","The nosuid mount option can be used to prevent
 execution of setuid programs in /home. The SUID and SGID permissions
 should not be required in these user data directories.
@@ -35033,7 +34992,7 @@ Add the nodev option to the fourth column of
     any non-root local partitions.","
                   Applicable - Configurable
                 ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify the nodev option is configured for non-root local partitions, run the following command:
-$ mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
+$ sudo mount | grep '^/dev\S* on /\S' | grep --invert-match 'nodev'
 The output shows local non-root partitions mounted without the nodev option, and there should be no output at all.
 
       Is it the case that some mounts appear among output lines?
@@ -35674,7 +35633,7 @@ run the command:
 $ ls -l /etc/ssh/*_key
 If properly configured, the output should indicate the following permissions:
 -rw-------
-      Is it the case that /etc/ssh/*_key has unix mode -rw-------?
+      Is it the case that /etc/ssh/*_key does not have unix mode -rw-------?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","
 To properly set the permissions of /etc/ssh/*_key, run the command:
 $ sudo chmod 0600 /etc/ssh/*_key",,,,
@@ -35687,7 +35646,7 @@ run the command:
 $ ls -l /etc/ssh/*.pub
 If properly configured, the output should indicate the following permissions:
 -rw-r--r--
-      Is it the case that /etc/ssh/*.pub has unix mode -rw-r--r--?
+      Is it the case that /etc/ssh/*.pub does not have unix mode -rw-r--r--?
       ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs."," To properly set the permissions of /etc/ssh/*.pub, run the command: $ sudo chmod 0644 /etc/ssh/*.pub",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-80895-6:Disable Compression Or Set Compression to delayed,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
