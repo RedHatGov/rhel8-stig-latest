@@ -550,8 +550,8 @@ account changes:
 using <code>pam_faillock.so</code>.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
 depending on the OS version.</td>
 <td>Applicable - Configurable</td>
 <td>Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.</td>
@@ -566,8 +566,8 @@ The output should show deny=.
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.</td>
 <td>medium</td>
 <td></td>
@@ -585,8 +585,8 @@ depending on the OS version.</td>
 incorrect login attempts using <code>pam_faillock.so</code>.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
 depending on the OS version.</td>
 <td>Applicable - Configurable</td>
 <td>Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.</td>
@@ -602,8 +602,8 @@ The output should show even_deny_root.
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.</td>
 <td>medium</td>
 <td></td>
@@ -619,22 +619,7 @@ depending on the OS version.</td>
 <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.</td>
 <td>Utilizing <code>pam_faillock.so</code>, the <code>fail_interval</code> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-<br><br>
-
-<ul><li><pre>authselect enable-feature with-faillock</pre></li></ul>
-<br>
-Then edit the <code>/etc/security/faillock.conf</code> file as follows:
-<br><br>
-<ul>
-<li> add, uncomment or edit the following line:
-<pre>fail_interval = <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
-</li>
-<li> add or uncomment the following line:
-<pre>silent</pre>
-</li>
-</ul>
-</td>
+period.</td>
 <td>Applicable - Configurable</td>
 <td>Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.</td>
 <td>To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -646,16 +631,7 @@ The output should show fail_interval = &lt;interval-in-seconds&gt; where interva
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3719r557039_fix">Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.</fixtext></td>
 <td>Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent</td>
+period.</td>
 <td>medium</td>
 <td></td>
 <td></td>
@@ -27003,8 +26979,8 @@ If both the "b32" and "b64" audit rules for "SGID" files are not defined, this i
 using <code>pam_faillock.so</code>.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
 depending on the OS version.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.</td>
@@ -27019,8 +26995,8 @@ The output should show deny=.
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.</td>
 <td>medium</td>
 <td></td>
@@ -27038,8 +27014,8 @@ depending on the OS version.</td>
 incorrect login attempts using <code>pam_faillock.so</code>.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <code>authselect</code> or <code>authconfig</code>,
 depending on the OS version.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.</td>
@@ -27055,8 +27031,8 @@ The output should show even_deny_root.
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.</td>
 <td>medium</td>
 <td></td>
@@ -27072,22 +27048,7 @@ depending on the OS version.</td>
 <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.</td>
 <td>Utilizing <code>pam_faillock.so</code>, the <code>fail_interval</code> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-<br><br>
-
-<ul><li><pre>authselect enable-feature with-faillock</pre></li></ul>
-<br>
-Then edit the <code>/etc/security/faillock.conf</code> file as follows:
-<br><br>
-<ul>
-<li> add, uncomment or edit the following line:
-<pre>fail_interval = <xccdf-1.1:sub xmlns:xccdf-1.1="http://checklists.nist.gov/xccdf/1.1" idref="var_accounts_passwords_pam_faillock_fail_interval"></xccdf-1.1:sub></pre>
-</li>
-<li> add or uncomment the following line:
-<pre>silent</pre>
-</li>
-</ul>
-</td>
+period.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.</td>
 <td>To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -27099,16 +27060,7 @@ The output should show fail_interval = &lt;interval-in-seconds&gt; where interva
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3823r375042_fix">Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.</fixtext></td>
 <td>Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent</td>
+period.</td>
 <td>medium</td>
 <td></td>
 <td></td>

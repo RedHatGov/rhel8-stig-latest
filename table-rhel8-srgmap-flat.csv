@@ -343,8 +343,8 @@ V-56579,SRG-OS-000021-GPOS-00005,TBD - Assigned by DISA after STIG release,The o
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.","
                   Applicable - Configurable
                 ","Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.","To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -356,15 +356,15 @@ The output should show deny=.
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.",,,,
 V-56579,SRG-OS-000021-GPOS-00005,TBD - Assigned by DISA after STIG release,The operating system must enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.,CCE-80668-7:Configure the root Account for Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.","This rule configures the system to lock out the root account after a number of
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.","
                   Applicable - Configurable
                 ","Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.","To ensure that even the root account is locked after a defined number of failed password
@@ -377,21 +377,12 @@ The output should show even_deny_root.
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.",,,,
 V-56579,SRG-OS-000021-GPOS-00005,TBD - Assigned by DISA after STIG release,The operating system must enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.,CCE-80669-5:Set Interval For Counting Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.","Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent","
+period.","
                   Applicable - Configurable
                 ","Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.","To ensure the failed password attempt policy is configured correctly, run the following command:
 
@@ -400,16 +391,7 @@ The output should show fail_interval = <interval-in-seconds> where interval-in-s
       Is it the case that fail_interval is less than the required value?
       ",Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.,"Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent",,,,
+period.",,,,
 V-56579,SRG-OS-000021-GPOS-00005,TBD - Assigned by DISA after STIG release,The operating system must enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.,CCE-80670-3:Set Lockout Time for Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.","This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using pam_faillock.so.
 
@@ -18556,8 +18538,8 @@ V-57237,SRG-OS-000329-GPOS-00128,TBD - Assigned by DISA after STIG release,The o
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.","
                   Applicable - Configurable
                 ","Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.","To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -18569,15 +18551,15 @@ The output should show deny=.
 using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.",,,,
 V-57237,SRG-OS-000329-GPOS-00128,TBD - Assigned by DISA after STIG release,The operating system must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes occur.,CCE-80668-7:Configure the root Account for Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.","This rule configures the system to lock out the root account after a number of
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.","
                   Applicable - Configurable
                 ","Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.","To ensure that even the root account is locked after a defined number of failed password
@@ -18590,21 +18572,12 @@ The output should show even_deny_root.
 incorrect login attempts using pam_faillock.so.
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
-defined to work as expected. In order to avoid any errors when manually editing these files,
-it is recommended to use the appropriate tools, such as authselect or authconfig,
+defined to work as expected. In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as authselect or authconfig,
 depending on the OS version.",,,,
 V-57237,SRG-OS-000329-GPOS-00128,TBD - Assigned by DISA after STIG release,The operating system must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes occur.,CCE-80669-5:Set Interval For Counting Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.","Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent","
+period.","
                   Applicable - Configurable
                 ","Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.","To ensure the failed password attempt policy is configured correctly, run the following command:
 
@@ -18613,16 +18586,7 @@ The output should show fail_interval = <interval-in-seconds> where interval-in-s
       Is it the case that fail_interval is less than the required value?
       ",Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.,"Utilizing pam_faillock.so, the fail_interval directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period. First make sure the feature is enabled using the following command:
-
-
-authselect enable-feature with-faillock
-
-Then edit the /etc/security/faillock.conf file as follows:
-
- add, uncomment or edit the following line:
-fail_interval =  add or uncomment the following line:
-silent",,,,
+period.",,,,
 V-57237,SRG-OS-000329-GPOS-00128,TBD - Assigned by DISA after STIG release,The operating system must automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes occur.,CCE-80670-3:Set Lockout Time for Failed Password Attempts,"By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.","This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using pam_faillock.so.
 
