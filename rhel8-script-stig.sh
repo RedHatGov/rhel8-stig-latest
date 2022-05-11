@@ -31503,8 +31503,12 @@ var_time_service_set_maxpoll='16'
 
 
 
+
+pof="/usr/sbin/pidof"
+
+
 config_file="/etc/ntp.conf"
-/usr/sbin/pidof ntpd || config_file="/etc/chrony.conf"
+$pof ntpd || config_file="/etc/chrony.conf"
 
 
 # Set maxpoll values to var_time_service_set_maxpoll
