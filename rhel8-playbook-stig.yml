@@ -33520,7 +33520,7 @@
             path: /etc/ssh/sshd_config
             create: true
             regexp: (?i)^\s*StrictModes\s+
-            line: StrictModes yes
+            line: StrictModes no
             state: present
             insertbefore: ^[#\s]*Match
             validate: /usr/sbin/sshd -t -f %s
