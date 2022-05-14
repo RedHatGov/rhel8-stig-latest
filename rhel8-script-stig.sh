@@ -29244,16 +29244,13 @@ find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,
 
 
 
-find /lib/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find -H /lib/  -type d -exec chgrp 0 {} \;
 
+find -H /lib64/  -type d -exec chgrp 0 {} \;
 
-find /lib64/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find -H /usr/lib/  -type d -exec chgrp 0 {} \;
 
-
-find /usr/lib/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
-
-
-find /usr/lib64/ -maxdepth 1 -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find -H /usr/lib64/  -type d -exec chgrp 0 {} \;
 # END fix for 'root_permissions_syslibrary_files'
 
 ###############################################################################
@@ -32029,10 +32026,10 @@ line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C s
 if [ -z "$line_number" ]; then
     # There was no match of '^Match', insert at
     # the end of the file.
-    printf '%s\n' "StrictModes no" >> "/etc/ssh/sshd_config"
+    printf '%s\n' "StrictModes yes" >> "/etc/ssh/sshd_config"
 else
     head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "StrictModes no" >> "/etc/ssh/sshd_config"
+    printf '%s\n' "StrictModes yes" >> "/etc/ssh/sshd_config"
     tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 fi
 # Clean up after ourselves.

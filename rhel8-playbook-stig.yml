@@ -28679,31 +28679,12 @@
         - medium_severity
         - no_reboot_needed
 
-    - name: Find /lib/ file(s) matching ^.*$
-      command: find -H /lib/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
-      register: files_found
-      changed_when: false
-      failed_when: false
-      check_mode: false
-      tags:
-        - CCE-86523-8
-        - DISA-STIG-RHEL-08-010350
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - root_permissions_syslibrary_files
-
-    - name: Ensure group owner on /lib/ file(s) matching ^.*$
+    - name: Ensure group owner on /lib/ recursively
       file:
-        path: '{{ item }}'
+        path: /lib/
+        state: directory
+        recurse: true
         group: '0'
-        state: file
-      with_items:
-        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28716,31 +28697,12 @@
         - no_reboot_needed
         - root_permissions_syslibrary_files
 
-    - name: Find /lib64/ file(s) matching ^.*$
-      command: find -H /lib64/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
-      register: files_found
-      changed_when: false
-      failed_when: false
-      check_mode: false
-      tags:
-        - CCE-86523-8
-        - DISA-STIG-RHEL-08-010350
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - root_permissions_syslibrary_files
-
-    - name: Ensure group owner on /lib64/ file(s) matching ^.*$
+    - name: Ensure group owner on /lib64/ recursively
       file:
-        path: '{{ item }}'
+        path: /lib64/
+        state: directory
+        recurse: true
         group: '0'
-        state: file
-      with_items:
-        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28753,31 +28715,12 @@
         - no_reboot_needed
         - root_permissions_syslibrary_files
 
-    - name: Find /usr/lib/ file(s) matching ^.*$
-      command: find -H /usr/lib/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
-      register: files_found
-      changed_when: false
-      failed_when: false
-      check_mode: false
-      tags:
-        - CCE-86523-8
-        - DISA-STIG-RHEL-08-010350
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - root_permissions_syslibrary_files
-
-    - name: Ensure group owner on /usr/lib/ file(s) matching ^.*$
+    - name: Ensure group owner on /usr/lib/ recursively
       file:
-        path: '{{ item }}'
+        path: /usr/lib/
+        state: directory
+        recurse: true
         group: '0'
-        state: file
-      with_items:
-        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -28790,31 +28733,12 @@
         - no_reboot_needed
         - root_permissions_syslibrary_files
 
-    - name: Find /usr/lib64/ file(s) matching ^.*$
-      command: find -H /usr/lib64/ -maxdepth 1 -type f ! -gid 0 -regex "^.*$"
-      register: files_found
-      changed_when: false
-      failed_when: false
-      check_mode: false
-      tags:
-        - CCE-86523-8
-        - DISA-STIG-RHEL-08-010350
-        - NIST-800-53-CM-5(6)
-        - NIST-800-53-CM-5(6).1
-        - configure_strategy
-        - low_complexity
-        - low_disruption
-        - medium_severity
-        - no_reboot_needed
-        - root_permissions_syslibrary_files
-
-    - name: Ensure group owner on /usr/lib64/ file(s) matching ^.*$
+    - name: Ensure group owner on /usr/lib64/ recursively
       file:
-        path: '{{ item }}'
+        path: /usr/lib64/
+        state: directory
+        recurse: true
         group: '0'
-        state: file
-      with_items:
-        - '{{ files_found.stdout_lines }}'
       tags:
         - CCE-86523-8
         - DISA-STIG-RHEL-08-010350
@@ -33520,7 +33444,7 @@
             path: /etc/ssh/sshd_config
             create: true
             regexp: (?i)^\s*StrictModes\s+
-            line: StrictModes no
+            line: StrictModes yes
             state: present
             insertbefore: ^[#\s]*Match
             validate: /usr/sbin/sshd -t -f %s
