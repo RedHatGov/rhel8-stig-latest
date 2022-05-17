@@ -17,7 +17,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  RHEL-8
-# Benchmark Version:  0.1.62
+# Benchmark Version:  0.1.63
 #
 # XCCDF Version:  1.1
 #
@@ -27867,7 +27867,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.all.accept_ra from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.all.accept_ra.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -27927,7 +27927,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.all.accept_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.all.accept_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -27987,7 +27987,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.all.accept_source_route from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.all.accept_source_route.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28047,7 +28047,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.default.accept_ra from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.default.accept_ra.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28107,7 +28107,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.default.accept_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.default.accept_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28167,7 +28167,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv6.conf.default.accept_source_route from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv6.conf.default.accept_source_route.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28227,7 +28227,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.all.accept_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.all.accept_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28287,7 +28287,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.all.accept_source_route from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.all.accept_source_route.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28347,7 +28347,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.all.rp_filter from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.all.rp_filter.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28407,7 +28407,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.default.accept_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.default.accept_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28467,7 +28467,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.default.accept_source_route from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.default.accept_source_route.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28527,7 +28527,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.icmp_echo_ignore_broadcasts from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.icmp_echo_ignore_broadcasts.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28587,7 +28587,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.all.send_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.all.send_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28645,7 +28645,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.conf.default.send_redirects from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.conf.default.send_redirects.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28703,7 +28703,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.ipv4.ip_forward from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.ipv4.ip_forward.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -28950,7 +28950,7 @@ find -H /etc/audit/rules.d/ -maxdepth 1 -perm /u+xs,g+xws,o+xwrt -type f -regex 
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of fs.protected_hardlinks from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*fs.protected_hardlinks.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -29008,7 +29008,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of fs.protected_symlinks from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*fs.protected_symlinks.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -29228,13 +29228,13 @@ done
 
 
 
-find -H /lib/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
+find -H /lib/  -perm /g+w,o+w -type f -regex '^.*$' -exec chmod g-w,o-w {} \;
 
-find -H /lib64/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
+find -H /lib64/  -perm /g+w,o+w -type f -regex '^.*$' -exec chmod g-w,o-w {} \;
 
-find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
+find -H /usr/lib/  -perm /g+w,o+w -type f -regex '^.*$' -exec chmod g-w,o-w {} \;
 
-find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex '^.*$' -exec chmod u-s,g-ws,o-wt {} \;
+find -H /usr/lib64/  -perm /g+w,o+w -type f -regex '^.*$' -exec chmod g-w,o-w {} \;
 # END fix for 'file_permissions_library_dirs'
 
 ###############################################################################
@@ -30314,7 +30314,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.core_pattern from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.core_pattern.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30372,7 +30372,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.dmesg_restrict from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.dmesg_restrict.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30430,7 +30430,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.kexec_load_disabled from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.kexec_load_disabled.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30488,7 +30488,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.perf_event_paranoid from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.perf_event_paranoid.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30546,7 +30546,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.unprivileged_bpf_disabled from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.unprivileged_bpf_disabled.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30604,7 +30604,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.yama.ptrace_scope from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.yama.ptrace_scope.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30662,7 +30662,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of net.core.bpf_jit_harden from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*net.core.bpf_jit_harden.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30720,7 +30720,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of user.max_user_namespaces from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*user.max_user_namespaces.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30868,7 +30868,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.kptr_restrict from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.kptr_restrict.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do
@@ -30928,7 +30928,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 # Comment out any occurrences of kernel.randomize_va_space from /etc/sysctl.d/*.conf files
-for f in /etc/sysctl.d/*.conf ; do
+for f in /etc/sysctl.d/*.conf /run/sysctl.d/*.conf; do
   matching_list=$(grep -P '^(?!#).*[\s]*kernel.randomize_va_space.*$' $f | uniq )
   if ! test -z "$matching_list"; then
     while IFS= read -r entry; do

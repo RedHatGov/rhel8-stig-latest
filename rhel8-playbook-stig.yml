@@ -18,7 +18,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  RHEL-8
-# Benchmark Version:  0.1.62
+# Benchmark Version:  0.1.63
 #
 # XCCDF Version:  1.1
 #
@@ -26387,7 +26387,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_ra.*$
         patterns: '*.conf'
         file_type: any
@@ -26452,7 +26454,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -26523,7 +26527,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.all.accept_source_route.*$
         patterns: '*.conf'
         file_type: any
@@ -26588,7 +26594,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_ra.*$
         patterns: '*.conf'
         file_type: any
@@ -26653,7 +26661,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -26718,7 +26728,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv6.conf.default.accept_source_route.*$
         patterns: '*.conf'
         file_type: any
@@ -26789,7 +26801,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.accept_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -26860,7 +26874,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.accept_source_route.*$
         patterns: '*.conf'
         file_type: any
@@ -26931,7 +26947,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.rp_filter.*$
         patterns: '*.conf'
         file_type: any
@@ -26999,7 +27017,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.accept_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -27070,7 +27090,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.accept_source_route.*$
         patterns: '*.conf'
         file_type: any
@@ -27141,7 +27163,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.icmp_echo_ignore_broadcasts.*$
         patterns: '*.conf'
         file_type: any
@@ -27209,7 +27233,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.all.send_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -27283,7 +27309,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.conf.default.send_redirects.*$
         patterns: '*.conf'
         file_type: any
@@ -27357,7 +27385,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.ipv4.ip_forward.*$
         patterns: '*.conf'
         file_type: any
@@ -27777,7 +27807,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*fs.protected_hardlinks.*$
         patterns: '*.conf'
         file_type: any
@@ -27836,7 +27868,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*fs.protected_symlinks.*$
         patterns: '*.conf'
         file_type: any
@@ -28516,7 +28550,7 @@
         - restrict_strategy
 
     - name: Find /lib/ file(s) recursively
-      command: find -H /lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+      command: find -H /lib/  -perm /g+w,o+w -type f -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -28538,7 +28572,7 @@
     - name: Set permissions for /lib/ file(s)
       file:
         path: '{{ item }}'
-        mode: u-s,g-ws,o-wt
+        mode: g-w,o-w
         state: file
       with_items:
         - '{{ files_found.stdout_lines }}'
@@ -28557,7 +28591,7 @@
         - no_reboot_needed
 
     - name: Find /lib64/ file(s) recursively
-      command: find -H /lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+      command: find -H /lib64/  -perm /g+w,o+w -type f -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -28579,7 +28613,7 @@
     - name: Set permissions for /lib64/ file(s)
       file:
         path: '{{ item }}'
-        mode: u-s,g-ws,o-wt
+        mode: g-w,o-w
         state: file
       with_items:
         - '{{ files_found.stdout_lines }}'
@@ -28598,7 +28632,7 @@
         - no_reboot_needed
 
     - name: Find /usr/lib/ file(s) recursively
-      command: find -H /usr/lib/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+      command: find -H /usr/lib/  -perm /g+w,o+w -type f -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -28620,7 +28654,7 @@
     - name: Set permissions for /usr/lib/ file(s)
       file:
         path: '{{ item }}'
-        mode: u-s,g-ws,o-wt
+        mode: g-w,o-w
         state: file
       with_items:
         - '{{ files_found.stdout_lines }}'
@@ -28639,7 +28673,7 @@
         - no_reboot_needed
 
     - name: Find /usr/lib64/ file(s) recursively
-      command: find -H /usr/lib64/  -perm /u+s,g+ws,o+wt -type f -regex "^.*$"
+      command: find -H /usr/lib64/  -perm /g+w,o+w -type f -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -28661,7 +28695,7 @@
     - name: Set permissions for /usr/lib64/ file(s)
       file:
         path: '{{ item }}'
-        mode: u-s,g-ws,o-wt
+        mode: g-w,o-w
         state: file
       with_items:
         - '{{ files_found.stdout_lines }}'
@@ -31222,7 +31256,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.core_pattern.*$
         patterns: '*.conf'
         file_type: any
@@ -31278,7 +31314,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.dmesg_restrict.*$
         patterns: '*.conf'
         file_type: any
@@ -31340,7 +31378,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.kexec_load_disabled.*$
         patterns: '*.conf'
         file_type: any
@@ -31396,7 +31436,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.perf_event_paranoid.*$
         patterns: '*.conf'
         file_type: any
@@ -31452,7 +31494,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.unprivileged_bpf_disabled.*$
         patterns: '*.conf'
         file_type: any
@@ -31511,7 +31555,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.yama.ptrace_scope.*$
         patterns: '*.conf'
         file_type: any
@@ -31567,7 +31613,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*net.core.bpf_jit_harden.*$
         patterns: '*.conf'
         file_type: any
@@ -31626,7 +31674,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*user.max_user_namespaces.*$
         patterns: '*.conf'
         file_type: any
@@ -31859,7 +31909,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.kptr_restrict.*$
         patterns: '*.conf'
         file_type: any
@@ -31924,7 +31976,9 @@
 
     - name: List /etc/sysctl.d/*.conf files
       find:
-        paths: /etc/sysctl.d/
+        paths:
+          - /etc/sysctl.d/
+          - /run/sysctl.d/
         contains: ^[\s]*kernel.randomize_va_space.*$
         patterns: '*.conf'
         file_type: any

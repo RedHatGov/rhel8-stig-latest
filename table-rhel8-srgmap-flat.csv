@@ -20558,8 +20558,12 @@ to inaccessible system if they use USB mouse/keyboard. To prevent this scenario,
 the initial policy configuration must be generated based on current connected USB
 devices.","
                   Applicable - Configurable
-                ","Verify the operating system authenticates peripherals before establishing a connection. If it does not, this is a finding.","Check that the file /etc/usbguard/rules.conf exists and contains a valid configuration
-      Is it the case that /etc/usbguard/rules.conf does not exist or is empty?
+                ","Verify the operating system authenticates peripherals before establishing a connection. If it does not, this is a finding.","Verify the USBGuard has a policy configured with the following command:
+
+$ sudo usbguard list-rules
+
+If the command does not return results or an error is returned, ask the SA to indicate how unauthorized peripherals are being blocked.
+      Is it the case that there is no evidence that unauthorized peripherals are being blocked before establishing a connection?
       ",Configure the operating system to authenticate peripherals before establishing a connection.,"By default USBGuard when enabled prevents access to all USB devices and this lead
 to inaccessible system if they use USB mouse/keyboard. To prevent this scenario,
 the initial policy configuration must be generated based on current connected USB
