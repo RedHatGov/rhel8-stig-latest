@@ -1292,9 +1292,9 @@
         - DISA-STIG-RHEL-08-010020
         - NIST-800-53-AC-17(2)
         - harden_sshd_macs_openssh_conf_crypto_policy
-        - high_severity
         - low_complexity
         - low_disruption
+        - medium_severity
         - reboot_required
         - restrict_strategy
 
