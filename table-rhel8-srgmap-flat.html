@@ -24211,46 +24211,176 @@ Audit tools must have the correct owner.</td>
 <td>SRG-OS-000257-GPOS-00098</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must protect audit tools from unauthorized modification.</td>
-<td></td>
+<td>CCE-86239-1:Audit Tools Must Be Group-owned by Root</td>
 <td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
 
 Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user has in order to make access decisions regarding the modification of audit tools.
 
 Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
-<td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized modification. If it does not, this is a finding.</td>
+<td>Verify the audit tools are group-owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the group-owner of each audit tool by running the following command:
+
+$ sudo stat -c "%G %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not group-owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3798r374907_fix">Configure the operating system to protect audit tools from unauthorized modification.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>SV-71435</td>
+<td>SRG-OS-000257-GPOS-00098</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must protect audit tools from unauthorized modification.</td>
+<td>CCE-86259-9:Audit Tools Must Be Owned by Root</td>
+<td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
+
+Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user has in order to make access decisions regarding the modification of audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized modification. If it does not, this is a finding.</td>
+<td>Verify the audit tools are owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the owner of each audit tool by running the following command:
+
+$ sudo stat -c "%U %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3798r374907_fix">Configure the operating system to protect audit tools from unauthorized modification.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-</td>
 </tr>
 <tr>
 <td>V-57177</td>
 <td>SRG-OS-000258-GPOS-00099</td>
 <td><i>TBD - Assigned by DISA after STIG release</i></td>
 <td>The operating system must protect audit tools from unauthorized deletion.</td>
-<td></td>
+<td>CCE-86239-1:Audit Tools Must Be Group-owned by Root</td>
 <td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
 
 Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user has in order to make access decisions regarding the deletion of audit tools.
 
 Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
-<td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized deletion. If it does not, this is a finding.</td>
+<td>Verify the audit tools are group-owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the group-owner of each audit tool by running the following command:
+
+$ sudo stat -c "%G %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not group-owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3799r374910_fix">Configure the operating system to protect audit tools from unauthorized deletion.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct group owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
+</tr>
+<tr>
+<td>V-57177</td>
+<td>SRG-OS-000258-GPOS-00099</td>
+<td><i>TBD - Assigned by DISA after STIG release</i></td>
+<td>The operating system must protect audit tools from unauthorized deletion.</td>
+<td>CCE-86259-9:Audit Tools Must Be Owned by Root</td>
+<td>Protecting audit information also includes identifying and protecting the tools used to view and manipulate log data. Therefore, protecting audit tools is necessary to prevent unauthorized operation on audit information.
+
+Operating systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools and the corresponding rights the user has in order to make access decisions regarding the deletion of audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.</td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>Applicable - Configurable</td>
+<td>Verify the operating system protects audit tools from unauthorized deletion. If it does not, this is a finding.</td>
+<td>Verify the audit tools are owned by "root" to prevent any unauthorized access, deletion, or modification.
+
+Check the owner of each audit tool by running the following command:
+
+$ sudo stat -c "%U %n" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/rsyslogd /sbin/augenrules
+
+root /sbin/auditctl
+root /sbin/aureport
+root /sbin/ausearch
+root /sbin/autrace
+root /sbin/auditd
+root /sbin/rsyslogd
+root /sbin/augenrules
+      Is it the case that any audit tools are not owned by root?
+      </td>
+<td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3799r374910_fix">Configure the operating system to protect audit tools from unauthorized deletion.</fixtext></td>
+<td>Red Hat Enterprise Linux 8 systems providing tools to interface with audit information will leverage user permissions and roles identifying the user accessing the tools, and the corresponding rights the user enjoys, to make access decisions regarding the access to audit tools.
+
+Audit tools include, but are not limited to, vendor-provided and open source audit tools needed to successfully view and manipulate audit information system activity and records. Audit tools include custom queries and report generators.
+
+Audit tools must have the correct owner.</td>
+<td>medium</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-</td>
 </tr>
 <tr>
 <td>V-57183</td>
@@ -30504,6 +30634,14 @@ Temporary passwords are typically used to allow access when new accounts are cre
 <td>CCE-82460-7:Configure SSSD to Expire Offline Credentials</td>
 <td>If cached authentication information is out-of-date, the validity of the authentication information may be questionable.</td>
 <td>SSSD should be configured to expire offline credentials after 1 day.
+
+Check if SSSD allows cached authentications with the following command:
+<pre>
+$ sudo grep cache_credentials /etc/sssd/sssd.conf
+cache_credentials = true
+</pre>
+If "cache_credentials" is set to "false" or is missing no further checks are required.<br>
+
 To configure SSSD to expire offline credentials, set
 <code>offline_credentials_expiration</code> to <code>1</code> under the <code>[pam]</code>
 section in <code>/etc/sssd/sssd.conf</code>. For example:
@@ -30513,7 +30651,15 @@ offline_credentials_expiration = 1
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system prohibits the use of cached authenticators after one day. If it does not, this is a finding.</td>
-<td>To verify that SSSD expires offline credentials, run the following command:
+<td>
+Check if SSSD allows cached authentications with the following command:
+
+$ sudo grep cache_credentials /etc/sssd/sssd.conf
+cache_credentials = true
+
+If "cache_credentials" is set to "false" or is missing no further checks are required.
+
+To verify that SSSD expires offline credentials, run the following command:
 $ sudo grep offline_credentials_expiration /etc/sssd/sssd.conf
 If configured properly, output should be
 offline_credentials_expiration = 1
@@ -30521,6 +30667,14 @@ offline_credentials_expiration = 1
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3858r375264_fix">Configure the operating system to prohibit the use of cached authenticators after one day.</fixtext></td>
 <td>SSSD should be configured to expire offline credentials after 1 day.
+
+Check if SSSD allows cached authentications with the following command:
+
+$ sudo grep cache_credentials /etc/sssd/sssd.conf
+cache_credentials = true
+
+If "cache_credentials" is set to "false" or is missing no further checks are required.
+
 To configure SSSD to expire offline credentials, set
 offline_credentials_expiration to 1 under the [pam]
 section in /etc/sssd/sssd.conf. For example:
