@@ -6963,6 +6963,70 @@
         database: passwd
         split: ':'
       tags:
+        - CCE-85888-6
+        - DISA-STIG-RHEL-08-010731
+        - accounts_users_home_files_permissions
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Create local_users variable from the getent output
+      ansible.builtin.set_fact:
+        local_users: '{{ ansible_facts.getent_passwd|dict2items }}'
+      tags:
+        - CCE-85888-6
+        - DISA-STIG-RHEL-08-010731
+        - accounts_users_home_files_permissions
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Test for existence home directories to avoid creating them.
+      ansible.builtin.stat:
+        path: '{{ item.value[4] }}'
+      register: path_exists
+      loop: '{{ local_users }}'
+      when:
+        - item.value[1]|int >= 1000
+        - item.value[1]|int != 65534
+      tags:
+        - CCE-85888-6
+        - DISA-STIG-RHEL-08-010731
+        - accounts_users_home_files_permissions
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Ensure interactive local users have proper permissions on their respective
+        home directories
+      ansible.builtin.file:
+        path: '{{ item.0.value[4] }}'
+        mode: u-s,g-w-s,o=-
+        follow: false
+        recurse: true
+      loop: '{{ local_users|zip(path_exists.results)|list }}'
+      when: item.1.stat is defined and item.1.stat.exists
+      tags:
+        - CCE-85888-6
+        - DISA-STIG-RHEL-08-010731
+        - accounts_users_home_files_permissions
+        - low_complexity
+        - low_disruption
+        - medium_severity
+        - no_reboot_needed
+        - restrict_strategy
+
+    - name: Get all local users from /etc/passwd
+      ansible.builtin.getent:
+        database: passwd
+        split: ':'
+      tags:
         - CCE-83434-1
         - DISA-STIG-RHEL-08-010740
         - file_groupownership_home_directories

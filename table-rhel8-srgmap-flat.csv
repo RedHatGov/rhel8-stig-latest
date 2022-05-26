@@ -6529,12 +6529,16 @@ To properly set the owner of /var/log/audit, run the command:
 $ sudo chown root /var/log/audit ",,,,
 V-56671,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-84048-8:System Audit Logs Must Have Mode 0750 or Less Permissive,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit","
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
 
@@ -6542,9 +6546,7 @@ Find the location of the audit logs:
 
 $ sudo grep ""^log_file"" /etc/audit/auditd.conf
 
-Find the group that owns audit logs:
 
-$ sudo grep ""^log_group"" /etc/audit/auditd.conf
 
 Run the following command to check the mode of the system audit logs:
 
@@ -6552,14 +6554,19 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
-If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs have a more permissive mode?
-      ",Configure the operating system to protect audit information from unauthorized read access.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit",,,,
+The correct permissions are 0700
+      Is it the case that audit logs have a more permissive mode?
+      ",Configure the operating system to protect audit information from unauthorized read access.,"
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
+
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".",,,,
 V-56671,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
 
 Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit operating system activity.","All audit logs must be group owned by root user. The path for audit log can
@@ -6772,12 +6779,16 @@ SV-70933,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The 
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit","
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
 
@@ -6785,9 +6796,7 @@ Find the location of the audit logs:
 
 $ sudo grep ""^log_file"" /etc/audit/auditd.conf
 
-Find the group that owns audit logs:
 
-$ sudo grep ""^log_group"" /etc/audit/auditd.conf
 
 Run the following command to check the mode of the system audit logs:
 
@@ -6795,14 +6804,19 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
-If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs have a more permissive mode?
-      ",Configure the operating system to protect audit information from unauthorized modification.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit",,,,
+The correct permissions are 0700
+      Is it the case that audit logs have a more permissive mode?
+      ",Configure the operating system to protect audit information from unauthorized modification.,"
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
+
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".",,,,
 SV-70933,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized modification.
@@ -7023,12 +7037,16 @@ SV-70935,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The 
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
 
-Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
+Audit information includes all information (e.g., audit records, audit settings, audit reports) needed to successfully audit information system activity.","
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit","
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".","
                   Applicable - Configurable
                 ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Verify the audit log directories have a correct mode or less permissive mode.
 
@@ -7036,9 +7054,7 @@ Find the location of the audit logs:
 
 $ sudo grep ""^log_file"" /etc/audit/auditd.conf
 
-Find the group that owns audit logs:
 
-$ sudo grep ""^log_group"" /etc/audit/auditd.conf
 
 Run the following command to check the mode of the system audit logs:
 
@@ -7046,14 +7062,19 @@ $ sudo stat -c ""%a %n"" [audit_log_directory]
 
 Replace ""[audit_log_directory]"" to the correct audit log directory path, by default this location is ""/var/log/audit"".
 
-If the log_group is ""root"" or is not set, the correct permissions are 0700, otherwise they are 0750.
-      Is it the case that audit logs have a more permissive mode?
-      ",Configure the operating system to protect audit information from unauthorized deletion.,"If log_group in /etc/audit/auditd.conf is set to a group other than the root
-group account, change the mode of the audit log files with the following command:
-$ sudo chmod 0750 /var/log/audit
 
-Otherwise, change the mode of the audit log files with the following command:
-$ sudo chmod 0700 /var/log/audit",,,,
+The correct permissions are 0700
+      Is it the case that audit logs have a more permissive mode?
+      ",Configure the operating system to protect audit information from unauthorized deletion.,"
+Verify the audit log directories have a mode of ""0700"" or less permissive by first determining
+where the audit logs are stored with the following command:
+$ sudo grep -iw log_file /etc/audit/auditd.conf
+
+log_file = /var/log/audit/audit.log
+Configure the audit log directory to be protected from unauthorized read access by setting the
+correct permissive mode with the following command:
+$ sudo chmod 0700 audit_log_directory
+By default, audit_log_directory is ""/var/log/audit"".",,,,
 SV-70935,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88227-4:System Audit Logs Must Be Group Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
 
 To ensure the veracity of audit information, the operating system must protect audit information from unauthorized deletion. This requirement can be achieved through multiple methods, which will depend upon system architecture and design.
@@ -13132,6 +13153,22 @@ $ grep sulogin /usr/lib/systemd/system/emergency.service
 The output should be similar to the following, and the line must begin with
 ExecStart and /usr/lib/systemd/systemd-sulogin-shell.
     ExecStart=-/usr/lib/systemd/systemd-sulogin-shell emergency
+
+Then, check if the emergency target requires the emergency service:
+Run the following command:
+$ sudo grep Requires /usr/lib/systemd/system/emergency.target
+The output should be the following:
+Requires=emergency.service
+
+Then, check if there is no custom emergency target configured in systemd configuration.
+Run the following command:
+$ sudo grep -r emergency.target /etc/systemd/system/
+The output should be empty.
+
+Then, check if there is no custom emergency service configured in systemd configuration.
+Run the following command:
+$ sudo grep -r emergency.service /etc/systemd/system/
+The output should be empty.
       Is it the case that the output is different?
       ",Configure the operating system to enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,"Emergency mode is intended as a system recovery
 method, providing a single user root access to the system
@@ -13179,17 +13216,17 @@ $ sed -i 's/\(set superuser=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
 Once the superuser account has been added,
 update the
 grub.cfg file by running:
-grub2-mkconfig -o /boot/grub2/grub.cfg","
+grubby --update-kernel=ALL --env=/boot/grub2/grubenv","
                   Applicable - Configurable
                 ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser account has been set, run the following
 command:
-sudo grep -A1 ""superusers"" /etc/grub2.cfg
+sudo grep -A1 ""superusers"" /boot/grub2/grub.cfg
 The output should show the following:
 set superusers=""superusers-account""
 export superusers
 where superusers-account is the actual account name different from common names like root,
-admin, or administrator.
-      Is it the case that it does not?
+admin, or administrator and different from any other existing user name.
+      Is it the case that superuser account is not set or is set to root, admin, administrator or any other existing user name?
       ",Configure the operating system to enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,"The grub2 boot loader should have a superuser account and password
 protection enabled to protect boot-time settings.
 
@@ -13205,7 +13242,7 @@ $ sed -i 's/\(set superuser=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
 Once the superuser account has been added,
 update the
 grub.cfg file by running:
-grub2-mkconfig -o /boot/grub2/grub.cfg",,,,
+grubby --update-kernel=ALL --env=/boot/grub2/grubenv",,,,
 SV-71007,SRG-OS-000080-GPOS-00048,TBD - Assigned by DISA after STIG release,The operating system must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,CCE-80828-7:Set Boot Loader Password in grub2,"To mitigate the risk of unauthorized access to sensitive information by entities that have been issued certificates by DoD-approved PKIs, all DoD systems (e.g., web servers and web portals) must be properly configured to incorporate access control methods that do not rely solely on the possession of a certificate for access. Successful authentication must not automatically give an entity access to an asset or security boundary. Authorization procedures and controls must be implemented to ensure each authenticated entity also has a validated and current authorization. Authorization is the process of determining whether an entity, once authenticated, is permitted to access a specific asset. Information systems use access control policies and enforcement mechanisms to implement this requirement.
 
 Access control policies include: identity-based policies, role-based policies, and attribute-based policies. Access enforcement mechanisms include: access control lists, access control matrices, and cryptography. These policies and mechanisms must be employed by the application to control access between users (or processes acting on behalf of users) and objects (e.g., devices, files, records, processes, programs, and domains) in the information system.","The grub2 boot loader should have a superuser account and password
@@ -13219,23 +13256,16 @@ by running the following command:
 When prompted, enter the password that was selected.
 ","
                   Applicable - Configurable
-                ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser password has been set, run the following
-command:
+                ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","First, check whether the password is defined in either /boot/grub2/user.cfg or
+/boot/grub2/grub.cfg.
+Run the following commands:
+$ sudo grep '^[\s]*GRUB2_PASSWORD=grub\.pbkdf2\.sha512.*$' /boot/grub2/user.cfg
+$ sudo grep '^[\s]*password_pbkdf2[\s]+.*[\s]+grub\.pbkdf2\.sha512.*$' /boot/grub2/grub.cfg
 
-sudo grep ""superusers"" /etc/grub2.cfg
 
-The output should show the following:
-password_pbkdf2 superusers-account ${GRUB2_PASSWORD}
-To verify the boot loader superuser account password has been set,
-and the password encrypted, run the following command:
-
-sudo cat /boot/grub2/user.cfg
-The output should be similar to:
-GRUB2_PASSWORD=grub.pbkdf2.sha512.10000.C4E08AC72FBFF7E837FD267BFAD7AEB3D42DDC
-2C99F2A94DD5E2E75C2DC331B719FE55D9411745F82D1B6CFD9E927D61925F9BBDD1CFAA0080E0
-916F7AB46E0D.1302284FCCC52CD73BA3671C6C12C26FF50BA873293B24EE2A96EE3B57963E6D7
-0C83964B473EC8F93B07FE749AA6710269E904A9B08A6BBACB00A2D242AD828
-      Is it the case that it does not?
+Second, check that a superuser is defined in /boot/grub2/grub.cfg.
+$ sudo grep '^[\s]*set[\s]+superusers=(""?)[a-zA-Z_]+\1$'  /boot/grub2/grub.cfg
+      Is it the case that it does not produce any output?
       ",Configure the operating system to enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,"The grub2 boot loader should have a superuser account and password
 protection enabled to protect boot-time settings.
 
@@ -13258,22 +13288,22 @@ It is highly suggested not to use common administrator account names like root,
 admin, or administrator for the grub2 superuser account.
 
 Change the superuser to a different username (The default is 'root').
-$ sed -i 's/\(set superuser=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
+$ sed -i 's/\(set superusers=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
 
 Once the superuser account has been added,
 update the
 grub.cfg file by running:
-grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg","
+grubby --update-kernel=ALL --env=/boot/grub2/grubenv","
                   Applicable - Configurable
                 ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser account has been set, run the following
 command:
-sudo grep -A1 ""superusers"" /etc/grub2-efi.cfg
+sudo grep -A1 ""superusers"" /boot/efi/EFI/redhat/grub.cfg
 The output should show the following:
 set superusers=""superusers-account""
 export superusers
 where superusers-account is the actual account name different from common names like root,
-admin, or administrator.
-      Is it the case that it does not?
+admin, or administrator and different from any other existing user name.
+      Is it the case that superuser account is not set or is set to an existing name or to a common name?
       ",Configure the operating system to enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,"The grub2 boot loader should have a superuser account and password
 protection enabled to protect boot-time settings.
 
@@ -13284,12 +13314,12 @@ It is highly suggested not to use common administrator account names like root,
 admin, or administrator for the grub2 superuser account.
 
 Change the superuser to a different username (The default is 'root').
-$ sed -i 's/\(set superuser=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
+$ sed -i 's/\(set superusers=\).*/\1""<unique user ID>""/g' /etc/grub.d/01_users
 
 Once the superuser account has been added,
 update the
 grub.cfg file by running:
-grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg",,,,
+grubby --update-kernel=ALL --env=/boot/grub2/grubenv",,,,
 SV-71007,SRG-OS-000080-GPOS-00048,TBD - Assigned by DISA after STIG release,The operating system must enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,CCE-80829-5:Set the UEFI Boot Loader Password,"To mitigate the risk of unauthorized access to sensitive information by entities that have been issued certificates by DoD-approved PKIs, all DoD systems (e.g., web servers and web portals) must be properly configured to incorporate access control methods that do not rely solely on the possession of a certificate for access. Successful authentication must not automatically give an entity access to an asset or security boundary. Authorization procedures and controls must be implemented to ensure each authenticated entity also has a validated and current authorization. Authorization is the process of determining whether an entity, once authenticated, is permitted to access a specific asset. Information systems use access control policies and enforcement mechanisms to implement this requirement.
 
 Access control policies include: identity-based policies, role-based policies, and attribute-based policies. Access enforcement mechanisms include: access control lists, access control matrices, and cryptography. These policies and mechanisms must be employed by the application to control access between users (or processes acting on behalf of users) and objects (e.g., devices, files, records, processes, programs, and domains) in the information system.","The grub2 boot loader should have a superuser account and password
@@ -13303,23 +13333,14 @@ by running the following command:
 When prompted, enter the password that was selected.
 ","
                   Applicable - Configurable
-                ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser password has been set, run the following
-command:
-
-sudo grep ""password"" /etc/grub2-efi.cfg
-
-The output should show the following:
-password_pbkdf2 superusers-account ${GRUB2_PASSWORD}
-To verify the boot loader superuser account password has been set,
-and the password encrypted, run the following command:
-
-sudo cat /boot/efi/EFI/redhat/user.cfg
+                ","Verify the operating system enforces approved authorizations for logical access to information and system resources in accordance with applicable access control policies. If it does not, this is a finding.","To verify the boot loader superuser password has been set, run the following command:
+$ sudo grep ""^[\s]*GRUB2_PASSWORD=grub\.pbkdf2\.sha512.*$"" /boot/efi/EFI/redhat/user.cfg
 The output should be similar to:
 GRUB2_PASSWORD=grub.pbkdf2.sha512.10000.C4E08AC72FBFF7E837FD267BFAD7AEB3D42DDC
 2C99F2A94DD5E2E75C2DC331B719FE55D9411745F82D1B6CFD9E927D61925F9BBDD1CFAA0080E0
 916F7AB46E0D.1302284FCCC52CD73BA3671C6C12C26FF50BA873293B24EE2A96EE3B57963E6D7
 0C83964B473EC8F93B07FE749AA6710269E904A9B08A6BBACB00A2D242AD828
-      Is it the case that it does not?
+      Is it the case that no password is set?
       ",Configure the operating system to enforce approved authorizations for logical access to information and system resources in accordance with applicable access control policies.,"The grub2 boot loader should have a superuser account and password
 protection enabled to protect boot-time settings.
 
@@ -34018,6 +34039,22 @@ The output should not return any interactive users.
 have a home directory assigned. Use the following commands to create the user
 home directory assigned in /etc/passwd:
 $ sudo mkdir /home/USER",,,,
+SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-85888-6:All User Files and Directories In The Home Directory Must Have Mode 0750 Or Less Permissive,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Set the mode on files and directories in the local interactive user home
+directory with the following command:
+$ sudo chmod 0750 /home/USER/FILE_DIR
+Files that begin with a ""."" are excluded from this requirement.","
+                  Applicable - Configurable
+                ","Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.","To verify all files and directories contained in interactive user home
+directory, excluding local initialization files, have a mode of 0750,
+run the following command:
+$ sudo ls -lLR /home/USER
+      Is it the case that home directory files or folders have incorrect permissions?
+      ","Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.","Set the mode on files and directories in the local interactive user home
+directory with the following command:
+$ sudo chmod 0750 /home/USER/FILE_DIR
+Files that begin with a ""."" are excluded from this requirement.",,,,
 SV-70851,SRG-OS-000480-GPOS-00227,TBD - Assigned by DISA after STIG release,"The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.",CCE-83434-1:All Interactive User Home Directories Must Be Group-Owned By The Primary User,"Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.","Change the group owner of interactive users home directory to the
