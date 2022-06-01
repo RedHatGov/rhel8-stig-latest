@@ -5581,7 +5581,14 @@ if LC_ALL=C grep -m 1 -q ^log_group /etc/audit/auditd.conf; then
 else
   GROUP=root
 fi
-find /var/log/audit -type d -exec chgrp ${GROUP} {} \;
+if LC_ALL=C grep -iw ^log_file /etc/audit/auditd.conf; then
+  DIR=$(awk -F "=" '/^log_file/ {print $2}' /etc/audit/auditd.conf | tr -d ' ' | rev | cut -d"/" -f2- | rev)
+else
+  DIR="/var/log/audit"
+fi
+
+
+find ${DIR} -type d -exec chgrp ${GROUP} {} \;
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -31948,7 +31955,7 @@ for f in $(echo -n "$MAIN_CONF /etc/sssd/sssd.conf /etc/sssd/conf.d/*.conf"); do
 
     # find section and add key = value to it
     elif grep -qs "[[:space:]]*\[sssd\]" "$f"; then
-            sed -i "/[[:space:]]*sssd/a certificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" "$f"
+            sed -i "/[[:space:]]*\[sssd\]/a certificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" "$f"
             found=true
     fi
 done
@@ -31999,7 +32006,7 @@ for f in $(echo -n "/etc/sssd/sssd.conf"); do
 
     # find section and add key = value to it
     elif grep -qs "[[:space:]]*\[pam\]" "$f"; then
-            sed -i "/[[:space:]]*pam/a pam_cert_auth = true" "$f"
+            sed -i "/[[:space:]]*\[pam\]/a pam_cert_auth = true" "$f"
             found=true
     fi
 done
@@ -32009,6 +32016,171 @@ if ! $found ; then
     file=$(echo "/etc/sssd/sssd.conf" | cut -f1 -d' ')
     mkdir -p "$(dirname "$file")"
     echo -e "[pam]\npam_cert_auth = true" >> "$file"
+fi
+
+
+if [ -f /usr/bin/authselect ]; then
+    if authselect check; then
+        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+        # Standard profiles delivered with authselect should not be modified.
+        # If not already in use, a custom profile is created preserving the enabled features.
+        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+            authselect create-profile hardening -b $CURRENT_PROFILE
+            CURRENT_PROFILE="custom/hardening"
+            # Ensure a backup before changing the profile
+            authselect apply-changes -b --backup=before-pwhistory-hardening.backup
+            authselect select $CURRENT_PROFILE
+            for feature in $ENABLED_FEATURES; do
+                authselect enable-feature $feature;
+            done
+        fi
+        # Include the desired configuration in the custom profile
+        CUSTOM_PROFILE_DIR="/etc/authselect/$CURRENT_PROFILE"
+        # The line should be included on the top of postlogin file
+        
+        if [ -e "$CUSTOM_PROFILE_DIR/smartcard-auth" ] ; then
+    valueRegex="" defaultValue=""
+    # non-empty values need to be preceded by an equals sign
+    [ -n "${valueRegex}" ] && valueRegex="=${valueRegex}"
+    # add an equals sign to non-empty values
+    [ -n "${defaultValue}" ] && defaultValue="=${defaultValue}"
+
+    # fix 'type' if it's wrong
+    if grep -q -P "^\\s*(?"'!'"auth\\s)[[:alnum:]]+\\s+[[:alnum:]]+\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*)[[:alnum:]]+(\\s+[[:alnum:]]+\\s+pam_sss.so)/\\1auth\\2/" "$CUSTOM_PROFILE_DIR/smartcard-auth"
+    fi
+
+    # fix 'control' if it's wrong
+    if grep -q -P "^\\s*auth\\s+(?"'!'"sufficient)[[:alnum:]]+\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+)[[:alnum:]]+(\\s+pam_sss.so)/\\1sufficient\\2/" "$CUSTOM_PROFILE_DIR/smartcard-auth"
+    fi
+
+    # fix the value for 'option' if one exists but does not match 'valueRegex'
+    if grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth(?"'!'"${valueRegex}(\\s|\$))" < "$CUSTOM_PROFILE_DIR/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s)try_cert_auth=[^[:space:]]*/\\1try_cert_auth${defaultValue}/" "$CUSTOM_PROFILE_DIR/smartcard-auth"
+
+    # add 'option=default' if option is not set
+    elif grep -q -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/smartcard-auth" &&
+            grep    -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/smartcard-auth" | grep -q -E -v "\\stry_cert_auth(=|\\s|\$)" ; then
+
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so[^\\n]*)/\\1 try_cert_auth${defaultValue}/" "$CUSTOM_PROFILE_DIR/smartcard-auth"
+    # add a new entry if none exists
+    elif ! grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth${valueRegex}(\\s|\$)" < "$CUSTOM_PROFILE_DIR/smartcard-auth" ; then
+        echo "auth sufficient pam_sss.so try_cert_auth${defaultValue}" >> "$CUSTOM_PROFILE_DIR/smartcard-auth"
+    fi
+else
+    echo "$CUSTOM_PROFILE_DIR/smartcard-auth doesn't exist" >&2
+fi
+        if [ -e "$CUSTOM_PROFILE_DIR/system-auth" ] ; then
+    valueRegex="" defaultValue=""
+    # non-empty values need to be preceded by an equals sign
+    [ -n "${valueRegex}" ] && valueRegex="=${valueRegex}"
+    # add an equals sign to non-empty values
+    [ -n "${defaultValue}" ] && defaultValue="=${defaultValue}"
+
+    # fix 'type' if it's wrong
+    if grep -q -P "^\\s*(?"'!'"auth\\s)[[:alnum:]]+\\s+[[:alnum:]]+\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*)[[:alnum:]]+(\\s+[[:alnum:]]+\\s+pam_sss.so)/\\1auth\\2/" "$CUSTOM_PROFILE_DIR/system-auth"
+    fi
+
+    # fix 'control' if it's wrong
+    if grep -q -P "^\\s*auth\\s+(?"'!'"sufficient)[[:alnum:]]+\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+)[[:alnum:]]+(\\s+pam_sss.so)/\\1sufficient\\2/" "$CUSTOM_PROFILE_DIR/system-auth"
+    fi
+
+    # fix the value for 'option' if one exists but does not match 'valueRegex'
+    if grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth(?"'!'"${valueRegex}(\\s|\$))" < "$CUSTOM_PROFILE_DIR/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s)try_cert_auth=[^[:space:]]*/\\1try_cert_auth${defaultValue}/" "$CUSTOM_PROFILE_DIR/system-auth"
+
+    # add 'option=default' if option is not set
+    elif grep -q -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/system-auth" &&
+            grep    -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "$CUSTOM_PROFILE_DIR/system-auth" | grep -q -E -v "\\stry_cert_auth(=|\\s|\$)" ; then
+
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so[^\\n]*)/\\1 try_cert_auth${defaultValue}/" "$CUSTOM_PROFILE_DIR/system-auth"
+    # add a new entry if none exists
+    elif ! grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth${valueRegex}(\\s|\$)" < "$CUSTOM_PROFILE_DIR/system-auth" ; then
+        echo "auth sufficient pam_sss.so try_cert_auth${defaultValue}" >> "$CUSTOM_PROFILE_DIR/system-auth"
+    fi
+else
+    echo "$CUSTOM_PROFILE_DIR/system-auth doesn't exist" >&2
+fi
+        authselect apply-changes -b --backup=after-pwhistory-hardening.backup
+    else
+        echo "
+authselect integrity check failed. Remediation aborted!
+This remediation could not be applied because the authselect profile is not intact.
+It is not recommended to manually edit the PAM files when authselect is available.
+In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        false
+    fi
+else
+    if [ -e "/etc/pam.d/smartcard-auth" ] ; then
+    valueRegex="" defaultValue=""
+    # non-empty values need to be preceded by an equals sign
+    [ -n "${valueRegex}" ] && valueRegex="=${valueRegex}"
+    # add an equals sign to non-empty values
+    [ -n "${defaultValue}" ] && defaultValue="=${defaultValue}"
+
+    # fix 'type' if it's wrong
+    if grep -q -P "^\\s*(?"'!'"auth\\s)[[:alnum:]]+\\s+[[:alnum:]]+\\s+pam_sss.so" < "/etc/pam.d/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*)[[:alnum:]]+(\\s+[[:alnum:]]+\\s+pam_sss.so)/\\1auth\\2/" "/etc/pam.d/smartcard-auth"
+    fi
+
+    # fix 'control' if it's wrong
+    if grep -q -P "^\\s*auth\\s+(?"'!'"sufficient)[[:alnum:]]+\\s+pam_sss.so" < "/etc/pam.d/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+)[[:alnum:]]+(\\s+pam_sss.so)/\\1sufficient\\2/" "/etc/pam.d/smartcard-auth"
+    fi
+
+    # fix the value for 'option' if one exists but does not match 'valueRegex'
+    if grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth(?"'!'"${valueRegex}(\\s|\$))" < "/etc/pam.d/smartcard-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s)try_cert_auth=[^[:space:]]*/\\1try_cert_auth${defaultValue}/" "/etc/pam.d/smartcard-auth"
+
+    # add 'option=default' if option is not set
+    elif grep -q -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "/etc/pam.d/smartcard-auth" &&
+            grep    -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "/etc/pam.d/smartcard-auth" | grep -q -E -v "\\stry_cert_auth(=|\\s|\$)" ; then
+
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so[^\\n]*)/\\1 try_cert_auth${defaultValue}/" "/etc/pam.d/smartcard-auth"
+    # add a new entry if none exists
+    elif ! grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth${valueRegex}(\\s|\$)" < "/etc/pam.d/smartcard-auth" ; then
+        echo "auth sufficient pam_sss.so try_cert_auth${defaultValue}" >> "/etc/pam.d/smartcard-auth"
+    fi
+else
+    echo "/etc/pam.d/smartcard-auth doesn't exist" >&2
+fi
+    if [ -e "/etc/pam.d/system-auth" ] ; then
+    valueRegex="" defaultValue=""
+    # non-empty values need to be preceded by an equals sign
+    [ -n "${valueRegex}" ] && valueRegex="=${valueRegex}"
+    # add an equals sign to non-empty values
+    [ -n "${defaultValue}" ] && defaultValue="=${defaultValue}"
+
+    # fix 'type' if it's wrong
+    if grep -q -P "^\\s*(?"'!'"auth\\s)[[:alnum:]]+\\s+[[:alnum:]]+\\s+pam_sss.so" < "/etc/pam.d/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*)[[:alnum:]]+(\\s+[[:alnum:]]+\\s+pam_sss.so)/\\1auth\\2/" "/etc/pam.d/system-auth"
+    fi
+
+    # fix 'control' if it's wrong
+    if grep -q -P "^\\s*auth\\s+(?"'!'"sufficient)[[:alnum:]]+\\s+pam_sss.so" < "/etc/pam.d/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+)[[:alnum:]]+(\\s+pam_sss.so)/\\1sufficient\\2/" "/etc/pam.d/system-auth"
+    fi
+
+    # fix the value for 'option' if one exists but does not match 'valueRegex'
+    if grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth(?"'!'"${valueRegex}(\\s|\$))" < "/etc/pam.d/system-auth" ; then
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s)try_cert_auth=[^[:space:]]*/\\1try_cert_auth${defaultValue}/" "/etc/pam.d/system-auth"
+
+    # add 'option=default' if option is not set
+    elif grep -q -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "/etc/pam.d/system-auth" &&
+            grep    -E "^\\s*auth\\s+sufficient\\s+pam_sss.so" < "/etc/pam.d/system-auth" | grep -q -E -v "\\stry_cert_auth(=|\\s|\$)" ; then
+
+        sed --follow-symlinks -i -E -e "s/^(\\s*auth\\s+sufficient\\s+pam_sss.so[^\\n]*)/\\1 try_cert_auth${defaultValue}/" "/etc/pam.d/system-auth"
+    # add a new entry if none exists
+    elif ! grep -q -P "^\\s*auth\\s+sufficient\\s+pam_sss.so(\\s.+)?\\s+try_cert_auth${valueRegex}(\\s|\$)" < "/etc/pam.d/system-auth" ; then
+        echo "auth sufficient pam_sss.so try_cert_auth${defaultValue}" >> "/etc/pam.d/system-auth"
+    fi
+else
+    echo "/etc/pam.d/system-auth doesn't exist" >&2
+fi
 fi
 
 else
@@ -32038,7 +32210,7 @@ for f in $(echo -n "/etc/sssd/sssd.conf"); do
 
     # find section and add key = value to it
     elif grep -qs "[[:space:]]*\[pam\]" "$f"; then
-            sed -i "/[[:space:]]*pam/a offline_credentials_expiration = 1" "$f"
+            sed -i "/[[:space:]]*\[pam\]/a offline_credentials_expiration = 1" "$f"
             found=true
     fi
 done

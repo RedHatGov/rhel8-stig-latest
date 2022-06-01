@@ -9612,11 +9612,13 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of <code>/var/log/audit</code>, run the command:
 <pre>$ sudo chgrp root /var/log/audit</pre>
+
 If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a group other than the <code>root</code>
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.</td>
-<td>Determine the audit log group by running the following command:
+<td>
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -9633,6 +9635,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>medium</td>
@@ -9982,11 +9985,13 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of <code>/var/log/audit</code>, run the command:
 <pre>$ sudo chgrp root /var/log/audit</pre>
+
 If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a group other than the <code>root</code>
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.</td>
-<td>Determine the audit log group by running the following command:
+<td>
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -10003,6 +10008,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>medium</td>
@@ -10364,11 +10370,13 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of <code>/var/log/audit</code>, run the command:
 <pre>$ sudo chgrp root /var/log/audit</pre>
+
 If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a group other than the <code>root</code>
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.</td>
-<td>Determine the audit log group by running the following command:
+<td>
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -10385,6 +10393,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>medium</td>
@@ -19848,6 +19857,13 @@ section in <code>/etc/sssd/sssd.conf</code>. For example:
 <pre>[pam]
 pam_cert_auth = true
 </pre>
+
+Add or update "pam_sss.so" with "try_cert_auth" or "require_cert_auth" in the
+"/etc/pam.d/system-auth" and "/etc/pam.d/smartcard-auth" files based on the following
+examples:
+<pre>/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
+</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system uses multifactor authentication for network access to privileged accounts. If it does not, this is a finding.</td>
@@ -19855,6 +19871,9 @@ pam_cert_auth = true
 $ sudo grep pam_cert_auth /etc/sssd/sssd.conf
 If configured properly, output should be
 pam_cert_auth = true
+
+
+$ sudo grep cert_auth /etc/sssd/sssd.conf /etc/pam.d/*
       Is it the case that smart cards are not enabled in SSSD?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3765r557647_fix">Configure the operating system to use multifactor authentication for network access to privileged accounts.</fixtext></td>
@@ -19864,6 +19883,13 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update "pam_sss.so" with "try_cert_auth" or "require_cert_auth" in the
+"/etc/pam.d/system-auth" and "/etc/pam.d/smartcard-auth" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 </td>
 <td>medium</td>
 <td></td>
@@ -21650,11 +21676,13 @@ The structure and content of error messages must be carefully considered by the 
 
 To properly set the group owner of <code>/var/log/audit</code>, run the command:
 <pre>$ sudo chgrp root /var/log/audit</pre>
+
 If <code>log_group</code> in <code>/etc/audit/auditd.conf</code> is set to a group other than the <code>root</code>
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.</td>
-<td>Determine the audit log group by running the following command:
+<td>
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -21671,6 +21699,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.</td>
 <td>medium</td>
@@ -30319,6 +30348,13 @@ section in <code>/etc/sssd/sssd.conf</code>. For example:
 <pre>[pam]
 pam_cert_auth = true
 </pre>
+
+Add or update "pam_sss.so" with "try_cert_auth" or "require_cert_auth" in the
+"/etc/pam.d/system-auth" and "/etc/pam.d/smartcard-auth" files based on the following
+examples:
+<pre>/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
+</pre>
 </td>
 <td>Applicable - Configurable</td>
 <td>Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.</td>
@@ -30326,6 +30362,9 @@ pam_cert_auth = true
 $ sudo grep pam_cert_auth /etc/sssd/sssd.conf
 If configured properly, output should be
 pam_cert_auth = true
+
+
+$ sudo grep cert_auth /etc/sssd/sssd.conf /etc/pam.d/*
       Is it the case that smart cards are not enabled in SSSD?
       </td>
 <td><fixtext xmlns="http://checklists.nist.gov/xccdf/1.1" fixref="F-3852r375189_fix">Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.</fixtext></td>
@@ -30335,6 +30374,13 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update "pam_sss.so" with "try_cert_auth" or "require_cert_auth" in the
+"/etc/pam.d/system-auth" and "/etc/pam.d/smartcard-auth" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 </td>
 <td>medium</td>
 <td></td>

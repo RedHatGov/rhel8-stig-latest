@@ -6522,10 +6522,12 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","Determine the audit log group by running the following command:
+                ","Verify the operating system protects audit information from unauthorized read access. If it does not, this is a finding.","
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -6540,6 +6542,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.",,,,
 V-56671,SRG-OS-000057-GPOS-00027,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized read access.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"Unauthorized disclosure of audit records can reveal system and configuration data to attackers, thus compromising its confidentiality.
@@ -6768,10 +6771,12 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","Determine the audit log group by running the following command:
+                ","Verify the operating system protects audit information from unauthorized modification. If it does not, this is a finding.","
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -6786,6 +6791,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.",,,,
 SV-70933,SRG-OS-000058-GPOS-00028,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized modification.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
@@ -7026,10 +7032,12 @@ Audit information includes all information (e.g., audit records, audit settings,
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","Determine the audit log group by running the following command:
+                ","Verify the operating system protects audit information from unauthorized deletion. If it does not, this is a finding.","
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -7044,6 +7052,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.",,,,
 SV-70935,SRG-OS-000059-GPOS-00029,TBD - Assigned by DISA after STIG release,The operating system must protect audit information from unauthorized deletion.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"If audit information were to become compromised, then forensic analysis and discovery of the true source of potentially malicious system activity is impossible to achieve.
@@ -14031,12 +14040,22 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update ""pam_sss.so"" with ""try_cert_auth"" or ""require_cert_auth"" in the
+""/etc/pam.d/system-auth"" and ""/etc/pam.d/smartcard-auth"" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 ","
                   Applicable - Configurable
                 ","Verify the operating system uses multifactor authentication for network access to privileged accounts. If it does not, this is a finding.","To verify that smart cards are enabled in SSSD, run the following command:
 $ sudo grep pam_cert_auth /etc/sssd/sssd.conf
 If configured properly, output should be
 pam_cert_auth = true
+
+
+$ sudo grep cert_auth /etc/sssd/sssd.conf /etc/pam.d/*
       Is it the case that smart cards are not enabled in SSSD?
       ",Configure the operating system to use multifactor authentication for network access to privileged accounts.,"SSSD should be configured to authenticate access to the system
 using smart cards. To enable smart cards in SSSD, set pam_cert_auth
@@ -14044,6 +14063,13 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update ""pam_sss.so"" with ""try_cert_auth"" or ""require_cert_auth"" in the
+""/etc/pam.d/system-auth"" and ""/etc/pam.d/smartcard-auth"" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 ",,,,
 SV-71017,SRG-OS-000106-GPOS-00053,TBD - Assigned by DISA after STIG release,The operating system must use multifactor authentication for network access to non-privileged accounts.,CCE-80896-4:Disable SSH Access via Empty Passwords,"To assure accountability and prevent unauthenticated access, non-privileged users must utilize multifactor authentication to prevent potential misuse and compromise of the system.
 
@@ -15231,10 +15257,12 @@ The structure and content of error messages must be carefully considered by the 
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.","
                   Applicable - Configurable
-                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","Determine the audit log group by running the following command:
+                ","Verify the operating system reveals error messages only to authorized users. If it does not, this is a finding.","
+Determine the audit log group by running the following command:
 
 $ sudo grep -P '^[ ]*log_group[ ]+=.*$' /etc/audit/auditd.conf
 
@@ -15249,6 +15277,7 @@ All listed directories must be owned by the log_group or by root if the log_grou
 
 To properly set the group owner of /var/log/audit, run the command:
 $ sudo chgrp root /var/log/audit
+
 If log_group in /etc/audit/auditd.conf is set to a group other than the root
 group account, change the group ownership of the audit directories to this specific group.",,,,
 SV-71163,SRG-OS-000206-GPOS-00084,TBD - Assigned by DISA after STIG release,The operating system must reveal error messages only to authorized users.,CCE-88226-6:System Audit Directories Must Be Owned By Root,"Only authorized personnel should be aware of errors and the details of the errors. Error messages are an indicator of an organization's operational state or can identify the operating system or platform. Additionally, Personally Identifiable Information (PII) and operational information must not be revealed through error messages to unauthorized personnel or their designated representatives.
@@ -20529,12 +20558,22 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update ""pam_sss.so"" with ""try_cert_auth"" or ""require_cert_auth"" in the
+""/etc/pam.d/system-auth"" and ""/etc/pam.d/smartcard-auth"" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 ","
                   Applicable - Configurable
                 ","Verify the operating system implements multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access. If it does not, this is a finding.","To verify that smart cards are enabled in SSSD, run the following command:
 $ sudo grep pam_cert_auth /etc/sssd/sssd.conf
 If configured properly, output should be
 pam_cert_auth = true
+
+
+$ sudo grep cert_auth /etc/sssd/sssd.conf /etc/pam.d/*
       Is it the case that smart cards are not enabled in SSSD?
       ",Configure the operating system to implement multifactor authentication for remote access to privileged accounts in such a way that one of the factors is provided by a device separate from the system gaining access.,"SSSD should be configured to authenticate access to the system
 using smart cards. To enable smart cards in SSSD, set pam_cert_auth
@@ -20542,6 +20581,13 @@ to true under the [pam]
 section in /etc/sssd/sssd.conf. For example:
 [pam]
 pam_cert_auth = true
+
+
+Add or update ""pam_sss.so"" with ""try_cert_auth"" or ""require_cert_auth"" in the
+""/etc/pam.d/system-auth"" and ""/etc/pam.d/smartcard-auth"" files based on the following
+examples:
+/etc/pam.d/smartcard-auth:auth sufficient pam_sss.so try_cert_auth
+/etc/pam.d/system-auth:auth [success=done authinfo_unavail=ignore ignore=ignore default=die] pam_sss.so try_cert_auth
 ",,,,
 V-56815,SRG-OS-000376-GPOS-00161,TBD - Assigned by DISA after STIG release,The operating system must accept Personal Identity Verification (PIV) credentials.,CCE-80846-9:Install the opensc Package For Multifactor Authentication,"The use of PIV credentials facilitates standardization and reduces the risk of unauthorized access.
 
