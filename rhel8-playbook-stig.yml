@@ -41612,8 +41612,8 @@
       - service_sshd_enabled
 
     - name: Find root:root-owned keys
-      command: find -H /etc/ssh/ -maxdepth 1 -user root -regex ".*_key$" -type f -group
-        root -perm /u+xs,g+xwrs,o+xwrt
+      ansible.builtin.command: find -H /etc/ssh/ -maxdepth 1 -user root -regex ".*_key$"
+        -type f -group root -perm /u+xs,g+xwrs,o+xwrt
       register: root_owned_keys
       changed_when: false
       failed_when: false
@@ -41637,7 +41637,7 @@
       - no_reboot_needed
 
     - name: Set permissions for root:root-owned keys
-      file:
+      ansible.builtin.file:
         path: '{{ item }}'
         mode: u-xs,g-xwrs,o-xwrt
         state: file
@@ -41662,8 +41662,8 @@
       - no_reboot_needed
 
     - name: Find root:ssh_keys-owned keys
-      command: find -H /etc/ssh/ -maxdepth 1 -user root -regex ".*_key$" -type f -group
-        ssh_keys -perm /u+xs,g+xws,o+xwrt
+      ansible.builtin.command: find -H /etc/ssh/ -maxdepth 1 -user root -regex ".*_key$"
+        -type f -group ssh_keys -perm /u+xs,g+xws,o+xwrt
       register: dedicated_group_owned_keys
       changed_when: false
       failed_when: false
@@ -41687,7 +41687,7 @@
       - no_reboot_needed
 
     - name: Set permissions for root:ssh_keys-owned keys
-      file:
+      ansible.builtin.file:
         path: '{{ item }}'
         mode: u-xs,g-xws,o-xwrt
         state: file

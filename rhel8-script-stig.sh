@@ -4185,7 +4185,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 service_file="/usr/lib/systemd/system/emergency.service"
 
+
 sulogin="/usr/lib/systemd/systemd-sulogin-shell emergency"
+
 
 if grep "^ExecStart=.*" "$service_file" ; then
     sed -i "s%^ExecStart=.*%ExecStart=-$sulogin%" "$service_file"
@@ -33657,7 +33659,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 for keyfile in /etc/ssh/*_key; do
     test -f "$keyfile" || continue
     if test root:root = "$(stat -c "%U:%G" "$keyfile")"; then
+    
 	chmod u-xs,g-xwrs,o-xwrt "$keyfile"
+    
     elif test root:ssh_keys = "$(stat -c "%U:%G" "$keyfile")"; then
 	chmod u-xs,g-xws,o-xwrt "$keyfile"
     else
