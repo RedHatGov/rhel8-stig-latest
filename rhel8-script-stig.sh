@@ -262,17 +262,11 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 chgrp 0 /sbin/auditctl
-
 chgrp 0 /sbin/aureport
-
 chgrp 0 /sbin/ausearch
-
 chgrp 0 /sbin/autrace
-
 chgrp 0 /sbin/auditd
-
 chgrp 0 /sbin/rsyslogd
-
 chgrp 0 /sbin/augenrules
 
 else
@@ -288,17 +282,11 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 chown 0 /sbin/auditctl
-
 chown 0 /sbin/aureport
-
 chown 0 /sbin/ausearch
-
 chown 0 /sbin/autrace
-
 chown 0 /sbin/auditd
-
 chown 0 /sbin/rsyslogd
-
 chown 0 /sbin/augenrules
 
 else
@@ -30848,9 +30836,6 @@ fi
 # BEGIN fix (279 / 396) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'
 ###############################################################################
 (>&2 echo "Remediating rule 279/396: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'")
-
-
-
 find -H /var/log/ -maxdepth 1 -type d -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'
 
@@ -30858,9 +30843,6 @@ find -H /var/log/ -maxdepth 1 -type d -exec chgrp 0 {} \;
 # BEGIN fix (280 / 396) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'
 ###############################################################################
 (>&2 echo "Remediating rule 280/396: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'")
-
-
-
 chgrp 0 /var/log/messages
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'
 
@@ -30868,9 +30850,6 @@ chgrp 0 /var/log/messages
 # BEGIN fix (281 / 396) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log'
 ###############################################################################
 (>&2 echo "Remediating rule 281/396: 'xccdf_org.ssgproject.content_rule_file_owner_var_log'")
-
-
-
 find -H /var/log/ -maxdepth 1 -type d -exec chown 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_file_owner_var_log'
 
@@ -30878,9 +30857,6 @@ find -H /var/log/ -maxdepth 1 -type d -exec chown 0 {} \;
 # BEGIN fix (282 / 396) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'
 ###############################################################################
 (>&2 echo "Remediating rule 282/396: 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'")
-
-
-
 chown 0 /var/log/messages
 # END fix for 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'
 
@@ -30912,15 +30888,9 @@ chmod u-xs,g-xws,o-xwrt /var/log/messages
 # BEGIN fix (285 / 396) for 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'
 ###############################################################################
 (>&2 echo "Remediating rule 285/396: 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'")
-
-
-
 find -H /lib/  -type d -exec chgrp 0 {} \;
-
 find -H /lib64/  -type d -exec chgrp 0 {} \;
-
 find -H /usr/lib/  -type d -exec chgrp 0 {} \;
-
 find -H /usr/lib64/  -type d -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'
 
@@ -30928,15 +30898,9 @@ find -H /usr/lib64/  -type d -exec chgrp 0 {} \;
 # BEGIN fix (286 / 396) for 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'
 ###############################################################################
 (>&2 echo "Remediating rule 286/396: 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'")
-
-
-
 find -H /lib/  -type d -exec chown 0 {} \;
-
 find -H /lib64/  -type d -exec chown 0 {} \;
-
 find -H /usr/lib/  -type d -exec chown 0 {} \;
-
 find -H /usr/lib64/  -type d -exec chown 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'
 
@@ -30988,8 +30952,6 @@ find /bin/ \
 ###############################################################################
 (>&2 echo "Remediating rule 290/396: 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'")
 
-
-
 find /lib/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 
 find /lib64/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
@@ -31032,16 +30994,11 @@ find -H /usr/lib64/  -perm /g+w,o+w  -type f -regex '^.*$' -exec chmod g-w,o-w {
 ###############################################################################
 (>&2 echo "Remediating rule 293/396: 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'")
 
-
-
 find /lib/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
-
 
 find /lib64/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 
-
 find /usr/lib/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
-
 
 find /usr/lib64/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'
