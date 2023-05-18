@@ -268,7 +268,7 @@
       lineinfile:
         path: /etc/aide.conf
         regexp: ^{{ item }}\s
-        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512 '
+        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512'
       with_items: '{{ audit_tools }}'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -286,7 +286,7 @@
     - name: Configure AIDE to properly protect audit tools
       lineinfile:
         path: /etc/aide.conf
-        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512 '
+        line: '{{ item }} p+i+n+u+g+s+b+acl+xattrs+sha512'
       with_items: '{{ audit_tools }}'
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -305,10 +305,10 @@
 
     - name: Ensure AIDE is installed
       package:
-        name: '{{ item }}'
+        name:
+        - aide
+        - crontabs
         state: present
-      with_items:
-      - aide
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82891-3

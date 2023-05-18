@@ -88,59 +88,45 @@ fi
 
 
 if grep -i '^.*/usr/sbin/auditctl.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/auditctl.*#/usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/auditctl.*#/usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/auditctl p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/auditd.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/auditd.*#/usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/auditd.*#/usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/auditd p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/ausearch.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/ausearch.*#/usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/ausearch.*#/usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/ausearch p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/aureport.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/aureport.*#/usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/aureport.*#/usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/aureport p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/autrace.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/autrace.*#/usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/autrace.*#/usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/autrace p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/augenrules.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/augenrules.*#/usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/augenrules.*#/usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/augenrules p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 if grep -i '^.*/usr/sbin/rsyslogd.*$' /etc/aide.conf; then
-sed -i "s#.*/usr/sbin/rsyslogd.*#/usr/sbin/rsyslogd p+i+n+u+g+s+b+acl+xattrs+sha512
-#" /etc/aide.conf
+sed -i "s#.*/usr/sbin/rsyslogd.*#/usr/sbin/rsyslogd p+i+n+u+g+s+b+acl+xattrs+sha512#" /etc/aide.conf
 else
-echo "/usr/sbin/rsyslogd p+i+n+u+g+s+b+acl+xattrs+sha512
-" >> /etc/aide.conf
+echo "/usr/sbin/rsyslogd p+i+n+u+g+s+b+acl+xattrs+sha512" >> /etc/aide.conf
 fi
 
 else
@@ -157,6 +143,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
+fi
+if ! rpm -q --quiet "crontabs" ; then
+    yum install -y "crontabs"
 fi
 var_aide_scan_notification_email='root@localhost'
 
