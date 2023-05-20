@@ -1589,13 +1589,6 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/yum.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^gpgcheck")
@@ -1608,11 +1601,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^gpgcheck\\>" "/etc/yum.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^gpgcheck\\>.*/$escaped_formatted_output/gi" "/etc/yum.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^gpgcheck\\>.*/$escaped_formatted_output/gi" "/etc/yum.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/yum.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/yum.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/yum.conf"
+    fi
     cce="CCE-80790-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/yum.conf" >> "/etc/yum.conf"
     printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
 fi
 
@@ -1628,13 +1623,6 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/yum.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^localpkg_gpgcheck")
@@ -1647,11 +1635,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^localpkg_gpgcheck\\>" "/etc/yum.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^localpkg_gpgcheck\\>.*/$escaped_formatted_output/gi" "/etc/yum.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^localpkg_gpgcheck\\>.*/$escaped_formatted_output/gi" "/etc/yum.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/yum.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/yum.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/yum.conf"
+    fi
     cce="CCE-80791-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/yum.conf" >> "/etc/yum.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/yum.conf" >> "/etc/yum.conf"
     printf '%s\n' "$formatted_output" >> "/etc/yum.conf"
 fi
 
@@ -3200,13 +3190,6 @@ var_password_pam_dcredit='-1'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dcredit")
@@ -3219,11 +3202,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_dcredit"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^dcredit\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^dcredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^dcredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80653-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3246,13 +3231,6 @@ var_password_pam_dictcheck='1'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^dictcheck")
@@ -3265,11 +3243,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_dictchec
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^dictcheck\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^dictcheck\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^dictcheck\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-86233-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3292,13 +3272,6 @@ var_password_pam_difok='8'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^difok")
@@ -3311,11 +3284,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_difok"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^difok\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^difok\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^difok\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80654-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3338,13 +3313,6 @@ var_password_pam_lcredit='-1'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^lcredit")
@@ -3357,11 +3325,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_lcredit"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^lcredit\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^lcredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^lcredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80655-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3384,13 +3354,6 @@ var_password_pam_maxclassrepeat='4'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxclassrepeat")
@@ -3403,11 +3366,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_maxclass
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^maxclassrepeat\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^maxclassrepeat\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^maxclassrepeat\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-81034-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3430,13 +3395,6 @@ var_password_pam_maxrepeat='3'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^maxrepeat")
@@ -3449,11 +3407,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_maxrepea
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^maxrepeat\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^maxrepeat\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^maxrepeat\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-82066-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3476,13 +3436,6 @@ var_password_pam_minclass='4'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minclass")
@@ -3495,11 +3448,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_minclass
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^minclass\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^minclass\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^minclass\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-82046-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3522,13 +3477,6 @@ var_password_pam_minlen='15'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^minlen")
@@ -3541,11 +3489,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_minlen"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^minlen\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^minlen\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^minlen\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80656-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3568,13 +3518,6 @@ var_password_pam_ocredit='-1'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ocredit")
@@ -3587,11 +3530,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_ocredit"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^ocredit\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^ocredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^ocredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80663-8"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -3744,13 +3689,6 @@ if rpm --quiet -q pam; then
 var_password_pam_retry='3'
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^retry")
@@ -3763,11 +3701,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_retry"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^retry\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^retry\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^retry\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80664-6"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 	
@@ -3880,13 +3820,6 @@ var_password_pam_ucredit='-1'
 
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/security/pwquality.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ucredit")
@@ -3899,11 +3832,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_password_pam_ucredit"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^ucredit\\>" "/etc/security/pwquality.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^ucredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^ucredit\\>.*/$escaped_formatted_output/gi" "/etc/security/pwquality.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/security/pwquality.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/security/pwquality.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/security/pwquality.conf"
+    fi
     cce="CCE-80665-3"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/security/pwquality.conf" >> "/etc/security/pwquality.conf"
     printf '%s\n' "$formatted_output" >> "/etc/security/pwquality.conf"
 fi
 
@@ -4106,13 +4041,6 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q systemd; then
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/systemd/system.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^CtrlAltDelBurstAction=")
@@ -4125,11 +4053,13 @@ printf -v formatted_output "%s=%s" "$stripped_key" "none"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^CtrlAltDelBurstAction=\\>" "/etc/systemd/system.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^CtrlAltDelBurstAction=\\>.*/$escaped_formatted_output/gi" "/etc/systemd/system.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^CtrlAltDelBurstAction=\\>.*/$escaped_formatted_output/gi" "/etc/systemd/system.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/systemd/system.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/systemd/system.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/systemd/system.conf"
+    fi
     cce="CCE-80784-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/systemd/system.conf" >> "/etc/systemd/system.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/systemd/system.conf" >> "/etc/systemd/system.conf"
     printf '%s\n' "$formatted_output" >> "/etc/systemd/system.conf"
 fi
 
@@ -4371,13 +4301,6 @@ if rpm --quiet -q shadow-utils; then
 var_account_disable_post_pw_expiration='35'
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/default/useradd"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^INACTIVE")
@@ -4390,11 +4313,13 @@ printf -v formatted_output "%s=%s" "$stripped_key" "$var_account_disable_post_pw
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^INACTIVE\\>" "/etc/default/useradd"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^INACTIVE\\>.*/$escaped_formatted_output/gi" "/etc/default/useradd"
+    LC_ALL=C sed -i --follow-symlinks "s/^INACTIVE\\>.*/$escaped_formatted_output/gi" "/etc/default/useradd"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/default/useradd" ]] && [[ -n "$(tail -c 1 -- "/etc/default/useradd" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/default/useradd"
+    fi
     cce="CCE-80954-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/default/useradd" >> "/etc/default/useradd"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/default/useradd" >> "/etc/default/useradd"
     printf '%s\n' "$formatted_output" >> "/etc/default/useradd"
 fi
 
@@ -4592,13 +4517,6 @@ if rpm --quiet -q shadow-utils; then
 var_accounts_fail_delay='4'
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/login.defs"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^FAIL_DELAY")
@@ -4611,11 +4529,13 @@ printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_fail_delay"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^FAIL_DELAY\\>" "/etc/login.defs"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^FAIL_DELAY\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
+    LC_ALL=C sed -i --follow-symlinks "s/^FAIL_DELAY\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
     cce="CCE-84037-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
     printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
@@ -4795,13 +4715,6 @@ if rpm --quiet -q shadow-utils; then
 var_accounts_user_umask='077'
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/login.defs"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^UMASK")
@@ -4814,11 +4727,13 @@ printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_user_umask"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^UMASK\\>" "/etc/login.defs"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^UMASK\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
+    LC_ALL=C sed -i --follow-symlinks "s/^UMASK\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
     cce="CCE-82888-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/login.defs" >> "/etc/login.defs"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
     printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
@@ -28678,13 +28593,6 @@ var_auditd_disk_error_action='syslog|single|halt'
 #
 var_auditd_disk_error_action="$(echo $var_auditd_disk_error_action | cut -d \| -f 1)"
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/audit/auditd.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^disk_error_action")
@@ -28697,11 +28605,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_disk_error_act
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^disk_error_action\\>" "/etc/audit/auditd.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^disk_error_action\\>.*/$escaped_formatted_output/gi" "/etc/audit/auditd.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^disk_error_action\\>.*/$escaped_formatted_output/gi" "/etc/audit/auditd.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/audit/auditd.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/audit/auditd.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/audit/auditd.conf"
+    fi
     cce="CCE-84046-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
     printf '%s\n' "$formatted_output" >> "/etc/audit/auditd.conf"
 fi
 
@@ -28722,13 +28632,6 @@ var_auditd_disk_full_action='syslog|single|halt'
 
 var_auditd_disk_full_action="$(echo $var_auditd_disk_full_action | cut -d \| -f 1)"
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/audit/auditd.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^disk_full_action")
@@ -28741,11 +28644,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_disk_full_acti
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^disk_full_action\\>" "/etc/audit/auditd.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^disk_full_action\\>.*/$escaped_formatted_output/gi" "/etc/audit/auditd.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^disk_full_action\\>.*/$escaped_formatted_output/gi" "/etc/audit/auditd.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/audit/auditd.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/audit/auditd.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/audit/auditd.conf"
+    fi
     cce="CCE-84045-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/audit/auditd.conf" >> "/etc/audit/auditd.conf"
     printf '%s\n' "$formatted_output" >> "/etc/audit/auditd.conf"
 fi
 
@@ -28766,13 +28671,6 @@ var_auditd_action_mail_acct='root'
 
 AUDITCONFIG=/etc/audit/auditd.conf
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "$AUDITCONFIG"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^action_mail_acct")
@@ -28785,11 +28683,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_action_mail_ac
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^action_mail_acct\\>" "$AUDITCONFIG"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^action_mail_acct\\>.*/$escaped_formatted_output/gi" "$AUDITCONFIG"
+    LC_ALL=C sed -i --follow-symlinks "s/^action_mail_acct\\>.*/$escaped_formatted_output/gi" "$AUDITCONFIG"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "$AUDITCONFIG" ]] && [[ -n "$(tail -c 1 -- "$AUDITCONFIG" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "$AUDITCONFIG"
+    fi
     cce="CCE-80678-6"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "$AUDITCONFIG" >> "$AUDITCONFIG"
     printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
 fi
 
@@ -28816,13 +28716,6 @@ var_auditd_space_left_action='email'
 
 AUDITCONFIG=/etc/audit/auditd.conf
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "$AUDITCONFIG"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^space_left_action")
@@ -28835,11 +28728,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$var_auditd_space_left_act
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^space_left_action\\>" "$AUDITCONFIG"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^space_left_action\\>.*/$escaped_formatted_output/gi" "$AUDITCONFIG"
+    LC_ALL=C sed -i --follow-symlinks "s/^space_left_action\\>.*/$escaped_formatted_output/gi" "$AUDITCONFIG"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "$AUDITCONFIG" ]] && [[ -n "$(tail -c 1 -- "$AUDITCONFIG" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "$AUDITCONFIG"
+    fi
     cce="CCE-80684-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "$AUDITCONFIG" >> "$AUDITCONFIG"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "$AUDITCONFIG" >> "$AUDITCONFIG"
     printf '%s\n' "$formatted_output" >> "$AUDITCONFIG"
 fi
 
@@ -29228,13 +29123,6 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 rsyslog_remote_loghost_address='logcollector'
 
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/rsyslog.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^\*\.\*")
@@ -29247,11 +29135,13 @@ printf -v formatted_output "%s %s" "$stripped_key" "@@$rsyslog_remote_loghost_ad
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^\*\.\*\\>" "/etc/rsyslog.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^\*\.\*\\>.*/$escaped_formatted_output/gi" "/etc/rsyslog.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^\*\.\*\\>.*/$escaped_formatted_output/gi" "/etc/rsyslog.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/rsyslog.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/rsyslog.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/rsyslog.conf"
+    fi
     cce="CCE-80863-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/rsyslog.conf" >> "/etc/rsyslog.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/rsyslog.conf" >> "/etc/rsyslog.conf"
     printf '%s\n' "$formatted_output" >> "/etc/rsyslog.conf"
 fi
 
@@ -29354,13 +29244,6 @@ sysctl_net_ipv6_conf_all_accept_ra_value='0'
 #	else, add "net.ipv6.conf.all.accept_ra = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_ra")
@@ -29373,11 +29256,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_ra\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_ra\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.all.accept_ra\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81006-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29426,13 +29311,6 @@ sysctl_net_ipv6_conf_all_accept_redirects_value='0'
 #	else, add "net.ipv6.conf.all.accept_redirects = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_redirects")
@@ -29445,11 +29323,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.all.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81009-3"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29498,13 +29378,6 @@ sysctl_net_ipv6_conf_all_accept_source_route_value='0'
 #	else, add "net.ipv6.conf.all.accept_source_route = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.accept_source_route")
@@ -29517,11 +29390,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.accept_source_route\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.all.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.all.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81013-5"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29570,13 +29445,6 @@ sysctl_net_ipv6_conf_all_forwarding_value='0'
 #	else, add "net.ipv6.conf.all.forwarding = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.all.forwarding")
@@ -29589,11 +29457,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.all.forwarding\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.all.forwarding\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.all.forwarding\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-82863-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29642,13 +29512,6 @@ sysctl_net_ipv6_conf_default_accept_ra_value='0'
 #	else, add "net.ipv6.conf.default.accept_ra = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_ra")
@@ -29661,11 +29524,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_defa
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_ra\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_ra\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.default.accept_ra\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81007-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29714,13 +29579,6 @@ sysctl_net_ipv6_conf_default_accept_redirects_value='0'
 #	else, add "net.ipv6.conf.default.accept_redirects = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_redirects")
@@ -29733,11 +29591,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_defa
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.default.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81010-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29786,13 +29646,6 @@ sysctl_net_ipv6_conf_default_accept_source_route_value='0'
 #	else, add "net.ipv6.conf.default.accept_source_route = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv6.conf.default.accept_source_route")
@@ -29805,11 +29658,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv6_conf_defa
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv6.conf.default.accept_source_route\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv6.conf.default.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv6.conf.default.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81015-0"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29858,13 +29713,6 @@ sysctl_net_ipv4_conf_all_accept_redirects_value='0'
 #	else, add "net.ipv4.conf.all.accept_redirects = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_redirects")
@@ -29877,11 +29725,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.all.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80917-8"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -29930,13 +29780,6 @@ sysctl_net_ipv4_conf_all_accept_source_route_value='0'
 #	else, add "net.ipv4.conf.all.accept_source_route = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.accept_source_route")
@@ -29949,11 +29792,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.accept_source_route\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.all.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.all.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81011-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30002,13 +29847,6 @@ sysctl_net_ipv4_conf_all_forwarding_value='0'
 #	else, add "net.ipv4.conf.all.forwarding = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.forwarding")
@@ -30021,11 +29859,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.forwarding\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.all.forwarding\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.all.forwarding\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-86220-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30074,13 +29914,6 @@ sysctl_net_ipv4_conf_all_rp_filter_value='1'
 #	else, add "net.ipv4.conf.all.rp_filter = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.rp_filter")
@@ -30093,11 +29926,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_all_
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.rp_filter\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.all.rp_filter\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.all.rp_filter\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81021-8"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30146,13 +29981,6 @@ sysctl_net_ipv4_conf_default_accept_redirects_value='0'
 #	else, add "net.ipv4.conf.default.accept_redirects = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_redirects")
@@ -30165,11 +29993,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_defa
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.default.accept_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80919-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30218,13 +30048,6 @@ sysctl_net_ipv4_conf_default_accept_source_route_value='0'
 #	else, add "net.ipv4.conf.default.accept_source_route = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.accept_source_route")
@@ -30237,11 +30060,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_conf_defa
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.accept_source_route\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.default.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.default.accept_source_route\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80920-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30290,13 +30115,6 @@ sysctl_net_ipv4_icmp_echo_ignore_broadcasts_value='1'
 #	else, add "net.ipv4.icmp_echo_ignore_broadcasts = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.icmp_echo_ignore_broadcasts")
@@ -30309,11 +30127,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_net_ipv4_icmp_echo
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.icmp_echo_ignore_broadcasts\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.icmp_echo_ignore_broadcasts\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.icmp_echo_ignore_broadcasts\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80922-8"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30360,13 +30180,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "net.ipv4.conf.all.send_redirects = 0" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.all.send_redirects")
@@ -30379,11 +30192,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "0"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.all.send_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.all.send_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.all.send_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80918-6"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30430,13 +30245,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "net.ipv4.conf.default.send_redirects = 0" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.ipv4.conf.default.send_redirects")
@@ -30449,11 +30257,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "0"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.ipv4.conf.default.send_redirects\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.ipv4.conf.default.send_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.ipv4.conf.default.send_redirects\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80921-0"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30719,13 +30529,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "fs.protected_hardlinks = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_hardlinks")
@@ -30738,11 +30541,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_hardlinks\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^fs.protected_hardlinks\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^fs.protected_hardlinks\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81027-5"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -30789,13 +30594,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "fs.protected_symlinks = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^fs.protected_symlinks")
@@ -30808,11 +30606,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^fs.protected_symlinks\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^fs.protected_symlinks\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^fs.protected_symlinks\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81030-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32107,13 +31907,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.core_pattern = |/bin/false" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.core_pattern")
@@ -32126,11 +31919,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "|/bin/false"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.core_pattern\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.core_pattern\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.core_pattern\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-82215-5"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32177,13 +31972,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.dmesg_restrict = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.dmesg_restrict")
@@ -32196,11 +31984,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.dmesg_restrict\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.dmesg_restrict\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.dmesg_restrict\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80913-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32247,13 +32037,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.kexec_load_disabled = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kexec_load_disabled")
@@ -32266,11 +32049,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.kexec_load_disabled\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.kexec_load_disabled\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.kexec_load_disabled\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80952-5"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32317,13 +32102,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.perf_event_paranoid = 2" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.perf_event_paranoid")
@@ -32336,11 +32114,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "2"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.perf_event_paranoid\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.perf_event_paranoid\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.perf_event_paranoid\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-81054-9"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32387,13 +32167,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.unprivileged_bpf_disabled = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.unprivileged_bpf_disabled")
@@ -32406,11 +32179,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.unprivileged_bpf_disabled\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.unprivileged_bpf_disabled\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.unprivileged_bpf_disabled\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-82974-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32457,13 +32232,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.yama.ptrace_scope = 1" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.yama.ptrace_scope")
@@ -32476,11 +32244,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "1"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.yama.ptrace_scope\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.yama.ptrace_scope\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.yama.ptrace_scope\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80953-3"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32527,13 +32297,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "net.core.bpf_jit_harden = 2" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^net.core.bpf_jit_harden")
@@ -32546,11 +32309,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "2"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^net.core.bpf_jit_harden\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^net.core.bpf_jit_harden\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^net.core.bpf_jit_harden\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-82934-1"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32597,13 +32362,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "user.max_user_namespaces = 0" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^user.max_user_namespaces")
@@ -32616,11 +32374,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "0"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^user.max_user_namespaces\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^user.max_user_namespaces\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^user.max_user_namespaces\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-82211-4"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32773,13 +32533,6 @@ sysctl_kernel_kptr_restrict_value='1'
 #	else, add "kernel.kptr_restrict = value" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.kptr_restrict")
@@ -32792,11 +32545,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "$sysctl_kernel_kptr_restri
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.kptr_restrict\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.kptr_restrict\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.kptr_restrict\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80915-2"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -32843,13 +32598,6 @@ SYSCONFIG_FILE="/etc/sysctl.conf"
 #	else, add "kernel.randomize_va_space = 2" to /etc/sysctl.conf
 #
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "${SYSCONFIG_FILE}"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^kernel.randomize_va_space")
@@ -32862,11 +32610,13 @@ printf -v formatted_output "%s = %s" "$stripped_key" "2"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^kernel.randomize_va_space\\>" "${SYSCONFIG_FILE}"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^kernel.randomize_va_space\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
+    LC_ALL=C sed -i --follow-symlinks "s/^kernel.randomize_va_space\\>.*/$escaped_formatted_output/gi" "${SYSCONFIG_FILE}"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "${SYSCONFIG_FILE}" ]] && [[ -n "$(tail -c 1 -- "${SYSCONFIG_FILE}" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "${SYSCONFIG_FILE}"
+    fi
     cce="CCE-80916-0"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "${SYSCONFIG_FILE}" >> "${SYSCONFIG_FILE}"
     printf '%s\n' "$formatted_output" >> "${SYSCONFIG_FILE}"
 fi
 
@@ -33335,13 +33085,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/chrony.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^port")
@@ -33354,11 +33097,13 @@ printf -v formatted_output "%s %s" "$stripped_key" "0"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^port\\>" "/etc/chrony.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^port\\>.*/$escaped_formatted_output/gi" "/etc/chrony.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^port\\>.*/$escaped_formatted_output/gi" "/etc/chrony.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/chrony.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/chrony.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/chrony.conf"
+    fi
     cce="CCE-82988-7"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/chrony.conf" >> "/etc/chrony.conf"
     printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
 fi
 
@@ -33374,13 +33119,6 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
-# Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
-# Otherwise, regular sed command will do.
-sed_command=('sed' '-i')
-if test -L "/etc/chrony.conf"; then
-    sed_command+=('--follow-symlinks')
-fi
-
 # Strip any search characters in the key arg so that the key can be replaced without
 # adding any search characters to the config file.
 stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^cmdport")
@@ -33393,11 +33131,13 @@ printf -v formatted_output "%s %s" "$stripped_key" "0"
 # so if we search for 'setting', 'setting2' won't match.
 if LC_ALL=C grep -q -m 1 -i -e "^cmdport\\>" "/etc/chrony.conf"; then
     escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
-    "${sed_command[@]}" "s/^cmdport\\>.*/$escaped_formatted_output/gi" "/etc/chrony.conf"
+    LC_ALL=C sed -i --follow-symlinks "s/^cmdport\\>.*/$escaped_formatted_output/gi" "/etc/chrony.conf"
 else
-    # \n is precaution for case where file ends without trailing newline
+    if [[ -s "/etc/chrony.conf" ]] && [[ -n "$(tail -c 1 -- "/etc/chrony.conf" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/chrony.conf"
+    fi
     cce="CCE-82840-0"
-    printf '\n# Per %s: Set %s in %s\n' "$cce" "$formatted_output" "/etc/chrony.conf" >> "/etc/chrony.conf"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/chrony.conf" >> "/etc/chrony.conf"
     printf '%s\n' "$formatted_output" >> "/etc/chrony.conf"
 fi
 
