@@ -14970,7 +14970,7 @@
       - restrict_strategy
 
     - name: Service facts
-      service_facts: null
+      ansible.builtin.service_facts: null
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -14991,7 +14991,7 @@
       - restrict_strategy
 
     - name: Check the rules script being used
-      command: grep '^ExecStartPost' /usr/lib/systemd/system/auditd.service
+      ansible.builtin.command: grep '^ExecStartPost' /usr/lib/systemd/system/auditd.service
       register: check_rules_scripts_result
       changed_when: false
       failed_when: false
@@ -15015,12 +15015,16 @@
       - restrict_strategy
 
     - name: Set suid_audit_rules fact
-      set_fact:
+      ansible.builtin.set_fact:
         suid_audit_rules:
-        - -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
-        - -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
-        - -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
-        - -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
+        - rule: -a always,exit -F arch=b32 -S execve -C gid!=egid -F egid=0 -k setgid
+          regex: ^[\s]*-a[\s]+always,exit[\s]+-F[\s]+arch=b32[\s]+-S[\s]+execve[\s]+-C[\s]+gid!=egid[\s]+-F[\s]+egid=0[\s]+(?:-k[\s]+|-F[\s]+key=)[\S]+[\s]*$
+        - rule: -a always,exit -F arch=b64 -S execve -C gid!=egid -F egid=0 -k setgid
+          regex: ^[\s]*-a[\s]+always,exit[\s]+-F[\s]+arch=b64[\s]+-S[\s]+execve[\s]+-C[\s]+gid!=egid[\s]+-F[\s]+egid=0[\s]+(?:-k[\s]+|-F[\s]+key=)[\S]+[\s]*$
+        - rule: -a always,exit -F arch=b32 -S execve -C uid!=euid -F euid=0 -k setuid
+          regex: ^[\s]*-a[\s]+always,exit[\s]+-F[\s]+arch=b32[\s]+-S[\s]+execve[\s]+-C[\s]+uid!=euid[\s]+-F[\s]+euid=0[\s]+(?:-k[\s]+|-F[\s]+key=)[\S]+[\s]*$
+        - rule: -a always,exit -F arch=b64 -S execve -C uid!=euid -F euid=0 -k setuid
+          regex: ^[\s]*-a[\s]+always,exit[\s]+-F[\s]+arch=b64[\s]+-S[\s]+execve[\s]+-C[\s]+uid!=euid[\s]+-F[\s]+euid=0[\s]+(?:-k[\s]+|-F[\s]+key=)[\S]+[\s]*$
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -15041,9 +15045,10 @@
       - restrict_strategy
 
     - name: Update /etc/audit/rules.d/privileged.rules to audit privileged functions
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/audit/rules.d/privileged.rules
-        line: '{{  item  }}'
+        line: '{{  item.rule  }}'
+        regexp: '{{ item.regex }}'
         create: true
       when:
       - '"audit" in ansible_facts.packages'
@@ -15069,9 +15074,10 @@
       - restrict_strategy
 
     - name: Update Update /etc/audit/audit.rules to audit privileged functions
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/audit/audit.rules
-        line: '{{  item  }}'
+        line: '{{  item.rule  }}'
+        regexp: '{{ item.regex }}'
         create: true
       when:
       - '"audit" in ansible_facts.packages'
@@ -15097,7 +15103,7 @@
       - restrict_strategy
 
     - name: Restart Auditd
-      command: /usr/sbin/service auditd restart
+      ansible.builtin.command: /usr/sbin/service auditd restart
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
