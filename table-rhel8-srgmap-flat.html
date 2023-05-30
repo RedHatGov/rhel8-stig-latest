@@ -316,7 +316,7 @@ account changes:
     <td>Verify the operating system automatically audits account creation. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account creation.</td>
@@ -369,7 +369,7 @@ account changes:
     <td>Verify the operating system automatically audits account creation. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -424,7 +424,7 @@ account changes:
     <td>Verify the operating system automatically audits account creation. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account creation.</td>
@@ -477,7 +477,7 @@ account changes:
     <td>Verify the operating system automatically audits account creation. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account creation.</td>
@@ -530,7 +530,7 @@ account changes:
     <td>Verify the operating system automatically audits account creation. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account creation.</td>
@@ -5917,7 +5917,7 @@ account changes:
     <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to produce audit records containing information to establish what type of events occurred.</td>
@@ -5972,7 +5972,7 @@ account changes:
     <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -6029,7 +6029,7 @@ account changes:
     <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to produce audit records containing information to establish what type of events occurred.</td>
@@ -6084,7 +6084,7 @@ account changes:
     <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to produce audit records containing information to establish what type of events occurred.</td>
@@ -6139,7 +6139,7 @@ account changes:
     <td>Verify the operating system produces audit records containing information to establish what type of events occurred. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to produce audit records containing information to establish what type of events occurred.</td>
@@ -9709,7 +9709,7 @@ account changes:
     <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records containing the full-text recording of privileged commands.</td>
@@ -9762,7 +9762,7 @@ account changes:
     <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -9817,7 +9817,7 @@ account changes:
     <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records containing the full-text recording of privileged commands.</td>
@@ -9870,7 +9870,7 @@ account changes:
     <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records containing the full-text recording of privileged commands.</td>
@@ -9923,7 +9923,7 @@ account changes:
     <td>Verify the operating system generates audit records containing the full-text recording of privileged commands. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records containing the full-text recording of privileged commands.</td>
@@ -16766,7 +16766,7 @@ DoD has defined the list of events for which the operating system will provide a
 If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -16853,7 +16853,7 @@ DoD has defined the list of events for which the operating system will provide a
 If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -16942,7 +16942,7 @@ DoD has defined the list of events for which the operating system will provide a
 If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -17029,7 +17029,7 @@ DoD has defined the list of events for which the operating system will provide a
 If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -17116,7 +17116,7 @@ DoD has defined the list of events for which the operating system will provide a
 If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to provide audit record generation capability for DoD-defined auditable events for all operating system components.
@@ -25202,7 +25202,7 @@ account changes:
     <td>Verify the operating system automatically audits account modification. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account modification.</td>
@@ -25255,7 +25255,7 @@ account changes:
     <td>Verify the operating system automatically audits account modification. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -25310,7 +25310,7 @@ account changes:
     <td>Verify the operating system automatically audits account modification. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account modification.</td>
@@ -25363,7 +25363,7 @@ account changes:
     <td>Verify the operating system automatically audits account modification. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account modification.</td>
@@ -25416,7 +25416,7 @@ account changes:
     <td>Verify the operating system automatically audits account modification. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account modification.</td>
@@ -25564,7 +25564,7 @@ account changes:
     <td>Verify the operating system automatically audits account disabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account disabling actions.</td>
@@ -25617,7 +25617,7 @@ account changes:
     <td>Verify the operating system automatically audits account disabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -25672,7 +25672,7 @@ account changes:
     <td>Verify the operating system automatically audits account disabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account disabling actions.</td>
@@ -25725,7 +25725,7 @@ account changes:
     <td>Verify the operating system automatically audits account disabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account disabling actions.</td>
@@ -25778,7 +25778,7 @@ account changes:
     <td>Verify the operating system automatically audits account disabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account disabling actions.</td>
@@ -25926,7 +25926,7 @@ account changes:
     <td>Verify the operating system automatically audits account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account removal actions.</td>
@@ -25979,7 +25979,7 @@ account changes:
     <td>Verify the operating system automatically audits account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -26034,7 +26034,7 @@ account changes:
     <td>Verify the operating system automatically audits account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account removal actions.</td>
@@ -26087,7 +26087,7 @@ account changes:
     <td>Verify the operating system automatically audits account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account removal actions.</td>
@@ -26140,7 +26140,7 @@ account changes:
     <td>Verify the operating system automatically audits account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account removal actions.</td>
@@ -27867,7 +27867,7 @@ account changes:
     <td>Verify the operating system notifies System Administrators and Information System Security Officers when accounts are created. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify System Administrators and Information System Security Officers when accounts are created.</td>
@@ -27925,7 +27925,7 @@ account changes:
     <td>Verify the operating system notifies System Administrators and Information System Security Officers when accounts are modified. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify System Administrators and Information System Security Officers when accounts are modified.</td>
@@ -27983,7 +27983,7 @@ account changes:
     <td>Verify the operating system notifies System Administrators and Information System Security Officers when accounts are disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify System Administrators and Information System Security Officers when accounts are disabled.</td>
@@ -28041,7 +28041,7 @@ account changes:
     <td>Verify the operating system notifies System Administrators and Information System Security Officers for account removal actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify System Administrators and Information System Security Officers for account removal actions.</td>
@@ -28693,7 +28693,7 @@ account changes:
     <td>Verify the operating system automatically audits account enabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account enabling actions.</td>
@@ -28746,7 +28746,7 @@ account changes:
     <td>Verify the operating system automatically audits account enabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -28801,7 +28801,7 @@ account changes:
     <td>Verify the operating system automatically audits account enabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account enabling actions.</td>
@@ -28854,7 +28854,7 @@ account changes:
     <td>Verify the operating system automatically audits account enabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account enabling actions.</td>
@@ -28907,7 +28907,7 @@ account changes:
     <td>Verify the operating system automatically audits account enabling actions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to automatically audit account enabling actions.</td>
@@ -29061,7 +29061,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify the System Administrator(s) and Information System Security Officer(s) when accounts are created, or enabled when previously disabled.</td>
@@ -29116,7 +29116,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -29173,7 +29173,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify the System Administrator(s) and Information System Security Officer(s) when accounts are created, or enabled when previously disabled.</td>
@@ -29228,7 +29228,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify the System Administrator(s) and Information System Security Officer(s) when accounts are created, or enabled when previously disabled.</td>
@@ -29283,7 +29283,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify the System Administrator(s) and Information System Security Officer(s) when accounts are created, or enabled when previously disabled.</td>
@@ -29338,7 +29338,7 @@ account changes:
     <td>Verify the operating system notifies the System Administrator and Information System Security Officer(s) when accounts are created, or enabled when previously disabled. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to notify the System Administrator(s) and Information System Security Officer(s) when accounts are created, or enabled when previously disabled.</td>
@@ -37437,7 +37437,7 @@ account changes:
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
@@ -37494,7 +37494,7 @@ account changes:
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -37553,7 +37553,7 @@ account changes:
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
@@ -37610,7 +37610,7 @@ account changes:
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
@@ -37667,7 +37667,7 @@ account changes:
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
@@ -44672,7 +44672,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
@@ -44725,7 +44725,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -44780,7 +44780,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
@@ -44833,7 +44833,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
@@ -44886,7 +44886,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to modify privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to modify privileges occur.</td>
@@ -47033,7 +47033,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to delete privileges occur.</td>
@@ -47086,7 +47086,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -47141,7 +47141,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to delete privileges occur.</td>
@@ -47194,7 +47194,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to delete privileges occur.</td>
@@ -47247,7 +47247,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful attempts to delete privileges occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful attempts to delete privileges occur.</td>
@@ -48367,7 +48367,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
@@ -48420,7 +48420,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -48475,7 +48475,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
@@ -48528,7 +48528,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
@@ -48581,7 +48581,7 @@ account changes:
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
@@ -51644,7 +51644,7 @@ account changes:
     <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for privileged activities or other system-level access.</td>
@@ -51697,7 +51697,7 @@ account changes:
     <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -51752,7 +51752,7 @@ account changes:
     <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for privileged activities or other system-level access.</td>
@@ -51805,7 +51805,7 @@ account changes:
     <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for privileged activities or other system-level access.</td>
@@ -51858,7 +51858,7 @@ account changes:
     <td>Verify the operating system generates audit records for privileged activities or other system-level access. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for privileged activities or other system-level access.</td>
@@ -53145,7 +53145,7 @@ account changes:
     <td>Verify the operating system generates audit records for all account creations, modifications, disabling, and termination events. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/group" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/group)'
+$ sudo auditctl -l | grep -E '(/etc/group)'
 
 -w /etc/group -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for all account creations, modifications, disabling, and termination events.</td>
@@ -53198,7 +53198,7 @@ account changes:
     <td>Verify the operating system generates audit records for all account creations, modifications, disabling, and termination events. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/gshadow" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/gshadow)'
+$ sudo auditctl -l | grep -E '(/etc/gshadow)'
 
 -w /etc/gshadow -p wa -k identity
 
@@ -53253,7 +53253,7 @@ account changes:
     <td>Verify the operating system generates audit records for all account creations, modifications, disabling, and termination events. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | egrep '(/etc/security/opasswd)'
+$ sudo auditctl -l | grep -E '(/etc/security/opasswd)'
 
 -w /etc/security/opasswd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for all account creations, modifications, disabling, and termination events.</td>
@@ -53306,7 +53306,7 @@ account changes:
     <td>Verify the operating system generates audit records for all account creations, modifications, disabling, and termination events. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd" with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/passwd)'
+$  sudo auditctl -l | grep -E '(/etc/passwd)'
 
 -w /etc/passwd -p wa -k identity Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for all account creations, modifications, disabling, and termination events.</td>
@@ -53359,7 +53359,7 @@ account changes:
     <td>Verify the operating system generates audit records for all account creations, modifications, disabling, and termination events. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/passwd with the following command:
 
-$  sudo auditctl -l | egrep '(/etc/shadow)'
+$  sudo auditctl -l | grep -E '(/etc/shadow)'
 
 -w /etc/shadow -p wa -k identity Is it the case that command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records for all account creations, modifications, disabling, and termination events.</td>
