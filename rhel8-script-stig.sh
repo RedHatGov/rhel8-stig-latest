@@ -30891,6 +30891,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /boot/efi  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -30938,6 +30944,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /boot  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -30979,6 +30991,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="tmpfs"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -31020,6 +31038,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="tmpfs"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31061,6 +31085,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="tmpfs"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -31108,6 +31138,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /home  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31155,6 +31191,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /home  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -31208,6 +31250,12 @@ for partition_record in "${partitions_records[@]}"; do
             previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                         | sed -E "s/(rw|defaults|seclabel|$MOUNT_OPTION)(,|$)//g;s/,$//")
             [ "$previous_mount_opts" ] && previous_mount_opts+=","
+            # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+            # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+            fs_type="$device_type"
+            if [  "$fs_type" == "iso9660" ] ; then
+                previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+            fi
             echo "$device $mount_point $device_type defaults,${previous_mount_opts}$MOUNT_OPTION 0 0" >> /etc/fstab
         # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
         elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "$MOUNT_OPTION"; then
@@ -31330,6 +31378,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /tmp  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -31377,6 +31431,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /tmp  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31424,6 +31484,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /tmp  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -31471,6 +31537,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log/audit  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -31518,6 +31590,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log/audit  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31565,6 +31643,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log/audit  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -31612,6 +31696,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -31659,6 +31749,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31706,6 +31802,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/log  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -31753,6 +31855,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/tmp  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -31800,6 +31908,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/tmp  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -31847,6 +31961,12 @@ function perform_remediation {
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type=""
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " /var/tmp  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
@@ -32999,6 +33119,12 @@ do
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="nfs4"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
@@ -33032,6 +33158,12 @@ do
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="nfs4"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
@@ -33065,6 +33197,12 @@ do
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
         [ "$previous_mount_opts" ] && previous_mount_opts+=","
+        # In iso9660 filesystems mtab could describe a "blocksize" value, this should be reflected in
+        # fstab as "block".  The next variable is to satisfy shellcheck SC2050.
+        fs_type="nfs4"
+        if [  "$fs_type" == "iso9660" ] ; then
+            previous_mount_opts=$(sed 's/blocksize=/block=/' <<< "$previous_mount_opts")
+        fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
     elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
