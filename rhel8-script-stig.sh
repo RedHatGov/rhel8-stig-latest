@@ -4655,7 +4655,27 @@ awk -F':' '{ if ($3 >= 1000 && $3 != 65534) system("chgrp -f " $4" "$6) }' /etc/
 # BEGIN fix (135 / 396) for 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
 ###############################################################################
 (>&2 echo "Remediating rule 135/396: 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'")
-(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files' IS MISSING!")
+
+var_user_initialization_files_regex='^(\.bashrc|\.zshrc|\.cshrc|\.profile|\.bash_login|\.bash_profile)$'
+
+
+readarray -t interactive_users < <(awk -F: '$3>=1000   {print $1}' /etc/passwd)
+readarray -t interactive_users_home < <(awk -F: '$3>=1000   {print $6}' /etc/passwd)
+readarray -t interactive_users_shell < <(awk -F: '$3>=1000   {print $7}' /etc/passwd)
+
+USERS_IGNORED_REGEX='nobody|nfsnobody'
+
+for (( i=0; i<"${#interactive_users[@]}"; i++ )); do
+    if ! grep -qP "$USERS_IGNORED_REGEX" <<< "${interactive_users[$i]}" && \
+        [ "${interactive_users_shell[$i]}" != "/sbin/nologin" ]; then
+        
+        readarray -t init_files < <(find "${interactive_users_home[$i]}" -maxdepth 1 \
+            -exec basename {} \; | grep -P "$var_user_initialization_files_regex")
+        for file in "${init_files[@]}"; do
+            chmod u-s,g-wxs,o= "${interactive_users_home[$i]}/$file"
+        done
+    fi
+done
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
 
 ###############################################################################
@@ -29161,7 +29181,16 @@ fi
 # BEGIN fix (243 / 396) for 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'
 ###############################################################################
 (>&2 echo "Remediating rule 243/396: 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'")
-(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled' IS MISSING!")
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+for interface in $(ip link show | grep -E '^[0-9]' | cut -d ":" -f 2); do
+    ip link set dev $interface multicast off promisc off
+done
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'
 
 ###############################################################################

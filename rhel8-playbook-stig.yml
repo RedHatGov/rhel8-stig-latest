@@ -83,6 +83,7 @@
       var_accounts_maximum_age_login_defs: !!str 60
       var_accounts_fail_delay: !!str 4
       var_accounts_max_concurrent_login_sessions: !!str 10
+      var_user_initialization_files_regex: !!str ^(\.bashrc|\.zshrc|\.cshrc|\.profile|\.bash_login|\.bash_profile)$
       var_accounts_user_umask: !!str 077
       var_accounts_user_umask: !!str 077
       var_accounts_user_umask: !!str 077
@@ -12778,7 +12779,7 @@
     - name: Insert correct line into /etc/tmux.conf
       lineinfile:
         path: /etc/tmux.conf
-        create: null
+        create: true
         regexp: \s*bind\s+\w\s+lock-session.*$
         mode: '0644'
         line: bind X lock-session
@@ -13578,6 +13579,62 @@
       - CCE-83434-1
       - DISA-STIG-RHEL-08-010740
       - file_groupownership_home_directories
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+
+
+    - name: Ensure All User Initialization Files Have Mode 0740 Or Less Permissive - Gather
+        User Info
+      ansible.builtin.getent:
+        database: passwd
+      tags:
+      - CCE-84043-9
+      - DISA-STIG-RHEL-08-010770
+      - file_permission_user_init_files
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Ensure All User Initialization Files Have Mode 0740 Or Less Permissive - Find
+        Init Files
+      ansible.builtin.find:
+        paths: '{{ item.value[4] }}'
+        pattern: '{{ var_user_initialization_files_regex }}'
+        hidden: true
+        use_regex: true
+      with_dict: '{{ ansible_facts.getent_passwd }}'
+      when:
+      - item.value[4] != "/sbin/nologin"
+      - item.key not in ["nobody", "nfsnobody"]
+      - item.value[1] | int >= 1000
+      register: found_init_files
+      tags:
+      - CCE-84043-9
+      - DISA-STIG-RHEL-08-010770
+      - file_permission_user_init_files
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Ensure All User Initialization Files Have Mode 0740 Or Less Permissive - Fix
+        Init Files Permissions
+      ansible.builtin.file:
+        path: '{{ item.1.path }}'
+        mode: u-s,g-wxs,o=
+      loop: '{{ q(''ansible.builtin.subelements'', found_init_files.results, ''files'',
+        {''skip_missing'': True}) }}'
+      tags:
+      - CCE-84043-9
+      - DISA-STIG-RHEL-08-010770
+      - file_permission_user_init_files
       - low_complexity
       - low_disruption
       - medium_severity
@@ -34156,6 +34213,48 @@
       - no_reboot_needed
       - restrict_strategy
       - rsyslog_remote_loghost
+
+    - name: Ensure System is Not Acting as a Network Sniffer - Gather network interfaces
+      ansible.builtin.command:
+        cmd: ip link show
+      register: network_interfaces
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-82283-3
+      - DISA-STIG-RHEL-08-040330
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-CM-7(2)
+      - NIST-800-53-CM-7(a)
+      - NIST-800-53-CM-7(b)
+      - NIST-800-53-MA-3
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - network_sniffer_disabled
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Ensure System is Not Acting as a Network Sniffer - Disable promiscuous mode
+      ansible.builtin.command:
+        cmd: ip link set dev {{ item.split(':')[1] }} multicast off promisc off
+      loop: '{{ network_interfaces.stdout_lines }}'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - item.split(':') | length == 3
+      tags:
+      - CCE-82283-3
+      - DISA-STIG-RHEL-08-040330
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-CM-7(2)
+      - NIST-800-53-CM-7(a)
+      - NIST-800-53-CM-7(b)
+      - NIST-800-53-MA-3
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - network_sniffer_disabled
+      - no_reboot_needed
+      - restrict_strategy
 
     - name: Ensure firewalld is installed
       package:
