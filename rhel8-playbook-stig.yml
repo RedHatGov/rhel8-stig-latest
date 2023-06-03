@@ -12415,7 +12415,7 @@
       - service_debug-shell_disabled
 
     - name: Unit Socket Exists - debug-shell.socket
-      command: systemctl list-unit-files debug-shell.socket
+      command: systemctl -q list-unit-files debug-shell.socket
       register: socket_file_exists
       changed_when: false
       failed_when: socket_file_exists.rc not in [0, 1]
@@ -12441,7 +12441,7 @@
         masked: 'yes'
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"debug-shell.socket" in socket_file_exists.stdout_lines[1]'
+      - socket_file_exists.stdout_lines is search("debug-shell.socket",multiline=True)
       tags:
       - CCE-80876-6
       - DISA-STIG-RHEL-08-040180
@@ -37105,7 +37105,7 @@
       - service_autofs_disabled
 
     - name: Unit Socket Exists - autofs.socket
-      command: systemctl list-unit-files autofs.socket
+      command: systemctl -q list-unit-files autofs.socket
       register: socket_file_exists
       changed_when: false
       failed_when: socket_file_exists.rc not in [0, 1]
@@ -37134,7 +37134,7 @@
         masked: 'yes'
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"autofs.socket" in socket_file_exists.stdout_lines[1]'
+      - socket_file_exists.stdout_lines is search("autofs.socket",multiline=True)
       tags:
       - CCE-80873-3
       - DISA-STIG-RHEL-08-040070
@@ -40263,7 +40263,7 @@
       - service_systemd-coredump_disabled
 
     - name: Unit Socket Exists - systemd-coredump.socket
-      command: systemctl list-unit-files systemd-coredump.socket
+      command: systemctl -q list-unit-files systemd-coredump.socket
       register: socket_file_exists
       changed_when: false
       failed_when: socket_file_exists.rc not in [0, 1]
@@ -40288,7 +40288,7 @@
         masked: 'yes'
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"systemd-coredump.socket" in socket_file_exists.stdout_lines[1]'
+      - socket_file_exists.stdout_lines is search("systemd-coredump.socket",multiline=True)
       tags:
       - CCE-82881-4
       - DISA-STIG-RHEL-08-010672
@@ -40824,7 +40824,7 @@
       - service_kdump_disabled
 
     - name: Unit Socket Exists - kdump.socket
-      command: systemctl list-unit-files kdump.socket
+      command: systemctl -q list-unit-files kdump.socket
       register: socket_file_exists
       changed_when: false
       failed_when: socket_file_exists.rc not in [0, 1]
@@ -40851,7 +40851,7 @@
         masked: 'yes'
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"kdump.socket" in socket_file_exists.stdout_lines[1]'
+      - socket_file_exists.stdout_lines is search("kdump.socket",multiline=True)
       tags:
       - CCE-80878-2
       - DISA-STIG-RHEL-08-010670
