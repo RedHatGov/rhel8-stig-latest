@@ -54513,7 +54513,7 @@ Therefore, this rule will report a finding for home directories like <tt>/users<
 
 <pre>$ sudo awk -F: '($3&gt;=1000)&amp;&amp;($7 !~ /nologin/){print $1, $3, $6}' /etc/passwd</pre>
 
-Inspect the output and verify that all interactive users (normally users with a UID greater that 1000) have a home directory defined. Is it the case that users home directory is not defined?</td>
+Inspect the output and verify that all interactive users (normally users with a UID greater than 1000) have a home directory defined. Is it the case that users home directory is not defined?</td>
     <td>Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
     <td>Assign home directories to all interactive users that currently do not
 have a home directory assigned.

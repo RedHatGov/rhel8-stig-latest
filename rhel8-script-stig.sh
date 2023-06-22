@@ -4597,7 +4597,7 @@ done
 ###############################################################################
 (>&2 echo "Remediating rule 130/396: 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'")
 
-for user in $(awk -F':' '{ if ($4 >= 1000 && $4 != 65534) print $1 }' /etc/passwd); do
+for user in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $1 }' /etc/passwd); do
     # This follows the same logic of evaluation of home directories as used in OVAL.
     if ! grep -q $user /etc/passwd | cut -d: -f6 | grep '^\/\w*\/\w\{1,\}'; then
         sed -i "s/\($user:x:[0-9]*:[0-9]*:.*:\).*\(:.*\)$/\1\/home\/$user\2/g" /etc/passwd;
