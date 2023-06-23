@@ -18947,12 +18947,15 @@ If the system is 64 bit then also add the following lines:
 
 
 
+
   <tr>
-    <td>V-56683</td>
+    <td>CCI-000185</td>
     <td>SRG-OS-000066-GPOS-00034</td>
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system, for PKI-based authentication, must validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor.</td>
-    <td></td>
+
+    <td>CCE-86312-6: SSSD Has a Correct Trust Anchor</td>
+
     <td>Without path validation, an informed trust decision by the relying party cannot be made when presented with any certificate not already explicitly trusted.
 
 A trust anchor is an authoritative entity represented via a public key and associated data. It is used in the context of public key infrastructures, X.509 digital certificates, and DNSSEC.
@@ -18960,17 +18963,36 @@ A trust anchor is an authoritative entity represented via a public key and assoc
 When there is a chain of trust, usually the top entity to be trusted becomes the trust anchor; it can be, for example, a Certification Authority (CA). A certification path starts with the subject certificate and proceeds through a number of intermediate certificates up to a trusted root certificate, typically issued by a trusted CA.
 
 This requirement verifies that a certification path to an accepted trust anchor is used for certificate validation and that the path includes status information. Path validation is necessary for a relying party to make an informed trust decision when presented with any certificate not already explicitly trusted. Status information for certification paths includes certificate revocation lists or online certificate status protocol responses. Validation of the certificate status information is out of scope for this requirement.</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>SSSD must have acceptable trust anchor present.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system, for PKI-based authentication, validates certificates by constructing a certification path (which includes status information) to an accepted trust anchor. If it does not, this is a finding.</td>
+    <td>Verify Red Hat Enterprise Linux 8 for PKI-based authentication has valid certificates by constructing a
+certification path (which includes status information) to an accepted trust anchor.
+
+Check that the system has a valid DoD root CA installed with the following command:
+
+$ sudo openssl x509 -text -in /etc/sssd/pki/sssd_auth_ca_db.pem
+
+Certificate:
+Data:
+Version: 3 (0x2)
+Serial Number: 1 (0x1)
+Signature Algorithm: sha256WithRSAEncryption
+Issuer: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+Validity
+Not Before: Mar 20 18:46:41 2012 GMT
+Not After : Dec 30 18:46:41 2029 GMT
+Subject: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+Subject Public Key Info:
+Public Key Algorithm: rsaEncryption Is it the case that root CA file is not a DoD-issued certificate with a valid date and installed in the /etc/sssd/pki/sssd_auth_ca_db.pem location?</td>
+    <td>Configure the operating system, for PKI-based authentication, to validate certificates by constructing a certification path (which includes status information) to an accepted trust anchor.</td>
+    <td>SSSD must have acceptable trust anchor present.</td>
+    <td>medium</td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
+
 
 
 
@@ -20044,6 +20066,53 @@ The value for <tt>remember</tt> option must be equal or greater than
 
 
 
+
+  <tr>
+    <td>CCI-000205</td>
+    <td>SRG-OS-000078-GPOS-00046</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must enforce a minimum 15-character password length.</td>
+
+    <td>CCE-80652-1: Set Password Minimum Length in login.defs</td>
+
+    <td>The shorter the password, the lower the number of possible combinations that need to be tested before the password is compromised.
+
+Password complexity, or strength, is a measure of the effectiveness of a password in resisting attempts at guessing and brute-force attacks. Password length is one factor of several that helps to determine strength and how long it takes to crack a password. Use of more characters in a password helps to exponentially increase the time and/or resources required to compromise the password.</td>
+    <td>To specify password length requirements for new accounts, edit the file
+<tt>/etc/login.defs</tt> and add or correct the following line:
+<pre>PASS_MIN_LEN <sub idref="var_accounts_password_minlen_login_defs" /></pre>
+<br /><br />
+The DoD requirement is <tt>15</tt>.
+The FISMA requirement is <tt>12</tt>.
+The profile requirement is
+<tt><sub idref="var_accounts_password_minlen_login_defs" /></tt>.
+If a program consults <tt>/etc/login.defs</tt> and also another PAM module
+(such as <tt>pam_pwquality</tt>) during a password change operation, then
+the most restrictive must be satisfied. See PAM section for more
+information about enforcing password quality requirements.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system enforces a minimum 15-character password length. If it does not, this is a finding.</td>
+    <td>To check the minimum password length, run the command:
+<pre>$ grep PASS_MIN_LEN /etc/login.defs</pre>
+The DoD requirement is <tt>15</tt>. Is it the case that it is not set to the required value?</td>
+    <td>Configure the operating system to enforce a minimum 15-character password length.</td>
+    <td>To specify password length requirements for new accounts, edit the file
+<tt>/etc/login.defs</tt> and add or correct the following line:
+<pre>PASS_MIN_LEN <sub idref="var_accounts_password_minlen_login_defs" /></pre>
+<br /><br />
+The DoD requirement is <tt>15</tt>.
+The FISMA requirement is <tt>12</tt>.
+The profile requirement is
+<tt><sub idref="var_accounts_password_minlen_login_defs" /></tt>.
+If a program consults <tt>/etc/login.defs</tt> and also another PAM module
+(such as <tt>pam_pwquality</tt>) during a password change operation, then
+the most restrictive must be satisfied. See PAM section for more
+information about enforcing password quality requirements.</td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 
   <tr>
     <td>CCI-000205</td>
@@ -33148,6 +33217,37 @@ The <code>fapolicyd</code> service can be enabled with the following command:
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must require users to re-authenticate for privilege escalation.</td>
 
+    <td>CCE-86319-1: Disallow Configuration to Bypass Password Requirements for Privilege Escalation</td>
+
+    <td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization. 
+
+When operating systems provide the capability to escalate a functional capability, it is critical the user re-authenticate.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system requires users to re-authenticate for privilege escalation. If it does not, this is a finding.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre> Is it the case that system is configured to bypass password requirements for privilege escalation?</td>
+    <td>Configure the operating system to require users to re-authenticate for privilege escalation.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-002038</td>
+    <td>SRG-OS-000373-GPOS-00156</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must require users to re-authenticate for privilege escalation.</td>
+
     <td>CCE-82202-3: Ensure Users Re-Authenticate for Privilege Escalation - sudo !authenticate</td>
 
     <td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization. 
@@ -33259,6 +33359,37 @@ and the user will not have to re-authenticate for privileged actions until the u
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must require users to re-authenticate when changing roles.</td>
 
+    <td>CCE-86319-1: Disallow Configuration to Bypass Password Requirements for Privilege Escalation</td>
+
+    <td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization. 
+
+When operating systems provide the capability to change security roles, it is critical the user re-authenticate.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system requires users to re-authenticate when changing roles. If it does not, this is a finding.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre> Is it the case that system is configured to bypass password requirements for privilege escalation?</td>
+    <td>Configure the operating system to require users to re-authenticate when changing roles.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-002038</td>
+    <td>SRG-OS-000373-GPOS-00157</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must require users to re-authenticate when changing roles.</td>
+
     <td>CCE-82202-3: Ensure Users Re-Authenticate for Privilege Escalation - sudo !authenticate</td>
 
     <td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization. 
@@ -33363,6 +33494,37 @@ and the user will not have to re-authenticate for privileged actions until the u
 
 
 
+
+  <tr>
+    <td>CCI-002038</td>
+    <td>SRG-OS-000373-GPOS-00158</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must require users to re-authenticate when changing authenticators.</td>
+
+    <td>CCE-86319-1: Disallow Configuration to Bypass Password Requirements for Privilege Escalation</td>
+
+    <td>Without re-authentication, users may access resources or perform tasks for which they do not have authorization. 
+
+When operating systems provide the capability to change user authenticators, it is critical the user re-authenticate.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system requires users to re-authenticate when changing authenticators. If it does not, this is a finding.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre> Is it the case that system is configured to bypass password requirements for privilege escalation?</td>
+    <td>Configure the operating system to require users to re-authenticate when changing authenticators.</td>
+    <td>Verify the operating system is not configured to bypass password requirements for privilege
+escalation. Check the configuration of the "/etc/pam.d/sudo" file with the following command:
+<pre>$ sudo grep pam_succeed_if /etc/pam.d/sudo</pre>
+If any occurrences of "pam_succeed_if" is returned from the command, this is a finding.</td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 
   <tr>
     <td>CCI-002038</td>
@@ -34148,24 +34310,46 @@ offline_credentials_expiration = 1
 
 
 
+
   <tr>
-    <td>V-56797</td>
+    <td>CCI-001991</td>
     <td>SRG-OS-000384-GPOS-00167</td>
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system, for PKI-based authentication, must implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.</td>
-    <td></td>
+
+    <td>CCE-86312-6: SSSD Has a Correct Trust Anchor</td>
+
     <td>Without configuring a local cache of revocation data, there is the potential to allow access to users who are no longer authorized (users with revoked certificates).</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>SSSD must have acceptable trust anchor present.</td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system, for PKI-based authentication, implements a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network. If it does not, this is a finding.</td>
+    <td>Verify Red Hat Enterprise Linux 8 for PKI-based authentication has valid certificates by constructing a
+certification path (which includes status information) to an accepted trust anchor.
+
+Check that the system has a valid DoD root CA installed with the following command:
+
+$ sudo openssl x509 -text -in /etc/sssd/pki/sssd_auth_ca_db.pem
+
+Certificate:
+Data:
+Version: 3 (0x2)
+Serial Number: 1 (0x1)
+Signature Algorithm: sha256WithRSAEncryption
+Issuer: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+Validity
+Not Before: Mar 20 18:46:41 2012 GMT
+Not After : Dec 30 18:46:41 2029 GMT
+Subject: C = US, O = U.S. Government, OU = DoD, OU = PKI, CN = DoD Root CA 3
+Subject Public Key Info:
+Public Key Algorithm: rsaEncryption Is it the case that root CA file is not a DoD-issued certificate with a valid date and installed in the /etc/sssd/pki/sssd_auth_ca_db.pem location?</td>
+    <td>Configure the operating system, for PKI-based authentication, to implement a local cache of revocation data to support path discovery and validation in case of the inability to access revocation information via the network.</td>
+    <td>SSSD must have acceptable trust anchor present.</td>
+    <td>medium</td>
     <td></td>
     <td></td>
     <td></td>
   </tr>
+
 
 
 
@@ -56303,6 +56487,50 @@ into the account without authentication. Remove any instances of the
 <tt>/etc/pam.d/password-auth</tt>
 
 to prevent logins with empty passwords.</td>
+    <td>high</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-000366</td>
+    <td>SRG-OS-000480-GPOS-00227</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must be configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+
+    <td>CCE-85953-8: Ensure There Are No Accounts With Blank or Null Passwords</td>
+
+    <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
+
+Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
+    <td>Check the "/etc/shadow" file for blank passwords with the
+following command:
+<pre>$ sudo awk -F: '!$2 {print $1}' /etc/shadow</pre>
+If the command returns any results, this is a finding.
+Configure all accounts on the system to have a password or lock
+the account with the following commands:
+Perform a password reset:
+<pre>$ sudo passwd [username]</pre>
+Lock an account:
+<pre>$ sudo passwd -l [username]</pre></td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
+    <td>To verify that null passwords cannot be used, run the following command:
+<pre>$ sudo awk -F: '!$2 {print $1}' /etc/shadow</pre>
+If this produces any output, it may be possible to log into accounts
+with empty passwords. Is it the case that Blank or NULL passwords can be used?</td>
+    <td>Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
+    <td>Check the "/etc/shadow" file for blank passwords with the
+following command:
+<pre>$ sudo awk -F: '!$2 {print $1}' /etc/shadow</pre>
+If the command returns any results, this is a finding.
+Configure all accounts on the system to have a password or lock
+the account with the following commands:
+Perform a password reset:
+<pre>$ sudo passwd [username]</pre>
+Lock an account:
+<pre>$ sudo passwd -l [username]</pre></td>
     <td>high</td>
     <td></td>
     <td></td>

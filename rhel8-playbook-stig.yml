@@ -81,6 +81,7 @@
       var_account_disable_post_pw_expiration: !!str 35
       var_accounts_maximum_age_login_defs: !!str 60
       var_accounts_minimum_age_login_defs: !!str 1
+      var_accounts_password_minlen_login_defs: !!str 15
       var_accounts_maximum_age_login_defs: !!str 60
       var_accounts_fail_delay: !!str 4
       var_accounts_max_concurrent_login_sessions: !!str 10
@@ -7429,7 +7430,7 @@
         manager: auto
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7448,7 +7449,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7517,7 +7518,7 @@
       - result_authselect_present.stat.exists
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7585,7 +7586,7 @@
       - not result_authselect_present.stat.exists
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7604,7 +7605,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7627,7 +7628,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -7990,7 +7991,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -8047,7 +8048,7 @@
       - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-80668-7
-      - DISA-STIG-RHEL-08-020022
+      - DISA-STIG-RHEL-08-020023
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
       - NIST-800-53-IA-5(c)
@@ -8783,7 +8784,7 @@
         manager: auto
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -8801,7 +8802,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -8869,7 +8870,7 @@
       - result_authselect_present.stat.exists
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -8936,7 +8937,7 @@
       - not result_authselect_present.stat.exists
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -8955,7 +8956,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -8977,7 +8978,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -9339,7 +9340,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -9425,7 +9426,7 @@
       - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
-      - DISA-STIG-RHEL-08-020012
+      - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
       - accounts_passwords_pam_faillock_interval
@@ -9665,7 +9666,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -9687,7 +9688,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -9758,7 +9759,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -9829,7 +9830,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -9852,7 +9853,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -9878,7 +9879,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -10244,7 +10245,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -10334,7 +10335,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
-      - DISA-STIG-RHEL-08-020016
+      - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
       - NIST-800-53-CM-6(a)
@@ -12965,6 +12966,48 @@
       - no_reboot_needed
       - restrict_strategy
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-80652-1
+      - CJIS-5.6.2.1
+      - DISA-STIG-RHEL-08-020231
+      - NIST-800-171-3.5.7
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-IA-5(1)(a)
+      - NIST-800-53-IA-5(f)
+      - accounts_password_minlen_login_defs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+
+    - name: Set Password Minimum Length in login.defs
+      lineinfile:
+        dest: /etc/login.defs
+        regexp: ^PASS_MIN_LEN *[0-9]*
+        state: present
+        line: PASS_MIN_LEN        {{ var_accounts_password_minlen_login_defs }}
+        create: true
+      when: '"shadow-utils" in ansible_facts.packages'
+      tags:
+      - CCE-80652-1
+      - CJIS-5.6.2.1
+      - DISA-STIG-RHEL-08-020231
+      - NIST-800-171-3.5.7
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-IA-5(1)(a)
+      - NIST-800-53-IA-5(f)
+      - accounts_password_minlen_login_defs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
 
 
     - name: Collect users with not correct maximum time period between password changes
@@ -13131,6 +13174,42 @@
       - medium_disruption
       - no_empty_passwords
       - no_reboot_needed
+
+    - name: Collect users with no password
+      command: |
+        awk -F: '!$2 {print $1}' /etc/shadow
+      register: users_nopasswd
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-85953-8
+      - DISA-STIG-RHEL-08-010121
+      - NIST-800-53-CM-6(b)
+      - NIST-800-53-CM-6.1(iv)
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_empty_passwords_etc_shadow
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Lock users with no password
+      command: |
+        passwd -l {{ item }}
+      with_items: '{{ users_nopasswd.stdout_lines }}'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - users_nopasswd.stdout_lines | length > 0
+      tags:
+      - CCE-85953-8
+      - DISA-STIG-RHEL-08-010121
+      - NIST-800-53-CM-6(b)
+      - NIST-800-53-CM-6.1(iv)
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_empty_passwords_etc_shadow
+      - no_reboot_needed
+      - restrict_strategy
 
     - name: Gather the package facts
       package_facts:
