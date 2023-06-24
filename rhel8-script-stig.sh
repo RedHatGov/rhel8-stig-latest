@@ -30848,13 +30848,13 @@ find -H /usr/lib64/  -perm /g+w,o+w  -type f -regex '^.*$' -exec chmod g-w,o-w {
 ###############################################################################
 (>&2 echo "Remediating rule 296/400: 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'")
 
-find /lib/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find /lib/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 
-find /lib64/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find /lib64/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 
-find /usr/lib/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find /usr/lib/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 
-find /usr/lib64/  -type f ! -gid 0 -regex '^.*$' -exec chgrp 0 {} \;
+find /usr/lib64/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'
 
 ###############################################################################

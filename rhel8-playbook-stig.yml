@@ -37004,7 +37004,7 @@
       - no_reboot_needed
 
     - name: Find /lib/ file(s) matching ^.*$ recursively
-      command: find -H /lib/  -type f ! -gid 0 -regex "^.*$"
+      command: find -H /lib/  -type f ! -group 0 -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -37041,7 +37041,7 @@
       - root_permissions_syslibrary_files
 
     - name: Find /lib64/ file(s) matching ^.*$ recursively
-      command: find -H /lib64/  -type f ! -gid 0 -regex "^.*$"
+      command: find -H /lib64/  -type f ! -group 0 -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -37078,7 +37078,7 @@
       - root_permissions_syslibrary_files
 
     - name: Find /usr/lib/ file(s) matching ^.*$ recursively
-      command: find -H /usr/lib/  -type f ! -gid 0 -regex "^.*$"
+      command: find -H /usr/lib/  -type f ! -group 0 -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
@@ -37115,7 +37115,7 @@
       - root_permissions_syslibrary_files
 
     - name: Find /usr/lib64/ file(s) matching ^.*$ recursively
-      command: find -H /usr/lib64/  -type f ! -gid 0 -regex "^.*$"
+      command: find -H /usr/lib64/  -type f ! -group 0 -regex "^.*$"
       register: files_found
       changed_when: false
       failed_when: false
