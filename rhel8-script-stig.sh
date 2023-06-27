@@ -29250,7 +29250,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 248/400: 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q firewalld; }; then
 
 SYSTEMCTL_EXEC='/usr/bin/systemctl'
 "$SYSTEMCTL_EXEC" unmask 'firewalld.service'
