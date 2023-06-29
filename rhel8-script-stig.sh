@@ -30940,7 +30940,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ -d /sys/firmware/e
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/boot/efi")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/boot/efi")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/boot/efi' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -30948,7 +30948,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /boot/efi)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /boot/efi)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -30993,7 +30993,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/boot")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/boot")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/boot' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31001,7 +31001,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /boot)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /boot)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31048,7 +31048,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31095,7 +31095,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31142,7 +31142,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31187,7 +31187,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/home")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/home' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31195,7 +31195,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /home)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /home)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31240,7 +31240,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/home")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/home' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31248,7 +31248,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /home)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /home)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31307,7 +31307,7 @@ for partition_record in "${partitions_records[@]}"; do
     device_type="$(echo ${partition_record} | cut -d " " -f3)"
     if ! printf '%s\0' "${polyinstantiated_dirs[@]}" | grep -qxzF "$mount_point"; then
         # device and device_type will be used only in case when the device doesn't have fstab record
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" $mount_point)"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" $mount_point)"
 
         # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
         if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31427,7 +31427,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31435,7 +31435,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31480,7 +31480,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31488,7 +31488,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31533,7 +31533,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31541,7 +31541,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31586,7 +31586,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31594,7 +31594,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31639,7 +31639,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31647,7 +31647,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31692,7 +31692,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31700,7 +31700,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31745,7 +31745,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31753,7 +31753,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31798,7 +31798,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31806,7 +31806,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31851,7 +31851,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31859,7 +31859,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31904,7 +31904,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31912,7 +31912,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -31957,7 +31957,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31965,7 +31965,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -32010,7 +32010,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32018,7 +32018,7 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -33176,7 +33176,7 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -33215,7 +33215,7 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
@@ -33254,7 +33254,7 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
     if ! grep "$mount_point_match_regexp" /etc/fstab; then
