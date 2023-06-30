@@ -308,10 +308,10 @@
 
     - name: Ensure AIDE is installed
       package:
-        name:
-        - aide
-        - crontabs
+        name: '{{ item }}'
         state: present
+      with_items:
+      - aide
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82891-3

@@ -144,9 +144,6 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 if ! rpm -q --quiet "aide" ; then
     yum install -y "aide"
 fi
-if ! rpm -q --quiet "crontabs" ; then
-    yum install -y "crontabs"
-fi
 var_aide_scan_notification_email='root@localhost'
 
 
