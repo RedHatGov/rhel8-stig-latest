@@ -38093,7 +38093,8 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/home" in ansible_mounts | map(attribute="mount") | list )
       tags:
       - CCE-81050-7
       - DISA-STIG-RHEL-08-010570
@@ -38117,7 +38118,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/home" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -38149,7 +38151,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/home" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -38174,7 +38177,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',nosuid''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/home" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "nosuid" not in mount_info.options
       tags:
       - CCE-81050-7
@@ -38200,7 +38204,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/home" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -38735,7 +38740,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log/audit" in ansible_mounts | map(attribute="mount") |
+        list )
       tags:
       - CCE-82080-3
       - DISA-STIG-RHEL-08-040129
@@ -38759,7 +38766,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -38792,7 +38800,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -38817,7 +38826,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',nodev''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "nodev" not in mount_info.options
       tags:
       - CCE-82080-3
@@ -38844,7 +38854,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -38868,7 +38879,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log/audit" in ansible_mounts | map(attribute="mount") |
+        list )
       tags:
       - CCE-82975-4
       - DISA-STIG-RHEL-08-040131
@@ -38892,7 +38905,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -38925,7 +38939,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -38950,7 +38965,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',noexec''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "noexec" not in mount_info.options
       tags:
       - CCE-82975-4
@@ -38977,7 +38993,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -39001,7 +39018,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log/audit" in ansible_mounts | map(attribute="mount") |
+        list )
       tags:
       - CCE-82921-8
       - DISA-STIG-RHEL-08-040130
@@ -39025,7 +39044,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -39058,7 +39078,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -39083,7 +39104,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',nosuid''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "nosuid" not in mount_info.options
       tags:
       - CCE-82921-8
@@ -39110,7 +39132,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log/audit" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -39134,7 +39157,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log" in ansible_mounts | map(attribute="mount") | list
+        )
       tags:
       - CCE-82077-9
       - DISA-STIG-RHEL-08-040126
@@ -39158,7 +39183,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -39190,7 +39216,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -39215,7 +39242,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',nodev''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "nodev" not in mount_info.options
       tags:
       - CCE-82077-9
@@ -39241,7 +39269,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -39265,7 +39294,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log" in ansible_mounts | map(attribute="mount") | list
+        )
       tags:
       - CCE-82008-4
       - DISA-STIG-RHEL-08-040128
@@ -39289,7 +39320,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -39322,7 +39354,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -39347,7 +39380,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',noexec''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "noexec" not in mount_info.options
       tags:
       - CCE-82008-4
@@ -39373,7 +39407,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:
@@ -39397,7 +39432,9 @@
       register: device_name
       failed_when: device_name.rc > 1
       changed_when: false
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when: ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman",
+        "container"] and "/var/log" in ansible_mounts | map(attribute="mount") | list
+        )
       tags:
       - CCE-82065-4
       - DISA-STIG-RHEL-08-040127
@@ -39421,7 +39458,8 @@
       - '{{ device_name.stdout_lines[0].split() | list | lower }}'
       - '{{ device_name.stdout_lines[1].split() | list }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - device_name.stdout is defined and device_name.stdout_lines is defined
       - (device_name.stdout | length > 0)
       tags:
@@ -39454,7 +39492,8 @@
         - ''
         - defaults
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - ("--fstab" | length == 0)
       - (device_name.stdout | length == 0)
       tags:
@@ -39479,7 +39518,8 @@
         mount_info: '{{ mount_info | combine( {''options'':''''~mount_info.options~'',nosuid''
           }) }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - mount_info is defined and "nosuid" not in mount_info.options
       tags:
       - CCE-82065-4
@@ -39505,7 +39545,8 @@
         state: mounted
         fstype: '{{ mount_info.fstype }}'
       when:
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+        and "/var/log" in ansible_mounts | map(attribute="mount") | list )
       - (device_name.stdout is defined and (device_name.stdout | length > 0)) or ("--fstab"
         | length == 0)
       tags:

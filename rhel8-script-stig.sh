@@ -31233,7 +31233,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 306/400: 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/home" > /dev/null || findmnt --fstab "/home" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31579,7 +31579,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 314/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31632,7 +31632,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 315/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31685,7 +31685,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 316/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31738,7 +31738,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 317/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31791,7 +31791,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 318/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
 function perform_remediation {
     
@@ -31844,7 +31844,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 319/400: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
 function perform_remediation {
     
