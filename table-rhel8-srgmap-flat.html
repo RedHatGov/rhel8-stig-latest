@@ -23801,7 +23801,15 @@ following command:
     <td>Applicable - Configurable</td>
     <td>Verify operating systems prevents unauthorized and unintended information transfer via shared system resources. If it does not, this is a finding.</td>
     <td>To find world-writable directories that lack the sticky bit, run the following command:
-<pre>$ sudo find / -type d \( -perm -0002 -a ! -perm -1000 \) -print 2>/dev/null</pre> Is it the case that any world-writable directories are missing the sticky bit?</td>
+<pre>$ sudo find / -type d \( -perm -0002 -a ! -perm -1000 \) -print 2>/dev/null</pre>
+fixtext: |-
+Configure all world-writable directories to have the sticky bit set to prevent unauthorized and unintended information transferred via shared system resources.
+
+Set the sticky bit on all world-writable directories using the command, replace "[World-Writable Directory]" with any directory path missing the sticky bit:
+
+$ chmod a+t [World-Writable Directory]
+srg_requirement:
+A sticky bit must be set on all Red Hat Enterprise Linux 8 public directories to prevent unauthorized and unintended information transferred via shared system resources. Is it the case that any world-writable directories are missing the sticky bit?</td>
     <td>Configure operating systems to prevent unauthorized and unintended information transfer via shared system resources.</td>
     <td>When the so-called 'sticky bit' is set on a directory,
 only the owner of a given file may remove that file from the
