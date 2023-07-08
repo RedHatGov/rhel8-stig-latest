@@ -1356,9 +1356,15 @@ rm "/etc/sudoers.bak"
 # BEGIN fix (50 / 400) for 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'
 ###############################################################################
 (>&2 echo "Remediating rule 50/400: 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'")
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 if ! rpm -q --quiet "rng-tools" ; then
     yum install -y "rng-tools"
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'
 

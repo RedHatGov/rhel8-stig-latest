@@ -3184,6 +3184,7 @@
       package:
         name: rng-tools
         state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82968-9
       - DISA-STIG-RHEL-08-010472
