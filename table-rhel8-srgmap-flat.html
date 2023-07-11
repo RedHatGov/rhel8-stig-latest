@@ -55022,8 +55022,7 @@ be generated.</td>
     <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
-    <td>The <tt>Storage</tt> option in <tt>[Coredump]</tt> section
-of <tt>/etc/systemd/coredump.conf</tt>
+    <td>The <tt>Storage</tt> option in <tt>[Coredump]</tt> sectionof <tt>/etc/systemd/coredump.conf</tt>
 can be set to <tt>none</tt> to disable storing core dumps permanently.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
@@ -55033,8 +55032,7 @@ $ grep -i storage /etc/systemd/coredump.conf
 
 Storage=none Is it the case that Storage is not set to none or is commented out and the need for core dumps is not documented with the Information System Security Officer (ISSO) as an operational requirement for all domains that have the "core" item assigned?</td>
     <td>Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
-    <td>The <tt>Storage</tt> option in <tt>[Coredump]</tt> section
-of <tt>/etc/systemd/coredump.conf</tt>
+    <td>The <tt>Storage</tt> option in <tt>[Coredump]</tt> sectionof <tt>/etc/systemd/coredump.conf</tt>
 can be set to <tt>none</tt> to disable storing core dumps permanently.</td>
     <td>medium</td>
     <td></td>
