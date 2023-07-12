@@ -3773,7 +3773,7 @@
 
 
 
-    - name: Modify the System Login Banner - ensure correct banner
+    - name: Modify the System Login Banner - Ensure Correct Banner
       copy:
         dest: /etc/issue
         content: '{{ login_banner_text | regex_replace("^\^(.*)\$$", "\1") | regex_replace("^\((.*\.)\|.*\)$",
@@ -12481,7 +12481,9 @@
         regexp: ^CtrlAltDelBurstAction
         line: CtrlAltDelBurstAction=none
         create: true
-      when: '"systemd" in ansible_facts.packages'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"systemd" in ansible_facts.packages'
       tags:
       - CCE-80784-2
       - DISA-STIG-RHEL-08-040172
@@ -12595,9 +12597,11 @@
       ansible.builtin.find:
         paths: /etc
         patterns: bashrc
-        contains: .*case "$name" in sshd|login) tmux ;; esac.*
+        contains: .*case "$name" in (sshd|login) tmux ;; esac.*
       register: tmux_in_bashrc
-      when: '"tmux" in ansible_facts.packages'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-90782-4
       - DISA-STIG-RHEL-08-020041
@@ -12613,9 +12617,11 @@
       ansible.builtin.find:
         paths: /etc/profile.d
         patterns: '*.sh'
-        contains: .*case "$name" in sshd|login) tmux ;; esac.*
+        contains: .*case "$name" in (sshd|login) tmux ;; esac.*
       register: tmux_in_profile_d
-      when: '"tmux" in ansible_facts.packages'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-90782-4
       - DISA-STIG-RHEL-08-020041
@@ -12634,10 +12640,11 @@
           if [ "$PS1" ]; then
             parent=$(ps -o ppid= -p $$)
             name=$(ps -o comm= -p $parent)
-            case "$name" in sshd|login) tmux ;; esac
+            case "$name" in (sshd|login) tmux ;; esac
           fi
         create: true
       when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       - '"tmux" in ansible_facts.packages'
       - tmux_in_bashrc is defined and tmux_in_bashrc.matched == 0
       - tmux_in_profile_d is defined and tmux_in_profile_d.matched == 0
@@ -30127,6 +30134,215 @@
       - low_disruption
       - medium_severity
       - no_reboot_needed
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Check if watch rule for /var/log/faillock already exists in /etc/audit/rules.d/
+      find:
+        paths: /etc/audit/rules.d
+        contains: ^\s*-w\s+/var/log/faillock\s+-p\s+wa(\s|$)+
+        patterns: '*.rules'
+      register: find_existing_watch_rules_d
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Search /etc/audit/rules.d for other rules with specified key logins
+      find:
+        paths: /etc/audit/rules.d
+        contains: ^.*(?:-F key=|-k\s+)logins$
+        patterns: '*.rules'
+      register: find_watch_key
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
+        == 0
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Use /etc/audit/rules.d/logins.rules as the recipient for the rule
+      set_fact:
+        all_files:
+        - /etc/audit/rules.d/logins.rules
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_watch_key.matched is defined and find_watch_key.matched == 0 and find_existing_watch_rules_d.matched
+        is defined and find_existing_watch_rules_d.matched == 0
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Use matched file as the recipient for the rule
+      set_fact:
+        all_files:
+        - '{{ find_watch_key.files | map(attribute=''path'') | list | first }}'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_watch_key.matched is defined and find_watch_key.matched > 0 and find_existing_watch_rules_d.matched
+        is defined and find_existing_watch_rules_d.matched == 0
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Add watch rule for /var/log/faillock in /etc/audit/rules.d/
+      lineinfile:
+        path: '{{ all_files[0] }}'
+        line: -w /var/log/faillock -p wa -k logins
+        create: true
+        mode: '0640'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
+        == 0
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Check if watch rule for /var/log/faillock already exists in /etc/audit/audit.rules
+      find:
+        paths: /etc/audit/
+        contains: ^\s*-w\s+/var/log/faillock\s+-p\s+wa(\s|$)+
+        patterns: audit.rules
+      register: find_existing_watch_audit_rules
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
+
+    - name: Add watch rule for /var/log/faillock in /etc/audit/audit.rules
+      lineinfile:
+        line: -w /var/log/faillock -p wa -k logins
+        state: present
+        dest: /etc/audit/audit.rules
+        create: true
+        mode: '0640'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_audit_rules.matched is defined and find_existing_watch_audit_rules.matched
+        == 0
+      tags:
+      - CCE-80718-0
+      - DISA-STIG-RHEL-08-030590
+      - NIST-800-171-3.1.7
+      - NIST-800-53-AC-6(9)
+      - NIST-800-53-AU-12(c)
+      - NIST-800-53-AU-2(d)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.2.3
+      - PCI-DSSv4-10.2.1.3
+      - audit_rules_login_events_faillock
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
 
     - name: Gather the package facts
       package_facts:

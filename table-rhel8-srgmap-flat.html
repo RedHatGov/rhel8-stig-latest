@@ -35910,6 +35910,59 @@ add the line to file <tt>/etc/audit/audit.rules</tt>.</td>
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
 
+    <td>CCE-80718-0: Record Attempts to Alter Logon and Logout Events - faillock</td>
+
+    <td>If events associated with nonlocal administrative access or diagnostic sessions are not logged, a major tool for assessing and investigating attacks would not be available.
+
+This requirement addresses auditing-related issues associated with maintenance tools used specifically for diagnostic and repair actions on organizational information systems.
+
+Nonlocal maintenance and diagnostic activities are those activities conducted by individuals communicating through a network, either an external network (e.g., the Internet) or an internal network. Local maintenance and diagnostic activities are those activities carried out by individuals physically present at the information system or information system component and not communicating across a network connection.
+
+This requirement applies to hardware/software diagnostic test equipment or tools. This requirement does not cover hardware/software components that may support information system maintenance, yet are a part of the system, for example, the software implementing "ping," "ls," "ipconfig," or the hardware and software implementing the monitoring port of an Ethernet switch.</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
+    <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
+
+$ sudo auditctl -l | grep /var/log/faillock
+
+-w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+    <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-002884</td>
+    <td>SRG-OS-000392-GPOS-00172</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
+
     <td>CCE-80719-8: Record Attempts to Alter Logon and Logout Events - lastlog</td>
 
     <td>If events associated with nonlocal administrative access or diagnostic sessions are not logged, a major tool for assessing and investigating attacks would not be available.
@@ -48397,6 +48450,55 @@ form to <tt>/etc/audit/audit.rules</tt>:
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must generate audit records when successful/unsuccessful logon attempts occur.</td>
 
+    <td>CCE-80718-0: Record Attempts to Alter Logon and Logout Events - faillock</td>
+
+    <td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
+    <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
+
+$ sudo auditctl -l | grep /var/log/faillock
+
+-w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+    <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-000172</td>
+    <td>SRG-OS-000470-GPOS-00214</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must generate audit records when successful/unsuccessful logon attempts occur.</td>
+
     <td>CCE-80719-8: Record Attempts to Alter Logon and Logout Events - lastlog</td>
 
     <td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
@@ -52432,6 +52534,55 @@ Audit records can be generated from various components within the information sy
 
 
 
+
+  <tr>
+    <td>CCI-000172</td>
+    <td>SRG-OS-000473-GPOS-00218</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must generate audit records when concurrent logons to the same account occur from different sources.</td>
+
+    <td>CCE-80718-0: Record Attempts to Alter Logon and Logout Events - faillock</td>
+
+    <td>Without generating audit records that are specific to the security and mission needs of the organization, it would be difficult to establish, correlate, and investigate the events relating to an incident or identify those responsible for one.
+
+Audit records can be generated from various components within the information system (e.g., module or policy filter).</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system generates audit records when concurrent logons to the same account occur from different sources. If it does not, this is a finding.</td>
+    <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
+
+$ sudo auditctl -l | grep /var/log/faillock
+
+-w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+    <td>Configure the operating system to generate audit records when concurrent logons to the same account occur from different sources.</td>
+    <td>The audit system already collects login information for all users
+and root. If the <tt>auditd</tt> daemon is configured to use the
+<tt>augenrules</tt> program to read audit rules during daemon startup (the
+default), add the following lines to a file with suffix <tt>.rules</tt> in the
+directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre>
+If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
+utility to read audit rules during daemon startup, add the following lines to
+<tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
+edits of files involved in storing logon events:
+<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
 
   <tr>
     <td>CCI-000172</td>
