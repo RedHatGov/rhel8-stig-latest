@@ -3578,6 +3578,7 @@
       tags:
       - CCE-80795-8
       - CJIS-5.10.4.1
+      - DISA-STIG-RHEL-08-010019
       - NIST-800-171-3.4.8
       - NIST-800-53-CM-5(3)
       - NIST-800-53-CM-6(a)
@@ -3600,6 +3601,7 @@
       tags:
       - CCE-80795-8
       - CJIS-5.10.4.1
+      - DISA-STIG-RHEL-08-010019
       - NIST-800-171-3.4.8
       - NIST-800-53-CM-5(3)
       - NIST-800-53-CM-6(a)
@@ -3622,6 +3624,7 @@
       tags:
       - CCE-80795-8
       - CJIS-5.10.4.1
+      - DISA-STIG-RHEL-08-010019
       - NIST-800-171-3.4.8
       - NIST-800-53-CM-5(3)
       - NIST-800-53-CM-6(a)
@@ -3642,6 +3645,7 @@
       tags:
       - CCE-80795-8
       - CJIS-5.10.4.1
+      - DISA-STIG-RHEL-08-010019
       - NIST-800-171-3.4.8
       - NIST-800-53-CM-5(3)
       - NIST-800-53-CM-6(a)
@@ -3669,6 +3673,7 @@
       tags:
       - CCE-80795-8
       - CJIS-5.10.4.1
+      - DISA-STIG-RHEL-08-010019
       - NIST-800-171-3.4.8
       - NIST-800-53-CM-5(3)
       - NIST-800-53-CM-6(a)
@@ -41340,6 +41345,22 @@
       - low_disruption
       - medium_severity
       - no_reboot_needed
+
+    - name: Ensure mailx is installed
+      package:
+        name: mailx
+        state: present
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-87036-0
+      - DISA-STIG-RHEL-08-010358
+      - NIST-800-53-CM-3(5)
+      - enable_strategy
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - package_mailx_installed
 
     - name: Ensure postfix is installed
       package:

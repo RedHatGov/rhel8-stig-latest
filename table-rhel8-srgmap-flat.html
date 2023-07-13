@@ -91,61 +91,6 @@ Account management functions include: assigning group or role membership; identi
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must automatically remove or disable temporary user accounts after 72 hours.</td>
 
-    <td>CCE-85910-8: Assign Expiration Date to Emergency Accounts</td>
-
-    <td>If temporary user accounts remain active when no longer needed or for an excessive period, these accounts may be used to gain unauthorized access. To mitigate this risk, automated termination of all temporary accounts must be set upon account creation.
-
-Temporary accounts are established as part of normal account activation procedures when there is a need for short-term accounts without the demand for immediacy in account activation.
-
-If temporary accounts are used, the operating system must be configured to automatically terminate these types of accounts after a DoD-defined time period of 72 hours.
-
-To address access requirements, many operating systems may be integrated with enterprise-level authentication/access mechanisms that meet or exceed access control policy requirements.</td>
-    <td>Emergency accounts are privileged accounts established in response to
-crisis situations where the need for rapid account activation is required.
-In the event emergency accounts are required, configure the system to
-terminate them after a documented time period. For every emergency account,
-run the following command to set an expiration date on it, substituting
-<tt><i>ACCOUNT_NAME</i></tt> and <tt><i>YYYY-MM-DD</i></tt>
-appropriately:
-<pre>$ sudo chage -E <i>YYYY-MM-DD ACCOUNT_NAME</i></pre>
-<tt><i>YYYY-MM-DD</i></tt> indicates the documented expiration date for the
-account. For U.S. Government systems, the operating system must be
-configured to automatically terminate these types of accounts after a
-period of 72 hours.</td>
-    <td>Applicable - Configurable</td>
-    <td>Verify the operating system automatically removes or disables local temporary user accounts after 72 hours. If it does not, this is a finding.</td>
-    <td>Verify emergency accounts have been provisioned with an expiration date of 72 hours.
-
-For every emergency account, run the following command to obtain its account aging and expiration information:
-
-$ sudo chage -l emergency_account_name
-
-Verify each of these accounts has an expiration date set within 72 hours or as documented. Is it the case that any emergency accounts have no expiration date set or do not expire within 72 hours?</td>
-    <td>Configure the operating system to automatically remove or disable local temporary user accounts after 72 hours.</td>
-    <td>Emergency accounts are privileged accounts established in response to
-crisis situations where the need for rapid account activation is required.
-In the event emergency accounts are required, configure the system to
-terminate them after a documented time period. For every emergency account,
-run the following command to set an expiration date on it, substituting
-<tt><i>ACCOUNT_NAME</i></tt> and <tt><i>YYYY-MM-DD</i></tt>
-appropriately:
-<pre>$ sudo chage -E <i>YYYY-MM-DD ACCOUNT_NAME</i></pre>
-<tt><i>YYYY-MM-DD</i></tt> indicates the documented expiration date for the
-account. For U.S. Government systems, the operating system must be
-configured to automatically terminate these types of accounts after a
-period of 72 hours.</td>
-    <td>medium</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-
-  <tr>
-    <td>CCI-000016</td>
-    <td>SRG-OS-000002-GPOS-00002</td>
-    <td><i>TBD - Assigned by DISA after STIG release</i></td>
-    <td>The operating system must automatically remove or disable temporary user accounts after 72 hours.</td>
-
     <td>CCE-82474-8: Assign Expiration Date to Temporary Accounts</td>
 
     <td>If temporary user accounts remain active when no longer needed or for an excessive period, these accounts may be used to gain unauthorized access. To mitigate this risk, automated termination of all temporary accounts must be set upon account creation.
@@ -632,9 +577,14 @@ audit Is it the case that the "audit" option is not set, is missing or commented
     <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.</td>
     <td>This rule configures the system to lock out accounts after a number of incorrect login attempts
 using <tt>pam_faillock.so</tt>.
-
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>deny = &lt;count&gt;</tt>
+Where count should be less than or equal to 
+<sub idref="var_accounts_passwords_pam_faillock_deny" /> and greater than 0.
+
 
 In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -651,9 +601,14 @@ or less (but not "0"), is missing or commented out?</td>
     <td>Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.</td>
     <td>This rule configures the system to lock out accounts after a number of incorrect login attempts
 using <tt>pam_faillock.so</tt>.
-
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>deny = &lt;count&gt;</tt>
+Where count should be less than or equal to 
+<sub idref="var_accounts_passwords_pam_faillock_deny" /> and greater than 0.
+
 
 In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -720,7 +675,9 @@ tally directory must be set with the "dir" option.</pre>
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
-depending on the OS version.</td>
+depending on the OS version.
+
+The chosen profile expects the directory to be <tt><sub idref="var_accounts_passwords_pam_faillock_dir" /></tt>.</td>
     <td>Applicable - Configurable</td>
     <td>Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.</td>
     <td>To ensure the tally directory is configured correctly, run the following command:
@@ -736,7 +693,9 @@ tally directory must be set with the "dir" option.</pre>
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
-depending on the OS version.</td>
+depending on the OS version.
+
+The chosen profile expects the directory to be <tt><sub idref="var_accounts_passwords_pam_faillock_dir" /></tt>.</td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -754,7 +713,15 @@ depending on the OS version.</td>
     <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-force attacks, is reduced. Limits are imposed by locking the account.</td>
     <td>Utilizing <tt>pam_faillock.so</tt>, the <tt>fail_interval</tt> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period.</td>
+period.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>fail_interval = &lt;interval-in-seconds&gt;</tt> where <tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_fail_interval" /></tt> or greater.
+
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.</td>
     <td>Applicable - Configurable</td>
     <td>Verify that the operating system enforces the limit of three consecutive invalid logon attempts by a user during a 15-minute time period. If it does not, this is a finding.</td>
     <td>To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -765,7 +732,15 @@ or less (but not "0"), the line is commented out, or the line is missing?</td>
     <td>Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.</td>
     <td>Utilizing <tt>pam_faillock.so</tt>, the <tt>fail_interval</tt> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period.</td>
+period.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>fail_interval = &lt;interval-in-seconds&gt;</tt> where <tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_fail_interval" /></tt> or greater.
+
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.</td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -822,6 +797,12 @@ depending on the OS version.</td>
     <td>This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using <tt>pam_faillock.so</tt>.
 
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>unlock_time=&lt;interval-in-seconds&gt;</tt> where
+<tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_unlock_time" /></tt> or greater.
+
+
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid any errors when manually editing these files,
 it is recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -842,6 +823,12 @@ the line is missing, or commented out?</td>
     <td>Configure the operating system to enforce the limit of three consecutive invalid logon attempts by a user during a 15-minute time period.</td>
     <td>This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using <tt>pam_faillock.so</tt>.
+
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>unlock_time=&lt;interval-in-seconds&gt;</tt> where
+<tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_unlock_time" /></tt> or greater.
+
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid any errors when manually editing these files,
@@ -22876,59 +22863,6 @@ The <code>auditd</code> service can be enabled with the following command:
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The information system must automatically remove or disable emergency accounts after the crisis is resolved or 72 hours.</td>
 
-    <td>CCE-85910-8: Assign Expiration Date to Emergency Accounts</td>
-
-    <td>Emergency accounts are privileged accounts that are established in response to crisis situations where the need for rapid account activation is required. Therefore, emergency account activation may bypass normal account authorization processes. If these accounts are automatically disabled, system maintenance during emergencies may not be possible, thus adversely affecting system availability. 
-
-Emergency accounts are different from infrequently used accounts (i.e., local logon accounts used by the organization's system administrators when network or normal logon/access is not available). Infrequently used accounts are not subject to automatic termination dates.  Emergency accounts are accounts created in response to crisis situations, usually for use by maintenance personnel. The automatic expiration or disabling time period may be extended as needed until the crisis is resolved; however, it must not be extended indefinitely. A permanent account should be established for privileged users who need long-term maintenance accounts.
-
-To address access requirements, many operating systems can be integrated with enterprise-level authentication/access mechanisms that meet or exceed access control policy requirements. </td>
-    <td>Emergency accounts are privileged accounts established in response to
-crisis situations where the need for rapid account activation is required.
-In the event emergency accounts are required, configure the system to
-terminate them after a documented time period. For every emergency account,
-run the following command to set an expiration date on it, substituting
-<tt><i>ACCOUNT_NAME</i></tt> and <tt><i>YYYY-MM-DD</i></tt>
-appropriately:
-<pre>$ sudo chage -E <i>YYYY-MM-DD ACCOUNT_NAME</i></pre>
-<tt><i>YYYY-MM-DD</i></tt> indicates the documented expiration date for the
-account. For U.S. Government systems, the operating system must be
-configured to automatically terminate these types of accounts after a
-period of 72 hours.</td>
-    <td>Applicable - Configurable</td>
-    <td>Verify the operating system is configured such that emergency administrator accounts are automatically removed or disabled within 72 hours. If it is not, this is a finding.</td>
-    <td>Verify emergency accounts have been provisioned with an expiration date of 72 hours.
-
-For every emergency account, run the following command to obtain its account aging and expiration information:
-
-$ sudo chage -l emergency_account_name
-
-Verify each of these accounts has an expiration date set within 72 hours or as documented. Is it the case that any emergency accounts have no expiration date set or do not expire within 72 hours?</td>
-    <td>Configure the operating system such that emergency administrator accounts are automatically removed or disabled within 72 hours.</td>
-    <td>Emergency accounts are privileged accounts established in response to
-crisis situations where the need for rapid account activation is required.
-In the event emergency accounts are required, configure the system to
-terminate them after a documented time period. For every emergency account,
-run the following command to set an expiration date on it, substituting
-<tt><i>ACCOUNT_NAME</i></tt> and <tt><i>YYYY-MM-DD</i></tt>
-appropriately:
-<pre>$ sudo chage -E <i>YYYY-MM-DD ACCOUNT_NAME</i></pre>
-<tt><i>YYYY-MM-DD</i></tt> indicates the documented expiration date for the
-account. For U.S. Government systems, the operating system must be
-configured to automatically terminate these types of accounts after a
-period of 72 hours.</td>
-    <td>medium</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-
-  <tr>
-    <td>CCI-001682</td>
-    <td>SRG-OS-000123-GPOS-00064</td>
-    <td><i>TBD - Assigned by DISA after STIG release</i></td>
-    <td>The information system must automatically remove or disable emergency accounts after the crisis is resolved or 72 hours.</td>
-
     <td>CCE-82474-8: Assign Expiration Date to Temporary Accounts</td>
 
     <td>Emergency accounts are privileged accounts that are established in response to crisis situations where the need for rapid account activation is required. Therefore, emergency account activation may bypass normal account authorization processes. If these accounts are automatically disabled, system maintenance during emergencies may not be possible, thus adversely affecting system availability. 
@@ -30058,9 +29992,14 @@ If both the "b32" and "b64" audit rules for "SGID" files are not defined, this i
     <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.</td>
     <td>This rule configures the system to lock out accounts after a number of incorrect login attempts
 using <tt>pam_faillock.so</tt>.
-
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>deny = &lt;count&gt;</tt>
+Where count should be less than or equal to 
+<sub idref="var_accounts_passwords_pam_faillock_deny" /> and greater than 0.
+
 
 In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -30077,9 +30016,14 @@ or less (but not "0"), is missing or commented out?</td>
     <td>Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.</td>
     <td>This rule configures the system to lock out accounts after a number of incorrect login attempts
 using <tt>pam_faillock.so</tt>.
-
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>deny = &lt;count&gt;</tt>
+Where count should be less than or equal to 
+<sub idref="var_accounts_passwords_pam_faillock_deny" /> and greater than 0.
+
 
 In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -30146,7 +30090,9 @@ tally directory must be set with the "dir" option.</pre>
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
-depending on the OS version.</td>
+depending on the OS version.
+
+The chosen profile expects the directory to be <tt><sub idref="var_accounts_passwords_pam_faillock_dir" /></tt>.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.</td>
     <td>To ensure the tally directory is configured correctly, run the following command:
@@ -30162,7 +30108,9 @@ tally directory must be set with the "dir" option.</pre>
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid errors when manually editing these files, it is
 recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
-depending on the OS version.</td>
+depending on the OS version.
+
+The chosen profile expects the directory to be <tt><sub idref="var_accounts_passwords_pam_faillock_dir" /></tt>.</td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -30180,7 +30128,15 @@ depending on the OS version.</td>
     <td>By limiting the number of failed logon attempts, the risk of unauthorized system access via user password guessing, otherwise known as brute-forcing, is reduced. Limits are imposed by locking the account.</td>
     <td>Utilizing <tt>pam_faillock.so</tt>, the <tt>fail_interval</tt> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period.</td>
+period.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>fail_interval = &lt;interval-in-seconds&gt;</tt> where <tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_fail_interval" /></tt> or greater.
+
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system automatically locks an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made. If it does not, this is a finding.</td>
     <td>To ensure the failed password attempt policy is configured correctly, run the following command:
@@ -30191,7 +30147,15 @@ or less (but not "0"), the line is commented out, or the line is missing?</td>
     <td>Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.</td>
     <td>Utilizing <tt>pam_faillock.so</tt>, the <tt>fail_interval</tt> directive configures the system
 to lock out an account after a number of incorrect login attempts within a specified time
-period.</td>
+period.
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>fail_interval = &lt;interval-in-seconds&gt;</tt> where <tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_fail_interval" /></tt> or greater.
+
+
+In order to avoid errors when manually editing these files, it is
+recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
+depending on the OS version.</td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -30248,6 +30212,12 @@ depending on the OS version.</td>
     <td>This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using <tt>pam_faillock.so</tt>.
 
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>unlock_time=&lt;interval-in-seconds&gt;</tt> where
+<tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_unlock_time" /></tt> or greater.
+
+
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid any errors when manually editing these files,
 it is recommended to use the appropriate tools, such as <tt>authselect</tt> or <tt>authconfig</tt>,
@@ -30268,6 +30238,12 @@ the line is missing, or commented out?</td>
     <td>Configure the operating system to automatically lock an account until the locked account is released by an administrator when three unsuccessful logon attempts in 15 minutes are made.</td>
     <td>This rule configures the system to lock out accounts during a specified time period after a
 number of incorrect login attempts using <tt>pam_faillock.so</tt>.
+
+
+Ensure that the file <tt>/etc/security/faillock.conf</tt> contains the following entry:
+<tt>unlock_time=&lt;interval-in-seconds&gt;</tt> where
+<tt>interval-in-seconds</tt> is <tt><sub idref="var_accounts_passwords_pam_faillock_unlock_time" /></tt> or greater.
+
 
 pam_faillock.so module requires multiple entries in pam files. These entries must be carefully
 defined to work as expected. In order to avoid any errors when manually editing these files,
@@ -31886,6 +31862,35 @@ following line to the existing AIDE line:
 Otherwise, add the following line to <tt>/etc/crontab</tt>:
 <pre>05 4 * * * root /usr/sbin/aide --check | /bin/mail -s "$(hostname) - AIDE Integrity Check" root@localhost</pre>
 AIDE can be executed periodically through other means; this is merely one example.</td>
+    <td>medium</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>CCI-001744</td>
+    <td>SRG-OS-000363-GPOS-00150</td>
+    <td><i>TBD - Assigned by DISA after STIG release</i></td>
+    <td>The operating system must notify designated personnel if baseline configurations are changed in an unauthorized manner.</td>
+
+    <td>CCE-87036-0: The mailx Package Is Installed</td>
+
+    <td>Unauthorized changes to the baseline configuration could make the system vulnerable to various attacks or allow unauthorized access to the operating system. Changes to operating system configurations can have unintended side effects, some of which may be relevant to security.
+
+Detecting such changes and providing an automated response can help avoid unintended, negative consequences that could ultimately affect the security state of the operating system. The operating system's IMO/ISSO and SAs must be notified via email and/or monitoring system trap when there is an unauthorized modification of a configuration item.</td>
+    <td>A mail server is required for sending emails.
+The <code>mailx</code> package can be installed with the following command:
+<pre>
+$ sudo yum install mailx</pre></td>
+    <td>Applicable - Configurable</td>
+    <td>Verify the operating system notifies designated personnel if baseline configurations are changed in an unauthorized manner. If it does not, this is a finding.</td>
+    <td>Run the following command to determine if the <code>mailx</code> package is installed: <pre>$ rpm -q mailx</pre> Is it the case that the package is not installed?</td>
+    <td>Configure the operating system to notify designated personnel if baseline configurations are changed in an unauthorized manner.</td>
+    <td>A mail server is required for sending emails.
+The <code>mailx</code> package can be installed with the following command:
+<pre>
+$ sudo yum install mailx</pre></td>
     <td>medium</td>
     <td></td>
     <td></td>
