@@ -1913,7 +1913,14 @@ fi
 # BEGIN fix (72 / 401) for 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'
 ###############################################################################
 (>&2 echo "Remediating rule 72/401: 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'")
-(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo' IS MISSING!")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q pam; then
+
+sed -i '/pam_succeed_if/d' /etc/pam.d/sudo
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'
 
 ###############################################################################
@@ -4014,7 +4021,22 @@ fi
 # BEGIN fix (100 / 401) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'
 ###############################################################################
 (>&2 echo "Remediating rule 100/401: 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'")
-(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs' IS MISSING!")
+
+if [ -e "/etc/login.defs" ] ; then
+    
+    LC_ALL=C sed -i "/^\s*SHA_CRYPT_MIN_ROUNDS\s*/Id" "/etc/login.defs"
+else
+    printf '%s\n' "Path '/etc/login.defs' wasn't found on this system. Refusing to continue." >&2
+    return 1
+fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/login.defs"
+
+cp "/etc/login.defs" "/etc/login.defs.bak"
+# Insert at the end of the file
+printf '%s\n' "SHA_CRYPT_MIN_ROUNDS 5000" >> "/etc/login.defs"
+# Clean up after ourselves.
+rm "/etc/login.defs.bak"
 # END fix for 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'
 
 ###############################################################################
@@ -4492,7 +4514,19 @@ fi
 # BEGIN fix (125 / 401) for 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'
 ###############################################################################
 (>&2 echo "Remediating rule 125/401: 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'")
-(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow' IS MISSING!")
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+readarray -t users_with_empty_pass < <(sudo awk -F: '!$2 {print $1}' /etc/shadow)
+
+for user_with_empty_pass in "${users_with_empty_pass[@]}"
+do
+    passwd -l $user_with_empty_pass
+done
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'
 
 ###############################################################################
@@ -30640,7 +30674,14 @@ nmcli radio all off
 ###############################################################################
 (>&2 echo "Remediating rule 273/401: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'")
 
-find / -not -fstype afs -not -fstype ceph -not -fstype cifs -not -fstype smb3 -not -fstype smbfs -not -fstype sshfs -not -fstype ncpfs -not -fstype ncp -not -fstype nfs -not -fstype nfs4 -not -fstype gfs -not -fstype gfs2 -not -fstype glusterfs -not -fstype gpfs -not -fstype pvfs2 -not -fstype ocfs2 -not -fstype lustre -not -fstype davfs -not -fstype fuse.sshfs -type d -perm -0002 -uid +0 -exec chown root {} \;
+# At least under containerized env /proc can have files w/o possilibity to
+# modify even as root. And touching /proc is not good idea anyways.
+find / -path /proc -prune -o \
+    -not -fstype afs -not -fstype ceph -not -fstype cifs -not -fstype smb3 -not -fstype smbfs \
+    -not -fstype sshfs -not -fstype ncpfs -not -fstype ncp -not -fstype nfs -not -fstype nfs4 \
+    -not -fstype gfs -not -fstype gfs2 -not -fstype glusterfs -not -fstype gpfs \
+    -not -fstype pvfs2 -not -fstype ocfs2 -not -fstype lustre -not -fstype davfs \
+    -not -fstype fuse.sshfs -type d -perm -0002 -uid +0 -exec chown root {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'
 
 ###############################################################################
