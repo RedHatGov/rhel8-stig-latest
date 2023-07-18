@@ -1521,12 +1521,13 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Test for crypto_policy group
-      command: grep '^\s*\[\s*crypto_policy\s*]' /etc/pki/tls/openssl.cnf
+    - name: Configure OpenSSL library to use System Crypto Policy - Search for crypto_policy
+        Section
+      ansible.builtin.find:
+        paths: /etc/pki/tls
+        patterns: openssl.cnf
+        contains: ^\s*\[\s*crypto_policy\s*]
       register: test_crypto_policy_group
-      failed_when: test_crypto_policy_group.rc not in [0, 1]
-      changed_when: false
-      check_mode: false
       tags:
       - CCE-80938-4
       - DISA-STIG-RHEL-08-010293
@@ -1546,15 +1547,42 @@
       - no_reboot_needed
       - unknown_strategy
 
-    - name: Add .include for opensslcnf.config to crypto_policy section
-      lineinfile:
+    - name: Configure OpenSSL library to use System Crypto Policy - Search for crypto_policy
+        Section Together With .include Directive
+      ansible.builtin.find:
+        paths: /etc/pki/tls
+        patterns: openssl.cnf
+        contains: ^\s*\.include\s*(?:=\s*)?/etc/crypto-policies/back-ends/opensslcnf.config$
+      register: test_crypto_policy_include_directive
+      tags:
+      - CCE-80938-4
+      - DISA-STIG-RHEL-08-010293
+      - NIST-800-53-AC-17(2)
+      - NIST-800-53-AC-17(a)
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-MA-4(6)
+      - NIST-800-53-SC-12(2)
+      - NIST-800-53-SC-12(3)
+      - NIST-800-53-SC-13
+      - PCI-DSS-Req-2.2
+      - PCI-DSSv4-2.2
+      - configure_openssl_crypto_policy
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - unknown_strategy
+
+    - name: '{{ rule_title }} - Add .include Line for opensslcnf.config File in crypto_policy
+        Section'
+      ansible.builtin.lineinfile:
         create: true
         insertafter: ^\s*\[\s*crypto_policy\s*]\s*
-        line: .include = /etc/crypto-policies/back-ends/opensslcnf.config
+        line: .include /etc/crypto-policies/back-ends/opensslcnf.config
         path: /etc/pki/tls/openssl.cnf
       when:
-      - test_crypto_policy_group.stdout is defined
-      - test_crypto_policy_group.stdout | length > 0
+      - test_crypto_policy_group.matched > 0
+      - test_crypto_policy_include_directive.matched == 0
       tags:
       - CCE-80938-4
       - DISA-STIG-RHEL-08-010293
@@ -1574,16 +1602,15 @@
       - no_reboot_needed
       - unknown_strategy
 
-    - name: Add crypto_policy group and set include opensslcnf.config
-      lineinfile:
+    - name: Configure OpenSSL library to use System Crypto Policy - Add crypto_policy
+        Section With .include for opensslcnf.config File
+      ansible.builtin.lineinfile:
         create: true
         line: |-
           [crypto_policy]
-          .include = /etc/crypto-policies/back-ends/opensslcnf.config
+          .include /etc/crypto-policies/back-ends/opensslcnf.config
         path: /etc/pki/tls/openssl.cnf
-      when:
-      - test_crypto_policy_group.stdout is defined
-      - test_crypto_policy_group.stdout | length < 1
+      when: test_crypto_policy_group.matched == 0
       tags:
       - CCE-80938-4
       - DISA-STIG-RHEL-08-010293
@@ -2964,12 +2991,28 @@
       - no_reboot_needed
       - sudoers_default_includedir
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-83422-6
+      - DISA-STIG-RHEL-08-010383
+      - NIST-800-53-CM-6(b)
+      - NIST-800-53-CM-6.1(iv)
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+      - sudoers_validate_passwd
+
     - name: Find out if /etc/sudoers.d/* files contain Defaults targetpw to be deduplicated
       find:
         path: /etc/sudoers.d
         patterns: '*'
         contains: ^Defaults targetpw$
       register: sudoers_d_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -2988,6 +3031,7 @@
         regexp: ^Defaults targetpw$
         state: absent
       with_items: '{{ sudoers_d_defaults.files }}'
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3006,6 +3050,7 @@
         patterns: '*'
         contains: ^Defaults rootpw$
       register: sudoers_d_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3024,6 +3069,7 @@
         regexp: ^Defaults rootpw$
         state: absent
       with_items: '{{ sudoers_d_defaults.files }}'
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3042,6 +3088,7 @@
         patterns: '*'
         contains: ^Defaults runaspw$
       register: sudoers_d_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3060,6 +3107,7 @@
         regexp: ^Defaults runaspw$
         state: absent
       with_items: '{{ sudoers_d_defaults.files }}'
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3079,6 +3127,7 @@
         validate: /usr/sbin/visudo -cf %s
         state: absent
       register: sudoers_file_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3098,6 +3147,7 @@
         validate: /usr/sbin/visudo -cf %s
         state: absent
       register: sudoers_file_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3117,6 +3167,7 @@
         validate: /usr/sbin/visudo -cf %s
         state: absent
       register: sudoers_file_defaults
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3138,6 +3189,7 @@
       check_mode: true
       changed_when: false
       register: dupes
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3156,7 +3208,9 @@
         create: false
         regexp: ^Defaults !targetpw$
         state: absent
-      when: dupes.found is defined and dupes.found > 1
+      when:
+      - '"sudo" in ansible_facts.packages'
+      - dupes.found is defined and dupes.found > 1
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3176,6 +3230,7 @@
         regexp: ^Defaults !targetpw$
         line: Defaults !targetpw
         state: present
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3197,6 +3252,7 @@
       check_mode: true
       changed_when: false
       register: dupes
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3215,7 +3271,9 @@
         create: false
         regexp: ^Defaults !rootpw$
         state: absent
-      when: dupes.found is defined and dupes.found > 1
+      when:
+      - '"sudo" in ansible_facts.packages'
+      - dupes.found is defined and dupes.found > 1
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3235,6 +3293,7 @@
         regexp: ^Defaults !rootpw$
         line: Defaults !rootpw
         state: present
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3256,6 +3315,7 @@
       check_mode: true
       changed_when: false
       register: dupes
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3274,7 +3334,9 @@
         create: false
         regexp: ^Defaults !runaspw$
         state: absent
-      when: dupes.found is defined and dupes.found > 1
+      when:
+      - '"sudo" in ansible_facts.packages'
+      - dupes.found is defined and dupes.found > 1
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -3294,6 +3356,7 @@
         regexp: ^Defaults !runaspw$
         line: Defaults !runaspw
         state: present
+      when: '"sudo" in ansible_facts.packages'
       tags:
       - CCE-83422-6
       - DISA-STIG-RHEL-08-010383
@@ -43416,6 +43479,7 @@
         section: sssd
         option: certificate_verification
         state: absent
+        mode: 384
       when: '"sssd-common" in ansible_facts.packages'
       tags:
       - CCE-86120-3
@@ -43434,6 +43498,7 @@
         section: sssd
         option: certificate_verification
         state: absent
+        mode: 384
       when: '"sssd-common" in ansible_facts.packages'
       tags:
       - CCE-86120-3
@@ -43453,6 +43518,7 @@
         option: certificate_verification
         value: ocsp_dgst = {{ var_sssd_certificate_verification_digest_function }}
         state: present
+        mode: 384
       when: '"sssd-common" in ansible_facts.packages'
       tags:
       - CCE-86120-3

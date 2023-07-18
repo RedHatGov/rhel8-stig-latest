@@ -467,8 +467,11 @@ remediate_libreswan_crypto_policy
 
 OPENSSL_CRYPTO_POLICY_SECTION='[ crypto_policy ]'
 OPENSSL_CRYPTO_POLICY_SECTION_REGEX='\[\s*crypto_policy\s*\]'
-OPENSSL_CRYPTO_POLICY_INCLUSION='.include = /etc/crypto-policies/back-ends/opensslcnf.config'
+
+OPENSSL_CRYPTO_POLICY_INCLUSION='.include /etc/crypto-policies/back-ends/opensslcnf.config'
+
 OPENSSL_CRYPTO_POLICY_INCLUSION_REGEX='^\s*\.include\s*(?:=\s*)?/etc/crypto-policies/back-ends/opensslcnf.config$'
+
 
 
   
@@ -1289,6 +1292,9 @@ fi
 # BEGIN fix (49 / 401) for 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'
 ###############################################################################
 (>&2 echo "Remediating rule 49/401: 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q sudo; then
+
 if grep -x '^Defaults targetpw$' /etc/sudoers; then
     sed -i "/Defaults targetpw/d" /etc/sudoers \;
 fi
@@ -1350,6 +1356,10 @@ cp "/etc/sudoers" "/etc/sudoers.bak"
 printf '%s\n' "Defaults !runaspw" >> "/etc/sudoers"
 # Clean up after ourselves.
 rm "/etc/sudoers.bak"
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'
 
 ###############################################################################
@@ -34352,6 +34362,11 @@ if rpm --quiet -q sssd-common; then
 var_sssd_certificate_verification_digest_function='sha1'
 
 
+# sssd configuration files must be created with 600 permissions if they don't exist
+# otherwise the sssd module fails to start
+OLD_UMASK=$(umask)
+umask u=rw,go=
+
 MAIN_CONF="/etc/sssd/conf.d/certificate_verification.conf"
 
 found=false
@@ -34381,10 +34396,7 @@ if ! $found ; then
     echo -e "[sssd]\ncertificate_verification = ocsp_dgst = $var_sssd_certificate_verification_digest_function" >> "$file"
 fi
 
-if [ -e "$MAIN_CONF" ]; then
-    chown root:root "$MAIN_CONF"
-	chmod 600 "$MAIN_CONF"
-fi
+umask $OLD_UMASK
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
@@ -34404,6 +34416,11 @@ fi
 (>&2 echo "Remediating rule 393/401: 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
+
+# sssd configuration files must be created with 600 permissions if they don't exist
+# otherwise the sssd module fails to start
+OLD_UMASK=$(umask)
+umask u=rw,go=
 
 found=false
 
@@ -34431,6 +34448,8 @@ if ! $found ; then
     mkdir -p "$(dirname "$file")"
     echo -e "[pam]\npam_cert_auth = True" >> "$file"
 fi
+
+umask $OLD_UMASK
 
 
 if [ -f /usr/bin/authselect ]; then
@@ -34495,6 +34514,11 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
+# sssd configuration files must be created with 600 permissions if they don't exist
+# otherwise the sssd module fails to start
+OLD_UMASK=$(umask)
+umask u=rw,go=
+
 found=false
 
 # set value in all files if they contain section or key
@@ -34521,6 +34545,8 @@ if ! $found ; then
     mkdir -p "$(dirname "$file")"
     echo -e "[pam]\noffline_credentials_expiration = 1" >> "$file"
 fi
+
+umask $OLD_UMASK
 
 else
     >&2 echo 'Remediation is not applicable, nothing was done'
