@@ -18,7 +18,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  xccdf_org.ssgproject.content_benchmark_RHEL-8
-# Benchmark Version:  0.1.69
+# Benchmark Version:  0.1.70
 #
 # XCCDF Version:  1.2
 #
@@ -9011,6 +9011,7 @@
         manager: auto
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9029,6 +9030,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9097,6 +9099,7 @@
       - result_authselect_present.stat.exists
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9164,6 +9167,7 @@
       - not result_authselect_present.stat.exists
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9183,6 +9187,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9205,6 +9210,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9567,6 +9573,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)
@@ -9653,6 +9660,7 @@
       - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-80669-5
+      - DISA-STIG-RHEL-08-020012
       - DISA-STIG-RHEL-08-020013
       - NIST-800-53-AC-7(a)
       - NIST-800-53-CM-6(a)

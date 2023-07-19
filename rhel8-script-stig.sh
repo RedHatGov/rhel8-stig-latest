@@ -17,7 +17,7 @@
 # - Red Hat Containers with a Red Hat Enterprise Linux 8 image
 #
 # Benchmark ID:  xccdf_org.ssgproject.content_benchmark_RHEL-8
-# Benchmark Version:  0.1.69
+# Benchmark Version:  0.1.70
 #
 # XCCDF Version:  1.2
 #
