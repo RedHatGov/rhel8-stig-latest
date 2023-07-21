@@ -13358,7 +13358,7 @@
 
     - name: Change the minimum time period between password changes
       command: |
-        chage -m 1 {{ item }}
+        chage -m {{ var_accounts_minimum_age_login_defs }} {{ item }}
       with_items: '{{ user_names.stdout_lines }}'
       when: user_names.stdout_lines | length > 0
       tags:
@@ -42337,11 +42337,37 @@
       - no_reboot_needed
       - package_rsh-server_removed
 
-    - name: Find local mount points
-      shell: |
-        set -o pipefail
-        df --local | awk '{print $6}' | grep -v Mounted | grep -v '^/dev' || true
-      register: local_mount_points
+    - name: Remove Host-Based Authentication Files - Define Excluded (Non-Local) File
+        Systems and Paths
+      ansible.builtin.set_fact:
+        excluded_fstypes:
+        - afs
+        - ceph
+        - cifs
+        - smb3
+        - smbfs
+        - sshfs
+        - ncpfs
+        - ncp
+        - nfs
+        - nfs4
+        - gfs
+        - gfs2
+        - glusterfs
+        - gpfs
+        - pvfs2
+        - ocfs2
+        - lustre
+        - davfs
+        - fuse.sshfs
+        excluded_paths:
+        - dev
+        - proc
+        - run
+        - sys
+        search_paths: []
+        shosts_equiv_files:
+        - /shosts.equiv
       tags:
       - CCE-84055-3
       - DISA-STIG-RHEL-08-010460
@@ -42352,16 +42378,15 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Detect the shosts.equiv files on the system
-      find:
-        paths: '{{ item }}'
-        recurse: true
-        patterns:
-        - shosts.equiv
-        file_type: file
-      check_mode: false
-      with_items: '{{ local_mount_points.stdout_lines }}'
-      register: shosts_equiv_locations
+    - name: Remove Host-Based Authentication Files - Find Relevant Root Directories Ignoring
+        Pre-Defined Excluded Paths
+      ansible.builtin.find:
+        paths: /
+        file_type: directory
+        excludes: '{{ excluded_paths }}'
+        hidden: true
+        recurse: false
+      register: result_relevant_root_dirs
       tags:
       - CCE-84055-3
       - DISA-STIG-RHEL-08-010460
@@ -42372,13 +42397,93 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Remove shosts.equiv Files
-      file:
-        path: '{{ item.path }}'
+    - name: Remove Host-Based Authentication Files - Include Relevant Root Directories
+        in a List of Paths to be Searched
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.path]) }}'
+      loop: '{{ result_relevant_root_dirs.files }}'
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Remove Host-Based Authentication Files - Increment Search Paths List with
+        Local Partitions Mount Points
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.mount]) }}'
+      loop: '{{ ansible_mounts }}'
+      when:
+      - item.fstype not in excluded_fstypes
+      - item.mount != '/'
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Remove Host-Based Authentication Files - Increment Search Paths List with
+        Local NFS File System Targets
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.device.split('':'')[1]]) }}'
+      loop: '{{ ansible_mounts }}'
+      when: item.device is search("localhost:")
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Remove Host-Based Authentication Files - Find All shosts.equiv Files in Local
+        File Systems
+      ansible.builtin.command:
+        cmd: find {{ item }} -xdev -type f -name "shosts.equiv"
+      loop: '{{ search_paths }}'
+      changed_when: false
+      register: result_found_shosts_equiv_files
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Remove Host-Based Authentication Files - Create List of shosts.equiv Files
+        Present in Local File Systems
+      ansible.builtin.set_fact:
+        shosts_equiv_files: '{{ shosts_equiv_files | union(item.stdout_lines) | list }}'
+      loop: '{{ result_found_shosts_equiv_files.results }}'
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Remove Host-Based Authentication Files - Ensure No shosts.equiv Files Are
+        Present in the System
+      ansible.builtin.file:
+        path: '{{ item }}'
         state: absent
-      with_items: '{{ shosts_equiv_locations.results | map(attribute=''files'') | list
-        }}'
-      when: shosts_equiv_locations is success
+      loop: '{{ shosts_equiv_files }}'
       tags:
       - CCE-84055-3
       - DISA-STIG-RHEL-08-010460

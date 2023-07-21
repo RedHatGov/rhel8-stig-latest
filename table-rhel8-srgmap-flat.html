@@ -56752,21 +56752,16 @@ filesystems the following command can be run manually for each partition:
     <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
-    <td>The <tt>shosts.equiv</tt> file list remote hosts
-and users that are trusted by the local system.
-To remove these files, run the following command to delete them from any
-location:
+    <td>The <tt>shosts.equiv</tt> file lists remote hosts and users that are trusted by the local
+system. To remove these files, run the following command to delete them from any location:
 <pre>$ sudo rm /[path]/[to]/[file]/shosts.equiv</pre></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
-    <td>Verify that there are no <tt>shosts.equiv</tt> files
-on the system, run the following command:
+    <td>Verify that there are no <tt>shosts.equiv</tt> files on the system, run the following command:
 <pre>$ find / -name shosts.equiv</pre> Is it the case that shosts.equiv files exist?</td>
     <td>Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
-    <td>The <tt>shosts.equiv</tt> file list remote hosts
-and users that are trusted by the local system.
-To remove these files, run the following command to delete them from any
-location:
+    <td>The <tt>shosts.equiv</tt> file lists remote hosts and users that are trusted by the local
+system. To remove these files, run the following command to delete them from any location:
 <pre>$ sudo rm /[path]/[to]/[file]/shosts.equiv</pre></td>
     <td>high</td>
     <td></td>
