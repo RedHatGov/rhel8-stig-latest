@@ -36957,11 +36957,29 @@
       - medium_severity
       - no_reboot_needed
 
-    - name: Set permissions for /var/log/
+    - name: Find /var/log/ file(s)
+      command: 'find -H /var/log/ -maxdepth 1 -perm /u+s,g+ws,o+wt  -type d '
+      register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      tags:
+      - CCE-83663-5
+      - DISA-STIG-RHEL-08-010240
+      - configure_strategy
+      - file_permissions_var_log
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Set permissions for /var/log/ file(s)
       file:
-        path: /var/log/
-        state: directory
+        path: '{{ item }}'
         mode: u-s,g-ws,o-wt
+        state: directory
+      with_items:
+      - '{{ files_found.stdout_lines }}'
       tags:
       - CCE-83663-5
       - DISA-STIG-RHEL-08-010240
@@ -37145,12 +37163,12 @@
       - medium_severity
       - no_reboot_needed
 
-    - name: Set permissions for /lib/ recursively
-      file:
-        path: /lib/
-        state: directory
-        recurse: true
-        mode: g-w,o-w
+    - name: Find /lib/ file(s) recursively
+      command: 'find -H /lib/  -perm /g+w,o+w  -type d '
+      register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
       - CCE-88692-9
       - DISA-STIG-RHEL-08-010331
@@ -37164,12 +37182,13 @@
       - medium_severity
       - no_reboot_needed
 
-    - name: Set permissions for /lib64/ recursively
+    - name: Set permissions for /lib/ file(s)
       file:
-        path: /lib64/
-        state: directory
-        recurse: true
+        path: '{{ item }}'
         mode: g-w,o-w
+        state: directory
+      with_items:
+      - '{{ files_found.stdout_lines }}'
       tags:
       - CCE-88692-9
       - DISA-STIG-RHEL-08-010331
@@ -37183,12 +37202,12 @@
       - medium_severity
       - no_reboot_needed
 
-    - name: Set permissions for /usr/lib/ recursively
-      file:
-        path: /usr/lib/
-        state: directory
-        recurse: true
-        mode: g-w,o-w
+    - name: Find /lib64/ file(s) recursively
+      command: 'find -H /lib64/  -perm /g+w,o+w  -type d '
+      register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
       tags:
       - CCE-88692-9
       - DISA-STIG-RHEL-08-010331
@@ -37202,12 +37221,91 @@
       - medium_severity
       - no_reboot_needed
 
-    - name: Set permissions for /usr/lib64/ recursively
+    - name: Set permissions for /lib64/ file(s)
       file:
-        path: /usr/lib64/
-        state: directory
-        recurse: true
+        path: '{{ item }}'
         mode: g-w,o-w
+        state: directory
+      with_items:
+      - '{{ files_found.stdout_lines }}'
+      tags:
+      - CCE-88692-9
+      - DISA-STIG-RHEL-08-010331
+      - NIST-800-53-CM-5
+      - NIST-800-53-CM-5(6)
+      - NIST-800-53-CM-5(6).1
+      - configure_strategy
+      - dir_permissions_library_dirs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Find /usr/lib/ file(s) recursively
+      command: 'find -H /usr/lib/  -perm /g+w,o+w  -type d '
+      register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      tags:
+      - CCE-88692-9
+      - DISA-STIG-RHEL-08-010331
+      - NIST-800-53-CM-5
+      - NIST-800-53-CM-5(6)
+      - NIST-800-53-CM-5(6).1
+      - configure_strategy
+      - dir_permissions_library_dirs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Set permissions for /usr/lib/ file(s)
+      file:
+        path: '{{ item }}'
+        mode: g-w,o-w
+        state: directory
+      with_items:
+      - '{{ files_found.stdout_lines }}'
+      tags:
+      - CCE-88692-9
+      - DISA-STIG-RHEL-08-010331
+      - NIST-800-53-CM-5
+      - NIST-800-53-CM-5(6)
+      - NIST-800-53-CM-5(6).1
+      - configure_strategy
+      - dir_permissions_library_dirs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Find /usr/lib64/ file(s) recursively
+      command: 'find -H /usr/lib64/  -perm /g+w,o+w  -type d '
+      register: files_found
+      changed_when: false
+      failed_when: false
+      check_mode: false
+      tags:
+      - CCE-88692-9
+      - DISA-STIG-RHEL-08-010331
+      - NIST-800-53-CM-5
+      - NIST-800-53-CM-5(6)
+      - NIST-800-53-CM-5(6).1
+      - configure_strategy
+      - dir_permissions_library_dirs
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Set permissions for /usr/lib64/ file(s)
+      file:
+        path: '{{ item }}'
+        mode: g-w,o-w
+        state: directory
+      with_items:
+      - '{{ files_found.stdout_lines }}'
       tags:
       - CCE-88692-9
       - DISA-STIG-RHEL-08-010331
