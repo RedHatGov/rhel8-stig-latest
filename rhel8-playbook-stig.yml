@@ -12621,8 +12621,9 @@
       - no_reboot_needed
       - set_password_hashing_algorithm_systemauth
 
-    - name: Ensure SHA_CRYPT_MIN_ROUNDS has minimum value of 5000
-      replace:
+    - name: Set Password Hashing Rounds in /etc/login.defs - Ensure SHA_CRYPT_MIN_ROUNDS
+        has Minimum Value of 5000
+      ansible.builtin.replace:
         path: /etc/login.defs
         regexp: (^\s*SHA_CRYPT_MIN_ROUNDS\s+)(?!(?:[5-9]\d{3,}|\d{5,}))\S*(\s*$)
         replace: \g<1>5000\g<2>
@@ -12637,28 +12638,13 @@
       - restrict_strategy
       - set_password_hashing_min_rounds_logindefs
 
-    - name: Check to see if SHA_CRYPT_MIN_ROUNDS is explicitly configured
-      shell: |
-        set -o pipefail
-        grep -e '^\s*SHA_CRYPT_MIN_ROUNDS\s\+' /etc/login.defs || true
-      register: check_sha_crypt_min_rounds_result
-      tags:
-      - CCE-89707-4
-      - DISA-STIG-RHEL-08-010130
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
-      - set_password_hashing_min_rounds_logindefs
-
-    - name: Ensure SHA_CRYPT_MAX_ROUNDS has minimum value of 5000
-      replace:
+    - name: Set Password Hashing Rounds in /etc/login.defs - Ensure SHA_CRYPT_MAX_ROUNDS
+        has Minimum Value of 5000
+      ansible.builtin.replace:
         path: /etc/login.defs
         regexp: (^\s*SHA_CRYPT_MAX_ROUNDS\s+)(?!(?:[5-9]\d{3,}|\d{5,}))\S*(\s*$)
         replace: \g<1>5000\g<2>
         backup: false
-      when: '"SHA_CRYPT_MIN_ROUNDS" not in check_sha_crypt_min_rounds_result.stdout'
       tags:
       - CCE-89707-4
       - DISA-STIG-RHEL-08-010130
@@ -36515,7 +36501,6 @@
         - run
         - sys
         search_paths: []
-        world_writable_dirs: []
       tags:
       - CCE-83375-6
       - DISA-STIG-RHEL-08-010700
@@ -36584,6 +36569,20 @@
         search_paths: '{{ search_paths | union([item.device.split('':'')[1]]) }}'
       loop: '{{ ansible_mounts }}'
       when: item.device is search("localhost:")
+      tags:
+      - CCE-83375-6
+      - DISA-STIG-RHEL-08-010700
+      - dir_perms_world_writable_root_owned
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Ensure All World-Writable Directories Are Owned by root User - Define Rule
+        Specific Facts
+      ansible.builtin.set_fact:
+        world_writable_dirs: []
       tags:
       - CCE-83375-6
       - DISA-STIG-RHEL-08-010700
@@ -41105,41 +41104,12 @@
       - reboot_required
       - sysctl_user_max_user_namespaces
 
-    - name: Block Disable service systemd-coredump
-      block:
-
-      - name: Disable service systemd-coredump
-        block:
-
-        - name: Disable service systemd-coredump
-          systemd:
-            name: systemd-coredump.service
-            enabled: 'no'
-            state: stopped
-            masked: 'yes'
-        rescue:
-
-        - name: Intentionally ignored previous 'Disable service systemd-coredump' failure,
-            service was already disabled
-          meta: noop
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-      - CCE-82881-4
-      - DISA-STIG-RHEL-08-010672
-      - NIST-800-53-SC-7(10)
-      - disable_strategy
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - service_systemd-coredump_disabled
-
-    - name: Unit Socket Exists - systemd-coredump.socket
-      command: systemctl -q list-unit-files systemd-coredump.socket
-      register: socket_file_exists
+    - name: Disable acquiring, saving, and processing core dumps - Collect systemd Socket
+        Units Present in the System
+      ansible.builtin.command:
+        cmd: systemctl -q list-unit-files --type socket
+      register: result_systemd_unit_files
       changed_when: false
-      failed_when: socket_file_exists.rc not in [0, 1]
-      check_mode: false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82881-4
@@ -41152,15 +41122,16 @@
       - no_reboot_needed
       - service_systemd-coredump_disabled
 
-    - name: Disable socket systemd-coredump
-      systemd:
+    - name: Disable acquiring, saving, and processing core dumps - Ensure systemd-coredump.socket
+        is Masked
+      ansible.builtin.systemd:
         name: systemd-coredump.socket
-        enabled: 'no'
         state: stopped
-        masked: 'yes'
+        enabled: false
+        masked: true
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - socket_file_exists.stdout_lines is search("systemd-coredump.socket",multiline=True)
+      - result_systemd_unit_files.stdout_lines is search("systemd-coredump.socket")
       tags:
       - CCE-82881-4
       - DISA-STIG-RHEL-08-010672
@@ -42464,8 +42435,6 @@
         - run
         - sys
         search_paths: []
-        shosts_equiv_files:
-        - /shosts.equiv
       tags:
       - CCE-84055-3
       - DISA-STIG-RHEL-08-010460
@@ -42544,6 +42513,20 @@
       - no_reboot_needed
       - restrict_strategy
 
+    - name: Remove Host-Based Authentication Files - Define Rule Specific Facts
+      ansible.builtin.set_fact:
+        shosts_equiv_files:
+        - /shosts.equiv
+      tags:
+      - CCE-84055-3
+      - DISA-STIG-RHEL-08-010460
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_host_based_files
+      - no_reboot_needed
+      - restrict_strategy
+
     - name: Remove Host-Based Authentication Files - Find All shosts.equiv Files in Local
         File Systems
       ansible.builtin.command:
@@ -42592,11 +42575,35 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Find local mount points
-      shell: |
-        set -o pipefail
-        df --local | awk '{print $6}' | grep -v Mounted | grep -v '^/dev' || true
-      register: local_mount_points
+    - name: Remove User Host-Based Authentication Files - Define Excluded (Non-Local)
+        File Systems and Paths
+      ansible.builtin.set_fact:
+        excluded_fstypes:
+        - afs
+        - ceph
+        - cifs
+        - smb3
+        - smbfs
+        - sshfs
+        - ncpfs
+        - ncp
+        - nfs
+        - nfs4
+        - gfs
+        - gfs2
+        - glusterfs
+        - gpfs
+        - pvfs2
+        - ocfs2
+        - lustre
+        - davfs
+        - fuse.sshfs
+        excluded_paths:
+        - dev
+        - proc
+        - run
+        - sys
+        search_paths: []
       tags:
       - CCE-84056-1
       - DISA-STIG-RHEL-08-010470
@@ -42607,17 +42614,15 @@
       - no_user_host_based_files
       - restrict_strategy
 
-    - name: Detect the .shosts files on the system
-      find:
-        paths: '{{ item }}'
-        recurse: true
-        patterns:
-        - .shosts
+    - name: Remove User Host-Based Authentication Files - Find Relevant Root Directories
+        Ignoring Pre-Defined Excluded Paths
+      ansible.builtin.find:
+        paths: /
+        file_type: directory
+        excludes: '{{ excluded_paths }}'
         hidden: true
-        file_type: file
-      check_mode: false
-      with_items: '{{ local_mount_points.stdout_lines }}'
-      register: shosts_locations
+        recurse: false
+      register: result_relevant_root_dirs
       tags:
       - CCE-84056-1
       - DISA-STIG-RHEL-08-010470
@@ -42628,12 +42633,107 @@
       - no_user_host_based_files
       - restrict_strategy
 
-    - name: Remove .shosts Files
-      file:
-        path: '{{ item.path }}'
+    - name: Remove User Host-Based Authentication Files - Include Relevant Root Directories
+        in a List of Paths to be Searched
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.path]) }}'
+      loop: '{{ result_relevant_root_dirs.files }}'
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Increment Search Paths List
+        with Local Partitions Mount Points
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.mount]) }}'
+      loop: '{{ ansible_mounts }}'
+      when:
+      - item.fstype not in excluded_fstypes
+      - item.mount != '/'
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Increment Search Paths List
+        with Local NFS File System Targets
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.device.split('':'')[1]]) }}'
+      loop: '{{ ansible_mounts }}'
+      when: item.device is search("localhost:")
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Define Rule Specific Facts
+      ansible.builtin.set_fact:
+        user_shosts_files:
+        - /.shosts
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Find All .shosts Files in Local
+        File Systems
+      ansible.builtin.command:
+        cmd: find {{ item }} -xdev -type f -name ".shosts"
+      loop: '{{ search_paths }}'
+      changed_when: false
+      register: result_found_shosts_files
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Create List of .shosts Files
+        Present in Local File Systems
+      ansible.builtin.set_fact:
+        user_shosts_files: '{{ user_shosts_files | union(item.stdout_lines) | list }}'
+      loop: '{{ result_found_shosts_files.results }}'
+      tags:
+      - CCE-84056-1
+      - DISA-STIG-RHEL-08-010470
+      - high_severity
+      - low_complexity
+      - low_disruption
+      - no_reboot_needed
+      - no_user_host_based_files
+      - restrict_strategy
+
+    - name: Remove User Host-Based Authentication Files - Ensure No .shosts Files Are
+        Present in the System
+      ansible.builtin.file:
+        path: '{{ item }}'
         state: absent
-      with_items: '{{ shosts_locations.results | map(attribute=''files'') | list }}'
-      when: shosts_locations is success
+      loop: '{{ user_shosts_files }}'
       tags:
       - CCE-84056-1
       - DISA-STIG-RHEL-08-010470
