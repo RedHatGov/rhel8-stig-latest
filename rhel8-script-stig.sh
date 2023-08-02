@@ -4,7 +4,7 @@
 # Profile Title:  DISA STIG for Red Hat Enterprise Linux 8
 # Profile Description:
 # This profile contains configuration checks that align to the
-# DISA STIG for Red Hat Enterprise Linux 8 V1R9.
+# DISA STIG for Red Hat Enterprise Linux 8 V1R11.
 # 
 # In addition to being applicable to Red Hat Enterprise Linux 8, DISA recognizes this
 # configuration baseline as applicable to the operating system tier of
@@ -4770,6 +4770,8 @@ done
 # BEGIN fix (139 / 401) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
 ###############################################################################
 (>&2 echo "Remediating rule 139/401: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q bash; then
 
 var_accounts_user_umask='077'
 
@@ -4782,6 +4784,10 @@ grep -q "^\s*umask" /etc/bashrc && \
   sed -i -E -e "s/^(\s*umask).*/\1 $var_accounts_user_umask/g" /etc/bashrc
 if ! [ $? -eq 0 ]; then
     echo "umask $var_accounts_user_umask" >> /etc/bashrc
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
 

@@ -5,7 +5,7 @@
 # Profile Title:  DISA STIG for Red Hat Enterprise Linux 8
 # Profile Description:
 # This profile contains configuration checks that align to the
-# DISA STIG for Red Hat Enterprise Linux 8 V1R9.
+# DISA STIG for Red Hat Enterprise Linux 8 V1R11.
 #
 # In addition to being applicable to Red Hat Enterprise Linux 8, DISA recognizes this
 # configuration baseline as applicable to the operating system tier of
@@ -14143,6 +14143,21 @@
       - no_reboot_needed
       - restrict_strategy
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-81036-6
+      - DISA-STIG-RHEL-08-020353
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSSv4-8.6.1
+      - accounts_umask_etc_bashrc
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
 
 
     - name: Check if umask in /etc/bashrc is already set
@@ -14153,6 +14168,7 @@
       check_mode: true
       changed_when: false
       register: umask_replace
+      when: '"bash" in ansible_facts.packages'
       tags:
       - CCE-81036-6
       - DISA-STIG-RHEL-08-020353
@@ -14171,7 +14187,9 @@
         path: /etc/bashrc
         regexp: ^(\s*)umask(\s+).*
         replace: \g<1>umask\g<2>{{ var_accounts_user_umask }}
-      when: umask_replace.found > 0
+      when:
+      - '"bash" in ansible_facts.packages'
+      - umask_replace.found > 0
       tags:
       - CCE-81036-6
       - DISA-STIG-RHEL-08-020353
@@ -14190,7 +14208,9 @@
         create: true
         path: /etc/bashrc
         line: umask {{ var_accounts_user_umask }}
-      when: umask_replace.found == 0
+      when:
+      - '"bash" in ansible_facts.packages'
+      - umask_replace.found == 0
       tags:
       - CCE-81036-6
       - DISA-STIG-RHEL-08-020353
