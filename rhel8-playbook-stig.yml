@@ -50,8 +50,8 @@
       var_system_crypto_policy: !!str FIPS
       sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr
       sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr
-      sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256
-      sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256
+      sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+      sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
       inactivity_timeout_value: !!str 900
       var_screensaver_lock_delay: !!str 5
       var_sudo_timestamp_timeout: !!str 0
@@ -78,6 +78,7 @@
       var_password_pam_retry: !!str 3
       var_password_pam_ucredit: !!str -1
       var_password_hashing_algorithm: !!str SHA512
+      var_logind_session_timeout: !!str 300
       var_account_disable_post_pw_expiration: !!str 35
       var_accounts_maximum_age_login_defs: !!str 60
       var_accounts_minimum_age_login_defs: !!str 1
@@ -12785,6 +12786,43 @@
       - low_complexity
       - low_disruption
       - no_reboot_needed
+
+
+
+    - name: Set 'StopIdleSessionSec' to '{{ var_logind_session_timeout }}' in the [Login]
+        section of '/etc/systemd/logind.conf'
+      ini_file:
+        path: /etc/systemd/logind.conf
+        section: Login
+        option: StopIdleSessionSec
+        value: '{{ var_logind_session_timeout }}'
+        create: true
+        mode: 420
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ( ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.7',
+        '>=') and ansible_distribution == 'RedHat' and ansible_distribution_version is
+        version('9.0', '!=') ) or ansible_distribution == 'OracleLinux' and ansible_distribution_version
+        is version('8.7', '>=')
+      tags:
+      - CCE-90784-0
+      - CJIS-5.5.6
+      - DISA-STIG-RHEL-08-020035
+      - NIST-800-171-3.1.11
+      - NIST-800-53-AC-12
+      - NIST-800-53-AC-17(a)
+      - NIST-800-53-AC-17(a)
+      - NIST-800-53-AC-2(5)
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-SC-10
+      - PCI-DSS-Req-8.1.8
+      - logind_session_timeout
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - reboot_required
+      - restrict_strategy
 
     - name: Require emergency mode password
       lineinfile:
@@ -42881,6 +42919,34 @@
       - medium_severity
       - no_reboot_needed
       - tftpd_uses_secure_mode
+
+    - name: Enable service rngd
+      block:
+
+      - name: Gather the package facts
+        package_facts:
+          manager: auto
+
+      - name: Enable service rngd
+        systemd:
+          name: rngd
+          enabled: 'yes'
+          state: started
+          masked: 'no'
+        when:
+        - '"rng-tools" in ansible_facts.packages'
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.3',
+        '<=')
+      tags:
+      - CCE-82831-9
+      - enable_strategy
+      - low_complexity
+      - low_disruption
+      - low_severity
+      - no_reboot_needed
+      - service_rngd_enabled
 
     - name: Ensure openssh-server is installed
       package:
