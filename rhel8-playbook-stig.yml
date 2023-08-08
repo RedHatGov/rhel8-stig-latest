@@ -1661,7 +1661,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/crypto-policies/back-ends/openssh.config
-          create: false
+          create: true
           regexp: ^.*Ciphers\s+
           state: absent
         check_mode: true
@@ -1671,7 +1671,7 @@
       - name: Deduplicate values from /etc/crypto-policies/back-ends/openssh.config
         lineinfile:
           path: /etc/crypto-policies/back-ends/openssh.config
-          create: false
+          create: true
           regexp: ^.*Ciphers\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -1786,7 +1786,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/crypto-policies/back-ends/openssh.config
-          create: false
+          create: true
           regexp: ^.*MACs\s+
           state: absent
         check_mode: true
@@ -1796,7 +1796,7 @@
       - name: Deduplicate values from /etc/crypto-policies/back-ends/openssh.config
         lineinfile:
           path: /etc/crypto-policies/back-ends/openssh.config
-          create: false
+          create: true
           regexp: ^.*MACs\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -12970,7 +12970,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/tmux.conf
-          create: false
+          create: true
           regexp: ^\s*set -g lock-after-time\s+
           mode: '0644'
           state: absent
@@ -12981,7 +12981,7 @@
       - name: Deduplicate values from /etc/tmux.conf
         lineinfile:
           path: /etc/tmux.conf
-          create: false
+          create: true
           regexp: ^\s*set -g lock-after-time\s+
           mode: '0644'
           state: absent
@@ -13012,7 +13012,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/tmux.conf
-          create: false
+          create: true
           regexp: ^\s*set -g lock-command\s+
           mode: '0644'
           state: absent
@@ -13023,7 +13023,7 @@
       - name: Deduplicate values from /etc/tmux.conf
         lineinfile:
           path: /etc/tmux.conf
-          create: false
+          create: true
           regexp: ^\s*set -g lock-command\s+
           mode: '0644'
           state: absent
@@ -13054,7 +13054,7 @@
     - name: Check for duplicate values
       lineinfile:
         path: /etc/tmux.conf
-        create: false
+        create: true
         regexp: \s*bind\s+\w\s+lock-session.*$
         mode: '0644'
         state: absent
@@ -13075,7 +13075,7 @@
     - name: Deduplicate values from /etc/tmux.conf
       lineinfile:
         path: /etc/tmux.conf
-        create: false
+        create: true
         regexp: \s*bind\s+\w\s+lock-session.*$
         mode: '0644'
         state: absent
@@ -13626,7 +13626,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/login.defs
-          create: false
+          create: true
           regexp: ^\s*CREATE_HOME\s+
           state: absent
         check_mode: true
@@ -13636,7 +13636,7 @@
       - name: Deduplicate values from /etc/login.defs
         lineinfile:
           path: /etc/login.defs
-          create: false
+          create: true
           regexp: ^\s*CREATE_HOME\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -34294,7 +34294,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*local_events\s*=\s*
           state: absent
         check_mode: true
@@ -34304,7 +34304,7 @@
       - name: Deduplicate values from /etc/audit/auditd.conf
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*local_events\s*=\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -34351,7 +34351,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*log_format\s*=\s*
           state: absent
         check_mode: true
@@ -34361,7 +34361,7 @@
       - name: Deduplicate values from /etc/audit/auditd.conf
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*log_format\s*=\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -34409,7 +34409,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*name_format\s*=\s*
           state: absent
         check_mode: true
@@ -34419,7 +34419,7 @@
       - name: Deduplicate values from /etc/audit/auditd.conf
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*name_format\s*=\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -34466,7 +34466,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*overflow_action\s*=\s*
           state: absent
         check_mode: true
@@ -34476,7 +34476,7 @@
       - name: Deduplicate values from /etc/audit/auditd.conf
         lineinfile:
           path: /etc/audit/auditd.conf
-          create: false
+          create: true
           regexp: (?i)^\s*overflow_action\s*=\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -41593,7 +41593,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/selinux/config
-          create: false
+          create: true
           regexp: ^SELINUXTYPE=
           state: absent
         check_mode: true
@@ -41603,7 +41603,7 @@
       - name: Deduplicate values from /etc/selinux/config
         lineinfile:
           path: /etc/selinux/config
-          create: false
+          create: true
           regexp: ^SELINUXTYPE=
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -41640,7 +41640,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/selinux/config
-          create: false
+          create: true
           regexp: ^SELINUX=
           state: absent
         check_mode: true
@@ -41650,7 +41650,7 @@
       - name: Deduplicate values from /etc/selinux/config
         lineinfile:
           path: /etc/selinux/config
-          create: false
+          create: true
           regexp: ^SELINUX=
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -41937,7 +41937,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/aliases
-          create: false
+          create: true
           regexp: ^\s*postmaster\s*:\s*
           state: absent
         check_mode: true
@@ -41947,7 +41947,7 @@
       - name: Deduplicate values from /etc/aliases
         lineinfile:
           path: /etc/aliases
-          create: false
+          create: true
           regexp: ^\s*postmaster\s*:\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -42026,7 +42026,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/postfix/main.cf
-          create: false
+          create: true
           regexp: ^[ \t]*smtpd_client_restrictions\s*=\s*
           state: absent
         check_mode: true
@@ -42036,7 +42036,7 @@
       - name: Deduplicate values from /etc/postfix/main.cf
         lineinfile:
           path: /etc/postfix/main.cf
-          create: false
+          create: true
           regexp: ^[ \t]*smtpd_client_restrictions\s*=\s*
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -42199,7 +42199,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/chrony.conf
-          create: false
+          create: true
           regexp: ^\s*port\s+
           state: absent
         check_mode: true
@@ -42209,7 +42209,7 @@
       - name: Deduplicate values from /etc/chrony.conf
         lineinfile:
           path: /etc/chrony.conf
-          create: false
+          create: true
           regexp: ^\s*port\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -42240,7 +42240,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/chrony.conf
-          create: false
+          create: true
           regexp: ^\s*cmdport\s+
           state: absent
         check_mode: true
@@ -42250,7 +42250,7 @@
       - name: Deduplicate values from /etc/chrony.conf
         lineinfile:
           path: /etc/chrony.conf
-          create: false
+          create: true
           regexp: ^\s*cmdport\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43156,7 +43156,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*ClientAliveCountMax\s+
           state: absent
         check_mode: true
@@ -43166,7 +43166,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*ClientAliveCountMax\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43208,7 +43208,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*ClientAliveInterval\s+
           state: absent
         check_mode: true
@@ -43218,7 +43218,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*ClientAliveInterval\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43263,7 +43263,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitEmptyPasswords\s+
           state: absent
         check_mode: true
@@ -43273,7 +43273,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitEmptyPasswords\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43313,7 +43313,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*GSSAPIAuthentication\s+
           state: absent
         check_mode: true
@@ -43323,7 +43323,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*GSSAPIAuthentication\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43359,7 +43359,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*KerberosAuthentication\s+
           state: absent
         check_mode: true
@@ -43369,7 +43369,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*KerberosAuthentication\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43405,7 +43405,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitRootLogin\s+
           state: absent
         check_mode: true
@@ -43415,7 +43415,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitRootLogin\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43458,7 +43458,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*IgnoreUserKnownHosts\s+
           state: absent
         check_mode: true
@@ -43468,7 +43468,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*IgnoreUserKnownHosts\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43504,7 +43504,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*X11Forwarding\s+
           state: absent
         check_mode: true
@@ -43514,7 +43514,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*X11Forwarding\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43547,7 +43547,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitUserEnvironment\s+
           state: absent
         check_mode: true
@@ -43557,7 +43557,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PermitUserEnvironment\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43596,7 +43596,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*StrictModes\s+
           state: absent
         check_mode: true
@@ -43606,7 +43606,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*StrictModes\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43641,7 +43641,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*Banner\s+
           state: absent
         check_mode: true
@@ -43651,7 +43651,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*Banner\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43690,7 +43690,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PrintLastLog\s+
           state: absent
         check_mode: true
@@ -43700,7 +43700,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*PrintLastLog\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43736,7 +43736,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*RekeyLimit\s+
           state: absent
         check_mode: true
@@ -43746,7 +43746,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*RekeyLimit\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43778,7 +43778,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/sysconfig/sshd
-          create: false
+          create: true
           regexp: ^\s*SSH_USE_STRONG_RNG=
           state: absent
         check_mode: true
@@ -43788,7 +43788,7 @@
       - name: Deduplicate values from /etc/sysconfig/sshd
         lineinfile:
           path: /etc/sysconfig/sshd
-          create: false
+          create: true
           regexp: ^\s*SSH_USE_STRONG_RNG=
           state: absent
         when: dupes.found is defined and dupes.found > 1
@@ -43819,7 +43819,7 @@
       - name: Check for duplicate values
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*X11UseLocalhost\s+
           state: absent
         check_mode: true
@@ -43829,7 +43829,7 @@
       - name: Deduplicate values from /etc/ssh/sshd_config
         lineinfile:
           path: /etc/ssh/sshd_config
-          create: false
+          create: true
           regexp: (?i)^\s*X11UseLocalhost\s+
           state: absent
         when: dupes.found is defined and dupes.found > 1
