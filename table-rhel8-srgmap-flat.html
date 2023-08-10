@@ -23090,13 +23090,13 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/openssh.config</tt> contains the following
 line and is not commented out:
-<tt>MACs hmac-sha2-512,hmac-sha2-256</tt></td>
+<tt>MACs <sub idref="sshd_approved_macs" /></tt></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system employs strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>To verify if the OpenSSH client uses defined MACs in the Crypto Policy, run:
 <pre>$ grep -i macs /etc/crypto-policies/back-ends/openssh.config</pre>
 and verify that the line matches:
-<pre>MACs hmac-sha2-512,hmac-sha2-256</pre> Is it the case that Crypto Policy for OpenSSH client is not configured correctly?</td>
+<pre>MACs <sub idref="sshd_approved_macs" /></pre> Is it the case that Crypto Policy for OpenSSH client is not configured correctly?</td>
     <td>Configure the operating system to employ strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions.</td>
     <td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
 OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
@@ -23105,7 +23105,7 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/openssh.config</tt> contains the following
 line and is not commented out:
-<tt>MACs hmac-sha2-512,hmac-sha2-256</tt></td>
+<tt>MACs <sub idref="sshd_approved_macs" /></tt></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -23132,13 +23132,13 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/opensshserver.config</tt> contains the following
 text and is not commented out:
-<tt>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</tt></td>
+<tt>-oMACS=<sub idref="sshd_approved_macs" /></tt></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system employs strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>To verify if the OpenSSH server uses defined MACs in the Crypto Policy, run:
 <pre>$ grep -Po '(-oMACs=\S+)' /etc/crypto-policies/back-ends/opensshserver.config</pre>
 and verify that the line matches:
-<pre>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</pre> Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?</td>
+<pre>-oMACS=<sub idref="sshd_approved_macs" /></pre> Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?</td>
     <td>Configure the operating system to employ strong authenticators in the establishment of nonlocal maintenance and diagnostic sessions.</td>
     <td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
 OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
@@ -23147,7 +23147,7 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/opensshserver.config</tt> contains the following
 text and is not commented out:
-<tt>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</tt></td>
+<tt>-oMACS=<sub idref="sshd_approved_macs" /></tt></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -26518,13 +26518,13 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/openssh.config</tt> contains the following
 line and is not commented out:
-<tt>MACs hmac-sha2-512,hmac-sha2-256</tt></td>
+<tt>MACs <sub idref="sshd_approved_macs" /></tt></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
     <td>To verify if the OpenSSH client uses defined MACs in the Crypto Policy, run:
 <pre>$ grep -i macs /etc/crypto-policies/back-ends/openssh.config</pre>
 and verify that the line matches:
-<pre>MACs hmac-sha2-512,hmac-sha2-256</pre> Is it the case that Crypto Policy for OpenSSH client is not configured correctly?</td>
+<pre>MACs <sub idref="sshd_approved_macs" /></pre> Is it the case that Crypto Policy for OpenSSH client is not configured correctly?</td>
     <td>Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</td>
     <td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
 OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
@@ -26533,7 +26533,7 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/openssh.config</tt> contains the following
 line and is not commented out:
-<tt>MACs hmac-sha2-512,hmac-sha2-256</tt></td>
+<tt>MACs <sub idref="sshd_approved_macs" /></tt></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -26560,13 +26560,13 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/opensshserver.config</tt> contains the following
 text and is not commented out:
-<tt>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</tt></td>
+<tt>-oMACS=<sub idref="sshd_approved_macs" /></tt></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system implements cryptography to protect the integrity of remote access sessions. If it does not, this is a finding.</td>
     <td>To verify if the OpenSSH server uses defined MACs in the Crypto Policy, run:
 <pre>$ grep -Po '(-oMACs=\S+)' /etc/crypto-policies/back-ends/opensshserver.config</pre>
 and verify that the line matches:
-<pre>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</pre> Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?</td>
+<pre>-oMACS=<sub idref="sshd_approved_macs" /></pre> Is it the case that Crypto Policy for OpenSSH Server is not configured correctly?</td>
     <td>Configure the operating system to implement cryptography to protect the integrity of remote access sessions.</td>
     <td>Crypto Policies provide a centralized control over crypto algorithms usage of many packages.
 OpenSSH is supported by system crypto policy, but the OpenSSH configuration may be
@@ -26575,7 +26575,7 @@ set up incorrectly.
 To check that Crypto Policies settings are configured correctly, ensure that
 <tt>/etc/crypto-policies/back-ends/opensshserver.config</tt> contains the following
 text and is not commented out:
-<tt>-oMACS=hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</tt></td>
+<tt>-oMACS=<sub idref="sshd_approved_macs" /></tt></td>
     <td>medium</td>
     <td></td>
     <td></td>

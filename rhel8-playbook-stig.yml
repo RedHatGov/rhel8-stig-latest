@@ -48,8 +48,8 @@
       var_aide_scan_notification_email: !!str root@localhost
       var_system_crypto_policy: !!str FIPS
       var_system_crypto_policy: !!str FIPS
-      sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr
-      sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr
+      sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com
+      sshd_approved_ciphers: !!str aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com
       sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
       sshd_approved_macs: !!str hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
       inactivity_timeout_value: !!str 900
@@ -36700,11 +36700,35 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Get all world-writable directories with no sticky bits set
-      shell: |
-        set -o pipefail
-        df --local -P | awk '{if (NR!=1) print $6}' | xargs -I '{}' find '{}' -xdev -type d \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null
-      register: dir_output
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Define Excluded
+        (Non-Local) File Systems and Paths
+      ansible.builtin.set_fact:
+        excluded_fstypes:
+        - afs
+        - ceph
+        - cifs
+        - smb3
+        - smbfs
+        - sshfs
+        - ncpfs
+        - ncp
+        - nfs
+        - nfs4
+        - gfs
+        - gfs2
+        - glusterfs
+        - gpfs
+        - pvfs2
+        - ocfs2
+        - lustre
+        - davfs
+        - fuse.sshfs
+        excluded_paths:
+        - dev
+        - proc
+        - run
+        - sys
+        search_paths: []
       tags:
       - CCE-80783-4
       - DISA-STIG-RHEL-08-010190
@@ -36717,12 +36741,141 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Ensure sticky bit is set
-      file:
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Find Relevant
+        Root Directories Ignoring Pre-Defined Excluded Paths
+      ansible.builtin.find:
+        paths: /
+        file_type: directory
+        excludes: '{{ excluded_paths }}'
+        hidden: true
+        recurse: false
+      register: result_relevant_root_dirs
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Include
+        Relevant Root Directories in a List of Paths to be Searched
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.path]) }}'
+      loop: '{{ result_relevant_root_dirs.files }}'
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Increment
+        Search Paths List with Local Partitions Mount Points
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.mount]) }}'
+      loop: '{{ ansible_mounts }}'
+      when:
+      - item.fstype not in excluded_fstypes
+      - item.mount != '/'
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Increment
+        Search Paths List with Local NFS File System Targets
+      ansible.builtin.set_fact:
+        search_paths: '{{ search_paths | union([item.device.split('':'')[1]]) }}'
+      loop: '{{ ansible_mounts }}'
+      when: item.device is search("localhost:")
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Define Rule
+        Specific Facts
+      ansible.builtin.set_fact:
+        world_writable_dirs: []
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Find All
+        Uncompliant Directories in Local File Systems
+      ansible.builtin.command:
+        cmd: find {{ item }} -xdev -type d ( -perm -0002 -a ! -perm -1000 )
+      loop: '{{ search_paths }}'
+      changed_when: false
+      register: result_found_dirs
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Create List
+        of World Writable Directories Without Sticky Bit
+      ansible.builtin.set_fact:
+        world_writable_dirs: '{{ world_writable_dirs | union(item.stdout_lines) | list
+          }}'
+      loop: '{{ result_found_dirs.results }}'
+      tags:
+      - CCE-80783-4
+      - DISA-STIG-RHEL-08-010190
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-CM-6(a)
+      - dir_perms_world_writable_sticky_bits
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Verify that All World-Writable Directories Have Sticky Bits Set - Ensure Sticky
+        Bit is Set on Local World Writable Directories
+      ansible.builtin.file:
         path: '{{ item }}'
         mode: a+t
-      with_items:
-      - '{{ dir_output.stdout_lines }}'
+      loop: '{{ world_writable_dirs }}'
       tags:
       - CCE-80783-4
       - DISA-STIG-RHEL-08-010190

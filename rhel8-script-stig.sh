@@ -518,7 +518,7 @@ sed -i "/^\s*CRYPTO_POLICY.*$/Id" $SSH_CONF
 ###############################################################################
 (>&2 echo "Remediating rule 21/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'")
 
-sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr'
+sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com'
 
 
 if [ -e "/etc/crypto-policies/back-ends/openssh.config" ] ; then
@@ -542,7 +542,7 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 ###############################################################################
 (>&2 echo "Remediating rule 22/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
 
-sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr'
+sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com'
 
 
 CONF_FILE=/etc/crypto-policies/back-ends/opensshserver.config
