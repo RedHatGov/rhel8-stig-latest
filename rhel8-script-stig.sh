@@ -34501,19 +34501,17 @@ umask $OLD_UMASK
 
 
 if [ -f /usr/bin/authselect ]; then
-    if authselect check; then
-        if ! authselect check; then
-        echo "
-        authselect integrity check failed. Remediation aborted!
-        This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
-        It is not recommended to manually edit the PAM files when authselect tool is available.
-        In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
-        exit 1
-        fi
-        authselect enable-feature with-smartcard
-
-        authselect apply-changes -b
+    if ! authselect check; then
+    echo "
+    authselect integrity check failed. Remediation aborted!
+    This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+    It is not recommended to manually edit the PAM files when authselect tool is available.
+    In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+    exit 1
     fi
+    authselect enable-feature with-smartcard
+
+    authselect apply-changes -b
 else
     if ! grep -qP '^\s*auth\s+'"sufficient"'\s+pam_sss.so\s*.*' "/etc/pam.d/smartcard-auth"; then
         # Line matching group + control + module was not found. Check group + module.
