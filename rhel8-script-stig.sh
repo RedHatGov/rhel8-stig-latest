@@ -31588,7 +31588,6 @@ if grep -q $device_regex /etc/fstab ; then
     sed -i "s|\($device_regex.*$previous_opts\)|\1,$mount_option|" /etc/fstab
 else
     echo "Not remediating, because there is no record of $var_removable_partition in /etc/fstab" >&2
-    return 1
 fi
 
 else
@@ -31614,7 +31613,6 @@ if grep -q $device_regex /etc/fstab ; then
     sed -i "s|\($device_regex.*$previous_opts\)|\1,$mount_option|" /etc/fstab
 else
     echo "Not remediating, because there is no record of $var_removable_partition in /etc/fstab" >&2
-    return 1
 fi
 
 else
@@ -31640,7 +31638,6 @@ if grep -q $device_regex /etc/fstab ; then
     sed -i "s|\($device_regex.*$previous_opts\)|\1,$mount_option|" /etc/fstab
 else
     echo "Not remediating, because there is no record of $var_removable_partition in /etc/fstab" >&2
-    return 1
 fi
 
 else
