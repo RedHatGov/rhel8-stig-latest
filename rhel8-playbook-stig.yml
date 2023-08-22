@@ -1574,8 +1574,8 @@
       - no_reboot_needed
       - unknown_strategy
 
-    - name: '{{ rule_title }} - Add .include Line for opensslcnf.config File in crypto_policy
-        Section'
+    - name: Configure OpenSSL library to use System Crypto Policy - Add .include Line
+        for opensslcnf.config File in crypto_policy Section
       ansible.builtin.lineinfile:
         create: true
         insertafter: ^\s*\[\s*crypto_policy\s*]\s*
