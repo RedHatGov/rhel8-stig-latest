@@ -2481,6 +2481,8 @@ fi
 # BEGIN fix (77 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'
 ###############################################################################
 (>&2 echo "Remediating rule 77/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'")
+# Remediation is applicable only in certain platforms
+if grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.2"; printf "%s\n%s" "$expected" "$real" | sort -VC; }; then
 
 if [ -f /usr/bin/authselect ]; then
     if ! authselect check; then
@@ -2572,6 +2574,10 @@ else
             sed -i --follow-symlinks '/^auth.*required.*pam_faillock\.so.*preauth.*silent.*/ s/$/ audit/' "$pam_file"
         fi
     done
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
 fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'
 
@@ -4245,7 +4251,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 109/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
 tmux_conf="/etc/tmux.conf"
 
@@ -4266,7 +4272,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 110/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
 tmux_conf="/etc/tmux.conf"
 
@@ -4287,7 +4293,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 111/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
 tmux_conf="/etc/tmux.conf"
 

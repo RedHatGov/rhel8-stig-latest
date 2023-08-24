@@ -6408,6 +6408,8 @@
       ansible.builtin.stat:
         path: /usr/bin/authselect
       register: result_authselect_present
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6469,7 +6471,10 @@
         when:
         - result_authselect_enable_feature_cmd is not skipped
         - result_authselect_enable_feature_cmd is success
-      when: result_authselect_present.stat.exists
+      when:
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
+      - result_authselect_present.stat.exists
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6532,7 +6537,10 @@
         - /etc/pam.d/password-auth
         when:
         - result_pam_faillock_is_enabled.found == 0
-      when: not result_authselect_present.stat.exists
+      when:
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
+      - not result_authselect_present.stat.exists
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6549,6 +6557,8 @@
       ansible.builtin.stat:
         path: /etc/security/faillock.conf
       register: result_faillock_conf_check
+      when: ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6567,7 +6577,10 @@
         regexp: ^\s*audit
         line: audit
         state: present
-      when: result_faillock_conf_check.stat.exists
+      when:
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
+      - result_faillock_conf_check.stat.exists
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6916,7 +6929,10 @@
           - result_pam_option_removal is changed
         when:
         - result_pam_file_present.stat.exists
-      when: result_faillock_conf_check.stat.exists
+      when:
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
+      - result_faillock_conf_check.stat.exists
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -6955,7 +6971,10 @@
         - /etc/pam.d/password-auth
         when:
         - result_pam_faillock_audit_parameter_is_present.found == 0
-      when: not result_faillock_conf_check.stat.exists
+      when:
+      - ansible_distribution == 'RedHat' and ansible_distribution_version is version('8.2',
+        '>=')
+      - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-86099-9
       - DISA-STIG-RHEL-08-020021
@@ -8292,6 +8311,7 @@
         manager: auto
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8310,6 +8330,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8375,6 +8396,7 @@
       - result_authselect_present.stat.exists
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8441,6 +8463,7 @@
       - not result_authselect_present.stat.exists
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8461,6 +8484,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8483,6 +8507,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8830,6 +8855,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8915,6 +8941,7 @@
       - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8937,6 +8964,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8956,6 +8984,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8978,6 +9007,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -8996,6 +9026,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-86067-6
+      - DISA-STIG-RHEL-08-020016
       - DISA-STIG-RHEL-08-020017
       - NIST-800-53-AC-7(a)
       - NIST-800-53-AC-7(b)
@@ -9677,6 +9708,7 @@
         manager: auto
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9693,6 +9725,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9759,6 +9792,7 @@
       - result_authselect_present.stat.exists
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9824,6 +9858,7 @@
       - not result_authselect_present.stat.exists
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9840,6 +9875,7 @@
       when: '"pam" in ansible_facts.packages'
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9860,6 +9896,7 @@
       - result_faillock_conf_check.stat.exists
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9888,6 +9925,7 @@
       - not result_faillock_conf_check.stat.exists
       tags:
       - CCE-87096-4
+      - DISA-STIG-RHEL-08-020018
       - DISA-STIG-RHEL-08-020019
       - accounts_passwords_pam_faillock_silent
       - low_complexity
@@ -9902,6 +9940,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -9924,6 +9963,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -9995,6 +10035,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -10066,6 +10107,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -10089,6 +10131,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -10115,6 +10158,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -10481,6 +10525,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -10571,6 +10616,7 @@
       tags:
       - CCE-80670-3
       - CJIS-5.5.3
+      - DISA-STIG-RHEL-08-020014
       - DISA-STIG-RHEL-08-020015
       - NIST-800-171-3.1.8
       - NIST-800-53-AC-7(b)
@@ -12964,6 +13010,19 @@
       - medium_severity
       - no_reboot_needed
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-82199-1
+      - DISA-STIG-RHEL-08-020070
+      - configure_tmux_lock_after_time
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
     - name: Configure tmux to lock session after inactivity
       block:
 
@@ -12995,11 +13054,29 @@
           mode: '0644'
           line: set -g lock-after-time 900
           state: present
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-82199-1
       - DISA-STIG-RHEL-08-020070
       - configure_tmux_lock_after_time
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-80940-0
+      - DISA-STIG-RHEL-08-020040
+      - NIST-800-53-AC-11(a)
+      - NIST-800-53-AC-11(b)
+      - NIST-800-53-CM-6(a)
+      - configure_tmux_lock_command
       - low_complexity
       - low_disruption
       - medium_severity
@@ -13037,7 +13114,9 @@
           mode: '0644'
           line: set -g lock-command vlock
           state: present
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-80940-0
       - DISA-STIG-RHEL-08-020040
@@ -13051,6 +13130,19 @@
       - no_reboot_needed
       - restrict_strategy
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-86135-1
+      - DISA-STIG-RHEL-08-020040
+      - configure_strategy
+      - configure_tmux_lock_keybinding
+      - low_complexity
+      - low_disruption
+      - low_severity
+      - no_reboot_needed
+
     - name: Check for duplicate values
       lineinfile:
         path: /etc/tmux.conf
@@ -13061,7 +13153,9 @@
       check_mode: true
       changed_when: false
       register: dupes
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-86135-1
       - DISA-STIG-RHEL-08-020040
@@ -13081,6 +13175,7 @@
         state: absent
       when:
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       - dupes.found is defined and dupes.found > 1
       tags:
       - CCE-86135-1
@@ -13100,7 +13195,9 @@
         mode: '0644'
         line: bind X lock-session
         state: present
-      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"tmux" in ansible_facts.packages'
       tags:
       - CCE-86135-1
       - DISA-STIG-RHEL-08-020040
@@ -13408,6 +13505,7 @@
       - CCE-80841-0
       - CJIS-5.5.2
       - DISA-STIG-RHEL-08-020331
+      - DISA-STIG-RHEL-08-020332
       - NIST-800-171-3.1.1
       - NIST-800-171-3.1.5
       - NIST-800-53-CM-6(a)
@@ -13481,6 +13579,7 @@
       - CCE-80841-0
       - CJIS-5.5.2
       - DISA-STIG-RHEL-08-020331
+      - DISA-STIG-RHEL-08-020332
       - NIST-800-171-3.1.1
       - NIST-800-171-3.1.5
       - NIST-800-53-CM-6(a)
@@ -13511,6 +13610,7 @@
       - CCE-80841-0
       - CJIS-5.5.2
       - DISA-STIG-RHEL-08-020331
+      - DISA-STIG-RHEL-08-020332
       - NIST-800-171-3.1.1
       - NIST-800-171-3.1.5
       - NIST-800-53-CM-6(a)
@@ -43094,6 +43194,7 @@
         '<=')
       tags:
       - CCE-82831-9
+      - DISA-STIG-RHEL-08-010471
       - enable_strategy
       - low_complexity
       - low_disruption
