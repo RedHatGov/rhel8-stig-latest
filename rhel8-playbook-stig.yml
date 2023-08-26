@@ -1256,8 +1256,8 @@
 
 
 
-    - name: Check to see the current status of FIPS mode
-      command: /usr/bin/fips-mode-setup --check
+    - name: Enable FIPS Mode - Check to See the Current Status of FIPS Mode
+      ansible.builtin.command: /usr/bin/fips-mode-setup --check
       register: is_fips_enabled
       ignore_errors: true
       changed_when: false
@@ -1282,8 +1282,8 @@
       - reboot_required
       - restrict_strategy
 
-    - name: Enable FIPS mode
-      command: /usr/bin/fips-mode-setup --enable
+    - name: Enable FIPS Mode - Enable FIPS Mode
+      ansible.builtin.command: /usr/bin/fips-mode-setup --enable
       when:
       - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         and not ( lookup("env", "container") == "bwrap-osbuild" ) )
@@ -1306,8 +1306,8 @@
       - reboot_required
       - restrict_strategy
 
-    - name: Enable FIPS Mode
-      lineinfile:
+    - name: Enable FIPS Mode - Configure Crypto Policy
+      ansible.builtin.lineinfile:
         path: /etc/crypto-policies/config
         regexp: ^(?!#)(\S+)$
         line: '{{ var_system_crypto_policy }}'
@@ -1333,8 +1333,9 @@
       - reboot_required
       - restrict_strategy
 
-    - name: Verify that Crypto Policy is Set (runtime)
-      command: /usr/bin/update-crypto-policies --set {{ var_system_crypto_policy }}
+    - name: Enable FIPS Mode - Verify that Crypto Policy is Set (runtime)
+      ansible.builtin.command: /usr/bin/update-crypto-policies --set {{ var_system_crypto_policy
+        }}
       when:
       - ( ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
         and not ( lookup("env", "container") == "bwrap-osbuild" ) )
@@ -16907,6 +16908,145 @@
       - medium_severity
       - reboot_required
       - restrict_strategy
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-88225-8
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030110
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_group_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: System Audit Directories Must Be Group Owned By Root - Register Audit Configuration
+        Text
+      ansible.builtin.slurp:
+        src: /etc/audit/auditd.conf
+      register: auditd_config_slurp
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-88225-8
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030110
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_group_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: System Audit Directories Must Be Group Owned By Root - Set Permissions Custom
+        Location
+      ansible.builtin.file:
+        group: |-
+          {{ auditd_config_slurp['content'] | b64decode | regex_findall('
+          log_group\s*=\s*(.+)') | default(['root',], boolean=True) | first }}
+        path: |-
+          {{ auditd_config_slurp['content'] | b64decode | regex_findall('
+          log_file\s*=\s*(.+)') | default(['/var/log/audit/audit.log',], boolean=True) | first | dirname }}
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-88225-8
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030110
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_group_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-88226-6
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030100
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: System Audit Directories Must Be Owned By Root - Register Audit Configuration
+        Text
+      ansible.builtin.slurp:
+        src: /etc/audit/auditd.conf
+      register: auditd_config_slurp
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-88226-6
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030100
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+
+    - name: System Audit Directories Must Be Owned By Root - Set Permissions Custom Location
+      ansible.builtin.file:
+        owner: root
+        path: |-
+          {{ auditd_config_slurp['content'] | b64decode | regex_findall('
+          log_file\s*=\s*(.+)') | default(['/var/log/audit/audit.log',], boolean=True) | first | dirname }}
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-88226-6
+      - CJIS-5.4.1.1
+      - DISA-STIG-RHEL-08-030100
+      - NIST-800-171-3.3.1
+      - NIST-800-53-AC-6(1)
+      - NIST-800-53-AU-9(4)
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-10.5.1
+      - configure_strategy
+      - directory_ownership_var_log_audit
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
 
     - name: Gather the package facts
       package_facts:
