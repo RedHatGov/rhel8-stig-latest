@@ -2011,9 +2011,20 @@ fi
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
-if [ -e "/etc/pam.d/postlogin" ] ; then
-    PAM_FILE_PATH="/etc/pam.d/postlogin"
-    if [ -f /usr/bin/authselect ]; then
+if [ -f /usr/bin/authselect ]; then
+    if authselect list-features minimal | grep -q with-silent-lastlog; then
+        if ! authselect check; then
+        echo "
+        authselect integrity check failed. Remediation aborted!
+        This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+        It is not recommended to manually edit the PAM files when authselect tool is available.
+        In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+        exit 1
+        fi
+        authselect disable-feature with-silent-lastlog
+
+        authselect apply-changes -b
+    else
         
         if ! authselect check; then
         echo "
@@ -2043,70 +2054,212 @@ if [ -e "/etc/pam.d/postlogin" ] ; then
         PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
 
         authselect apply-changes -b
-    fi
-    if ! grep -qP '^\s*session\s+'"required"'\s+pam_lastlog.so\s*.*' "$PAM_FILE_PATH"; then
-            # Line matching group + control + module was not found. Check group + module.
-            if [ "$(grep -cP '^\s*session\s+.*\s+pam_lastlog.so\s*' "$PAM_FILE_PATH")" -eq 1 ]; then
-                # The control is updated only if one single line matches.
-                sed -i -E --follow-symlinks 's/^(\s*session\s+).*(\bpam_lastlog.so.*)/\1'"required"' \2/' "$PAM_FILE_PATH"
-            else
-                sed -i --follow-symlinks '1i session     '"required"'    pam_lastlog.so' "$PAM_FILE_PATH"
+        if [ -e "$PAM_FILE_PATH" ] ; then
+            PAM_FILE_PATH="$PAM_FILE_PATH"
+            if [ -f /usr/bin/authselect ]; then
+                
+                if ! authselect check; then
+                echo "
+                authselect integrity check failed. Remediation aborted!
+                This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+                It is not recommended to manually edit the PAM files when authselect tool is available.
+                In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+                exit 1
+                fi
+
+                CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+                # If not already in use, a custom profile is created preserving the enabled features.
+                if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+                    ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+                    authselect create-profile hardening -b $CURRENT_PROFILE
+                    CURRENT_PROFILE="custom/hardening"
+                    
+                    authselect apply-changes -b --backup=before-hardening-custom-profile
+                    authselect select $CURRENT_PROFILE
+                    for feature in $ENABLED_FEATURES; do
+                        authselect enable-feature $feature;
+                    done
+                    
+                    authselect apply-changes -b --backup=after-hardening-custom-profile
+                fi
+                PAM_FILE_NAME=$(basename "$PAM_FILE_PATH")
+                PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
+
+                authselect apply-changes -b
             fi
+            if ! grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s*.*' "$PAM_FILE_PATH"; then
+                    # Line matching group + control + module was not found. Check group + module.
+                    if [ "$(grep -cP '^\s*session\s+.*\s+pam_lastlog.so\s*' "$PAM_FILE_PATH")" -eq 1 ]; then
+                        # The control is updated only if one single line matches.
+                        sed -i -E --follow-symlinks 's/^(\s*session\s+).*(\bpam_lastlog.so.*)/\1'"\[default=1\]"' \2/' "$PAM_FILE_PATH"
+                    else
+                        LAST_MATCH_LINE=$(grep -nP "^\s*session\s+.*pam_succeed_if\.so.*" "$PAM_FILE_PATH" | tail -n 1 | cut -d: -f 1)
+                        if [ ! -z $LAST_MATCH_LINE ]; then
+                            sed -i --follow-symlinks $LAST_MATCH_LINE' a session     '"\[default=1\]"'    pam_lastlog.so' "$PAM_FILE_PATH"
+                        else
+                            echo 'session    '"\[default=1\]"'    pam_lastlog.so' >> "$PAM_FILE_PATH"
+                        fi
+                    fi
+                fi
+                # Check the option
+                if ! grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s*.*\sshowfailed\b' "$PAM_FILE_PATH"; then
+                    sed -i -E --follow-symlinks '/\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so.*/ s/$/ showfailed/' "$PAM_FILE_PATH"
+                fi
+            if [ -f /usr/bin/authselect ]; then
+                
+                authselect apply-changes -b
+            fi
+        else
+            echo "$PAM_FILE_PATH was not found" >&2
         fi
-        # Check the option
-        if ! grep -qP '^\s*session\s+'"required"'\s+pam_lastlog.so\s*.*\sshowfailed\b' "$PAM_FILE_PATH"; then
-            sed -i -E --follow-symlinks '/\s*session\s+'"required"'\s+pam_lastlog.so.*/ s/$/ showfailed/' "$PAM_FILE_PATH"
+        if [ -e "$PAM_FILE_PATH" ] ; then
+            PAM_FILE_PATH="$PAM_FILE_PATH"
+            if [ -f /usr/bin/authselect ]; then
+                
+                if ! authselect check; then
+                echo "
+                authselect integrity check failed. Remediation aborted!
+                This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+                It is not recommended to manually edit the PAM files when authselect tool is available.
+                In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+                exit 1
+                fi
+
+                CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+                # If not already in use, a custom profile is created preserving the enabled features.
+                if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+                    ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+                    authselect create-profile hardening -b $CURRENT_PROFILE
+                    CURRENT_PROFILE="custom/hardening"
+                    
+                    authselect apply-changes -b --backup=before-hardening-custom-profile
+                    authselect select $CURRENT_PROFILE
+                    for feature in $ENABLED_FEATURES; do
+                        authselect enable-feature $feature;
+                    done
+                    
+                    authselect apply-changes -b --backup=after-hardening-custom-profile
+                fi
+                PAM_FILE_NAME=$(basename "$PAM_FILE_PATH")
+                PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
+
+                authselect apply-changes -b
+            fi
+            
+        if grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s.*\bsilent\b' "$PAM_FILE_PATH"; then
+            sed -i -E --follow-symlinks 's/(.*session.*'"\[default=1\]"'.*pam_lastlog.so.*)\ssilent=?[[:alnum:]]*(.*)/\1\2/g' "$PAM_FILE_PATH"
         fi
-    if [ -f /usr/bin/authselect ]; then
-        
-        authselect apply-changes -b
+            if [ -f /usr/bin/authselect ]; then
+                
+                authselect apply-changes -b
+            fi
+        else
+            echo "$PAM_FILE_PATH was not found" >&2
+        fi
     fi
 else
-    echo "/etc/pam.d/postlogin was not found" >&2
-fi
-if [ -e "/etc/pam.d/postlogin" ] ; then
-    PAM_FILE_PATH="/etc/pam.d/postlogin"
-    if [ -f /usr/bin/authselect ]; then
-        
-        if ! authselect check; then
-        echo "
-        authselect integrity check failed. Remediation aborted!
-        This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
-        It is not recommended to manually edit the PAM files when authselect tool is available.
-        In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
-        exit 1
-        fi
+    if [ -e "/etc/pam.d/postlogin" ] ; then
+            PAM_FILE_PATH="/etc/pam.d/postlogin"
+            if [ -f /usr/bin/authselect ]; then
+                
+                if ! authselect check; then
+                echo "
+                authselect integrity check failed. Remediation aborted!
+                This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+                It is not recommended to manually edit the PAM files when authselect tool is available.
+                In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+                exit 1
+                fi
 
-        CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
-        # If not already in use, a custom profile is created preserving the enabled features.
-        if [[ ! $CURRENT_PROFILE == custom/* ]]; then
-            ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
-            authselect create-profile hardening -b $CURRENT_PROFILE
-            CURRENT_PROFILE="custom/hardening"
-            
-            authselect apply-changes -b --backup=before-hardening-custom-profile
-            authselect select $CURRENT_PROFILE
-            for feature in $ENABLED_FEATURES; do
-                authselect enable-feature $feature;
-            done
-            
-            authselect apply-changes -b --backup=after-hardening-custom-profile
-        fi
-        PAM_FILE_NAME=$(basename "/etc/pam.d/postlogin")
-        PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
+                CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+                # If not already in use, a custom profile is created preserving the enabled features.
+                if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+                    ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+                    authselect create-profile hardening -b $CURRENT_PROFILE
+                    CURRENT_PROFILE="custom/hardening"
+                    
+                    authselect apply-changes -b --backup=before-hardening-custom-profile
+                    authselect select $CURRENT_PROFILE
+                    for feature in $ENABLED_FEATURES; do
+                        authselect enable-feature $feature;
+                    done
+                    
+                    authselect apply-changes -b --backup=after-hardening-custom-profile
+                fi
+                PAM_FILE_NAME=$(basename "/etc/pam.d/postlogin")
+                PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
 
-        authselect apply-changes -b
-    fi
-    
-if grep -qP '^\s*session\s.*\bpam_lastlog.so\s.*\bsilent\b' "$PAM_FILE_PATH"; then
-    sed -i -E --follow-symlinks 's/(.*session.*pam_lastlog.so.*)\bsilent\b=?[[:alnum:]]*(.*)/\1\2/g' "$PAM_FILE_PATH"
-fi
-    if [ -f /usr/bin/authselect ]; then
-        
-        authselect apply-changes -b
-    fi
-else
-    echo "/etc/pam.d/postlogin was not found" >&2
+                authselect apply-changes -b
+            fi
+            if ! grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s*.*' "$PAM_FILE_PATH"; then
+                    # Line matching group + control + module was not found. Check group + module.
+                    if [ "$(grep -cP '^\s*session\s+.*\s+pam_lastlog.so\s*' "$PAM_FILE_PATH")" -eq 1 ]; then
+                        # The control is updated only if one single line matches.
+                        sed -i -E --follow-symlinks 's/^(\s*session\s+).*(\bpam_lastlog.so.*)/\1'"\[default=1\]"' \2/' "$PAM_FILE_PATH"
+                    else
+                        LAST_MATCH_LINE=$(grep -nP "^\s*session\s+.*pam_succeed_if\.so.*" "$PAM_FILE_PATH" | tail -n 1 | cut -d: -f 1)
+                        if [ ! -z $LAST_MATCH_LINE ]; then
+                            sed -i --follow-symlinks $LAST_MATCH_LINE' a session     '"\[default=1\]"'    pam_lastlog.so' "$PAM_FILE_PATH"
+                        else
+                            echo 'session    '"\[default=1\]"'    pam_lastlog.so' >> "$PAM_FILE_PATH"
+                        fi
+                    fi
+                fi
+                # Check the option
+                if ! grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s*.*\sshowfailed\b' "$PAM_FILE_PATH"; then
+                    sed -i -E --follow-symlinks '/\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so.*/ s/$/ showfailed/' "$PAM_FILE_PATH"
+                fi
+            if [ -f /usr/bin/authselect ]; then
+                
+                authselect apply-changes -b
+            fi
+        else
+            echo "/etc/pam.d/postlogin was not found" >&2
+        fi
+    if [ -e "/etc/pam.d/postlogin" ] ; then
+            PAM_FILE_PATH="/etc/pam.d/postlogin"
+            if [ -f /usr/bin/authselect ]; then
+                
+                if ! authselect check; then
+                echo "
+                authselect integrity check failed. Remediation aborted!
+                This remediation could not be applied because an authselect profile was not selected or the selected profile is not intact.
+                It is not recommended to manually edit the PAM files when authselect tool is available.
+                In cases where the default authselect profile does not cover a specific demand, a custom authselect profile is recommended."
+                exit 1
+                fi
+
+                CURRENT_PROFILE=$(authselect current -r | awk '{ print $1 }')
+                # If not already in use, a custom profile is created preserving the enabled features.
+                if [[ ! $CURRENT_PROFILE == custom/* ]]; then
+                    ENABLED_FEATURES=$(authselect current | tail -n+3 | awk '{ print $2 }')
+                    authselect create-profile hardening -b $CURRENT_PROFILE
+                    CURRENT_PROFILE="custom/hardening"
+                    
+                    authselect apply-changes -b --backup=before-hardening-custom-profile
+                    authselect select $CURRENT_PROFILE
+                    for feature in $ENABLED_FEATURES; do
+                        authselect enable-feature $feature;
+                    done
+                    
+                    authselect apply-changes -b --backup=after-hardening-custom-profile
+                fi
+                PAM_FILE_NAME=$(basename "/etc/pam.d/postlogin")
+                PAM_FILE_PATH="/etc/authselect/$CURRENT_PROFILE/$PAM_FILE_NAME"
+
+                authselect apply-changes -b
+            fi
+            
+        if grep -qP '^\s*session\s+'"\[default=1\]"'\s+pam_lastlog.so\s.*\bsilent\b' "$PAM_FILE_PATH"; then
+            sed -i -E --follow-symlinks 's/(.*session.*'"\[default=1\]"'.*pam_lastlog.so.*)\ssilent=?[[:alnum:]]*(.*)/\1\2/g' "$PAM_FILE_PATH"
+        fi
+            if [ -f /usr/bin/authselect ]; then
+                
+                authselect apply-changes -b
+            fi
+        else
+            echo "/etc/pam.d/postlogin was not found" >&2
+        fi
 fi
 
 else
@@ -22226,6 +22379,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; 
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
 
+
+var_accounts_passwords_pam_faillock_dir='/var/log/faillock'
+
 # Create a list of audit *.rules files that should be inspected for presence and correctness
 # of a particular audit rule. The scheme is as follows:
 #
@@ -22249,7 +22405,7 @@ files_to_inspect+=('/etc/audit/audit.rules')
 for audit_rules_file in "${files_to_inspect[@]}"
 do
     # Check if audit watch file system object rule for given path already present
-    if grep -q -P -- "^[\s]*-w[\s]+/var/log/faillock" "$audit_rules_file"
+    if grep -q -P -- "^[\s]*-w[\s]+${var_accounts_passwords_pam_faillock_dir}" "$audit_rules_file"
     then
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
@@ -22257,7 +22413,7 @@ do
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/var/log/faillock $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+${var_accounts_passwords_pam_faillock_dir} $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -22273,12 +22429,12 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s#\($sp*-w$sp\+/var/log/faillock$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+${var_accounts_passwords_pam_faillock_dir}$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
 
-        echo "-w /var/log/faillock -p wa -k logins" >> "$audit_rules_file"
+        echo "-w ${var_accounts_passwords_pam_faillock_dir} -p wa -k logins" >> "$audit_rules_file"
     fi
 done
 # Create a list of audit *.rules files that should be inspected for presence and correctness
@@ -22297,7 +22453,7 @@ files_to_inspect=()
 # If the audit is 'augenrules', then check if rule is already defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
 # If rule isn't defined, add '/etc/audit/rules.d/logins.rules' to list of files for inspection.
-readarray -t matches < <(grep -HP "[\s]*-w[\s]+/var/log/faillock" /etc/audit/rules.d/*.rules)
+readarray -t matches < <(grep -HP "[\s]*-w[\s]+${var_accounts_passwords_pam_faillock_dir}" /etc/audit/rules.d/*.rules)
 
 # For each of the matched entries
 for match in "${matches[@]}"
@@ -22326,7 +22482,7 @@ fi
 for audit_rules_file in "${files_to_inspect[@]}"
 do
     # Check if audit watch file system object rule for given path already present
-    if grep -q -P -- "^[\s]*-w[\s]+/var/log/faillock" "$audit_rules_file"
+    if grep -q -P -- "^[\s]*-w[\s]+${var_accounts_passwords_pam_faillock_dir}" "$audit_rules_file"
     then
         # Rule is found => verify yet if existing rule definition contains
         # all of the required access type bits
@@ -22334,7 +22490,7 @@ do
         # Define BRE whitespace class shortcut
         sp="[[:space:]]"
         # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
-        current_access_bits=$(sed -ne "s#$sp*-w$sp\+/var/log/faillock $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
+        current_access_bits=$(sed -ne "s#$sp*-w$sp\+${var_accounts_passwords_pam_faillock_dir} $sp\+-p$sp\+\([rxwa]\{1,4\}\).*#\1#p" "$audit_rules_file")
         # Split required access bits string into characters array
         # (to check bit's presence for one bit at a time)
         for access_bit in $(echo "wa" | grep -o .)
@@ -22350,12 +22506,12 @@ do
         done
         # Propagate the updated rule's access bits (original + the required
         # ones) back into the /etc/audit/audit.rules file for that rule
-        sed -i "s#\($sp*-w$sp\+/var/log/faillock$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
+        sed -i "s#\($sp*-w$sp\+${var_accounts_passwords_pam_faillock_dir}$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)#\1$current_access_bits\3#" "$audit_rules_file"
     else
         # Rule isn't present yet. Append it at the end of $audit_rules_file file
         # with proper key
 
-        echo "-w /var/log/faillock -p wa -k logins" >> "$audit_rules_file"
+        echo "-w ${var_accounts_passwords_pam_faillock_dir} -p wa -k logins" >> "$audit_rules_file"
     fi
 done
 
@@ -22373,6 +22529,7 @@ fi
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
 # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+
 
 # Create a list of audit *.rules files that should be inspected for presence and correctness
 # of a particular audit rule. The scheme is as follows:
@@ -31475,7 +31632,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ -d /sys/firmware/e
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/boot/efi")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/boot/efi")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/boot/efi' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31483,10 +31640,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /boot/efi)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /boot/efi)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -31499,7 +31656,7 @@ function perform_remediation {
         fi
         echo " /boot/efi  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -31529,7 +31686,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/boot")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/boot")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/boot' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31537,10 +31694,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /boot)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /boot)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -31553,7 +31710,7 @@ function perform_remediation {
         fi
         echo " /boot  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -31585,10 +31742,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -31601,7 +31758,7 @@ function perform_remediation {
         fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -31633,10 +31790,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -31649,7 +31806,7 @@ function perform_remediation {
         fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -31681,10 +31838,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /dev/shm)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -31697,7 +31854,7 @@ function perform_remediation {
         fi
         echo "tmpfs /dev/shm tmpfs defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -31727,7 +31884,7 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/home")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/home' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31735,10 +31892,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /home)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /home)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -31751,7 +31908,7 @@ function perform_remediation {
         fi
         echo " /home  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -31781,7 +31938,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/h
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/home")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/home' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31789,10 +31946,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /home)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /home)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -31805,7 +31962,7 @@ function perform_remediation {
         fi
         echo " /home  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -31849,10 +32006,10 @@ for partition_record in "${partitions_records[@]}"; do
     device_type="$(echo ${partition_record} | cut -d " " -f3)"
     if ! printf '%s\0' "${polyinstantiated_dirs[@]}" | grep -qxzF "$mount_point"; then
         # device and device_type will be used only in case when the device doesn't have fstab record
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" $mount_point)"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" $mount_point)"
 
         # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-        if ! grep "$mount_point_match_regexp" /etc/fstab; then
+        if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
             # runtime opts without some automatic kernel/userspace-added defaults
             previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                         | sed -E "s/(rw|defaults|seclabel|$MOUNT_OPTION)(,|$)//g;s/,$//")
@@ -31865,7 +32022,7 @@ for partition_record in "${partitions_records[@]}"; do
             fi
             echo "$device $mount_point $device_type defaults,${previous_mount_opts}$MOUNT_OPTION 0 0" >> /etc/fstab
         # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-        elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "$MOUNT_OPTION"; then
+        elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "$MOUNT_OPTION"; then
             previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
             sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,$MOUNT_OPTION|" /etc/fstab
         fi
@@ -31970,7 +32127,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -31978,10 +32135,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -31994,7 +32151,7 @@ function perform_remediation {
         fi
         echo " /tmp  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -32024,7 +32181,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32032,10 +32189,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -32048,7 +32205,7 @@ function perform_remediation {
         fi
         echo " /tmp  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -32078,7 +32235,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32086,10 +32243,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -32102,7 +32259,7 @@ function perform_remediation {
         fi
         echo " /tmp  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -32132,7 +32289,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32140,10 +32297,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -32156,7 +32313,7 @@ function perform_remediation {
         fi
         echo " /var/log/audit  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -32186,7 +32343,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32194,10 +32351,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -32210,7 +32367,7 @@ function perform_remediation {
         fi
         echo " /var/log/audit  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -32240,7 +32397,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log/audit' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32248,10 +32405,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log/audit)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -32264,7 +32421,7 @@ function perform_remediation {
         fi
         echo " /var/log/audit  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -32294,7 +32451,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32302,10 +32459,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -32318,7 +32475,7 @@ function perform_remediation {
         fi
         echo " /var/log  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -32348,7 +32505,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32356,10 +32513,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -32372,7 +32529,7 @@ function perform_remediation {
         fi
         echo " /var/log  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -32402,7 +32559,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/log' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32410,10 +32567,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/log)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/log)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -32426,7 +32583,7 @@ function perform_remediation {
         fi
         echo " /var/log  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -32456,7 +32613,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32464,10 +32621,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -32480,7 +32637,7 @@ function perform_remediation {
         fi
         echo " /var/tmp  defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -32510,7 +32667,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32518,10 +32675,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -32534,7 +32691,7 @@ function perform_remediation {
         fi
         echo " /var/tmp  defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -32564,7 +32721,7 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
-        mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
+        mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
         || { echo "The mount point '/var/tmp' is not even in /etc/fstab, so we can't set up mount options" >&2;
@@ -32572,10 +32729,10 @@ function perform_remediation {
     
 
 
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" /var/tmp)"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -32588,7 +32745,7 @@ function perform_remediation {
         fi
         echo " /var/tmp  defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -33775,10 +33932,10 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nodev)(,|$)//g;s/,$//")
@@ -33791,7 +33948,7 @@ do
         fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}nodev 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nodev"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nodev"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nodev|" /etc/fstab
     fi
@@ -33815,10 +33972,10 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|noexec)(,|$)//g;s/,$//")
@@ -33831,7 +33988,7 @@ do
         fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}noexec 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "noexec"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "noexec"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,noexec|" /etc/fstab
     fi
@@ -33855,10 +34012,10 @@ readarray -t vfstype_points < <(grep -E "[[:space:]]nfs[4]?[[:space:]]" /etc/fst
 
 for vfstype_point in "${vfstype_points[@]}"
 do
-    mount_point_match_regexp="$(printf "[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
+    mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" ${vfstype_point//\\/\\\\})"
 
     # If the mount point is not in /etc/fstab, get previous mount options from /etc/mtab
-    if ! grep "$mount_point_match_regexp" /etc/fstab; then
+    if ! grep -q "$mount_point_match_regexp" /etc/fstab; then
         # runtime opts without some automatic kernel/userspace-added defaults
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/mtab | head -1 |  awk '{print $4}' \
                     | sed -E "s/(rw|defaults|seclabel|nosuid)(,|$)//g;s/,$//")
@@ -33871,7 +34028,7 @@ do
         fi
         echo " ${vfstype_point//\\/\\\\} nfs4 defaults,${previous_mount_opts}nosuid 0 0" >> /etc/fstab
     # If the mount_opt option is not already in the mount point's /etc/fstab entry, add it
-    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep "nosuid"; then
+    elif ! grep "$mount_point_match_regexp" /etc/fstab | grep -q "nosuid"; then
         previous_mount_opts=$(grep "$mount_point_match_regexp" /etc/fstab | awk '{print $4}')
         sed -i "s|\(${mount_point_match_regexp}.*${previous_mount_opts}\)|\1,nosuid|" /etc/fstab
     fi
@@ -34239,17 +34396,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "ClientAliveCountMax $var_sshd_set_keepalive" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "ClientAliveCountMax $var_sshd_set_keepalive" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "ClientAliveCountMax $var_sshd_set_keepalive" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34279,17 +34428,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "ClientAliveInterval $sshd_idle_timeout_value" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "ClientAliveInterval $sshd_idle_timeout_value" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "ClientAliveInterval $sshd_idle_timeout_value" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34316,17 +34457,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "PermitEmptyPasswords no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "PermitEmptyPasswords no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "PermitEmptyPasswords no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34353,17 +34486,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "GSSAPIAuthentication no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "GSSAPIAuthentication no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "GSSAPIAuthentication no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34390,17 +34515,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "KerberosAuthentication no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "KerberosAuthentication no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "KerberosAuthentication no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34427,17 +34544,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "PermitRootLogin no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "PermitRootLogin no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "PermitRootLogin no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34464,17 +34573,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "IgnoreUserKnownHosts yes" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "IgnoreUserKnownHosts yes" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "IgnoreUserKnownHosts yes" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34501,17 +34602,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "X11Forwarding no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "X11Forwarding no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "X11Forwarding no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34538,17 +34631,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "PermitUserEnvironment no" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "PermitUserEnvironment no" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "PermitUserEnvironment no" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34575,17 +34660,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "StrictModes yes" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "StrictModes yes" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "StrictModes yes" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34612,17 +34689,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "Banner /etc/issue" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "Banner /etc/issue" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "Banner /etc/issue" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34649,17 +34718,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "PrintLastLog yes" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "PrintLastLog yes" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "PrintLastLog yes" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34692,17 +34753,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "RekeyLimit $var_rekey_limit_size $var_rekey_limit_time" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "RekeyLimit $var_rekey_limit_size $var_rekey_limit_time" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "RekeyLimit $var_rekey_limit_size $var_rekey_limit_time" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 
@@ -34774,17 +34827,9 @@ fi
 sed -i -e '$a\' "/etc/ssh/sshd_config"
 
 cp "/etc/ssh/sshd_config" "/etc/ssh/sshd_config.bak"
-# Insert before the line matching the regex '^Match'.
-line_number="$(LC_ALL=C grep -n "^Match" "/etc/ssh/sshd_config.bak" | LC_ALL=C sed 's/:.*//g')"
-if [ -z "$line_number" ]; then
-    # There was no match of '^Match', insert at
-    # the end of the file.
-    printf '%s\n' "X11UseLocalhost yes" >> "/etc/ssh/sshd_config"
-else
-    head -n "$(( line_number - 1 ))" "/etc/ssh/sshd_config.bak" > "/etc/ssh/sshd_config"
-    printf '%s\n' "X11UseLocalhost yes" >> "/etc/ssh/sshd_config"
-    tail -n "+$(( line_number ))" "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
-fi
+# Insert at the beginning of the file
+printf '%s\n' "X11UseLocalhost yes" > "/etc/ssh/sshd_config"
+cat "/etc/ssh/sshd_config.bak" >> "/etc/ssh/sshd_config"
 # Clean up after ourselves.
 rm "/etc/ssh/sshd_config.bak"
 

@@ -35964,19 +35964,19 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system audits all activities performed during nonlocal maintenance and diagnostic sessions. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | grep /var/log/faillock
+$ sudo auditctl -l | grep <sub idref="var_accounts_passwords_pam_faillock_dir" />
 
--w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to audit all activities performed during nonlocal maintenance and diagnostic sessions.</td>
     <td>The audit system already collects login information for all users
 and root. If the <tt>auditd</tt> daemon is configured to use the
@@ -35984,12 +35984,12 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -48500,19 +48500,19 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system generates audit records when successful/unsuccessful logon attempts occur. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | grep /var/log/faillock
+$ sudo auditctl -l | grep <sub idref="var_accounts_passwords_pam_faillock_dir" />
 
--w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when successful/unsuccessful logon attempts occur.</td>
     <td>The audit system already collects login information for all users
 and root. If the <tt>auditd</tt> daemon is configured to use the
@@ -48520,12 +48520,12 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -52591,19 +52591,19 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system generates audit records when concurrent logons to the same account occur from different sources. If it does not, this is a finding.</td>
     <td>Verify Red Hat Enterprise Linux 8 generates audit records for all account creations, modifications, disabling, and termination events that affect "/etc/security/opasswd" with the following command:
 
-$ sudo auditctl -l | grep /var/log/faillock
+$ sudo auditctl -l | grep <sub idref="var_accounts_passwords_pam_faillock_dir" />
 
--w /var/log/faillock -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
+-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins Is it the case that the command does not return a line, or the line is commented out?</td>
     <td>Configure the operating system to generate audit records when concurrent logons to the same account occur from different sources.</td>
     <td>The audit system already collects login information for all users
 and root. If the <tt>auditd</tt> daemon is configured to use the
@@ -52611,12 +52611,12 @@ and root. If the <tt>auditd</tt> daemon is configured to use the
 default), add the following lines to a file with suffix <tt>.rules</tt> in the
 directory <tt>/etc/audit/rules.d</tt> in order to watch for attempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre>
 If the <tt>auditd</tt> daemon is configured to use the <tt>auditctl</tt>
 utility to read audit rules during daemon startup, add the following lines to
 <tt>/etc/audit/audit.rules</tt> file in order to watch for unattempted manual
 edits of files involved in storing logon events:
-<pre>-w /var/log/faillock -p wa -k logins</pre></td>
+<pre>-w <sub idref="var_accounts_passwords_pam_faillock_dir" /> -p wa -k logins</pre></td>
     <td>medium</td>
     <td></td>
     <td></td>
@@ -55537,28 +55537,24 @@ Configuration settings are the set of parameters that can be changed in hardware
     <td>Configuring the operating system to implement organization-wide security implementation guides and security checklists ensures compliance with federal standards and establishes a common security baseline across DoD that reflects the most restrictive security posture consistent with operational requirements.
 
 Configuration settings are the set of parameters that can be changed in hardware, software, or firmware components of the system that affect the security posture and/or functionality of the system. Security-related parameters are those parameters impacting the security state of the system, including the parameters required to satisfy other security control requirements. Security-related parameters include, for example: registry settings; account, file, directory permission settings; and settings for functions, ports, protocols, services, and remote connections.</td>
-    <td>To configure the system to notify users of last logon/access
-using <tt>pam_lastlog</tt>, add or correct the <tt>pam_lastlog</tt>
-settings in
-<tt>/etc/pam.d/postlogin</tt> to read as follows:
-<pre>session     required pam_lastlog.so showfailed</pre>
-And make sure that the <tt>silent</tt> option is not set for
-<tt>pam_lastlog</tt> module.</td>
+    <td>To configure the system to notify users of last logon/access using <tt>pam_lastlog</tt>,
+add or correct the <tt>pam_lastlog</tt> settings in <tt>/etc/pam.d/postlogin</tt>
+to include <tt>showfailed</tt> option, such as:
+<pre>session     [default=1]    pam_lastlog.so showfailed</pre>
+And make sure that the <tt>silent</tt> option is not set for this specific line.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system is configured in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs. If it is not, this is a finding.</td>
     <td>Verify users are provided with feedback on when account accesses last occurred with the following command:
 
 <pre>$ sudo grep pam_lastlog /etc/pam.d/postlogin
 
-session required pam_lastlog.so showfailed</pre> Is it the case that "pam_lastlog" is missing from "/etc/pam.d/postlogin" file, or the silent option is present?</td>
+session [default=1] pam_lastlog.so showfailed</pre> Is it the case that "pam_lastlog.so" is not properly configured in "/etc/pam.d/postlogin" file?</td>
     <td>Configure the operating system in accordance with the security configuration settings based on DoD security configuration or implementation guidance, including STIGs, NSA configuration guides, CTOs, and DTMs.</td>
-    <td>To configure the system to notify users of last logon/access
-using <tt>pam_lastlog</tt>, add or correct the <tt>pam_lastlog</tt>
-settings in
-<tt>/etc/pam.d/postlogin</tt> to read as follows:
-<pre>session     required pam_lastlog.so showfailed</pre>
-And make sure that the <tt>silent</tt> option is not set for
-<tt>pam_lastlog</tt> module.</td>
+    <td>To configure the system to notify users of last logon/access using <tt>pam_lastlog</tt>,
+add or correct the <tt>pam_lastlog</tt> settings in <tt>/etc/pam.d/postlogin</tt>
+to include <tt>showfailed</tt> option, such as:
+<pre>session     [default=1]    pam_lastlog.so showfailed</pre>
+And make sure that the <tt>silent</tt> option is not set for this specific line.</td>
     <td>low</td>
     <td></td>
     <td></td>
