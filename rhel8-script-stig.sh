@@ -5185,7 +5185,7 @@ var_accounts_user_umask='077'
 readarray -t profile_files < <(find /etc/profile.d/ -type f -name '*.sh' -or -name 'sh.local')
 
 for file in "${profile_files[@]}" /etc/profile; do
-  grep -qE '^[^#]*umask' "$file" && sed -i "s/umask.*/umask $var_accounts_user_umask/g" "$file"
+  grep -qE '^[^#]*umask' "$file" && sed -i -E "s/^(\s*umask\s*)[0-7]+/\1$var_accounts_user_umask/g" "$file"
 done
 
 if ! grep -qrE '^[^#]*umask' /etc/profile*; then
@@ -5202,7 +5202,7 @@ fi
 while IFS= read -r dir; do
     while IFS= read -r -d '' file; do
         if [ "$(basename $file)" != ".bash_history" ]; then
-            sed -i 's/^\([\s]*umask\s*\)/#\1/g' "$file"
+            sed -i 's/^\(\s*umask\s*\)/#\1/g' "$file"
         fi
     done <   <(find $dir -maxdepth 1 -type f -name ".*" -print0)
 done <   <(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd)
