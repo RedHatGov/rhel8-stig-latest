@@ -6400,28 +6400,28 @@ The <code>auditd</code> service can be enabled with the following command:
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must produce audit records containing information to establish where the events occurred.</td>
 
-    <td>CCE-82897-0: Set hostname as computer node name in audit logs</td>
+    <td>CCE-82897-0: Set type of computer node name logging in audit logs</td>
 
     <td>Without establishing where events occurred, it is impossible to establish, correlate, and investigate the events leading up to an outage or attack.
 
 In order to compile an accurate risk assessment and provide forensic analysis, it is essential for security personnel to know where events occurred, such as operating system components, modules, device identifiers, node names, file names, and functionality.
 
 Associating information about where the event occurred within the operating system provides a means of investigating an attack; recognizing resource utilization or capacity thresholds; or identifying an improperly configured operating system.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system produces audit records containing information to establish where the events occurred. If it does not, this is a finding.</td>
-    <td>To verify that Audit Daemon is configured to record the hostname
-in audit events, run the following command:
+    <td>To verify that Audit Daemon is configured to record the computer node
+name in the audit events, run the following command:
 <pre>$ sudo grep name_format /etc/audit/auditd.conf</pre>
 The output should return the following:
-<pre>name_format = hostname</pre> Is it the case that name_format isn't set to hostname?</td>
+<pre>name_format = <sub idref="var_auditd_name_format" /></pre> Is it the case that name_format isn't set to <sub idref="var_auditd_name_format" />?</td>
     <td>Configure the operating system to produce audit records containing information to establish where the events occurred.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>medium</td>
     <td></td>
@@ -30624,26 +30624,26 @@ following command:
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must off-load audit records onto a different system or media from the system being audited.</td>
 
-    <td>CCE-82897-0: Set hostname as computer node name in audit logs</td>
+    <td>CCE-82897-0: Set type of computer node name logging in audit logs</td>
 
     <td>Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
 
 Off-loading is a common process in information systems with limited audit storage capacity.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system off-loads audit records onto a different system or media from the system being audited. If it does not, this is a finding.</td>
-    <td>To verify that Audit Daemon is configured to record the hostname
-in audit events, run the following command:
+    <td>To verify that Audit Daemon is configured to record the computer node
+name in the audit events, run the following command:
 <pre>$ sudo grep name_format /etc/audit/auditd.conf</pre>
 The output should return the following:
-<pre>name_format = hostname</pre> Is it the case that name_format isn't set to hostname?</td>
+<pre>name_format = <sub idref="var_auditd_name_format" /></pre> Is it the case that name_format isn't set to <sub idref="var_auditd_name_format" />?</td>
     <td>Configure the operating system to off-load audit records onto a different system or media from the system being audited.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>medium</td>
     <td></td>
@@ -54096,26 +54096,26 @@ and continuous monitoring tests in place.</td>
     <td><i>TBD - Assigned by DISA after STIG release</i></td>
     <td>The operating system must, at a minimum, off-load audit data from interconnected systems in real time and off-load audit data from standalone systems weekly.</td>
 
-    <td>CCE-82897-0: Set hostname as computer node name in audit logs</td>
+    <td>CCE-82897-0: Set type of computer node name logging in audit logs</td>
 
     <td>Information stored in one location is vulnerable to accidental or incidental deletion or alteration.
 
 Off-loading is a common process in information systems with limited audit storage capacity.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>Applicable - Configurable</td>
     <td>Verify the operating system, at a minimum, off-loads interconnected systems in real time and off-loads standalone systems weekly. If it does not, this is a finding.</td>
-    <td>To verify that Audit Daemon is configured to record the hostname
-in audit events, run the following command:
+    <td>To verify that Audit Daemon is configured to record the computer node
+name in the audit events, run the following command:
 <pre>$ sudo grep name_format /etc/audit/auditd.conf</pre>
 The output should return the following:
-<pre>name_format = hostname</pre> Is it the case that name_format isn't set to hostname?</td>
+<pre>name_format = <sub idref="var_auditd_name_format" /></pre> Is it the case that name_format isn't set to <sub idref="var_auditd_name_format" />?</td>
     <td>Configure the operating system to, at a minimum, off-load interconnected systems in real time and off-load standalone systems weekly.</td>
-    <td>To configure Audit daemon to use value returned by gethostname
-syscall as computer node name in the audit events,
-set <tt>name_format</tt> to <tt>hostname</tt>
+    <td>To configure Audit daemon to use a unique identifier
+as computer node name in the audit events,
+set <tt>name_format</tt> to <tt><sub idref="var_auditd_name_format" /></tt>
 in <tt>/etc/audit/auditd.conf</tt>.</td>
     <td>medium</td>
     <td></td>

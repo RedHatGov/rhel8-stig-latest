@@ -78,6 +78,7 @@
     var_auditd_action_mail_acct: !!str root
     var_auditd_space_left_action: !!str email
     var_auditd_space_left_percentage: !!str 25
+    var_auditd_name_format: !!str hostname|fqd|numeric
     rsyslog_remote_loghost_address: !!str logcollector
     sysctl_net_ipv6_conf_all_accept_ra_value: !!str 0
     sysctl_net_ipv6_conf_all_accept_redirects_value: !!str 0
@@ -34686,7 +34687,27 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Set hostname as computer node name in audit logs
+
+    - name: Set type of computer node name logging in audit logs - Define Value to Be
+        Used in the Remediation
+      ansible.builtin.set_fact: auditd_name_format_split="{{ var_auditd_name_format.split('|')[0]
+        }}"
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-82897-0
+      - DISA-STIG-RHEL-08-030062
+      - NIST-800-53-AU-3
+      - NIST-800-53-CM-6
+      - auditd_name_format
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Set type of computer node name logging in audit logs
       block:
 
       - name: Check for duplicate values
@@ -34712,7 +34733,7 @@
           path: /etc/audit/auditd.conf
           create: true
           regexp: (?i)^\s*name_format\s*=\s*
-          line: name_format = hostname
+          line: name_format = {{ auditd_name_format_split }}
           state: present
       when:
       - '"audit" in ansible_facts.packages'

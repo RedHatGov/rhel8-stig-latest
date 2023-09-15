@@ -29492,6 +29492,11 @@ fi
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
+var_auditd_name_format='hostname|fqd|numeric'
+
+
+var_auditd_name_format="$(echo $var_auditd_name_format | cut -d \| -f 1)"
+
 if [ -e "/etc/audit/auditd.conf" ] ; then
     
     LC_ALL=C sed -i "/^\s*name_format\s*=\s*/Id" "/etc/audit/auditd.conf"
@@ -29503,7 +29508,7 @@ sed -i -e '$a\' "/etc/audit/auditd.conf"
 
 cp "/etc/audit/auditd.conf" "/etc/audit/auditd.conf.bak"
 # Insert at the end of the file
-printf '%s\n' "name_format = hostname" >> "/etc/audit/auditd.conf"
+printf '%s\n' "name_format = $var_auditd_name_format" >> "/etc/audit/auditd.conf"
 # Clean up after ourselves.
 rm "/etc/audit/auditd.conf.bak"
 
