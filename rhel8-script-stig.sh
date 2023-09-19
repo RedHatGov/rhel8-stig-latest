@@ -7515,7 +7515,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 166/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -7851,7 +7851,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 167/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -10845,7 +10845,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 174/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -15777,7 +15777,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 185/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -16447,7 +16447,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 187/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -16782,7 +16782,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 188/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -17452,7 +17452,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 190/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system
@@ -18752,7 +18752,7 @@ fi
 ###############################################################################
 (>&2 echo "Remediating rule 192/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
 # First perform the remediation of the syscall rule
 # Retrieve hardware architecture of the underlying system

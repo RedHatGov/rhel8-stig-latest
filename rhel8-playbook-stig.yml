@@ -17194,6 +17194,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -17342,6 +17343,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80685-1
       - CJIS-5.4.1.1
@@ -17488,6 +17490,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80685-1
@@ -17533,6 +17536,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -17683,6 +17687,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80686-9
       - CJIS-5.4.1.1
@@ -17831,6 +17836,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80686-9
@@ -20454,6 +20460,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -20604,6 +20611,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80693-5
       - CJIS-5.4.1.1
@@ -20752,6 +20760,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80693-5
@@ -24134,6 +24143,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -24285,6 +24295,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80703-2
       - DISA-STIG-RHEL-08-030361
@@ -24434,6 +24445,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80703-2
@@ -24820,6 +24832,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -24971,6 +24984,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80705-7
       - DISA-STIG-RHEL-08-030361
@@ -25120,6 +25134,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80705-7
@@ -25163,6 +25178,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -25314,6 +25330,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80706-5
       - DISA-STIG-RHEL-08-030361
@@ -25463,6 +25480,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80706-5
@@ -25851,6 +25869,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -26006,6 +26025,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80751-1
       - DISA-STIG-RHEL-08-030420
@@ -26159,6 +26179,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80751-1
@@ -26313,6 +26334,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80751-1
       - DISA-STIG-RHEL-08-030420
@@ -26466,6 +26488,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80751-1
@@ -27175,6 +27198,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - ansible_architecture == "aarch64" or ansible_architecture == "ppc64" or ansible_architecture
         == "ppc64le" or ansible_architecture == "s390x" or ansible_architecture == "x86_64"
       tags:
@@ -27330,6 +27354,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80753-7
       - DISA-STIG-RHEL-08-030420
@@ -27483,6 +27508,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80753-7
@@ -27637,6 +27663,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       tags:
       - CCE-80753-7
       - DISA-STIG-RHEL-08-030420
@@ -27790,6 +27817,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - not ( ansible_architecture == "aarch64" )
       - audit_arch == "b64"
       tags:
       - CCE-80753-7
