@@ -127,8 +127,8 @@
       - package_aide_installed
 
 
-    - name: Ensure AIDE is installed
-      package:
+    - name: Build and Test AIDE Database - Ensure AIDE Is Installed
+      ansible.builtin.package:
         name: '{{ item }}'
         state: present
       with_items:
@@ -148,8 +148,8 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Build and Test AIDE Database
-      command: /usr/sbin/aide --init
+    - name: Build and Test AIDE Database - Build and Test AIDE Database
+      ansible.builtin.command: /usr/sbin/aide --init
       changed_when: true
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
@@ -166,8 +166,8 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Check whether the stock AIDE Database exists
-      stat:
+    - name: Build and Test AIDE Database - Check Whether the Stock AIDE Database Exists
+      ansible.builtin.stat:
         path: /var/lib/aide/aide.db.new.gz
       register: aide_database_stat
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
@@ -185,8 +185,8 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Stage AIDE Database
-      copy:
+    - name: Build and Test AIDE Database - Stage AIDE Database
+      ansible.builtin.copy:
         src: /var/lib/aide/aide.db.new.gz
         dest: /var/lib/aide/aide.db.gz
         backup: true
