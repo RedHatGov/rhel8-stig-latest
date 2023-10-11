@@ -765,7 +765,6 @@ then
     fi
 fi
 
-
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/login-screen\\]" "${DCONFFILE}"
 then
@@ -833,7 +832,6 @@ then
         sed -Ei "s/(^\s*)removal-action(\s*=)/#\1removal-action\2/g" "${SETTINGSFILES[@]}"
     fi
 fi
-
 
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/settings-daemon/peripherals/smartcard\\]" "${DCONFFILE}"
@@ -930,7 +928,6 @@ then
     fi
 fi
 
-
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/desktop/session\\]" "${DCONFFILE}"
 then
@@ -983,7 +980,6 @@ then
     fi
 fi
 
-
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/desktop/screensaver\\]" "${DCONFFILE}"
 then
@@ -1032,7 +1028,6 @@ then
         sed -Ei "s/(^\s*)lock-enabled(\s*=)/#\1lock-enabled\2/g" "${SETTINGSFILES[@]}"
     fi
 fi
-
 
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/desktop/screensaver\\]" "${DCONFFILE}"
@@ -1167,7 +1162,6 @@ then
         sed -Ei "s/(^\s*)logout(\s*=)/#\1logout\2/g" "${SETTINGSFILES[@]}"
     fi
 fi
-
 
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/settings-daemon/plugins/media-keys\\]" "${DCONFFILE}"
@@ -1859,7 +1853,6 @@ then
     fi
 fi
 
-
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/login-screen\\]" "${DCONFFILE}"
 then
@@ -1946,7 +1939,6 @@ then
         sed -Ei "s/(^\s*)banner-message-text(\s*=)/#\1banner-message-text\2/g" "${SETTINGSFILES[@]}"
     fi
 fi
-
 
 [ ! -z "${DCONFFILE}" ] && echo "" >> "${DCONFFILE}"
 if ! grep -q "\\[org/gnome/login-screen\\]" "${DCONFFILE}"
@@ -5390,7 +5382,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -5549,7 +5540,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -6021,7 +6011,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -6180,7 +6169,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -6341,7 +6329,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -6500,7 +6487,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -7560,7 +7546,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -7719,7 +7704,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -7896,7 +7880,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -8055,7 +8038,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8232,7 +8214,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -8391,7 +8372,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8568,7 +8548,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -8727,7 +8706,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -8904,7 +8882,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -9063,7 +9040,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9240,7 +9216,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -9399,7 +9374,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9576,7 +9550,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -9735,7 +9708,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -9897,7 +9869,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -10056,7 +10027,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10233,7 +10203,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -10392,7 +10361,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10554,7 +10522,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -10713,7 +10680,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -10890,7 +10856,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -11049,7 +11014,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11226,7 +11190,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -11385,7 +11348,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11547,7 +11509,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -11706,7 +11667,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -11883,7 +11843,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -12042,7 +12001,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12204,7 +12162,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -12363,7 +12320,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12540,7 +12496,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -12699,7 +12654,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -12861,7 +12815,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -13020,7 +12973,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13197,7 +13149,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -13356,7 +13307,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13518,7 +13468,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -13677,7 +13626,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -13847,7 +13795,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -14006,7 +13953,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14175,7 +14121,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -14334,7 +14279,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14503,7 +14447,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -14662,7 +14605,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -14831,7 +14773,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -14990,7 +14931,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15159,7 +15099,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -15318,7 +15257,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15487,7 +15425,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -15646,7 +15583,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -15821,7 +15757,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -15980,7 +15915,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16156,7 +16090,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -16315,7 +16248,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16491,7 +16423,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -16650,7 +16581,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -16826,7 +16756,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -16985,7 +16914,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17161,7 +17089,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -17320,7 +17247,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17497,7 +17423,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -17656,7 +17581,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -17811,7 +17735,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -17970,7 +17893,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18147,7 +18069,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -18306,7 +18227,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18461,7 +18381,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -18620,7 +18539,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -18797,7 +18715,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -18956,7 +18873,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -19111,7 +19027,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -19270,7 +19185,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -19447,7 +19361,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -19606,7 +19519,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -19761,7 +19673,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -19920,7 +19831,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20097,7 +20007,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -20256,7 +20165,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20411,7 +20319,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -20570,7 +20477,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -20747,7 +20653,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -20906,7 +20811,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21061,7 +20965,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -21220,7 +21123,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21402,7 +21304,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -21561,7 +21462,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -21743,7 +21643,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -21902,7 +21801,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -22084,7 +21982,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -22243,7 +22140,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -22713,7 +22609,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -22872,7 +22767,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23041,7 +22935,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -23200,7 +23093,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23369,7 +23261,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -23528,7 +23419,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -23697,7 +23587,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -23856,7 +23745,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24033,7 +23921,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -24192,7 +24079,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24361,7 +24247,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -24520,7 +24405,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -24689,7 +24573,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -24848,7 +24731,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25017,7 +24899,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -25176,7 +25057,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25345,7 +25225,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -25504,7 +25383,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -25673,7 +25551,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -25832,7 +25709,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26001,7 +25877,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -26160,7 +26035,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26329,7 +26203,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -26488,7 +26361,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26657,7 +26529,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -26816,7 +26687,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -26985,7 +26855,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -27144,7 +27013,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -27313,7 +27181,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -27472,7 +27339,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -27641,7 +27507,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -27800,7 +27665,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -27969,7 +27833,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -28128,7 +27991,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -28297,7 +28159,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -28456,7 +28317,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
@@ -28625,7 +28485,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 #
 files_to_inspect=()
 
-
 # If audit tool is 'augenrules', then check if the audit rule is defined
 # If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
 # If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
@@ -28784,7 +28643,6 @@ read -a syscall_grouping <<< $SYSCALL_GROUPING
 # -----------------------------------------------------------------------------------------
 #
 files_to_inspect=()
-
 
 
 # If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
