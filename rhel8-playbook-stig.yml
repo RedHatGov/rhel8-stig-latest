@@ -42235,6 +42235,78 @@
       - service_fapolicyd_enabled
 
 
+    - name: Configure Fapolicy Module to Employ a Deny-all, Permit-by-exception Policy
+        to Allow the Execution of Authorized Software Programs. - Ensure a Final Rule
+        Denying Everything
+      ansible.builtin.copy:
+        content: |
+          # Red Hat KCS 7003854 (https://access.redhat.com/solutions/7003854)
+          deny perm=any all : all
+        dest: /etc/fapolicyd/rules.d/99-deny-everything.rules
+        owner: root
+        group: fapolicyd
+        mode: '0644'
+      register: result_fapolicyd_final_rule
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-86478-5
+      - DISA-STIG-RHEL-08-040137
+      - NIST-800-53-CM-6 b
+      - NIST-800-53-CM-7 (2)
+      - NIST-800-53-CM-7 (5) (b)
+      - fapolicy_default_deny
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Configure Fapolicy Module to Employ a Deny-all, Permit-by-exception Policy
+        to Allow the Execution of Authorized Software Programs. - Ensure fapolicyd is
+        Not Permissive
+      ansible.builtin.lineinfile:
+        path: /etc/fapolicyd/fapolicyd.conf
+        regexp: ^(permissive\s*=).*$
+        line: \1 0
+        backrefs: true
+      register: result_fapolicyd_enforced
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-86478-5
+      - DISA-STIG-RHEL-08-040137
+      - NIST-800-53-CM-6 b
+      - NIST-800-53-CM-7 (2)
+      - NIST-800-53-CM-7 (5) (b)
+      - fapolicy_default_deny
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Configure Fapolicy Module to Employ a Deny-all, Permit-by-exception Policy
+        to Allow the Execution of Authorized Software Programs. - Restart fapolicyd If
+        Permissive Mode or Final Rule is Changed
+      ansible.builtin.service:
+        name: fapolicyd
+        state: restarted
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - result_fapolicyd_final_rule is changed or result_fapolicyd_enforced is changed
+      tags:
+      - CCE-86478-5
+      - DISA-STIG-RHEL-08-040137
+      - NIST-800-53-CM-6 b
+      - NIST-800-53-CM-7 (2)
+      - NIST-800-53-CM-7 (5) (b)
+      - fapolicy_default_deny
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+
     - name: Ensure vsftpd is removed
       package:
         name: vsftpd
