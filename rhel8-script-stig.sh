@@ -149,6 +149,7 @@ fi
 var_aide_scan_notification_email='root@localhost'
 
 
+
 CRONTAB=/etc/crontab
 CRONDIRS='/etc/cron.d /etc/cron.daily /etc/cron.weekly /etc/cron.monthly'
 
