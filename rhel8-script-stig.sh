@@ -32,9 +32,9 @@
 ###############################################################################
 
 ###############################################################################
-# BEGIN fix (1 / 403) for 'xccdf_org.ssgproject.content_rule_package_aide_installed'
+# BEGIN fix (1 / 410) for 'xccdf_org.ssgproject.content_rule_package_aide_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 1/403: 'xccdf_org.ssgproject.content_rule_package_aide_installed'")
+(>&2 echo "Remediating rule 1/410: 'xccdf_org.ssgproject.content_rule_package_aide_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -49,9 +49,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_aide_installed'
 
 ###############################################################################
-# BEGIN fix (2 / 403) for 'xccdf_org.ssgproject.content_rule_aide_build_database'
+# BEGIN fix (2 / 410) for 'xccdf_org.ssgproject.content_rule_aide_build_database'
 ###############################################################################
-(>&2 echo "Remediating rule 2/403: 'xccdf_org.ssgproject.content_rule_aide_build_database'")
+(>&2 echo "Remediating rule 2/410: 'xccdf_org.ssgproject.content_rule_aide_build_database'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -69,9 +69,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_aide_build_database'
 
 ###############################################################################
-# BEGIN fix (3 / 403) for 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'
+# BEGIN fix (3 / 410) for 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'
 ###############################################################################
-(>&2 echo "Remediating rule 3/403: 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'")
+(>&2 echo "Remediating rule 3/410: 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -137,9 +137,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_aide_check_audit_tools'
 
 ###############################################################################
-# BEGIN fix (4 / 403) for 'xccdf_org.ssgproject.content_rule_aide_scan_notification'
+# BEGIN fix (4 / 410) for 'xccdf_org.ssgproject.content_rule_aide_scan_notification'
 ###############################################################################
-(>&2 echo "Remediating rule 4/403: 'xccdf_org.ssgproject.content_rule_aide_scan_notification'")
+(>&2 echo "Remediating rule 4/410: 'xccdf_org.ssgproject.content_rule_aide_scan_notification'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -173,9 +173,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_aide_scan_notification'
 
 ###############################################################################
-# BEGIN fix (5 / 403) for 'xccdf_org.ssgproject.content_rule_aide_verify_acls'
+# BEGIN fix (5 / 410) for 'xccdf_org.ssgproject.content_rule_aide_verify_acls'
 ###############################################################################
-(>&2 echo "Remediating rule 5/403: 'xccdf_org.ssgproject.content_rule_aide_verify_acls'")
+(>&2 echo "Remediating rule 5/410: 'xccdf_org.ssgproject.content_rule_aide_verify_acls'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -210,9 +210,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_aide_verify_acls'
 
 ###############################################################################
-# BEGIN fix (6 / 403) for 'xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes'
+# BEGIN fix (6 / 410) for 'xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes'
 ###############################################################################
-(>&2 echo "Remediating rule 6/403: 'xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes'")
+(>&2 echo "Remediating rule 6/410: 'xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -247,9 +247,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_aide_verify_ext_attributes'
 
 ###############################################################################
-# BEGIN fix (7 / 403) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_group_ownership'
+# BEGIN fix (7 / 410) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_group_ownership'
 ###############################################################################
-(>&2 echo "Remediating rule 7/403: 'xccdf_org.ssgproject.content_rule_file_audit_tools_group_ownership'")
+(>&2 echo "Remediating rule 7/410: 'xccdf_org.ssgproject.content_rule_file_audit_tools_group_ownership'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -268,9 +268,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_audit_tools_group_ownership'
 
 ###############################################################################
-# BEGIN fix (8 / 403) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_ownership'
+# BEGIN fix (8 / 410) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_ownership'
 ###############################################################################
-(>&2 echo "Remediating rule 8/403: 'xccdf_org.ssgproject.content_rule_file_audit_tools_ownership'")
+(>&2 echo "Remediating rule 8/410: 'xccdf_org.ssgproject.content_rule_file_audit_tools_ownership'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -289,9 +289,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_audit_tools_ownership'
 
 ###############################################################################
-# BEGIN fix (9 / 403) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_permissions'
+# BEGIN fix (9 / 410) for 'xccdf_org.ssgproject.content_rule_file_audit_tools_permissions'
 ###############################################################################
-(>&2 echo "Remediating rule 9/403: 'xccdf_org.ssgproject.content_rule_file_audit_tools_permissions'")
+(>&2 echo "Remediating rule 9/410: 'xccdf_org.ssgproject.content_rule_file_audit_tools_permissions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -316,9 +316,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_audit_tools_permissions'
 
 ###############################################################################
-# BEGIN fix (10 / 403) for 'xccdf_org.ssgproject.content_rule_enable_dracut_fips_module'
+# BEGIN fix (10 / 410) for 'xccdf_org.ssgproject.content_rule_enable_dracut_fips_module'
 ###############################################################################
-(>&2 echo "Remediating rule 10/403: 'xccdf_org.ssgproject.content_rule_enable_dracut_fips_module'")
+(>&2 echo "Remediating rule 10/410: 'xccdf_org.ssgproject.content_rule_enable_dracut_fips_module'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! ( [ "${container:-}" == "bwrap-osbuild" ] ) ); then
 
@@ -335,9 +335,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_enable_dracut_fips_module'
 
 ###############################################################################
-# BEGIN fix (11 / 403) for 'xccdf_org.ssgproject.content_rule_enable_fips_mode'
+# BEGIN fix (11 / 410) for 'xccdf_org.ssgproject.content_rule_enable_fips_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 11/403: 'xccdf_org.ssgproject.content_rule_enable_fips_mode'")
+(>&2 echo "Remediating rule 11/410: 'xccdf_org.ssgproject.content_rule_enable_fips_mode'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! ( [ "${container:-}" == "bwrap-osbuild" ] ) ) && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -368,17 +368,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_enable_fips_mode'
 
 ###############################################################################
-# BEGIN fix (12 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled'
+# BEGIN fix (12 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 12/403: 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled'")
+(>&2 echo "Remediating rule 12/410: 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_crypto_fips_enabled'
 
 ###############################################################################
-# BEGIN fix (13 / 403) for 'xccdf_org.ssgproject.content_rule_configure_bind_crypto_policy'
+# BEGIN fix (13 / 410) for 'xccdf_org.ssgproject.content_rule_configure_bind_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 13/403: 'xccdf_org.ssgproject.content_rule_configure_bind_crypto_policy'")
+(>&2 echo "Remediating rule 13/410: 'xccdf_org.ssgproject.content_rule_configure_bind_crypto_policy'")
 
 function remediate_bind_crypto_policy() {
 	CONFIG_FILE="/etc/named.conf"
@@ -396,9 +396,9 @@ remediate_bind_crypto_policy
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_bind_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (14 / 403) for 'xccdf_org.ssgproject.content_rule_configure_crypto_policy'
+# BEGIN fix (14 / 410) for 'xccdf_org.ssgproject.content_rule_configure_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 14/403: 'xccdf_org.ssgproject.content_rule_configure_crypto_policy'")
+(>&2 echo "Remediating rule 14/410: 'xccdf_org.ssgproject.content_rule_configure_crypto_policy'")
 
 var_system_crypto_policy='FIPS'
 
@@ -421,9 +421,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (15 / 403) for 'xccdf_org.ssgproject.content_rule_configure_gnutls_tls_crypto_policy'
+# BEGIN fix (15 / 410) for 'xccdf_org.ssgproject.content_rule_configure_gnutls_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 15/403: 'xccdf_org.ssgproject.content_rule_configure_gnutls_tls_crypto_policy'")
+(>&2 echo "Remediating rule 15/410: 'xccdf_org.ssgproject.content_rule_configure_gnutls_tls_crypto_policy'")
 
 CONF_FILE=/etc/crypto-policies/back-ends/gnutls.config
 correct_value='+VERS-ALL:-VERS-DTLS0.9:-VERS-SSL3.0:-VERS-TLS1.0:-VERS-TLS1.1:-VERS-DTLS1.0'
@@ -450,9 +450,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_gnutls_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (16 / 403) for 'xccdf_org.ssgproject.content_rule_configure_kerberos_crypto_policy'
+# BEGIN fix (16 / 410) for 'xccdf_org.ssgproject.content_rule_configure_kerberos_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 16/403: 'xccdf_org.ssgproject.content_rule_configure_kerberos_crypto_policy'")
+(>&2 echo "Remediating rule 16/410: 'xccdf_org.ssgproject.content_rule_configure_kerberos_crypto_policy'")
 
 rm -f /etc/krb5.conf.d/crypto-policies
 ln -s /etc/crypto-policies/back-ends/krb5.config /etc/krb5.conf.d/crypto-policies
@@ -460,9 +460,9 @@ ln -s /etc/crypto-policies/back-ends/krb5.config /etc/krb5.conf.d/crypto-policie
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_kerberos_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (17 / 403) for 'xccdf_org.ssgproject.content_rule_configure_libreswan_crypto_policy'
+# BEGIN fix (17 / 410) for 'xccdf_org.ssgproject.content_rule_configure_libreswan_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 17/403: 'xccdf_org.ssgproject.content_rule_configure_libreswan_crypto_policy'")
+(>&2 echo "Remediating rule 17/410: 'xccdf_org.ssgproject.content_rule_configure_libreswan_crypto_policy'")
 
 function remediate_libreswan_crypto_policy() {
     CONFIG_FILE="/etc/ipsec.conf"
@@ -478,9 +478,9 @@ remediate_libreswan_crypto_policy
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_libreswan_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (18 / 403) for 'xccdf_org.ssgproject.content_rule_configure_openssl_crypto_policy'
+# BEGIN fix (18 / 410) for 'xccdf_org.ssgproject.content_rule_configure_openssl_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 18/403: 'xccdf_org.ssgproject.content_rule_configure_openssl_crypto_policy'")
+(>&2 echo "Remediating rule 18/410: 'xccdf_org.ssgproject.content_rule_configure_openssl_crypto_policy'")
 
 OPENSSL_CRYPTO_POLICY_SECTION='[ crypto_policy ]'
 OPENSSL_CRYPTO_POLICY_SECTION_REGEX='\[\s*crypto_policy\s*\]'
@@ -515,17 +515,17 @@ remediate_openssl_crypto_policy
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_openssl_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (19 / 403) for 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy'
+# BEGIN fix (19 / 410) for 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 19/403: 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy'")
+(>&2 echo "Remediating rule 19/410: 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_openssl_tls_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (20 / 403) for 'xccdf_org.ssgproject.content_rule_configure_ssh_crypto_policy'
+# BEGIN fix (20 / 410) for 'xccdf_org.ssgproject.content_rule_configure_ssh_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 20/403: 'xccdf_org.ssgproject.content_rule_configure_ssh_crypto_policy'")
+(>&2 echo "Remediating rule 20/410: 'xccdf_org.ssgproject.content_rule_configure_ssh_crypto_policy'")
 
 SSH_CONF="/etc/sysconfig/sshd"
 
@@ -534,9 +534,9 @@ sed -i "/^\s*CRYPTO_POLICY.*$/Id" $SSH_CONF
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_ssh_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (21 / 403) for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'
+# BEGIN fix (21 / 410) for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 21/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'")
+(>&2 echo "Remediating rule 21/410: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'")
 
 sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com'
 
@@ -559,9 +559,9 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 # END fix for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_openssh_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (22 / 403) for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'
+# BEGIN fix (22 / 410) for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 22/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
+(>&2 echo "Remediating rule 22/410: 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'")
 
 sshd_approved_ciphers='aes256-ctr,aes192-ctr,aes128-ctr,aes256-gcm@openssh.com,aes128-gcm@openssh.com'
 
@@ -597,9 +597,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_harden_sshd_ciphers_opensshserver_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (23 / 403) for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_openssh_conf_crypto_policy'
+# BEGIN fix (23 / 410) for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_openssh_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 23/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_openssh_conf_crypto_policy'")
+(>&2 echo "Remediating rule 23/410: 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_openssh_conf_crypto_policy'")
 
 sshd_approved_macs='hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com'
 
@@ -622,9 +622,9 @@ rm "/etc/crypto-policies/back-ends/openssh.config.bak"
 # END fix for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_openssh_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (24 / 403) for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_opensshserver_conf_crypto_policy'
+# BEGIN fix (24 / 410) for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_opensshserver_conf_crypto_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 24/403: 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_opensshserver_conf_crypto_policy'")
+(>&2 echo "Remediating rule 24/410: 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_opensshserver_conf_crypto_policy'")
 
 sshd_approved_macs='hmac-sha2-512,hmac-sha2-256,hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com'
 
@@ -660,89 +660,89 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_harden_sshd_macs_opensshserver_conf_crypto_policy'
 
 ###############################################################################
-# BEGIN fix (25 / 403) for 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported'
+# BEGIN fix (25 / 410) for 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported'
 ###############################################################################
-(>&2 echo "Remediating rule 25/403: 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported'")
+(>&2 echo "Remediating rule 25/410: 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_installed_OS_is_vendor_supported'
 
 ###############################################################################
-# BEGIN fix (26 / 403) for 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed'
+# BEGIN fix (26 / 410) for 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 26/403: 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed'")
+(>&2 echo "Remediating rule 26/410: 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_package_mcafeetp_installed'
 
 ###############################################################################
-# BEGIN fix (27 / 403) for 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running'
+# BEGIN fix (27 / 410) for 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running'
 ###############################################################################
-(>&2 echo "Remediating rule 27/403: 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running'")
+(>&2 echo "Remediating rule 27/410: 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_agent_mfetpd_running'
 
 ###############################################################################
-# BEGIN fix (28 / 403) for 'xccdf_org.ssgproject.content_rule_encrypt_partitions'
+# BEGIN fix (28 / 410) for 'xccdf_org.ssgproject.content_rule_encrypt_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 28/403: 'xccdf_org.ssgproject.content_rule_encrypt_partitions'")
+(>&2 echo "Remediating rule 28/410: 'xccdf_org.ssgproject.content_rule_encrypt_partitions'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_encrypt_partitions' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_encrypt_partitions'
 
 ###############################################################################
-# BEGIN fix (29 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_home'
+# BEGIN fix (29 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_home'
 ###############################################################################
-(>&2 echo "Remediating rule 29/403: 'xccdf_org.ssgproject.content_rule_partition_for_home'")
+(>&2 echo "Remediating rule 29/410: 'xccdf_org.ssgproject.content_rule_partition_for_home'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_home' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_home'
 
 ###############################################################################
-# BEGIN fix (30 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_tmp'
+# BEGIN fix (30 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 30/403: 'xccdf_org.ssgproject.content_rule_partition_for_tmp'")
+(>&2 echo "Remediating rule 30/410: 'xccdf_org.ssgproject.content_rule_partition_for_tmp'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_tmp' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_tmp'
 
 ###############################################################################
-# BEGIN fix (31 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_var'
+# BEGIN fix (31 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_var'
 ###############################################################################
-(>&2 echo "Remediating rule 31/403: 'xccdf_org.ssgproject.content_rule_partition_for_var'")
+(>&2 echo "Remediating rule 31/410: 'xccdf_org.ssgproject.content_rule_partition_for_var'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_var'
 
 ###############################################################################
-# BEGIN fix (32 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_var_log'
+# BEGIN fix (32 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 32/403: 'xccdf_org.ssgproject.content_rule_partition_for_var_log'")
+(>&2 echo "Remediating rule 32/410: 'xccdf_org.ssgproject.content_rule_partition_for_var_log'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_log' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_var_log'
 
 ###############################################################################
-# BEGIN fix (33 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'
+# BEGIN fix (33 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 33/403: 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'")
+(>&2 echo "Remediating rule 33/410: 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (34 / 403) for 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'
+# BEGIN fix (34 / 410) for 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'
 ###############################################################################
-(>&2 echo "Remediating rule 34/403: 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'")
+(>&2 echo "Remediating rule 34/410: 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_partition_for_var_tmp'
 
 ###############################################################################
-# BEGIN fix (35 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_user_list'
+# BEGIN fix (35 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_user_list'
 ###############################################################################
-(>&2 echo "Remediating rule 35/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_user_list'")
+(>&2 echo "Remediating rule 35/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_user_list'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -808,9 +808,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_user_list'
 
 ###############################################################################
-# BEGIN fix (36 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_lock_screen_on_smartcard_removal'
+# BEGIN fix (36 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_lock_screen_on_smartcard_removal'
 ###############################################################################
-(>&2 echo "Remediating rule 36/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_lock_screen_on_smartcard_removal'")
+(>&2 echo "Remediating rule 36/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_lock_screen_on_smartcard_removal'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -876,9 +876,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_lock_screen_on_smartcard_removal'
 
 ###############################################################################
-# BEGIN fix (37 / 403) for 'xccdf_org.ssgproject.content_rule_gnome_gdm_disable_automatic_login'
+# BEGIN fix (37 / 410) for 'xccdf_org.ssgproject.content_rule_gnome_gdm_disable_automatic_login'
 ###############################################################################
-(>&2 echo "Remediating rule 37/403: 'xccdf_org.ssgproject.content_rule_gnome_gdm_disable_automatic_login'")
+(>&2 echo "Remediating rule 37/410: 'xccdf_org.ssgproject.content_rule_gnome_gdm_disable_automatic_login'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -900,9 +900,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_gnome_gdm_disable_automatic_login'
 
 ###############################################################################
-# BEGIN fix (38 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_idle_delay'
+# BEGIN fix (38 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_idle_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 38/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_idle_delay'")
+(>&2 echo "Remediating rule 38/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_idle_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -952,9 +952,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_idle_delay'
 
 ###############################################################################
-# BEGIN fix (39 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_delay'
+# BEGIN fix (39 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 39/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_delay'")
+(>&2 echo "Remediating rule 39/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -1004,9 +1004,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_delay'
 
 ###############################################################################
-# BEGIN fix (40 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_enabled'
+# BEGIN fix (40 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 40/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_enabled'")
+(>&2 echo "Remediating rule 40/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -1072,9 +1072,42 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_enabled'
 
 ###############################################################################
-# BEGIN fix (41 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_user_locks'
+# BEGIN fix (41 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_locked'
 ###############################################################################
-(>&2 echo "Remediating rule 41/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_user_locks'")
+(>&2 echo "Remediating rule 41/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_locked'")
+# Remediation is applicable only in certain platforms
+if rpm --quiet -q gdm; then
+
+# Check for setting in any of the DConf db directories
+LOCKFILES=$(grep -r "^/org/gnome/desktop/screensaver/lock-enabled$" "/etc/dconf/db/" \
+            | grep -v 'distro\|ibus\|local.d' | grep ":" | cut -d":" -f1)
+LOCKSFOLDER="/etc/dconf/db/local.d/locks"
+
+mkdir -p "${LOCKSFOLDER}"
+
+# Comment out the configurations in databases different from the target one
+if [[ ! -z "${LOCKFILES}" ]]
+then
+    sed -i -E "s|^/org/gnome/desktop/screensaver/lock-enabled$|#&|" "${LOCKFILES[@]}"
+fi
+
+if ! grep -qr "^/org/gnome/desktop/screensaver/lock-enabled$" /etc/dconf/db/local.d/
+then
+    echo "/org/gnome/desktop/screensaver/lock-enabled" >> "/etc/dconf/db/local.d/locks/00-security-settings-lock"
+fi
+
+dconf update
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
+
+# END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_lock_locked'
+
+###############################################################################
+# BEGIN fix (42 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_user_locks'
+###############################################################################
+(>&2 echo "Remediating rule 42/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_user_locks'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -1105,9 +1138,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_screensaver_user_locks'
 
 ###############################################################################
-# BEGIN fix (42 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_session_idle_user_locks'
+# BEGIN fix (43 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_session_idle_user_locks'
 ###############################################################################
-(>&2 echo "Remediating rule 42/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_session_idle_user_locks'")
+(>&2 echo "Remediating rule 43/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_session_idle_user_locks'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -1138,9 +1171,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_session_idle_user_locks'
 
 ###############################################################################
-# BEGIN fix (43 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_ctrlaltdel_reboot'
+# BEGIN fix (44 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 43/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 44/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -1206,9 +1239,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (44 / 403) for 'xccdf_org.ssgproject.content_rule_sudo_remove_no_authenticate'
+# BEGIN fix (45 / 410) for 'xccdf_org.ssgproject.content_rule_sudo_remove_no_authenticate'
 ###############################################################################
-(>&2 echo "Remediating rule 44/403: 'xccdf_org.ssgproject.content_rule_sudo_remove_no_authenticate'")
+(>&2 echo "Remediating rule 45/410: 'xccdf_org.ssgproject.content_rule_sudo_remove_no_authenticate'")
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -1228,9 +1261,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_sudo_remove_no_authenticate'
 
 ###############################################################################
-# BEGIN fix (45 / 403) for 'xccdf_org.ssgproject.content_rule_sudo_remove_nopasswd'
+# BEGIN fix (46 / 410) for 'xccdf_org.ssgproject.content_rule_sudo_remove_nopasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 45/403: 'xccdf_org.ssgproject.content_rule_sudo_remove_nopasswd'")
+(>&2 echo "Remediating rule 46/410: 'xccdf_org.ssgproject.content_rule_sudo_remove_nopasswd'")
 
 for f in /etc/sudoers /etc/sudoers.d/* ; do
   if [ ! -e "$f" ] ; then
@@ -1250,9 +1283,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_sudo_remove_nopasswd'
 
 ###############################################################################
-# BEGIN fix (46 / 403) for 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'
+# BEGIN fix (47 / 410) for 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'
 ###############################################################################
-(>&2 echo "Remediating rule 46/403: 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'")
+(>&2 echo "Remediating rule 47/410: 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sudo; then
 
@@ -1296,17 +1329,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sudo_require_reauthentication'
 
 ###############################################################################
-# BEGIN fix (47 / 403) for 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized'
+# BEGIN fix (48 / 410) for 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized'
 ###############################################################################
-(>&2 echo "Remediating rule 47/403: 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized'")
+(>&2 echo "Remediating rule 48/410: 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_sudo_restrict_privilege_elevation_to_authorized'
 
 ###############################################################################
-# BEGIN fix (48 / 403) for 'xccdf_org.ssgproject.content_rule_sudoers_default_includedir'
+# BEGIN fix (49 / 410) for 'xccdf_org.ssgproject.content_rule_sudoers_default_includedir'
 ###############################################################################
-(>&2 echo "Remediating rule 48/403: 'xccdf_org.ssgproject.content_rule_sudoers_default_includedir'")
+(>&2 echo "Remediating rule 49/410: 'xccdf_org.ssgproject.content_rule_sudoers_default_includedir'")
 
 sudoers_config_file="/etc/sudoers"
 sudoers_config_dir="/etc/sudoers.d"
@@ -1331,9 +1364,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sudoers_default_includedir'
 
 ###############################################################################
-# BEGIN fix (49 / 403) for 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'
+# BEGIN fix (50 / 410) for 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 49/403: 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'")
+(>&2 echo "Remediating rule 50/410: 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sudo; then
 
@@ -1406,9 +1439,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sudoers_validate_passwd'
 
 ###############################################################################
-# BEGIN fix (50 / 403) for 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'
+# BEGIN fix (51 / 410) for 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 50/403: 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'")
+(>&2 echo "Remediating rule 51/410: 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -1423,9 +1456,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_rng-tools_installed'
 
 ###############################################################################
-# BEGIN fix (51 / 403) for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-ccpp_removed'
+# BEGIN fix (52 / 410) for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-ccpp_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 51/403: 'xccdf_org.ssgproject.content_rule_package_abrt-addon-ccpp_removed'")
+(>&2 echo "Remediating rule 52/410: 'xccdf_org.ssgproject.content_rule_package_abrt-addon-ccpp_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-ccpp
 #	   from the system, and may remove any packages
@@ -1442,9 +1475,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-ccpp_removed'
 
 ###############################################################################
-# BEGIN fix (52 / 403) for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-kerneloops_removed'
+# BEGIN fix (53 / 410) for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-kerneloops_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 52/403: 'xccdf_org.ssgproject.content_rule_package_abrt-addon-kerneloops_removed'")
+(>&2 echo "Remediating rule 53/410: 'xccdf_org.ssgproject.content_rule_package_abrt-addon-kerneloops_removed'")
 
 # CAUTION: This remediation script will remove abrt-addon-kerneloops
 #	   from the system, and may remove any packages
@@ -1461,9 +1494,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_abrt-addon-kerneloops_removed'
 
 ###############################################################################
-# BEGIN fix (53 / 403) for 'xccdf_org.ssgproject.content_rule_package_abrt-cli_removed'
+# BEGIN fix (54 / 410) for 'xccdf_org.ssgproject.content_rule_package_abrt-cli_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 53/403: 'xccdf_org.ssgproject.content_rule_package_abrt-cli_removed'")
+(>&2 echo "Remediating rule 54/410: 'xccdf_org.ssgproject.content_rule_package_abrt-cli_removed'")
 
 # CAUTION: This remediation script will remove abrt-cli
 #	   from the system, and may remove any packages
@@ -1480,9 +1513,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_abrt-cli_removed'
 
 ###############################################################################
-# BEGIN fix (54 / 403) for 'xccdf_org.ssgproject.content_rule_package_abrt-plugin-sosreport_removed'
+# BEGIN fix (55 / 410) for 'xccdf_org.ssgproject.content_rule_package_abrt-plugin-sosreport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 54/403: 'xccdf_org.ssgproject.content_rule_package_abrt-plugin-sosreport_removed'")
+(>&2 echo "Remediating rule 55/410: 'xccdf_org.ssgproject.content_rule_package_abrt-plugin-sosreport_removed'")
 
 # CAUTION: This remediation script will remove abrt-plugin-sosreport
 #	   from the system, and may remove any packages
@@ -1499,9 +1532,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_abrt-plugin-sosreport_removed'
 
 ###############################################################################
-# BEGIN fix (55 / 403) for 'xccdf_org.ssgproject.content_rule_package_gssproxy_removed'
+# BEGIN fix (56 / 410) for 'xccdf_org.ssgproject.content_rule_package_gssproxy_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 55/403: 'xccdf_org.ssgproject.content_rule_package_gssproxy_removed'")
+(>&2 echo "Remediating rule 56/410: 'xccdf_org.ssgproject.content_rule_package_gssproxy_removed'")
 
 # CAUTION: This remediation script will remove gssproxy
 #	   from the system, and may remove any packages
@@ -1518,9 +1551,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_gssproxy_removed'
 
 ###############################################################################
-# BEGIN fix (56 / 403) for 'xccdf_org.ssgproject.content_rule_package_iprutils_removed'
+# BEGIN fix (57 / 410) for 'xccdf_org.ssgproject.content_rule_package_iprutils_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 56/403: 'xccdf_org.ssgproject.content_rule_package_iprutils_removed'")
+(>&2 echo "Remediating rule 57/410: 'xccdf_org.ssgproject.content_rule_package_iprutils_removed'")
 
 # CAUTION: This remediation script will remove iprutils
 #	   from the system, and may remove any packages
@@ -1537,9 +1570,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_iprutils_removed'
 
 ###############################################################################
-# BEGIN fix (57 / 403) for 'xccdf_org.ssgproject.content_rule_package_krb5-workstation_removed'
+# BEGIN fix (58 / 410) for 'xccdf_org.ssgproject.content_rule_package_krb5-workstation_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 57/403: 'xccdf_org.ssgproject.content_rule_package_krb5-workstation_removed'")
+(>&2 echo "Remediating rule 58/410: 'xccdf_org.ssgproject.content_rule_package_krb5-workstation_removed'")
 
 # CAUTION: This remediation script will remove krb5-workstation
 #	   from the system, and may remove any packages
@@ -1556,9 +1589,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_krb5-workstation_removed'
 
 ###############################################################################
-# BEGIN fix (58 / 403) for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-logger_removed'
+# BEGIN fix (59 / 410) for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-logger_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 58/403: 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-logger_removed'")
+(>&2 echo "Remediating rule 59/410: 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-logger_removed'")
 
 # CAUTION: This remediation script will remove libreport-plugin-logger
 #	   from the system, and may remove any packages
@@ -1575,9 +1608,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-logger_removed'
 
 ###############################################################################
-# BEGIN fix (59 / 403) for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-rhtsupport_removed'
+# BEGIN fix (60 / 410) for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-rhtsupport_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 59/403: 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-rhtsupport_removed'")
+(>&2 echo "Remediating rule 60/410: 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-rhtsupport_removed'")
 
 # CAUTION: This remediation script will remove libreport-plugin-rhtsupport
 #	   from the system, and may remove any packages
@@ -1594,9 +1627,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_libreport-plugin-rhtsupport_removed'
 
 ###############################################################################
-# BEGIN fix (60 / 403) for 'xccdf_org.ssgproject.content_rule_package_python3-abrt-addon_removed'
+# BEGIN fix (61 / 410) for 'xccdf_org.ssgproject.content_rule_package_python3-abrt-addon_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 60/403: 'xccdf_org.ssgproject.content_rule_package_python3-abrt-addon_removed'")
+(>&2 echo "Remediating rule 61/410: 'xccdf_org.ssgproject.content_rule_package_python3-abrt-addon_removed'")
 
 # CAUTION: This remediation script will remove python3-abrt-addon
 #	   from the system, and may remove any packages
@@ -1613,9 +1646,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_python3-abrt-addon_removed'
 
 ###############################################################################
-# BEGIN fix (61 / 403) for 'xccdf_org.ssgproject.content_rule_package_tuned_removed'
+# BEGIN fix (62 / 410) for 'xccdf_org.ssgproject.content_rule_package_tuned_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 61/403: 'xccdf_org.ssgproject.content_rule_package_tuned_removed'")
+(>&2 echo "Remediating rule 62/410: 'xccdf_org.ssgproject.content_rule_package_tuned_removed'")
 
 # CAUTION: This remediation script will remove tuned
 #	   from the system, and may remove any packages
@@ -1632,9 +1665,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_tuned_removed'
 
 ###############################################################################
-# BEGIN fix (62 / 403) for 'xccdf_org.ssgproject.content_rule_clean_components_post_updating'
+# BEGIN fix (63 / 410) for 'xccdf_org.ssgproject.content_rule_clean_components_post_updating'
 ###############################################################################
-(>&2 echo "Remediating rule 62/403: 'xccdf_org.ssgproject.content_rule_clean_components_post_updating'")
+(>&2 echo "Remediating rule 63/410: 'xccdf_org.ssgproject.content_rule_clean_components_post_updating'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1652,9 +1685,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_clean_components_post_updating'
 
 ###############################################################################
-# BEGIN fix (63 / 403) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
+# BEGIN fix (64 / 410) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
 ###############################################################################
-(>&2 echo "Remediating rule 63/403: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'")
+(>&2 echo "Remediating rule 64/410: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1687,9 +1720,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_globally_activated'
 
 ###############################################################################
-# BEGIN fix (64 / 403) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
+# BEGIN fix (65 / 410) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 64/403: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'")
+(>&2 echo "Remediating rule 65/410: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q yum; then
 
@@ -1722,18 +1755,18 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_local_packages'
 
 ###############################################################################
-# BEGIN fix (65 / 403) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
+# BEGIN fix (66 / 410) for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 65/403: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'")
+(>&2 echo "Remediating rule 66/410: 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'")
 
 sed -i 's/gpgcheck\s*=.*/gpgcheck=1/g' /etc/yum.repos.d/*
 
 # END fix for 'xccdf_org.ssgproject.content_rule_ensure_gpgcheck_never_disabled'
 
 ###############################################################################
-# BEGIN fix (66 / 403) for 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'
+# BEGIN fix (67 / 410) for 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 66/403: 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'")
+(>&2 echo "Remediating rule 67/410: 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'")
 # The two fingerprints below are retrieved from https://access.redhat.com/security/team/key
 readonly REDHAT_RELEASE_FINGERPRINT="567E347AD0044ADE55BA8A5F199E2F91FD431D51"
 readonly REDHAT_AUXILIARY_FINGERPRINT="6A6AA7C97C8890AEC6AEBFE2F76F66C3D4082792"
@@ -1765,9 +1798,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_ensure_redhat_gpgkey_installed'
 
 ###############################################################################
-# BEGIN fix (67 / 403) for 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'
+# BEGIN fix (68 / 410) for 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'
 ###############################################################################
-(>&2 echo "Remediating rule 67/403: 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'")
+(>&2 echo "Remediating rule 68/410: 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'")
 
 
 yum -y update
@@ -1775,9 +1808,9 @@ yum -y update
 # END fix for 'xccdf_org.ssgproject.content_rule_security_patches_up_to_date'
 
 ###############################################################################
-# BEGIN fix (68 / 403) for 'xccdf_org.ssgproject.content_rule_enable_authselect'
+# BEGIN fix (69 / 410) for 'xccdf_org.ssgproject.content_rule_enable_authselect'
 ###############################################################################
-(>&2 echo "Remediating rule 68/403: 'xccdf_org.ssgproject.content_rule_enable_authselect'")
+(>&2 echo "Remediating rule 69/410: 'xccdf_org.ssgproject.content_rule_enable_authselect'")
 
 var_authselect_profile='sssd'
 
@@ -1795,9 +1828,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_enable_authselect'
 
 ###############################################################################
-# BEGIN fix (69 / 403) for 'xccdf_org.ssgproject.content_rule_banner_etc_issue'
+# BEGIN fix (70 / 410) for 'xccdf_org.ssgproject.content_rule_banner_etc_issue'
 ###############################################################################
-(>&2 echo "Remediating rule 69/403: 'xccdf_org.ssgproject.content_rule_banner_etc_issue'")
+(>&2 echo "Remediating rule 70/410: 'xccdf_org.ssgproject.content_rule_banner_etc_issue'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -1828,9 +1861,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_banner_etc_issue'
 
 ###############################################################################
-# BEGIN fix (70 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_banner_enabled'
+# BEGIN fix (71 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_banner_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 70/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_banner_enabled'")
+(>&2 echo "Remediating rule 71/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_banner_enabled'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1896,9 +1929,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_banner_enabled'
 
 ###############################################################################
-# BEGIN fix (71 / 403) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_login_banner_text'
+# BEGIN fix (72 / 410) for 'xccdf_org.ssgproject.content_rule_dconf_gnome_login_banner_text'
 ###############################################################################
-(>&2 echo "Remediating rule 71/403: 'xccdf_org.ssgproject.content_rule_dconf_gnome_login_banner_text'")
+(>&2 echo "Remediating rule 72/410: 'xccdf_org.ssgproject.content_rule_dconf_gnome_login_banner_text'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q gdm; then
 
@@ -1983,9 +2016,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_dconf_gnome_login_banner_text'
 
 ###############################################################################
-# BEGIN fix (72 / 403) for 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'
+# BEGIN fix (73 / 410) for 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'
 ###############################################################################
-(>&2 echo "Remediating rule 72/403: 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'")
+(>&2 echo "Remediating rule 73/410: 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -1998,9 +2031,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_disallow_bypass_password_sudo'
 
 ###############################################################################
-# BEGIN fix (73 / 403) for 'xccdf_org.ssgproject.content_rule_display_login_attempts'
+# BEGIN fix (74 / 410) for 'xccdf_org.ssgproject.content_rule_display_login_attempts'
 ###############################################################################
-(>&2 echo "Remediating rule 73/403: 'xccdf_org.ssgproject.content_rule_display_login_attempts'")
+(>&2 echo "Remediating rule 74/410: 'xccdf_org.ssgproject.content_rule_display_login_attempts'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2262,9 +2295,25 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_display_login_attempts'
 
 ###############################################################################
-# BEGIN fix (74 / 403) for 'xccdf_org.ssgproject.content_rule_account_password_selinux_faillock_dir'
+# BEGIN fix (75 / 410) for 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 74/403: 'xccdf_org.ssgproject.content_rule_account_password_selinux_faillock_dir'")
+(>&2 echo "Remediating rule 75/410: 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_password_auth'")
+(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_password_auth' IS MISSING!")
+
+# END fix for 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_password_auth'
+
+###############################################################################
+# BEGIN fix (76 / 410) for 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_system_auth'
+###############################################################################
+(>&2 echo "Remediating rule 76/410: 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_system_auth'")
+(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_system_auth' IS MISSING!")
+
+# END fix for 'xccdf_org.ssgproject.content_rule_account_password_pam_faillock_system_auth'
+
+###############################################################################
+# BEGIN fix (77 / 410) for 'xccdf_org.ssgproject.content_rule_account_password_selinux_faillock_dir'
+###############################################################################
+(>&2 echo "Remediating rule 77/410: 'xccdf_org.ssgproject.content_rule_account_password_selinux_faillock_dir'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -2297,9 +2346,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_account_password_selinux_faillock_dir'
 
 ###############################################################################
-# BEGIN fix (75 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_password_auth'
+# BEGIN fix (78 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 75/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_password_auth'")
+(>&2 echo "Remediating rule 78/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2498,9 +2547,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_password_auth'
 
 ###############################################################################
-# BEGIN fix (76 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_system_auth'
+# BEGIN fix (79 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 76/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_system_auth'")
+(>&2 echo "Remediating rule 79/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2699,9 +2748,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwhistory_remember_system_auth'
 
 ###############################################################################
-# BEGIN fix (77 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'
+# BEGIN fix (80 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 77/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'")
+(>&2 echo "Remediating rule 80/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'")
 # Remediation is applicable only in certain platforms
 if grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.2"; printf "%s\n%s" "$expected" "$real" | sort -VC; }; then
 
@@ -2804,9 +2853,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_audit'
 
 ###############################################################################
-# BEGIN fix (78 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'
+# BEGIN fix (81 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'
 ###############################################################################
-(>&2 echo "Remediating rule 78/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'")
+(>&2 echo "Remediating rule 81/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -2918,9 +2967,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny'
 
 ###############################################################################
-# BEGIN fix (79 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny_root'
+# BEGIN fix (82 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny_root'
 ###############################################################################
-(>&2 echo "Remediating rule 79/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny_root'")
+(>&2 echo "Remediating rule 82/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny_root'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3024,9 +3073,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_deny_root'
 
 ###############################################################################
-# BEGIN fix (80 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_dir'
+# BEGIN fix (83 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_dir'
 ###############################################################################
-(>&2 echo "Remediating rule 80/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_dir'")
+(>&2 echo "Remediating rule 83/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_dir'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3152,9 +3201,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_dir'
 
 ###############################################################################
-# BEGIN fix (81 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_interval'
+# BEGIN fix (84 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_interval'
 ###############################################################################
-(>&2 echo "Remediating rule 81/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_interval'")
+(>&2 echo "Remediating rule 84/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_interval'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3266,9 +3315,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_interval'
 
 ###############################################################################
-# BEGIN fix (82 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_silent'
+# BEGIN fix (85 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_silent'
 ###############################################################################
-(>&2 echo "Remediating rule 82/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_silent'")
+(>&2 echo "Remediating rule 85/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_silent'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3323,9 +3372,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_silent'
 
 ###############################################################################
-# BEGIN fix (83 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'
+# BEGIN fix (86 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'
 ###############################################################################
-(>&2 echo "Remediating rule 83/403: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'")
+(>&2 echo "Remediating rule 86/410: 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3437,9 +3486,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_passwords_pam_faillock_unlock_time'
 
 ###############################################################################
-# BEGIN fix (84 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dcredit'
+# BEGIN fix (87 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 84/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dcredit'")
+(>&2 echo "Remediating rule 87/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3479,9 +3528,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dcredit'
 
 ###############################################################################
-# BEGIN fix (85 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dictcheck'
+# BEGIN fix (88 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dictcheck'
 ###############################################################################
-(>&2 echo "Remediating rule 85/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dictcheck'")
+(>&2 echo "Remediating rule 88/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dictcheck'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3521,9 +3570,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_dictcheck'
 
 ###############################################################################
-# BEGIN fix (86 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_difok'
+# BEGIN fix (89 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_difok'
 ###############################################################################
-(>&2 echo "Remediating rule 86/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_difok'")
+(>&2 echo "Remediating rule 89/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_difok'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3563,9 +3612,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_difok'
 
 ###############################################################################
-# BEGIN fix (87 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_lcredit'
+# BEGIN fix (90 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_lcredit'
 ###############################################################################
-(>&2 echo "Remediating rule 87/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_lcredit'")
+(>&2 echo "Remediating rule 90/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_lcredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3605,9 +3654,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_lcredit'
 
 ###############################################################################
-# BEGIN fix (88 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxclassrepeat'
+# BEGIN fix (91 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxclassrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 88/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxclassrepeat'")
+(>&2 echo "Remediating rule 91/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxclassrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3647,9 +3696,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxclassrepeat'
 
 ###############################################################################
-# BEGIN fix (89 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxrepeat'
+# BEGIN fix (92 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxrepeat'
 ###############################################################################
-(>&2 echo "Remediating rule 89/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxrepeat'")
+(>&2 echo "Remediating rule 92/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxrepeat'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3689,9 +3738,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_maxrepeat'
 
 ###############################################################################
-# BEGIN fix (90 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minclass'
+# BEGIN fix (93 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minclass'
 ###############################################################################
-(>&2 echo "Remediating rule 90/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minclass'")
+(>&2 echo "Remediating rule 93/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minclass'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3731,9 +3780,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minclass'
 
 ###############################################################################
-# BEGIN fix (91 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minlen'
+# BEGIN fix (94 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minlen'
 ###############################################################################
-(>&2 echo "Remediating rule 91/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minlen'")
+(>&2 echo "Remediating rule 94/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minlen'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3773,9 +3822,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_minlen'
 
 ###############################################################################
-# BEGIN fix (92 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ocredit'
+# BEGIN fix (95 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ocredit'
 ###############################################################################
-(>&2 echo "Remediating rule 92/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ocredit'")
+(>&2 echo "Remediating rule 95/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ocredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3815,9 +3864,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ocredit'
 
 ###############################################################################
-# BEGIN fix (93 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_password_auth'
+# BEGIN fix (96 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_password_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 93/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_password_auth'")
+(>&2 echo "Remediating rule 96/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_password_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3883,9 +3932,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_password_auth'
 
 ###############################################################################
-# BEGIN fix (94 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_system_auth'
+# BEGIN fix (97 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_system_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 94/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_system_auth'")
+(>&2 echo "Remediating rule 97/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_system_auth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -3951,9 +4000,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_pwquality_system_auth'
 
 ###############################################################################
-# BEGIN fix (95 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_retry'
+# BEGIN fix (98 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_retry'
 ###############################################################################
-(>&2 echo "Remediating rule 95/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_retry'")
+(>&2 echo "Remediating rule 98/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_retry'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -4079,9 +4128,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_retry'
 
 ###############################################################################
-# BEGIN fix (96 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ucredit'
+# BEGIN fix (99 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ucredit'
 ###############################################################################
-(>&2 echo "Remediating rule 96/403: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ucredit'")
+(>&2 echo "Remediating rule 99/410: 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ucredit'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -4121,9 +4170,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_pam_ucredit'
 
 ###############################################################################
-# BEGIN fix (97 / 403) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_logindefs'
+# BEGIN fix (100 / 410) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_logindefs'
 ###############################################################################
-(>&2 echo "Remediating rule 97/403: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_logindefs'")
+(>&2 echo "Remediating rule 100/410: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_logindefs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4144,9 +4193,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_logindefs'
 
 ###############################################################################
-# BEGIN fix (98 / 403) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_passwordauth'
+# BEGIN fix (101 / 410) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_passwordauth'
 ###############################################################################
-(>&2 echo "Remediating rule 98/403: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_passwordauth'")
+(>&2 echo "Remediating rule 101/410: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_passwordauth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -4211,9 +4260,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_passwordauth'
 
 ###############################################################################
-# BEGIN fix (99 / 403) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth'
+# BEGIN fix (102 / 410) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth'
 ###############################################################################
-(>&2 echo "Remediating rule 99/403: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth'")
+(>&2 echo "Remediating rule 102/410: 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -4278,9 +4327,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_set_password_hashing_algorithm_systemauth'
 
 ###############################################################################
-# BEGIN fix (100 / 403) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'
+# BEGIN fix (103 / 410) for 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'
 ###############################################################################
-(>&2 echo "Remediating rule 100/403: 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'")
+(>&2 echo "Remediating rule 103/410: 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'")
 
 if [ -e "/etc/login.defs" ] ; then
     
@@ -4301,9 +4350,9 @@ rm "/etc/login.defs.bak"
 # END fix for 'xccdf_org.ssgproject.content_rule_set_password_hashing_min_rounds_logindefs'
 
 ###############################################################################
-# BEGIN fix (101 / 403) for 'xccdf_org.ssgproject.content_rule_service_debug-shell_disabled'
+# BEGIN fix (104 / 410) for 'xccdf_org.ssgproject.content_rule_service_debug-shell_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 101/403: 'xccdf_org.ssgproject.content_rule_service_debug-shell_disabled'")
+(>&2 echo "Remediating rule 104/410: 'xccdf_org.ssgproject.content_rule_service_debug-shell_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4328,9 +4377,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_debug-shell_disabled'
 
 ###############################################################################
-# BEGIN fix (102 / 403) for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_burstaction'
+# BEGIN fix (105 / 410) for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_burstaction'
 ###############################################################################
-(>&2 echo "Remediating rule 102/403: 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_burstaction'")
+(>&2 echo "Remediating rule 105/410: 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_burstaction'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q systemd; }; then
 
@@ -4363,9 +4412,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_burstaction'
 
 ###############################################################################
-# BEGIN fix (103 / 403) for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_reboot'
+# BEGIN fix (106 / 410) for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_reboot'
 ###############################################################################
-(>&2 echo "Remediating rule 103/403: 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_reboot'")
+(>&2 echo "Remediating rule 106/410: 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_reboot'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4379,9 +4428,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_disable_ctrlaltdel_reboot'
 
 ###############################################################################
-# BEGIN fix (104 / 403) for 'xccdf_org.ssgproject.content_rule_logind_session_timeout'
+# BEGIN fix (107 / 410) for 'xccdf_org.ssgproject.content_rule_logind_session_timeout'
 ###############################################################################
-(>&2 echo "Remediating rule 104/403: 'xccdf_org.ssgproject.content_rule_logind_session_timeout'")
+(>&2 echo "Remediating rule 107/410: 'xccdf_org.ssgproject.content_rule_logind_session_timeout'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { ( grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.7"; printf "%s\n%s" "$expected" "$real" | sort -VC; } && grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="9.0"; [[ "$real" != "$expected" ]]; } ) || grep -qP "^ID=[\"']?ol[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.7"; printf "%s\n%s" "$expected" "$real" | sort -VC; }; }; then
 
@@ -4411,9 +4460,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_logind_session_timeout'
 
 ###############################################################################
-# BEGIN fix (105 / 403) for 'xccdf_org.ssgproject.content_rule_require_emergency_target_auth'
+# BEGIN fix (108 / 410) for 'xccdf_org.ssgproject.content_rule_require_emergency_target_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 105/403: 'xccdf_org.ssgproject.content_rule_require_emergency_target_auth'")
+(>&2 echo "Remediating rule 108/410: 'xccdf_org.ssgproject.content_rule_require_emergency_target_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4436,9 +4485,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_require_emergency_target_auth'
 
 ###############################################################################
-# BEGIN fix (106 / 403) for 'xccdf_org.ssgproject.content_rule_require_singleuser_auth'
+# BEGIN fix (109 / 410) for 'xccdf_org.ssgproject.content_rule_require_singleuser_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 106/403: 'xccdf_org.ssgproject.content_rule_require_singleuser_auth'")
+(>&2 echo "Remediating rule 109/410: 'xccdf_org.ssgproject.content_rule_require_singleuser_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4459,9 +4508,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_require_singleuser_auth'
 
 ###############################################################################
-# BEGIN fix (107 / 403) for 'xccdf_org.ssgproject.content_rule_package_tmux_installed'
+# BEGIN fix (110 / 410) for 'xccdf_org.ssgproject.content_rule_package_tmux_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 107/403: 'xccdf_org.ssgproject.content_rule_package_tmux_installed'")
+(>&2 echo "Remediating rule 110/410: 'xccdf_org.ssgproject.content_rule_package_tmux_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4476,9 +4525,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_tmux_installed'
 
 ###############################################################################
-# BEGIN fix (108 / 403) for 'xccdf_org.ssgproject.content_rule_configure_bashrc_tmux'
+# BEGIN fix (111 / 410) for 'xccdf_org.ssgproject.content_rule_configure_bashrc_tmux'
 ###############################################################################
-(>&2 echo "Remediating rule 108/403: 'xccdf_org.ssgproject.content_rule_configure_bashrc_tmux'")
+(>&2 echo "Remediating rule 111/410: 'xccdf_org.ssgproject.content_rule_configure_bashrc_tmux'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
@@ -4500,9 +4549,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_bashrc_tmux'
 
 ###############################################################################
-# BEGIN fix (109 / 403) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'
+# BEGIN fix (112 / 410) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'
 ###############################################################################
-(>&2 echo "Remediating rule 109/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'")
+(>&2 echo "Remediating rule 112/410: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
@@ -4522,9 +4571,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_after_time'
 
 ###############################################################################
-# BEGIN fix (110 / 403) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'
+# BEGIN fix (113 / 410) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'
 ###############################################################################
-(>&2 echo "Remediating rule 110/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'")
+(>&2 echo "Remediating rule 113/410: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
@@ -4544,9 +4593,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_command'
 
 ###############################################################################
-# BEGIN fix (111 / 403) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'
+# BEGIN fix (114 / 410) for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'
 ###############################################################################
-(>&2 echo "Remediating rule 111/403: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'")
+(>&2 echo "Remediating rule 114/410: 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q tmux; }; then
 
@@ -4564,9 +4613,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_tmux_lock_keybinding'
 
 ###############################################################################
-# BEGIN fix (112 / 403) for 'xccdf_org.ssgproject.content_rule_no_tmux_in_shells'
+# BEGIN fix (115 / 410) for 'xccdf_org.ssgproject.content_rule_no_tmux_in_shells'
 ###############################################################################
-(>&2 echo "Remediating rule 112/403: 'xccdf_org.ssgproject.content_rule_no_tmux_in_shells'")
+(>&2 echo "Remediating rule 115/410: 'xccdf_org.ssgproject.content_rule_no_tmux_in_shells'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4581,9 +4630,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_no_tmux_in_shells'
 
 ###############################################################################
-# BEGIN fix (113 / 403) for 'xccdf_org.ssgproject.content_rule_package_opensc_installed'
+# BEGIN fix (116 / 410) for 'xccdf_org.ssgproject.content_rule_package_opensc_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 113/403: 'xccdf_org.ssgproject.content_rule_package_opensc_installed'")
+(>&2 echo "Remediating rule 116/410: 'xccdf_org.ssgproject.content_rule_package_opensc_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4598,9 +4647,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_opensc_installed'
 
 ###############################################################################
-# BEGIN fix (114 / 403) for 'xccdf_org.ssgproject.content_rule_install_smartcard_packages'
+# BEGIN fix (117 / 410) for 'xccdf_org.ssgproject.content_rule_install_smartcard_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 114/403: 'xccdf_org.ssgproject.content_rule_install_smartcard_packages'")
+(>&2 echo "Remediating rule 117/410: 'xccdf_org.ssgproject.content_rule_install_smartcard_packages'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { ! grep -q s390x /proc/sys/kernel/osrelease; }; then
 
@@ -4615,25 +4664,25 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_install_smartcard_packages'
 
 ###############################################################################
-# BEGIN fix (115 / 403) for 'xccdf_org.ssgproject.content_rule_account_unique_id'
+# BEGIN fix (118 / 410) for 'xccdf_org.ssgproject.content_rule_account_unique_id'
 ###############################################################################
-(>&2 echo "Remediating rule 115/403: 'xccdf_org.ssgproject.content_rule_account_unique_id'")
+(>&2 echo "Remediating rule 118/410: 'xccdf_org.ssgproject.content_rule_account_unique_id'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_account_unique_id' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_account_unique_id'
 
 ###############################################################################
-# BEGIN fix (116 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users'
+# BEGIN fix (119 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users'
 ###############################################################################
-(>&2 echo "Remediating rule 116/403: 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users'")
+(>&2 echo "Remediating rule 119/410: 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_authorized_local_users'
 
 ###############################################################################
-# BEGIN fix (117 / 403) for 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'
+# BEGIN fix (120 / 410) for 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 117/403: 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'")
+(>&2 echo "Remediating rule 120/410: 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4669,17 +4718,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_account_disable_post_pw_expiration'
 
 ###############################################################################
-# BEGIN fix (118 / 403) for 'xccdf_org.ssgproject.content_rule_account_temp_expire_date'
+# BEGIN fix (121 / 410) for 'xccdf_org.ssgproject.content_rule_account_temp_expire_date'
 ###############################################################################
-(>&2 echo "Remediating rule 118/403: 'xccdf_org.ssgproject.content_rule_account_temp_expire_date'")
+(>&2 echo "Remediating rule 121/410: 'xccdf_org.ssgproject.content_rule_account_temp_expire_date'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_account_temp_expire_date' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_account_temp_expire_date'
 
 ###############################################################################
-# BEGIN fix (119 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'
+# BEGIN fix (122 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 119/403: 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'")
+(>&2 echo "Remediating rule 122/410: 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4699,9 +4748,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_maximum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (120 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'
+# BEGIN fix (123 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 120/403: 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'")
+(>&2 echo "Remediating rule 123/410: 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4721,9 +4770,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_minimum_age_login_defs'
 
 ###############################################################################
-# BEGIN fix (121 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs'
+# BEGIN fix (124 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 121/403: 'xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs'")
+(>&2 echo "Remediating rule 124/410: 'xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4744,9 +4793,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_minlen_login_defs'
 
 ###############################################################################
-# BEGIN fix (122 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'
+# BEGIN fix (125 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 122/403: 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'")
+(>&2 echo "Remediating rule 125/410: 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'")
 
 var_accounts_maximum_age_login_defs='60'
 
@@ -4760,9 +4809,9 @@ done <   <(awk -v var="$var_accounts_maximum_age_login_defs" -F: '(/^[^:]+:[^!*]
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_set_max_life_existing'
 
 ###############################################################################
-# BEGIN fix (123 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'
+# BEGIN fix (126 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'
 ###############################################################################
-(>&2 echo "Remediating rule 123/403: 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'")
+(>&2 echo "Remediating rule 126/410: 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'")
 
 var_accounts_minimum_age_login_defs='1'
 
@@ -4776,17 +4825,17 @@ done <   <(awk -v var="$var_accounts_minimum_age_login_defs" -F: '(/^[^:]+:[^!*]
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_set_min_life_existing'
 
 ###############################################################################
-# BEGIN fix (124 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512'
+# BEGIN fix (127 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512'
 ###############################################################################
-(>&2 echo "Remediating rule 124/403: 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512'")
+(>&2 echo "Remediating rule 127/410: 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_password_all_shadowed_sha512'
 
 ###############################################################################
-# BEGIN fix (125 / 403) for 'xccdf_org.ssgproject.content_rule_no_empty_passwords'
+# BEGIN fix (128 / 410) for 'xccdf_org.ssgproject.content_rule_no_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 125/403: 'xccdf_org.ssgproject.content_rule_no_empty_passwords'")
+(>&2 echo "Remediating rule 128/410: 'xccdf_org.ssgproject.content_rule_no_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4828,9 +4877,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_no_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (126 / 403) for 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'
+# BEGIN fix (129 / 410) for 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'
 ###############################################################################
-(>&2 echo "Remediating rule 126/403: 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'")
+(>&2 echo "Remediating rule 129/410: 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -4848,17 +4897,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_no_empty_passwords_etc_shadow'
 
 ###############################################################################
-# BEGIN fix (127 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_no_uid_except_zero'
+# BEGIN fix (130 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_no_uid_except_zero'
 ###############################################################################
-(>&2 echo "Remediating rule 127/403: 'xccdf_org.ssgproject.content_rule_accounts_no_uid_except_zero'")
+(>&2 echo "Remediating rule 130/410: 'xccdf_org.ssgproject.content_rule_accounts_no_uid_except_zero'")
 awk -F: '$3 == 0 && $1 != "root" { print $1 }' /etc/passwd | xargs --no-run-if-empty --max-lines=1 passwd -l
 
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_no_uid_except_zero'
 
 ###############################################################################
-# BEGIN fix (128 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_have_homedir_login_defs'
+# BEGIN fix (131 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_have_homedir_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 128/403: 'xccdf_org.ssgproject.content_rule_accounts_have_homedir_login_defs'")
+(>&2 echo "Remediating rule 131/410: 'xccdf_org.ssgproject.content_rule_accounts_have_homedir_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4893,9 +4942,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_have_homedir_login_defs'
 
 ###############################################################################
-# BEGIN fix (129 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_logon_fail_delay'
+# BEGIN fix (132 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_logon_fail_delay'
 ###############################################################################
-(>&2 echo "Remediating rule 129/403: 'xccdf_org.ssgproject.content_rule_accounts_logon_fail_delay'")
+(>&2 echo "Remediating rule 132/410: 'xccdf_org.ssgproject.content_rule_accounts_logon_fail_delay'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -4931,9 +4980,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_logon_fail_delay'
 
 ###############################################################################
-# BEGIN fix (130 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_max_concurrent_login_sessions'
+# BEGIN fix (133 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_max_concurrent_login_sessions'
 ###############################################################################
-(>&2 echo "Remediating rule 130/403: 'xccdf_org.ssgproject.content_rule_accounts_max_concurrent_login_sessions'")
+(>&2 echo "Remediating rule 133/410: 'xccdf_org.ssgproject.content_rule_accounts_max_concurrent_login_sessions'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -4955,9 +5004,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_max_concurrent_login_sessions'
 
 ###############################################################################
-# BEGIN fix (131 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_user_dot_no_world_writable_programs'
+# BEGIN fix (134 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_user_dot_no_world_writable_programs'
 ###############################################################################
-(>&2 echo "Remediating rule 131/403: 'xccdf_org.ssgproject.content_rule_accounts_user_dot_no_world_writable_programs'")
+(>&2 echo "Remediating rule 134/410: 'xccdf_org.ssgproject.content_rule_accounts_user_dot_no_world_writable_programs'")
 
 readarray -t world_writable_files < <(find / -xdev -type f -perm -0002 2> /dev/null)
 readarray -t interactive_home_dirs < <(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6 }' /etc/passwd)
@@ -4974,17 +5023,17 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_user_dot_no_world_writable_programs'
 
 ###############################################################################
-# BEGIN fix (132 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only'
+# BEGIN fix (135 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only'
 ###############################################################################
-(>&2 echo "Remediating rule 132/403: 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only'")
+(>&2 echo "Remediating rule 135/410: 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_user_home_paths_only'
 
 ###############################################################################
-# BEGIN fix (133 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'
+# BEGIN fix (136 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'
 ###############################################################################
-(>&2 echo "Remediating rule 133/403: 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'")
+(>&2 echo "Remediating rule 136/410: 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'")
 
 for user in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $1 }' /etc/passwd); do
     # This follows the same logic of evaluation of home directories as used in OVAL.
@@ -4996,9 +5045,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_defined'
 
 ###############################################################################
-# BEGIN fix (134 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_exists'
+# BEGIN fix (137 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_exists'
 ###############################################################################
-(>&2 echo "Remediating rule 134/403: 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_exists'")
+(>&2 echo "Remediating rule 137/410: 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_exists'")
 
 for user in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $1}' /etc/passwd); do
     mkhomedir_helper $user 0077;
@@ -5007,9 +5056,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_user_interactive_home_directory_exists'
 
 ###############################################################################
-# BEGIN fix (135 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_groupownership'
+# BEGIN fix (138 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_groupownership'
 ###############################################################################
-(>&2 echo "Remediating rule 135/403: 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_groupownership'")
+(>&2 echo "Remediating rule 138/410: 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_groupownership'")
 
 for user in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $1 }' /etc/passwd); do
     home_dir=$(getent passwd $user | cut -d: -f6)
@@ -5023,9 +5072,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_groupownership'
 
 ###############################################################################
-# BEGIN fix (136 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_permissions'
+# BEGIN fix (139 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_permissions'
 ###############################################################################
-(>&2 echo "Remediating rule 136/403: 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_permissions'")
+(>&2 echo "Remediating rule 139/410: 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_permissions'")
 
 for home_dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6 }' /etc/passwd); do
     # Only update the permissions when necessary. This will avoid changing the inode timestamp when
@@ -5037,18 +5086,18 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_users_home_files_permissions'
 
 ###############################################################################
-# BEGIN fix (137 / 403) for 'xccdf_org.ssgproject.content_rule_file_groupownership_home_directories'
+# BEGIN fix (140 / 410) for 'xccdf_org.ssgproject.content_rule_file_groupownership_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 137/403: 'xccdf_org.ssgproject.content_rule_file_groupownership_home_directories'")
+(>&2 echo "Remediating rule 140/410: 'xccdf_org.ssgproject.content_rule_file_groupownership_home_directories'")
 
 awk -F':' '{ if ($3 >= 1000 && $3 != 65534) system("chgrp -f " $4" "$6) }' /etc/passwd
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupownership_home_directories'
 
 ###############################################################################
-# BEGIN fix (138 / 403) for 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
+# BEGIN fix (141 / 410) for 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
 ###############################################################################
-(>&2 echo "Remediating rule 138/403: 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'")
+(>&2 echo "Remediating rule 141/410: 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'")
 
 var_user_initialization_files_regex='^(\.bashrc|\.zshrc|\.cshrc|\.profile|\.bash_login|\.bash_profile)$'
 
@@ -5074,9 +5123,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permission_user_init_files'
 
 ###############################################################################
-# BEGIN fix (139 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_home_directories'
+# BEGIN fix (142 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_home_directories'
 ###############################################################################
-(>&2 echo "Remediating rule 139/403: 'xccdf_org.ssgproject.content_rule_file_permissions_home_directories'")
+(>&2 echo "Remediating rule 142/410: 'xccdf_org.ssgproject.content_rule_file_permissions_home_directories'")
 
 for home_dir in $(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6 }' /etc/passwd); do
     # Only update the permissions when necessary. This will avoid changing the inode timestamp when
@@ -5088,9 +5137,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_home_directories'
 
 ###############################################################################
-# BEGIN fix (140 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
+# BEGIN fix (143 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
 ###############################################################################
-(>&2 echo "Remediating rule 140/403: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'")
+(>&2 echo "Remediating rule 143/410: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q bash; then
 
@@ -5114,9 +5163,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_bashrc'
 
 ###############################################################################
-# BEGIN fix (141 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_csh_cshrc'
+# BEGIN fix (144 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_csh_cshrc'
 ###############################################################################
-(>&2 echo "Remediating rule 141/403: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_csh_cshrc'")
+(>&2 echo "Remediating rule 144/410: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_csh_cshrc'")
 
 var_accounts_user_umask='077'
 
@@ -5130,9 +5179,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_csh_cshrc'
 
 ###############################################################################
-# BEGIN fix (142 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'
+# BEGIN fix (145 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'
 ###############################################################################
-(>&2 echo "Remediating rule 142/403: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'")
+(>&2 echo "Remediating rule 145/410: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q shadow-utils; then
 
@@ -5168,9 +5217,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_login_defs'
 
 ###############################################################################
-# BEGIN fix (143 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'
+# BEGIN fix (146 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'
 ###############################################################################
-(>&2 echo "Remediating rule 143/403: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'")
+(>&2 echo "Remediating rule 146/410: 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'")
 
 var_accounts_user_umask='077'
 
@@ -5188,9 +5237,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_etc_profile'
 
 ###############################################################################
-# BEGIN fix (144 / 403) for 'xccdf_org.ssgproject.content_rule_accounts_umask_interactive_users'
+# BEGIN fix (147 / 410) for 'xccdf_org.ssgproject.content_rule_accounts_umask_interactive_users'
 ###############################################################################
-(>&2 echo "Remediating rule 144/403: 'xccdf_org.ssgproject.content_rule_accounts_umask_interactive_users'")
+(>&2 echo "Remediating rule 147/410: 'xccdf_org.ssgproject.content_rule_accounts_umask_interactive_users'")
 
 while IFS= read -r dir; do
     while IFS= read -r -d '' file; do
@@ -5203,9 +5252,9 @@ done <   <(awk -F':' '{ if ($3 >= 1000 && $3 != 65534) print $6}' /etc/passwd)
 # END fix for 'xccdf_org.ssgproject.content_rule_accounts_umask_interactive_users'
 
 ###############################################################################
-# BEGIN fix (145 / 403) for 'xccdf_org.ssgproject.content_rule_package_audit_installed'
+# BEGIN fix (148 / 410) for 'xccdf_org.ssgproject.content_rule_package_audit_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 145/403: 'xccdf_org.ssgproject.content_rule_package_audit_installed'")
+(>&2 echo "Remediating rule 148/410: 'xccdf_org.ssgproject.content_rule_package_audit_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -5220,9 +5269,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_audit_installed'
 
 ###############################################################################
-# BEGIN fix (146 / 403) for 'xccdf_org.ssgproject.content_rule_service_auditd_enabled'
+# BEGIN fix (149 / 410) for 'xccdf_org.ssgproject.content_rule_service_auditd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 146/403: 'xccdf_org.ssgproject.content_rule_service_auditd_enabled'")
+(>&2 echo "Remediating rule 149/410: 'xccdf_org.ssgproject.content_rule_service_auditd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q audit; }; then
 
@@ -5238,9 +5287,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_auditd_enabled'
 
 ###############################################################################
-# BEGIN fix (147 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'
+# BEGIN fix (150 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 147/403: 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'")
+(>&2 echo "Remediating rule 150/410: 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -5253,9 +5302,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_audit_argument'
 
 ###############################################################################
-# BEGIN fix (148 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'
+# BEGIN fix (151 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 148/403: 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'")
+(>&2 echo "Remediating rule 151/410: 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -5268,9 +5317,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_audit_backlog_limit_argument'
 
 ###############################################################################
-# BEGIN fix (149 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable'
+# BEGIN fix (152 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable'
 ###############################################################################
-(>&2 echo "Remediating rule 149/403: 'xccdf_org.ssgproject.content_rule_audit_rules_immutable'")
+(>&2 echo "Remediating rule 152/410: 'xccdf_org.ssgproject.content_rule_audit_rules_immutable'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -5304,9 +5353,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable'
 
 ###############################################################################
-# BEGIN fix (150 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable_login_uids'
+# BEGIN fix (153 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable_login_uids'
 ###############################################################################
-(>&2 echo "Remediating rule 150/403: 'xccdf_org.ssgproject.content_rule_audit_rules_immutable_login_uids'")
+(>&2 echo "Remediating rule 153/410: 'xccdf_org.ssgproject.content_rule_audit_rules_immutable_login_uids'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -5334,9 +5383,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_immutable_login_uids'
 
 ###############################################################################
-# BEGIN fix (151 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_media_export'
+# BEGIN fix (154 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_media_export'
 ###############################################################################
-(>&2 echo "Remediating rule 151/403: 'xccdf_org.ssgproject.content_rule_audit_rules_media_export'")
+(>&2 echo "Remediating rule 154/410: 'xccdf_org.ssgproject.content_rule_audit_rules_media_export'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -5668,9 +5717,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_media_export'
 
 ###############################################################################
-# BEGIN fix (152 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers'
+# BEGIN fix (155 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers'
 ###############################################################################
-(>&2 echo "Remediating rule 152/403: 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers'")
+(>&2 echo "Remediating rule 155/410: 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -5815,9 +5864,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers'
 
 ###############################################################################
-# BEGIN fix (153 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers_d'
+# BEGIN fix (156 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers_d'
 ###############################################################################
-(>&2 echo "Remediating rule 153/403: 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers_d'")
+(>&2 echo "Remediating rule 156/410: 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers_d'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -5962,9 +6011,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_sudoers_d'
 
 ###############################################################################
-# BEGIN fix (154 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_suid_privilege_function'
+# BEGIN fix (157 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_suid_privilege_function'
 ###############################################################################
-(>&2 echo "Remediating rule 154/403: 'xccdf_org.ssgproject.content_rule_audit_rules_suid_privilege_function'")
+(>&2 echo "Remediating rule 157/410: 'xccdf_org.ssgproject.content_rule_audit_rules_suid_privilege_function'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -6615,9 +6664,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_suid_privilege_function'
 
 ###############################################################################
-# BEGIN fix (155 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_group'
+# BEGIN fix (158 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_group'
 ###############################################################################
-(>&2 echo "Remediating rule 155/403: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_group'")
+(>&2 echo "Remediating rule 158/410: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_group'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -6763,9 +6812,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_group'
 
 ###############################################################################
-# BEGIN fix (156 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_gshadow'
+# BEGIN fix (159 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_gshadow'
 ###############################################################################
-(>&2 echo "Remediating rule 156/403: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_gshadow'")
+(>&2 echo "Remediating rule 159/410: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_gshadow'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -6911,9 +6960,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_gshadow'
 
 ###############################################################################
-# BEGIN fix (157 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_opasswd'
+# BEGIN fix (160 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_opasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 157/403: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_opasswd'")
+(>&2 echo "Remediating rule 160/410: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_opasswd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7059,9 +7108,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_opasswd'
 
 ###############################################################################
-# BEGIN fix (158 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_passwd'
+# BEGIN fix (161 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 158/403: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_passwd'")
+(>&2 echo "Remediating rule 161/410: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_passwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7207,9 +7256,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_passwd'
 
 ###############################################################################
-# BEGIN fix (159 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_shadow'
+# BEGIN fix (162 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_shadow'
 ###############################################################################
-(>&2 echo "Remediating rule 159/403: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_shadow'")
+(>&2 echo "Remediating rule 162/410: 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_shadow'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7355,9 +7404,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_usergroup_modification_shadow'
 
 ###############################################################################
-# BEGIN fix (160 / 403) for 'xccdf_org.ssgproject.content_rule_directory_group_ownership_var_log_audit'
+# BEGIN fix (163 / 410) for 'xccdf_org.ssgproject.content_rule_directory_group_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 160/403: 'xccdf_org.ssgproject.content_rule_directory_group_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 163/410: 'xccdf_org.ssgproject.content_rule_directory_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7382,9 +7431,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_directory_group_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (161 / 403) for 'xccdf_org.ssgproject.content_rule_directory_ownership_var_log_audit'
+# BEGIN fix (164 / 410) for 'xccdf_org.ssgproject.content_rule_directory_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 161/403: 'xccdf_org.ssgproject.content_rule_directory_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 164/410: 'xccdf_org.ssgproject.content_rule_directory_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7403,9 +7452,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_directory_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (162 / 403) for 'xccdf_org.ssgproject.content_rule_directory_permissions_var_log_audit'
+# BEGIN fix (165 / 410) for 'xccdf_org.ssgproject.content_rule_directory_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 162/403: 'xccdf_org.ssgproject.content_rule_directory_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 165/410: 'xccdf_org.ssgproject.content_rule_directory_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7425,9 +7474,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_directory_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (163 / 403) for 'xccdf_org.ssgproject.content_rule_file_group_ownership_var_log_audit'
+# BEGIN fix (166 / 410) for 'xccdf_org.ssgproject.content_rule_file_group_ownership_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 163/403: 'xccdf_org.ssgproject.content_rule_file_group_ownership_var_log_audit'")
+(>&2 echo "Remediating rule 166/410: 'xccdf_org.ssgproject.content_rule_file_group_ownership_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7456,9 +7505,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_group_ownership_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (164 / 403) for 'xccdf_org.ssgproject.content_rule_file_ownership_var_log_audit_stig'
+# BEGIN fix (167 / 410) for 'xccdf_org.ssgproject.content_rule_file_ownership_var_log_audit_stig'
 ###############################################################################
-(>&2 echo "Remediating rule 164/403: 'xccdf_org.ssgproject.content_rule_file_ownership_var_log_audit_stig'")
+(>&2 echo "Remediating rule 167/410: 'xccdf_org.ssgproject.content_rule_file_ownership_var_log_audit_stig'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7476,9 +7525,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_ownership_var_log_audit_stig'
 
 ###############################################################################
-# BEGIN fix (165 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_audit'
+# BEGIN fix (168 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_audit'
 ###############################################################################
-(>&2 echo "Remediating rule 165/403: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_audit'")
+(>&2 echo "Remediating rule 168/410: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_audit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -7498,9 +7547,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_audit'
 
 ###############################################################################
-# BEGIN fix (166 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'
+# BEGIN fix (169 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'
 ###############################################################################
-(>&2 echo "Remediating rule 166/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'")
+(>&2 echo "Remediating rule 169/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -7832,9 +7881,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chmod'
 
 ###############################################################################
-# BEGIN fix (167 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'
+# BEGIN fix (170 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'
 ###############################################################################
-(>&2 echo "Remediating rule 167/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'")
+(>&2 echo "Remediating rule 170/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -8166,9 +8215,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_chown'
 
 ###############################################################################
-# BEGIN fix (168 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmod'
+# BEGIN fix (171 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmod'
 ###############################################################################
-(>&2 echo "Remediating rule 168/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmod'")
+(>&2 echo "Remediating rule 171/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -8500,9 +8549,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmod'
 
 ###############################################################################
-# BEGIN fix (169 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmodat'
+# BEGIN fix (172 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmodat'
 ###############################################################################
-(>&2 echo "Remediating rule 169/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmodat'")
+(>&2 echo "Remediating rule 172/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmodat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -8834,9 +8883,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchmodat'
 
 ###############################################################################
-# BEGIN fix (170 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchown'
+# BEGIN fix (173 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchown'
 ###############################################################################
-(>&2 echo "Remediating rule 170/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchown'")
+(>&2 echo "Remediating rule 173/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -9168,9 +9217,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchown'
 
 ###############################################################################
-# BEGIN fix (171 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchownat'
+# BEGIN fix (174 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchownat'
 ###############################################################################
-(>&2 echo "Remediating rule 171/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchownat'")
+(>&2 echo "Remediating rule 174/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchownat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -9502,9 +9551,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fchownat'
 
 ###############################################################################
-# BEGIN fix (172 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fremovexattr'
+# BEGIN fix (175 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fremovexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 172/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fremovexattr'")
+(>&2 echo "Remediating rule 175/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fremovexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -10155,9 +10204,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fremovexattr'
 
 ###############################################################################
-# BEGIN fix (173 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fsetxattr'
+# BEGIN fix (176 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fsetxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 173/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fsetxattr'")
+(>&2 echo "Remediating rule 176/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fsetxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -10808,9 +10857,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_fsetxattr'
 
 ###############################################################################
-# BEGIN fix (174 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'
+# BEGIN fix (177 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'
 ###############################################################################
-(>&2 echo "Remediating rule 174/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'")
+(>&2 echo "Remediating rule 177/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -11142,9 +11191,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lchown'
 
 ###############################################################################
-# BEGIN fix (175 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lremovexattr'
+# BEGIN fix (178 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lremovexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 175/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lremovexattr'")
+(>&2 echo "Remediating rule 178/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lremovexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -11795,9 +11844,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lremovexattr'
 
 ###############################################################################
-# BEGIN fix (176 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lsetxattr'
+# BEGIN fix (179 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lsetxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 176/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lsetxattr'")
+(>&2 echo "Remediating rule 179/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lsetxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -12448,9 +12497,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_lsetxattr'
 
 ###############################################################################
-# BEGIN fix (177 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_removexattr'
+# BEGIN fix (180 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_removexattr'
 ###############################################################################
-(>&2 echo "Remediating rule 177/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_removexattr'")
+(>&2 echo "Remediating rule 180/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_removexattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -13101,9 +13150,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_removexattr'
 
 ###############################################################################
-# BEGIN fix (178 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_setxattr'
+# BEGIN fix (181 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_setxattr'
 ###############################################################################
-(>&2 echo "Remediating rule 178/403: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_setxattr'")
+(>&2 echo "Remediating rule 181/410: 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_setxattr'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -13754,9 +13803,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_dac_modification_setxattr'
 
 ###############################################################################
-# BEGIN fix (179 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chacl'
+# BEGIN fix (182 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chacl'
 ###############################################################################
-(>&2 echo "Remediating rule 179/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chacl'")
+(>&2 echo "Remediating rule 182/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chacl'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -14080,9 +14129,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chacl'
 
 ###############################################################################
-# BEGIN fix (180 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfacl'
+# BEGIN fix (183 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfacl'
 ###############################################################################
-(>&2 echo "Remediating rule 180/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfacl'")
+(>&2 echo "Remediating rule 183/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfacl'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -14406,9 +14455,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfacl'
 
 ###############################################################################
-# BEGIN fix (181 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chcon'
+# BEGIN fix (184 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chcon'
 ###############################################################################
-(>&2 echo "Remediating rule 181/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chcon'")
+(>&2 echo "Remediating rule 184/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chcon'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -14732,9 +14781,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_chcon'
 
 ###############################################################################
-# BEGIN fix (182 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_semanage'
+# BEGIN fix (185 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_semanage'
 ###############################################################################
-(>&2 echo "Remediating rule 182/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_semanage'")
+(>&2 echo "Remediating rule 185/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_semanage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -15058,9 +15107,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_semanage'
 
 ###############################################################################
-# BEGIN fix (183 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfiles'
+# BEGIN fix (186 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfiles'
 ###############################################################################
-(>&2 echo "Remediating rule 183/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfiles'")
+(>&2 echo "Remediating rule 186/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfiles'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -15384,9 +15433,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setfiles'
 
 ###############################################################################
-# BEGIN fix (184 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setsebool'
+# BEGIN fix (187 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setsebool'
 ###############################################################################
-(>&2 echo "Remediating rule 184/403: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setsebool'")
+(>&2 echo "Remediating rule 187/410: 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setsebool'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -15710,9 +15759,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_execution_setsebool'
 
 ###############################################################################
-# BEGIN fix (185 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'
+# BEGIN fix (188 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'
 ###############################################################################
-(>&2 echo "Remediating rule 185/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'")
+(>&2 echo "Remediating rule 188/410: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -16043,9 +16092,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rename'
 
 ###############################################################################
-# BEGIN fix (186 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_renameat'
+# BEGIN fix (189 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_renameat'
 ###############################################################################
-(>&2 echo "Remediating rule 186/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_renameat'")
+(>&2 echo "Remediating rule 189/410: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_renameat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -16376,9 +16425,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_renameat'
 
 ###############################################################################
-# BEGIN fix (187 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'
+# BEGIN fix (190 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'
 ###############################################################################
-(>&2 echo "Remediating rule 187/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'")
+(>&2 echo "Remediating rule 190/410: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -16709,9 +16758,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_rmdir'
 
 ###############################################################################
-# BEGIN fix (188 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'
+# BEGIN fix (191 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'
 ###############################################################################
-(>&2 echo "Remediating rule 188/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'")
+(>&2 echo "Remediating rule 191/410: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -17042,9 +17091,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlink'
 
 ###############################################################################
-# BEGIN fix (189 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlinkat'
+# BEGIN fix (192 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlinkat'
 ###############################################################################
-(>&2 echo "Remediating rule 189/403: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlinkat'")
+(>&2 echo "Remediating rule 192/410: 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlinkat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -17375,9 +17424,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_file_deletion_events_unlinkat'
 
 ###############################################################################
-# BEGIN fix (190 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'
+# BEGIN fix (193 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'
 ###############################################################################
-(>&2 echo "Remediating rule 190/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'")
+(>&2 echo "Remediating rule 193/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -18021,9 +18070,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_creat'
 
 ###############################################################################
-# BEGIN fix (191 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_ftruncate'
+# BEGIN fix (194 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_ftruncate'
 ###############################################################################
-(>&2 echo "Remediating rule 191/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_ftruncate'")
+(>&2 echo "Remediating rule 194/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_ftruncate'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -18667,9 +18716,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_ftruncate'
 
 ###############################################################################
-# BEGIN fix (192 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'
+# BEGIN fix (195 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'
 ###############################################################################
-(>&2 echo "Remediating rule 192/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'")
+(>&2 echo "Remediating rule 195/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit && { ! ( grep -q aarch64 /proc/sys/kernel/osrelease ); }; then
 
@@ -19313,9 +19362,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open'
 
 ###############################################################################
-# BEGIN fix (193 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open_by_handle_at'
+# BEGIN fix (196 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open_by_handle_at'
 ###############################################################################
-(>&2 echo "Remediating rule 193/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open_by_handle_at'")
+(>&2 echo "Remediating rule 196/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open_by_handle_at'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -19959,9 +20008,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_open_by_handle_at'
 
 ###############################################################################
-# BEGIN fix (194 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_openat'
+# BEGIN fix (197 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_openat'
 ###############################################################################
-(>&2 echo "Remediating rule 194/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_openat'")
+(>&2 echo "Remediating rule 197/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_openat'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -20605,9 +20654,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_openat'
 
 ###############################################################################
-# BEGIN fix (195 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_truncate'
+# BEGIN fix (198 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_truncate'
 ###############################################################################
-(>&2 echo "Remediating rule 195/403: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_truncate'")
+(>&2 echo "Remediating rule 198/410: 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_truncate'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -21251,9 +21300,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_unsuccessful_file_modification_truncate'
 
 ###############################################################################
-# BEGIN fix (196 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_delete'
+# BEGIN fix (199 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_delete'
 ###############################################################################
-(>&2 echo "Remediating rule 196/403: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_delete'")
+(>&2 echo "Remediating rule 199/410: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_delete'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -21590,9 +21639,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_delete'
 
 ###############################################################################
-# BEGIN fix (197 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_finit'
+# BEGIN fix (200 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_finit'
 ###############################################################################
-(>&2 echo "Remediating rule 197/403: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_finit'")
+(>&2 echo "Remediating rule 200/410: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_finit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -21929,9 +21978,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_finit'
 
 ###############################################################################
-# BEGIN fix (198 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_init'
+# BEGIN fix (201 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_init'
 ###############################################################################
-(>&2 echo "Remediating rule 198/403: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_init'")
+(>&2 echo "Remediating rule 201/410: 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_init'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -22268,9 +22317,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_kernel_module_loading_init'
 
 ###############################################################################
-# BEGIN fix (199 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_faillock'
+# BEGIN fix (202 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_faillock'
 ###############################################################################
-(>&2 echo "Remediating rule 199/403: 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_faillock'")
+(>&2 echo "Remediating rule 202/410: 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_faillock'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -22419,9 +22468,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_faillock'
 
 ###############################################################################
-# BEGIN fix (200 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_lastlog'
+# BEGIN fix (203 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_lastlog'
 ###############################################################################
-(>&2 echo "Remediating rule 200/403: 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_lastlog'")
+(>&2 echo "Remediating rule 203/410: 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_lastlog'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -22568,9 +22617,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_login_events_lastlog'
 
 ###############################################################################
-# BEGIN fix (201 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chage'
+# BEGIN fix (204 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chage'
 ###############################################################################
-(>&2 echo "Remediating rule 201/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chage'")
+(>&2 echo "Remediating rule 204/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -22894,9 +22943,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chage'
 
 ###############################################################################
-# BEGIN fix (202 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chsh'
+# BEGIN fix (205 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chsh'
 ###############################################################################
-(>&2 echo "Remediating rule 202/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chsh'")
+(>&2 echo "Remediating rule 205/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chsh'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -23220,9 +23269,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_chsh'
 
 ###############################################################################
-# BEGIN fix (203 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_crontab'
+# BEGIN fix (206 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_crontab'
 ###############################################################################
-(>&2 echo "Remediating rule 203/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_crontab'")
+(>&2 echo "Remediating rule 206/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_crontab'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -23546,9 +23595,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_crontab'
 
 ###############################################################################
-# BEGIN fix (204 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_gpasswd'
+# BEGIN fix (207 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_gpasswd'
 ###############################################################################
-(>&2 echo "Remediating rule 204/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_gpasswd'")
+(>&2 echo "Remediating rule 207/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_gpasswd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -23872,17 +23921,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_gpasswd'
 
 ###############################################################################
-# BEGIN fix (205 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod'
+# BEGIN fix (208 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod'
 ###############################################################################
-(>&2 echo "Remediating rule 205/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod'")
+(>&2 echo "Remediating rule 208/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_kmod'
 
 ###############################################################################
-# BEGIN fix (206 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_mount'
+# BEGIN fix (209 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_mount'
 ###############################################################################
-(>&2 echo "Remediating rule 206/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_mount'")
+(>&2 echo "Remediating rule 209/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_mount'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -24206,9 +24255,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_mount'
 
 ###############################################################################
-# BEGIN fix (207 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_newgrp'
+# BEGIN fix (210 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_newgrp'
 ###############################################################################
-(>&2 echo "Remediating rule 207/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_newgrp'")
+(>&2 echo "Remediating rule 210/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_newgrp'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -24532,9 +24581,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_newgrp'
 
 ###############################################################################
-# BEGIN fix (208 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_pam_timestamp_check'
+# BEGIN fix (211 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_pam_timestamp_check'
 ###############################################################################
-(>&2 echo "Remediating rule 208/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_pam_timestamp_check'")
+(>&2 echo "Remediating rule 211/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_pam_timestamp_check'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -24858,9 +24907,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_pam_timestamp_check'
 
 ###############################################################################
-# BEGIN fix (209 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_passwd'
+# BEGIN fix (212 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_passwd'
 ###############################################################################
-(>&2 echo "Remediating rule 209/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_passwd'")
+(>&2 echo "Remediating rule 212/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_passwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -25184,9 +25233,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_passwd'
 
 ###############################################################################
-# BEGIN fix (210 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postdrop'
+# BEGIN fix (213 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postdrop'
 ###############################################################################
-(>&2 echo "Remediating rule 210/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postdrop'")
+(>&2 echo "Remediating rule 213/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postdrop'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -25510,9 +25559,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postdrop'
 
 ###############################################################################
-# BEGIN fix (211 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postqueue'
+# BEGIN fix (214 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postqueue'
 ###############################################################################
-(>&2 echo "Remediating rule 211/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postqueue'")
+(>&2 echo "Remediating rule 214/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postqueue'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -25836,9 +25885,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_postqueue'
 
 ###############################################################################
-# BEGIN fix (212 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_agent'
+# BEGIN fix (215 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_agent'
 ###############################################################################
-(>&2 echo "Remediating rule 212/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_agent'")
+(>&2 echo "Remediating rule 215/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_agent'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -26162,9 +26211,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_agent'
 
 ###############################################################################
-# BEGIN fix (213 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_keysign'
+# BEGIN fix (216 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_keysign'
 ###############################################################################
-(>&2 echo "Remediating rule 213/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_keysign'")
+(>&2 echo "Remediating rule 216/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_keysign'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -26488,9 +26537,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_ssh_keysign'
 
 ###############################################################################
-# BEGIN fix (214 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_su'
+# BEGIN fix (217 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_su'
 ###############################################################################
-(>&2 echo "Remediating rule 214/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_su'")
+(>&2 echo "Remediating rule 217/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_su'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -26814,9 +26863,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_su'
 
 ###############################################################################
-# BEGIN fix (215 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_sudo'
+# BEGIN fix (218 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_sudo'
 ###############################################################################
-(>&2 echo "Remediating rule 215/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_sudo'")
+(>&2 echo "Remediating rule 218/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_sudo'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -27140,9 +27189,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_sudo'
 
 ###############################################################################
-# BEGIN fix (216 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_umount'
+# BEGIN fix (219 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_umount'
 ###############################################################################
-(>&2 echo "Remediating rule 216/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_umount'")
+(>&2 echo "Remediating rule 219/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_umount'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -27466,9 +27515,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_umount'
 
 ###############################################################################
-# BEGIN fix (217 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_chkpwd'
+# BEGIN fix (220 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_chkpwd'
 ###############################################################################
-(>&2 echo "Remediating rule 217/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_chkpwd'")
+(>&2 echo "Remediating rule 220/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_chkpwd'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -27792,9 +27841,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_chkpwd'
 
 ###############################################################################
-# BEGIN fix (218 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_update'
+# BEGIN fix (221 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_update'
 ###############################################################################
-(>&2 echo "Remediating rule 218/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_update'")
+(>&2 echo "Remediating rule 221/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_update'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28118,9 +28167,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_unix_update'
 
 ###############################################################################
-# BEGIN fix (219 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_userhelper'
+# BEGIN fix (222 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_userhelper'
 ###############################################################################
-(>&2 echo "Remediating rule 219/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_userhelper'")
+(>&2 echo "Remediating rule 222/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_userhelper'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28444,9 +28493,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_userhelper'
 
 ###############################################################################
-# BEGIN fix (220 / 403) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_usermod'
+# BEGIN fix (223 / 410) for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_usermod'
 ###############################################################################
-(>&2 echo "Remediating rule 220/403: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_usermod'")
+(>&2 echo "Remediating rule 223/410: 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_usermod'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28770,17 +28819,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_audit_rules_privileged_commands_usermod'
 
 ###############################################################################
-# BEGIN fix (221 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition'
+# BEGIN fix (224 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition'
 ###############################################################################
-(>&2 echo "Remediating rule 221/403: 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition'")
+(>&2 echo "Remediating rule 224/410: 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_audispd_configure_sufficiently_large_partition'
 
 ###############################################################################
-# BEGIN fix (222 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_error_action'
+# BEGIN fix (225 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_error_action'
 ###############################################################################
-(>&2 echo "Remediating rule 222/403: 'xccdf_org.ssgproject.content_rule_auditd_data_disk_error_action'")
+(>&2 echo "Remediating rule 225/410: 'xccdf_org.ssgproject.content_rule_auditd_data_disk_error_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28823,9 +28872,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_error_action'
 
 ###############################################################################
-# BEGIN fix (223 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_full_action'
+# BEGIN fix (226 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_full_action'
 ###############################################################################
-(>&2 echo "Remediating rule 223/403: 'xccdf_org.ssgproject.content_rule_auditd_data_disk_full_action'")
+(>&2 echo "Remediating rule 226/410: 'xccdf_org.ssgproject.content_rule_auditd_data_disk_full_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28863,9 +28912,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_data_disk_full_action'
 
 ###############################################################################
-# BEGIN fix (224 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_action_mail_acct'
+# BEGIN fix (227 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_action_mail_acct'
 ###############################################################################
-(>&2 echo "Remediating rule 224/403: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_action_mail_acct'")
+(>&2 echo "Remediating rule 227/410: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_action_mail_acct'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28903,9 +28952,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_action_mail_acct'
 
 ###############################################################################
-# BEGIN fix (225 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_action'
+# BEGIN fix (228 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_action'
 ###############################################################################
-(>&2 echo "Remediating rule 225/403: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_action'")
+(>&2 echo "Remediating rule 228/410: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28949,9 +28998,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_action'
 
 ###############################################################################
-# BEGIN fix (226 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_percentage'
+# BEGIN fix (229 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_percentage'
 ###############################################################################
-(>&2 echo "Remediating rule 226/403: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_percentage'")
+(>&2 echo "Remediating rule 229/410: 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_percentage'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28969,9 +29018,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_data_retention_space_left_percentage'
 
 ###############################################################################
-# BEGIN fix (227 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_local_events'
+# BEGIN fix (230 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_local_events'
 ###############################################################################
-(>&2 echo "Remediating rule 227/403: 'xccdf_org.ssgproject.content_rule_auditd_local_events'")
+(>&2 echo "Remediating rule 230/410: 'xccdf_org.ssgproject.content_rule_auditd_local_events'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -28997,9 +29046,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_local_events'
 
 ###############################################################################
-# BEGIN fix (228 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_log_format'
+# BEGIN fix (231 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_log_format'
 ###############################################################################
-(>&2 echo "Remediating rule 228/403: 'xccdf_org.ssgproject.content_rule_auditd_log_format'")
+(>&2 echo "Remediating rule 231/410: 'xccdf_org.ssgproject.content_rule_auditd_log_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -29025,9 +29074,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_log_format'
 
 ###############################################################################
-# BEGIN fix (229 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_name_format'
+# BEGIN fix (232 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_name_format'
 ###############################################################################
-(>&2 echo "Remediating rule 229/403: 'xccdf_org.ssgproject.content_rule_auditd_name_format'")
+(>&2 echo "Remediating rule 232/410: 'xccdf_org.ssgproject.content_rule_auditd_name_format'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -29058,9 +29107,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_name_format'
 
 ###############################################################################
-# BEGIN fix (230 / 403) for 'xccdf_org.ssgproject.content_rule_auditd_overflow_action'
+# BEGIN fix (233 / 410) for 'xccdf_org.ssgproject.content_rule_auditd_overflow_action'
 ###############################################################################
-(>&2 echo "Remediating rule 230/403: 'xccdf_org.ssgproject.content_rule_auditd_overflow_action'")
+(>&2 echo "Remediating rule 233/410: 'xccdf_org.ssgproject.content_rule_auditd_overflow_action'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q audit; then
 
@@ -29086,9 +29135,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_auditd_overflow_action'
 
 ###############################################################################
-# BEGIN fix (231 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_pti_argument'
+# BEGIN fix (234 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_pti_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 231/403: 'xccdf_org.ssgproject.content_rule_grub2_pti_argument'")
+(>&2 echo "Remediating rule 234/410: 'xccdf_org.ssgproject.content_rule_grub2_pti_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -29101,9 +29150,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_pti_argument'
 
 ###############################################################################
-# BEGIN fix (232 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_vsyscall_argument'
+# BEGIN fix (235 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_vsyscall_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 232/403: 'xccdf_org.ssgproject.content_rule_grub2_vsyscall_argument'")
+(>&2 echo "Remediating rule 235/410: 'xccdf_org.ssgproject.content_rule_grub2_vsyscall_argument'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q grub2-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -29116,41 +29165,41 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_vsyscall_argument'
 
 ###############################################################################
-# BEGIN fix (233 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_admin_username'
+# BEGIN fix (236 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 233/403: 'xccdf_org.ssgproject.content_rule_grub2_admin_username'")
+(>&2 echo "Remediating rule 236/410: 'xccdf_org.ssgproject.content_rule_grub2_admin_username'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_admin_username' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_admin_username'
 
 ###############################################################################
-# BEGIN fix (234 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_password'
+# BEGIN fix (237 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_password'
 ###############################################################################
-(>&2 echo "Remediating rule 234/403: 'xccdf_org.ssgproject.content_rule_grub2_password'")
+(>&2 echo "Remediating rule 237/410: 'xccdf_org.ssgproject.content_rule_grub2_password'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_password' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_password'
 
 ###############################################################################
-# BEGIN fix (235 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username'
+# BEGIN fix (238 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username'
 ###############################################################################
-(>&2 echo "Remediating rule 235/403: 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username'")
+(>&2 echo "Remediating rule 238/410: 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_uefi_admin_username'
 
 ###############################################################################
-# BEGIN fix (236 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'
+# BEGIN fix (239 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'
 ###############################################################################
-(>&2 echo "Remediating rule 236/403: 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'")
+(>&2 echo "Remediating rule 239/410: 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_grub2_uefi_password' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_uefi_password'
 
 ###############################################################################
-# BEGIN fix (237 / 403) for 'xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed'
+# BEGIN fix (240 / 410) for 'xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 237/403: 'xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed'")
+(>&2 echo "Remediating rule 240/410: 'xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29165,9 +29214,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_rsyslog-gnutls_installed'
 
 ###############################################################################
-# BEGIN fix (238 / 403) for 'xccdf_org.ssgproject.content_rule_package_rsyslog_installed'
+# BEGIN fix (241 / 410) for 'xccdf_org.ssgproject.content_rule_package_rsyslog_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 238/403: 'xccdf_org.ssgproject.content_rule_package_rsyslog_installed'")
+(>&2 echo "Remediating rule 241/410: 'xccdf_org.ssgproject.content_rule_package_rsyslog_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29182,9 +29231,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_rsyslog_installed'
 
 ###############################################################################
-# BEGIN fix (239 / 403) for 'xccdf_org.ssgproject.content_rule_service_rsyslog_enabled'
+# BEGIN fix (242 / 410) for 'xccdf_org.ssgproject.content_rule_service_rsyslog_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 239/403: 'xccdf_org.ssgproject.content_rule_service_rsyslog_enabled'")
+(>&2 echo "Remediating rule 242/410: 'xccdf_org.ssgproject.content_rule_service_rsyslog_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29200,9 +29249,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_rsyslog_enabled'
 
 ###############################################################################
-# BEGIN fix (240 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_cron_logging'
+# BEGIN fix (243 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_cron_logging'
 ###############################################################################
-(>&2 echo "Remediating rule 240/403: 'xccdf_org.ssgproject.content_rule_rsyslog_cron_logging'")
+(>&2 echo "Remediating rule 243/410: 'xccdf_org.ssgproject.content_rule_rsyslog_cron_logging'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29220,9 +29269,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_cron_logging'
 
 ###############################################################################
-# BEGIN fix (241 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
+# BEGIN fix (244 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
 ###############################################################################
-(>&2 echo "Remediating rule 241/403: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdriverauthmode'")
+(>&2 echo "Remediating rule 244/410: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdriverauthmode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29250,9 +29299,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdriverauthmode'
 
 ###############################################################################
-# BEGIN fix (242 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdrivermode'
+# BEGIN fix (245 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdrivermode'
 ###############################################################################
-(>&2 echo "Remediating rule 242/403: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdrivermode'")
+(>&2 echo "Remediating rule 245/410: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdrivermode'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29278,9 +29327,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_actionsendstreamdrivermode'
 
 ###############################################################################
-# BEGIN fix (243 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_defaultnetstreamdriver'
+# BEGIN fix (246 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_defaultnetstreamdriver'
 ###############################################################################
-(>&2 echo "Remediating rule 243/403: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_defaultnetstreamdriver'")
+(>&2 echo "Remediating rule 246/410: 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_defaultnetstreamdriver'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29306,9 +29355,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_encrypt_offload_defaultnetstreamdriver'
 
 ###############################################################################
-# BEGIN fix (244 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_access_monitoring'
+# BEGIN fix (247 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_access_monitoring'
 ###############################################################################
-(>&2 echo "Remediating rule 244/403: 'xccdf_org.ssgproject.content_rule_rsyslog_remote_access_monitoring'")
+(>&2 echo "Remediating rule 247/410: 'xccdf_org.ssgproject.content_rule_rsyslog_remote_access_monitoring'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29343,9 +29392,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_access_monitoring'
 
 ###############################################################################
-# BEGIN fix (245 / 403) for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost'
+# BEGIN fix (248 / 410) for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost'
 ###############################################################################
-(>&2 echo "Remediating rule 245/403: 'xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost'")
+(>&2 echo "Remediating rule 248/410: 'xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29381,17 +29430,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_rsyslog_remote_loghost'
 
 ###############################################################################
-# BEGIN fix (246 / 403) for 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution'
+# BEGIN fix (249 / 410) for 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution'
 ###############################################################################
-(>&2 echo "Remediating rule 246/403: 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution'")
+(>&2 echo "Remediating rule 249/410: 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_network_configure_name_resolution'
 
 ###############################################################################
-# BEGIN fix (247 / 403) for 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'
+# BEGIN fix (250 / 410) for 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 247/403: 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'")
+(>&2 echo "Remediating rule 250/410: 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29406,9 +29455,46 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_network_sniffer_disabled'
 
 ###############################################################################
-# BEGIN fix (248 / 403) for 'xccdf_org.ssgproject.content_rule_package_firewalld_installed'
+# BEGIN fix (251 / 410) for 'xccdf_org.ssgproject.content_rule_firewalld-backend'
 ###############################################################################
-(>&2 echo "Remediating rule 248/403: 'xccdf_org.ssgproject.content_rule_package_firewalld_installed'")
+(>&2 echo "Remediating rule 251/410: 'xccdf_org.ssgproject.content_rule_firewalld-backend'")
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q firewalld; }; then
+
+if [ -e "/etc/firewalld/firewalld.conf" ] ; then
+    
+    LC_ALL=C sed -i "/^\s*FirewallBackend\s*=\s*/d" "/etc/firewalld/firewalld.conf"
+else
+    touch "/etc/firewalld/firewalld.conf"
+fi
+# make sure file has newline at the end
+sed -i -e '$a\' "/etc/firewalld/firewalld.conf"
+
+cp "/etc/firewalld/firewalld.conf" "/etc/firewalld/firewalld.conf.bak"
+# Insert before the line matching the regex '^#\s*FirewallBackend'.
+line_number="$(LC_ALL=C grep -n "^#\s*FirewallBackend" "/etc/firewalld/firewalld.conf.bak" | LC_ALL=C sed 's/:.*//g')"
+if [ -z "$line_number" ]; then
+    # There was no match of '^#\s*FirewallBackend', insert at
+    # the end of the file.
+    printf '%s\n' "FirewallBackend=nftables" >> "/etc/firewalld/firewalld.conf"
+else
+    head -n "$(( line_number - 1 ))" "/etc/firewalld/firewalld.conf.bak" > "/etc/firewalld/firewalld.conf"
+    printf '%s\n' "FirewallBackend=nftables" >> "/etc/firewalld/firewalld.conf"
+    tail -n "+$(( line_number ))" "/etc/firewalld/firewalld.conf.bak" >> "/etc/firewalld/firewalld.conf"
+fi
+# Clean up after ourselves.
+rm "/etc/firewalld/firewalld.conf.bak"
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
+
+# END fix for 'xccdf_org.ssgproject.content_rule_firewalld-backend'
+
+###############################################################################
+# BEGIN fix (252 / 410) for 'xccdf_org.ssgproject.content_rule_package_firewalld_installed'
+###############################################################################
+(>&2 echo "Remediating rule 252/410: 'xccdf_org.ssgproject.content_rule_package_firewalld_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29423,9 +29509,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_firewalld_installed'
 
 ###############################################################################
-# BEGIN fix (249 / 403) for 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'
+# BEGIN fix (253 / 410) for 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 249/403: 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'")
+(>&2 echo "Remediating rule 253/410: 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q firewalld; }; then
 
@@ -29441,17 +29527,33 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_firewalld_enabled'
 
 ###############################################################################
-# BEGIN fix (250 / 403) for 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports'
+# BEGIN fix (254 / 410) for 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports'
 ###############################################################################
-(>&2 echo "Remediating rule 250/403: 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports'")
+(>&2 echo "Remediating rule 254/410: 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_firewalld_ports'
 
 ###############################################################################
-# BEGIN fix (251 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'
+# BEGIN fix (255 / 410) for 'xccdf_org.ssgproject.content_rule_configured_firewalld_default_deny'
 ###############################################################################
-(>&2 echo "Remediating rule 251/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'")
+(>&2 echo "Remediating rule 255/410: 'xccdf_org.ssgproject.content_rule_configured_firewalld_default_deny'")
+(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_configured_firewalld_default_deny' IS MISSING!")
+
+# END fix for 'xccdf_org.ssgproject.content_rule_configured_firewalld_default_deny'
+
+###############################################################################
+# BEGIN fix (256 / 410) for 'xccdf_org.ssgproject.content_rule_set_firewalld_default_zone'
+###############################################################################
+(>&2 echo "Remediating rule 256/410: 'xccdf_org.ssgproject.content_rule_set_firewalld_default_zone'")
+(>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_set_firewalld_default_zone' IS MISSING!")
+
+# END fix for 'xccdf_org.ssgproject.content_rule_set_firewalld_default_zone'
+
+###############################################################################
+# BEGIN fix (257 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'
+###############################################################################
+(>&2 echo "Remediating rule 257/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29517,9 +29619,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_ra'
 
 ###############################################################################
-# BEGIN fix (252 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'
+# BEGIN fix (258 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 252/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 258/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29585,9 +29687,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (253 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'
+# BEGIN fix (259 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 253/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 259/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29653,9 +29755,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (254 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'
+# BEGIN fix (260 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'
 ###############################################################################
-(>&2 echo "Remediating rule 254/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'")
+(>&2 echo "Remediating rule 260/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29721,9 +29823,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_all_forwarding'
 
 ###############################################################################
-# BEGIN fix (255 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'
+# BEGIN fix (261 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'
 ###############################################################################
-(>&2 echo "Remediating rule 255/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'")
+(>&2 echo "Remediating rule 261/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29789,9 +29891,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_ra'
 
 ###############################################################################
-# BEGIN fix (256 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'
+# BEGIN fix (262 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 256/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 262/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29857,9 +29959,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (257 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'
+# BEGIN fix (263 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 257/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 263/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29925,9 +30027,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv6_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (258 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'
+# BEGIN fix (264 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 258/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'")
+(>&2 echo "Remediating rule 264/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -29993,9 +30095,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (259 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'
+# BEGIN fix (265 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 259/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'")
+(>&2 echo "Remediating rule 265/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30061,9 +30163,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (260 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_forwarding'
+# BEGIN fix (266 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_forwarding'
 ###############################################################################
-(>&2 echo "Remediating rule 260/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_forwarding'")
+(>&2 echo "Remediating rule 266/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_forwarding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30129,9 +30231,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_forwarding'
 
 ###############################################################################
-# BEGIN fix (261 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'
+# BEGIN fix (267 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'
 ###############################################################################
-(>&2 echo "Remediating rule 261/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'")
+(>&2 echo "Remediating rule 267/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30197,9 +30299,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_rp_filter'
 
 ###############################################################################
-# BEGIN fix (262 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'
+# BEGIN fix (268 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 262/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'")
+(>&2 echo "Remediating rule 268/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30265,9 +30367,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_redirects'
 
 ###############################################################################
-# BEGIN fix (263 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'
+# BEGIN fix (269 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'
 ###############################################################################
-(>&2 echo "Remediating rule 263/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'")
+(>&2 echo "Remediating rule 269/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30333,9 +30435,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_accept_source_route'
 
 ###############################################################################
-# BEGIN fix (264 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
+# BEGIN fix (270 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 ###############################################################################
-(>&2 echo "Remediating rule 264/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
+(>&2 echo "Remediating rule 270/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_icmp_echo_ignore_broadcasts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30401,9 +30503,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_icmp_echo_ignore_broadcasts'
 
 ###############################################################################
-# BEGIN fix (265 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'
+# BEGIN fix (271 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 265/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'")
+(>&2 echo "Remediating rule 271/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30467,9 +30569,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_all_send_redirects'
 
 ###############################################################################
-# BEGIN fix (266 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'
+# BEGIN fix (272 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'
 ###############################################################################
-(>&2 echo "Remediating rule 266/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'")
+(>&2 echo "Remediating rule 272/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30533,9 +30635,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_ipv4_conf_default_send_redirects'
 
 ###############################################################################
-# BEGIN fix (267 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_atm_disabled'
+# BEGIN fix (273 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_atm_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 267/403: 'xccdf_org.ssgproject.content_rule_kernel_module_atm_disabled'")
+(>&2 echo "Remediating rule 273/410: 'xccdf_org.ssgproject.content_rule_kernel_module_atm_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30558,9 +30660,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_atm_disabled'
 
 ###############################################################################
-# BEGIN fix (268 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_can_disabled'
+# BEGIN fix (274 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_can_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 268/403: 'xccdf_org.ssgproject.content_rule_kernel_module_can_disabled'")
+(>&2 echo "Remediating rule 274/410: 'xccdf_org.ssgproject.content_rule_kernel_module_can_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30583,9 +30685,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_can_disabled'
 
 ###############################################################################
-# BEGIN fix (269 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_firewire-core_disabled'
+# BEGIN fix (275 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_firewire-core_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 269/403: 'xccdf_org.ssgproject.content_rule_kernel_module_firewire-core_disabled'")
+(>&2 echo "Remediating rule 275/410: 'xccdf_org.ssgproject.content_rule_kernel_module_firewire-core_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30608,9 +30710,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_firewire-core_disabled'
 
 ###############################################################################
-# BEGIN fix (270 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'
+# BEGIN fix (276 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 270/403: 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'")
+(>&2 echo "Remediating rule 276/410: 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30633,9 +30735,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_sctp_disabled'
 
 ###############################################################################
-# BEGIN fix (271 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'
+# BEGIN fix (277 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 271/403: 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'")
+(>&2 echo "Remediating rule 277/410: 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30658,9 +30760,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_tipc_disabled'
 
 ###############################################################################
-# BEGIN fix (272 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_bluetooth_disabled'
+# BEGIN fix (278 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_bluetooth_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 272/403: 'xccdf_org.ssgproject.content_rule_kernel_module_bluetooth_disabled'")
+(>&2 echo "Remediating rule 278/410: 'xccdf_org.ssgproject.content_rule_kernel_module_bluetooth_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30683,9 +30785,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_bluetooth_disabled'
 
 ###############################################################################
-# BEGIN fix (273 / 403) for 'xccdf_org.ssgproject.content_rule_wireless_disable_interfaces'
+# BEGIN fix (279 / 410) for 'xccdf_org.ssgproject.content_rule_wireless_disable_interfaces'
 ###############################################################################
-(>&2 echo "Remediating rule 273/403: 'xccdf_org.ssgproject.content_rule_wireless_disable_interfaces'")
+(>&2 echo "Remediating rule 279/410: 'xccdf_org.ssgproject.content_rule_wireless_disable_interfaces'")
 
 if ! rpm -q --quiet "NetworkManager" ; then
     yum install -y "NetworkManager"
@@ -30696,9 +30798,9 @@ nmcli radio all off
 # END fix for 'xccdf_org.ssgproject.content_rule_wireless_disable_interfaces'
 
 ###############################################################################
-# BEGIN fix (274 / 403) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'
+# BEGIN fix (280 / 410) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'
 ###############################################################################
-(>&2 echo "Remediating rule 274/403: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'")
+(>&2 echo "Remediating rule 280/410: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'")
 
 # At least under containerized env /proc can have files w/o possilibity to
 # modify even as root. And touching /proc is not good idea anyways.
@@ -30712,9 +30814,9 @@ find / -path /proc -prune -o \
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_root_owned'
 
 ###############################################################################
-# BEGIN fix (275 / 403) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_sticky_bits'
+# BEGIN fix (281 / 410) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_sticky_bits'
 ###############################################################################
-(>&2 echo "Remediating rule 275/403: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_sticky_bits'")
+(>&2 echo "Remediating rule 281/410: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_sticky_bits'")
 df --local -P | awk '{if (NR!=1) print $6}' \
 | xargs -I '$6' find '$6' -xdev -type d \
 \( -perm -0002 -a ! -perm -1000 \) 2>/dev/null \
@@ -30723,17 +30825,17 @@ df --local -P | awk '{if (NR!=1) print $6}' \
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_sticky_bits'
 
 ###############################################################################
-# BEGIN fix (276 / 403) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group'
+# BEGIN fix (282 / 410) for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group'
 ###############################################################################
-(>&2 echo "Remediating rule 276/403: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group'")
+(>&2 echo "Remediating rule 282/410: 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_perms_world_writable_system_owned_group'
 
 ###############################################################################
-# BEGIN fix (277 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_auditd'
+# BEGIN fix (283 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_auditd'
 ###############################################################################
-(>&2 echo "Remediating rule 277/403: 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_auditd'")
+(>&2 echo "Remediating rule 283/410: 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_auditd'")
 
 
 
@@ -30744,9 +30846,9 @@ chmod u-xs,g-xws,o-xwrt /etc/audit/auditd.conf
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_auditd'
 
 ###############################################################################
-# BEGIN fix (278 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_rulesd'
+# BEGIN fix (284 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_rulesd'
 ###############################################################################
-(>&2 echo "Remediating rule 278/403: 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_rulesd'")
+(>&2 echo "Remediating rule 284/410: 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_rulesd'")
 
 
 
@@ -30757,25 +30859,25 @@ find -H /etc/audit/rules.d/ -maxdepth 1 -perm /u+xs,g+xws,o+xwrt  -type f -regex
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_etc_audit_rulesd'
 
 ###############################################################################
-# BEGIN fix (279 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned'
+# BEGIN fix (285 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned'
 ###############################################################################
-(>&2 echo "Remediating rule 279/403: 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned'")
+(>&2 echo "Remediating rule 285/410: 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_ungroupowned'
 
 ###############################################################################
-# BEGIN fix (280 / 403) for 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user'
+# BEGIN fix (286 / 410) for 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user'
 ###############################################################################
-(>&2 echo "Remediating rule 280/403: 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user'")
+(>&2 echo "Remediating rule 286/410: 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_no_files_unowned_by_user'
 
 ###############################################################################
-# BEGIN fix (281 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_hardlinks'
+# BEGIN fix (287 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_hardlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 281/403: 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_hardlinks'")
+(>&2 echo "Remediating rule 287/410: 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_hardlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30839,9 +30941,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_hardlinks'
 
 ###############################################################################
-# BEGIN fix (282 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_symlinks'
+# BEGIN fix (288 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_symlinks'
 ###############################################################################
-(>&2 echo "Remediating rule 282/403: 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_symlinks'")
+(>&2 echo "Remediating rule 288/410: 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_symlinks'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -30905,41 +31007,41 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_fs_protected_symlinks'
 
 ###############################################################################
-# BEGIN fix (283 / 403) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'
+# BEGIN fix (289 / 410) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 283/403: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'")
+(>&2 echo "Remediating rule 289/410: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'")
 find -H /var/log/ -maxdepth 1 -type d -exec chgrp 0 {} \;
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log'
 
 ###############################################################################
-# BEGIN fix (284 / 403) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'
+# BEGIN fix (290 / 410) for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 284/403: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'")
+(>&2 echo "Remediating rule 290/410: 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'")
 chgrp 0 /var/log/messages
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupowner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (285 / 403) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log'
+# BEGIN fix (291 / 410) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 285/403: 'xccdf_org.ssgproject.content_rule_file_owner_var_log'")
+(>&2 echo "Remediating rule 291/410: 'xccdf_org.ssgproject.content_rule_file_owner_var_log'")
 find -H /var/log/ -maxdepth 1 -type d -exec chown 0 {} \;
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_owner_var_log'
 
 ###############################################################################
-# BEGIN fix (286 / 403) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'
+# BEGIN fix (292 / 410) for 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 286/403: 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'")
+(>&2 echo "Remediating rule 292/410: 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'")
 chown 0 /var/log/messages
 
 # END fix for 'xccdf_org.ssgproject.content_rule_file_owner_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (287 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log'
+# BEGIN fix (293 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log'
 ###############################################################################
-(>&2 echo "Remediating rule 287/403: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log'")
+(>&2 echo "Remediating rule 293/410: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log'")
 
 
 
@@ -30950,9 +31052,9 @@ find -H /var/log/ -maxdepth 1 -perm /u+s,g+ws,o+wt -type d -exec chmod u-s,g-ws,
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log'
 
 ###############################################################################
-# BEGIN fix (288 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_messages'
+# BEGIN fix (294 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_messages'
 ###############################################################################
-(>&2 echo "Remediating rule 288/403: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_messages'")
+(>&2 echo "Remediating rule 294/410: 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_messages'")
 
 
 
@@ -30963,9 +31065,9 @@ chmod u-xs,g-xws,o-xwrt /var/log/messages
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_var_log_messages'
 
 ###############################################################################
-# BEGIN fix (289 / 403) for 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'
+# BEGIN fix (295 / 410) for 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 289/403: 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'")
+(>&2 echo "Remediating rule 295/410: 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'")
 find -H /lib/  -type d -exec chgrp 0 {} \;
 find -H /lib64/  -type d -exec chgrp 0 {} \;
 find -H /usr/lib/  -type d -exec chgrp 0 {} \;
@@ -30974,9 +31076,9 @@ find -H /usr/lib64/  -type d -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_group_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (290 / 403) for 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'
+# BEGIN fix (296 / 410) for 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 290/403: 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'")
+(>&2 echo "Remediating rule 296/410: 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'")
 find -H /lib/  -type d -exec chown 0 {} \;
 find -H /lib64/  -type d -exec chown 0 {} \;
 find -H /usr/lib/  -type d -exec chown 0 {} \;
@@ -30985,9 +31087,9 @@ find -H /usr/lib64/  -type d -exec chown 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (291 / 403) for 'xccdf_org.ssgproject.content_rule_dir_permissions_library_dirs'
+# BEGIN fix (297 / 410) for 'xccdf_org.ssgproject.content_rule_dir_permissions_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 291/403: 'xccdf_org.ssgproject.content_rule_dir_permissions_library_dirs'")
+(>&2 echo "Remediating rule 297/410: 'xccdf_org.ssgproject.content_rule_dir_permissions_library_dirs'")
 
 
 
@@ -31004,9 +31106,9 @@ find -H /usr/lib64/  -perm /g+w,o+w -type d -exec chmod g-w,o-w {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_dir_permissions_library_dirs'
 
 ###############################################################################
-# BEGIN fix (292 / 403) for 'xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs'
+# BEGIN fix (298 / 410) for 'xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 292/403: 'xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs'")
+(>&2 echo "Remediating rule 298/410: 'xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs'")
 
 for SYSCMDFILES in /bin /sbin /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin
 do
@@ -31016,9 +31118,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_file_groupownership_system_commands_dirs'
 
 ###############################################################################
-# BEGIN fix (293 / 403) for 'xccdf_org.ssgproject.content_rule_file_ownership_binary_dirs'
+# BEGIN fix (299 / 410) for 'xccdf_org.ssgproject.content_rule_file_ownership_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 293/403: 'xccdf_org.ssgproject.content_rule_file_ownership_binary_dirs'")
+(>&2 echo "Remediating rule 299/410: 'xccdf_org.ssgproject.content_rule_file_ownership_binary_dirs'")
 find /bin/ \
 /usr/bin/ \
 /usr/local/bin/ \
@@ -31031,9 +31133,9 @@ find /bin/ \
 # END fix for 'xccdf_org.ssgproject.content_rule_file_ownership_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (294 / 403) for 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'
+# BEGIN fix (300 / 410) for 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 294/403: 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'")
+(>&2 echo "Remediating rule 300/410: 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'")
 
 find /lib/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 
@@ -31046,9 +31148,9 @@ find /usr/lib64/  -type f ! -uid 0 -regex '^.*$' -exec chown 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_file_ownership_library_dirs'
 
 ###############################################################################
-# BEGIN fix (295 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_binary_dirs'
+# BEGIN fix (301 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_binary_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 295/403: 'xccdf_org.ssgproject.content_rule_file_permissions_binary_dirs'")
+(>&2 echo "Remediating rule 301/410: 'xccdf_org.ssgproject.content_rule_file_permissions_binary_dirs'")
 DIRS="/bin /usr/bin /usr/local/bin /sbin /usr/sbin /usr/local/sbin /usr/libexec"
 for dirPath in $DIRS; do
 	find "$dirPath" -perm /022 -exec chmod go-w '{}' \;
@@ -31057,9 +31159,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_binary_dirs'
 
 ###############################################################################
-# BEGIN fix (296 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_library_dirs'
+# BEGIN fix (302 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_library_dirs'
 ###############################################################################
-(>&2 echo "Remediating rule 296/403: 'xccdf_org.ssgproject.content_rule_file_permissions_library_dirs'")
+(>&2 echo "Remediating rule 302/410: 'xccdf_org.ssgproject.content_rule_file_permissions_library_dirs'")
 
 
 
@@ -31076,9 +31178,9 @@ find -H /usr/lib64/  -perm /g+w,o+w  -type f -regex '^.*$' -exec chmod g-w,o-w {
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_library_dirs'
 
 ###############################################################################
-# BEGIN fix (297 / 403) for 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'
+# BEGIN fix (303 / 410) for 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'
 ###############################################################################
-(>&2 echo "Remediating rule 297/403: 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'")
+(>&2 echo "Remediating rule 303/410: 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'")
 
 find /lib/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 
@@ -31091,9 +31193,9 @@ find /usr/lib64/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 # END fix for 'xccdf_org.ssgproject.content_rule_root_permissions_syslibrary_files'
 
 ###############################################################################
-# BEGIN fix (298 / 403) for 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'
+# BEGIN fix (304 / 410) for 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 298/403: 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'")
+(>&2 echo "Remediating rule 304/410: 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31118,9 +31220,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'
 
 ###############################################################################
-# BEGIN fix (299 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'
+# BEGIN fix (305 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 299/403: 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'")
+(>&2 echo "Remediating rule 305/410: 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31143,9 +31245,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_cramfs_disabled'
 
 ###############################################################################
-# BEGIN fix (300 / 403) for 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'
+# BEGIN fix (306 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 300/403: 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'")
+(>&2 echo "Remediating rule 306/410: 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31168,9 +31270,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_usb-storage_disabled'
 
 ###############################################################################
-# BEGIN fix (301 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_boot_efi_nosuid'
+# BEGIN fix (307 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_boot_efi_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 301/403: 'xccdf_org.ssgproject.content_rule_mount_option_boot_efi_nosuid'")
+(>&2 echo "Remediating rule 307/410: 'xccdf_org.ssgproject.content_rule_mount_option_boot_efi_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ -d /sys/firmware/efi ] ); then
 
@@ -31222,9 +31324,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_boot_efi_nosuid'
 
 ###############################################################################
-# BEGIN fix (302 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_boot_nosuid'
+# BEGIN fix (308 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_boot_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 302/403: 'xccdf_org.ssgproject.content_rule_mount_option_boot_nosuid'")
+(>&2 echo "Remediating rule 308/410: 'xccdf_org.ssgproject.content_rule_mount_option_boot_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31276,9 +31378,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_boot_nosuid'
 
 ###############################################################################
-# BEGIN fix (303 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'
+# BEGIN fix (309 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 303/403: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'")
+(>&2 echo "Remediating rule 309/410: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31324,9 +31426,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nodev'
 
 ###############################################################################
-# BEGIN fix (304 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'
+# BEGIN fix (310 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 304/403: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'")
+(>&2 echo "Remediating rule 310/410: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31372,9 +31474,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_noexec'
 
 ###############################################################################
-# BEGIN fix (305 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'
+# BEGIN fix (311 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 305/403: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'")
+(>&2 echo "Remediating rule 311/410: 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31420,9 +31522,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_dev_shm_nosuid'
 
 ###############################################################################
-# BEGIN fix (306 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_home_noexec'
+# BEGIN fix (312 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_home_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 306/403: 'xccdf_org.ssgproject.content_rule_mount_option_home_noexec'")
+(>&2 echo "Remediating rule 312/410: 'xccdf_org.ssgproject.content_rule_mount_option_home_noexec'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31474,9 +31576,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_home_noexec'
 
 ###############################################################################
-# BEGIN fix (307 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'
+# BEGIN fix (313 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 307/403: 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'")
+(>&2 echo "Remediating rule 313/410: 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/home" > /dev/null || findmnt --fstab "/home" > /dev/null ); then
 
@@ -31528,9 +31630,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_home_nosuid'
 
 ###############################################################################
-# BEGIN fix (308 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions'
+# BEGIN fix (314 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 308/403: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions'")
+(>&2 echo "Remediating rule 314/410: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31585,9 +31687,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_nonroot_local_partitions'
 
 ###############################################################################
-# BEGIN fix (309 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_removable_partitions'
+# BEGIN fix (315 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 309/403: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_removable_partitions'")
+(>&2 echo "Remediating rule 315/410: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31611,9 +31713,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (310 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_removable_partitions'
+# BEGIN fix (316 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 310/403: 'xccdf_org.ssgproject.content_rule_mount_option_noexec_removable_partitions'")
+(>&2 echo "Remediating rule 316/410: 'xccdf_org.ssgproject.content_rule_mount_option_noexec_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31637,9 +31739,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (311 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_removable_partitions'
+# BEGIN fix (317 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_removable_partitions'
 ###############################################################################
-(>&2 echo "Remediating rule 311/403: 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_removable_partitions'")
+(>&2 echo "Remediating rule 317/410: 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_removable_partitions'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -31663,9 +31765,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_removable_partitions'
 
 ###############################################################################
-# BEGIN fix (312 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev'
+# BEGIN fix (318 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 312/403: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev'")
+(>&2 echo "Remediating rule 318/410: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/tmp" > /dev/null || findmnt --fstab "/tmp" > /dev/null ); then
 
@@ -31717,9 +31819,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (313 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_noexec'
+# BEGIN fix (319 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 313/403: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_noexec'")
+(>&2 echo "Remediating rule 319/410: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/tmp" > /dev/null || findmnt --fstab "/tmp" > /dev/null ); then
 
@@ -31771,9 +31873,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (314 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nosuid'
+# BEGIN fix (320 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 314/403: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nosuid'")
+(>&2 echo "Remediating rule 320/410: 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/tmp" > /dev/null || findmnt --fstab "/tmp" > /dev/null ); then
 
@@ -31825,9 +31927,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (315 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'
+# BEGIN fix (321 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 315/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'")
+(>&2 echo "Remediating rule 321/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
@@ -31879,9 +31981,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nodev'
 
 ###############################################################################
-# BEGIN fix (316 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'
+# BEGIN fix (322 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 316/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'")
+(>&2 echo "Remediating rule 322/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
@@ -31933,9 +32035,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_noexec'
 
 ###############################################################################
-# BEGIN fix (317 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'
+# BEGIN fix (323 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 317/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'")
+(>&2 echo "Remediating rule 323/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log/audit" > /dev/null || findmnt --fstab "/var/log/audit" > /dev/null ); then
 
@@ -31987,9 +32089,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_audit_nosuid'
 
 ###############################################################################
-# BEGIN fix (318 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'
+# BEGIN fix (324 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 318/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'")
+(>&2 echo "Remediating rule 324/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
@@ -32041,9 +32143,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nodev'
 
 ###############################################################################
-# BEGIN fix (319 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'
+# BEGIN fix (325 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 319/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'")
+(>&2 echo "Remediating rule 325/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
@@ -32095,9 +32197,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_noexec'
 
 ###############################################################################
-# BEGIN fix (320 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'
+# BEGIN fix (326 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 320/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'")
+(>&2 echo "Remediating rule 326/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/log" > /dev/null || findmnt --fstab "/var/log" > /dev/null ); then
 
@@ -32149,9 +32251,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_log_nosuid'
 
 ###############################################################################
-# BEGIN fix (321 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nodev'
+# BEGIN fix (327 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nodev'
 ###############################################################################
-(>&2 echo "Remediating rule 321/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nodev'")
+(>&2 echo "Remediating rule 327/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nodev'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/tmp" > /dev/null || findmnt --fstab "/var/tmp" > /dev/null ); then
 
@@ -32203,9 +32305,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nodev'
 
 ###############################################################################
-# BEGIN fix (322 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_noexec'
+# BEGIN fix (328 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_noexec'
 ###############################################################################
-(>&2 echo "Remediating rule 322/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_noexec'")
+(>&2 echo "Remediating rule 328/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_noexec'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/tmp" > /dev/null || findmnt --fstab "/var/tmp" > /dev/null ); then
 
@@ -32257,9 +32359,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_noexec'
 
 ###############################################################################
-# BEGIN fix (323 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nosuid'
+# BEGIN fix (329 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nosuid'
 ###############################################################################
-(>&2 echo "Remediating rule 323/403: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nosuid'")
+(>&2 echo "Remediating rule 329/410: 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nosuid'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/var/tmp" > /dev/null || findmnt --fstab "/var/tmp" > /dev/null ); then
 
@@ -32311,9 +32413,34 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_var_tmp_nosuid'
 
 ###############################################################################
-# BEGIN fix (324 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_core_pattern'
+# BEGIN fix (330 / 410) for 'xccdf_org.ssgproject.content_rule_kernel_module_uvcvideo_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 324/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_core_pattern'")
+(>&2 echo "Remediating rule 330/410: 'xccdf_org.ssgproject.content_rule_kernel_module_uvcvideo_disabled'")
+# Remediation is applicable only in certain platforms
+if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+
+if LC_ALL=C grep -q -m 1 "^install uvcvideo" /etc/modprobe.d/uvcvideo.conf ; then
+	
+	sed -i 's#^install uvcvideo.*#install uvcvideo /bin/true#g' /etc/modprobe.d/uvcvideo.conf
+else
+	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/uvcvideo.conf
+	echo "install uvcvideo /bin/true" >> /etc/modprobe.d/uvcvideo.conf
+fi
+
+if ! LC_ALL=C grep -q -m 1 "^blacklist uvcvideo$" /etc/modprobe.d/uvcvideo.conf ; then
+	echo "blacklist uvcvideo" >> /etc/modprobe.d/uvcvideo.conf
+fi
+
+else
+    >&2 echo 'Remediation is not applicable, nothing was done'
+fi
+
+# END fix for 'xccdf_org.ssgproject.content_rule_kernel_module_uvcvideo_disabled'
+
+###############################################################################
+# BEGIN fix (331 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_core_pattern'
+###############################################################################
+(>&2 echo "Remediating rule 331/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_core_pattern'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32377,9 +32504,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_core_pattern'
 
 ###############################################################################
-# BEGIN fix (325 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_dmesg_restrict'
+# BEGIN fix (332 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_dmesg_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 325/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_dmesg_restrict'")
+(>&2 echo "Remediating rule 332/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_dmesg_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32443,9 +32570,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_dmesg_restrict'
 
 ###############################################################################
-# BEGIN fix (326 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kexec_load_disabled'
+# BEGIN fix (333 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kexec_load_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 326/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kexec_load_disabled'")
+(>&2 echo "Remediating rule 333/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kexec_load_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32509,9 +32636,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kexec_load_disabled'
 
 ###############################################################################
-# BEGIN fix (327 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_perf_event_paranoid'
+# BEGIN fix (334 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_perf_event_paranoid'
 ###############################################################################
-(>&2 echo "Remediating rule 327/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_perf_event_paranoid'")
+(>&2 echo "Remediating rule 334/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_perf_event_paranoid'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32575,9 +32702,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_perf_event_paranoid'
 
 ###############################################################################
-# BEGIN fix (328 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_unprivileged_bpf_disabled'
+# BEGIN fix (335 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_unprivileged_bpf_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 328/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_unprivileged_bpf_disabled'")
+(>&2 echo "Remediating rule 335/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_unprivileged_bpf_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32641,9 +32768,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_unprivileged_bpf_disabled'
 
 ###############################################################################
-# BEGIN fix (329 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope'
+# BEGIN fix (336 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope'
 ###############################################################################
-(>&2 echo "Remediating rule 329/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope'")
+(>&2 echo "Remediating rule 336/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32707,9 +32834,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_yama_ptrace_scope'
 
 ###############################################################################
-# BEGIN fix (330 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_net_core_bpf_jit_harden'
+# BEGIN fix (337 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_net_core_bpf_jit_harden'
 ###############################################################################
-(>&2 echo "Remediating rule 330/403: 'xccdf_org.ssgproject.content_rule_sysctl_net_core_bpf_jit_harden'")
+(>&2 echo "Remediating rule 337/410: 'xccdf_org.ssgproject.content_rule_sysctl_net_core_bpf_jit_harden'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32773,9 +32900,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_net_core_bpf_jit_harden'
 
 ###############################################################################
-# BEGIN fix (331 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_user_max_user_namespaces'
+# BEGIN fix (338 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_user_max_user_namespaces'
 ###############################################################################
-(>&2 echo "Remediating rule 331/403: 'xccdf_org.ssgproject.content_rule_sysctl_user_max_user_namespaces'")
+(>&2 echo "Remediating rule 338/410: 'xccdf_org.ssgproject.content_rule_sysctl_user_max_user_namespaces'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32839,9 +32966,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_user_max_user_namespaces'
 
 ###############################################################################
-# BEGIN fix (332 / 403) for 'xccdf_org.ssgproject.content_rule_service_systemd-coredump_disabled'
+# BEGIN fix (339 / 410) for 'xccdf_org.ssgproject.content_rule_service_systemd-coredump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 332/403: 'xccdf_org.ssgproject.content_rule_service_systemd-coredump_disabled'")
+(>&2 echo "Remediating rule 339/410: 'xccdf_org.ssgproject.content_rule_service_systemd-coredump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -32860,9 +32987,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_systemd-coredump_disabled'
 
 ###############################################################################
-# BEGIN fix (333 / 403) for 'xccdf_org.ssgproject.content_rule_coredump_disable_backtraces'
+# BEGIN fix (340 / 410) for 'xccdf_org.ssgproject.content_rule_coredump_disable_backtraces'
 ###############################################################################
-(>&2 echo "Remediating rule 333/403: 'xccdf_org.ssgproject.content_rule_coredump_disable_backtraces'")
+(>&2 echo "Remediating rule 340/410: 'xccdf_org.ssgproject.content_rule_coredump_disable_backtraces'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q systemd; then
 
@@ -32888,9 +33015,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_coredump_disable_backtraces'
 
 ###############################################################################
-# BEGIN fix (334 / 403) for 'xccdf_org.ssgproject.content_rule_coredump_disable_storage'
+# BEGIN fix (341 / 410) for 'xccdf_org.ssgproject.content_rule_coredump_disable_storage'
 ###############################################################################
-(>&2 echo "Remediating rule 334/403: 'xccdf_org.ssgproject.content_rule_coredump_disable_storage'")
+(>&2 echo "Remediating rule 341/410: 'xccdf_org.ssgproject.content_rule_coredump_disable_storage'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q systemd; then
 
@@ -32916,9 +33043,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_coredump_disable_storage'
 
 ###############################################################################
-# BEGIN fix (335 / 403) for 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'
+# BEGIN fix (342 / 410) for 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'
 ###############################################################################
-(>&2 echo "Remediating rule 335/403: 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'")
+(>&2 echo "Remediating rule 342/410: 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q pam; then
 
@@ -32941,9 +33068,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_disable_users_coredumps'
 
 ###############################################################################
-# BEGIN fix (336 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kptr_restrict'
+# BEGIN fix (343 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kptr_restrict'
 ###############################################################################
-(>&2 echo "Remediating rule 336/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kptr_restrict'")
+(>&2 echo "Remediating rule 343/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kptr_restrict'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33009,9 +33136,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_kptr_restrict'
 
 ###############################################################################
-# BEGIN fix (337 / 403) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'
+# BEGIN fix (344 / 410) for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'
 ###############################################################################
-(>&2 echo "Remediating rule 337/403: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'")
+(>&2 echo "Remediating rule 344/410: 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33075,17 +33202,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sysctl_kernel_randomize_va_space'
 
 ###############################################################################
-# BEGIN fix (338 / 403) for 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions'
+# BEGIN fix (345 / 410) for 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions'
 ###############################################################################
-(>&2 echo "Remediating rule 338/403: 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions'")
+(>&2 echo "Remediating rule 345/410: 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_bios_enable_execution_restrictions'
 
 ###############################################################################
-# BEGIN fix (339 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_page_poison_argument'
+# BEGIN fix (346 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_page_poison_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 339/403: 'xccdf_org.ssgproject.content_rule_grub2_page_poison_argument'")
+(>&2 echo "Remediating rule 346/410: 'xccdf_org.ssgproject.content_rule_grub2_page_poison_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -33098,9 +33225,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_page_poison_argument'
 
 ###############################################################################
-# BEGIN fix (340 / 403) for 'xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument'
+# BEGIN fix (347 / 410) for 'xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument'
 ###############################################################################
-(>&2 echo "Remediating rule 340/403: 'xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument'")
+(>&2 echo "Remediating rule 347/410: 'xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { rpm --quiet -q grub2-common; }; then
 
@@ -33117,9 +33244,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_grub2_slub_debug_argument'
 
 ###############################################################################
-# BEGIN fix (341 / 403) for 'xccdf_org.ssgproject.content_rule_package_policycoreutils_installed'
+# BEGIN fix (348 / 410) for 'xccdf_org.ssgproject.content_rule_package_policycoreutils_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 341/403: 'xccdf_org.ssgproject.content_rule_package_policycoreutils_installed'")
+(>&2 echo "Remediating rule 348/410: 'xccdf_org.ssgproject.content_rule_package_policycoreutils_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33134,9 +33261,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_policycoreutils_installed'
 
 ###############################################################################
-# BEGIN fix (342 / 403) for 'xccdf_org.ssgproject.content_rule_selinux_policytype'
+# BEGIN fix (349 / 410) for 'xccdf_org.ssgproject.content_rule_selinux_policytype'
 ###############################################################################
-(>&2 echo "Remediating rule 342/403: 'xccdf_org.ssgproject.content_rule_selinux_policytype'")
+(>&2 echo "Remediating rule 349/410: 'xccdf_org.ssgproject.content_rule_selinux_policytype'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33165,9 +33292,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_selinux_policytype'
 
 ###############################################################################
-# BEGIN fix (343 / 403) for 'xccdf_org.ssgproject.content_rule_selinux_state'
+# BEGIN fix (350 / 410) for 'xccdf_org.ssgproject.content_rule_selinux_state'
 ###############################################################################
-(>&2 echo "Remediating rule 343/403: 'xccdf_org.ssgproject.content_rule_selinux_state'")
+(>&2 echo "Remediating rule 350/410: 'xccdf_org.ssgproject.content_rule_selinux_state'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33199,17 +33326,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_selinux_state'
 
 ###############################################################################
-# BEGIN fix (344 / 403) for 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles'
+# BEGIN fix (351 / 410) for 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles'
 ###############################################################################
-(>&2 echo "Remediating rule 344/403: 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles'")
+(>&2 echo "Remediating rule 351/410: 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_selinux_user_login_roles'
 
 ###############################################################################
-# BEGIN fix (345 / 403) for 'xccdf_org.ssgproject.content_rule_package_abrt_removed'
+# BEGIN fix (352 / 410) for 'xccdf_org.ssgproject.content_rule_package_abrt_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 345/403: 'xccdf_org.ssgproject.content_rule_package_abrt_removed'")
+(>&2 echo "Remediating rule 352/410: 'xccdf_org.ssgproject.content_rule_package_abrt_removed'")
 
 # CAUTION: This remediation script will remove abrt
 #	   from the system, and may remove any packages
@@ -33226,9 +33353,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_abrt_removed'
 
 ###############################################################################
-# BEGIN fix (346 / 403) for 'xccdf_org.ssgproject.content_rule_service_kdump_disabled'
+# BEGIN fix (353 / 410) for 'xccdf_org.ssgproject.content_rule_service_kdump_disabled'
 ###############################################################################
-(>&2 echo "Remediating rule 346/403: 'xccdf_org.ssgproject.content_rule_service_kdump_disabled'")
+(>&2 echo "Remediating rule 353/410: 'xccdf_org.ssgproject.content_rule_service_kdump_disabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33253,9 +33380,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_kdump_disabled'
 
 ###############################################################################
-# BEGIN fix (347 / 403) for 'xccdf_org.ssgproject.content_rule_package_fapolicyd_installed'
+# BEGIN fix (354 / 410) for 'xccdf_org.ssgproject.content_rule_package_fapolicyd_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 347/403: 'xccdf_org.ssgproject.content_rule_package_fapolicyd_installed'")
+(>&2 echo "Remediating rule 354/410: 'xccdf_org.ssgproject.content_rule_package_fapolicyd_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33270,9 +33397,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_fapolicyd_installed'
 
 ###############################################################################
-# BEGIN fix (348 / 403) for 'xccdf_org.ssgproject.content_rule_service_fapolicyd_enabled'
+# BEGIN fix (355 / 410) for 'xccdf_org.ssgproject.content_rule_service_fapolicyd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 348/403: 'xccdf_org.ssgproject.content_rule_service_fapolicyd_enabled'")
+(>&2 echo "Remediating rule 355/410: 'xccdf_org.ssgproject.content_rule_service_fapolicyd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33288,9 +33415,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_fapolicyd_enabled'
 
 ###############################################################################
-# BEGIN fix (349 / 403) for 'xccdf_org.ssgproject.content_rule_fapolicy_default_deny'
+# BEGIN fix (356 / 410) for 'xccdf_org.ssgproject.content_rule_fapolicy_default_deny'
 ###############################################################################
-(>&2 echo "Remediating rule 349/403: 'xccdf_org.ssgproject.content_rule_fapolicy_default_deny'")
+(>&2 echo "Remediating rule 356/410: 'xccdf_org.ssgproject.content_rule_fapolicy_default_deny'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33326,9 +33453,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_fapolicy_default_deny'
 
 ###############################################################################
-# BEGIN fix (350 / 403) for 'xccdf_org.ssgproject.content_rule_package_vsftpd_removed'
+# BEGIN fix (357 / 410) for 'xccdf_org.ssgproject.content_rule_package_vsftpd_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 350/403: 'xccdf_org.ssgproject.content_rule_package_vsftpd_removed'")
+(>&2 echo "Remediating rule 357/410: 'xccdf_org.ssgproject.content_rule_package_vsftpd_removed'")
 
 # CAUTION: This remediation script will remove vsftpd
 #	   from the system, and may remove any packages
@@ -33345,9 +33472,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_vsftpd_removed'
 
 ###############################################################################
-# BEGIN fix (351 / 403) for 'xccdf_org.ssgproject.content_rule_package_krb5-server_removed'
+# BEGIN fix (358 / 410) for 'xccdf_org.ssgproject.content_rule_package_krb5-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 351/403: 'xccdf_org.ssgproject.content_rule_package_krb5-server_removed'")
+(>&2 echo "Remediating rule 358/410: 'xccdf_org.ssgproject.content_rule_package_krb5-server_removed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33370,9 +33497,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_krb5-server_removed'
 
 ###############################################################################
-# BEGIN fix (352 / 403) for 'xccdf_org.ssgproject.content_rule_kerberos_disable_no_keytab'
+# BEGIN fix (359 / 410) for 'xccdf_org.ssgproject.content_rule_kerberos_disable_no_keytab'
 ###############################################################################
-(>&2 echo "Remediating rule 352/403: 'xccdf_org.ssgproject.content_rule_kerberos_disable_no_keytab'")
+(>&2 echo "Remediating rule 359/410: 'xccdf_org.ssgproject.content_rule_kerberos_disable_no_keytab'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33385,9 +33512,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_kerberos_disable_no_keytab'
 
 ###############################################################################
-# BEGIN fix (353 / 403) for 'xccdf_org.ssgproject.content_rule_package_mailx_installed'
+# BEGIN fix (360 / 410) for 'xccdf_org.ssgproject.content_rule_package_mailx_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 353/403: 'xccdf_org.ssgproject.content_rule_package_mailx_installed'")
+(>&2 echo "Remediating rule 360/410: 'xccdf_org.ssgproject.content_rule_package_mailx_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33402,9 +33529,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_mailx_installed'
 
 ###############################################################################
-# BEGIN fix (354 / 403) for 'xccdf_org.ssgproject.content_rule_package_postfix_installed'
+# BEGIN fix (361 / 410) for 'xccdf_org.ssgproject.content_rule_package_postfix_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 354/403: 'xccdf_org.ssgproject.content_rule_package_postfix_installed'")
+(>&2 echo "Remediating rule 361/410: 'xccdf_org.ssgproject.content_rule_package_postfix_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33419,9 +33546,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_postfix_installed'
 
 ###############################################################################
-# BEGIN fix (355 / 403) for 'xccdf_org.ssgproject.content_rule_package_sendmail_removed'
+# BEGIN fix (362 / 410) for 'xccdf_org.ssgproject.content_rule_package_sendmail_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 355/403: 'xccdf_org.ssgproject.content_rule_package_sendmail_removed'")
+(>&2 echo "Remediating rule 362/410: 'xccdf_org.ssgproject.content_rule_package_sendmail_removed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33444,9 +33571,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_sendmail_removed'
 
 ###############################################################################
-# BEGIN fix (356 / 403) for 'xccdf_org.ssgproject.content_rule_postfix_client_configure_mail_alias_postmaster'
+# BEGIN fix (363 / 410) for 'xccdf_org.ssgproject.content_rule_postfix_client_configure_mail_alias_postmaster'
 ###############################################################################
-(>&2 echo "Remediating rule 356/403: 'xccdf_org.ssgproject.content_rule_postfix_client_configure_mail_alias_postmaster'")
+(>&2 echo "Remediating rule 363/410: 'xccdf_org.ssgproject.content_rule_postfix_client_configure_mail_alias_postmaster'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33476,9 +33603,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_postfix_client_configure_mail_alias_postmaster'
 
 ###############################################################################
-# BEGIN fix (357 / 403) for 'xccdf_org.ssgproject.content_rule_postfix_prevent_unrestricted_relay'
+# BEGIN fix (364 / 410) for 'xccdf_org.ssgproject.content_rule_postfix_prevent_unrestricted_relay'
 ###############################################################################
-(>&2 echo "Remediating rule 357/403: 'xccdf_org.ssgproject.content_rule_postfix_prevent_unrestricted_relay'")
+(>&2 echo "Remediating rule 364/410: 'xccdf_org.ssgproject.content_rule_postfix_prevent_unrestricted_relay'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q postfix; then
 
@@ -33495,9 +33622,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_postfix_prevent_unrestricted_relay'
 
 ###############################################################################
-# BEGIN fix (358 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_remote_filesystems'
+# BEGIN fix (365 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 358/403: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_remote_filesystems'")
+(>&2 echo "Remediating rule 365/410: 'xccdf_org.ssgproject.content_rule_mount_option_nodev_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33535,9 +33662,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_nodev_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (359 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_remote_filesystems'
+# BEGIN fix (366 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 359/403: 'xccdf_org.ssgproject.content_rule_mount_option_noexec_remote_filesystems'")
+(>&2 echo "Remediating rule 366/410: 'xccdf_org.ssgproject.content_rule_mount_option_noexec_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33575,9 +33702,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_noexec_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (360 / 403) for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_remote_filesystems'
+# BEGIN fix (367 / 410) for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_remote_filesystems'
 ###############################################################################
-(>&2 echo "Remediating rule 360/403: 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_remote_filesystems'")
+(>&2 echo "Remediating rule 367/410: 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_remote_filesystems'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33615,9 +33742,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_mount_option_nosuid_remote_filesystems'
 
 ###############################################################################
-# BEGIN fix (361 / 403) for 'xccdf_org.ssgproject.content_rule_chronyd_client_only'
+# BEGIN fix (368 / 410) for 'xccdf_org.ssgproject.content_rule_chronyd_client_only'
 ###############################################################################
-(>&2 echo "Remediating rule 361/403: 'xccdf_org.ssgproject.content_rule_chronyd_client_only'")
+(>&2 echo "Remediating rule 368/410: 'xccdf_org.ssgproject.content_rule_chronyd_client_only'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33650,9 +33777,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_chronyd_client_only'
 
 ###############################################################################
-# BEGIN fix (362 / 403) for 'xccdf_org.ssgproject.content_rule_chronyd_no_chronyc_network'
+# BEGIN fix (369 / 410) for 'xccdf_org.ssgproject.content_rule_chronyd_no_chronyc_network'
 ###############################################################################
-(>&2 echo "Remediating rule 362/403: 'xccdf_org.ssgproject.content_rule_chronyd_no_chronyc_network'")
+(>&2 echo "Remediating rule 369/410: 'xccdf_org.ssgproject.content_rule_chronyd_no_chronyc_network'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33685,9 +33812,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_chronyd_no_chronyc_network'
 
 ###############################################################################
-# BEGIN fix (363 / 403) for 'xccdf_org.ssgproject.content_rule_chronyd_or_ntpd_set_maxpoll'
+# BEGIN fix (370 / 410) for 'xccdf_org.ssgproject.content_rule_chronyd_or_ntpd_set_maxpoll'
 ###############################################################################
-(>&2 echo "Remediating rule 363/403: 'xccdf_org.ssgproject.content_rule_chronyd_or_ntpd_set_maxpoll'")
+(>&2 echo "Remediating rule 370/410: 'xccdf_org.ssgproject.content_rule_chronyd_or_ntpd_set_maxpoll'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { ( rpm --quiet -q chrony || rpm --quiet -q ntp ); }; then
 
@@ -33730,17 +33857,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_chronyd_or_ntpd_set_maxpoll'
 
 ###############################################################################
-# BEGIN fix (364 / 403) for 'xccdf_org.ssgproject.content_rule_chronyd_server_directive'
+# BEGIN fix (371 / 410) for 'xccdf_org.ssgproject.content_rule_chronyd_server_directive'
 ###############################################################################
-(>&2 echo "Remediating rule 364/403: 'xccdf_org.ssgproject.content_rule_chronyd_server_directive'")
+(>&2 echo "Remediating rule 371/410: 'xccdf_org.ssgproject.content_rule_chronyd_server_directive'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_chronyd_server_directive' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_chronyd_server_directive'
 
 ###############################################################################
-# BEGIN fix (365 / 403) for 'xccdf_org.ssgproject.content_rule_package_rsh-server_removed'
+# BEGIN fix (372 / 410) for 'xccdf_org.ssgproject.content_rule_package_rsh-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 365/403: 'xccdf_org.ssgproject.content_rule_package_rsh-server_removed'")
+(>&2 echo "Remediating rule 372/410: 'xccdf_org.ssgproject.content_rule_package_rsh-server_removed'")
 
 # CAUTION: This remediation script will remove rsh-server
 #	   from the system, and may remove any packages
@@ -33757,9 +33884,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_rsh-server_removed'
 
 ###############################################################################
-# BEGIN fix (366 / 403) for 'xccdf_org.ssgproject.content_rule_no_host_based_files'
+# BEGIN fix (373 / 410) for 'xccdf_org.ssgproject.content_rule_no_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 366/403: 'xccdf_org.ssgproject.content_rule_no_host_based_files'")
+(>&2 echo "Remediating rule 373/410: 'xccdf_org.ssgproject.content_rule_no_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -33773,9 +33900,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_no_host_based_files'
 
 ###############################################################################
-# BEGIN fix (367 / 403) for 'xccdf_org.ssgproject.content_rule_no_user_host_based_files'
+# BEGIN fix (374 / 410) for 'xccdf_org.ssgproject.content_rule_no_user_host_based_files'
 ###############################################################################
-(>&2 echo "Remediating rule 367/403: 'xccdf_org.ssgproject.content_rule_no_user_host_based_files'")
+(>&2 echo "Remediating rule 374/410: 'xccdf_org.ssgproject.content_rule_no_user_host_based_files'")
 
 # Identify local mounts
 MOUNT_LIST=$(df --local | awk '{ print $6 }')
@@ -33789,9 +33916,9 @@ done
 # END fix for 'xccdf_org.ssgproject.content_rule_no_user_host_based_files'
 
 ###############################################################################
-# BEGIN fix (368 / 403) for 'xccdf_org.ssgproject.content_rule_package_telnet-server_removed'
+# BEGIN fix (375 / 410) for 'xccdf_org.ssgproject.content_rule_package_telnet-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 368/403: 'xccdf_org.ssgproject.content_rule_package_telnet-server_removed'")
+(>&2 echo "Remediating rule 375/410: 'xccdf_org.ssgproject.content_rule_package_telnet-server_removed'")
 
 # CAUTION: This remediation script will remove telnet-server
 #	   from the system, and may remove any packages
@@ -33808,9 +33935,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_telnet-server_removed'
 
 ###############################################################################
-# BEGIN fix (369 / 403) for 'xccdf_org.ssgproject.content_rule_package_tftp-server_removed'
+# BEGIN fix (376 / 410) for 'xccdf_org.ssgproject.content_rule_package_tftp-server_removed'
 ###############################################################################
-(>&2 echo "Remediating rule 369/403: 'xccdf_org.ssgproject.content_rule_package_tftp-server_removed'")
+(>&2 echo "Remediating rule 376/410: 'xccdf_org.ssgproject.content_rule_package_tftp-server_removed'")
 
 # CAUTION: This remediation script will remove tftp-server
 #	   from the system, and may remove any packages
@@ -33827,9 +33954,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_tftp-server_removed'
 
 ###############################################################################
-# BEGIN fix (370 / 403) for 'xccdf_org.ssgproject.content_rule_tftpd_uses_secure_mode'
+# BEGIN fix (377 / 410) for 'xccdf_org.ssgproject.content_rule_tftpd_uses_secure_mode'
 ###############################################################################
-(>&2 echo "Remediating rule 370/403: 'xccdf_org.ssgproject.content_rule_tftpd_uses_secure_mode'")
+(>&2 echo "Remediating rule 377/410: 'xccdf_org.ssgproject.content_rule_tftpd_uses_secure_mode'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q tftp-server; then
 
@@ -33849,9 +33976,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_tftpd_uses_secure_mode'
 
 ###############################################################################
-# BEGIN fix (371 / 403) for 'xccdf_org.ssgproject.content_rule_service_rngd_enabled'
+# BEGIN fix (378 / 410) for 'xccdf_org.ssgproject.content_rule_service_rngd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 371/403: 'xccdf_org.ssgproject.content_rule_service_rngd_enabled'")
+(>&2 echo "Remediating rule 378/410: 'xccdf_org.ssgproject.content_rule_service_rngd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.3"; printf "%s\n%s" "$real" "$expected" | sort -VC; }; }; then
 
@@ -33867,9 +33994,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_rngd_enabled'
 
 ###############################################################################
-# BEGIN fix (372 / 403) for 'xccdf_org.ssgproject.content_rule_package_openssh-server_installed'
+# BEGIN fix (379 / 410) for 'xccdf_org.ssgproject.content_rule_package_openssh-server_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 372/403: 'xccdf_org.ssgproject.content_rule_package_openssh-server_installed'")
+(>&2 echo "Remediating rule 379/410: 'xccdf_org.ssgproject.content_rule_package_openssh-server_installed'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33884,9 +34011,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_openssh-server_installed'
 
 ###############################################################################
-# BEGIN fix (373 / 403) for 'xccdf_org.ssgproject.content_rule_service_sshd_enabled'
+# BEGIN fix (380 / 410) for 'xccdf_org.ssgproject.content_rule_service_sshd_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 373/403: 'xccdf_org.ssgproject.content_rule_service_sshd_enabled'")
+(>&2 echo "Remediating rule 380/410: 'xccdf_org.ssgproject.content_rule_service_sshd_enabled'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33902,9 +34029,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_sshd_enabled'
 
 ###############################################################################
-# BEGIN fix (374 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_private_key'
+# BEGIN fix (381 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_private_key'
 ###############################################################################
-(>&2 echo "Remediating rule 374/403: 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_private_key'")
+(>&2 echo "Remediating rule 381/410: 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_private_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33928,9 +34055,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_private_key'
 
 ###############################################################################
-# BEGIN fix (375 / 403) for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_pub_key'
+# BEGIN fix (382 / 410) for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_pub_key'
 ###############################################################################
-(>&2 echo "Remediating rule 375/403: 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_pub_key'")
+(>&2 echo "Remediating rule 382/410: 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_pub_key'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33943,17 +34070,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_file_permissions_sshd_pub_key'
 
 ###############################################################################
-# BEGIN fix (376 / 403) for 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected'
+# BEGIN fix (383 / 410) for 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected'
 ###############################################################################
-(>&2 echo "Remediating rule 376/403: 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected'")
+(>&2 echo "Remediating rule 383/410: 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_ssh_keys_passphrase_protected'
 
 ###############################################################################
-# BEGIN fix (377 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'
+# BEGIN fix (384 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'
 ###############################################################################
-(>&2 echo "Remediating rule 377/403: 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'")
+(>&2 echo "Remediating rule 384/410: 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -33983,9 +34110,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_set_keepalive'
 
 ###############################################################################
-# BEGIN fix (378 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'
+# BEGIN fix (385 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'
 ###############################################################################
-(>&2 echo "Remediating rule 378/403: 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'")
+(>&2 echo "Remediating rule 385/410: 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && { grep -qP "^ID=[\"']?rhel[\"']?$" "/etc/os-release" && { real="$(grep -P "^VERSION_ID=[\"']?[\w.]+[\"']?$" /etc/os-release | sed "s/^VERSION_ID=[\"']\?\([^\"']\+\)[\"']\?$/\1/")"; expected="8.5"; printf "%s\n%s" "$real" "$expected" | sort -VC; }; }; then
 
@@ -34015,9 +34142,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_set_idle_timeout'
 
 ###############################################################################
-# BEGIN fix (379 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'
+# BEGIN fix (386 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'
 ###############################################################################
-(>&2 echo "Remediating rule 379/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'")
+(>&2 echo "Remediating rule 386/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34044,9 +34171,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_empty_passwords'
 
 ###############################################################################
-# BEGIN fix (380 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'
+# BEGIN fix (387 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 380/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'")
+(>&2 echo "Remediating rule 387/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34073,9 +34200,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_gssapi_auth'
 
 ###############################################################################
-# BEGIN fix (381 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_kerb_auth'
+# BEGIN fix (388 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_kerb_auth'
 ###############################################################################
-(>&2 echo "Remediating rule 381/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_kerb_auth'")
+(>&2 echo "Remediating rule 388/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_kerb_auth'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34102,9 +34229,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_kerb_auth'
 
 ###############################################################################
-# BEGIN fix (382 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'
+# BEGIN fix (389 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'
 ###############################################################################
-(>&2 echo "Remediating rule 382/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'")
+(>&2 echo "Remediating rule 389/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34131,9 +34258,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_root_login'
 
 ###############################################################################
-# BEGIN fix (383 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_user_known_hosts'
+# BEGIN fix (390 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_user_known_hosts'
 ###############################################################################
-(>&2 echo "Remediating rule 383/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_user_known_hosts'")
+(>&2 echo "Remediating rule 390/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_user_known_hosts'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34160,9 +34287,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_user_known_hosts'
 
 ###############################################################################
-# BEGIN fix (384 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_disable_x11_forwarding'
+# BEGIN fix (391 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_disable_x11_forwarding'
 ###############################################################################
-(>&2 echo "Remediating rule 384/403: 'xccdf_org.ssgproject.content_rule_sshd_disable_x11_forwarding'")
+(>&2 echo "Remediating rule 391/410: 'xccdf_org.ssgproject.content_rule_sshd_disable_x11_forwarding'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34189,9 +34316,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_disable_x11_forwarding'
 
 ###############################################################################
-# BEGIN fix (385 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'
+# BEGIN fix (392 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'
 ###############################################################################
-(>&2 echo "Remediating rule 385/403: 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'")
+(>&2 echo "Remediating rule 392/410: 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34218,9 +34345,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_do_not_permit_user_env'
 
 ###############################################################################
-# BEGIN fix (386 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_enable_strictmodes'
+# BEGIN fix (393 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_enable_strictmodes'
 ###############################################################################
-(>&2 echo "Remediating rule 386/403: 'xccdf_org.ssgproject.content_rule_sshd_enable_strictmodes'")
+(>&2 echo "Remediating rule 393/410: 'xccdf_org.ssgproject.content_rule_sshd_enable_strictmodes'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34247,9 +34374,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_enable_strictmodes'
 
 ###############################################################################
-# BEGIN fix (387 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner'
+# BEGIN fix (394 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner'
 ###############################################################################
-(>&2 echo "Remediating rule 387/403: 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner'")
+(>&2 echo "Remediating rule 394/410: 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34276,9 +34403,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_enable_warning_banner'
 
 ###############################################################################
-# BEGIN fix (388 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_print_last_log'
+# BEGIN fix (395 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_print_last_log'
 ###############################################################################
-(>&2 echo "Remediating rule 388/403: 'xccdf_org.ssgproject.content_rule_sshd_print_last_log'")
+(>&2 echo "Remediating rule 395/410: 'xccdf_org.ssgproject.content_rule_sshd_print_last_log'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34305,9 +34432,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_print_last_log'
 
 ###############################################################################
-# BEGIN fix (389 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_rekey_limit'
+# BEGIN fix (396 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_rekey_limit'
 ###############################################################################
-(>&2 echo "Remediating rule 389/403: 'xccdf_org.ssgproject.content_rule_sshd_rekey_limit'")
+(>&2 echo "Remediating rule 396/410: 'xccdf_org.ssgproject.content_rule_sshd_rekey_limit'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34340,17 +34467,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_rekey_limit'
 
 ###############################################################################
-# BEGIN fix (390 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig'
+# BEGIN fix (397 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig'
 ###############################################################################
-(>&2 echo "Remediating rule 390/403: 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig'")
+(>&2 echo "Remediating rule 397/410: 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_use_approved_kex_ordered_stig'
 
 ###############################################################################
-# BEGIN fix (391 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_use_strong_rng'
+# BEGIN fix (398 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_use_strong_rng'
 ###############################################################################
-(>&2 echo "Remediating rule 391/403: 'xccdf_org.ssgproject.content_rule_sshd_use_strong_rng'")
+(>&2 echo "Remediating rule 398/410: 'xccdf_org.ssgproject.content_rule_sshd_use_strong_rng'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34385,9 +34512,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_use_strong_rng'
 
 ###############################################################################
-# BEGIN fix (392 / 403) for 'xccdf_org.ssgproject.content_rule_sshd_x11_use_localhost'
+# BEGIN fix (399 / 410) for 'xccdf_org.ssgproject.content_rule_sshd_x11_use_localhost'
 ###############################################################################
-(>&2 echo "Remediating rule 392/403: 'xccdf_org.ssgproject.content_rule_sshd_x11_use_localhost'")
+(>&2 echo "Remediating rule 399/410: 'xccdf_org.ssgproject.content_rule_sshd_x11_use_localhost'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
@@ -34414,9 +34541,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sshd_x11_use_localhost'
 
 ###############################################################################
-# BEGIN fix (393 / 403) for 'xccdf_org.ssgproject.content_rule_sssd_certificate_verification'
+# BEGIN fix (400 / 410) for 'xccdf_org.ssgproject.content_rule_sssd_certificate_verification'
 ###############################################################################
-(>&2 echo "Remediating rule 393/403: 'xccdf_org.ssgproject.content_rule_sssd_certificate_verification'")
+(>&2 echo "Remediating rule 400/410: 'xccdf_org.ssgproject.content_rule_sssd_certificate_verification'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common; then
 
@@ -34466,17 +34593,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sssd_certificate_verification'
 
 ###############################################################################
-# BEGIN fix (394 / 403) for 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap'
+# BEGIN fix (401 / 410) for 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap'
 ###############################################################################
-(>&2 echo "Remediating rule 394/403: 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap'")
+(>&2 echo "Remediating rule 401/410: 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_sssd_enable_certmap'
 
 ###############################################################################
-# BEGIN fix (395 / 403) for 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'
+# BEGIN fix (402 / 410) for 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'
 ###############################################################################
-(>&2 echo "Remediating rule 395/403: 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'")
+(>&2 echo "Remediating rule 402/410: 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -34563,17 +34690,17 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sssd_enable_smartcards'
 
 ###############################################################################
-# BEGIN fix (396 / 403) for 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor'
+# BEGIN fix (403 / 410) for 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor'
 ###############################################################################
-(>&2 echo "Remediating rule 396/403: 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor'")
+(>&2 echo "Remediating rule 403/410: 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor'")
 (>&2 echo "FIX FOR THIS RULE 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor' IS MISSING!")
 
 # END fix for 'xccdf_org.ssgproject.content_rule_sssd_has_trust_anchor'
 
 ###############################################################################
-# BEGIN fix (397 / 403) for 'xccdf_org.ssgproject.content_rule_sssd_offline_cred_expiration'
+# BEGIN fix (404 / 410) for 'xccdf_org.ssgproject.content_rule_sssd_offline_cred_expiration'
 ###############################################################################
-(>&2 echo "Remediating rule 397/403: 'xccdf_org.ssgproject.content_rule_sssd_offline_cred_expiration'")
+(>&2 echo "Remediating rule 404/410: 'xccdf_org.ssgproject.content_rule_sssd_offline_cred_expiration'")
 # Remediation is applicable only in certain platforms
 if rpm --quiet -q sssd-common && { [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; }; then
 
@@ -34618,9 +34745,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_sssd_offline_cred_expiration'
 
 ###############################################################################
-# BEGIN fix (398 / 403) for 'xccdf_org.ssgproject.content_rule_package_usbguard_installed'
+# BEGIN fix (405 / 410) for 'xccdf_org.ssgproject.content_rule_package_usbguard_installed'
 ###############################################################################
-(>&2 echo "Remediating rule 398/403: 'xccdf_org.ssgproject.content_rule_package_usbguard_installed'")
+(>&2 echo "Remediating rule 405/410: 'xccdf_org.ssgproject.content_rule_package_usbguard_installed'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! grep -q s390x /proc/sys/kernel/osrelease ); then
 
@@ -34635,9 +34762,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_package_usbguard_installed'
 
 ###############################################################################
-# BEGIN fix (399 / 403) for 'xccdf_org.ssgproject.content_rule_service_usbguard_enabled'
+# BEGIN fix (406 / 410) for 'xccdf_org.ssgproject.content_rule_service_usbguard_enabled'
 ###############################################################################
-(>&2 echo "Remediating rule 399/403: 'xccdf_org.ssgproject.content_rule_service_usbguard_enabled'")
+(>&2 echo "Remediating rule 406/410: 'xccdf_org.ssgproject.content_rule_service_usbguard_enabled'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! grep -q s390x /proc/sys/kernel/osrelease ); then
 
@@ -34653,9 +34780,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_service_usbguard_enabled'
 
 ###############################################################################
-# BEGIN fix (400 / 403) for 'xccdf_org.ssgproject.content_rule_configure_usbguard_auditbackend'
+# BEGIN fix (407 / 410) for 'xccdf_org.ssgproject.content_rule_configure_usbguard_auditbackend'
 ###############################################################################
-(>&2 echo "Remediating rule 400/403: 'xccdf_org.ssgproject.content_rule_configure_usbguard_auditbackend'")
+(>&2 echo "Remediating rule 407/410: 'xccdf_org.ssgproject.content_rule_configure_usbguard_auditbackend'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! grep -q s390x /proc/sys/kernel/osrelease ) && { rpm --quiet -q usbguard; }; then
 
@@ -34681,9 +34808,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_configure_usbguard_auditbackend'
 
 ###############################################################################
-# BEGIN fix (401 / 403) for 'xccdf_org.ssgproject.content_rule_usbguard_generate_policy'
+# BEGIN fix (408 / 410) for 'xccdf_org.ssgproject.content_rule_usbguard_generate_policy'
 ###############################################################################
-(>&2 echo "Remediating rule 401/403: 'xccdf_org.ssgproject.content_rule_usbguard_generate_policy'")
+(>&2 echo "Remediating rule 408/410: 'xccdf_org.ssgproject.content_rule_usbguard_generate_policy'")
 # Remediation is applicable only in certain platforms
 if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && ! grep -q s390x /proc/sys/kernel/osrelease ); then
 
@@ -34717,9 +34844,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_usbguard_generate_policy'
 
 ###############################################################################
-# BEGIN fix (402 / 403) for 'xccdf_org.ssgproject.content_rule_xwindows_remove_packages'
+# BEGIN fix (409 / 410) for 'xccdf_org.ssgproject.content_rule_xwindows_remove_packages'
 ###############################################################################
-(>&2 echo "Remediating rule 402/403: 'xccdf_org.ssgproject.content_rule_xwindows_remove_packages'")
+(>&2 echo "Remediating rule 409/410: 'xccdf_org.ssgproject.content_rule_xwindows_remove_packages'")
 
 
 # remove packages
@@ -34748,9 +34875,9 @@ fi
 # END fix for 'xccdf_org.ssgproject.content_rule_xwindows_remove_packages'
 
 ###############################################################################
-# BEGIN fix (403 / 403) for 'xccdf_org.ssgproject.content_rule_xwindows_runlevel_target'
+# BEGIN fix (410 / 410) for 'xccdf_org.ssgproject.content_rule_xwindows_runlevel_target'
 ###############################################################################
-(>&2 echo "Remediating rule 403/403: 'xccdf_org.ssgproject.content_rule_xwindows_runlevel_target'")
+(>&2 echo "Remediating rule 410/410: 'xccdf_org.ssgproject.content_rule_xwindows_runlevel_target'")
 # Remediation is applicable only in certain platforms
 if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 

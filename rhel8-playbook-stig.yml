@@ -2508,6 +2508,62 @@
       package_facts:
         manager: auto
       tags:
+      - CCE-87261-4
+      - CJIS-5.5.5
+      - DISA-STIG-RHEL-08-020082
+      - NIST-800-171-3.1.10
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-8.1.8
+      - dconf_gnome_screensaver_lock_locked
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - unknown_strategy
+
+    - name: Prevent user modification of GNOME Screensaver lock-enabled
+      lineinfile:
+        path: /etc/dconf/db/local.d/locks/00-security-settings-lock
+        regexp: ^/org/gnome/desktop/screensaver/lock-enabled$
+        line: /org/gnome/desktop/screensaver/lock-enabled
+        create: true
+      when: '"gdm" in ansible_facts.packages'
+      tags:
+      - CCE-87261-4
+      - CJIS-5.5.5
+      - DISA-STIG-RHEL-08-020082
+      - NIST-800-171-3.1.10
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-8.1.8
+      - dconf_gnome_screensaver_lock_locked
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - unknown_strategy
+
+    - name: Dconf Update
+      command: dconf update
+      when: '"gdm" in ansible_facts.packages'
+      tags:
+      - CCE-87261-4
+      - CJIS-5.5.5
+      - DISA-STIG-RHEL-08-020082
+      - NIST-800-171-3.1.10
+      - NIST-800-53-CM-6(a)
+      - PCI-DSS-Req-8.1.8
+      - dconf_gnome_screensaver_lock_locked
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - unknown_strategy
+
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
       - CCE-80780-0
       - DISA-STIG-RHEL-08-020080
       - NIST-800-171-3.1.10
@@ -35147,6 +35203,66 @@
       - restrict_strategy
 
 
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
+      - CCE-86506-3
+      - DISA-STIG-RHEL-08-040150
+      - NIST-800-53-SC-5
+      - firewalld-backend
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Setting unquoted shell-style assignment of 'FirewallBackend' to 'nftables'
+        in '/etc/firewalld/firewalld.conf'
+      block:
+
+      - name: Check for duplicate values
+        lineinfile:
+          path: /etc/firewalld/firewalld.conf
+          create: true
+          regexp: ^\s*FirewallBackend=
+          state: absent
+        check_mode: true
+        changed_when: false
+        register: dupes
+
+      - name: Deduplicate values from /etc/firewalld/firewalld.conf
+        lineinfile:
+          path: /etc/firewalld/firewalld.conf
+          create: true
+          regexp: ^\s*FirewallBackend=
+          state: absent
+        when: dupes.found is defined and dupes.found > 1
+
+      - name: Insert correct line to /etc/firewalld/firewalld.conf
+        lineinfile:
+          path: /etc/firewalld/firewalld.conf
+          create: true
+          regexp: ^\s*FirewallBackend=
+          line: FirewallBackend=nftables
+          state: present
+          insertbefore: ^# FirewallBackend
+          validate: /usr/bin/bash -n %s
+      when:
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - '"firewalld" in ansible_facts.packages'
+      tags:
+      - CCE-86506-3
+      - DISA-STIG-RHEL-08-040150
+      - NIST-800-53-SC-5
+      - firewalld-backend
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+
     - name: Ensure firewalld is installed
       package:
         name: firewalld
@@ -41077,6 +41193,45 @@
       - medium_severity
       - mount_option_var_tmp_nosuid
       - no_reboot_needed
+
+
+    - name: Ensure kernel module 'uvcvideo' is disabled
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/uvcvideo.conf
+        regexp: install\s+uvcvideo
+        line: install uvcvideo /bin/true
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-86960-2
+      - DISA-STIG-RHEL-08-040020
+      - NIST-800-53-CM-7 (5) (b)
+      - NIST-800-53-CM-7 (a)
+      - disable_strategy
+      - kernel_module_uvcvideo_disabled
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - reboot_required
+
+    - name: Ensure kernel module 'uvcvideo' is blacklisted
+      lineinfile:
+        create: true
+        dest: /etc/modprobe.d/uvcvideo.conf
+        regexp: ^blacklist uvcvideo$
+        line: blacklist uvcvideo
+      when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-86960-2
+      - DISA-STIG-RHEL-08-040020
+      - NIST-800-53-CM-7 (5) (b)
+      - NIST-800-53-CM-7 (a)
+      - disable_strategy
+      - kernel_module_uvcvideo_disabled
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - reboot_required
 
 
     - name: List /etc/sysctl.d/*.conf files
