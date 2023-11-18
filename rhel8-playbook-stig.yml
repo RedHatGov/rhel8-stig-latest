@@ -31859,6 +31859,208 @@
       package_facts:
         manager: auto
       tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Check if watch rule for /usr/bin/kmod already exists in /etc/audit/rules.d/
+      find:
+        paths: /etc/audit/rules.d
+        contains: ^\s*-w\s+/usr/bin/kmod\s+-p\s+x(\s|$)+
+        patterns: '*.rules'
+      register: find_existing_watch_rules_d
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Search /etc/audit/rules.d for other rules with specified key modules
+      find:
+        paths: /etc/audit/rules.d
+        contains: ^.*(?:-F key=|-k\s+)modules$
+        patterns: '*.rules'
+      register: find_watch_key
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
+        == 0
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Use /etc/audit/rules.d/modules.rules as the recipient for the rule
+      set_fact:
+        all_files:
+        - /etc/audit/rules.d/modules.rules
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_watch_key.matched is defined and find_watch_key.matched == 0 and find_existing_watch_rules_d.matched
+        is defined and find_existing_watch_rules_d.matched == 0
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Use matched file as the recipient for the rule
+      set_fact:
+        all_files:
+        - '{{ find_watch_key.files | map(attribute=''path'') | list | first }}'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_watch_key.matched is defined and find_watch_key.matched > 0 and find_existing_watch_rules_d.matched
+        is defined and find_existing_watch_rules_d.matched == 0
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Add watch rule for /usr/bin/kmod in /etc/audit/rules.d/
+      lineinfile:
+        path: '{{ all_files[0] }}'
+        line: -w /usr/bin/kmod -p x -k modules
+        create: true
+        mode: '0640'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
+        == 0
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Check if watch rule for /usr/bin/kmod already exists in /etc/audit/audit.rules
+      find:
+        paths: /etc/audit/
+        contains: ^\s*-w\s+/usr/bin/kmod\s+-p\s+x(\s|$)+
+        patterns: audit.rules
+      register: find_existing_watch_audit_rules
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+    - name: Add watch rule for /usr/bin/kmod in /etc/audit/audit.rules
+      lineinfile:
+        line: -w /usr/bin/kmod -p x -k modules
+        state: present
+        dest: /etc/audit/audit.rules
+        create: true
+        mode: '0640'
+      when:
+      - '"audit" in ansible_facts.packages'
+      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
+      - find_existing_watch_audit_rules.matched is defined and find_existing_watch_audit_rules.matched
+        == 0
+      tags:
+      - CCE-89455-0
+      - DISA-STIG-RHEL-08-030580
+      - NIST-800-53-AU-12(a)
+      - NIST-800-53-AU-12.1(ii)
+      - NIST-800-53-AU-12.1(iv)AU-12(c)
+      - NIST-800-53-AU-3
+      - NIST-800-53-AU-3.1
+      - NIST-800-53-MA-4(1)(a)
+      - audit_rules_privileged_commands_kmod
+      - low_complexity
+      - low_disruption
+      - medium_severity
+      - no_reboot_needed
+      - restrict_strategy
+
+
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+      tags:
       - CCE-80989-7
       - DISA-STIG-RHEL-08-030300
       - NIST-800-53-AC-6(9)
