@@ -2762,7 +2762,7 @@
 
 
     - name: Find /etc/sudoers.d/ files
-      find:
+      ansible.builtin.find:
         paths:
         - /etc/sudoers.d/
       register: sudoers
@@ -2779,7 +2779,7 @@
       - sudo_remove_no_authenticate
 
     - name: Remove lines containing !authenticate from sudoers files
-      replace:
+      ansible.builtin.replace:
         regexp: (^(?!#).*[\s]+\!authenticate.*$)
         replace: '# \g<1>'
         path: '{{ item.path }}'
@@ -2801,7 +2801,7 @@
 
 
     - name: Find /etc/sudoers.d/ files
-      find:
+      ansible.builtin.find:
         paths:
         - /etc/sudoers.d/
       register: sudoers
@@ -2818,7 +2818,7 @@
       - sudo_remove_nopasswd
 
     - name: Remove lines containing NOPASSWD from sudoers files
-      replace:
+      ansible.builtin.replace:
         regexp: (^(?!#).*[\s]+NOPASSWD[\s]*\:.*$)
         replace: '# \g<1>'
         path: '{{ item.path }}'
@@ -31898,172 +31898,127 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Check if watch rule for /usr/bin/kmod already exists in /etc/audit/rules.d/
-      find:
-        paths: /etc/audit/rules.d
-        contains: ^\s*-w\s+/usr/bin/kmod\s+-p\s+x(\s|$)+
-        patterns: '*.rules'
-      register: find_existing_watch_rules_d
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+    - name: Perform remediation of Audit rules for /usr/bin/kmod
+      block:
 
-    - name: Search /etc/audit/rules.d for other rules with specified key modules
-      find:
-        paths: /etc/audit/rules.d
-        contains: ^.*(?:-F key=|-k\s+)modules$
-        patterns: '*.rules'
-      register: find_watch_key
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
-        == 0
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+      - name: Declare list of syscalls
+        set_fact:
+          syscalls: []
+          syscall_grouping: []
 
-    - name: Use /etc/audit/rules.d/modules.rules as the recipient for the rule
-      set_fact:
-        all_files:
-        - /etc/audit/rules.d/modules.rules
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - find_watch_key.matched is defined and find_watch_key.matched == 0 and find_existing_watch_rules_d.matched
-        is defined and find_existing_watch_rules_d.matched == 0
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+      - name: Check existence of  in /etc/audit/rules.d/
+        find:
+          paths: /etc/audit/rules.d
+          contains: -a always,exit(( -S |,)\w+)*(( -S |,){{ item }})+(( -S |,)\w+)* -F
+            path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
+          patterns: '*.rules'
+        register: find_command
+        loop: '{{ (syscall_grouping + syscalls) | unique }}'
 
-    - name: Use matched file as the recipient for the rule
-      set_fact:
-        all_files:
-        - '{{ find_watch_key.files | map(attribute=''path'') | list | first }}'
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - find_watch_key.matched is defined and find_watch_key.matched > 0 and find_existing_watch_rules_d.matched
-        is defined and find_existing_watch_rules_d.matched == 0
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+      - name: Reset syscalls found per file
+        set_fact:
+          syscalls_per_file: {}
+          found_paths_dict: {}
 
-    - name: Add watch rule for /usr/bin/kmod in /etc/audit/rules.d/
-      lineinfile:
-        path: '{{ all_files[0] }}'
-        line: -w /usr/bin/kmod -p x -k modules
-        create: true
-        mode: '0640'
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - find_existing_watch_rules_d.matched is defined and find_existing_watch_rules_d.matched
-        == 0
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+      - name: Declare syscalls found per file
+        set_fact: syscalls_per_file="{{ syscalls_per_file | combine( {item.files[0].path
+          :[item.item] + syscalls_per_file.get(item.files[0].path, []) } ) }}"
+        loop: '{{ find_command.results | selectattr(''matched'') | list }}'
 
-    - name: Check if watch rule for /usr/bin/kmod already exists in /etc/audit/audit.rules
-      find:
-        paths: /etc/audit/
-        contains: ^\s*-w\s+/usr/bin/kmod\s+-p\s+x(\s|$)+
-        patterns: audit.rules
-      register: find_existing_watch_audit_rules
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-      - CCE-89455-0
-      - DISA-STIG-RHEL-08-030580
-      - NIST-800-53-AU-12(a)
-      - NIST-800-53-AU-12.1(ii)
-      - NIST-800-53-AU-12.1(iv)AU-12(c)
-      - NIST-800-53-AU-3
-      - NIST-800-53-AU-3.1
-      - NIST-800-53-MA-4(1)(a)
-      - audit_rules_privileged_commands_kmod
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
+      - name: Declare files where syscalls were found
+        set_fact: found_paths="{{ find_command.results | map(attribute='files') | flatten
+          | map(attribute='path') | list }}"
 
-    - name: Add watch rule for /usr/bin/kmod in /etc/audit/audit.rules
-      lineinfile:
-        line: -w /usr/bin/kmod -p x -k modules
-        state: present
-        dest: /etc/audit/audit.rules
-        create: true
-        mode: '0640'
+      - name: Count occurrences of syscalls in paths
+        set_fact: found_paths_dict="{{ found_paths_dict | combine({ item:1+found_paths_dict.get(item,
+          0) }) }}"
+        loop: '{{ find_command.results | map(attribute=''files'') | flatten | map(attribute=''path'')
+          | list }}'
+
+      - name: Get path with most syscalls
+        set_fact: audit_file="{{ (found_paths_dict | dict2items() | sort(attribute='value')
+          | last).key }}"
+        when: found_paths | length >= 1
+
+      - name: No file with syscall found, set path to /etc/audit/rules.d/privileged.rules
+        set_fact: audit_file="/etc/audit/rules.d/privileged.rules"
+        when: found_paths | length == 0
+
+      - name: Declare found syscalls
+        set_fact: syscalls_found="{{ find_command.results | selectattr('matched') | map(attribute='item')
+          | list }}"
+
+      - name: Declare missing syscalls
+        set_fact: missing_syscalls="{{ syscalls | difference(syscalls_found) }}"
+
+      - name: Replace the audit rule in {{ audit_file }}
+        lineinfile:
+          path: '{{ audit_file }}'
+          regexp: (-a always,exit)(?=.*(?:(?:-S |,)(?:{{ syscalls_per_file[audit_file]
+            | join("|") }}))\b)((?:( -S |,)\w+)+)( -F path=/usr/bin/kmod -F perm=x -F
+            auid>=1000 -F auid!=unset (?:-k |-F key=)\w+)
+          line: \1\2\3{{ missing_syscalls | join("\3") }}\4
+          backrefs: true
+          state: present
+        when: syscalls_found | length > 0 and missing_syscalls | length > 0
+
+      - name: Add the audit rule to {{ audit_file }}
+        lineinfile:
+          path: '{{ audit_file }}'
+          line: -a always,exit{{ syscalls | join(',') }} -F path=/usr/bin/kmod -F perm=x
+            -F auid>=1000 -F auid!=unset -F key=privileged
+          create: true
+          mode: o-rwx
+          state: present
+        when: syscalls_found | length == 0
+
+      - name: Declare list of syscalls
+        set_fact:
+          syscalls: []
+          syscall_grouping: []
+
+      - name: Check existence of  in /etc/audit/audit.rules
+        find:
+          paths: /etc/audit
+          contains: -a always,exit(( -S |,)\w+)*(( -S |,){{ item }})+(( -S |,)\w+)* -F
+            path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset (-k\s+|-F\s+key=)\S+\s*$
+          patterns: audit.rules
+        register: find_command
+        loop: '{{ (syscall_grouping + syscalls) | unique }}'
+
+      - name: Set path to /etc/audit/audit.rules
+        set_fact: audit_file="/etc/audit/audit.rules"
+
+      - name: Declare found syscalls
+        set_fact: syscalls_found="{{ find_command.results | selectattr('matched') | map(attribute='item')
+          | list }}"
+
+      - name: Declare missing syscalls
+        set_fact: missing_syscalls="{{ syscalls | difference(syscalls_found) }}"
+
+      - name: Replace the audit rule in {{ audit_file }}
+        lineinfile:
+          path: '{{ audit_file }}'
+          regexp: (-a always,exit)(?=.*(?:(?:-S |,)(?:{{ syscalls_found | join("|") }}))\b)((?:(
+            -S |,)\w+)+)( -F path=/usr/bin/kmod -F perm=x -F auid>=1000 -F auid!=unset
+            (?:-k |-F key=)\w+)
+          line: \1\2\3{{ missing_syscalls | join("\3") }}\4
+          backrefs: true
+          state: present
+        when: syscalls_found | length > 0 and missing_syscalls | length > 0
+
+      - name: Add the audit rule to {{ audit_file }}
+        lineinfile:
+          path: '{{ audit_file }}'
+          line: -a always,exit{{ syscalls | join(',') }} -F path=/usr/bin/kmod -F perm=x
+            -F auid>=1000 -F auid!=unset -F key=privileged
+          create: true
+          mode: o-rwx
+          state: present
+        when: syscalls_found | length == 0
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - find_existing_watch_audit_rules.matched is defined and find_existing_watch_audit_rules.matched
-        == 0
       tags:
       - CCE-89455-0
       - DISA-STIG-RHEL-08-030580
@@ -37174,6 +37129,7 @@
         world_writable_dirs: '{{ world_writable_dirs | union(item.stdout_lines) | list
           }}'
       loop: '{{ result_found_dirs.results }}'
+      when: item is not skipped
       tags:
       - CCE-83375-6
       - DISA-STIG-RHEL-08-010700
@@ -37366,6 +37322,7 @@
         world_writable_dirs: '{{ world_writable_dirs | union(item.stdout_lines) | list
           }}'
       loop: '{{ result_found_dirs.results }}'
+      when: result_found_dirs is not skipped and item is not skipped
       tags:
       - CCE-80783-4
       - DISA-STIG-RHEL-08-010190
