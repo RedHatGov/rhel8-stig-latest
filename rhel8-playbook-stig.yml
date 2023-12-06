@@ -15700,31 +15700,6 @@
       - no_reboot_needed
       - restrict_strategy
 
-    - name: Check the rules script being used
-      ansible.builtin.command: grep '^ExecStartPost' /usr/lib/systemd/system/auditd.service
-      register: check_rules_scripts_result
-      changed_when: false
-      failed_when: false
-      when:
-      - '"audit" in ansible_facts.packages'
-      - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      tags:
-      - CCE-83556-1
-      - DISA-STIG-RHEL-08-030000
-      - NIST-800-53-AC-6(9)
-      - NIST-800-53-AU-12(3)
-      - NIST-800-53-AU-7(a)
-      - NIST-800-53-AU-7(b)
-      - NIST-800-53-AU-8(b)
-      - NIST-800-53-CM-5(1)
-      - PCI-DSSv4-10.2.1.2
-      - audit_rules_suid_privilege_function
-      - low_complexity
-      - low_disruption
-      - medium_severity
-      - no_reboot_needed
-      - restrict_strategy
-
     - name: Set suid_audit_rules fact
       ansible.builtin.set_fact:
         suid_audit_rules:
@@ -15765,8 +15740,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"auditd.service" in ansible_facts.services'
-      - '"augenrules" in check_rules_scripts_result.stdout'
+      - ('"auditd.service" in ansible_facts.services' or '"augenrules.service" in ansible_facts.services')
       register: augenrules_audit_rules_privilege_function_update_result
       with_items: '{{ suid_audit_rules }}'
       tags:
@@ -15795,8 +15769,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - '"auditd.service" in ansible_facts.services'
-      - '"auditctl" in check_rules_scripts_result.stdout'
+      - ('"auditd.service" in ansible_facts.services' or '"augenrules.service" in ansible_facts.services')
       register: auditctl_audit_rules_privilege_function_update_result
       with_items: '{{ suid_audit_rules }}'
       tags:
