@@ -3347,6 +3347,7 @@ done
 
 fi
 
+
 AUTH_FILES=("/etc/pam.d/system-auth" "/etc/pam.d/password-auth")
 FAILLOCK_CONF="/etc/security/faillock.conf"
 if [ -f $FAILLOCK_CONF ]; then
