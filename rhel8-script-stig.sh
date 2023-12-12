@@ -31515,7 +31515,7 @@ find /usr/lib64/  -type f ! -group 0 -regex '^.*$' -exec chgrp 0 {} \;
 ###############################################################################
 (>&2 echo "Remediating rule 304/410: 'xccdf_org.ssgproject.content_rule_service_autofs_disabled'")
 # Remediation is applicable only in certain platforms
-if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
+if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && rpm --quiet -q autofs ); then
 
 SYSTEMCTL_EXEC='/usr/bin/systemctl'
 "$SYSTEMCTL_EXEC" stop 'autofs.service'
