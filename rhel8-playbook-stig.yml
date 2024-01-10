@@ -36910,6 +36910,28 @@
       - unknown_strategy
       - wireless_disable_interfaces
 
+    - name: Service facts
+      ansible.builtin.service_facts: null
+      tags:
+      - CCE-83501-7
+      - DISA-STIG-RHEL-08-040110
+      - NIST-800-171-3.1.16
+      - NIST-800-53-AC-18(3)
+      - NIST-800-53-AC-18(a)
+      - NIST-800-53-CM-6(a)
+      - NIST-800-53-CM-7(a)
+      - NIST-800-53-CM-7(b)
+      - NIST-800-53-MP-7
+      - PCI-DSS-Req-1.3.3
+      - PCI-DSSv4-1.3.3
+      - PCI-DSSv4-2.3
+      - low_complexity
+      - medium_disruption
+      - medium_severity
+      - no_reboot_needed
+      - unknown_strategy
+      - wireless_disable_interfaces
+
     - name: Ensure NetworkManager is installed
       ansible.builtin.package:
         name: '{{ item }}'
@@ -36936,9 +36958,11 @@
       - unknown_strategy
       - wireless_disable_interfaces
 
-    - name: Deactivate Wireless Network Interfaces
+    - name: NetworkManager Deactivate Wireless Network Interfaces
       command: nmcli radio wifi off
-      when: '''NetworkManager'' in ansible_facts.packages'
+      when:
+      - '''NetworkManager'' in ansible_facts.packages'
+      - ansible_facts.services['NetworkManager.service'].state == 'running'
       tags:
       - CCE-83501-7
       - DISA-STIG-RHEL-08-040110
