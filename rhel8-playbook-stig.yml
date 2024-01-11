@@ -3840,8 +3840,9 @@
         option: gpgcheck
         value: '1'
         no_extra_spaces: true
-      loop: '{{ repo_grep_results.stdout | regex_findall( ''(.+\.repo):\[(.+)\]\n?'' )
-        }}'
+      loop: '{{ repo_grep_results.stdout |regex_findall( ''(.+\.repo):\[(.+)\]\n?'' )
+        if repo_grep_results is not skipped else []}}'
+      when: repo_grep_results is not skipped
       tags:
       - CCE-80792-5
       - CJIS-5.10.4.1
@@ -17142,7 +17143,7 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - (log_file_exists.stdout | length > 0)
+      - log_file_exists is not skipped and (log_file_exists.stdout | length > 0)
       tags:
       - CCE-80819-6
       - CJIS-5.4.1.1
@@ -17166,7 +17167,8 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - (log_file_exists is undefined) or (log_file_exists.stdout | length == 0)
+      - (log_file_exists is skipped) or (log_file_exists is undefined) or (log_file_exists.stdout
+        | length == 0)
       tags:
       - CCE-80819-6
       - CJIS-5.4.1.1
@@ -17190,7 +17192,8 @@
       when:
       - '"audit" in ansible_facts.packages'
       - ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
-      - (log_file_line.stdout is defined) and (log_file_line.stdout | length > 0)
+      - (log_file_exists is not skipped) and (log_file_line.stdout is defined) and (log_file_line.stdout
+        | length > 0)
       tags:
       - CCE-80819-6
       - CJIS-5.4.1.1
