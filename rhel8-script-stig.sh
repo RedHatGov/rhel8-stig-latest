@@ -4178,12 +4178,26 @@ if rpm --quiet -q shadow-utils; then
 
 var_password_hashing_algorithm='SHA512'
 
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^ENCRYPT_METHOD")
 
-if grep --silent ^ENCRYPT_METHOD /etc/login.defs ; then
-	sed -i "s/^ENCRYPT_METHOD .*/ENCRYPT_METHOD $var_password_hashing_algorithm/g" /etc/login.defs
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_password_hashing_algorithm"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^ENCRYPT_METHOD\\>" "/etc/login.defs"; then
+    escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
+    LC_ALL=C sed -i --follow-symlinks "s/^ENCRYPT_METHOD\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
 else
-	echo "" >> /etc/login.defs
-	echo "ENCRYPT_METHOD $var_password_hashing_algorithm" >> /etc/login.defs
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
+    cce="CCE-80892-3"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
 else
@@ -4734,11 +4748,26 @@ if rpm --quiet -q shadow-utils; then
 
 var_accounts_maximum_age_login_defs='60'
 
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^PASS_MAX_DAYS")
 
-grep -q ^PASS_MAX_DAYS /etc/login.defs && \
-  sed -i "s/PASS_MAX_DAYS.*/PASS_MAX_DAYS     $var_accounts_maximum_age_login_defs/g" /etc/login.defs
-if ! [ $? -eq 0 ]; then
-    echo "PASS_MAX_DAYS      $var_accounts_maximum_age_login_defs" >> /etc/login.defs
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_maximum_age_login_defs"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^PASS_MAX_DAYS\\>" "/etc/login.defs"; then
+    escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
+    LC_ALL=C sed -i --follow-symlinks "s/^PASS_MAX_DAYS\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
+else
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
+    cce="CCE-80647-1"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
 else
@@ -4756,11 +4785,26 @@ if rpm --quiet -q shadow-utils; then
 
 var_accounts_minimum_age_login_defs='1'
 
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^PASS_MIN_DAYS")
 
-grep -q ^PASS_MIN_DAYS /etc/login.defs && \
-  sed -i "s/PASS_MIN_DAYS.*/PASS_MIN_DAYS     $var_accounts_minimum_age_login_defs/g" /etc/login.defs
-if ! [ $? -eq 0 ]; then
-    echo "PASS_MIN_DAYS      $var_accounts_minimum_age_login_defs" >> /etc/login.defs
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_minimum_age_login_defs"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^PASS_MIN_DAYS\\>" "/etc/login.defs"; then
+    escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
+    LC_ALL=C sed -i --follow-symlinks "s/^PASS_MIN_DAYS\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
+else
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
+    cce="CCE-80648-9"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
 else
@@ -4778,12 +4822,26 @@ if rpm --quiet -q shadow-utils; then
 
 var_accounts_password_minlen_login_defs='15'
 
+# Strip any search characters in the key arg so that the key can be replaced without
+# adding any search characters to the config file.
+stripped_key=$(sed 's/[\^=\$,;+]*//g' <<< "^PASS_MIN_LEN")
 
-grep -q ^PASS_MIN_LEN /etc/login.defs && \
-sed -i "s/PASS_MIN_LEN.*/PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs/g" /etc/login.defs
-if ! [ $? -eq 0 ]
-then
-  echo -e "PASS_MIN_LEN\t$var_accounts_password_minlen_login_defs" >> /etc/login.defs
+# shellcheck disable=SC2059
+printf -v formatted_output "%s %s" "$stripped_key" "$var_accounts_password_minlen_login_defs"
+
+# If the key exists, change it. Otherwise, add it to the config_file.
+# We search for the key string followed by a word boundary (matched by \>),
+# so if we search for 'setting', 'setting2' won't match.
+if LC_ALL=C grep -q -m 1 -i -e "^PASS_MIN_LEN\\>" "/etc/login.defs"; then
+    escaped_formatted_output=$(sed -e 's|/|\\/|g' <<< "$formatted_output")
+    LC_ALL=C sed -i --follow-symlinks "s/^PASS_MIN_LEN\\>.*/$escaped_formatted_output/gi" "/etc/login.defs"
+else
+    if [[ -s "/etc/login.defs" ]] && [[ -n "$(tail -c 1 -- "/etc/login.defs" || true)" ]]; then
+        LC_ALL=C sed -i --follow-symlinks '$a'\\ "/etc/login.defs"
+    fi
+    cce="CCE-80652-1"
+    printf '# Per %s: Set %s in %s\n' "${cce}" "${formatted_output}" "/etc/login.defs" >> "/etc/login.defs"
+    printf '%s\n' "$formatted_output" >> "/etc/login.defs"
 fi
 
 else
