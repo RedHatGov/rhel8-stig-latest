@@ -31666,6 +31666,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && [ -d /sys/firmware/e
 
 function perform_remediation {
     
+        # the mount point /boot/efi has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/boot/efi")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -31720,6 +31723,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
+        # the mount point /boot has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/boot")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -31918,6 +31924,9 @@ if [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ]; then
 
 function perform_remediation {
     
+        # the mount point /home has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -31972,6 +31981,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/h
 
 function perform_remediation {
     
+        # the mount point /home has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/home")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32161,6 +32173,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
+        # the mount point /tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32215,6 +32230,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
+        # the mount point /tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32269,6 +32287,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/t
 
 function perform_remediation {
     
+        # the mount point /tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32323,6 +32344,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log/audit has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32377,6 +32401,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log/audit has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32431,6 +32458,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log/audit has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log/audit")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32485,6 +32515,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32539,6 +32572,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32593,6 +32629,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/log has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/log")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32647,6 +32686,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32701,6 +32743,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
@@ -32755,6 +32800,9 @@ if ( [ ! -f /.dockerenv ] && [ ! -f /run/.containerenv ] && findmnt --kernel "/v
 
 function perform_remediation {
     
+        # the mount point /var/tmp has to be defined in /etc/fstab
+        # before this remediation can be executed. In case it is not defined, the
+        # remediation aborts and no changes regarding the mount point are done.
         mount_point_match_regexp="$(printf "^[[:space:]]*[^#].*[[:space:]]%s[[:space:]]" "/var/tmp")"
 
     grep "$mount_point_match_regexp" -q /etc/fstab \
