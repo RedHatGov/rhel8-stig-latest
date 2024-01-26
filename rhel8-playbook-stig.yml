@@ -36643,7 +36643,7 @@
         create: true
         dest: /etc/modprobe.d/atm.conf
         regexp: install\s+atm
-        line: install atm /bin/true
+        line: install atm /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82028-2
@@ -36680,7 +36680,7 @@
         create: true
         dest: /etc/modprobe.d/can.conf
         regexp: install\s+can
-        line: install can /bin/true
+        line: install can /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82059-7
@@ -36717,7 +36717,7 @@
         create: true
         dest: /etc/modprobe.d/firewire-core.conf
         regexp: install\s+firewire-core
-        line: install firewire-core /bin/true
+        line: install firewire-core /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82005-0
@@ -36754,7 +36754,7 @@
         create: true
         dest: /etc/modprobe.d/sctp.conf
         regexp: install\s+sctp
-        line: install sctp /bin/true
+        line: install sctp /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-80834-5
@@ -36803,7 +36803,7 @@
         create: true
         dest: /etc/modprobe.d/tipc.conf
         regexp: install\s+tipc
-        line: install tipc /bin/true
+        line: install tipc /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-82297-3
@@ -36844,7 +36844,7 @@
         create: true
         dest: /etc/modprobe.d/bluetooth.conf
         regexp: install\s+bluetooth
-        line: install bluetooth /bin/true
+        line: install bluetooth /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-80832-9
@@ -38707,7 +38707,7 @@
         create: true
         dest: /etc/modprobe.d/cramfs.conf
         regexp: install\s+cramfs
-        line: install cramfs /bin/true
+        line: install cramfs /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-81031-7
@@ -38750,7 +38750,7 @@
         create: true
         dest: /etc/modprobe.d/usb-storage.conf
         regexp: install\s+usb-storage
-        line: install usb-storage /bin/true
+        line: install usb-storage /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-80835-2
@@ -41402,7 +41402,7 @@
         create: true
         dest: /etc/modprobe.d/uvcvideo.conf
         regexp: install\s+uvcvideo
-        line: install uvcvideo /bin/true
+        line: install uvcvideo /bin/false
       when: ansible_virtualization_type not in ["docker", "lxc", "openvz", "podman", "container"]
       tags:
       - CCE-86960-2

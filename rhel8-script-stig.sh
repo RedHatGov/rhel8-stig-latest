@@ -31023,7 +31023,7 @@ if LC_ALL=C grep -q -m 1 "^install atm" /etc/modprobe.d/atm.conf ; then
 	sed -i 's#^install atm.*#install atm /bin/true#g' /etc/modprobe.d/atm.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/atm.conf
-	echo "install atm /bin/true" >> /etc/modprobe.d/atm.conf
+	echo "install atm /bin/false" >> /etc/modprobe.d/atm.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist atm$" /etc/modprobe.d/atm.conf ; then
@@ -31048,7 +31048,7 @@ if LC_ALL=C grep -q -m 1 "^install can" /etc/modprobe.d/can.conf ; then
 	sed -i 's#^install can.*#install can /bin/true#g' /etc/modprobe.d/can.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/can.conf
-	echo "install can /bin/true" >> /etc/modprobe.d/can.conf
+	echo "install can /bin/false" >> /etc/modprobe.d/can.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist can$" /etc/modprobe.d/can.conf ; then
@@ -31073,7 +31073,7 @@ if LC_ALL=C grep -q -m 1 "^install firewire-core" /etc/modprobe.d/firewire-core.
 	sed -i 's#^install firewire-core.*#install firewire-core /bin/true#g' /etc/modprobe.d/firewire-core.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/firewire-core.conf
-	echo "install firewire-core /bin/true" >> /etc/modprobe.d/firewire-core.conf
+	echo "install firewire-core /bin/false" >> /etc/modprobe.d/firewire-core.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist firewire-core$" /etc/modprobe.d/firewire-core.conf ; then
@@ -31098,7 +31098,7 @@ if LC_ALL=C grep -q -m 1 "^install sctp" /etc/modprobe.d/sctp.conf ; then
 	sed -i 's#^install sctp.*#install sctp /bin/true#g' /etc/modprobe.d/sctp.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/sctp.conf
-	echo "install sctp /bin/true" >> /etc/modprobe.d/sctp.conf
+	echo "install sctp /bin/false" >> /etc/modprobe.d/sctp.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist sctp$" /etc/modprobe.d/sctp.conf ; then
@@ -31123,7 +31123,7 @@ if LC_ALL=C grep -q -m 1 "^install tipc" /etc/modprobe.d/tipc.conf ; then
 	sed -i 's#^install tipc.*#install tipc /bin/true#g' /etc/modprobe.d/tipc.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/tipc.conf
-	echo "install tipc /bin/true" >> /etc/modprobe.d/tipc.conf
+	echo "install tipc /bin/false" >> /etc/modprobe.d/tipc.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist tipc$" /etc/modprobe.d/tipc.conf ; then
@@ -31148,7 +31148,7 @@ if LC_ALL=C grep -q -m 1 "^install bluetooth" /etc/modprobe.d/bluetooth.conf ; t
 	sed -i 's#^install bluetooth.*#install bluetooth /bin/true#g' /etc/modprobe.d/bluetooth.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/bluetooth.conf
-	echo "install bluetooth /bin/true" >> /etc/modprobe.d/bluetooth.conf
+	echo "install bluetooth /bin/false" >> /etc/modprobe.d/bluetooth.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist bluetooth$" /etc/modprobe.d/bluetooth.conf ; then
@@ -31620,7 +31620,7 @@ if LC_ALL=C grep -q -m 1 "^install cramfs" /etc/modprobe.d/cramfs.conf ; then
 	sed -i 's#^install cramfs.*#install cramfs /bin/true#g' /etc/modprobe.d/cramfs.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/cramfs.conf
-	echo "install cramfs /bin/true" >> /etc/modprobe.d/cramfs.conf
+	echo "install cramfs /bin/false" >> /etc/modprobe.d/cramfs.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist cramfs$" /etc/modprobe.d/cramfs.conf ; then
@@ -31645,7 +31645,7 @@ if LC_ALL=C grep -q -m 1 "^install usb-storage" /etc/modprobe.d/usb-storage.conf
 	sed -i 's#^install usb-storage.*#install usb-storage /bin/true#g' /etc/modprobe.d/usb-storage.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/usb-storage.conf
-	echo "install usb-storage /bin/true" >> /etc/modprobe.d/usb-storage.conf
+	echo "install usb-storage /bin/false" >> /etc/modprobe.d/usb-storage.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist usb-storage$" /etc/modprobe.d/usb-storage.conf ; then
@@ -32861,7 +32861,7 @@ if LC_ALL=C grep -q -m 1 "^install uvcvideo" /etc/modprobe.d/uvcvideo.conf ; the
 	sed -i 's#^install uvcvideo.*#install uvcvideo /bin/true#g' /etc/modprobe.d/uvcvideo.conf
 else
 	echo -e "\n# Disable per security requirements" >> /etc/modprobe.d/uvcvideo.conf
-	echo "install uvcvideo /bin/true" >> /etc/modprobe.d/uvcvideo.conf
+	echo "install uvcvideo /bin/false" >> /etc/modprobe.d/uvcvideo.conf
 fi
 
 if ! LC_ALL=C grep -q -m 1 "^blacklist uvcvideo$" /etc/modprobe.d/uvcvideo.conf ; then
